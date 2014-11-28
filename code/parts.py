@@ -645,6 +645,19 @@ class Generator(Part):
 					self.ship.energy + self.rate * self.ship.efficiency \
 					* self.ship.generatorBonus / self.game.fps)
 		Part.update(self)
+
+class Interconnect(Part):
+	baseImage = loadImage("res/parts/interconnect" + ext)
+	image = None
+	name = "Interconnect"
+
+	def __init__(self, game):
+		Part.__init__(self, game)
+		self.ports = [Port((0, self.height / 2 ), 270, self), \
+				Port((-self.width / 2 , 0), 0, self), \
+				Port((0, -self.height / 2 ), 90, self)]
+
+		
 	
 class Battery(Part):
 	baseImage = loadImage("res/parts/battery" + ext)

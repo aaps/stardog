@@ -16,9 +16,9 @@ def setVolume(channel, floater1, floater2):
 	 the player and floater."""
 	distance = floater2.pos.get_distance(floater1.pos)
 	if channel and floater1 and floater2:
-		volume = 0
+		volume = 0.0
 		if distance < SOUND_RADIUS and (isinstance(floater1, Player) or  isinstance(floater2, Player)):
-			volume = channel.set_volume( math.sqrt((SOUND_RADIUS - distance)**1.8 / (SOUND_RADIUS + 0.001)**1.8) )
+			volume =  math.sqrt((SOUND_RADIUS - distance)**1.8 / (SOUND_RADIUS + 0.001)**1.8)
 		channel.set_volume(volume)
 
 BULLET_IMAGE = loadImage("res/shot.bmp")
@@ -295,10 +295,8 @@ class LaserBeam(Floater):
 	def update(self):
 		self.life -= 1. / self.game.fps
 		Floater.update(self)
-		self.start = (self.start.x + self.delta.x / self.game.fps,
-						self.start.y + self.delta.y / self.game.fps)
-		self.stop = (self.stop.x + self.delta.x / self.game.fps, 
-						self.stop.y + self.delta.y / self.game.fps)
+		self.start = self.start + self.delta / self.game.fps
+		self.stop = self.stop  + self.delta / self.game.fps
 		if self.life < 0:
 			self.kill()
 	
