@@ -10,6 +10,7 @@ from spaceship import *
 from strafebat import *
 from dialogs import *
 import plot
+from vec2d import Vec2d
 # import yaml
 # import yamlpygame
 
@@ -71,7 +72,7 @@ class Game:
 				pygame.display.flip()
 			#setup initial state:
 			self.playerScript = InputScript(self)
-			self.player = playerShip(self, 0,0, script = self.playerScript,
+			self.player = playerShip(self, Vec2d(0,0),Vec2d(0,0), script = self.playerScript,
 							color = self.playerColor, type = self.playerType)
 			self.curSystem = SolarA1(self, self.player)
 			self.systems = [self.curSystem]
@@ -133,8 +134,8 @@ class Game:
 					for trigger in self.triggers:
 						trigger.update()
 					self.curSystem.update()
-					self.top_left = self.player.x - self.width / 2, \
-							self.player.y - self.height / 2
+					self.top_left = self.player.pos.x - self.width / 2, \
+							self.player.pos.y - self.height / 2
 					self.messenger.update()
 							
 				#draw the layers:

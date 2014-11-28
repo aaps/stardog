@@ -32,7 +32,7 @@ def dist(x1, y1, x2, y2):
 
 def dist2(floater1, floater2):
 	"""returns the squared distance between two floaters (center to center)."""
-	return (floater1.x - floater2.x) ** 2 + (floater1.y - floater2.y) ** 2
+	return (floater1.pos.x - floater2.pos.x) ** 2 + (floater1.pos.y - floater2.pos.y) ** 2
 
 def sign(num):
 	"""returns the sign of the number, -1, 0, or 1."""
@@ -136,10 +136,10 @@ def collisionTest(a, b):
 	"""test spatial collision of Floaters a and b"""
 	r = a.radius + b. radius
 	return a != b \
-	and a.x < b.x + r \
-	and b.x < a.x + r \
-	and a.y < b.y + r \
-	and b.y < a.y + r \
+	and a.pos.x < b.pos.x + r \
+	and b.pos.x < a.pos.x + r \
+	and a.pos.y < b.pos.y + r \
+	and b.pos.y < a.pos.y + r \
 	and dist2(a, b) < r ** 2
 
 def linePointDist(linePoint1, linePoint2, point, infinite = False):

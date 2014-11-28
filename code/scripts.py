@@ -119,9 +119,9 @@ class AIScript(Script):
 		returns True if the ship is pointed within self.acceptableError degrees 
 		of the target."""
 		if isinstance(target, Floater):
-			angleToTarget = atan2(target.y - ship.y, target.x - ship.x) - ship.dir
+			angleToTarget = atan2(target.pos.y - ship.pos.y, target.pos.x - ship.pos.x) - ship.dir
 		else:#target is a point
-			angleToTarget = atan2(target[1] - ship.y, target[0] - ship.x) - ship.dir
+			angleToTarget = atan2(target[1] - ship.pos.y, target[0] - ship.pos.x) - ship.dir
 			
 		angleToTarget = (angleToTarget - angleOffset + 180) % 360 - 180
 		if angleToTarget < 0:
@@ -134,9 +134,9 @@ class AIScript(Script):
 		"""relativeSpeed2(ship, target) -> the relative speed between two 
 		floaters. Note that this is negative if they are getting closer."""
 		#distance next second - distance this second (preserves sign):
-		return sqrt((ship.x + ship.dx - target.x - target.dx)**2 \
-					+ (ship.y + ship.dy - target.y - target.dy)**2) \
-				- sqrt((ship.x - target.x)**2 + (ship.y - target.y)**2)
+		return sqrt((ship.pos.x + ship.delta.x - target.pos.x - target.delta.x)**2 \
+					+ (ship.pos.y + ship.delta.y - target.pos.y - target.delta.y)**2) \
+				- sqrt((ship.pos.x - target.pos.x)**2 + (ship.pos.y - target.pos.y)**2)
 	
 	def intercept(self, ship, target, relativeSpeedLimit = 0):
 		"""intercept(ship, target) -> ship moves to intercept target. 
@@ -148,13 +148,13 @@ class AIScript(Script):
 		else: 
 			#roughly guess speed:
 			accel = ship.forwardThrust / ship.mass
-			speed = sqrt( dist(ship.x, ship.y, target.x, target.y) / not0(accel))
-		time = dist(ship.x, ship.y, target.x, target.y) / not0(speed)
+			speed = sqrt( dist(ship.pos.x, ship.pos.y, target.pos.x, target.pos.y) / not0(accel))
+		time = dist(ship.pos.x, ship.pos.y, target.pos.x, target.pos.y) / not0(speed)
 		if self.game.debug: print time, ship
-		dummy = Ballistic(target.x, target.y, \
-						target.dx - ship.dx, target.dy - ship.dy)
+		dummy = Ballistic(target.pos, \
+						target.delta - ship.delta)
 		pos = self.predictBallistic(dummy, time)
-		angle = atan2(pos[1] - ship.y, pos[0] - ship.x)
+		angle = atan2(pos[1] - ship.pos.y, pos[0] - ship.pos.x)
 		if self.turn(ship, angle):
 			if not relativeSpeedLimit\
 			or self.relativeSpeed(ship, target) > - relativeSpeedLimit:
@@ -170,11 +170,11 @@ class AIScript(Script):
 		if not ship.guns:
 			return
 		speed = ship.guns[0].speed
-		time = dist(ship.x, ship.y, target.x, target.y) / speed
-		dummy = Ballistic(target.x, target.y, \
-						target.dx - ship.dx, target.dy - ship.dy)
+		time = dist(ship.pos.x, ship.pos.y, target.pos.x, target.pos.y) / speed
+		dummy = Ballistic(target.pos, \
+						target.delta - ship.delta)
 		pos = self.predictBallistic(dummy, time)
-		angle = atan2(pos[1] - ship.y, pos[0] - ship.x)
+		angle = atan2(pos[1] - ship.pos.y, pos[0] - ship.pos.x)
 		if self.turn(ship, angle):
 			ship.shoot()
 	
@@ -182,8 +182,8 @@ class AIScript(Script):
 		"""predictBallistic(floater, time) ->
 		the point (x,y) the floater will be in after time seconds if there is 
 		no acceleration."""
-		return (floater.x + time * floater.dx, \
-				floater.y + time * floater.dy)
+		return (floater.pos.x + time * floater.delta.x, \
+				floater.pos.y + time * floater.delta.y)
 		
 	def predictTimeMin(self, ship, distance):
 		"""predictTimeMin(ship, distance) ->
@@ -211,16 +211,16 @@ class AIScript(Script):
 		"""directs the ship to fly to the position. 
 		If target, pos is a position relative to the target."""
 		accel = ship.forwardThrust / ship.mass
-		time = sqrt(dist(ship.x, ship.y, pos[0], pos[1]) / accel)
+		time = sqrt(dist(ship.pos.x, ship.pos.y, pos[0], pos[1]) / accel)
 		if not target:
 			dummy = Ballistic(pos[0], pos[1], 0, 0)
 		else:
-			dummy = Ballistic(pos[0] + target.x, pos[1] + target.y,\
-								target.dx, target.dy)
+			dummy = Ballistic(pos[0] + target.pos.x, pos[1] + target.pos.y,\
+								target.delta.x, target.delta.y)
 		
 		turnTime = ship.moment / ship.torque * 180
-		angle = atan2(dummy.y - ship.y, dummy.x - ship.x)
-		distance = dist(dummy.x, dummy.y, ship.x, ship.y)
+		angle = atan2(dummy.pos.y - ship.pos.y, dummy.pos.x - ship.pos.x)
+		distance = dist(dummy.pos.x, dummy.pos.y, ship.pos.x, ship.pos.y)
 		relativeSpeed = self.relativeSpeed(ship, dummy)
 		if - relativeSpeed / not0(accel) + turnTime > distance / abs(not0(relativeSpeed)):
 			#slow down

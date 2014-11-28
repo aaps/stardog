@@ -6,6 +6,7 @@ from scripts import *
 from pygame.locals import *
 from floaters import *
 import stardog
+from vec2d import Vec2d
 
 PART_OVERLAP = 0
 DETACH_SPACE = 3
@@ -57,7 +58,7 @@ class Part(Floater):
 		self.hp = 10
 		radius = max(self.baseImage.get_height() / 2,
 					self.baseImage.get_width() / 2)
-		Floater.__init__(self, game, 0, 0, dir = 270, radius = radius)
+		Floater.__init__(self, game, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = radius)
 		self.image = colorShift(self.baseImage.copy(), self.color)
 		self.width = self.image.get_width() - 4
 		self.height = self.image.get_height() - 4
@@ -65,6 +66,7 @@ class Part(Floater):
 		 #each element is the part there, (x,y,dir) position of the connection.
 		 #the example is at the bottom of the part, pointed down.
 		self.ports = [Port((-self.width / 2, 0), 0, self)]
+
 	
 	def stats(self):
 		stats = (self.hp, self.maxhp, self.mass, len(self.ports))
@@ -142,14 +144,14 @@ class Part(Floater):
 		#set physics to drift away from ship (not collide):
 		cost = cos(self.ship.dir) #cost is short for cos(theta)
 		sint = sin(self.ship.dir)
-		self.x = self.ship.x + DETACH_SPACE * self.offset[0] * cost \
+		self.pos.x = self.ship.pos.x + DETACH_SPACE * self.offset[0] * cost \
 				- DETACH_SPACE * self.offset[1] * sint
-		self.y = self.ship.y + DETACH_SPACE * self.offset[0] * sint \
+		self.pos.y = self.ship.pos.y + DETACH_SPACE * self.offset[0] * sint \
 				+ DETACH_SPACE * self.offset[1] * cost
-		self.dx = self.ship.dx \
+		self.delta.x = self.ship.delta.x \
 				+ rand() * sign(self.offset[0]) * cost * DETACH_SPEED\
 				- rand() * sign(self.offset[1]) * sint * DETACH_SPEED
-		self.dy = self.ship.dy \
+		self.delta.y = self.ship.delta.y \
 				+ rand() * sign(self.offset[0]) * sint * DETACH_SPEED\
 				+ rand() * sign(self.offset[1]) * cost * DETACH_SPEED
 		#if this is the root of the ship, kill the ship:
@@ -176,10 +178,10 @@ class Part(Floater):
 		angle = randint(0,360)
 		offset = cos(angle) * DETACH_SPACE, sin(angle) * DETACH_SPACE
 		#set physics to drift away from ship (not collide):
-		self.x = ship.x + self.offset[0] 
-		self.y = ship.y + self.offset[1] 
-		self.dx = ship.dx + rand() * sign(self.offset[0]) * DETACH_SPEED
-		self.dy = ship.dy + rand() * sign(self.offset[1]) * DETACH_SPEED
+		self.pos.x = ship.pos.x + self.offset[0] 
+		self.pos.y = ship.pos.y + self.offset[1] 
+		self.delta.x = ship.delta.x + rand() * sign(self.offset[0]) * DETACH_SPEED
+		self.delta.y = ship.delta.y + rand() * sign(self.offset[1]) * DETACH_SPEED
 		self.game.curSystem.add(self)
 		
 	def unequip(self, toInventory = True):
@@ -209,10 +211,11 @@ class Part(Floater):
 		self.acted = False
 		#if it's attached to a ship, just rotate with the ship:
 		if self.parent:
+			# print self
 			cost = cos(self.ship.dir) #cost is short for cos(theta)
 			sint = sin(self.ship.dir)
-			self.x = self.ship.x + self.offset[0] * cost - self.offset[1] * sint
-			self.y = self.ship.y + self.offset[0] * sint + self.offset[1] * cost
+			self.pos.x = self.ship.pos.x + self.offset[0] * cost - self.offset[1] * sint
+			self.pos.y = self.ship.pos.y + self.offset[0] * sint + self.offset[1] * cost
 		#if it's floating in space, act like a floater:
 		else:
 			Floater.update(self)
@@ -247,12 +250,12 @@ class Part(Floater):
 			image = pygame.transform.rotate(self.animatedImage, \
 								- self.dir - self.ship.dir).convert_alpha()
 			image.set_colorkey((0,0,0))
-			pos = self.x - image.get_width() / 2 - offset[0], \
-				  self.y - image.get_height() / 2 - offset[1]
+			pos = self.pos.x - image.get_width() / 2 - offset[0], \
+				  self.pos.y - image.get_height() / 2 - offset[1]
 			surface.blit(image, pos)
 		#hp rings:
-		pos = 	int(self.x - offset[0] - self.radius), \
-				int(self.y - offset[1] - self.radius)
+		pos = 	int(self.pos.x - offset[0] - self.radius), \
+				int(self.pos.y - offset[1] - self.radius)
 		if self.hp / self.maxhp < .9:
 			#color fades green to red as hp decreases.
 			color = limit(0, int((1 - self.hp * 1. / self.maxhp ) * 255),255), \
@@ -285,8 +288,8 @@ class Part(Floater):
 				self.detach()
 			self.kill()
 			#if dead, make an explosion here.
-			self.game.curSystem.add(Explosion(self.game, self.x, self.y, \
-						self.dx, self.dy, radius = self.radius * 4,\
+			self.game.curSystem.add(Explosion(self.game, self.pos, \
+						self.delta, radius = self.radius * 4,\
 						time = self.maxhp / 5))
 
 class Dummy(Part):
@@ -561,8 +564,8 @@ class Engine(Part):
 			accel = self.ship.efficiency * self.ship.thrustBonus \
 					* self.force / self.ship.mass / self.game.fps
 			dir = self.dir + self.ship.dir
-			self.ship.dx += cos(dir) * accel
-			self.ship.dy += sin(dir) * accel
+			self.ship.delta.x += cos(dir) * accel
+			self.ship.delta.y += sin(dir) * accel
 			self.ship.energy -= self.energyCost / self.game.fps
 			self.thrusting = True
 
@@ -863,8 +866,8 @@ class Drone(Cockpit, Engine, Cannon):
 		self.thrusted = True
 		if self.ship and self.ship.energy >= self.thrustCost * self.energyCost:
 			dir = self.ship.dir
-			self.ship.dx += cos(dir) * self.force / self.ship.mass / self.game.fps
-			self.ship.dy += sin(dir) * self.force / self.ship.mass / self.game.fps
+			self.ship.delta.x += cos(dir) * self.force / self.ship.mass / self.game.fps
+			self.ship.delta.y += sin(dir) * self.force / self.ship.mass / self.game.fps
 			self.ship.energy -= self.thrustCost / self.game.fps * self.energyCost
 			self.thrusting = True
 			

@@ -8,6 +8,7 @@ from tinyFighter import *
 from planet import *
 from gui import *
 import stardog
+from vec2d import Vec2d
 
 class SolarSystem:
 	"""A SolarSystem holds ships and other floaters."""
@@ -45,18 +46,18 @@ class SolarSystem:
 				self.drawEdgeWarning = False
 				
 		for floater in self.floaters:
-			if floater.x < edge[0][0] and floater.dx < 0 \
-			or floater.x > edge[0][1] and floater.dx > 0:
+			if floater.pos.x < edge[0][0] and floater.delta.x < 0 \
+			or floater.pos.x > edge[0][1] and floater.delta.x > 0:
 				if isinstance(floater, Ship):
 					floater.dx = 0
 					if floater == self.game.player:
 						self.drawEdgeWarning = 1
 				else:
 					floater.kill()
-			if floater.y < edge[1][0] and floater.dy < 0 \
-			or floater.y > edge[1][1] and floater.dy > 0:
+			if floater.pos.y < edge[1][0] and floater.delta.y < 0 \
+			or floater.pos.y > edge[1][1] and floater.delta.y > 0:
 				if isinstance(floater, Ship):
-					floater.dy = 0
+					floater.delta.y = 0
 					if floater == self.game.player:
 						self.drawEdgeWarning = self.game.fps
 				else:
@@ -64,14 +65,14 @@ class SolarSystem:
 					
 		#list floaters that are on screen now:
 		self.onScreen = []
-		offset = (self.game.player.x - self.game.width / 2, 
-				self.game.player.y - self.game.height / 2)
+		offset = (self.game.player.pos.x - self.game.width / 2, 
+				self.game.player.pos.y - self.game.height / 2)
 		for floater in self.floaters:
 			r = floater.radius
-			if (r + floater.x > offset[0] \
-				and floater.x - r < offset[0] + self.game.width)\
-			and (r + floater.y > offset[1] \
-				and floater.y - r < offset[1] + self.game.height):
+			if (r + floater.pos.x > offset[0] \
+				and floater.pos.x - r < offset[0] + self.game.width)\
+			and (r + floater.pos.y > offset[1] \
+				and floater.pos.y - r < offset[1] + self.game.height):
 					self.onScreen.append(floater)
 					
 		#do any special actions that don't fit elsewhere:
@@ -102,13 +103,13 @@ class SolarA1(SolarSystem):
 	fightersPerMinute = 2
 	def __init__(self, game, player, numPlanets = 10):
 		SolarSystem.__init__(self, game)
-		self.sun = (Sun( game, 0, 0, radius = 2000, mass = 180000, \
+		self.sun = (Sun( game, Vec2d(0,0), radius = 2000, mass = 180000, \
 					color = (255, 255, 255), image = None)) # the star
 		#place player:
 		angle = randint(0,360)
 		distanceFromSun = randint(8000, 18000)
-		player.x = distanceFromSun * cos(angle)
-		player.y = distanceFromSun * sin(angle)
+		player.pos.x = distanceFromSun * cos(angle)
+		player.pos.y = distanceFromSun * sin(angle)
 		self.add(self.sun)
 		self.planets = []
 		#add planets:
@@ -119,8 +120,8 @@ class SolarA1(SolarSystem):
 			color = randint(40,255),randint(40,255),randint(40,255)
 			radius = randint(100,500)
 			mass = randnorm(radius * 10, 800)
-			self.planets.append(Planet(game, distanceFromSun * cos(angle), \
-				distanceFromSun * sin(angle), radius = radius, mass = mass, \
+			self.planets.append(Planet(game, Vec2d(distanceFromSun * cos(angle), \
+				distanceFromSun * sin(angle)), radius = radius, mass = mass, \
 				color = color))
 			self.add(self.planets[i])
 			d+= 1200
@@ -146,27 +147,26 @@ class SolarA1(SolarSystem):
 					planet.numShips += 1
 					for i in range(planet.numShips):
 						angle = randint(0, 360)
-						x = planet.x + cos(angle) * (planet.radius + 300)
-						y = planet.y + sin(angle) * (planet.radius + 300)
-						ship = Strafebat(self.game, x, y, color = planet.color)
+						x = planet.pos.x + cos(angle) * (planet.radius + 300)
+						y = planet.pos.y + sin(angle) * (planet.radius + 300)
+						ship = Strafebat(self.game, Vec2d(x,y), color = planet.color)
 						planet.ships.add(ship)
 						self.add(ship)
 						ship.planet = planet
-		#tiny fighters
-		if self.fighterTimer <= 0 and len(self.tinyFighters) < self.maxFighters:
-			numSpawn = randint(1,3)
-			for i in range(numSpawn):
-				angle = randint(0,360)
-				distance = randint(1000, 4000)
-				x = distance * cos(angle) + self.game.player.x
-				y = distance * sin(angle) + self.game.player.y
-				fighter = TinyFighter(self.game, x, y, self.game.player.dx, 
-									self.game.player.dy)
-				self.add(fighter)
-				self.tinyFighters.append(fighter)					
-				self.fighterTimer = 60 / self.fightersPerMinute
-		else:
-			self.fighterTimer -= 1. / self.game.fps
+		# #tiny fighters
+		# if self.fighterTimer <= 0 and len(self.tinyFighters) < self.maxFighters:
+		# 	numSpawn = randint(1,3)
+		# 	for i in range(numSpawn):
+		# 		angle = randint(0,360)
+		# 		distance = randint(1000, 4000)
+		# 		x = distance * cos(angle) + self.game.player.pos.x
+		# 		y = distance * sin(angle) + self.game.player.pos.y
+		# 		fighter = TinyFighter(self.game, Vec2d(x, y), self.game.player.delta)
+		# 		self.add(fighter)
+		# 		self.tinyFighters.append(fighter)					
+		# 		self.fighterTimer = 60 / self.fightersPerMinute
+		# else:
+		# 	self.fighterTimer -= 1. / self.game.fps
 		
 	
 def collide(a, b):
@@ -180,8 +180,8 @@ def collide(a, b):
 		#planet/?
 		if isinstance(b, Planet): a,b = b,a
 		if isinstance(a, Planet):
-			if  sign(b.x - a.x) == sign(b.dx - a.dx) \
-			and sign(b.y - a.y) == sign(b.dy - a.dy):# moving away from planet.
+			if  sign(b.pos.x - a.pos.x) == sign(b.delta.x - a.delta.x) \
+			and sign(b.pos.y - a.pos.y) == sign(b.delta.y - a.delta.y):# moving away from planet.
 				return False
 			# planet/ship
 			if isinstance(b, Ship):
@@ -209,8 +209,8 @@ def collide(a, b):
 				return True
 			#crash against ship's shields, if any:
 			hit = False
-			if b.hp >= 0 and (sign(b.x - a.x) == - sign(b.dx - a.dx) \
-							or sign(b.y - a.y) == - sign(b.dy - a.dy)):
+			if b.hp >= 0 and (sign(b.pos.x - a.pos.x) == - sign(b.delta.x - a.delta.x) \
+							or sign(b.pos.y - a.pos.y) == - sign(b.delta.y - a.delta.y)):
 				# moving into ship, not out of it.
 				crash(a,b)
 				hit = True
@@ -256,8 +256,8 @@ def collide(a, b):
 	return False
 
 def planet_ship_collision(planet, ship):
-	angle = atan2(planet.y - ship.y, planet.x - ship.x)
-	dx, dy = rotate(ship.dx, ship.dy, angle)
+	angle = atan2(planet.pos.y - ship.pos.y, planet.pos.x - ship.pos.x)
+	dx, dy = rotate(ship.delta.x, ship.delta.y, angle)
 	speed = sqrt(dy ** 2 + dx ** 2)
 	if speed > planet.LANDING_SPEED:
 		if planet.damage.has_key(ship):
@@ -274,10 +274,10 @@ def planet_ship_collision(planet, ship):
 				damage -= temp
 				if damage <= 0:
 					r = ship.radius + planet.radius
-					temp = ship.dx * -(ship.x - planet.x) / r \
-							+ ship.dy * -(ship.y - planet.y) / r
-					ship.dy = ship.dx * (ship.y - planet.y) / r \
-							+ ship.dy * -(ship.x - planet.x) / r
+					temp = ship.delta.x * -(ship.pos.x - planet.pos.x) / r \
+							+ ship.delta.y * -(ship.pos.y - planet.pos.y) / r
+					ship.dy = ship.delta.x * (ship.pos.y - planet.pos.y) / r \
+							+ ship.delta.y * -(ship.pos.x - planet.pos.x) / r
 					ship.dx = temp
 					if planet.damage.has_key(ship):
 						del planet.damage[ship]
@@ -290,7 +290,7 @@ def planet_ship_collision(planet, ship):
 			planet.game.pause = True
 			ship.landed = planet
 			ship.game.menu.parts.reset()
-		ship.dx, ship.dy = planet.dx, planet.dy
+		ship.delta.x, ship.delta.y = planet.delta.x, planet.delta.y
 
 def planet_freePart_collision(planet, part):
 	part.kill()
@@ -315,8 +315,8 @@ def explosion_push(explosion, floater):
 			not0(dist2(explosion, floater)) * explosion.radius ** 2)
 	dir = atan2(floater.y - explosion.y, floater.x - explosion.x)
 	accel = force / not0(floater.mass)
-	floater.dx += accel * cos(dir) / explosion.game.fps
-	floater.dy += accel * sin(dir) / explosion.game.fps
+	floater.delta.x += accel * cos(dir) / explosion.game.fps
+	floater.delta.y += accel * sin(dir) / explosion.game.fps
 	
 def crash(a, b):
 	if soundModule:

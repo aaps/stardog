@@ -82,9 +82,9 @@ class HUD:
 		#draw floating part dots:
 		for floater in self.game.curSystem.floaters:
 			dotPos = int(center[0] + limit(-radius, \
-					(floater.x - thisShip.x) / scale, radius)), \
+					(floater.pos.x - thisShip.pos.x) / scale, radius)), \
 					int(center[1] + limit(-radius, \
-					(floater.y - thisShip.y) / scale, radius))
+					(floater.pos.y - thisShip.pos.y) / scale, radius))
 			if isinstance(floater, Ship):
 				pygame.draw.circle(self.image, (250, 250, 0), dotPos, 2)
 				color = floater.color
@@ -124,8 +124,8 @@ class BG:
 		"""updates the HUD and draws it."""
 		depth = 1.
 		for star in self.stars:
-			x = int(star[0] - thisShip.x / star[2]) % (self.game.width-1)
-			y =	int(star[1] - thisShip.y / star[2]) % (self.game.height-1)
+			x = int(star[0] - thisShip.pos.x / star[2]) % (self.game.width-1)
+			y =	int(star[1] - thisShip.pos.y / star[2]) % (self.game.height-1)
 			pa[x][y] = star[3]
 			pa[x+1][y] = star[3]
 			pa[x][y+1] = star[3]

@@ -3,6 +3,7 @@
 from utils import *
 from pygame.locals import *
 import stardog
+from vec2d import Vec2d
 
 FPS = 200
 MISSILE_RADIUS = 50
@@ -12,8 +13,8 @@ def setVolume(channel, floater1, floater2):
 	 the player and floater."""
 	if channel and floater1 and floater2:
 		channel.set_volume(.25 / (min(1, \
-						(floater2.x - floater1.x) ** 2 + \
-						(floater2.y - floater1.y) ** 2 + .0001)))
+						(floater2.pos.x - floater1.pos.x) ** 2 + \
+						(floater2.pos.y - floater1.pos.y) ** 2 + .0001)))
 
 BULLET_IMAGE = loadImage("res/shot.bmp")
 MISSILE_IMAGE = loadImage("res/missile" + ext)
@@ -23,9 +24,9 @@ DEFAULT_IMAGE = loadImage("res/default" + ext)
 		
 class Ballistic:
 	"""an abstraction of a Floater.  Just has a x,y,dx,dy."""
-	def __init__(self, x, y, dx = 0, dy = 0):
-		self.x, self.y = x, y
-		self.dx, self.dy = dx, dy
+	def __init__(self, pos, delta):
+		self.pos = pos
+		self.delta = delta
 			
 class Floater(pygame.sprite.Sprite, Ballistic):
 	"""creates a floater with position (x,y) in pixels, speed (dx,dy) 
@@ -41,15 +42,14 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	mass = 1
 	tangible = True
 
-	def __init__(self, game, x, y, dx = 0., dy = 0., dir = 270, radius = 10, \
+	def __init__(self, game, pos, delta, dir = 270, radius = 10, \
 			image = None):
 		pygame.sprite.Sprite.__init__(self)
 		self.game = game
 		self.dir = dir
-		self.x = x
-		self.y = y
-		self.dx = dx
-		self.dy = dy
+		self.pos = pos
+		self.delta = delta
+
 		self.radius = radius
 		if (not image):
 			image = DEFAULT_IMAGE
@@ -60,9 +60,9 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 
 	def update(self):
 		"""updates this floater based on its variables"""
-		self.x += self.dx / self.game.fps
-		self.y += self.dy / self.game.fps
-		self.rect.center = (self.x, self.y)
+		self.pos.x += self.delta.x / self.game.fps
+		self.pos.y += self.delta.y / self.game.fps
+		self.rect.center = (self.pos.x, self.pos.y)
 
 	def takeDamage(self, damage, other):
 		self.hp -= damage
@@ -71,26 +71,26 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 
 	def draw(self, surface, offset = (0,0)):
 		"""Blits this floater onto the surface. """
-		pos = self.x - self.image.get_width()  / 2 - offset[0], \
-			  self.y - self.image.get_height() / 2 - offset[1]
-		surface.blit(self.image, pos)
+		poss = self.pos.x - self.image.get_width()  / 2 - offset[0], \
+			  self.pos.y - self.image.get_height() / 2 - offset[1]
+		surface.blit(self.image, poss)
 
 class Bullet(Floater):
 	def __init__(self, game, gun, damage, speed, range, image = None):
 		dir = gun.dir + gun.ship.dir
 		cost = cos(dir) #cost is short for cos(theta)
 		sint = sin(dir)
-		x = gun.x + gun.shootPoint[0] * cost\
-						- gun.shootPoint[1] * sint + gun.ship.dx / game.fps
-		y = gun.y + gun.shootPoint[0] * sint\
-						+ gun.shootPoint[1] * cost + gun.ship.dy / game.fps
+		x = gun.pos.x + gun.shootPoint[0] * cost\
+						- gun.shootPoint[1] * sint + gun.ship.delta.x / game.fps
+		y = gun.pos.y + gun.shootPoint[0] * sint\
+						+ gun.shootPoint[1] * cost + gun.ship.delta.y / game.fps
 		dir += gun.shootDir # not needed for the offset, but needed for the dir.
 		self.speed = speed
-		dx = self.speed * cos(dir) + gun.ship.dx
-		dy = self.speed * sin(dir) + gun.ship.dy
+		dx = self.speed * cos(dir) + gun.ship.delta.x
+		dy = self.speed * sin(dir) + gun.ship.delta.y
 		if image == None:
 			image = BULLET_IMAGE
-		Floater.__init__(self, game, x, y, dx = dx, dy = dy, \
+		Floater.__init__(self, game, Vec2d(x, y), Vec2d(dx, dy), \
 							dir = dir, radius = gun.bulletRadius, \
 							image = image)
 		self.range = range
@@ -129,15 +129,15 @@ class Missile(Bullet):
 		self.life += 1. / self.game.fps
 		self.dir = (self.dir + 180) % 360 - 180
 		Floater.update(self)
-		self.dx += self.acceleration * cos(self.dir) / self.game.fps
-		self.dy += self.acceleration * sin(self.dir) / self.game.fps
+		self.delta.x += self.acceleration * cos(self.dir) / self.game.fps
+		self.delta.y += self.acceleration * sin(self.dir) / self.game.fps
 		if self.life > self.range:
 			self.kill()
 
 	def detonate(self):
 		explosion = Explosion(self.game, self.x, self.y, 
-				self.dx - self.acceleration * self.life * cos(self.dir),
-				self.dy - self.acceleration * self.life * sin(self.dir),
+				self.delta.x - self.acceleration * self.life * cos(self.dir),
+				self.delta.y - self.acceleration * self.life * sin(self.dir),
 				self.explosionRadius, self.time, self.damage, self.force)
 		self.game.curSystem.add(explosion)
 
@@ -154,11 +154,11 @@ class Missile(Bullet):
 class Explosion(Floater):
 	life = 0
 
-	def __init__(self, game, x, y, dx = 0, dy = 0, radius = 10,\
+	def __init__(self, game, pos, delta, radius = 10,\
 				time = 1, damage = 0, force = 6000):
 		image = pygame.Surface((radius * 2, radius * 2), flags = hardwareFlag).convert()
 		image.set_colorkey((0,0,0))
-		Floater.__init__(self, game, x, y, dx, dy, radius = 0,\
+		Floater.__init__(self, game, pos, delta, radius = 0,\
 				image = image)
 		self.maxRadius = int(radius)
 		self.force = force
@@ -190,9 +190,9 @@ class Explosion(Floater):
 			radius = randint(self.radius / 4, self.radius / 2)
 			r = randint(0, self.radius - radius)
 			theta = randint(0, 360)
-			pos = (int(cos(theta) * r + self.maxRadius), \
+			poss = (int(cos(theta) * r + self.maxRadius), \
 					  int(sin(theta) * r + self.maxRadius))
-			pygame.draw.circle(self.image, color, pos, radius)
+			pygame.draw.circle(self.image, color, poss, radius)
 		Floater.draw(self, surface, offset)
 
 	def kill(self):
@@ -220,16 +220,16 @@ class LaserBeam(Floater):
 		dir = laser.dir + laser.ship.dir
 		cost = cos(dir) #cost is short for cos(theta)
 		sint = sin(dir)
-		x = laser.x + laser.shootPoint[0] * cost\
-					- laser.shootPoint[1] * sint + laser.ship.dx / game.fps
-		y = laser.y + laser.shootPoint[0] * sint\
-					+ laser.shootPoint[1] * cost + laser.ship.dy / game.fps
+		x = laser.pos.x + laser.shootPoint[0] * cost\
+					- laser.shootPoint[1] * sint + laser.ship.delta.x / game.fps
+		y = laser.pos.y + laser.shootPoint[0] * sint\
+					+ laser.shootPoint[1] * cost + laser.ship.delta.y / game.fps
 		start = x,y
 		dir = laser.dir + laser.ship.dir + laser.shootDir
 		length = range
 		stop = x + range * cos(dir), y + range * sin(dir)		
 		x, y = (start[0] + stop[0]) / 2., (start[1] + stop[1]) / 2.
-		Floater.__init__(self, game, x, y, laser.ship.dx, laser.ship.dy, dir,
+		Floater.__init__(self, game, Vec2d(x,y), Vec2d(laser.ship.delta.x, laser.ship.delta.y), dir,
 						radius = 0)
 		self.damage = damage
 		self.start = start
@@ -295,10 +295,10 @@ class LaserBeam(Floater):
 	def update(self):
 		self.life -= 1. / self.game.fps
 		Floater.update(self)
-		self.start = (self.start[0] + self.dx / self.game.fps,
-						self.start[1] + self.dy / self.game.fps)
-		self.stop = (self.stop[0] + self.dx / self.game.fps, 
-						self.stop[1] + self.dy / self.game.fps)
+		self.start = (self.start[0] + self.delta.x / self.game.fps,
+						self.start[1] + self.delta.y / self.game.fps)
+		self.stop = (self.stop[0] + self.delta.x / self.game.fps, 
+						self.stop[1] + self.delta.y / self.game.fps)
 		if self.life < 0:
 			self.kill()
 	
