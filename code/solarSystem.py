@@ -108,6 +108,7 @@ class SolarA1(SolarSystem):
 		#place player:
 		angle = randint(0,360)
 		distanceFromSun = randint(8000, 18000)
+
 		player.pos.x = distanceFromSun * cos(angle)
 		player.pos.y = distanceFromSun * sin(angle)
 		self.add(self.sun)
@@ -256,7 +257,7 @@ def collide(a, b):
 	return False
 
 def planet_ship_collision(planet, ship):
-	angle = atan2(planet.pos.y - ship.pos.y, planet.pos.x - ship.pos.x)
+	angle = (planet.pos - ship.pos).get_angle()
 	dx, dy = rotate(ship.delta.x, ship.delta.y, angle)
 	speed = sqrt(dy ** 2 + dx ** 2)
 	if speed > planet.LANDING_SPEED:
@@ -274,11 +275,7 @@ def planet_ship_collision(planet, ship):
 				damage -= temp
 				if damage <= 0:
 					r = ship.radius + planet.radius
-					temp = ship.delta.x * -(ship.pos.x - planet.pos.x) / r \
-							+ ship.delta.y * -(ship.pos.y - planet.pos.y) / r
-					ship.dy = ship.delta.x * (ship.pos.y - planet.pos.y) / r \
-							+ ship.delta.y * -(ship.pos.x - planet.pos.x) / r
-					ship.dx = temp
+					ship.delta = ship.delta * (ship.pos - planet.pos) + ship.delta * -(ship.pos - planet.pos)
 					if planet.damage.has_key(ship):
 						del planet.damage[ship]
 					return
@@ -313,7 +310,7 @@ def explosion_push(explosion, floater):
 	collision branching, which continues."""
 	force = (explosion.force / 
 			not0(dist2(explosion, floater)) * explosion.radius ** 2)
-	dir = atan2(floater.y - explosion.y, floater.x - explosion.x)
+	dir = atan2(floater.pos.y - explosion.pos.y, floater.pos.x - explosion.pos.x)
 	accel = force / not0(floater.mass)
 	floater.delta.x += accel * cos(dir) / explosion.game.fps
 	floater.delta.y += accel * sin(dir) / explosion.game.fps

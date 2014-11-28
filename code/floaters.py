@@ -13,8 +13,7 @@ def setVolume(channel, floater1, floater2):
 	 the player and floater."""
 	if channel and floater1 and floater2:
 		channel.set_volume(.25 / (min(1, \
-						(floater2.pos.x - floater1.pos.x) ** 2 + \
-						(floater2.pos.y - floater1.pos.y) ** 2 + .0001)))
+						(floater2.pos - floater1.pos).get_length() ** 2 + 0.001 )))
 
 BULLET_IMAGE = loadImage("res/shot.bmp")
 MISSILE_IMAGE = loadImage("res/missile" + ext)
@@ -60,9 +59,9 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 
 	def update(self):
 		"""updates this floater based on its variables"""
-		self.pos.x += self.delta.x / self.game.fps
-		self.pos.y += self.delta.y / self.game.fps
-		self.rect.center = (self.pos.x, self.pos.y)
+		self.pos += self.delta / self.game.fps
+		# self.pos.y += self.delta.y / self.game.fps
+		self.rect.center = (self.pos)
 
 	def takeDamage(self, damage, other):
 		self.hp -= damage
@@ -80,17 +79,15 @@ class Bullet(Floater):
 		dir = gun.dir + gun.ship.dir
 		cost = cos(dir) #cost is short for cos(theta)
 		sint = sin(dir)
-		x = gun.pos.x + gun.shootPoint[0] * cost\
-						- gun.shootPoint[1] * sint + gun.ship.delta.x / game.fps
-		y = gun.pos.y + gun.shootPoint[0] * sint\
-						+ gun.shootPoint[1] * cost + gun.ship.delta.y / game.fps
+		pos = gun.pos + Vec2d(gun.shootPoint).rotated(dir) + gun.ship.delta / game.fps
+
 		dir += gun.shootDir # not needed for the offset, but needed for the dir.
 		self.speed = speed
 		dx = self.speed * cos(dir) + gun.ship.delta.x
 		dy = self.speed * sin(dir) + gun.ship.delta.y
 		if image == None:
 			image = BULLET_IMAGE
-		Floater.__init__(self, game, Vec2d(x, y), Vec2d(dx, dy), \
+		Floater.__init__(self, game, pos, Vec2d(dx, dy), \
 							dir = dir, radius = gun.bulletRadius, \
 							image = image)
 		self.range = range
@@ -135,9 +132,9 @@ class Missile(Bullet):
 			self.kill()
 
 	def detonate(self):
-		explosion = Explosion(self.game, self.x, self.y, 
-				self.delta.x - self.acceleration * self.life * cos(self.dir),
-				self.delta.y - self.acceleration * self.life * sin(self.dir),
+		explosion = Explosion(self.game, self.pos, 
+				Vec2d(self.delta.x - self.acceleration * self.life * cos(self.dir),
+				self.delta.y - self.acceleration * self.life * sin(self.dir)),
 				self.explosionRadius, self.time, self.damage, self.force)
 		self.game.curSystem.add(explosion)
 
@@ -220,16 +217,17 @@ class LaserBeam(Floater):
 		dir = laser.dir + laser.ship.dir
 		cost = cos(dir) #cost is short for cos(theta)
 		sint = sin(dir)
-		x = laser.pos.x + laser.shootPoint[0] * cost\
-					- laser.shootPoint[1] * sint + laser.ship.delta.x / game.fps
-		y = laser.pos.y + laser.shootPoint[0] * sint\
-					+ laser.shootPoint[1] * cost + laser.ship.delta.y / game.fps
-		start = x,y
+		pos = laser.pos + Vec2d(laser.shootPoint).rotated(dir) + laser.ship.delta / game.fps
+		# x = laser.pos.x + laser.shootPoint[0] * cost\
+		# 			- laser.shootPoint[1] * sint + laser.ship.delta.x / game.fps
+		# y = laser.pos.y + laser.shootPoint[0] * sint\
+		# 			+ laser.shootPoint[1] * cost + laser.ship.delta.y / game.fps
+		start = pos
 		dir = laser.dir + laser.ship.dir + laser.shootDir
 		length = range
-		stop = x + range * cos(dir), y + range * sin(dir)		
-		x, y = (start[0] + stop[0]) / 2., (start[1] + stop[1]) / 2.
-		Floater.__init__(self, game, Vec2d(x,y), Vec2d(laser.ship.delta.x, laser.ship.delta.y), dir,
+		stop = pos.rotated(dir) + range
+		# x, y = (start[0] + stop[0]) , (start[1] + stop[1]) 
+		Floater.__init__(self, game, pos, laser.ship.delta, dir,
 						radius = 0)
 		self.damage = damage
 		self.start = start
@@ -257,7 +255,7 @@ class LaserBeam(Floater):
 		#check rect collide:
 		if floater != self and (skipRect or self.rect.colliderect(floater.rect)):
 			#check line-circle collide:
-			dist = linePointDist(self.start, self.stop, (floater.x, floater.y))
+			dist = linePointDist(self.start, self.stop, (floater.pos.x, floater.pos.y))
 			if dist	< floater.radius:
 				return dist
 				
@@ -278,7 +276,7 @@ class LaserBeam(Floater):
 			dir = sign(self.stop[1] + self.stop[0] * self.slope - 
 					self.start[1] + self.start[0] * self.slope)
 			colliders.sort(key = lambda f: 
-					(f.y + f.x * self.slope) * dir - f.radius)
+					(f.pos.y + f.pos.x * self.slope) * dir - f.radius)
 			#hit until damage is used up
 			for floater in colliders:
 				tmp = floater.hp
@@ -286,7 +284,7 @@ class LaserBeam(Floater):
 				self.damage -= tmp
 				if self.damage < 1: #fudge it for effect: 1 not 0
 					#adjust stop based on last hit target:
-					self.stop = (floater.x, (floater.x - self.start[0]) 
+					self.stop = (floater.pos.x, (floater.pos.x - self.start[0]) 
 											* self.slope + self.start[1])
 					self.length = dist(self.start[0],self.start[1], self.stop[0], self.stop[1])
 					break

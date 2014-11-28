@@ -37,7 +37,7 @@ class Planet(Floater):
 			and abs(self.pos.y - other.pos.y) < self.maxRadius:
 				#accelerate that floater towards this planet:
 				accel = self.g * (self.mass) / dist2(self, other)
-				angle = atan2(self.pos.y - other.pos.y, self.pos.x - other.pos.x)
+				angle = (self.pos - other.pos).get_angle()
 				other.delta.x += cos(angle) * accel / self.game.fps
 				other.delta.y += sin(angle) * accel / self.game.fps
 	
