@@ -262,6 +262,12 @@ class Vec2d(object):
         x = self.x*cos - self.y*sin
         y = self.x*sin + self.y*cos
         return Vec2d(x, y)
+
+    def rotatedd(self, angle_degrees, range):
+        radians = math.radians(angle_degrees)
+        x = self.x + range * math.cos(radians) 
+        y = self.y + range * math.sin(radians) 
+        return Vec2d(x, y)
  
     def get_angle(self):
         if (self.get_length_sqrd() == 0):

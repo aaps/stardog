@@ -60,7 +60,6 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	def update(self):
 		"""updates this floater based on its variables"""
 		self.pos += self.delta / self.game.fps
-		# self.pos.y += self.delta.y / self.game.fps
 		self.rect.center = (self.pos)
 
 	def takeDamage(self, damage, other):
@@ -83,11 +82,10 @@ class Bullet(Floater):
 
 		dir += gun.shootDir # not needed for the offset, but needed for the dir.
 		self.speed = speed
-		dx = self.speed * cos(dir) + gun.ship.delta.x
-		dy = self.speed * sin(dir) + gun.ship.delta.y
+		delta = gun.ship.delta.rotatedd(dir, self.speed)		
 		if image == None:
 			image = BULLET_IMAGE
-		Floater.__init__(self, game, pos, Vec2d(dx, dy), \
+		Floater.__init__(self, game, pos, delta, \
 							dir = dir, radius = gun.bulletRadius, \
 							image = image)
 		self.range = range
@@ -132,10 +130,8 @@ class Missile(Bullet):
 			self.kill()
 
 	def detonate(self):
-		explosion = Explosion(self.game, self.pos, 
-				Vec2d(self.delta.x - self.acceleration * self.life * cos(self.dir),
-				self.delta.y - self.acceleration * self.life * sin(self.dir)),
-				self.explosionRadius, self.time, self.damage, self.force)
+		delta = self.delta.rotatedd(self.dir, -(self.acceleration * self.life))
+		explosion = Explosion(self.game, self.pos, delta, self.explosionRadius, self.time, self.damage, self.force)
 		self.game.curSystem.add(explosion)
 
 	def kill(self):
@@ -200,6 +196,7 @@ class Explosion(Floater):
 		
 		
 
+	
 class LaserBeam(Floater):
 	"""LaserBeam(game, laser, damage, range) -> new LaserBeam
 
@@ -218,26 +215,24 @@ class LaserBeam(Floater):
 		cost = cos(dir) #cost is short for cos(theta)
 		sint = sin(dir)
 		pos = laser.pos + Vec2d(laser.shootPoint).rotated(dir) + laser.ship.delta / game.fps
-		# x = laser.pos.x + laser.shootPoint[0] * cost\
-		# 			- laser.shootPoint[1] * sint + laser.ship.delta.x / game.fps
-		# y = laser.pos.y + laser.shootPoint[0] * sint\
-		# 			+ laser.shootPoint[1] * cost + laser.ship.delta.y / game.fps
+
 		start = pos
 		dir = laser.dir + laser.ship.dir + laser.shootDir
 		length = range
-		stop = pos.rotated(dir) + range
-		# x, y = (start[0] + stop[0]) , (start[1] + stop[1]) 
-		Floater.__init__(self, game, pos, laser.ship.delta, dir,
+
+		stop = pos.rotatedd(dir, range)
+
+		Floater.__init__(self, game, (start + stop) / 2, laser.ship.delta, dir,
 						radius = 0)
 		self.damage = damage
 		self.start = start
 		self.stop = stop
-		left = min(start[0], stop[0])
-		top = min(start[1], stop[1])
-		width = abs(start[0] - stop[0])
-		height = abs(start[1] - stop[1])
+		left = min(start.x, stop.x)
+		top = min(start.y, stop.y)
+		width = abs(start.x - stop.x)
+		height = abs(start.y - stop.y)
 		self.rect = Rect(left, top, width, height)
-		self.slope = (start[1]-stop[1]) / not0(start[0] - stop[0])
+		self.slope = (start.y-stop.y) / not0(start.x - stop.x)
 		self.laser = laser
 		self.life = laser.imageDuration
 		self.ship = laser.ship
@@ -273,8 +268,8 @@ class LaserBeam(Floater):
 						if self.intersect(part, True):
 							colliders.append(part)
 			#sort so that the nearest gets hit first:
-			dir = sign(self.stop[1] + self.stop[0] * self.slope - 
-					self.start[1] + self.start[0] * self.slope)
+			dir = sign(self.stop.y + self.stop.x * self.slope - 
+					self.start.y + self.start.x * self.slope)
 			colliders.sort(key = lambda f: 
 					(f.pos.y + f.pos.x * self.slope) * dir - f.radius)
 			#hit until damage is used up
@@ -284,19 +279,20 @@ class LaserBeam(Floater):
 				self.damage -= tmp
 				if self.damage < 1: #fudge it for effect: 1 not 0
 					#adjust stop based on last hit target:
-					self.stop = (floater.pos.x, (floater.pos.x - self.start[0]) 
-											* self.slope + self.start[1])
-					self.length = dist(self.start[0],self.start[1], self.stop[0], self.stop[1])
+					self.stop = (floater.pos.x, (floater.pos.x - self.start.x) 
+											* self.slope + self.start.y)
+					
+					self.length = self.start.get_distance(self.stop)
 					break
 				
 					
 	def update(self):
 		self.life -= 1. / self.game.fps
 		Floater.update(self)
-		self.start = (self.start[0] + self.delta.x / self.game.fps,
-						self.start[1] + self.delta.y / self.game.fps)
-		self.stop = (self.stop[0] + self.delta.x / self.game.fps, 
-						self.stop[1] + self.delta.y / self.game.fps)
+		self.start = (self.start.x + self.delta.x / self.game.fps,
+						self.start.y + self.delta.y / self.game.fps)
+		self.stop = (self.stop.x + self.delta.x / self.game.fps, 
+						self.stop.y + self.delta.y / self.game.fps)
 		if self.life < 0:
 			self.kill()
 	

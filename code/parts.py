@@ -564,8 +564,8 @@ class Engine(Part):
 			accel = self.ship.efficiency * self.ship.thrustBonus \
 					* self.force / self.ship.mass / self.game.fps
 			dir = self.dir + self.ship.dir
-			self.ship.delta.x += cos(dir) * accel
-			self.ship.delta.y += sin(dir) * accel
+			self.ship.delta = self.ship.delta.rotatedd(dir, accel)
+
 			self.ship.energy -= self.energyCost / self.game.fps
 			self.thrusting = True
 
@@ -866,8 +866,11 @@ class Drone(Cockpit, Engine, Cannon):
 		self.thrusted = True
 		if self.ship and self.ship.energy >= self.thrustCost * self.energyCost:
 			dir = self.ship.dir
-			self.ship.delta.x += cos(dir) * self.force / self.ship.mass / self.game.fps
-			self.ship.delta.y += sin(dir) * self.force / self.ship.mass / self.game.fps
+			# self.ship.delta.x += cos(dir) * self.force / self.ship.mass / self.game.fps
+			# self.ship.delta.y += sin(dir) * self.force / self.ship.mass / self.game.fps
+			
+			self.ship.delta = self.ship.delta.rotatedd(dir, self.force / self.ship.mass / self.game.fps)
+
 			self.ship.energy -= self.thrustCost / self.game.fps * self.energyCost
 			self.thrusting = True
 			

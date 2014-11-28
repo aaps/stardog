@@ -33,8 +33,7 @@ class Planet(Floater):
 		for other in self.game.curSystem.floaters.sprites():
 			if  not isinstance(other, Planet) \
 			and not collisionTest(self, other) \
-			and abs(self.pos.x - other.pos.x) < self.maxRadius \
-			and abs(self.pos.y - other.pos.y) < self.maxRadius:
+			and abs(self.pos.get_distance(other.pos)) < self.maxRadius:
 				#accelerate that floater towards this planet:
 				accel = self.g * (self.mass) / dist2(self, other)
 				angle = (self.pos - other.pos).get_angle()
