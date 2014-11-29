@@ -157,7 +157,7 @@ class Part(Floater):
 		#if this is the root of the ship, kill the ship:
 		root = False
 		if self.parent and self.parent == self.ship:
-			self.ship.kill()
+			self.ship.kill(Floater(self.game,Vec2d(0,0),Vec2d(0,0)))
 			root = True
 		#cleanup relations:
 		if self.parent and self.parent != self.ship:
@@ -475,7 +475,7 @@ class FlakCannon(Cannon):
 	energyCost = 3
 	reloadTime = .08
 	burstSize = 5
-	reloadBurstTime = 3
+	reloadBurstTime = 1
 	range = 6
 	speed = 150
 	def __init__(self, game):

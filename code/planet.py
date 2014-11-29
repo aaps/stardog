@@ -26,7 +26,7 @@ class Planet(Floater):
 		if image == None:
 			self.image = None
 		self.inventory = []
-		for x in range(10):
+		for x in range(randint(1,8)):
 			self.inventory.append(randItem(game, 1))
 	
 	def update(self):

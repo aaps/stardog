@@ -417,7 +417,7 @@ class Ship(Floater):
 		if isinstance(other, Bullet) and other.ship == self.game.player:
 			self.game.player.xpDamage(self, damage)
 
-	def kill(self):
+	def kill(self, other):
 		"""play explosion effect than call Floater.kill(self)"""
 		if soundModule:
 			setVolume(explodeSound.play(), self, self.game.player)

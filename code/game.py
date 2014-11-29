@@ -110,7 +110,7 @@ class Game:
 				#game-level key input:
 				if self.keys[K_DELETE % 322]:
 					self.keys[K_DELETE % 322] = False
-					self.player.kill() #suicide
+					self.player.kill(None) #suicide
 				if self.keys[K_RETURN % 322]:
 					self.pause = not self.pause #pause/menu
 					self.keys[K_RETURN % 322] = False

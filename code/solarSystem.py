@@ -53,7 +53,7 @@ class SolarSystem:
 					if floater == self.game.player:
 						self.drawEdgeWarning = 1
 				else:
-					floater.kill()
+					floater.kill(Floater(self.game,Vec2d(0,0),Vec2d(0,0)))
 			if floater.pos.y < edge[1][0] and floater.delta.y < 0 \
 			or floater.pos.y > edge[1][1] and floater.delta.y > 0:
 				if isinstance(floater, Ship):
@@ -61,7 +61,7 @@ class SolarSystem:
 					if floater == self.game.player:
 						self.drawEdgeWarning = self.game.fps
 				else:
-					floater.kill()
+					floater.kill(Floater(self.game,Vec2d(0,0),Vec2d(0,0)))
 					
 		#list floaters that are on screen now:
 		self.onScreen = []

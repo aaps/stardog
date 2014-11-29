@@ -52,7 +52,7 @@ if __name__=="__main__":
       "X.oooo.X        ",
       "X.ooooo.X       ",
       "X.ooo....X      ",
-      "Xoo..XXXXXX     ",
+      "X.o..XXXXXX     ",
       "X..XXX          ",
       "X.XX            ",
       "XX              ",

@@ -71,7 +71,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	def takeDamage(self, damage, other):
 		self.hp -= damage
 		if self.hp <= 0:
-			self.kill()
+			self.kill(other)
 
 	def draw(self, surface, offset = (0,0)):
 		"""Blits this floater onto the surface. """
@@ -105,7 +105,23 @@ class Bullet(Floater):
 		self.life += 1. / self.game.fps
 		Floater.update(self)
 		if self.life > self.range:
-			self.kill()
+			self.softkill()
+
+	def detonate(self,other):
+		delta = other.delta / 10
+		impact = Impact(self.game, self.pos, delta, 20, 14)
+		self.game.curSystem.add(impact)
+
+	def kill(self,other):
+		self.detonate(other)
+		if soundModule:
+			setVolume(missileSound.play(), self, self.game.player)
+		Floater.kill(self)
+
+	def softkill(self):
+		Floater.kill(self)
+
+
 
 class Missile(Bullet):
 	life = 0
@@ -140,7 +156,7 @@ class Missile(Bullet):
 		explosion = Explosion(self.game, self.pos, delta, self.explosionRadius, self.time, self.damage, self.force)
 		self.game.curSystem.add(explosion)
 
-	def kill(self):
+	def kill(self,other):
 		self.detonate()
 		if soundModule:
 			setVolume(missileSound.play(), self, self.game.player)
@@ -194,12 +210,57 @@ class Explosion(Floater):
 			pygame.draw.circle(self.image, color, poss, radius)
 		Floater.draw(self, surface, offset)
 
-	def kill(self):
+	def kill(self,other):
 		pass
 		
 	def takeDamage(self, damage, other):
 		pass
+	
+class Impact(Floater):
+	life = 10
+	tangible = False
+	mass = 0
+	def __init__(self, game, pos, delta, radius = 5,\
+				time = 1):
+		image = pygame.Surface((radius * 2, radius * 2), flags = hardwareFlag).convert()
+		image.set_colorkey((0,0,0))
+		Floater.__init__(self, game, pos, delta, radius = 0,\
+				image = image)
+		self.maxRadius = int(radius)
+		self.radius = 0
+		self.time = time
+
+
+	def update(self):
+		Floater.update(self)
+		self.life += 1. / self.game.fps
+		if self.life > self.time:
+			Floater.kill(self)
+		#grow or shrink: size peaks at time / 2:
+		if self.life < self.time / 4:
+			self.radius = int(self.maxRadius * self.life * 4 / self.time)
+		else:
+			self.radius = int(self.maxRadius * (self.time * 4 / 3 \
+						- self.life * 4 / 3) / self.time)
 		
+	def draw(self, surface, offset = (0,0)):
+		self.image.fill((0, 0, 0, 0))
+		for circle in range(min(self.radius / 4, 80)):
+			color = (randint(100, 200), randint(100, 200), randint(100, 255), \
+					randint(100, 255))
+			radius = randint(self.radius / 4, self.radius / 2)
+			r = randint(0, self.radius - radius)
+			theta = randint(0, 360)
+			poss = (int(cos(theta) * r + self.maxRadius), \
+					  int(sin(theta) * r + self.maxRadius))
+			pygame.draw.circle(self.image, color, poss, radius)
+		Floater.draw(self, surface, offset)
+
+	def kill(self,other):
+		pass
+		
+	def takeDamage(self, damage, other):
+		pass
 		
 
 	
