@@ -71,8 +71,8 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 
 	def draw(self, surface, offset = (0,0)):
 		"""Blits this floater onto the surface. """
-		pos = self.x - self.image.get_width()  / 2 - offset[0], \
-			  self.y - self.image.get_height() / 2 - offset[1]
+		pos = self.pos.x - self.image.get_width()  / 2 - offset[0], \
+			  self.pos.y - self.image.get_height() / 2 - offset[1]
 		surface.blit(self.image, pos)
 
 class Bullet(Floater):

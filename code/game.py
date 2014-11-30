@@ -9,6 +9,7 @@ from planet import *
 from spaceship import *
 from strafebat import *
 from dialogs import *
+from views import *
 import plot
 # import yaml
 # import yamlpygame
@@ -35,6 +36,7 @@ class Game:
 		self.triggers = []
 		#messenger, with controls as first message:
 		self.messenger = Messenger(self)
+		self.view = View(self,screen)
 		
 		#key polling:
 		self.keys = []
@@ -129,9 +131,9 @@ class Game:
 					
 				#unpaused:
 				if not self.pause:
-					#update action:
-					for trigger in self.triggers:
-						trigger.update()
+					# update action:
+					# for trigger in self.triggers:
+					# 	trigger.update()
 					self.curSystem.update()
 					self.top_left = self.player.x - self.width / 2, \
 							self.player.y - self.height / 2
@@ -139,7 +141,8 @@ class Game:
 							
 				#draw the layers:
 				self.screen.fill((0, 0, 0, 0))
-				self.curSystem.draw(self.screen, self.top_left)
+				self.view.starSystemDraw(self.curSystem, self.top_left)
+				# self.curSystem.draw(self.screen, self.top_left)
 				self.hud.draw(self.screen, self.player)
 				self.messenger.draw(self.screen)
 				

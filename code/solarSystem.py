@@ -18,8 +18,8 @@ class SolarSystem:
 		self.floaters = pygame.sprite.Group()
 		self.ships = pygame.sprite.Group()
 		self.specialOperations = []
-		self.onScreen = []
-		self.bg = BG(self.game) # the background layer
+		# self.onScreen = []
+		# self.bg = BG(self.game) # the background layer
 		pygame.mixer.music.load("res/sound/space music.ogg")
 		pygame.mixer.music.play(-1)
 		pygame.mixer.music.set_volume(.15)
@@ -62,17 +62,17 @@ class SolarSystem:
 				else:
 					floater.kill()
 					
-		#list floaters that are on screen now:
-		self.onScreen = []
-		offset = (self.game.player.x - self.game.width / 2, 
-				self.game.player.y - self.game.height / 2)
-		for floater in self.floaters:
-			r = floater.radius
-			if (r + floater.x > offset[0] \
-				and floater.x - r < offset[0] + self.game.width)\
-			and (r + floater.y > offset[1] \
-				and floater.y - r < offset[1] + self.game.height):
-					self.onScreen.append(floater)
+		# #list floaters that are on screen now:
+		# self.onScreen = []
+		# offset = (self.game.player.x - self.game.width / 2, 
+		# 		self.game.player.y - self.game.height / 2)
+		# for floater in self.floaters:
+		# 	r = floater.radius
+		# 	if (r + floater.x > offset[0] \
+		# 		and floater.x - r < offset[0] + self.game.width)\
+		# 	and (r + floater.y > offset[1] \
+		# 		and floater.y - r < offset[1] + self.game.height):
+		# 			self.onScreen.append(floater)
 					
 		#do any special actions that don't fit elsewhere:
 		#(currently just laser collisions)
@@ -80,10 +80,10 @@ class SolarSystem:
 			function()
 		self.specialOperations = []
 		
-	def draw(self, surface, offset):
-		self.bg.draw(surface, self.game.player)
-		for floater in self.onScreen:
-				floater.draw(surface, offset)
+	# def draw(self, surface, offset):
+	# 	self.bg.draw(surface, self.game.player)
+	# 	for floater in self.onScreen:
+	# 			floater.draw(surface, offset)
 		
 	def add(self, floater):
 		"""adds a floater to this game."""
