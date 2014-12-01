@@ -5,6 +5,7 @@ import stardog
 from parts import Dummy, PART_OVERLAP, DEFAULT_IMAGE, FlippablePart
 from spaceship import Ship
 
+
 DEFAULT_SELECTED_IMAGE = loadImage("res/defaultselected" + ext)
 
 class Menu(TopLevelPanel):
@@ -89,12 +90,12 @@ class PartsPanel(Panel):
 			
 	def reset(self):
 		if self.player.landed and not self.tradePanel:
-			self.image = self.tradeImage
-			self.tradePanel = InventoryPanel(Rect(660, 30, 130, 570), 
-								self, self.player.landed.inventory)
+			# self.image = self.tradeImage
+			# self.tradePanel = InventoryPanel(Rect(660, 30, 130, 570), 
+			# 					self, self.player.landed.inventory)
 			self.addPanel(self.tradePanel)
 		elif not self.player.landed:
-			self.image = self.baseImage
+			# self.image = self.baseImage
 			self.removePanel(self.tradePanel)
 			self.tradePanel = None
 		Panel.reset(self)
@@ -140,9 +141,9 @@ class PartsPanel(Panel):
 		if self.inventoryPanel.selected:
 			part = self.inventoryPanel.selected.part
 			part.color = self.player.color
-			part.image = colorShift(pygame.transform.rotate(part.baseImage, \
-						-part.dir), part.color).convert()
-			part.image.set_colorkey((255,255,255))
+			# part.image = colorShift(pygame.transform.rotate(part.baseImage, \
+						# -part.dir), part.color).convert()
+			# part.image.set_colorkey((255,255,255))
 			self.inventoryPanel.reset()
 					
 class ShipPanel(Selecter):
@@ -182,9 +183,12 @@ class ShipPanel(Selecter):
 						+ port.offset[1] * cost 
 						- sin(dummy.dir) * (dummy.width - PART_OVERLAP) / 2)
 					#rotate takes a ccw angle.
-					dummy.image = colorShift(pygame.transform.rotate(
-							dummy.baseImage, -dummy.dir), dummy.color).convert()
-					dummy.image.set_colorkey((0,0,0))
+					
+					# dummy.image = self.view.panelDraw(dummy, dummy.offset)
+
+					# dummy.image = colorShift(pygame.transform.rotate(
+					# 		dummy.baseImage, -dummy.dir), dummy.color).convert()
+					# dummy.image.set_colorkey((0,0,0))
 					self.selectables.append(ShipPartPanel(dummy, self))
 					self.selectables[-1].port = port
 		#update ship stats display:
@@ -215,17 +219,17 @@ class PartDescriptionPanel(Panel):
 		self.part = part
 		self.removePanel(self.text)
 		self.removePanel(self.name)
-		if not part or isinstance(part, Dummy):
-			if self.image:
-				self.image.fill((0,0,0,0))
-			return
-		self.image = pygame.Surface((self.rect.width, self.rect.height), 
-					hardwareFlag).convert()
-		self.image.set_colorkey((0,0,0))
-		bigImage = pygame.transform.scale2x(self.part.image)
-		bigImage.set_colorkey((255,255,255)) # idk why this one's white.
-		self.image.blit(bigImage, 
-				(self.rect.width / 2 - bigImage.get_width() / 2, 5))
+		# if not part or isinstance(part, Dummy):
+		# 	if self.image:
+		# 		self.image.fill((0,0,0,0))
+		# 	return
+		# self.image = pygame.Surface((self.rect.width, self.rect.height), 
+		# 			hardwareFlag).convert()
+		# self.image.set_colorkey((0,0,0))
+		# bigImage = pygame.transform.scale2x(self.part.image)
+		# bigImage.set_colorkey((255,255,255)) # idk why this one's white.
+		# self.image.blit(bigImage, 
+		# 		(self.rect.width / 2 - bigImage.get_width() / 2, 5))
 		string = part.stats()
 		string += '\nFunctions: '
 		for function in part.functions:
@@ -262,12 +266,13 @@ class ShipPartPanel(DragableSelectable):
 	port = None
 	part = None
 	def __init__(self, part, parent):
-		width = part.image.get_width() * 2
-		height = part.image.get_height() * 2
-		rect = Rect(
-			part.offset[0] * 2 + parent.rect.width / 2 - width / 2, 
-			part.offset[1] * 2 + parent.rect.height / 2 - height / 2, 
-			width, height)
+		# width = part.image.get_width() * 2
+		# height = part.image.get_height() * 2
+		rect = Rect(0,0,10,10)
+		# rect = Rect(
+		# 	part.offset[0] * 2 + parent.rect.width / 2 - width / 2, 
+		# 	part.offset[1] * 2 + parent.rect.height / 2 - height / 2, 
+		# 	width, height)
 		DragableSelectable.__init__(self, rect, parent)
 		self.ship = parent.player
 		if not isinstance(part, Dummy):
@@ -276,32 +281,30 @@ class ShipPartPanel(DragableSelectable):
 			for port in part.parent.ports:
 				if port.part == part:
 					self.port = port
-		self.image = pygame.transform.scale2x(part.image).convert()
-		self.image.set_colorkey((0,0,0)) 
+		# self.image = pygame.transform.scale2x(part.image).convert()
+		# self.image.set_colorkey((0,0,0)) 
 		
 	def select(self):
 		if self.part:
 			color = self.part.color
 			color = color[0] // 4 + 192, color[1] // 2 + 128, color[2] // 2 + 128
-			self.image = colorShift(pygame.transform.scale2x(\
-					pygame.transform.rotate(self.part.baseImage, -self.part.dir)), \
-					color).convert()
-			self.image.set_colorkey((0,0,0)) 
+			# self.image = colorShift(pygame.transform.scale2x(pygame.transform.rotate(self.part.baseImage, -self.part.dir)), color).convert()
+			# self.image.set_colorkey((0,0,0)) 
 		else:
 			dir = self.port.dir + self.port.parent.dir
-			self.image = pygame.transform.scale2x(\
-					pygame.transform.rotate(DEFAULT_SELECTED_IMAGE, -dir)).convert()
-			self.image.set_colorkey((0,0,0)) 
+			# self.image = pygame.transform.scale2x(\
+			# 		pygame.transform.rotate(DEFAULT_SELECTED_IMAGE, -dir)).convert()
+			# self.image.set_colorkey((0,0,0)) 
 		
 	def unselect(self):
-		if self.part:
-			self.image = pygame.transform.scale2x(self.part.image).convert()
-			self.image.set_colorkey((0,0,0)) 
-		else:
+		# if self.part:
+			# self.image = pygame.transform.scale2x(self.part.image).convert()
+			# self.image.set_colorkey((0,0,0)) 
+		# else:
 			dir = self.port.dir + self.port.parent.dir
-			self.image = pygame.transform.scale2x(\
-						pygame.transform.rotate(DEFAULT_IMAGE, -dir)).convert()
-			self.image.set_colorkey((0,0,0)) 
+			# self.image = pygame.transform.scale2x(\
+			# 			pygame.transform.rotate(DEFAULT_IMAGE, -dir)).convert()
+			# self.image.set_colorkey((0,0,0)) 
 		
 	def dragOver(self, pos, rel):
 		self.parent.setSelected(self)
@@ -365,11 +368,11 @@ class PartTile(DragableSelectable):
 		The menu interface for a part. Display it like a button!"""
 		DragableSelectable.__init__(self, rect, parent)
 		self.part = part
-		bigImage = pygame.transform.scale2x(self.part.image)
-		bigImage.set_colorkey((255,255,255)) # idk why this one's white.
+		# bigImage = pygame.transform.scale2x(self.part.image)
+		# bigImage.set_colorkey((255,255,255)) # idk why this one's white.
 		self.hotSpot = (self.partImageOffset[0] + self.part.width, 
 						self.partImageOffset[1] + self.part.height)
-		self.image.blit(bigImage, PartTile.partImageOffset)
+		# self.image.blit(bigImage, PartTile.partImageOffset)
 		#add text labels:
 		rect = Rect(rect)
 		self.addPanel(Label(rect, part.name, font = SMALL_FONT))
@@ -435,7 +438,7 @@ class InventoryPanel(Selecter):
 			self.parent.dirtyParts = True
 			
 class Keys(Panel):
-	bindingMessage = pygame.image.load("res/menus/keybind.gif")
+	# bindingMessage = pygame.image.load("res/menus/keybind.gif")
 	"""the Keys panel of the menu."""
 	def __init__(self, rect, player):
 		Panel.__init__(self, rect)
@@ -468,12 +471,12 @@ class Keys(Panel):
 
 	def toggleMouse(self):
 		self.player.game.mouseControl = not self.player.game.mouseControl
-		if self.player.game.mouseControl:
-			self.toggleMouseButton.image = FONT.render('Turn Mouse Off',\
-						True, self.color)
-		else: 
-			self.toggleMouseButton.image = FONT.render('Turn Mouse On',\
-						True, self.color)
+		# if self.player.game.mouseControl:
+			# self.toggleMouseButton.image = FONT.render('Turn Mouse Off',\
+			# 			True, self.color)
+		# else: 
+			# self.toggleMouseButton.image = FONT.render('Turn Mouse On',\
+			# 			True, self.color)
 		
 	def unbind(self):
 		"""Removes the currently selected binding."""

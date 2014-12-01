@@ -27,7 +27,7 @@ class Ballistic:
 		self.x, self.y = x, y
 		self.dx, self.dy = dx, dy
 			
-class Floater(pygame.sprite.Sprite, Ballistic):
+class Floater( Ballistic):
 	"""creates a floater with position (x,y) in pixels, speed (dx,dy) 
 	in pixels per second, direction dir 
 	where 0 is pointing right and 270 is pointing up, radius radius 
@@ -41,9 +41,8 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	mass = 1
 	tangible = True
 
-	def __init__(self, game, x, y, dx = 0., dy = 0., dir = 270, radius = 10, \
-			image = None):
-		pygame.sprite.Sprite.__init__(self)
+	def __init__(self, game, x, y, dx = 0., dy = 0., dir = 270, radius = 10):
+		# pygame.sprite.Sprite.__init__(self)
 		self.game = game
 		self.dir = dir
 		self.x = x
@@ -51,12 +50,11 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 		self.dx = dx
 		self.dy = dy
 		self.radius = radius
-		if (not image):
-			image = DEFAULT_IMAGE
-		#rotate() takes a counter-clockwise angle. 
-		self.image = pygame.transform.rotate(image, -self.dir).convert()
-		#self.image.set_colorkey((0,0,0))
-		self.rect = self.image.get_rect()
+		# self.image = 'default'
+		# if (not image):
+		# 	image = DEFAULT_IMAGE
+		# self.image = pygame.transform.rotate(image, -self.dir).convert()
+		self.rect = Rect(0,0,10,10)
 
 	def update(self):
 		"""updates this floater based on its variables"""
@@ -69,14 +67,14 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 		if self.hp <= 0:
 			self.kill()
 
-	def draw(self, surface, offset = (0,0)):
-		"""Blits this floater onto the surface. """
-		pos = self.pos.x - self.image.get_width()  / 2 - offset[0], \
-			  self.pos.y - self.image.get_height() / 2 - offset[1]
-		surface.blit(self.image, pos)
+	# def draw(self, surface, offset = (0,0)):
+	# 	"""Blits this floater onto the surface. """
+	# 	pos = self.pos.x - self.image.get_width()  / 2 - offset[0], \
+	# 		  self.pos.y - self.image.get_height() / 2 - offset[1]
+	# 	surface.blit(self.image, pos)
 
 class Bullet(Floater):
-	def __init__(self, game, gun, damage, speed, range, image = None):
+	def __init__(self, game, gun, damage, speed, range):
 		dir = gun.dir + gun.ship.dir
 		cost = cos(dir) #cost is short for cos(theta)
 		sint = sin(dir)
@@ -88,11 +86,10 @@ class Bullet(Floater):
 		self.speed = speed
 		dx = self.speed * cos(dir) + gun.ship.dx
 		dy = self.speed * sin(dir) + gun.ship.dy
-		if image == None:
-			image = BULLET_IMAGE
+		# if image == None:
+		# 	image = BULLET_IMAGE
 		Floater.__init__(self, game, x, y, dx = dx, dy = dy, \
-							dir = dir, radius = gun.bulletRadius, \
-							image = image)
+							dir = dir, radius = gun.bulletRadius,)
 		self.range = range
 		self.hp = damage
 		self.life = 0.
@@ -115,8 +112,8 @@ class Missile(Bullet):
 	explode = False
 
 	def __init__(self, game, launcher, damage, speed, acceleration, range, 
-				explosionRadius, image = None):
-		Bullet.__init__(self, game, launcher, self.hp, speed, range, image)
+				explosionRadius):
+		Bullet.__init__(self, game, launcher, self.hp, speed, range)
 		self.damage = damage
 		self.turning = launcher.turning
 		self.percision = launcher.percision
@@ -156,10 +153,9 @@ class Explosion(Floater):
 
 	def __init__(self, game, x, y, dx = 0, dy = 0, radius = 10,\
 				time = 1, damage = 0, force = 6000):
-		image = pygame.Surface((radius * 2, radius * 2), flags = hardwareFlag).convert()
-		image.set_colorkey((0,0,0))
-		Floater.__init__(self, game, x, y, dx, dy, radius = 0,\
-				image = image)
+		# image = pygame.Surface((radius * 2, radius * 2), flags = hardwareFlag).convert()
+		# image.set_colorkey((0,0,0))
+		Floater.__init__(self, game, x, y, dx, dy, radius = 0)
 		self.maxRadius = int(radius)
 		self.force = force
 		self.radius = 0
@@ -182,18 +178,18 @@ class Explosion(Floater):
 			self.radius = int(self.maxRadius * (self.time * 4 / 3 \
 						- self.life * 4 / 3) / self.time)
 		
-	def draw(self, surface, offset = (0,0)):
-		self.image.fill((0, 0, 0, 0))
-		for circle in range(min(self.radius / 4, 80)):
-			color = (randint(100, 155), randint(000, 100), randint(0, 20), \
-					randint(100, 255))
-			radius = randint(self.radius / 4, self.radius / 2)
-			r = randint(0, self.radius - radius)
-			theta = randint(0, 360)
-			pos = (int(cos(theta) * r + self.maxRadius), \
-					  int(sin(theta) * r + self.maxRadius))
-			pygame.draw.circle(self.image, color, pos, radius)
-		Floater.draw(self, surface, offset)
+	# def draw(self, surface, offset = (0,0)):
+	# 	self.image.fill((0, 0, 0, 0))
+	# 	for circle in range(min(self.radius / 4, 80)):
+	# 		color = (randint(100, 155), randint(000, 100), randint(0, 20), \
+	# 				randint(100, 255))
+	# 		radius = randint(self.radius / 4, self.radius / 2)
+	# 		r = randint(0, self.radius - radius)
+	# 		theta = randint(0, 360)
+	# 		pos = (int(cos(theta) * r + self.maxRadius), \
+	# 				  int(sin(theta) * r + self.maxRadius))
+	# 		pygame.draw.circle(self.image, color, pos, radius)
+	# 	Floater.draw(self, surface, offset)
 
 	def kill(self):
 		pass
@@ -241,13 +237,13 @@ class LaserBeam(Floater):
 		self.rect = Rect(left, top, width, height)
 		self.slope = (start[1]-stop[1]) / not0(start[0] - stop[0])
 		self.laser = laser
-		self.life = laser.imageDuration
+		# self.life = laser.imageDuration
 		self.ship = laser.ship
 		self.width = laser.beamWidth
-		self.image = pygame.transform.rotate(
-					pygame.transform.scale(
-					colorShift(self.baseImage, self.ship.color),
-					(int(length), 5)), -dir)
+		# self.image = pygame.transform.rotate(
+		# 			pygame.transform.scale(
+		# 			colorShift(self.baseImage, self.ship.color),
+		# 			(int(length), 5)), -dir)
 		if 'target' in laser.ship.__dict__:
 			self.target = laser.ship.target
 		self.game.curSystem.specialOperations.append(self.collision)

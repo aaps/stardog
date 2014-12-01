@@ -15,8 +15,10 @@ class SolarSystem:
 	drawEdgeWarning = False
 	def __init__(self, game):
 		self.game = game
-		self.floaters = pygame.sprite.Group()
-		self.ships = pygame.sprite.Group()
+		self.floaters = []
+		self.ships = []
+		# self.floaters = pygame.sprite.Group()
+		# self.ships = pygame.sprite.Group()
 		self.specialOperations = []
 		# self.onScreen = []
 		# self.bg = BG(self.game) # the background layer
@@ -27,14 +29,16 @@ class SolarSystem:
 		
 	def update(self):
 		"""Runs the game."""
-		self.floaters.update()
+		# self.floaters.update()
+		for floater in self.floaters:
+			floater.update()
 		
 		#collision:
 		# TODO: sort lists to minimize collision tests.
-		floaters = self.floaters.sprites()
-		for i in range(len(floaters)):
-			for j in range(i + 1, len(floaters)):
-				collide(floaters[i], floaters[j])
+		# floaters = self.floaters
+		for i in range(len(self.floaters)):
+			for j in range(i + 1, len(self.floaters)):
+				collide(self.floaters[i], self.floaters[j])
 				#see collide() at bottom of this module.
 				
 		#keep ships in system for now:
@@ -87,9 +91,10 @@ class SolarSystem:
 		
 	def add(self, floater):
 		"""adds a floater to this game."""
-		self.floaters.add(floater)
+		self.game.view.add(floater)
+		self.floaters.append(floater)
 		if isinstance(floater, Ship):
-			self.ships.add(floater)
+			self.ships.append(floater)
 		
 	def empty(self):
 		self.ships.empty()
@@ -103,7 +108,7 @@ class SolarA1(SolarSystem):
 	def __init__(self, game, player, numPlanets = 10):
 		SolarSystem.__init__(self, game)
 		self.sun = (Sun( game, 0, 0, radius = 2000, mass = 180000, \
-					color = (255, 255, 255), image = None)) # the star
+					color = (255, 255, 255))) # the star
 		#place player:
 		angle = randint(0,360)
 		distanceFromSun = randint(8000, 18000)

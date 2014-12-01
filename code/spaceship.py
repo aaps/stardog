@@ -281,8 +281,8 @@ class Ship(Floater):
 		self.baseImage = pygame.Surface((size, size), \
 					hardwareFlag | SRCALPHA).convert_alpha()
 		self.baseImage.set_colorkey((0,0,0))
-		if self.ports[0].part:
-			self.ports[0].part.draw(self.baseImage)
+		# if self.ports[0].part:
+		# 	self.ports[0].part.draw(self.baseImage)
 
 	def partRollCall(self, part):
 		"""adds parts to self.parts recursively."""

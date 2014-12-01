@@ -88,7 +88,8 @@ class Game:
 			self.triggers = plot.newGameTriggers(self)
 				
 			#The in-round loop (while player is alive):
-			while self.running and self.curSystem.ships.has(self.player):
+			print self.curSystem.ships
+			while self.running and self.player in self.curSystem.ships:
 				#event polling:
 				for event in pygame.event.get():
 					if event.type == pygame.QUIT:
@@ -149,7 +150,8 @@ class Game:
 				#paused:
 				if self.pause:
 					self.menu.update()
-					self.menu.draw(self.screen)
+					# self.menu.draw(self.screen)
+					self.view.menuDraw(self.menu)
 					
 				#frame maintainance:
 				pygame.display.flip()

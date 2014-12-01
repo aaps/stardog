@@ -1,8 +1,8 @@
 from solarSystem import *
 from planet import *
-from gui import *
+# from gui import *
 from spaceship import *
-from dialogs import *
+from menuElements import *
 from spaceship import *
 from floaters import *
 
@@ -15,6 +15,7 @@ class View:
 		self.onScreen = []
 		self.imagenames = {'shot':'shot.bmp','missile':'missile.bmp','default':'default.bmp','defaultselected':'defaultselected.bmp' }
 		self.images = {}
+		self.mutatedimages = {}
 		self.respath = 'res/'
 		for name in self.imagenames:
 			self.images[name] =  loadImage(self.respath + self.imagenames[name])
@@ -42,10 +43,21 @@ class View:
 				self.floaterDraw(floater, offset)
 				# floater.draw(self.surface, offset)
 
+	def add(self,floater):
+			if hasattr(floater, 'image'):
+				image = floater.image
+				if (not image):
+					image = DEFAULT_IMAGE
+				if (floater.dir):
+					self.mutatedimages[image] = pygame.transform.rotate(self.images[image], -floater.dir).convert()
+				self.mutatedimages[image] = self.images[image]
+
+			# self.images[name] =  loadImage(self.respath + self.imagenames[name])
+
 	def floaterDraw(self, floater, offset = (0,0)):
 		"""Blits this floater onto the surface. """
-		pos = floater.x - floater.image.get_width()  / 2 - offset[0], \
-			  floater.y - floater.image.get_height() / 2 - offset[1]
+		pos = floater.x - floater.rect.width  / 2 - offset[0], \
+			  floater.y - floater.rect.height / 2 - offset[1]
 		self.surface.blit(self.images['default'], pos)
 
 	def shipDraw(self, floater, offset = (0,0)):
@@ -55,6 +67,14 @@ class View:
 	def explotionDraw(self, floater, offset = (0,0)):
 		pass
 
-	def partDraw(self, floater, offset = (0,0)):
+
+	def partDraw(self, part, offset = (0,0)):
+		pass
+
+	def menuDraw(self, menu):
+		pass
+
+
+	def panelDraw(self, rect):
 		pass
 

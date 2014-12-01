@@ -23,8 +23,8 @@ class Port:
 
 class Part(Floater):
 	"""A part of a ship."""
-	baseImage = loadImage("res/default.gif", (255,255,255))
-	image = None
+	# baseImage = loadImage("res/default.gif", (255,255,255))
+	# image = None
 	height, width = 9, 3
 	parent = None
 	dir = 270
@@ -36,8 +36,8 @@ class Part(Floater):
 	#whether this should be redrawn each frame:
 	color = (150,150,150)
 	animated = False
-	animatedBaseImage = None
-	animatedImage = None
+	# animatedBaseImage = None
+	# animatedImage = None
 	number = -1
 	name = 'part'
 	level = 1
@@ -49,22 +49,26 @@ class Part(Floater):
 	#a list of functions that are called on this part at attach time:
 	attachEffects = []
 
+
 	def __init__(self, game):
 		self.functions = []
 		self.functionDescriptions = []
 		self.adjectives = []
 		self.maxhp = 10
 		self.hp = 10
-		radius = max(self.baseImage.get_height() / 2,
-					self.baseImage.get_width() / 2)
+		self.rect = Rect(0,0,10,10)
+		radius = max(self.rect.height / 2,
+					self.rect.width / 2)
 		Floater.__init__(self, game, 0, 0, dir = 270, radius = radius)
-		self.image = colorShift(self.baseImage.copy(), self.color)
-		self.width = self.image.get_width() - 4
-		self.height = self.image.get_height() - 4
+		# self.image = colorShift(self.baseImage.copy(), self.color)
+		# self.width = self.rect.get_width() - 4
+		# self.height = self.image.get_height() - 4
 		#the length of this list is the number of connections.
 		 #each element is the part there, (x,y,dir) position of the connection.
 		 #the example is at the bottom of the part, pointed down.
 		self.ports = [Port((-self.width / 2, 0), 0, self)]
+
+
 	
 	def stats(self):
 		stats = (self.hp, self.maxhp, self.mass, len(self.ports))
@@ -102,12 +106,12 @@ class Part(Floater):
 			+ port.offset[1] * cost \
 			- sin(part.dir) * (part.width - PART_OVERLAP) / 2
 		#rotate takes a ccw angle and color.
-		part.image = colorShift(pygame.transform.rotate(part.baseImage, \
-					-part.dir), part.color)
-		part.image.set_colorkey((0,0,0))
-		if part.animatedBaseImage:
-			part.animatedImage = colorShift(part.animatedBaseImage, part.color)
-			part.animatedImage.set_colorkey((0,0,0))
+		# part.image = colorShift(pygame.transform.rotate(part.baseImage, \
+					# -part.dir), part.color)
+		# part.image.set_colorkey((0,0,0))
+		# if part.animatedBaseImage:
+		# 	part.animatedImage = colorShift(part.animatedBaseImage, part.color)
+		# 	part.animatedImage.set_colorkey((0,0,0))
 		#unequip the part if it collides with others, except parent(self).
 		# for other in self.ship.parts:
 			# if other is not self and other is not part:
@@ -221,49 +225,49 @@ class Part(Floater):
 			if port.part:
 				port.part.update()
 
-	def draw(self, surface, offset = None):
-		"""draws this part onto the surface."""
-		if not offset:
-			offset =(surface.get_width() \
-					- self.image.get_width()) / 2 + self.offset[0], \
-					(surface.get_height() \
-					- self.image.get_height()) / 2 + self.offset[1]
-		if self.ship == None:
-			Floater.draw(self, surface, offset)
-		else:
-			surface.blit(self.image, offset)
-		#draw children:
-		for port in self.ports:
-			if port.part:
-				port.part.draw(surface)
-		if not self.parent:
-			self.redraw(surface, offset)
+	# def draw(self, surface, offset = None):
+	# 	"""draws this part onto the surface."""
+	# 	if not offset:
+	# 		offset =(surface.get_width() \
+	# 				- self.image.get_width()) / 2 + self.offset[0], \
+	# 				(surface.get_height() \
+	# 				- self.image.get_height()) / 2 + self.offset[1]
+	# 	if self.ship == None:
+	# 		Floater.draw(self, surface, offset)
+	# 	else:
+	# 		surface.blit(self.image, offset)
+	# 	#draw children:
+	# 	for port in self.ports:
+	# 		if port.part:
+	# 			port.part.draw(surface)
+	# 	if not self.parent:
+	# 		self.redraw(surface, offset)
 
-	def redraw(self, surface, offset):
-		"""redraw(surface, offset) -> draws 
-		animated elements of this part to surface. 
-		This should circumvent the ship surface and draw directly onto space."""
-		if self.animated and self.animatedImage and self.ship:
-			image = pygame.transform.rotate(self.animatedImage, \
-								- self.dir - self.ship.dir).convert_alpha()
-			image.set_colorkey((0,0,0))
-			pos = self.x - image.get_width() / 2 - offset[0], \
-				  self.y - image.get_height() / 2 - offset[1]
-			surface.blit(image, pos)
-		#hp rings:
-		pos = 	int(self.x - offset[0] - self.radius), \
-				int(self.y - offset[1] - self.radius)
-		if self.hp / self.maxhp < .9:
-			#color fades green to red as hp decreases.
-			color = limit(0, int((1 - self.hp * 1. / self.maxhp ) * 255),255), \
-					limit(0, int(1. * self.hp / self.maxhp * 255), 255), 0, 100 
-			rect = (0,0, self.radius * 2, self.radius * 2)
-			#arc from - hp/maxhp*360 to -90:
-			pygame.draw.arc(self.buffer, color, rect, \
-					math.pi/2 - math.pi * 2 * (1 - 1. * self.hp / self.maxhp),\
-					math.pi/2, 2)
-			surface.blit(self.buffer, pos)
-			self.buffer.fill((0,0,0,0))
+	# def redraw(self, surface, offset):
+	# 	"""redraw(surface, offset) -> draws 
+	# 	animated elements of this part to surface. 
+	# 	This should circumvent the ship surface and draw directly onto space."""
+	# 	if self.animated and self.animatedImage and self.ship:
+	# 		image = pygame.transform.rotate(self.animatedImage, \
+	# 							- self.dir - self.ship.dir).convert_alpha()
+	# 		image.set_colorkey((0,0,0))
+	# 		pos = self.x - image.get_width() / 2 - offset[0], \
+	# 			  self.y - image.get_height() / 2 - offset[1]
+	# 		surface.blit(image, pos)
+	# 	#hp rings:
+	# 	pos = 	int(self.x - offset[0] - self.radius), \
+	# 			int(self.y - offset[1] - self.radius)
+	# 	if self.hp / self.maxhp < .9:
+	# 		#color fades green to red as hp decreases.
+	# 		color = limit(0, int((1 - self.hp * 1. / self.maxhp ) * 255),255), \
+	# 				limit(0, int(1. * self.hp / self.maxhp * 255), 255), 0, 100 
+	# 		rect = (0,0, self.radius * 2, self.radius * 2)
+	# 		#arc from - hp/maxhp*360 to -90:
+	# 		pygame.draw.arc(self.buffer, color, rect, \
+	# 				math.pi/2 - math.pi * 2 * (1 - 1. * self.hp / self.maxhp),\
+	# 				math.pi/2, 2)
+	# 		surface.blit(self.buffer, pos)
+	# 		self.buffer.fill((0,0,0,0))
 
 	def takeDamage(self, damage, other):
 		from spaceship import Player
@@ -322,8 +326,8 @@ class FlippablePart(Part):
 			self.name = self.name[:i] + 'Right' + self.name[i+4:]
 					
 class Gun(Part):
-	baseImage = loadImage("res/default" + ext)
-	image = None
+	# baseImage = loadImage("res/default" + ext)
+	# image = None
 	damage = 2
 	range = 4
 	name = "Gun"
@@ -395,10 +399,11 @@ class Cannon(Gun):
 					Bullet(self.game, self, 
 					self.damage * s.efficiency * s.damageBonus * s.cannonBonus, 
 					self.speed * s.cannonSpeedBonus,
-					self.range * s.cannonRangeBonus, image = self.bulletImage))
+					self.range * s.cannonRangeBonus))
+					# self.range * s.cannonRangeBonus, image = self.bulletImage))
 
 class MissileLauncher(Gun):
-	baseImage = loadImage("res/parts/missilelauncher" + ext)
+	# baseImage = loadImage("res/parts/missilelauncher" + ext)
 	missileImage = None
 	damage = 20
 	speed = 40
@@ -435,18 +440,18 @@ class MissileLauncher(Gun):
 					self.damage * s.efficiency * s.damageBonus * s.missileBonus,
 					self.speed * s.missileSpeedBonus,
 					self.acceleration * s.missileSpeedBonus,
-					self.range * s.missileRangeBonus, self.explosionRadius,
-					image = MISSILE_IMAGE))
+					self.range * s.missileRangeBonus, self.explosionRadius))
+					# image = MISSILE_IMAGE))
 							
 class Laser(Gun):
-	baseImage = loadImage("res/parts/leftlaser" + ext)
+	# baseImage = loadImage("res/parts/leftlaser" + ext)
 	damage = 10
 	range = 300
 	name = "Laser"
 	reloadTime = .8 #in seconds
 	energyCost = 8
 	beamWidth = 1
-	imageDuration = .08
+	# imageDuration = .08
 	
 	def __init__(self, game):
 		Gun.__init__(self, game)
@@ -511,23 +516,24 @@ class FlakCannon(Cannon):
 				Bullet(self.game, self, 
 				self.damage * s.efficiency * s.damageBonus * s.cannonBonus, 
 				self.speed * s.cannonSpeedBonus,
-				self.range * s.cannonRangeBonus, image = self.bulletImage))
+				100))
+				# self.range * s.cannonRangeBonus, image = self.bulletImage))
 			self.shootDir = baseDir # restore shootDir.
 			if self.burst <= 0:
 				self.reloadBurst = self.reloadBurstTime
 				
 class Engine(Part):
-	baseImage = loadImage("res/parts/engine" + ext)
-	image = None
+	# baseImage = loadImage("res/parts/engine" + ext)
+	# image = None
 	name = "Engine"
 	force = 24000
 	thrusting = False
 	energyCost = 1.
 	def __init__(self, game):
-		if Engine.animatedImage == None:
-			Engine.animatedImage = loadImage(\
-					"res/parts/engine thrusting" + ext)
-		self.baseAnimatedImage = Engine.animatedImage
+		# if Engine.animatedImage == None:
+		# 	Engine.animatedImage = loadImage(\
+		# 			"res/parts/engine thrusting" + ext)
+		# self.baseAnimatedImage = Engine.animatedImage
 		Part.__init__(self, game)
 		self.width -= 6	#move the engines in 6 pixels.
 		self.ports = []
@@ -567,8 +573,8 @@ class Engine(Part):
 			self.thrusting = True
 
 class Gyro(Part):
-	baseImage = loadImage("res/parts/gyro" + ext)
-	image = None
+	# baseImage = loadImage("res/parts/gyro" + ext)
+	# image = None
 	name = "Gyro"
 	torque = 180000 #N m degrees== m m kg degrees /s /s
 	energyCost = .8
@@ -621,8 +627,8 @@ class Gyro(Part):
 			self.ship.energy -= self.energyCost / self.game.fps
 	
 class Generator(Part):
-	baseImage = loadImage("res/parts/generator" + ext)
-	image = None
+	# baseImage = loadImage("res/parts/generator" + ext)
+	# image = None
 	name = "Generator"
 	rate = 6.
 		
@@ -644,8 +650,8 @@ class Generator(Part):
 		Part.update(self)
 	
 class Battery(Part):
-	baseImage = loadImage("res/parts/battery" + ext)
-	image = None
+	# baseImage = loadImage("res/parts/battery" + ext)
+	# image = None
 	name = "Battery"
 	capacity = 100
 	
@@ -664,8 +670,8 @@ class Battery(Part):
 		Part.attach(self)
 
 class Shield(Part):
-	baseImage = loadImage("res/parts/shield" + ext)
-	image = None
+	# baseImage = loadImage("res/parts/shield" + ext)
+	# image = None
 	name = "Shield"
 	shieldhp = 10
 	shieldRegen = .30
@@ -702,8 +708,8 @@ class Shield(Part):
 		Part.update(self)
 
 class Cockpit(Battery, Generator, Gyro):
-	baseImage = loadImage("res/parts/cockpit.gif")
-	image = None
+	# baseImage = loadImage("res/parts/cockpit.gif")
+	# image = None
 	energyCost = .2 #gyro
 	torque = 35000 #gyro
 	capacity = 5 #battery
@@ -774,12 +780,13 @@ class Fighter(Cockpit):#move to config
 					Port((-5, -7), 90, self),
 					Port((-5, 7), -90, self),
 					Port((-9, 0), 0, self)]
+		self.rect = Rect(0,0,10,10)
 					
 class Drone(Cockpit, Engine, Cannon):
-	baseImage = loadImage("res/ship" + ext)
+	# baseImage = loadImage("res/ship" + ext)
 	mass = 10
 	name = "Tiny Fighter Chassis"
-	image = None
+	# image = None
 	energyCost = 1 #this is used as a coefficient everywhere.
 	#gun:
 	shootDir = 0
@@ -853,7 +860,8 @@ class Drone(Cockpit, Engine, Cannon):
 					Bullet(self.game, self, 
 					self.damage * s.efficiency * s.damageBonus * s.cannonBonus,
 					self.speed * s.cannonSpeedBonus,
-					self.range * s.cannonRangeBonus, image = self.bulletImage))
+					self.range * s.cannonRangeBonus))
+					# self.range * s.cannonRangeBonus, image = self.bulletImage))
 			if self.burst <= 0:
 				self.reloadBurst = self.reloadBurstTime
 				

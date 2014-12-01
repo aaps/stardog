@@ -4,6 +4,7 @@ import pygame
 import math
 import random
 from pygame.locals import *
+# from views import *
 
 class Panel:
 	"""Panel(mouse, rect) -> new Panel. 
@@ -15,6 +16,8 @@ class Panel:
 	def __init__(self, rect):
 		self.rect = rect
 		self.panels = []
+		# self.view = View(self,screen)
+
 	
 	def update(self):
 		"""updates this panel and its children"""
