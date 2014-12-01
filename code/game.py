@@ -150,8 +150,8 @@ class Game:
 				
 				#paused:
 				if self.pause:
-					self.menu.update()
-					# self.menu.draw(self.screen)
+					# self.menu.update()
+					self.menu.draw(self.screen)
 					self.view.menuDraw(self.menu)
 					
 				#frame maintainance:

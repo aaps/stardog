@@ -197,8 +197,8 @@ class Ship(Floater):
 		self.__dict__.update(self.baseBonuses)
 		if script: self.script = script
 		else: self.script = Script(game)
-		self.baseImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
-		self.baseImage.set_colorkey((0,0,0))
+		# self.baseImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
+		# self.baseImage.set_colorkey((0,0,0))
 		self.functions = [self.forward, self.reverse, self.left, self.right, \
 				self.turnLeft, self.turnRight, self.shoot, self.launchMissiles]
 		self.functionDescriptions = []
@@ -213,8 +213,8 @@ class Ship(Floater):
 		part.dir = 0
 		part.offset = (0, 0)
 		part.ship = self
-		part.image = colorShift(part.baseImage, self.color).convert()
-		part.image.set_colorkey((0,0,0))
+		# part.image = colorShift(part.baseImage, self.color).convert()
+		# part.image.set_colorkey((0,0,0))
 		self.ports[0].part = part
 		self.reset()
 
@@ -278,9 +278,9 @@ class Ship(Floater):
 			size = int(self.radius * 2 + 60)
 		else: 
 			size = int(self.radius * 2)
-		self.baseImage = pygame.Surface((size, size), \
-					hardwareFlag | SRCALPHA).convert_alpha()
-		self.baseImage.set_colorkey((0,0,0))
+		# self.baseImage = pygame.Surface((size, size), \
+		# 			hardwareFlag | SRCALPHA).convert_alpha()
+		# self.baseImage.set_colorkey((0,0,0))
 		# if self.ports[0].part:
 		# 	self.ports[0].part.draw(self.baseImage)
 
@@ -378,22 +378,22 @@ class Ship(Floater):
 		buffer = pygame.Surface((self.radius * 2, self.radius * 2), \
 				flags = hardwareFlag | SRCALPHA).convert_alpha()
 		buffer.set_colorkey((0,0,0))
-		self.image = pygame.transform.rotate(self.baseImage, \
-									-self.dir).convert_alpha()
-		self.image.set_colorkey((0,0,0))
+		# self.image = pygame.transform.rotate(self.baseImage, \
+		# 							-self.dir).convert_alpha()
+		# self.image.set_colorkey((0,0,0))
 		
 		#imageOffset compensates for the extra padding from the rotation.
-		imageOffset = [- self.image.get_width() / 2,\
-					   - self.image.get_height() / 2]
+		# imageOffset = [- self.image.get_width() / 2,\
+		# 			   - self.image.get_height() / 2]
 		#offset is where on the input surface to blit the ship.
-		if offset:
-			pos =[self.x  - offset[0] + pos[0] + imageOffset[0], \
-				  self.y  - offset[1] + pos[1] + imageOffset[1]]
+		# if offset:
+		# 	pos =[self.x  - offset[0] + pos[0] + imageOffset[0], \
+		# 		  self.y  - offset[1] + pos[1] + imageOffset[1]]
 				  
 		#draw to buffer:
-		surface.blit(self.image, pos)
-		for part in self.parts:
-			part.redraw(surface, offset)
+		# surface.blit(self.image, pos)
+		# for part in self.parts:
+		# 	part.redraw(surface, offset)
 		
 		#shield:
 		if self.hp > .0002:
@@ -408,9 +408,9 @@ class Ship(Floater):
 							math.pi * 2 * self.hp / self.maxhp + math.pi/2, 5)
 							
 		#draw to input surface:
-		pos[0] += - imageOffset[0] - self.radius
-		pos[1] += - imageOffset[1] - self.radius
-		surface.blit(buffer, pos) 
+		# pos[0] += - imageOffset[0] - self.radius
+		# pos[1] += - imageOffset[1] - self.radius
+		# surface.blit(buffer, pos) 
 		
 	def takeDamage(self, damage, other):
 		self.hp = max(self.hp - damage, 0)
