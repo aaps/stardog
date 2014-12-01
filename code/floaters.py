@@ -40,6 +40,7 @@ class Floater( Ballistic):
 	color = (200, 200, 0)
 	mass = 1
 	tangible = True
+	alive = True
 
 	def __init__(self, game, x, y, dx = 0., dy = 0., dir = 270, radius = 10):
 		# pygame.sprite.Sprite.__init__(self)
@@ -55,6 +56,7 @@ class Floater( Ballistic):
 		# 	image = DEFAULT_IMAGE
 		# self.image = pygame.transform.rotate(image, -self.dir).convert()
 		self.rect = Rect(0,0,10,10)
+		alive = True
 
 	def update(self):
 		"""updates this floater based on its variables"""
@@ -66,6 +68,9 @@ class Floater( Ballistic):
 		self.hp -= damage
 		if self.hp <= 0:
 			self.kill()
+
+	def kill(self):
+		self.alive = False
 
 	# def draw(self, surface, offset = (0,0)):
 	# 	"""Blits this floater onto the surface. """

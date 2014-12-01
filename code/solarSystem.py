@@ -65,6 +65,8 @@ class SolarSystem:
 						self.drawEdgeWarning = self.game.fps
 				else:
 					floater.kill()
+			if not floater.alive:
+				self.floaters.remove(floater)
 					
 		# #list floaters that are on screen now:
 		# self.onScreen = []

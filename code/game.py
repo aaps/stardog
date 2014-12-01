@@ -117,7 +117,8 @@ class Game:
 					self.pause = not self.pause #pause/menu
 					self.keys[K_RETURN % 322] = False
 					if self.pause:
-						self.menu.reset()
+						pass
+						# self.menu.reset()
 				self.debug = False
 				if self.keys[K_BACKSPACE % 322]:
 					self.debug = True #print debug information
