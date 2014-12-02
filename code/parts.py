@@ -223,7 +223,6 @@ class Part(Floater):
 		#update children:
 		for port in self.ports:
 			if port.part:
-				print port.part
 				port.part.update()
 
 
@@ -709,7 +708,7 @@ class Shield(Part):
 				self.ship.energy -= self.energyCost / self.game.fps
 		Part.update(self)
 
-class Cockpit(Battery, Generator, Gyro):
+class Cockpit(Battery, Generator):
 	# baseImage = loadImage("res/parts/cockpit.gif")
 	# image = None
 	energyCost = .2 #gyro
@@ -734,7 +733,6 @@ class Cockpit(Battery, Generator, Gyro):
 
 	def update(self):
 		Generator.update(self)
-		Gyro.update(self)
 		Battery.update(self)
 		
 class Interceptor(Cockpit):#move to config
