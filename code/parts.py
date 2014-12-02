@@ -516,7 +516,7 @@ class FlakCannon(Cannon):
 				Bullet(self.game, self, 
 				self.damage * s.efficiency * s.damageBonus * s.cannonBonus, 
 				self.speed * s.cannonSpeedBonus,
-				100))
+				10))
 				# self.range * s.cannonRangeBonus, image = self.bulletImage))
 			self.shootDir = baseDir # restore shootDir.
 			if self.burst <= 0:
