@@ -431,18 +431,24 @@ class Player(Ship):
 	landed = False
 	def __init__(self, game, x, y, dx = 0, dy = 0, dir = 270, script = None, \
 				color = (255, 255, 255)):
+		print "init player"
 		Ship.__init__(self, game, x, y, dx, dy, dir, script, color)
 		self.skills = [Modularity(self), Agility(self), Composure(self)]
+
 	def xpQuest(self, xp):
 		self.xp += xp
+
 	def xpKill(self, ship):
 		self.xp +=  10. * ship.level / self.level
+
 	def xpDamage(self, target, damage):
 		if isinstance(target, Part) and target.parent:
 			target = target.parent #count the ship, not the part.
 		self.xp += 1. * target.level / self.level * damage
+
 	def xpDestroy(self, target):
 		self.xp += 2. * target.level / self.level
+		
 	def update(self):
 		if self.game.debug: print 'xp:',self.xp
 		if self.xp >= self.next():
