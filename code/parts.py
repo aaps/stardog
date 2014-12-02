@@ -223,7 +223,9 @@ class Part(Floater):
 		#update children:
 		for port in self.ports:
 			if port.part:
+				print port.part
 				port.part.update()
+
 
 	# def draw(self, surface, offset = None):
 	# 	"""draws this part onto the surface."""
@@ -729,6 +731,11 @@ class Cockpit(Battery, Generator, Gyro):
 					"\nCapacity: %s energy" +
 					"\nEnergy Produced: %s/second")
 		return Part.stats(self) + statString % stats
+
+	def update(self):
+		Generator.update(self)
+		Gyro.update(self)
+		Battery.update(self)
 		
 class Interceptor(Cockpit):#move to config
 	mass = 20

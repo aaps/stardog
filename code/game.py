@@ -88,7 +88,6 @@ class Game:
 			self.triggers = plot.newGameTriggers(self)
 				
 			#The in-round loop (while player is alive):
-			print self.curSystem.ships
 			while self.running and self.player in self.curSystem.ships:
 				#event polling:
 				for event in pygame.event.get():

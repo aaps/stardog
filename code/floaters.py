@@ -64,6 +64,7 @@ class Floater( Ballistic):
 		self.y += self.dy / self.game.fps
 		self.rect.center = (self.x, self.y)
 
+
 	def takeDamage(self, damage, other):
 		self.hp -= damage
 		if self.hp <= 0:
