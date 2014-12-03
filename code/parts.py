@@ -708,7 +708,7 @@ class Shield(Part):
 				self.ship.energy -= self.energyCost / self.game.fps
 		Part.update(self)
 
-class Cockpit(Battery, Generator):
+class Cockpit(Battery, Generator, Gyro):
 	# baseImage = loadImage("res/parts/cockpit.gif")
 	# image = None
 	energyCost = .2 #gyro
@@ -734,6 +734,7 @@ class Cockpit(Battery, Generator):
 	def update(self):
 		Generator.update(self)
 		Battery.update(self)
+		Gyro.update(self)
 		
 class Interceptor(Cockpit):#move to config
 	mass = 20
@@ -774,6 +775,7 @@ class Fighter(Cockpit):#move to config
 	hp = 10
 	energyCost = .2
 	rate = 1.5
+	image = 'fighter'
 	capacity = 5
 	baseImage = loadImage("res/parts/fighter.bmp")
 	name = 'Fighter Cockpit'

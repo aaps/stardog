@@ -36,6 +36,7 @@ class Floater( Ballistic):
 	and	a .bmp, which is used depends on the pygame support on the run
 	system."""
 	hp = 1
+	image = 'default'
 	baseImage = None
 	color = (200, 200, 0)
 	mass = 1
@@ -80,6 +81,7 @@ class Floater( Ballistic):
 	# 	surface.blit(self.image, pos)
 
 class Bullet(Floater):
+	image = 'shot'
 	def __init__(self, game, gun, damage, speed, range):
 		dir = gun.dir + gun.ship.dir
 		cost = cos(dir) #cost is short for cos(theta)

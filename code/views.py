@@ -13,14 +13,13 @@ class View:
 		self.bg = BG(self.game)
 		self.surface = screen
 		self.onScreen = []
-		self.imagenames = {'shot':'shot.bmp','missile':'missile.bmp','default':'default.bmp','defaultselected':'defaultselected.bmp' }
+		self.imagenames = {'shot':'res/shot.bmp','missile':'res/missile.bmp','default':'res/default.bmp','defaultselected':'res/defaultselected.bmp','fighter':'res/parts/fighter.bmp' }
 		self.images = {}
 		self.mutatedimages = {}
-		self.respath = 'res/'
 		for name in self.imagenames:
-			self.images[name] =  loadImage(self.respath + self.imagenames[name])
+			self.images[name] =  loadImage(self.imagenames[name])
+		self.mutatedimages['default'] = self.images['default']
 
-	
 
 	def getAllOnScreen(self,starsystem, offset):
 		self.onScreen = []
@@ -41,40 +40,21 @@ class View:
 		self.bg.draw(self.surface, self.game.player)
 		for floater in self.onScreen:
 				self.floaterDraw(floater, offset)
-				# floater.draw(self.surface, offset)
 
 	def add(self,floater):
 			if hasattr(floater, 'image'):
-				image = floater.image
-				if (not image):
-					image = DEFAULT_IMAGE
-				if (floater.dir):
-					self.mutatedimages[image] = pygame.transform.rotate(self.images[image], -floater.dir).convert()
-				self.mutatedimages[image] = self.images[image]
+				self.mutatedimages[floater.image] = pygame.transform.rotate(self.images[floater.image], -floater.dir).convert()
 
-			# self.images[name] =  loadImage(self.respath + self.imagenames[name])
 
 	def floaterDraw(self, floater, offset = (0,0)):
 		"""Blits this floater onto the surface. """
-		pos = floater.x - floater.rect.width  / 2 - offset[0], \
-			  floater.y - floater.rect.height / 2 - offset[1]
-		self.surface.blit(self.images['default'], pos)
 
-	def shipDraw(self, floater, offset = (0,0)):
-		pass
-
-
-	def explotionDraw(self, floater, offset = (0,0)):
-		pass
+		pos = floater.x - floater.rect.width  / 2 - offset[0], floater.y - floater.rect.height / 2 - offset[1]
+		if hasattr(floater, 'image'):
+			self.surface.blit(self.mutatedimages[floater.image], pos)
+		else:
+			self.surface.blit(self.mutatedimages['default'], pos)
 
 
-	def partDraw(self, part, offset = (0,0)):
-		pass
 
-	def menuDraw(self, menu):
-		pass
-
-
-	def panelDraw(self, rect):
-		pass
 
