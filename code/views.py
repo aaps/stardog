@@ -54,10 +54,13 @@ class View:
 			self.surface.blit(self.mutatedimages[floater.image], pos)
 		if hasattr(floater, 'parts') and len(floater.parts) > 0:
 			for part in floater.parts:
-				self.partDraw(part, offset)
+				self.partDraw(part,floater, offset)
 
 
-	def partDraw(self, part, offset = (0,0)):
+	def partDraw(self, part, floater,offset = (0,0)):
+		if hasattr(part,'dir'):
+			self.mutatedimages[part.image] = pygame.transform.rotate(self.images[part.image], - part.dir - floater.dir).convert_alpha()
+
 		pos = part.x - part.rect.width  / 2 - offset[0], part.y - part.rect.height / 2 - offset[1]
 		self.surface.blit(self.mutatedimages[part.image], pos)
 

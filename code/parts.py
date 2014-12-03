@@ -622,8 +622,6 @@ class Gyro(Part):
 			self.ship.energy -= self.energyCost / self.game.fps
 	
 class Generator(Part):
-	# baseImage = loadImage("res/parts/generator" + ext)
-	# image = None
 	name = "Generator"
 	rate = 6.
 		
@@ -645,8 +643,6 @@ class Generator(Part):
 		Part.update(self)
 	
 class Battery(Part):
-	# baseImage = loadImage("res/parts/battery" + ext)
-	# image = None
 	name = "Battery"
 	capacity = 100
 	
@@ -665,8 +661,6 @@ class Battery(Part):
 		Part.attach(self)
 
 class Shield(Part):
-	# baseImage = loadImage("res/parts/shield" + ext)
-	# image = None
 	name = "Shield"
 	shieldhp = 10
 	shieldRegen = .30
@@ -703,8 +697,6 @@ class Shield(Part):
 		Part.update(self)
 
 class Cockpit(Battery, Generator, Gyro):
-	# baseImage = loadImage("res/parts/cockpit.gif")
-	# image = None
 	energyCost = .2 #gyro
 	torque = 35000 #gyro
 	capacity = 5 #battery
@@ -733,7 +725,6 @@ class Cockpit(Battery, Generator, Gyro):
 class Interceptor(Cockpit):#move to config
 	mass = 20
 	hp = 15
-	baseImage = loadImage("res/parts/interceptor.bmp")
 	name = 'Interceptor Cockpit'
 	
 	def __init__(self, game):
@@ -750,7 +741,6 @@ class Destroyer(Cockpit):#move to config
 	mass = 60
 	hp = 30
 	energyCost = .6
-	baseImage = loadImage("res/parts/destroyer.bmp")
 	name = 'Destroyer Cockpit'
 	
 	def __init__(self, game):
@@ -771,7 +761,6 @@ class Fighter(Cockpit):#move to config
 	rate = 1.5
 	image = 'fighter'
 	capacity = 5
-	baseImage = loadImage("res/parts/fighter.bmp")
 	name = 'Fighter Cockpit'
 	
 	def __init__(self, game):
@@ -784,7 +773,6 @@ class Fighter(Cockpit):#move to config
 		self.rect = Rect(0,0,10,10)
 					
 class Drone(Cockpit, Engine, Cannon):
-	# baseImage = loadImage("res/ship" + ext)
 	mass = 10
 	name = "Tiny Fighter Chassis"
 	# image = None
@@ -812,8 +800,6 @@ class Drone(Cockpit, Engine, Cannon):
 	capacity = 40
 	
 	def __init__(self,  game):
-		if Drone.animatedImage == None:
-			Drone.animatedImage = loadImage("res/shipThrusting" + ext)
 		self.baseAnimatedImage = Drone.animatedImage
 		self.animated = True
 		Part.__init__(self, game)
