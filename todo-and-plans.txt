@@ -1,1 +1,31 @@
 The edge of the system is a stupid idea, and can be replaced with a when out of system gravity drive that can be activated x distance from star to get back to star system in no time.
+
+if you will travel long enough you will also reach the next solar system, as in stargate travel.
+
+A radar tah will eventualy suport raytracing.
+
+a cource line for a ship that will include gravity pulls.
+
+a particle engine for explotions, engine stuff.
+
+Space mines.
+
+finite engine trust speed
+
+astroids
+
+wormholes/star gates to other systems.
+
+ship lights
+
+every planet own part list
+
+quad trees
+
+better ui
+
+engines with different trust in N
+
+multyplayer
+
+zoom in out option
