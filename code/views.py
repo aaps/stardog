@@ -13,7 +13,7 @@ class View:
 		self.bg = BG(self.game)
 		self.surface = screen
 		self.onScreen = []
-		self.imagenames = {'shot':'res/shot.bmp','missile':'res/missile.bmp','default':'res/default.bmp','defaultselected':'res/defaultselected.bmp','fighter':'res/parts/fighter.bmp' }
+		self.imagenames = {'shot':'res/shot.bmp','missile':'res/missile.bmp','default':'res/default.bmp','defaultselected':'res/defaultselected.bmp','fighter':'res/parts/fighter.bmp','engine':'res/parts/engine.bmp','machinegun':'res/parts/machine_gun.bmp','fightershield':'res/parts/fighter_shield.bmp' }
 		self.images = {}
 		self.mutatedimages = {}
 		for name in self.imagenames:

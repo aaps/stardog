@@ -15,9 +15,8 @@ def setVolume(channel, floater1, floater2):
 						(floater2.x - floater1.x) ** 2 + \
 						(floater2.y - floater1.y) ** 2 + .0001)))
 
-BULLET_IMAGE = loadImage("res/shot.bmp")
-MISSILE_IMAGE = loadImage("res/missile" + ext)
-DEFAULT_IMAGE = loadImage("res/default" + ext)
+
+DEFAULT_IMAGE = loadImage("res/default.bmp")
 
 
 		

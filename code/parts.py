@@ -23,8 +23,6 @@ class Port:
 
 class Part(Floater):
 	"""A part of a ship."""
-	# baseImage = loadImage("res/default.gif", (255,255,255))
-	# image = None
 	height, width = 9, 3
 	parent = None
 	dir = 270
@@ -327,8 +325,6 @@ class FlippablePart(Part):
 			self.name = self.name[:i] + 'Right' + self.name[i+4:]
 					
 class Gun(Part):
-	# baseImage = loadImage("res/default" + ext)
-	# image = None
 	damage = 2
 	range = 4
 	name = "Gun"
@@ -373,8 +369,8 @@ class Cannon(Gun):
 	name = "Cannon"
 	
 	def __init__(self, game):
-		if self.bulletImage == None:
-			self.bulletImage = BULLET_IMAGE.copy()
+		# if self.bulletImage == None:
+		# 	self.bulletImage = BULLET_IMAGE.copy()
 		Gun.__init__(self, game)
 		
 	def stats(self):
@@ -383,7 +379,7 @@ class Cannon(Gun):
 		return Gun.stats(self) + statString % stats
 				
 	def attach(self):
-		self.bulletImage = colorShift(BULLET_IMAGE, self.ship.color)
+		# self.bulletImage = colorShift(BULLET_IMAGE, self.ship.color)
 		Part.attach(self)
 			
 	def shoot(self):
@@ -404,7 +400,6 @@ class Cannon(Gun):
 					# self.range * s.cannonRangeBonus, image = self.bulletImage))
 
 class MissileLauncher(Gun):
-	# baseImage = loadImage("res/parts/missilelauncher" + ext)
 	missileImage = None
 	damage = 20
 	speed = 40
@@ -419,8 +414,8 @@ class MissileLauncher(Gun):
 	name = 'Missile Launcher'
 	
 	def init(self, game):
-		if self.missileImage == None:
-			self.missileImage = MISSILE_IMAGE.copy()
+		# if self.missileImage == None:
+			# self.missileImage = MISSILE_IMAGE.copy()
 		Gun.__init__(self, game)
 	
 	def stats(self):
@@ -445,7 +440,6 @@ class MissileLauncher(Gun):
 					# image = MISSILE_IMAGE))
 							
 class Laser(Gun):
-	# baseImage = loadImage("res/parts/leftlaser" + ext)
 	damage = 10
 	range = 300
 	name = "Laser"
@@ -524,9 +518,9 @@ class FlakCannon(Cannon):
 				self.reloadBurst = self.reloadBurstTime
 				
 class Engine(Part):
-	# baseImage = loadImage("res/parts/engine" + ext)
-	# image = None
+
 	name = "Engine"
+	image="engine"
 	force = 24000
 	thrusting = False
 	energyCost = 1.

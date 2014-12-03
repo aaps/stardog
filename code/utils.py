@@ -94,17 +94,14 @@ except (ImportError, NotImplementedError):
  #if there is extended image support, load .gifs, otherwise load .bmps.
  #.bmps do not support transparency, so there might be black clipping.
  
-if pygame.image.get_extended():
-	ext = ".gif"
-else:
-	ext = ".bmp"
+
 	
 def loadImage(filename, colorkey=(0,0,0)):
 	try:
 		image = pygame.image.load(filename).convert()
 		image.set_colorkey(colorkey)
 	except pygame.error:
-		image = pygame.image.load("res/default" + ext).convert()
+		image = pygame.image.load("res/default.bmp").convert()
 		image.set_colorkey((255,255,255))
 	return image
 	

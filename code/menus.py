@@ -6,7 +6,7 @@ from parts import Dummy, PART_OVERLAP, DEFAULT_IMAGE, FlippablePart
 from spaceship import Ship
 
 
-DEFAULT_SELECTED_IMAGE = loadImage("res/defaultselected" + ext)
+DEFAULT_SELECTED_IMAGE = loadImage("res/defaultselected.bmp")
 
 class Menu(TopLevelPanel):
 	"""The top level menu object. Menu(mouse, rect) -> new Menu"""
