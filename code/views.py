@@ -43,18 +43,22 @@ class View:
 
 	def add(self,floater):
 			if hasattr(floater, 'image'):
+
 				self.mutatedimages[floater.image] = pygame.transform.rotate(self.images[floater.image], -floater.dir).convert()
 
 
 	def floaterDraw(self, floater, offset = (0,0)):
 		"""Blits this floater onto the surface. """
-
 		pos = floater.x - floater.rect.width  / 2 - offset[0], floater.y - floater.rect.height / 2 - offset[1]
 		if hasattr(floater, 'image'):
 			self.surface.blit(self.mutatedimages[floater.image], pos)
-		else:
-			self.surface.blit(self.mutatedimages['default'], pos)
+		if hasattr(floater, 'parts') and len(floater.parts) > 0:
+			for part in floater.parts:
+				self.partDraw(part, offset)
 
 
+	def partDraw(self, part, offset = (0,0)):
+		pos = part.x - part.rect.width  / 2 - offset[0], part.y - part.rect.height / 2 - offset[1]
+		self.surface.blit(self.mutatedimages[part.image], pos)
 
 

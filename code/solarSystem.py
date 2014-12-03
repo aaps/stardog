@@ -97,6 +97,8 @@ class SolarSystem:
 		self.floaters.append(floater)
 		if isinstance(floater, Ship):
 			self.ships.append(floater)
+			for part in floater.parts:
+				self.game.view.add(part)
 		
 	def empty(self):
 		self.ships.empty()
