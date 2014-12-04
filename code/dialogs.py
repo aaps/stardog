@@ -30,13 +30,16 @@ class IntroMenu(TopLevelPanel):
 						
 	def typeChoose(self):
 		self.panels = []
-		x = 200
-		y = 200
-		self.addPanel(TypeButton(self, Rect(x,y,100,120), 'fighter'))
+		image_width = 100
+		image_height = 120
+		x,y,width,height = self.rect
+		x = (width/5)
+		y = (height/4)
+		self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'fighter'))
 		x += 200
-		self.addPanel(TypeButton(self, Rect(x,y,100,120), 'interceptor'))
+		self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'interceptor'))
 		x += 200
-		self.addPanel(TypeButton(self, Rect(x,y,100,120), 'destroyer'))
+		self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'destroyer'))
 		#exit(1)
 	def chooseColor(self, color):
 		self.game.playerColor = color

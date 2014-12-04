@@ -56,7 +56,7 @@ class Game:
 			# game setup:
 			intro = IntroMenu(self, Rect((self.width - 800) / 2,
 										(self.height - 600) / 2,
-										self.width*0.50, self.height*0.50))
+										800,600))
 			self.messenger.empty()
 			while self.running and intro.running:
 				#event polling:

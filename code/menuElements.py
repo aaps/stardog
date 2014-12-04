@@ -510,7 +510,7 @@ class Selecter(ScrollPanel):
 
 	def click(self, button, pos):
 		if ScrollPanel.click(self, button, pos):
-			returnTrue
+			return True
 		posNew = pos[0] - self.rect.left + self.visibleRect.left, \
 				pos[1] - self.rect.top + self.visibleRect.top
 		new = False
