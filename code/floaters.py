@@ -149,7 +149,7 @@ class Missile(Bullet):
 		self.delta.x += self.acceleration * cos(self.dir) / self.game.fps
 		self.delta.y += self.acceleration * sin(self.dir) / self.game.fps
 		if self.life > self.range:
-			self.kill()
+			self.kill(Floater(self.game, Vec2d(0,0), Vec2d(0,0)))
 
 	def detonate(self):
 		delta = self.delta.rotatedd(self.dir, -(self.acceleration * self.life))

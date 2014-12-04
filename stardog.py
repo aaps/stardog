@@ -11,7 +11,7 @@ except ImportError:
     
 FULL = False; RESOLUTION = 1024, 800 #test
 #FULL = True; RESOLUTION = None #play
-hardwareFlag = pygame.HWSURFACE
+hardwareFlag = pygame.HWSURFACE|pygame.DOUBLEBUF
 
 
 if __name__=="__main__":
