@@ -34,8 +34,6 @@ class Part(Floater):
 	#whether this should be redrawn each frame:
 	color = (150,150,150)
 	animated = False
-	# animatedBaseImage = None
-	# animatedImage = None
 	number = -1
 	name = 'part'
 	level = 1
@@ -112,10 +110,10 @@ class Part(Floater):
 		# 	part.animatedImage.set_colorkey((0,0,0))
 		#unequip the part if it collides with others, except parent(self).
 		# for other in self.ship.parts:
-			# if other is not self and other is not part:
-				# if abs(part.offset[0] - other.offset[0]) < 7 \
-				# and abs(part.offset[1] - other.offset[1]) < 7:
-					# part.unequip()
+		# 	if other is not self and other is not part:
+		# 		if abs(part.offset[0] - other.offset[0]) < 7 \
+		# 		and abs(part.offset[1] - other.offset[1]) < 7:
+		# 			part.unequip()
 		#allow the ship to re-adjust:
 		self.ship.reset()
 			
@@ -400,7 +398,7 @@ class Cannon(Gun):
 					# self.range * s.cannonRangeBonus, image = self.bulletImage))
 
 class MissileLauncher(Gun):
-	missileImage = None
+	image = "missilelauncher"
 	damage = 20
 	speed = 40
 	reloadTime = 5
@@ -525,10 +523,6 @@ class Engine(Part):
 	thrusting = False
 	energyCost = 1.
 	def __init__(self, game):
-		# if Engine.animatedImage == None:
-		# 	Engine.animatedImage = loadImage(\
-		# 			"res/parts/engine thrusting" + ext)
-		# self.baseAnimatedImage = Engine.animatedImage
 		Part.__init__(self, game)
 		self.width -= 6	#move the engines in 6 pixels.
 		self.ports = []
@@ -568,8 +562,7 @@ class Engine(Part):
 			self.thrusting = True
 
 class Gyro(Part):
-	# baseImage = loadImage("res/parts/gyro" + ext)
-	# image = None
+	image = "gyro"
 	name = "Gyro"
 	torque = 180000 #N m degrees== m m kg degrees /s /s
 	energyCost = .8
@@ -644,6 +637,7 @@ class Generator(Part):
 	
 class Battery(Part):
 	name = "Battery"
+	image = "battery"
 	capacity = 100
 	
 	def stats(self):
@@ -663,6 +657,7 @@ class Battery(Part):
 class Shield(Part):
 	name = "Shield"
 	shieldhp = 10
+	image = "shield"
 	shieldRegen = .30
 	energyCost = 1.5
 	def __init__(self, game): 
@@ -725,6 +720,7 @@ class Cockpit(Battery, Generator, Gyro):
 class Interceptor(Cockpit):#move to config
 	mass = 20
 	hp = 15
+	image = 'interceptor'
 	name = 'Interceptor Cockpit'
 	
 	def __init__(self, game):
@@ -740,6 +736,7 @@ class Interceptor(Cockpit):#move to config
 class Destroyer(Cockpit):#move to config
 	mass = 60
 	hp = 30
+	image = 'destroyer'
 	energyCost = .6
 	name = 'Destroyer Cockpit'
 	

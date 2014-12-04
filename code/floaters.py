@@ -111,6 +111,7 @@ class Bullet(Floater):
 			self.kill()
 
 class Missile(Bullet):
+	image = "missile"
 	life = 0
 	turning = 0
 	percision = 0
@@ -160,8 +161,6 @@ class Explosion(Floater):
 
 	def __init__(self, game, x, y, dx = 0, dy = 0, radius = 10,\
 				time = 1, damage = 0, force = 6000):
-		# image = pygame.Surface((radius * 2, radius * 2), flags = hardwareFlag).convert()
-		# image.set_colorkey((0,0,0))
 		Floater.__init__(self, game, x, y, dx, dy, radius = 0)
 		self.maxRadius = int(radius)
 		self.force = force
@@ -216,8 +215,6 @@ class LaserBeam(Floater):
 	life = .5 #seconds
 	hp = 0
 	tangible = False
-	baseImage = loadImage("res/laser.bmp").convert()
-	baseImage.set_colorkey((0,0,0))
 	
 	def __init__(self, game, laser, damage, range):
 		dir = laser.dir + laser.ship.dir
