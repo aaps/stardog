@@ -28,4 +28,12 @@ engines with different trust in N
 
 multyplayer
 
-zoom in out option
+zoom in out option for radar
+
+weapon heat generation
+
+test if solar orbit is posible,
+
+a orbit calculator
+
+someway to target ships, parts and planets
