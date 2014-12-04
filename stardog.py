@@ -10,7 +10,7 @@ except ImportError:
     print 'this game may run faster if you install psyco.'
     
 FULL = True; RESOLUTION = 1024, 768 #test
-#FULL = True; RESOLUTION = None
+FULL = True; RESOLUTION = None
 #FULL = True; RESOLUTION = None #play
 hardwareFlag = pygame.HWSURFACE|pygame.DOUBLEBUF
 
