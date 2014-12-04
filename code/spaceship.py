@@ -189,7 +189,7 @@ class Ship(Floater):
 				color = (255, 255, 255)):
 		Floater.__init__(self, game, x, y, dx, dy, dir, 1)
 		self.inventory = []
-		self.ports = [Port((0,0), 0, self)]
+		self.ports = [Port(0, self)]
 		self.energy = 0
 		self.maxEnergy = 0
 		self.color = color

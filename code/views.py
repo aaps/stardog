@@ -33,6 +33,13 @@ class View:
 				and floater.y - r < offset[1] + self.game.height):
 					self.onScreen.append(floater)
 
+	def reposparts(self, part):
+		print part
+		for port in part.ports:
+			if port.part:
+				self.reposparts(port.part)
+
+
 
 	def starSystemDraw(self, starsystem, offset):
 		self.getAllOnScreen(starsystem, offset)
@@ -51,9 +58,9 @@ class View:
 					self.images[floater.image] = self.images['default']
 
 				if isinstance(floater, Part):
-					print "is part"
-					floater.width = self.images[floater.image].get_width()
-					floater.height = self.images[floater.image].get_height()
+
+					floater.setwithheight(self.images[floater.image].get_width(), self.images[floater.image].get_height())
+
 		
 
 	def floaterDraw(self, floater, offset = (0,0)):
@@ -69,6 +76,7 @@ class View:
 
 
 	def partDraw(self, part, floater,offset = (0,0)):
+
 		if hasattr(part,'dir'):
 			self.mutatedimages[part.image] = pygame.transform.rotate(self.images[part.image], - part.dir - floater.dir).convert_alpha()
 		pos = part.x - self.mutatedimages[part.image].get_width()  / 2 - offset[0], part.y - self.mutatedimages[part.image].get_height() / 2 - offset[1]
