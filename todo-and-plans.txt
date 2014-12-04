@@ -37,3 +37,7 @@ test if solar orbit is posible,
 a orbit calculator
 
 someway to target ships, parts and planets
+
+<Duality>
+
+make menu work on fullscreen. only fighter is displayed right left corner.

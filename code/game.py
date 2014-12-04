@@ -24,7 +24,6 @@ class Game:
 	def __init__(self, screen):
 		self.pause = False
 		self.debug = False
-		self.pause = False
 		self.fps = FPS
 		self.screen = screen
 		self.top_left = 0, 0
@@ -57,7 +56,7 @@ class Game:
 			# game setup:
 			intro = IntroMenu(self, Rect((self.width - 800) / 2,
 										(self.height - 600) / 2,
-										800, 600))
+										self.width*0.50, self.height*0.50))
 			self.messenger.empty()
 			while self.running and intro.running:
 				#event polling:
