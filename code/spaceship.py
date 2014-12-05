@@ -87,7 +87,7 @@ def makeInterceptor(game, x, y, dx = 0, dy = 0, dir = 270, script = None, \
 	missile = MissileLauncher(game)
 	engine = Engine(game)
 	engine2 = Engine(game)
-	for part in [gyro, generator, battery, cockpit, gun, gun2, engine, engine2,
+	for part in [gyro, generator ,battery, cockpit, gun, gun2, engine2,
 				missile]:
 		if rand() > .8:
 			addAdjective(part)
@@ -98,10 +98,10 @@ def makeInterceptor(game, x, y, dx = 0, dy = 0, dir = 270, script = None, \
 	cockpit.addPart(missile, 0)
 	cockpit.addPart(gun, 2)
 	cockpit.addPart(gun2, 3)
-	cockpit.addPart(generator, 4)
+	cockpit.addPart(battery, 4)
 	cockpit.addPart(gyro, 5)
-	generator.addPart(battery, 0)
-	battery.addPart(engine, 0)
+	battery.addPart(generator, 0)
+	# battery.addPart(engine, 0)
 	gyro.addPart(engine2, 1)
 	ship.reset()
 	ship.energy = ship.maxEnergy * .8

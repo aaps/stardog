@@ -60,9 +60,6 @@ class Part(Floater):
 	def setwithheight(self, width, height):
 		self.width = width
 		self.height = height
-		# print self.ports[0]
-		# self.ports[0].offset = (-self.width / 2, 0)
-		
 
 		
 
@@ -76,7 +73,31 @@ class Part(Floater):
 		stats = (self.hp, self.maxhp)
 		statString = """%i/%i"""
 		return statString % stats
+	
+	def reposparts(self, part, port):
+		if port in self.ports:
+			pass
+		else:
+			if len(self.ports) > port:
+				port = self.ports[port]
 		
+		cost = cos(self.dir) #cost is short for cos(theta)
+		sint = sin(self.dir)
+		part.offset = self.offset[0] + port.offset[0] * cost \
+			- port.offset[1] * sint \
+			- cos(part.dir) * (part.width - PART_OVERLAP) / 2, \
+			self.offset[1] + port.offset[0] * sint \
+			+ port.offset[1] * cost \
+			- sin(part.dir) * (part.height - PART_OVERLAP) / 2
+
+		print part, len(part.ports), part.offset
+		print
+
+		for port in part.ports:
+			if port.part:
+				self.reposparts(port.part, part.ports.index(port))
+
+
 	def addPart(self, part, port):
 		"""addPart(part, port) -> connects part to port of this part.
 		port can be a port number or a reference to the port."""
@@ -524,13 +545,12 @@ class Engine(Part):
 		Part.__init__(self, game)
 		self.functions.append(self.thrust)
 		self.functionDescriptions.append('thrust')
-		self.ports = [Port(0, self)]
 	
 	def setwithheight(self, width, height):
 		self.width = width
 		self.height = height
 		# self.width -= 6
-		self.ports[0].offset = (-self.width / 2, 0)
+		
 
 	def stats(self):
 		stats = (self.force, self.energyCost)
@@ -624,7 +644,8 @@ class Gyro(Part):
 class Generator(Part):
 	name = "Generator"
 	rate = 6.
-		
+	image = "generator"
+	
 	def stats(self):
 		stats = (self.rate,)
 		statString = """\nEnergy Produced: %s/second"""
