@@ -1,4 +1,4 @@
-The edge of the system is a stupid idea, and can be replaced with a when out of system gravity drive that can be activated x distance from star to get back to star system in no time.
+The edge of the system is a stupid idea, and can be replaced with a: when out of system gravity drive that can be activated x distance from star to get back to star system in no time.
 
 if you will travel long enough you will also reach the next solar system, as in stargate travel.
 
@@ -32,7 +32,7 @@ zoom in out option for radar
 
 weapon heat generation
 
-test if solar orbit is posible,
+test if solar orbit is posible, <solar orbit is possible did it twice (duality)>
 
 a orbit calculator
 
@@ -40,4 +40,4 @@ someway to target ships, parts and planets
 
 <Duality>
 
-make menu work on fullscreen. only fighter is displayed right left corner.
+make menu work on fullscreen. only fighter is displayed right left corner. <fixed Duality>
