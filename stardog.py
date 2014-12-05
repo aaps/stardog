@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import pygame
+import cProfile
 from pygame.locals import *
 import sys
 try:
