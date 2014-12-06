@@ -52,11 +52,16 @@ bays:
 	a part that is a cargo bay
 ship:
 	every ship a individual mid section that defines what the ship is.
+	implement droping mines and implement a part for it that does that?
+	or only give the destroyer that capability?
 parts:
 	blocks with different shapes so that you can better position parts.
 	maybe implement hull plating. some things are worth protecting.
 universe:
 	make mass count more realisticly. it's not just counted in to heavy.
+key-handling:
+	some key combinations don't work in menu or other parts of the game.
+	thus make key-handling for quiting (for example) be interupt based.
 
 if part die/are killed damage vehicle/ship
 
