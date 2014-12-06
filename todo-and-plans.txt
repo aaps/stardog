@@ -41,3 +41,23 @@ someway to target ships, parts and planets
 <Duality>
 
 make menu work on fullscreen. only fighter is displayed right left corner. <fixed Duality>
+
+crew:
+	add crew? and parts for crew quaters.
+	more crew more efficient ship.
+	maybe if crew then heal x per x seconds.
+bays:
+	a part that is mechanic bay
+	a part that is the armory
+	a part that is a cargo bay
+ship:
+	every ship a individual mid section that defines what the ship is.
+parts:
+	blocks with different shapes so that you can better position parts.
+	maybe implement hull plating. some things are worth protecting.
+universe:
+	make mass count more realisticly. it's not just counted in to heavy.
+
+if part die/are killed damage vehicle/ship
+
+particle engine for effects.
