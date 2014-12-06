@@ -518,7 +518,7 @@ class FlakCannon(Cannon):
 			self.shootDir = baseDir # restore shootDir.
 			if self.burst <= 0:
 				self.reloadBurst = self.reloadBurstTime
-				
+
 class Engine(Part):
 	baseImage = loadImage("res/parts/engine" + ext)
 	image = None
@@ -569,7 +569,7 @@ class Engine(Part):
 			self.ship.energy -= self.energyCost / self.game.fps
 			self.thrusting = True
 
-class Gyro(Part):
+class Gyro(FlippablePart):
 	baseImage = loadImage("res/parts/gyro" + ext)
 	image = None
 	name = "Gyro"
@@ -657,8 +657,32 @@ class Interconnect(Part):
 				Port((-self.width / 2 , 0), 0, self), \
 				Port((0, -self.height / 2 ), 90, self)]
 
-		
-	
+#<duality> added this part it works it regenerates health really nice and slow :)
+class Quarters(Part):
+	baseImage = loadImage("res/parts/interconnect"+ext)
+	image = None
+	name = "Crew Quaters"
+	repair = .1
+	def __init__(self, game):
+		Part.__init__(self, game)
+		self.ports = [Port((-self.width/2,0), 0, self)]
+	def stats(self):
+		stats = (self.repair,)
+		statString = "\nRepairy: %s hp/s"
+		return Part.stats(self) + statString % stats
+	def shortStats(self):
+		stats = (self.repair,)
+		statString = "\n%s E"
+	def update(self):
+		print ""
+		for part in self.ship.parts:
+			print "name: %s, hp: %d, max: %d"%(part.name,part.hp, part.maxhp)
+			if self.ship.parts and part.hp < part.maxhp:
+				part.hp = min(part.maxhp, part.hp+self.repair*self.ship.efficiency/self.game.fps)
+		print ""
+		print "name: %s, hp: %d, max: %d"%(self.ship.name,self.ship.hp, self.ship.maxhp)
+		Part.update(self)
+
 class Battery(Part):
 	baseImage = loadImage("res/parts/battery" + ext)
 	image = None

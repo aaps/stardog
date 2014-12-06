@@ -87,8 +87,9 @@ def makeInterceptor(game, pos, delta, dir = 270, script = None, \
 	missile = MissileLauncher(game)
 	engine = Engine(game)
 	engine2 = Engine(game)
+	quarter = Quarters(game)
 	for part in [gyro, generator, battery, cockpit, gun, gun2, engine, engine2,
-				missile]:
+				missile, quarter]:
 		if rand() > .8:
 			addAdjective(part)
 			if rand() > .6:
@@ -103,6 +104,7 @@ def makeInterceptor(game, pos, delta, dir = 270, script = None, \
 	generator.addPart(battery, 0)
 	battery.addPart(engine, 0)
 	gyro.addPart(engine2, 1)
+	gyro.addPart(quarter, 2)
 	ship.reset()
 	ship.energy = ship.maxEnergy * .8
 	return ship
@@ -350,11 +352,10 @@ class Ship(Floater):
 	def update(self):
 		#check if dead:
 		if not self.parts or self.parts[0].hp <= 0:
-			self.kill()
-
+			self.kill(Floater(self.game, Vec2d(0,0), 0))
 		#run script, get choices.
 		self.script.update(self)
-
+		
 		# actual updating:
 		Floater.update(self)
 		#parts updating:

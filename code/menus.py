@@ -374,7 +374,7 @@ class PartTile(DragableSelectable):
 		rect = Rect(rect)
 		self.addPanel(Label(rect, part.name, font = SMALL_FONT))
 		self.panels[-1].rect.width = self.rect.width
-		string = part.shortStats()
+		string = str(part.shortStats())
 		i = string.find('\n')
 		rect = Rect(rect)
 		rect.x += 38; rect.y += 14

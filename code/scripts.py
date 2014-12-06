@@ -64,7 +64,7 @@ class InputScript(Script):
 
 class AIScript(Script):
 	interceptSpeed = 200. / 3
-	acceptableError = 5
+	acceptableError = 10
 	"""A scripts with basic physics calculation functions.  Virtual."""
 	def update(self, ship):
 		# find closest ship:
@@ -76,6 +76,7 @@ class AIScript(Script):
 				#(ship.guns[0].bulletRange * ship.guns[0].speed) ** 2 / 2
 		else: #without guns kamikaze. 
 			if self.turnTowards(ship, target):
+				return
 				ship.forward()
 			return
 		if distance < shootingRange:
