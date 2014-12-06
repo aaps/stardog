@@ -524,8 +524,8 @@ class Engine(Part):
 	image = None
 	name = "Engine"
 
-	exspeed = 1000
-	exmass = 25
+	exspeed = 5000
+	exmass = 10
 	thrusting = False
 	energyCost = 1.
 	def __init__(self, game):
@@ -556,6 +556,8 @@ class Engine(Part):
 		else:
 			self.animated = False
 		self.thrusting = False
+		# if self.ship:
+		# 	self.ship.delta * 0.9
 		Part.update(self)
 	
 	def thrust(self):
@@ -564,14 +566,20 @@ class Engine(Part):
 		self.acted = True
 		if self.ship and self.ship.energy >= self.energyCost:
 			dir = self.dir + self.ship.dir
-			if Vec2d(0,0).rotatedd(dir, self.exspeed) > self.ship.delta:
-				effectiveexspeed =  (Vec2d(0,0).rotatedd(dir, self.exspeed) - self.ship.delta)
-			else:
-				effectiveexspeed = Vec2d(0,0)
+			
+			effectiveexspeed = Vec2d(0,0)
+			maxi = Vec2d(0,0).rotatedd(dir, self.exspeed).get_length()
 
-			accel = self.ship.efficiency * self.ship.thrustBonus \
+			if maxi > self.ship.delta.get_length():
+				effectiveexspeed =  (Vec2d(0,0).rotatedd(dir, self.exspeed) - self.ship.delta)
+				accel = self.ship.efficiency * self.ship.thrustBonus \
 					* effectiveexspeed.get_length() * self.exmass / self.ship.mass / self.game.fps
-			self.ship.delta = self.ship.delta.rotatedd(dir, accel)
+				self.ship.delta = self.ship.delta.rotatedd(dir, accel)
+			else:
+
+				self.ship.delta *= 0.99
+				
+			
 			self.ship.energy -= self.energyCost / self.game.fps
 			self.thrusting = True
 
