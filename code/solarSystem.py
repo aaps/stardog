@@ -99,7 +99,6 @@ class SolarSystem:
 			self.ships.append(floater)
 			for part in floater.parts:
 				self.game.view.add(part)
-				print part.width, part.height
 			floater.parts[0].reposparts(floater.parts[0],0)
 		
 	def empty(self):

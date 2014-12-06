@@ -80,7 +80,8 @@ class Part(Floater):
 		else:
 			if len(self.ports) > port:
 				port = self.ports[port]
-		
+
+
 		cost = cos(self.dir) #cost is short for cos(theta)
 		sint = sin(self.dir)
 		part.offset = self.offset[0] + port.offset[0] * cost \
@@ -88,13 +89,15 @@ class Part(Floater):
 			- cos(part.dir) * (part.width - PART_OVERLAP) / 2, \
 			self.offset[1] + port.offset[0] * sint \
 			+ port.offset[1] * cost \
-			- sin(part.dir) * (part.height - PART_OVERLAP) / 2
+			- sin(part.dir) * (part.width - PART_OVERLAP) / 2
 
+		print self.offset
 		print part, len(part.ports), part.offset
 		print
 
 		for port in part.ports:
 			if port.part:
+				# print port.part
 				self.reposparts(port.part, part.ports.index(port))
 
 
@@ -115,14 +118,15 @@ class Part(Floater):
 		part.ship = self.ship
 		part.dir = port.dir + self.dir
 		#calculate offsets:
-		cost = cos(self.dir) #cost is short for cos(theta)
-		sint = sin(self.dir)
-		part.offset = self.offset[0] + port.offset[0] * cost \
-			- port.offset[1] * sint \
-			- cos(part.dir) * (part.width - PART_OVERLAP) / 2, \
-			self.offset[1] + port.offset[0] * sint \
-			+ port.offset[1] * cost \
-			- sin(part.dir) * (part.width - PART_OVERLAP) / 2
+		# cost = cos(self.dir) #cost is short for cos(theta)
+		# sint = sin(self.dir)
+		# part.offset = self.offset[0] + port.offset[0] * cost \
+		# 	- port.offset[1] * sint \
+		# 	- cos(part.dir) * (part.width - PART_OVERLAP) / 2, \
+		# 	self.offset[1] + port.offset[0] * sint \
+		# 	+ port.offset[1] * cost \
+		# 	- sin(part.dir) * (part.width - PART_OVERLAP) / 2
+
 		#rotate takes a ccw angle and color.
 		# part.image = colorShift(pygame.transform.rotate(part.baseImage, \
 					# -part.dir), part.color)

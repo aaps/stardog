@@ -101,7 +101,7 @@ def makeInterceptor(game, x, y, dx = 0, dy = 0, dir = 270, script = None, \
 	cockpit.addPart(battery, 4)
 	cockpit.addPart(gyro, 5)
 	battery.addPart(generator, 0)
-	# battery.addPart(engine, 0)
+	gyro.addPart(engine, 0)
 	gyro.addPart(engine2, 1)
 	ship.reset()
 	ship.energy = ship.maxEnergy * .8
