@@ -688,13 +688,9 @@ class Quarters(Part):
 		stats = (self.repair,)
 		statString = "\n%s E"
 	def update(self):
-		print ""
 		for part in self.ship.parts:
-			print "name: %s, hp: %d, max: %d"%(part.name,part.hp, part.maxhp)
 			if self.ship.parts and part.hp < part.maxhp:
 				part.hp = min(part.maxhp, part.hp+self.repair*self.ship.efficiency/self.game.fps)
-		print ""
-		print "name: %s, hp: %d, max: %d"%(self.ship.name,self.ship.hp, self.ship.maxhp)
 		Part.update(self)
 
 class Battery(Part):
