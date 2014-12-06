@@ -291,16 +291,16 @@ class Ship(Floater):
 			if isinstance(part, Engine):
 				if part.dir == 180:
 					self.reverseEngines.append(part)
-					self.reverseThrust += part.force
+					self.reverseThrust += part.exspeed * part.exmass
 				if part.dir == 0:
 					self.forwardEngines.append(part)
-					self.forwardThrust += part.force
+					self.forwardThrust += part.exspeed * part.exmass
 				if part.dir == 90:
 					self.rightEngines.append(part)
-					self.rightThrust += part.force
+					self.rightThrust += part.exspeed * part.exmass
 				if part.dir == 270:
 					self.leftEngines.append(part)
-					self.leftThrust += part.force
+					self.leftThrust += part.exspeed * part.exmass
 			if isinstance(part, Gyro):
 				self.gyros.append(part)
 				self.torque += part.torque

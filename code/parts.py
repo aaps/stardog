@@ -523,7 +523,9 @@ class Engine(Part):
 	baseImage = loadImage("res/parts/engine" + ext)
 	image = None
 	name = "Engine"
-	force = 24000
+
+	exspeed = 1000
+	exmass = 25
 	thrusting = False
 	energyCost = 1.
 	def __init__(self, game):
@@ -538,12 +540,12 @@ class Engine(Part):
 		self.functionDescriptions.append('thrust')
 		
 	def stats(self):
-		stats = (self.force, self.energyCost)
-		statString = """\nThrust: %s N\nCost: %s /second thrusting"""
+		stats = (self.exspeed,self.exmass, self.energyCost)
+		statString = """\nexhoustspeed: %s m/s\nexhoustmass: %s k/g\nCost: %s /second thrusting"""
 		return Part.stats(self) + statString % stats
 		
 	def shortStats(self):
-		stats = (self.force,)
+		stats = (self.exspeed)
 		statString = """\n%s N"""
 		return Part.shortStats(self) + statString % stats
 
@@ -561,11 +563,15 @@ class Engine(Part):
 		if self.acted: return
 		self.acted = True
 		if self.ship and self.ship.energy >= self.energyCost:
-			accel = self.ship.efficiency * self.ship.thrustBonus \
-					* self.force / self.ship.mass / self.game.fps
 			dir = self.dir + self.ship.dir
-			self.ship.delta = self.ship.delta.rotatedd(dir, accel)
+			if Vec2d(0,0).rotatedd(dir, self.exspeed) > self.ship.delta:
+				effectiveexspeed =  (Vec2d(0,0).rotatedd(dir, self.exspeed) - self.ship.delta)
+			else:
+				effectiveexspeed = Vec2d(0,0)
 
+			accel = self.ship.efficiency * self.ship.thrustBonus \
+					* effectiveexspeed.get_length() * self.exmass / self.ship.mass / self.game.fps
+			self.ship.delta = self.ship.delta.rotatedd(dir, accel)
 			self.ship.energy -= self.energyCost / self.game.fps
 			self.thrusting = True
 
