@@ -66,7 +66,11 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	def update(self):
 		"""updates this floater based on its variables"""
 		self.pos += self.delta / self.game.fps
-		self.rect.center = self.pos
+		print self
+		print (int(self.pos.x), int(self.pos.y))
+		print
+		self.rect.centerx = int(self.pos.x)
+		self.rect.centerx =	int(self.pos.y)
 
 	def takeDamage(self, damage, other):
 		self.hp -= damage
@@ -143,13 +147,15 @@ class Missile(Bullet):
 		self.force = launcher.force
 		
 	def update(self):
+		
 		self.life += 1. / self.game.fps
 		self.dir = (self.dir + 180) % 360 - 180
-		Floater.update(self)
+		
 		self.delta.x += self.acceleration * cos(self.dir) / self.game.fps
 		self.delta.y += self.acceleration * sin(self.dir) / self.game.fps
 		if self.life > self.range:
 			self.kill(Floater(self.game, Vec2d(0,0), Vec2d(0,0)))
+		Floater.update(self)
 
 	def detonate(self):
 		delta = self.delta.rotatedd(self.dir, -(self.acceleration * self.life))
@@ -176,6 +182,7 @@ class Explosion(Floater):
 		Floater.__init__(self, game, pos, delta, radius = 0,\
 				image = image)
 		self.maxRadius = int(radius)
+		self.delta =  delta
 		self.force = force
 		self.radius = 0
 		self.time = time
@@ -185,7 +192,6 @@ class Explosion(Floater):
 			self.tangible = False
 
 	def update(self):
-		Floater.update(self)
 		self.life += 1. / self.game.fps
 		if self.life > self.time:
 			Floater.kill(self)
@@ -196,6 +202,7 @@ class Explosion(Floater):
 		else:
 			self.radius = int(self.maxRadius * (self.time * 4 / 3 \
 						- self.life * 4 / 3) / self.time)
+		# Floater.update(self)
 		
 	def draw(self, surface, offset = (0,0)):
 		self.image.fill((0, 0, 0, 0))
@@ -232,7 +239,6 @@ class Impact(Floater):
 
 
 	def update(self):
-		Floater.update(self)
 		self.life += 1. / self.game.fps
 		if self.life > self.time:
 			Floater.kill(self)

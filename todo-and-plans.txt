@@ -25,6 +25,10 @@ side dish:
 		http://ocemp.sourceforge.net/guiwidget.html
 	the solarsystm.py has lots of basic functionality in a specific class can be put in parent class. this leaves space for starsystem specific stuff such as names and planet locations.
 
+bugs:
+	on branch viewsinview an explotion will make another one, fix
+	I can make a crash by bowing up my own ship in missile difference collision on branch all2vector <Fixed Aat>
+
 
 parts:
 	Space mines <easy mode>
