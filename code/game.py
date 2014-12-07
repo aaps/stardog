@@ -11,8 +11,12 @@ from strafebat import *
 from dialogs import *
 import plot
 from vec2d import Vec2d
+from swampy.Lumpy import Lumpy
 # import yaml
 # import yamlpygame
+
+# lumpy = Lumpy()
+# lumpy.make_reference()
 
 FPS = 300
 
@@ -155,3 +159,5 @@ class Game:
 				self.timer += 1. / self.fps
 			#end round loop (until gameover)
 		#end game loop
+
+# lumpy.class_diagram()

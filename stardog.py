@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import pygame
-import cProfile
+
 from pygame.locals import *
 import sys
 try:
@@ -9,9 +9,11 @@ try:
     psyco.full()
 except ImportError:
     print 'this game may run faster if you install psyco.'
-    
-#FULL = False; RESOLUTION = 1024, 768 #test
-FULL = True; RESOLUTION = None
+
+
+
+FULL = False; RESOLUTION = 1024, 768 #test
+# FULL = True; RESOLUTION = None
 #FULL = True; RESOLUTION = None #play
 hardwareFlag = pygame.HWSURFACE|pygame.DOUBLEBUF
 
@@ -67,4 +69,5 @@ if __name__=="__main__":
 import code.game
 if __name__ == '__main__':
     game = code.game.Game(screen)
+    
     game.run()
