@@ -8,6 +8,7 @@ http://code.google.com/p/legume/
 	a particle engine for explotions, engine stuff. <medium stuff, after view splitout>
 	better ui (nasty mode ?, after view splitout)
 	A save function ?
+	replace the part - port system with a part - grid system
 
 side dish:
 	make planet erv of a Gravless class so stargate will not be effected by graf and not be a planet.
