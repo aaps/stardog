@@ -2,7 +2,7 @@
 main dish
 ==========
 * splitout views <nasty stuff> !!!
-* quad trees (hardmode, after vector and view splitout)
+* quad trees (hardmode, after vector and view splitout, wil replace current collision check mess)
 * wormholes/star gates to other systems. (medium mode ?, after Gravless class)
 * multyplayer <hard mode, dependant on code structure, vectors and views split, also a better ui>
 http://code.google.com/p/legume/
@@ -13,7 +13,7 @@ http://code.google.com/p/legume/
 
 side dish
 ==========
-* make planet inherit from a Gravless class so stargate will not be effected by graf and * not be a planet. !!!
+* make planet inherit from a Gravless class so stargate will not be effected by graf and * not be a planet. !!! also good for space ports, etc.
 * make the space structure class that will inherit from gravless as well with a custom 
 http://www.pygame.org/docs/ref/draw.html#pygame.draw.polygon shape
 * posibility to eject parts <easy mode>
@@ -31,6 +31,8 @@ bugs
 * on branch viewsinview an explotion will make another one.
 * I can make a crash by bowing up my own ship in missile difference collision on branch * all2vector <Fixed Aat>
 *in case of part flip in equipment screen another mirror part will apear but will replace counterpart when equipt.
+engines will sometimes not fire in case of multyple forward.
+can a planet have negative gravity ?
 
 
 parts
