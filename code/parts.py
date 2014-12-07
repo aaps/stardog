@@ -673,7 +673,7 @@ class Interconnect(Part):
 
 #<duality> added this part it works it regenerates health really nice and slow :)
 class Quarters(Part):
-	baseImage = loadImage("res/parts/interconnect"+ext)
+	baseImage = loadImage("res/parts/quarters"+ext)
 	image = None
 	name = "Crew Quaters"
 	repair = .1
@@ -691,6 +691,7 @@ class Quarters(Part):
 		for part in self.ship.parts:
 			if self.ship.parts and part.hp < part.maxhp:
 				part.hp = min(part.maxhp, part.hp+self.repair*self.ship.efficiency/self.game.fps)
+				break
 		Part.update(self)
 
 class Battery(Part):
