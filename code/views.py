@@ -71,7 +71,8 @@ class View:
 			self.surface.blit(self.mutatedimages[floater.image], pos)
 		elif isinstance(floater, Explosion):
 			self.explotionDraw(floater, offset)
-
+		elif isinstance(floater, Planet):
+			self.PlanetDraw(floater, offset)
 
 	def partDraw(self, part, floater,offset = (0,0)):
 
@@ -92,4 +93,7 @@ class View:
 					  int(sin(theta) * r + floater.maxRadius + offset[1]))
 			pygame.draw.circle(self.surface, color, pos, radius)
 
-
+	def PlanetDraw(self, floater, offset = (0,0)):
+		pos = int(floater.x - offset[0]),  int(floater.y - offset[1])
+		pygame.draw.circle(self.surface, self.color, pos, int(self.radius))
+		# self.surface.blit(colorShift(self.mutatedimages[part.image],part.color), pos)
