@@ -101,15 +101,9 @@ class View:
 		self.surface.blit(sur, poss)
 
 	def PlanetDraw(self, floater, offset = (0,0)):
-		sur = pygame.Surface((floater.radius*2,floater.radius*2))
-		sur.fill((0, 0, 0, 0))
-		pos = (sur.get_width()/2,  sur.get_height()/2)
-		pygame.draw.circle(sur, floater.color, pos, int(floater.radius))
-		poss = floater.x - sur.get_width()  / 2 - offset[0], floater.y - sur.get_height() / 2 - offset[1]	
-		sur.set_colorkey((0,0,0))
-		self.surface.blit(sur, poss)
+		pos = int(floater.x - offset[0]), int(floater.y - offset[1])
+		pygame.draw.circle(self.surface, floater.color, pos, int(floater.radius))
 
-			
 
 	def impactdraw(self):
 		pass
