@@ -8,6 +8,7 @@ import parts
 import stardog
 
 class Planet(Floater):
+	image = None
 	maxRadius = 1000000 # no gravity felt past this (approximation).
 	PLANET_DAMAGE = .0004
 	LANDING_SPEED = 200 #pixels per second. Under this, no damage.

@@ -67,12 +67,13 @@ class View:
 			for part in floater.parts:
 				self.partDraw(part,floater, offset)
 		elif hasattr(floater, 'image') and floater.image:
-			print floater
 			self.surface.blit(self.mutatedimages[floater.image], pos)
 		elif isinstance(floater, Explosion):
 			self.explotionDraw(floater, offset)
 		elif isinstance(floater, Planet):
 			self.PlanetDraw(floater, offset)
+
+		
 
 	def partDraw(self, part, floater,offset = (0,0)):
 
@@ -82,18 +83,36 @@ class View:
 		self.surface.blit(colorShift(self.mutatedimages[part.image],part.color), pos)
 
 	def explotionDraw(self, floater, offset = (0,0)):
-		print offset
+		sur = pygame.Surface((250,250))
+		sur.fill((0, 0, 0, 0))
 		for circle in range(min(floater.radius / 4, 40)):
 			color = (randint(100, 155), randint(000, 100), randint(0, 20), \
 					randint(100, 255))
 			radius = randint(floater.radius / 4, floater.radius / 2)
 			r = randint(0, floater.radius - radius)
 			theta = randint(0, 360)
-			pos = (int(cos(theta) * r + floater.maxRadius + offset[0]), \
-					  int(sin(theta) * r + floater.maxRadius + offset[1]))
-			pygame.draw.circle(self.surface, color, pos, radius)
+
+			pos = (int(cos(theta) * r + floater.maxRadius ), \
+					  int(sin(theta) * r + floater.maxRadius))
+			
+			pygame.draw.circle(sur, color, pos, radius)
+		poss = floater.x - sur.get_width()  / 2 - offset[0], floater.y - sur.get_height() / 2 - offset[1]	
+		sur.set_colorkey((0,0,0))
+		self.surface.blit(sur, poss)
 
 	def PlanetDraw(self, floater, offset = (0,0)):
-		pos = int(floater.x - offset[0]),  int(floater.y - offset[1])
-		pygame.draw.circle(self.surface, self.color, pos, int(self.radius))
-		# self.surface.blit(colorShift(self.mutatedimages[part.image],part.color), pos)
+		sur = pygame.Surface((floater.radius*2,floater.radius*2))
+		sur.fill((0, 0, 0, 0))
+		pos = (sur.get_width()/2,  sur.get_height()/2)
+		pygame.draw.circle(sur, floater.color, pos, int(floater.radius))
+		poss = floater.x - sur.get_width()  / 2 - offset[0], floater.y - sur.get_height() / 2 - offset[1]	
+		sur.set_colorkey((0,0,0))
+		self.surface.blit(sur, poss)
+
+			
+
+	def impactdraw(self):
+		pass
+
+
+
