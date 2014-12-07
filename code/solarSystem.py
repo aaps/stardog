@@ -137,6 +137,9 @@ class SolarA1(SolarSystem):
 			planet.ships = pygame.sprite.Group()
 			planet.respawn = 30
 			self.add(planet)
+
+		
+
 		self.fighterTimer = 60
 			
 	def update(self):

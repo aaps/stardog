@@ -2,13 +2,17 @@
 main dish:
 	splitout views <nasty stuff>
 	quad trees (hardmode, after vector and view splitout)
-	wormholes/star gates to other systems. (medium mode ?)
+	wormholes/star gates to other systems. (medium mode ?, after static class)
 	multyplayer <hard mode, dependant on code structure, vectors and views split, also a better ui>
 http://code.google.com/p/legume/
 	a particle engine for explotions, engine stuff. <medium stuff, after view splitout>
 	better ui (nasty mode ?, after view splitout)
+	A save function ?
 
 side dish:
+	make planet erv of a Gravless class so stargate will not be effected by graf and not be a planet.
+	make the space structure class that will erv from gravless as well with a custom 
+	http://www.pygame.org/docs/ref/draw.html#pygame.draw.polygon shape
 	posibility to eject parts <easy mode>
 	someway to target ships, parts and planets <easy mode>
 	zoom in out option for radar <medium mode ?>
@@ -18,6 +22,7 @@ side dish:
 	a name to give yourself a name <as a precursor of network play and to get familiair with gui, after view spitout and vectors>
 		http://www.cosc.canterbury.ac.nz/greg.ewing/python/Albow/
 		http://ocemp.sourceforge.net/guiwidget.html
+	the solarsystm.py has lots of basic functionality in a specific class can be put in parent class. this leaves space for starsystem specific stuff such as names and planet locations.
 
 
 parts:

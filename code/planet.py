@@ -8,6 +8,7 @@ import parts
 import stardog
 from vec2d import Vec2d
 
+
 class Planet(Floater):
 	maxRadius = 1000000 # no gravity felt past this (approximation).
 	PLANET_DAMAGE = .0004
@@ -45,7 +46,6 @@ class Planet(Floater):
 			pos = (int(self.pos.x - self.image.get_width()  / 2 - offset[0]), 
 				  int(self.pos.y - self.image.get_height() / 2 - offset[1]))
 			surface.blit(self.image, pos)
-		
 		else:
 			pos = int(self.pos.x - offset[0]), \
 				  int(self.pos.y - offset[1])
