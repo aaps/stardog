@@ -140,9 +140,9 @@ class Missile(Bullet):
 		self.game.curSystem.add(explosion)
 
 	def kill(self):
-		self.detonate()
 		if soundModule:
 			setVolume(missileSound.play(), self, self.game.player)
+		self.detonate()
 		Floater.kill(self)
 
 	def takeDamage(self, damage, other):
@@ -152,8 +152,8 @@ class Missile(Bullet):
 class Explosion(Floater):
 	life = 0
 	image = None
-	def __init__(self, game, x, y, dx = 0, dy = 0, radius = 10,\
-				time = 1, damage = 0, force = 6000):
+	def __init__(self, game, x, y, dx = 0, dy = 0, radius = 10,	time = 1, damage = 0, force = 6000):
+		print "make explotion !"
 		Floater.__init__(self, game, x, y, dx, dy, radius = 0)
 		self.maxRadius = int(radius)
 		self.force = force
@@ -161,7 +161,7 @@ class Explosion(Floater):
 		self.time = time
 		self.damage = damage
 		self.hp = damage / (self.time * self.game.fps)
-		if damage == 0:
+		if self.hp < 0:
 			self.tangible = False
 
 	def update(self):
@@ -176,22 +176,9 @@ class Explosion(Floater):
 		else:
 			self.radius = int(self.maxRadius * (self.time * 4 / 3 \
 						- self.life * 4 / 3) / self.time)
-		
-	# def draw(self, surface, offset = (0,0)):
-	# 	self.image.fill((0, 0, 0, 0))
-	# 	for circle in range(min(self.radius / 4, 80)):
-	# 		color = (randint(100, 155), randint(000, 100), randint(0, 20), \
-	# 				randint(100, 255))
-	# 		radius = randint(self.radius / 4, self.radius / 2)
-	# 		r = randint(0, self.radius - radius)
-	# 		theta = randint(0, 360)
-	# 		pos = (int(cos(theta) * r + self.maxRadius), \
-	# 				  int(sin(theta) * r + self.maxRadius))
-	# 		pygame.draw.circle(self.image, color, pos, radius)
-	# 	Floater.draw(self, surface, offset)
 
 	def kill(self):
-		pass
+		Floater.kill(self)
 		
 	def takeDamage(self, damage, other):
 		pass

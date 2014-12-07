@@ -61,26 +61,28 @@ class View:
 
 	def floaterDraw(self, floater, offset = (0,0)):
 		"""Blits this floater onto the surface. """
-		pos = floater.x - floater.rect.width  / 2 - offset[0], floater.y - floater.rect.height / 2 - offset[1]
+		
 		
 		if hasattr(floater, 'parts') and len(floater.parts) > 0:
-			for part in floater.parts:
-				self.partDraw(part,floater, offset)
+			self.shipDraw( floater, offset)
 		elif hasattr(floater, 'image') and floater.image:
-			self.surface.blit(self.mutatedimages[floater.image], pos)
+			self.partDraw(floater, offset)
 		elif isinstance(floater, Explosion):
 			self.explotionDraw(floater, offset)
 		elif isinstance(floater, Planet):
 			self.PlanetDraw(floater, offset)
 
+	def partDraw(self, floater, offset = (0,0)):
+		pos = floater.x - floater.rect.width  / 2 - offset[0], floater.y - floater.rect.height / 2 - offset[1]
+		self.surface.blit(colorShift(self.mutatedimages[floater.image],floater.color), pos)
 		
 
-	def partDraw(self, part, floater,offset = (0,0)):
-
-		if hasattr(part,'dir'):
-			self.mutatedimages[part.image] = pygame.transform.rotate(self.images[part.image], - part.dir - floater.dir).convert_alpha()
-		pos = part.x - self.mutatedimages[part.image].get_width()  / 2 - offset[0], part.y - self.mutatedimages[part.image].get_height() / 2 - offset[1]
-		self.surface.blit(colorShift(self.mutatedimages[part.image],part.color), pos)
+	def shipDraw(self, floater,offset = (0,0)):
+		for part in floater.parts:
+			if hasattr(part,'dir'):
+				self.mutatedimages[part.image] = pygame.transform.rotate(self.images[part.image], - part.dir - floater.dir).convert_alpha()
+			pos = part.x - self.mutatedimages[part.image].get_width()  / 2 - offset[0], part.y - self.mutatedimages[part.image].get_height() / 2 - offset[1]
+			self.surface.blit(colorShift(self.mutatedimages[part.image],part.color), pos)
 
 	def explotionDraw(self, floater, offset = (0,0)):
 		sur = pygame.Surface((250,250))

@@ -189,6 +189,7 @@ class Part(Floater):
 		self.parent = None
 		#otherwise add this to the game as an independent Floater:
 		if not root:
+			self.dir = randint(0,360)
 			self.game.curSystem.add(self)
 		
 	def scatter(self, ship):
