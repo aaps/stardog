@@ -51,10 +51,7 @@ class Floater( Ballistic):
 		self.dx = dx
 		self.dy = dy
 		self.radius = radius
-		# self.image = 'default'
-		# if (not image):
-		# 	image = DEFAULT_IMAGE
-		# self.image = pygame.transform.rotate(image, -self.dir).convert()
+
 		self.rect = Rect(0,0,10,10)
 		alive = True
 
@@ -62,7 +59,8 @@ class Floater( Ballistic):
 		"""updates this floater based on its variables"""
 		self.x += self.dx / self.game.fps
 		self.y += self.dy / self.game.fps
-		self.rect.center = (self.x, self.y)
+		# print self.rect
+		# self.rect.center = (self.x, self.y)
 
 
 	def takeDamage(self, damage, other):
@@ -73,11 +71,6 @@ class Floater( Ballistic):
 	def kill(self):
 		self.alive = False
 
-	# def draw(self, surface, offset = (0,0)):
-	# 	"""Blits this floater onto the surface. """
-	# 	pos = self.pos.x - self.image.get_width()  / 2 - offset[0], \
-	# 		  self.pos.y - self.image.get_height() / 2 - offset[1]
-	# 	surface.blit(self.image, pos)
 
 class Bullet(Floater):
 	image = 'shot'
@@ -158,7 +151,7 @@ class Missile(Bullet):
 		
 class Explosion(Floater):
 	life = 0
-
+	image = None
 	def __init__(self, game, x, y, dx = 0, dy = 0, radius = 10,\
 				time = 1, damage = 0, force = 6000):
 		Floater.__init__(self, game, x, y, dx, dy, radius = 0)

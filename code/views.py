@@ -55,7 +55,7 @@ class View:
 
 				if isinstance(floater, Part):
 
-					floater.setwithheight(self.images[floater.image].get_width(), self.images[floater.image].get_height())
+					floater.setwithheight(self.images[floater.image].get_width()-1, self.images[floater.image].get_height()-1)
 
 		
 
@@ -66,9 +66,11 @@ class View:
 		if hasattr(floater, 'parts') and len(floater.parts) > 0:
 			for part in floater.parts:
 				self.partDraw(part,floater, offset)
-		else:
-			if hasattr(floater, 'image'):
-				self.surface.blit(self.mutatedimages[floater.image], pos)
+		elif hasattr(floater, 'image') and floater.image:
+			print floater
+			self.surface.blit(self.mutatedimages[floater.image], pos)
+		elif isinstance(floater, Explosion):
+			self.explotionDraw(floater, offset)
 
 
 	def partDraw(self, part, floater,offset = (0,0)):
@@ -77,5 +79,17 @@ class View:
 			self.mutatedimages[part.image] = pygame.transform.rotate(self.images[part.image], - part.dir - floater.dir).convert_alpha()
 		pos = part.x - self.mutatedimages[part.image].get_width()  / 2 - offset[0], part.y - self.mutatedimages[part.image].get_height() / 2 - offset[1]
 		self.surface.blit(colorShift(self.mutatedimages[part.image],part.color), pos)
+
+	def explotionDraw(self, floater, offset = (0,0)):
+		print offset
+		for circle in range(min(floater.radius / 4, 40)):
+			color = (randint(100, 155), randint(000, 100), randint(0, 20), \
+					randint(100, 255))
+			radius = randint(floater.radius / 4, floater.radius / 2)
+			r = randint(0, floater.radius - radius)
+			theta = randint(0, 360)
+			pos = (int(cos(theta) * r + floater.maxRadius + offset[0]), \
+					  int(sin(theta) * r + floater.maxRadius + offset[1]))
+			pygame.draw.circle(self.surface, color, pos, radius)
 
 

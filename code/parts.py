@@ -91,14 +91,9 @@ class Part(Floater):
 			+ port.offset[1] * cost \
 			- sin(part.dir) * (part.width - PART_OVERLAP) / 2
 
-		print self.offset
-		print part, len(part.ports), part.offset
-		print
-
 		for port in part.ports:
 			if port.part:
-				# print port.part
-				self.reposparts(port.part, part.ports.index(port))
+				part.reposparts(port.part, part.ports.index(port))
 
 
 	def addPart(self, part, port):
