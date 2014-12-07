@@ -8,35 +8,43 @@ a cource line for a ship that will include gravity pulls.
 
 a particle engine for explotions, engine stuff.
 
-Space mines.
+Space mines (easy mode)
 
-finite engine trust speed
+posibility to eject parts
 
-astroids
+some early implementation of space $
 
-wormholes/star gates to other systems.
+finite engine trust speed <it is done, can be tweaked, but is done (Aat)>
 
-ship lights
+engine exaust speed, and engine exaust mass should be variable like other parts (easy mode)
 
-every planet own part list
+astroids in orbits (hard mode, depends on quad tree, simulatorception)
 
-quad trees
+wormholes/star gates to other systems. (medium mode ?)
 
-better ui
+ship lights (easy mode once particles is done)
 
-engines with different trust in N
+every planet own part list (it is already so ?)
 
-multyplayer
+quad trees (hardmode)
 
-zoom in out option for radar
+better ui (nasty mode ?)
+http://www.cosc.canterbury.ac.nz/greg.ewing/python/Albow/
+http://ocemp.sourceforge.net/guiwidget.html
 
-weapon heat generation
+multyplayer <hard mode dependant on code structure, vectors and views split>
+
+zoom in out option for radar <medium mode ?>
+
+weapon heat generation <easy mode>
 
 test if solar orbit is posible, <solar orbit is possible did it twice (duality)>
 
-a orbit calculator
+a orbit calculator <depends on simulator ception>
 
-someway to target ships, parts and planets
+simulator ception for calculation of trajectorys, targeting and future positions
+
+someway to target ships, parts and planets <easy mode>
 
 <Duality>
 
