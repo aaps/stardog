@@ -66,9 +66,6 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	def update(self):
 		"""updates this floater based on its variables"""
 		self.pos += self.delta / self.game.fps
-		print self
-		print (int(self.pos.x), int(self.pos.y))
-		print
 		self.rect.centerx = int(self.pos.x)
 		self.rect.centerx =	int(self.pos.y)
 

@@ -428,7 +428,7 @@ class Ship(Floater):
 
 class Player(Ship):
 	xp = 0
-	developmentPoints = 2
+	developmentPoints = 12
 	landed = False
 	def __init__(self, game, pos, delta, dir = 270, script = None, \
 				color = (255, 255, 255)):

@@ -41,6 +41,7 @@ class Menu(TopLevelPanel):
 			self.panels.remove(self.activeMenu)
 		self.activeMenu = menu
 		self.panels.append(menu)
+		#print "self.panels len: %d"%(len(self.panels))
 	
 	def update(self):
 		Panel.update(self)
@@ -499,7 +500,6 @@ class Keys(Panel):
 		"""Warning: Enters a loop for upto five seconds!
 		captures the first pressed key and returns its number.""" 
 		start = pygame.time.get_ticks()
-		print 'capturing key'
 		while pygame.time.get_ticks() < start + 5000:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:

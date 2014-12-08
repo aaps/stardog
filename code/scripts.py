@@ -151,7 +151,6 @@ class AIScript(Script):
 			accel = ship.forwardThrust / ship.mass
 			speed = sqrt( dist(ship.pos.x, ship.pos.y, target.pos.x, target.pos.y) / not0(accel))
 		time = dist(ship.pos.x, ship.pos.y, target.pos.x, target.pos.y) / not0(speed)
-		if self.game.debug: print time, ship
 		dummy = Ballistic(target.pos, \
 						target.delta - ship.delta)
 		pos = self.predictBallistic(dummy, time)
