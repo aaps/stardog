@@ -211,7 +211,6 @@ class Part(Floater):
 		self.acted = False
 		#if it's attached to a ship, just rotate with the ship:
 		if self.parent:
-			# print self
 			cost = cos(self.ship.dir) #cost is short for cos(theta)
 			sint = sin(self.ship.dir)
 			self.pos.x = self.ship.pos.x + self.offset[0] * cost - self.offset[1] * sint

@@ -11,7 +11,10 @@ from strafebat import *
 from dialogs import *
 import plot
 from vec2d import Vec2d
-from swampy.Lumpy import Lumpy
+try:
+	from swampy.Lumpy import Lumpy
+except ImportError:
+	print "no way to build a class diagram now!! "
 # import yaml
 # import yamlpygame
 

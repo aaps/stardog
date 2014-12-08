@@ -46,7 +46,7 @@ def limit(min, num, max):
 	if num > max: return max
 	if num < min: return min
 	return num
-	
+
 def not0(num):
 	"""if num is 0, returns .001.  To prevent div by 0 errors."""
 	if num:
@@ -115,11 +115,11 @@ def colorShift(surface, color, colorkey = (0,0,0)):
 	s = pygame.Surface(surface.get_size(), flags = hardwareFlag).convert()
 	s.set_colorkey(colorkey)
 	s.blit(surface, (0,0))
-	pa = pygame.PixelArray(s)
+	pa = pygame.surfarray.pixels2d(s)#PixelArray(s)
 	alpha = surface.get_alpha()
 	for i in range(len(pa)):
 		for j in range(len(pa[i])):
-			oldColor = s.unmap_rgb(pa[i][j])
+			oldColor = s.unmap_rgb(pa[i,j])
 			if oldColor[0] == oldColor[2]: #a shade of magic pink
 				newColor = [0, 0, 0, 0]
 				for k in [0,1,2]:
@@ -128,8 +128,12 @@ def colorShift(surface, color, colorkey = (0,0,0)):
 					newColor[k] = int(oldColor[0] * color[k] / 255 \
 								+ oldColor[1] * (255 - color[k]) / 255)
 				newColor[3] = oldColor[3]
-				pa[i][j] = s.map_rgb(tuple(newColor))
+				pa[i,j] = s.map_rgb(tuple(newColor))
 	del pa
+	del surface
+	del alpha
+	del oldColor
+	del newColor
 	return s
 
 def collisionTest(a, b):

@@ -126,10 +126,10 @@ class BG:
 		for star in self.stars:
 			x = int(star[0] - thisShip.pos.x / star[2]) % (self.game.width-1)
 			y =	int(star[1] - thisShip.pos.y / star[2]) % (self.game.height-1)
-			pa[x][y] = star[3]
-			pa[x+1][y] = star[3]
-			pa[x][y+1] = star[3]
-			pa[x+1][y+1] = star[3]
+			pa[x,y] = star[3]
+			pa[x+1,y] = star[3]
+			pa[x,y+1] = star[3]
+			pa[x+1,y+1] = star[3]
 			
 class BGNova:
 	def __init__(self, game):

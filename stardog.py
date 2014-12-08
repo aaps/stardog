@@ -4,6 +4,7 @@ import pygame
 
 from pygame.locals import *
 import sys
+import cProfile
 try:
     import psyco
     psyco.full()
