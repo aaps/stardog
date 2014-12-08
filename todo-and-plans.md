@@ -10,6 +10,7 @@ http://code.google.com/p/legume/
 * better ui (nasty mode ?, after view splitout)
 * A save function ? <a sqllite file for now with sqlalchemy>
 * replace the part - port system with a part - grid system
+* sounds also need to be in views
 
 side dish
 ==========
@@ -25,6 +26,8 @@ http://www.pygame.org/docs/ref/draw.html#pygame.draw.polygon shape
 	http://www.cosc.canterbury.ac.nz/greg.ewing/python/Albow/
 	http://ocemp.sourceforge.net/guiwidget.html
 * the solarsystm.py has lots of basic functionality in a specific class can be put in parent class. this leaves space for starsystem specific stuff such as names and planet locations. !!!
+* other sound for bullet impact on shield and plating and on planet
+* palaxing background
 
 bugs
 =====
@@ -33,6 +36,7 @@ bugs
 *in case of part flip in equipment screen another mirror part will apear but will replace counterpart when equipt.
 engines will sometimes not fire in case of multyple forward.
 can a planet have negative gravity ?
+in viewsinview ship direction jitters sometimes
 
 
 parts
@@ -58,7 +62,7 @@ unknowns
 * test if planet orbit is posible and if no what is needed to make it so !
 * a orbit calculator <depends on simulator ception>
 * simulator ception for calculation of trajectorys, targeting and future positions <hard ?>
-
+* integrate wishlist of: http://code.google.com/p/stardog/
 
 
 DONE
