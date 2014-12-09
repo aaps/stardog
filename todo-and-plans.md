@@ -28,6 +28,7 @@ http://www.pygame.org/docs/ref/draw.html#pygame.draw.polygon shape
 * the solarsystm.py has lots of basic functionality in a specific class can be put in parent class. this leaves space for starsystem specific stuff such as names and planet locations. !!!
 * other sound for bullet impact on shield and plating and on planet
 * palaxing background
+menu volume controll vor music and effects
 
 bugs
 =====
@@ -37,6 +38,7 @@ bugs
 engines will sometimes not fire in case of multyple forward.
 can a planet have negative gravity ?
 in viewsinview ship direction jitters sometimes
+the laser is broken, ;(
 
 
 parts
@@ -56,7 +58,7 @@ unknowns
 
 * if you will travel long enough you will also reach the next solar system, as in stargate travel.
 * The edge of the system is a stupid idea, and can be replaced with a: when over boundry go to next star system independent of direction, will alwais travel to next star system even is only one ajacent
-* every planet own part list <it is already so ?> <Robert ?>
+
 * a cource line for a ship that will include gravity pulls. <depends on simulator ception>
 * astroids in orbits (hard mode, depends on quad tree, simulatorception)
 * test if planet orbit is posible and if no what is needed to make it so !
@@ -70,6 +72,7 @@ DONE
 * test if solar orbit is posible, <solar orbit is possible did it twice (duality)>
 * finite engine trust speed <it is done, can be tweaked, but is done (Aat)>
 * revamp to use vectors <as good as done Aat>
+* every planet own part list, nope but fixed <Aat fixed it>
 
 <Duality>
 

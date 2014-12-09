@@ -89,10 +89,15 @@ class PartsPanel(Panel):
 			self.reset()
 			
 	def reset(self):
-		if self.player.landed and not self.tradePanel:
+		if self.player.landed and self.tradePanel:
 			self.image = self.tradeImage
-			self.tradePanel = InventoryPanel(Rect(660, 30, 130, 570), 
-								self, self.player.landed.inventory)
+			self.removePanel(self.tradePanel)
+			self.tradePanel = InventoryPanel(Rect(660, 30, 130, 570), self, self.player.landed.inventory)
+			self.addPanel(self.tradePanel)
+
+		elif self.player.landed and not self.tradePanel:
+			self.image = self.tradeImage
+			self.tradePanel = InventoryPanel(Rect(660, 30, 130, 570), self, self.player.landed.inventory)
 			self.addPanel(self.tradePanel)
 		elif not self.player.landed:
 			self.image = self.baseImage
@@ -404,9 +409,11 @@ class InventoryPanel(Selecter):
 		
 		self.selectables = []
 		for part in self.partList:
-			self.addSelectable(PartTile(part, \
-						Rect(0,0,PartTile.width, PartTile.height), self))
+			self.addSelectable(PartTile(part, Rect(0,0,PartTile.width, PartTile.height), self))
 		Selecter.reset(self)
+
+	def set_partlist(self, parts):
+		self.partlist = parts
 
 	def drop(self, pos, dropped):
 		result = Selecter.drop(self, pos, dropped)
