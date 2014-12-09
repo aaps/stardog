@@ -9,6 +9,7 @@ from planet import *
 from spaceship import *
 from strafebat import *
 from dialogs import *
+from camera import *
 import plot
 from vec2d import Vec2d
 try:
@@ -40,6 +41,7 @@ class Game:
 		self.timer = 0
 		self.systems = []
 		self.triggers = []
+		self.camera = Camera(screen)
 		#messenger, with controls as first message:
 		self.messenger = Messenger(self)
 		

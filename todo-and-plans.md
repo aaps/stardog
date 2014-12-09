@@ -11,6 +11,7 @@ http://code.google.com/p/legume/
 * A save function ? <a sqllite file for now with sqlalchemy>
 * replace the part - port system with a part - grid system
 * sounds also need to be in views
+* put the collide logic in the things that collide, planets, floaters, parts etc.
 
 side dish
 ==========
@@ -30,7 +31,15 @@ http://www.pygame.org/docs/ref/draw.html#pygame.draw.polygon shape
 * palaxing background
 * menu volume controll vor music and effects
 * instead of restart directly, wait for keypress and see your lifeless ship float into the distance
+* a camera to capture different places, in stead of only player.
+* make the game run from the beginning, so if choosing ship and color the game is already running
+* give ships a atention score that goes up when ships are sooting and dying drops off over time.
 
+Housekeeping
+===
+* cleanup class diagram
+* impost original stagdog svn
+* integrate wishlist of: http://code.google.com/p/stardog/
 
 bugs
 =====
@@ -39,7 +48,7 @@ bugs
 *in case of part flip in equipment screen another mirror part will apear but will replace counterpart when equipt.
 engines will sometimes not fire in case of multyple forward.
 can a planet have negative gravity ?
-in viewsinview ship direction jitters sometimes
+in viewsinview ship direction jitters sometimes, more so when it's got a lot of parts.
 the laser is broken, ;(
 
 
@@ -66,7 +75,7 @@ unknowns
 * test if planet orbit is posible and if no what is needed to make it so !
 * a orbit calculator <depends on simulator ception>
 * simulator ception for calculation of trajectorys, targeting and future positions <hard ?>
-* integrate wishlist of: http://code.google.com/p/stardog/
+
 
 
 DONE
@@ -75,6 +84,7 @@ DONE
 * finite engine trust speed <it is done, can be tweaked, but is done (Aat)>
 * revamp to use vectors <as good as done Aat>
 * every planet own part list, nope but fixed <Aat fixed it>
+* fixing a bug that made memmory leak during the drawing of the star map (duality)
 
 <Duality>
 
