@@ -294,8 +294,6 @@ def planet_ship_collision(planet, ship):
 		if ship == planet.game.player and not ship.landed:
 			planet.game.pause = True
 			ship.landed = planet
-			# print ship.landed.inventory
-			# print
 			ship.game.menu.parts.reset()
 		ship.delta.x, ship.delta.y = planet.delta.x, planet.delta.y
 

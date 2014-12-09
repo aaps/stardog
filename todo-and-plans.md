@@ -28,7 +28,9 @@ http://www.pygame.org/docs/ref/draw.html#pygame.draw.polygon shape
 * the solarsystm.py has lots of basic functionality in a specific class can be put in parent class. this leaves space for starsystem specific stuff such as names and planet locations. !!!
 * other sound for bullet impact on shield and plating and on planet
 * palaxing background
-menu volume controll vor music and effects
+* menu volume controll vor music and effects
+* instead of restart directly, wait for keypress and see your lifeless ship float into the distance
+
 
 bugs
 =====

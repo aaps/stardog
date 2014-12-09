@@ -86,15 +86,12 @@ class PartsPanel(Panel):
 			self.dirtyParts = True
 		if self.dirtyParts:
 			self.dirtyParts = False
+			# self.tradePanel.set_partlist(self.player.landed.inventory)
 			self.reset()
 			
 	def reset(self):
 		if self.player.landed and self.tradePanel:
-			self.image = self.tradeImage
-			self.removePanel(self.tradePanel)
-			self.tradePanel = InventoryPanel(Rect(660, 30, 130, 570), self, self.player.landed.inventory)
-			self.addPanel(self.tradePanel)
-
+			self.tradePanel.set_partlist(self.player.landed.inventory)
 		elif self.player.landed and not self.tradePanel:
 			self.image = self.tradeImage
 			self.tradePanel = InventoryPanel(Rect(660, 30, 130, 570), self, self.player.landed.inventory)
@@ -413,7 +410,16 @@ class InventoryPanel(Selecter):
 		Selecter.reset(self)
 
 	def set_partlist(self, parts):
-		self.partlist = parts
+		self.partList = parts
+		print parts
+		print
+		self.selectables = []
+		self.setSelected(None)
+		for part in self.partList:
+			print part
+			self.addSelectable(PartTile(part, Rect(0,0,PartTile.width, PartTile.height), self))
+		print
+		
 
 	def drop(self, pos, dropped):
 		result = Selecter.drop(self, pos, dropped)
