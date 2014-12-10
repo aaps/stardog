@@ -397,6 +397,31 @@ class Cannon(Gun):
 					self.speed * s.cannonSpeedBonus,
 					self.range * s.cannonRangeBonus, image = self.bulletImage))
 
+
+class MineDropper(Gun):
+	baseImage = loadImage("res/parts/minelayer"+ext)
+	mineImage = None
+	damage = 10
+	speed = 0
+	reloadTime = 2
+	acceleration = 0
+	range = 1
+	turning = 0
+	percision = 0
+	explosionRadius = 120
+	explosionTime = .6
+	force = 6000
+	name = "Mine"
+	
+	def __init__(self, game):
+		Gun.__init__(self, game)
+	def stats(self):
+		stats = (self.speed, self.acceleration)
+		statString = ("\n Mine Speed: %s m/s\nMine Accel: %s m/s/s")
+		return Gun.stats(self)+statString%stats
+	def shoot(self):
+		pass
+
 class MissileLauncher(Gun):
 	baseImage = loadImage("res/parts/missilelauncher" + ext)
 	missileImage = None
@@ -412,7 +437,7 @@ class MissileLauncher(Gun):
 	force = 6000
 	name = 'Missile Launcher'
 	
-	def init(self, game):
+	def __init__(self, game):
 		if self.missileImage == None:
 			self.missileImage = MISSILE_IMAGE.copy()
 		Gun.__init__(self, game)
@@ -437,7 +462,7 @@ class MissileLauncher(Gun):
 					self.acceleration * s.missileSpeedBonus,
 					self.range * s.missileRangeBonus, self.explosionRadius,
 					image = MISSILE_IMAGE))
-							
+
 class Laser(Gun):
 	baseImage = loadImage("res/parts/leftlaser" + ext)
 	damage = 10
@@ -672,8 +697,8 @@ class Interconnect(Part):
 class Quarters(Part):
 	baseImage = loadImage("res/parts/quarters"+ext)
 	image = None
-	name = "Crew Quaters"
-	repair = .1
+	name = "Crew Quarters"
+	repair = .2
 	def __init__(self, game):
 		Part.__init__(self, game)
 		self.ports = [Port(Vec2d(-self.width/2,0), 0, self)]
@@ -687,7 +712,7 @@ class Quarters(Part):
 	def update(self):
 		for part in self.ship.parts:
 			if self.ship.parts and part.hp < part.maxhp:
-				part.hp = min(part.maxhp, part.hp+self.repair*self.ship.efficiency/self.game.fps)
+				part.hp = part.hp+self.repair*self.ship.efficiency/self.game.fps
 				break
 		Part.update(self)
 

@@ -93,7 +93,7 @@ def makeInterceptor(game, pos, delta, dir = 270, script = None, \
 	missile = MissileLauncher(game)
 	engine = Engine(game)
 	engine2 = Engine(game)
-	quarter = Quarters(game)
+	quarter = MineDropper(game)#Quarters(game)
 	for part in [gyro, generator, battery, cockpit, gun, gun2, engine, engine2,
 				missile, quarter]:
 		if rand() > .8:

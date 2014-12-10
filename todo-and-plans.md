@@ -91,6 +91,10 @@ DONE
 
 make menu work on fullscreen. only fighter is displayed right left corner. <fixed Duality>
 
+Commanline interface
+=====
+* a command line interface for manipulating the world so that testing is faster.
+
 crew
 =====
 * add crew?
