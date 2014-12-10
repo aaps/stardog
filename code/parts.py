@@ -508,11 +508,11 @@ class Laser(Gun):
 					self.range * s.laserRangeBonus))
 	
 class FlakCannon(Cannon):
-	spread = 50
-	damage = 1
-	energyCost = 3
-	reloadTime = .08
-	burstSize = 5
+	spread = 18.75
+	damage = 2.
+	energyCost = .3
+	reloadTime = .04
+	burstSize = 8
 	reloadBurstTime = 1
 	range = 6
 	speed = 150
@@ -725,11 +725,13 @@ class Quarters(Part):
 	def shortStats(self):
 		stats = (self.repair,)
 		statString = "\n%s E"
+		return Part.shortStats(self)+statString%(stats)
 	def update(self):
-		for part in self.ship.parts:
-			if self.ship.parts and part.hp < part.maxhp:
-				part.hp = part.hp+self.repair*self.ship.efficiency/self.game.fps
-				break
+		if self.ship:
+			for part in self.ship.parts:
+				if part.hp < part.maxhp:
+					part.hp = part.hp+self.repair*self.ship.efficiency/self.game.fps
+					break
 		Part.update(self)
 
 class Battery(Part):

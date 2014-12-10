@@ -197,6 +197,12 @@ class Ship(Floater):
 				color = (255, 255, 255)):
 		Floater.__init__(self, game, pos, delta, dir, 1)
 		self.inventory = []
+		"""
+		self.insertInInventory(Gyro, 3)
+		self.insertInInventory(MineDropper, 2)
+		self.insertInInventory(Generator, 4)
+		self.insertInInventory(Battery, 4)
+		"""
 		self.ports = [Port((0,0), 0, self)]
 		self.energy = 0
 		self.maxEnergy = 0
@@ -213,7 +219,9 @@ class Ship(Floater):
 		for function in self.functions:
 			self.functionDescriptions.append(function.__doc__)
 		self.baseBonuses = self.baseBonuses.copy()
-
+	def insertInInventory(self, part, amount=1):
+		for i in range(amount):
+			self.inventory.append(part(self.game))
 	def addPart(self, part, portIndex = 0):
 		"""ship.addPart(part) -> Sets the main part for this ship.
 		Only used for the base part (usually a cockpit), other parts are added to parts."""
