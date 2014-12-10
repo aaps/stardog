@@ -23,9 +23,8 @@ http://www.pygame.org/docs/ref/draw.html#pygame.draw.polygon shape
 * zoom in out option for radar <medium mode ?>
 * weapon heat generation <easy mode>
 * some early implementation of space $ <easy mode>
-* a name to give yourself <as a precursor of network play and to get familiair with gui, after view spitout and vectors>
-	http://www.cosc.canterbury.ac.nz/greg.ewing/python/Albow/
-	http://ocemp.sourceforge.net/guiwidget.html
+* a name to give yourself <as a precursor of network play and to get familiair with gui, after view spitout and vectors> <gui is not nice, but overhaul costs to much time, lets keep it for now>
+
 * Display solar system name somewhere
 * other sound for bullet impact on shield and plating and on planet
 * palaxing background
