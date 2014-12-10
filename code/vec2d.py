@@ -232,6 +232,12 @@ class Vec2d(object):
  
     def __invert__(self):
         return Vec2d(-self.x, -self.y)
+
+    def round(self,n=0):
+        return Vec2d(round(self.x,n),round(self.y,n))
+
+    def inttup(self):
+        return int(self.x),int(self.y)
  
     # vectory functions
     def get_length_sqrd(self):

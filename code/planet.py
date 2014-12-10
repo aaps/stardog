@@ -41,15 +41,14 @@ class Planet(Floater):
 				other.delta.x += cos(angle) * accel / self.game.fps
 				other.delta.y += sin(angle) * accel / self.game.fps
 	
-	def draw(self, surface, offset = (0,0)):
+	def draw(self, surface, offset = Vec2d(0,0)):
 		if self.image:
 			pos = (int(self.pos.x - self.image.get_width()  / 2 - offset[0]), 
 				  int(self.pos.y - self.image.get_height() / 2 - offset[1]))
-			surface.blit(self.image, pos)
+			surface.blit(self.image, pos())
 		else:
-			pos = int(self.pos.x - offset[0]), \
-				  int(self.pos.y - offset[1])
-			pygame.draw.circle(surface, self.color, pos, int(self.radius))
+			pos = self.pos - offset
+			pygame.draw.circle(surface, self.color, pos.inttup(), int(self.radius))
 	
 	def takeDamage(self, damage, other):
 		pass

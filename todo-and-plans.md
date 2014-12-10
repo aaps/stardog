@@ -26,7 +26,7 @@ http://www.pygame.org/docs/ref/draw.html#pygame.draw.polygon shape
 * a name to give yourself <as a precursor of network play and to get familiair with gui, after view spitout and vectors>
 	http://www.cosc.canterbury.ac.nz/greg.ewing/python/Albow/
 	http://ocemp.sourceforge.net/guiwidget.html
-* the solarsystm.py has lots of basic functionality in a specific class can be put in parent class. this leaves space for starsystem specific stuff such as names and planet locations. !!!
+* Display solar system name somewhere
 * other sound for bullet impact on shield and plating and on planet
 * palaxing background
 * menu volume controll vor music and effects
@@ -85,6 +85,7 @@ DONE
 * revamp to use vectors <as good as done Aat>
 * every planet own part list, nope but fixed <Aat fixed it>
 * fixing a bug that made memmory leak during the drawing of the star map (duality)
+* the solarsystm.py has lots of basic functionality in a specific class can be put in parent class. this leaves space for starsystem specific stuff such as names and planet locations. !!! (Aat)
 
 <Duality>
 
