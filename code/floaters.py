@@ -320,7 +320,7 @@ class LaserBeam(Floater):
 		#check rect collide:
 		if floater != self and (skipRect or self.rect.colliderect(floater.rect)):
 			#check line-circle collide:
-			dist = linePointDist(self.start, self.stop, (floater.pos.x, floater.pos.y))
+			dist = linePointDist(self.start, self.stop, (floater.x, floater.y))
 			if dist	< floater.radius:
 				return dist
 				
@@ -332,8 +332,9 @@ class LaserBeam(Floater):
 				colliders.append(floater)
 		if colliders:
 			#recurse for parts in a ship:
-			for floater in colliders[:]:
+			for floater in colliders:
 				if isinstance(floater, Ship):
+					print "hit ship"
 					for part in floater.parts:
 						if self.intersect(part, True):
 							colliders.append(part)
