@@ -33,7 +33,7 @@ class Part(Floater):
 	ship = None
 	# position in relation to the center of the ship
 	#and the center of this part:
-	offset = 0, 0
+	offset = Vec2d(0, 0)
 	#whether this should be redrawn each frame:
 	color = (150,150,150)
 	animated = False
@@ -65,7 +65,7 @@ class Part(Floater):
 		#the length of this list is the number of connections.
 		 #each element is the part there, (x,y,dir) position of the connection.
 		 #the example is at the bottom of the part, pointed down.
-		self.ports = [Port((-self.width / 2, 0), 0, self)]
+		self.ports = [Port(Vec2d(-self.width / 2, 0), 0, self)]
 
 	
 	def stats(self):
@@ -95,14 +95,10 @@ class Part(Floater):
 		part.ship = self.ship
 		part.dir = port.dir + self.dir
 		#calculate offsets:
-		cost = cos(self.dir) #cost is short for cos(theta)
-		sint = sin(self.dir)
-		part.offset = self.offset[0] + port.offset[0] * cost \
-			- port.offset[1] * sint \
-			- cos(part.dir) * (part.width - PART_OVERLAP) / 2, \
-			self.offset[1] + port.offset[0] * sint \
-			+ port.offset[1] * cost \
-			- sin(part.dir) * (part.width - PART_OVERLAP) / 2
+
+		part.offset = self.offset + port.offset.rotated(self.dir) - Vec2d(0,0).rotatedd(part.dir,(part.width - PART_OVERLAP) / 2)
+		
+
 		#rotate takes a ccw angle and color.
 		part.image = colorShift(pygame.transform.rotate(part.baseImage, \
 					-part.dir), part.color)
@@ -127,8 +123,7 @@ class Part(Floater):
 		#It must be recalculated because moment is calculated from the center
 		#of the ship.  
 		self.ship.mass += self.mass
-		self.ship.moment += self.mass \
-					* sqrt(self.offset[0] ** 2 + self.offset[1] ** 2)
+		self.ship.moment += self.mass * self.offset.get_length()
 		#These two can be modified by adjectives:
 		self.ship.partEffects.extend(self.shipEffects)
 		for effect in self.attachEffects:
@@ -144,16 +139,18 @@ class Part(Floater):
 		#set physics to drift away from ship (not collide):
 		cost = cos(self.ship.dir) #cost is short for cos(theta)
 		sint = sin(self.ship.dir)
-		self.pos.x = self.ship.pos.x + DETACH_SPACE * self.offset[0] * cost \
-				- DETACH_SPACE * self.offset[1] * sint
-		self.pos.y = self.ship.pos.y + DETACH_SPACE * self.offset[0] * sint \
-				+ DETACH_SPACE * self.offset[1] * cost
+		
+		self.pos.x = self.ship.pos.x + DETACH_SPACE * self.offset.x * cost \
+				- DETACH_SPACE * self.offset.y * sint
+		self.pos.y = self.ship.pos.y + DETACH_SPACE * self.offset.x * sint \
+				+ DETACH_SPACE * self.offset.y * cost
+
 		self.delta.x = self.ship.delta.x \
-				+ rand() * sign(self.offset[0]) * cost * DETACH_SPEED\
-				- rand() * sign(self.offset[1]) * sint * DETACH_SPEED
+				+ rand() * sign(self.offset.x) * cost * DETACH_SPEED\
+				- rand() * sign(self.offset.y) * sint * DETACH_SPEED
 		self.delta.y = self.ship.delta.y \
-				+ rand() * sign(self.offset[0]) * sint * DETACH_SPEED\
-				+ rand() * sign(self.offset[1]) * cost * DETACH_SPEED
+				+ rand() * sign(self.offset.x) * sint * DETACH_SPEED\
+				+ rand() * sign(self.offset.y) * cost * DETACH_SPEED
 		#if this is the root of the ship, kill the ship:
 		root = False
 		if self.parent and self.parent == self.ship:
@@ -176,10 +173,11 @@ class Part(Floater):
 		"""Like detach, but for parts that are in an inventory when a 
 		ship is destroyed."""
 		angle = randint(0,360)
-		offset = cos(angle) * DETACH_SPACE, sin(angle) * DETACH_SPACE
+		offset = Vec2d(cos(angle) * DETACH_SPACE, sin(angle) * DETACH_SPACE)
 		#set physics to drift away from ship (not collide):
-		self.pos.x = ship.pos.x + self.offset[0] 
-		self.pos.y = ship.pos.y + self.offset[1] 
+		# self.pos.x = ship.pos.x + self.offset[0] 
+		# self.pos.y = ship.pos.y + self.offset[1]
+		self.pos = ship.pos + self.offset
 		self.delta.x = ship.delta.x + rand() * sign(self.offset[0]) * DETACH_SPEED
 		self.delta.y = ship.delta.y + rand() * sign(self.offset[1]) * DETACH_SPEED
 		self.game.curSystem.add(self)
@@ -213,8 +211,9 @@ class Part(Floater):
 		if self.parent:
 			cost = cos(self.ship.dir) #cost is short for cos(theta)
 			sint = sin(self.ship.dir)
-			self.pos.x = self.ship.pos.x + self.offset[0] * cost - self.offset[1] * sint
-			self.pos.y = self.ship.pos.y + self.offset[0] * sint + self.offset[1] * cost
+
+			self.pos = self.ship.pos + self.offset.rotated(self.ship.dir)
+
 		#if it's floating in space, act like a floater:
 		else:
 			Floater.update(self)
@@ -226,10 +225,10 @@ class Part(Floater):
 	def draw(self, surface, offset = None):
 		"""draws this part onto the surface."""
 		if not offset:
-			offset =(surface.get_width() \
+			offset = Vec2d((surface.get_width() \
 					- self.image.get_width()) / 2 + self.offset[0], \
 					(surface.get_height() \
-					- self.image.get_height()) / 2 + self.offset[1]
+					- self.image.get_height()) / 2 + self.offset[1])
 		if self.ship == None:
 			Floater.draw(self, surface, offset)
 		else:
@@ -253,8 +252,7 @@ class Part(Floater):
 				  self.pos.y - image.get_height() / 2 - offset[1]
 			surface.blit(image, pos)
 		#hp rings:
-		pos = 	int(self.pos.x - offset[0] - self.radius), \
-				int(self.pos.y - offset[1] - self.radius)
+		pos = 	self.pos - offset - self.radius
 		if self.hp / self.maxhp < .9:
 			#color fades green to red as hp decreases.
 			color = limit(0, int((1 - self.hp * 1. / self.maxhp ) * 255),255), \
@@ -264,7 +262,7 @@ class Part(Floater):
 			pygame.draw.arc(self.buffer, color, rect, \
 					math.pi/2 - math.pi * 2 * (1 - 1. * self.hp / self.maxhp),\
 					math.pi/2, 2)
-			surface.blit(self.buffer, pos)
+			surface.blit(self.buffer, pos.inttup())
 			self.buffer.fill((0,0,0,0))
 
 	def takeDamage(self, damage, other):
@@ -590,9 +588,9 @@ class Gyro(FlippablePart):
 	energyCost = .8
 	def __init__(self, game):
 		Part.__init__(self, game)
-		self.ports = [Port((0, self.height / 2 ), 270, self), \
-				Port((-self.width / 2 , 0), 0, self), \
-				Port((0, -self.height / 2 ), 90, self)]
+		self.ports = [Port(Vec2d(0, self.height / 2 ), 270, self), \
+				Port(Vec2d(-self.width / 2 , 0), 0, self), \
+				Port(Vec2d(0, -self.height / 2 ), 90, self)]
 		self.functions.extend([self.turnLeft,self.turnRight])
 		self.functionDescriptions.extend(\
 				[self.turnLeft.__doc__,self.turnRight.__doc__])
@@ -666,9 +664,9 @@ class Interconnect(Part):
 
 	def __init__(self, game):
 		Part.__init__(self, game)
-		self.ports = [Port((0, self.height / 2 ), 270, self), \
-				Port((-self.width / 2 , 0), 0, self), \
-				Port((0, -self.height / 2 ), 90, self)]
+		self.ports = [Port(Vec2d(0, self.height / 2 ), 270, self), \
+				Port(Vec2d(-self.width / 2 , 0), 0, self), \
+				Port(Vec2d(0, -self.height / 2 ), 90, self)]
 
 #<duality> added this part it works it regenerates health really nice and slow :)
 class Quarters(Part):
@@ -678,7 +676,7 @@ class Quarters(Part):
 	repair = .1
 	def __init__(self, game):
 		Part.__init__(self, game)
-		self.ports = [Port((-self.width/2,0), 0, self)]
+		self.ports = [Port(Vec2d(-self.width/2,0), 0, self)]
 	def stats(self):
 		stats = (self.repair,)
 		statString = "\nRepairy: %s hp/s"
@@ -762,10 +760,10 @@ class Cockpit(Battery, Generator, Gyro):
 	
 	def __init__(self, game):
 		Part.__init__(self, game)
-		self.ports = [Port((self.width / 2 - 2, 0), 180, self), \
-					Port((0, self.height / 2 - 2), 270, self), \
-					Port((-self.width / 2 + 2, 0), 0, self), \
-					Port((0, -self.height / 2 + 2), 90, self)]
+		self.ports = [Port(Vec2d(self.width / 2 - 2, 0), 180, self), \
+					Port(Vec2d(0, self.height / 2 - 2), 270, self), \
+					Port(Vec2d(-self.width / 2 + 2, 0), 0, self), \
+					Port(Vec2d(0, -self.height / 2 + 2), 90, self)]
 
 	def stats(self):
 		stats = (self.torque, self.energyCost, self.capacity, self.rate)
@@ -783,12 +781,12 @@ class Interceptor(Cockpit):#move to config
 	def __init__(self, game):
 		Cockpit.__init__(self, game)
 		self.ports = [
-					Port((4, 10), 180, self),
-					Port((4, -10), 180, self),
-					Port((-3, -17), 90, self),
-					Port((-3, 17), -90, self),
-					Port((-6, 12), 0, self),
-					Port((-6, -12), 0, self)]
+					Port(Vec2d(4, 10), 180, self),
+					Port(Vec2d(4, -10), 180, self),
+					Port(Vec2d(-3, -17), 90, self),
+					Port(Vec2d(-3, 17), -90, self),
+					Port(Vec2d(-6, 12), 0, self),
+					Port(Vec2d(-6, -12), 0, self)]
 					
 class Destroyer(Cockpit):#move to config
 	mass = 60
@@ -800,13 +798,13 @@ class Destroyer(Cockpit):#move to config
 	def __init__(self, game):
 		Cockpit.__init__(self, game)
 		self.ports = [
-					Port((25, 0), 180, self),
-					Port((8, -8), 90, self),
-					Port((8, 8), -90, self),
-					Port((-14, -13), 90, self),
-					Port((-14, 13), -90, self),
-					Port((-25, -8), 0, self),
-					Port((-25, 8), 0, self)]
+					Port(Vec2d(25, 0), 180, self),
+					Port(Vec2d(8, -8), 90, self),
+					Port(Vec2d(8, 8), -90, self),
+					Port(Vec2d(-14, -13), 90, self),
+					Port(Vec2d(-14, 13), -90, self),
+					Port(Vec2d(-25, -8), 0, self),
+					Port(Vec2d(-25, 8), 0, self)]
 					
 class Fighter(Cockpit):#move to config
 	mass = 10
@@ -820,10 +818,10 @@ class Fighter(Cockpit):#move to config
 	def __init__(self, game):
 		Cockpit.__init__(self, game)
 		self.ports = [
-					Port((9, 0), 180, self),
-					Port((-5, -7), 90, self),
-					Port((-5, 7), -90, self),
-					Port((-9, 0), 0, self)]
+					Port(Vec2d(9, 0), 180, self),
+					Port(Vec2d(-5, -7), 90, self),
+					Port(Vec2d(-5, 7), -90, self),
+					Port(Vec2d(-9, 0), 0, self)]
 					
 class Drone(Cockpit, Engine, Cannon):
 	baseImage = loadImage("res/ship" + ext)

@@ -213,7 +213,7 @@ class Ship(Floater):
 		Only used for the base part (usually a cockpit), other parts are added to parts."""
 		part.parent = self
 		part.dir = 0
-		part.offset = (0, 0)
+		part.offset = Vec2d(0, 0)
 		part.ship = self
 		part.image = colorShift(part.baseImage, self.color).convert()
 		part.image.set_colorkey((0,0,0))
@@ -250,8 +250,9 @@ class Ship(Floater):
 			maxY = max(part.offset[1] + part.radius, maxY)
 		self.radius = max(maxX - minX, maxY - minY) / 2
 		#recenter:
-		xCorrection = (maxX + minX) / 2
-		yCorrection = (maxY + minY) / 2
+		# xCorrection = (maxX + minX) / 2
+		# yCorrection = (maxY + minY) / 2
+		Correction = Vec2d( (maxX + minX) / 2, (maxY + minY) / 2)
 		self.partEffects = []
 		self.mass = 1
 		self.moment = 1
@@ -262,8 +263,7 @@ class Ship(Floater):
 			if not isinstance(part, Dummy):
 				part.number = partNum
 				partNum += 1
-				part.offset = 	part.offset[0] - xCorrection, \
-								part.offset[1] - yCorrection
+				part.offset = part.offset - Correction		
 				part.attach()
 		partNum -= 1
 		if partNum > self.partLimit:
@@ -388,8 +388,7 @@ class Ship(Floater):
 					   - self.image.get_height() / 2]
 		#offset is where on the input surface to blit the ship.
 		if offset:
-			pos =[self.pos.x  - offset[0] + pos[0] + imageOffset[0], \
-				  self.pos.y  - offset[1] + pos[1] + imageOffset[1]]
+			pos = self.pos  - offset + pos + imageOffset
 				  
 		#draw to buffer:
 		surface.blit(self.image, pos)

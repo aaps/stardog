@@ -411,14 +411,10 @@ class InventoryPanel(Selecter):
 
 	def set_partlist(self, parts):
 		self.partList = parts
-		print parts
-		print
 		self.selectables = []
 		self.setSelected(None)
 		for part in self.partList:
-			print part
 			self.addSelectable(PartTile(part, Rect(0,0,PartTile.width, PartTile.height), self))
-		print
 		
 
 	def drop(self, pos, dropped):

@@ -81,10 +81,9 @@ class HUD:
 				(center[0] - radius, center[1] - radius))
 		#draw floating part dots:
 		for floater in self.game.curSystem.floaters:
-			dotPos = int(center[0] + limit(-radius, \
-					(floater.pos.x - thisShip.pos.x) / scale, radius)), \
-					int(center[1] + limit(-radius, \
-					(floater.pos.y - thisShip.pos.y) / scale, radius))
+			result = floater.pos - thisShip.pos
+			dotPos = int(center[0] + limit(-radius,	result.x / scale, radius)), \
+					int(center[1] + limit(-radius, result.y / scale, radius))
 			if isinstance(floater, Ship):
 				pygame.draw.circle(self.image, (250, 250, 0), dotPos, 2)
 				color = floater.color
