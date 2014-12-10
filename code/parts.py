@@ -57,8 +57,8 @@ class Part(Floater):
 		self.ports = [Port(0, self)]
 
 	def setwithheight(self, width, height):
-		self.width = width
-		self.height = height
+		self.width += width
+		self.height += height
 		radius = max(self.height / 2, self.width / 2)
 
 	
@@ -241,50 +241,6 @@ class Part(Floater):
 			if port.part:
 				port.part.update()
 
-
-	# def draw(self, surface, offset = None):
-	# 	"""draws this part onto the surface."""
-	# 	if not offset:
-	# 		offset =(surface.get_width() \
-	# 				- self.image.get_width()) / 2 + self.offset[0], \
-	# 				(surface.get_height() \
-	# 				- self.image.get_height()) / 2 + self.offset[1]
-	# 	if self.ship == None:
-	# 		Floater.draw(self, surface, offset)
-	# 	else:
-	# 		surface.blit(self.image, offset)
-	# 	#draw children:
-	# 	for port in self.ports:
-	# 		if port.part:
-	# 			port.part.draw(surface)
-	# 	if not self.parent:
-	# 		self.redraw(surface, offset)
-
-	# def redraw(self, surface, offset):
-	# 	"""redraw(surface, offset) -> draws 
-	# 	animated elements of this part to surface. 
-	# 	This should circumvent the ship surface and draw directly onto space."""
-	# 	if self.animated and self.animatedImage and self.ship:
-	# 		image = pygame.transform.rotate(self.animatedImage, \
-	# 							- self.dir - self.ship.dir).convert_alpha()
-	# 		image.set_colorkey((0,0,0))
-	# 		pos = self.x - image.get_width() / 2 - offset[0], \
-	# 			  self.y - image.get_height() / 2 - offset[1]
-	# 		surface.blit(image, pos)
-	# 	#hp rings:
-	# 	pos = 	int(self.x - offset[0] - self.radius), \
-	# 			int(self.y - offset[1] - self.radius)
-	# 	if self.hp / self.maxhp < .9:
-	# 		#color fades green to red as hp decreases.
-	# 		color = limit(0, int((1 - self.hp * 1. / self.maxhp ) * 255),255), \
-	# 				limit(0, int(1. * self.hp / self.maxhp * 255), 255), 0, 100 
-	# 		rect = (0,0, self.radius * 2, self.radius * 2)
-	# 		#arc from - hp/maxhp*360 to -90:
-	# 		pygame.draw.arc(self.buffer, color, rect, \
-	# 				math.pi/2 - math.pi * 2 * (1 - 1. * self.hp / self.maxhp),\
-	# 				math.pi/2, 2)
-	# 		surface.blit(self.buffer, pos)
-	# 		self.buffer.fill((0,0,0,0))
 
 	def takeDamage(self, damage, other):
 		from spaceship import Player
@@ -543,6 +499,7 @@ class Engine(Part):
 		Part.__init__(self, game)
 		self.functions.append(self.thrust)
 		self.functionDescriptions.append('thrust')
+		self.width -= 6
 		
 
 	def stats(self):

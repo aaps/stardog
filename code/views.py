@@ -52,7 +52,7 @@ class View:
 					self.mutatedimages[floater.image] = pygame.transform.rotate(self.images['default'], -floater.dir).convert()
 					self.images[floater.image] = self.images['default']
 				if isinstance(floater, Part):
-					floater.setwithheight(self.images[floater.image].get_width(), self.images[floater.image].get_height()-5)
+					floater.setwithheight(self.images[floater.image].get_width()-6, self.images[floater.image].get_height())
 
 		
 
@@ -77,7 +77,6 @@ class View:
 				self.mutatedimages[part.image] = pygame.transform.rotate(self.images[part.image], - part.dir - floater.dir).convert_alpha()
 			pos = part.x - self.mutatedimages[part.image].get_width()  / 2 - offset[0], part.y - self.mutatedimages[part.image].get_height() / 2 - offset[1]
 			self.surface.blit(colorShift(self.mutatedimages[part.image],part.color), pos)
-		print 
 
 	def explotionDraw(self, floater, offset = (0,0)):
 		sur = pygame.Surface((250,250))

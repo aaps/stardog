@@ -149,9 +149,9 @@ class Game:
 				
 				#paused:
 				if self.pause:
-					# self.menu.update()
+					self.menu.update()
 					self.menu.draw(self.screen)
-					self.view.menuDraw(self.menu)
+					# self.view.menuDraw(self.menu)
 					
 				#frame maintainance:
 				pygame.display.flip()

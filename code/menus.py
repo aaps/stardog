@@ -219,17 +219,17 @@ class PartDescriptionPanel(Panel):
 		self.part = part
 		self.removePanel(self.text)
 		self.removePanel(self.name)
-		# if not part or isinstance(part, Dummy):
-		# 	if self.image:
-		# 		self.image.fill((0,0,0,0))
-		# 	return
-		# self.image = pygame.Surface((self.rect.width, self.rect.height), 
-		# 			hardwareFlag).convert()
-		# self.image.set_colorkey((0,0,0))
-		# bigImage = pygame.transform.scale2x(self.part.image)
-		# bigImage.set_colorkey((255,255,255)) # idk why this one's white.
-		# self.image.blit(bigImage, 
-		# 		(self.rect.width / 2 - bigImage.get_width() / 2, 5))
+		if not part or isinstance(part, Dummy):
+			if self.image:
+				self.image.fill((0,0,0,0))
+			return
+		self.image = pygame.Surface((self.rect.width, self.rect.height), 
+					hardwareFlag).convert()
+		self.image.set_colorkey((0,0,0))
+		bigImage = pygame.transform.scale2x(self.part.image)
+		bigImage.set_colorkey((255,255,255)) # idk why this one's white.
+		self.image.blit(bigImage, 
+				(self.rect.width / 2 - bigImage.get_width() / 2, 5))
 		string = part.stats()
 		string += '\nFunctions: '
 		for function in part.functions:
@@ -368,11 +368,11 @@ class PartTile(DragableSelectable):
 		The menu interface for a part. Display it like a button!"""
 		DragableSelectable.__init__(self, rect, parent)
 		self.part = part
-		# bigImage = pygame.transform.scale2x(self.part.image)
-		# bigImage.set_colorkey((255,255,255)) # idk why this one's white.
+		bigImage = pygame.transform.scale2x(self.part.image)
+		bigImage.set_colorkey((255,255,255)) # idk why this one's white.
 		self.hotSpot = (self.partImageOffset[0] + self.part.width, 
 						self.partImageOffset[1] + self.part.height)
-		# self.image.blit(bigImage, PartTile.partImageOffset)
+		self.image.blit(bigImage, PartTile.partImageOffset)
 		#add text labels:
 		rect = Rect(rect)
 		self.addPanel(Label(rect, part.name, font = SMALL_FONT))
