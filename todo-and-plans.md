@@ -50,7 +50,8 @@ engines will sometimes not fire in case of multyple forward.
 can a planet have negative gravity ?
 in viewsinview ship direction jitters sometimes, more so when it's got a lot of parts.
 the laser is broken, ;(
-
+* make binding keys actually works. they bind but don't do anything. and moste of the time. it bugs out the guns so they fire randomly or continously.
+* if you bind a key to a engine that isn't in the engine slot. it won't fire if you press that key.
 
 parts
 ======
