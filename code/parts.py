@@ -52,16 +52,14 @@ class Part(Floater):
 		self.adjectives = []
 		self.maxhp = 10
 		self.hp = 10
-		self.rect = Rect(0,0,10,10)
-		radius = max(self.rect.height / 2, self.rect.width / 2)
+		radius = 0
 		Floater.__init__(self, game, 0, 0, dir = 270, radius = radius)
 		self.ports = [Port(0, self)]
 
 	def setwithheight(self, width, height):
 		self.width = width
 		self.height = height
-
-		
+		radius = max(self.height / 2, self.width / 2)
 
 	
 	def stats(self):
@@ -545,11 +543,6 @@ class Engine(Part):
 		Part.__init__(self, game)
 		self.functions.append(self.thrust)
 		self.functionDescriptions.append('thrust')
-	
-	def setwithheight(self, width, height):
-		self.width = width
-		self.height = height
-		# self.width -= 6
 		
 
 	def stats(self):
@@ -597,8 +590,7 @@ class Gyro(Part):
 				[self.turnLeft.__doc__,self.turnRight.__doc__])
 
 	def setwithheight(self, width, height):
-		self.width = width
-		self.height = height
+		Part.setwithheight(self,width,height)
 		self.ports[0].offset = (-self.width / 2, 0)
 		self.ports[1].offset = (0,-self.height / 2)
 				
@@ -691,10 +683,6 @@ class Shield(Part):
 	def __init__(self, game): 
 		Part.__init__(self, game)
 		self.ports = []
-
-	def setwithheight(self, width, height):
-		self.width = width
-		self.height = height
 	
 	def stats(self):
 		stats = (self.shieldhp, self.shieldRegen, self.energyCost)
@@ -735,8 +723,7 @@ class Cockpit(Battery, Generator, Gyro):
 		self.ports = [Port(180, self),	Port(270, self), Port(0, self), Port(90, self)]
 
 	def setwithheight(self, width, height):
-		self.width = width
-		self.height = height
+		Part.setwithheight(self,width,height)
 		self.ports[0].offset = (self.width / 2 - 2, 0)
 		self.ports[1].offset = (0, self.height / 2 - 2)
 		self.ports[2].offset = (-self.width / 2 + 2, 0)
@@ -774,8 +761,7 @@ class Interceptor(Cockpit):#move to config
 					Port(0, self)]
 
 	def setwithheight(self, width, height):
-		self.width = width
-		self.height = height
+		Part.setwithheight(self, width, height)
 		self.ports[0].offset = (4, 10)
 		self.ports[1].offset = (4, -10)
 		self.ports[2].offset = (-3, -17)
@@ -803,8 +789,7 @@ class Destroyer(Cockpit):#move to config
 					Port(0, self)]
 
 	def setwithheight(self, width, height):
-		self.width = width
-		self.height = height
+		Part.setwithheight(self,width,height)
 		self.ports[0].offset = (25, 0)
 		self.ports[1].offset = (8, -8)
 		self.ports[2].offset = (8, 8)
@@ -830,12 +815,11 @@ class Fighter(Cockpit):#move to config
 					Port( 90, self),
 					Port( -90, self),
 					Port( 0, self)]
-		self.rect = Rect(0,0,10,10)
+		# self.rect = Rect(0,0,10,10)
 
 	def setwithheight(self, width, height):
-		self.width = width
-		self.height = height
-		self.ports[0].offset = (9, 0)
+		Part.setwithheight(self,width,height)
+		self.ports[0].offset = (6, 0)
 		self.ports[1].offset = (-5, -7)
 		self.ports[2].offset = (-5, 7)
 		self.ports[3].offset = (-9, 0)
@@ -878,9 +862,6 @@ class Drone(Cockpit, Engine, Cannon):
 		self.thrust]
 		self.functionDescriptions = ['shoot', 'turn left', 'turn right', 'thrust']
 
-	def setwithheight(self, width, height):
-		self.width = width
-		self.height = height
 	
 	def update(self):
 		self.animated = self.thrusted

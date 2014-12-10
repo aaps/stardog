@@ -46,36 +46,30 @@ class View:
 
 	def add(self,floater):
 			if hasattr(floater, 'image'):
-
 				if floater.image in self.images:
 					self.mutatedimages[floater.image] = pygame.transform.rotate(self.images[floater.image], -floater.dir).convert()
 				else:
 					self.mutatedimages[floater.image] = pygame.transform.rotate(self.images['default'], -floater.dir).convert()
 					self.images[floater.image] = self.images['default']
-
 				if isinstance(floater, Part):
-
-					floater.setwithheight(self.images[floater.image].get_width()-1, self.images[floater.image].get_height()-1)
+					floater.setwithheight(self.images[floater.image].get_width(), self.images[floater.image].get_height()-5)
 
 		
 
 	def floaterDraw(self, floater, offset = (0,0)):
 		"""Blits this floater onto the surface. """
-		
-		
 		if hasattr(floater, 'parts') and len(floater.parts) > 0:
 			self.shipDraw( floater, offset)
 		elif hasattr(floater, 'image') and floater.image:
-			self.partDraw(floater, offset)
+			self.loaseFloaterDraw(floater, offset)
 		elif isinstance(floater, Explosion):
 			self.explotionDraw(floater, offset)
 		elif isinstance(floater, Planet):
 			self.PlanetDraw(floater, offset)
 
-	def partDraw(self, floater, offset = (0,0)):
+	def loaseFloaterDraw(self, floater, offset = (0,0)):
 		pos = floater.x - floater.rect.width  / 2 - offset[0], floater.y - floater.rect.height / 2 - offset[1]
 		self.surface.blit(colorShift(self.mutatedimages[floater.image],floater.color), pos)
-		
 
 	def shipDraw(self, floater,offset = (0,0)):
 		for part in floater.parts:
@@ -83,6 +77,7 @@ class View:
 				self.mutatedimages[part.image] = pygame.transform.rotate(self.images[part.image], - part.dir - floater.dir).convert_alpha()
 			pos = part.x - self.mutatedimages[part.image].get_width()  / 2 - offset[0], part.y - self.mutatedimages[part.image].get_height() / 2 - offset[1]
 			self.surface.blit(colorShift(self.mutatedimages[part.image],part.color), pos)
+		print 
 
 	def explotionDraw(self, floater, offset = (0,0)):
 		sur = pygame.Surface((250,250))
