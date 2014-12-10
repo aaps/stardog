@@ -170,7 +170,7 @@ class Missile(Bullet):
 		Floater.takeDamage(self, damage, other)
 
 class Mine(Bullet):
-	life = 0
+	life = 1e6
 	tangible = True
 	turning = 0
 	percision = 0
@@ -189,11 +189,13 @@ class Mine(Bullet):
 		self.time = launcher.explosionTime
 		self.force = launcher.force
 	def update(self):
-		self.life += 1./self.game.fps
 		self.dir = (self.dir+180)%360 - 180
 		
-		self.delta.x += self.acceleration*cos(self.dir)/self.game.fps
-		self.delta.y += self.acceleration*sin(self.dir)/self.game.fps
+		#self.delta.x += self.acceleration*cos(self.dir)/self.game.fps
+		#self.delta.y += self.acceleration*sin(self.dir)/self.game.fps
+		
+		self.delta = self.delta / 1.05
+		
 		
 		if self.life > self.range:
 			self.kill(self)

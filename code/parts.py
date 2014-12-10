@@ -400,7 +400,7 @@ class Cannon(Gun):
 
 class MineDropper(Gun):
 	baseImage = loadImage("res/parts/minelayer"+ext)
-	mineImage = None
+	mineImage = loadImage("res/mine"+ext)
 	damage = 10
 	speed = 0
 	reloadTime = 2
@@ -420,7 +420,20 @@ class MineDropper(Gun):
 		statString = ("\n Mine Speed: %s m/s\nMine Accel: %s m/s/s")
 		return Gun.stats(self)+statString%stats
 	def shoot(self):
-		pass
+		if self.acted: return
+		self.acted = True
+		s = self.ship
+		if self.reload <= 0 and s.energy > self.energyCost:
+			self.reload = self.reloadTime
+			s.energy -= self.energyCost
+			if soundModule:
+				setVolume(shootSound.play(), self, self.game.player)
+			self.game.curSystem.add(Mine(self.game, self,
+					self.damage*s.efficiency*s.damageBonus,
+					self.speed,
+					self.acceleration,
+					self.range, self.explosionRadius,
+					image = self.mineImage))
 
 class MissileLauncher(Gun):
 	baseImage = loadImage("res/parts/missilelauncher" + ext)
