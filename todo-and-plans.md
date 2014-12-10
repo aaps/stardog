@@ -56,6 +56,11 @@ parts
 ======
 * Space mines <easy mode> <Robert ?>
 * A radar that will eventualy suport raytracing. <easy for initial radar> !!!
+* Make mine's de accelerate till they hit thier target spot. 
+* so you can get out of the way intime.
+* maybe implement a arming period. 
+* bigger detonation range.
+* 
 * a gravity well part.
 * a dockingport part <can be hardmode>
 * a disable beam part <easymode>

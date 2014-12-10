@@ -419,6 +419,9 @@ class MineDropper(Gun):
 		stats = (self.speed, self.acceleration)
 		statString = ("\n Mine Speed: %s m/s\nMine Accel: %s m/s/s")
 		return Gun.stats(self)+statString%stats
+	def attach(self):
+		self.mineImage = colorShift(self.mineImage, self.ship.color)
+		Gun.attach(self)
 	def shoot(self):
 		if self.acted: return
 		self.acted = True
