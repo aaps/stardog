@@ -250,7 +250,7 @@ class Mine(Bullet):
 	def update(self):
 		pass
 
-	def kill(self, other):
+	def kill(self):
 		self.detonate()
 		if soundModule:
 			setVolume(missileSound.play(), self, self.game.player)
