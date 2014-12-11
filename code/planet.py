@@ -1,6 +1,5 @@
 #planet.py
 
-
 from utils import *
 from floaters import Floater
 from adjectives import randItem
@@ -59,3 +58,32 @@ class Sun(Planet):
 	# def __init__(self, game, pos, radius = 100, mass = 10000, \
 	# 				color = (100,200,50), image = None, race = None):
 	# 	Floater.__init__(self, game, pos, radius = radius, image = image)
+
+
+class Structure(Floater):
+	LANDING_SPEED = 200 #pixels per second. Under this, no damage.
+	
+	def __init__(self, game, pos, color = (100,200,50), radius = 100, image = None):
+		Floater.__init__(self, game, pos, Vec2d(0,0), 0, image=image)
+		self.color = (0,0,255)
+		self.damage = {}	
+		self.radius = radius
+		#damage[ships] = amount of damage ship will take. 
+		#see solarSystem.planet_ship_collision
+		self.race = None #race that owns this planet
+		if image == None:
+			self.image = None
+		self.inventory = []
+
+	def update(self):
+		pass
+
+	def draw(self, surface, offset = Vec2d(0,0)):
+		if self.image:
+			pos = (int(self.pos.x - self.image.get_width()  / 2 - offset[0]), 
+				  int(self.pos.y - self.image.get_height() / 2 - offset[1]))
+			surface.blit(self.image, pos())
+		else:
+			pos = self.pos - offset
+			pygame.draw.circle(surface, self.color, pos.inttup(), int(self.radius))
+			# pygame.draw.rect(surface, self.color, Rect(self.pos.x,self.pos.y,self.radius,self.radius), 0)

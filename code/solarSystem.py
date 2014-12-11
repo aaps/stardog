@@ -25,6 +25,7 @@ class SolarSystem:
 		pygame.mixer.music.play(-1)
 		pygame.mixer.music.set_volume(.15)
 		self.planets = []
+		self.structures = []
 		self.name = ""
 		
 		
@@ -279,7 +280,7 @@ class SolarA1(SolarSystem):
 	maxFighters = 15
 	respawnTime = 30
 	fightersPerMinute = 2
-	def __init__(self, game, player, numPlanets = 10):
+	def __init__(self, game, player, numPlanets = 10, numStructures = 2):
 		SolarSystem.__init__(self, game)
 		self.sun = (Sun( game, Vec2d(0,0), radius = 2000, mass = 180000, \
 					color = (255, 255, 255), image = None)) # the star
@@ -297,20 +298,33 @@ class SolarA1(SolarSystem):
 		for i in range(numPlanets):
 			angle = randint(0,360)
 			distanceFromSun = randint(d, d + 1200)
-			color = randint(40,255),randint(40,255),randint(40,255)
-			radius = randint(100,500)
+			color = randint(40,200),randint(40,200),randint(40,200)
+			radius = randint(300,700)
 			mass = randnorm(radius * 10, 800)
 			self.planets.append(Planet(game, Vec2d(distanceFromSun * cos(angle), \
 				distanceFromSun * sin(angle)), radius = radius, mass = mass, \
 				color = color))
 			self.add(self.planets[i])
 			d+= 1200
+
+		# for i in range(numStructures):
+		# 	angle = randint(0,360)
+		# 	distanceFromSun = randint(d, d + 2500)
+		# 	color = randint(0,100),randint(0,100),randint(0,100)
+		# 	radius = randint(100,200)
+		# 	self.structures.append(Structure( game, Vec2d(distanceFromSun * cos(angle), \
+		# 		distanceFromSun * sin(angle)), color, radius))
+
 				
 		for planet in self.planets:
 			planet.numShips = 0
 			planet.ships = pygame.sprite.Group()
 			planet.respawn = 30
 			self.add(planet)
+
+		# for structure in self.structures:
+		# 	print structure.radius
+		# 	self.add(structure)
 
 		
 
