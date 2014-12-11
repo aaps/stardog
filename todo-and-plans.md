@@ -47,6 +47,7 @@ Housekeeping
 
 bugs
 =====
+* remove the self.kill(other) thing see master branch, this is not working should be other way of both coliders to know about each other.
 * on branch viewsinview an explotion will make another one.<so what for now>
 * I can make a crash by bowing up my own ship in missile difference collision on branch * all2vector <Fixed Aat>
 engines will sometimes not fire in case of multyple forward. <fixed , Aat>
