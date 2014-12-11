@@ -1,13 +1,15 @@
 
 main dish
 ==========
-* splitout views <nasty stuff> !!!
+
 * quad trees (hardmode, after vector and view splitout, wil replace current collision check mess)
-* wormholes/star gates to other systems. (medium mode ?, after Gravless class)
+
+* wormholes/star gates to other systems. (medium mode ?, after Gravless class) !!!
+
 * multyplayer <hard mode, dependant on code structure, vectors and views split, also a better ui>
-http://code.google.com/p/legume/
 * a particle engine for explotions, engine stuff. <medium stuff, after view splitout>
 * better ui (nasty mode ?, after view splitout)
+http://pygame.org/project-planes-2392-4051.html get version 0.6
 * A save function ? <a sqllite file for now with sqlalchemy>
 * replace the part - port system with a part - grid system
 * sounds also need to be in views
@@ -15,7 +17,10 @@ http://code.google.com/p/legume/
 
 side dish
 ==========
-* make planet inherit from a Gravless class so stargate will not be effected by graf and * not be a planet. !!! also good for space ports, etc.
+* make planet inherit from a Gravless class so stargate will not be effected by graf and 
+
+* not be a planet. !!! also good for space ports, etc.
+
 * make the space structure class that will inherit from gravless as well with a custom 
 http://www.pygame.org/docs/ref/draw.html#pygame.draw.polygon shape
 * posibility to eject parts <easy mode>
@@ -91,6 +96,7 @@ DONE
 * every planet own part list, nope but fixed <Aat fixed it>
 * fixing a bug that made memmory leak during the drawing of the star map (duality)
 * the solarsystm.py has lots of basic functionality in a specific class can be put in parent class. this leaves space for starsystem specific stuff such as names and planet locations. !!! (Aat)
+* splitout views <nasty stuff> <as good as done, for now i want no part of it Aat>
 
 <Duality>
 
