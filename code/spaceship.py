@@ -47,14 +47,12 @@ def makeDestroyer(game, pos, delta, dir = 270, script = None, \
 				script = script, color = color)
 	gyro = Gyro(game)
 	generator = Generator(game)
-	lgun = LeftFlakCannon(game)
 	battery = Battery(game)
 	cockpit = Destroyer(game)
-	rgun = RightFlakCannon(game)
-	#gun = RightLaser(game)
+	gun = RightLaser(game)
 	engine = Engine(game)
 	shield = Shield(game)
-	for part in [gyro, generator, battery, cockpit, lgun,rgun, engine, shield]:
+	for part in [gyro, generator, battery, cockpit, gun, engine, shield]:
 		if rand() > .8:
 			addAdjective(part)
 			if rand() > .6:
@@ -62,8 +60,7 @@ def makeDestroyer(game, pos, delta, dir = 270, script = None, \
 		part.color = color
 	ship.addPart(cockpit)
 	
-	cockpit.addPart(rgun, 2)
-	cockpit.addPart(lgun, 1)
+	cockpit.addPart(gun, 2)
 	cockpit.addPart(battery, 3)
 	cockpit.addPart(generator, 4)
 	cockpit.addPart(gyro, 5)
