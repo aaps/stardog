@@ -51,6 +51,27 @@ class Planet(Floater):
 	
 	def takeDamage(self, damage, other):
 		pass
+
+	def collide(self):
+		pass
+
+	def collidePart(self):
+		pass
+
+	def collidePlanet(self):
+		pass
+
+
+	# ship - ship
+	# ship - freepart
+	# ship - planet
+	# planet - freepart
+	# bullet - freepart
+	# bullet - planet
+	# ship - bullet
+	# explotion - floater
+	# planet - planet
+	# floater - floater
 	
 class Sun(Planet):
 	PLANET_DAMAGE = 300

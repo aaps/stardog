@@ -57,7 +57,7 @@ class SolarSystem:
 						self.drawEdgeWarning = 1
 				else:
 					try:
-						floater.kill(Floater(self.game,Vec2d(0,0),Vec2d(0,0)))
+						floater.kill()
 					except TypeError:
 						print floater
 			if floater.pos.y < edge[1][0] and floater.delta.y < 0 \
@@ -68,7 +68,7 @@ class SolarSystem:
 						self.drawEdgeWarning = self.game.fps
 				else:
 					try:
-						floater.kill(Floater(self.game,Vec2d(0,0),Vec2d(0,0)))
+						floater.kill(Floater())
 					except TypeError:
 						print floater
 		#list floaters that are on screen now:
@@ -207,6 +207,17 @@ class SolarSystem:
 				self.crash(a, b)
 				return True
 		return False
+
+	# ship - ship
+	# ship - freepart
+	# ship - planet
+	# planet - freepart
+	# bullet - freepart
+	# bullet - planet
+	# ship - bullet
+	# explotion - floater
+	# planet - planet
+	# floater - floater
 
 	def planet_ship_collision(self, planet, ship):
 		angle = (planet.pos - ship.pos).get_angle()

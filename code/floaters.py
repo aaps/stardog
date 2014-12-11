@@ -54,6 +54,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 		self.dir = dir
 		self.pos = pos
 		self.delta = delta
+		self.collisions = []
 
 		self.radius = radius
 		if (not image):
@@ -72,13 +73,35 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	def takeDamage(self, damage, other):
 		self.hp -= damage
 		if self.hp <= 0:
-			self.kill(other)
+			self.kill()
 
 	def draw(self, surface, offset = (0,0)):
 		"""Blits this floater onto the surface. """
 		poss = self.pos.x - self.image.get_width()  / 2 - offset[0], \
 			  self.pos.y - self.image.get_height() / 2 - offset[1]
 		surface.blit(self.image, poss)
+
+	def addCollider(self, floater):
+		self.collisions.append(floater)
+
+	def collide(self):
+		pass
+
+	def floaterCollide(self):
+		pass
+
+
+
+	# ship - ship
+	# ship - freepart
+	# ship - planet
+	# planet - freepart
+	# bullet - freepart
+	# bullet - planet
+	# ship - bullet
+	# explotion - floater
+	# planet - planet
+	# floater - floater
 
 class Bullet(Floater):
 	def __init__(self, game, gun, damage, speed, range, image = None):
@@ -113,14 +136,37 @@ class Bullet(Floater):
 		impact = Impact(self.game, self.pos, delta, 20, 14)
 		self.game.curSystem.add(impact)
 
-	def kill(self,other):
-		self.detonate(other)
+	def kill(self):
+		# self.detonate(other)
 		if soundModule:
 			setVolume(missileSound.play(), self, self.game.player)
 		Floater.kill(self)
 
 	def softkill(self):
 		Floater.kill(self)
+
+
+	def collide(self):
+		pass
+
+	def collidePart(self):
+		pass
+
+	def collidePlanet(self):
+		pass
+
+	
+
+	# ship - ship
+	# ship - freepart
+	# ship - planet
+	# planet - freepart
+	# bullet - freepart
+	# bullet - planet
+	# ship - bullet
+	# explotion - floater
+	# planet - planet
+	# floater - floater
 
 
 
@@ -151,7 +197,7 @@ class Missile(Bullet):
 		self.delta.x += self.acceleration * cos(self.dir) / self.game.fps
 		self.delta.y += self.acceleration * sin(self.dir) / self.game.fps
 		if self.life > self.range:
-			self.kill(Floater(self.game, Vec2d(0,0), Vec2d(0,0)))
+			self.kill()
 		Floater.update(self)
 
 	def detonate(self):
@@ -159,7 +205,7 @@ class Missile(Bullet):
 		explosion = Explosion(self.game, self.pos, delta, self.explosionRadius, self.time, self.damage, self.force)
 		self.game.curSystem.add(explosion)
 
-	def kill(self,other):
+	def kill(self):
 		self.detonate()
 		if soundModule:
 			setVolume(missileSound.play(), self, self.game.player)
@@ -194,13 +240,13 @@ class Mine(Bullet):
 		self.delta = self.delta / 1.05
 		
 		if self.life > self.range:
-			self.kill(self)
+			self.kill()
 		Floater.update(self)
 	def detonate(self):
 		delta = self.delta.rotatedd(self.dir, -(self.acceleration*self.life))
 		explosion = Explosion(self.game, self.pos, delta, self.explosionRadius, self.time, self.damage, self.force)
 		self.game.curSystem.add(explosion)
-	def kill(self, other):
+	def kill(self,):
 		self.detonate()
 		if soundModule:
 			setVolume(missileSound.play(), self, self.game.player)
@@ -254,7 +300,7 @@ class Explosion(Floater):
 			pygame.draw.circle(self.image, color, poss, radius)
 		Floater.draw(self, surface, offset)
 
-	def kill(self,other):
+	def kill(self):
 		pass
 		
 	def takeDamage(self, damage, other):
@@ -264,6 +310,7 @@ class Impact(Floater):
 	life = 10
 	tangible = False
 	mass = 0
+
 	def __init__(self, game, pos, delta, radius = 5,\
 				time = 1):
 		image = pygame.Surface((radius * 2, radius * 2), flags = hardwareFlag).convert()
@@ -273,6 +320,7 @@ class Impact(Floater):
 		self.maxRadius = int(radius)
 		self.radius = 0
 		self.time = time
+
 	def update(self):
 		self.life += 1. / self.game.fps
 		if self.life > self.time:
@@ -283,6 +331,7 @@ class Impact(Floater):
 		else:
 			self.radius = int(self.maxRadius * (self.time * 4 / 3 \
 						- self.life * 4 / 3) / self.time)
+
 	def draw(self, surface, offset = (0,0)):
 		self.image.fill((0, 0, 0, 0))
 		for circle in range(min(self.radius / 4, 80)):
@@ -295,8 +344,7 @@ class Impact(Floater):
 					  int(sin(theta) * r + self.maxRadius))
 			pygame.draw.circle(self.image, color, poss, radius)
 		Floater.draw(self, surface, offset)
-	def kill(self,other):
-		pass
+
 	def takeDamage(self, damage, other):
 		pass
 

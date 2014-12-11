@@ -366,7 +366,7 @@ class Ship(Floater):
 	def update(self):
 		#check if dead:
 		if not self.parts or self.parts[0].hp <= 0:
-			self.kill(Floater(self.game, Vec2d(0,0), 0))
+			self.kill()
 		#run script, get choices.
 		self.script.update(self)
 		
@@ -431,7 +431,7 @@ class Ship(Floater):
 		if isinstance(other, Bullet) and other.ship == self.game.player:
 			self.game.player.xpDamage(self, damage)
 
-	def kill(self, other):
+	def kill(self):
 		"""play explosion effect than call Floater.kill(self)"""
 		if soundModule:
 			setVolume(explodeSound.play(), self, self.game.player)

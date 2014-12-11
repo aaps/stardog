@@ -154,7 +154,7 @@ class Part(Floater):
 		#if this is the root of the ship, kill the ship:
 		root = False
 		if self.parent and self.parent == self.ship:
-			self.ship.kill(Floater(self.game,Vec2d(0,0),Vec2d(0,0)))
+			self.ship.kill()
 			root = True
 		#cleanup relations:
 		if self.parent and self.parent != self.ship:
@@ -288,6 +288,29 @@ class Part(Floater):
 			self.game.curSystem.add(Explosion(self.game, self.pos, \
 						self.delta, radius = self.radius * 4,\
 						time = self.maxhp / 5))
+	def collide(self):
+		pass
+
+	def collideShip(self):
+		pass
+
+	def collidePlanet(self):
+		pass
+
+	def collideBullet(self):
+		pass
+
+
+	# ship - ship
+	# ship - freepart
+	# ship - planet
+	# planet - freepart
+	# bullet - freepart
+	# bullet - planet
+	# ship - bullet
+	# explotion - floater
+	# planet - planet
+	# floater - floater
 
 class Dummy(Part):
 	"""A dummy part used by the parts menu."""
