@@ -411,7 +411,7 @@ class MineDropper(Gun):
 	explosionRadius = 120
 	explosionTime = .6
 	force = 6000
-	name = "Mine"
+	name = "Mine-Layer"
 	
 	def __init__(self, game):
 		Gun.__init__(self, game)
@@ -607,14 +607,12 @@ class Engine(Part):
 			
 			effectiveexspeed = Vec2d(0,0)
 			maxi = Vec2d(0,0).rotatedd(dir, self.exspeed).get_length()
-
 			if maxi > self.ship.delta.get_length():
 				effectiveexspeed =  (Vec2d(0,0).rotatedd(dir, self.exspeed) - self.ship.delta)
 				accel = self.ship.efficiency * self.ship.thrustBonus \
 					* effectiveexspeed.get_length() * self.exmass / self.ship.mass / self.game.fps
 				self.ship.delta = self.ship.delta.rotatedd(dir, accel)
 			else:
-
 				self.ship.delta *= 0.99
 				
 			

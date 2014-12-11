@@ -195,7 +195,7 @@ class Mine(Bullet):
 		
 		if self.life > self.range:
 			self.kill(self)
-		#Floater.update(self)
+		Floater.update(self)
 	def detonate(self):
 		delta = self.delta.rotatedd(self.dir, -(self.acceleration*self.life))
 		explosion = Explosion(self.game, self.pos, delta, self.explosionRadius, self.time, self.damage, self.force)
