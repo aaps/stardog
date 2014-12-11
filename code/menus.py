@@ -90,12 +90,12 @@ class PartsPanel(Panel):
 			
 	def reset(self):
 		if self.player.landed and not self.tradePanel:
-			# self.image = self.tradeImage
-			# self.tradePanel = InventoryPanel(Rect(660, 30, 130, 570), 
-			# 					self, self.player.landed.inventory)
+			self.image = self.tradeImage
+			self.tradePanel = InventoryPanel(Rect(660, 30, 130, 570), 
+								self, self.player.landed.inventory)
 			self.addPanel(self.tradePanel)
 		elif not self.player.landed:
-			# self.image = self.baseImage
+			#self.image = self.baseImage
 			self.removePanel(self.tradePanel)
 			self.tradePanel = None
 		Panel.reset(self)

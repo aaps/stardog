@@ -133,8 +133,8 @@ class Game:
 				#unpaused:
 				if not self.pause:
 					# update action:
-					# for trigger in self.triggers:
-					# 	trigger.update()
+					for trigger in self.triggers:
+						trigger.update()
 					self.curSystem.update()
 					self.top_left = self.player.x - self.width / 2, \
 							self.player.y - self.height / 2
@@ -143,7 +143,6 @@ class Game:
 				#draw the layers:
 				self.screen.fill((0, 0, 0, 0))
 				self.view.starSystemDraw(self.curSystem, self.top_left)
-				# self.curSystem.draw(self.screen, self.top_left)
 				self.hud.draw(self.screen, self.player)
 				self.messenger.draw(self.screen)
 				

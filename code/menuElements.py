@@ -22,7 +22,8 @@ class Panel:
 	def update(self):
 		"""updates this panel and its children"""
 		for panel in self.panels:
-			panel.update()
+			if isinstance(panel,Panel):
+				panel.update()
 			
 	def addPanel(self, panel):
 		"""adds a subpanel to this panel."""
@@ -35,29 +36,33 @@ class Panel:
 	
 	def reset(self):
 		for panel in self.panels:
-			panel.reset()
+			if isinstance(panel,Panel):
+				panel.reset()
 	
 	def click(self, button, pos):
 		"""called when this panel is clicked on."""
 		#pass the click on to first colliding child:
 		for panel in self.panels:
-			if panel.rect.collidepoint(pos):
-				if panel.click(button, pos):
-					return True
+			if isinstance(panel,Panel):
+				if panel.rect.collidepoint(pos):
+					if panel.click(button, pos):
+						return True
 	
 	def move(self, pos, rel):
 		"""called when the mouse moves to or from this panel."""
 		oldpos = pos[0] - rel[0] , pos[1] - rel[1]
 		for panel in self.panels:
-			if panel.rect.collidepoint(oldpos) or panel.rect.collidepoint(pos):
-				panel.move(pos, rel)
+			if isinstance(panel,Panel):
+				if panel.rect.collidepoint(oldpos) or panel.rect.collidepoint(pos):
+					panel.move(pos, rel)
 				
 	def dragOver(self, pos, rel):
 		"""called when the mouse moves to or from this panel."""
 		oldpos = pos[0] - rel[0] , pos[1] - rel[1]
 		for panel in self.panels:
-			if panel.rect.collidepoint(oldpos) or panel.rect.collidepoint(pos):
-				panel.dragOver(pos, rel)
+			if isinstance(panel,Panel):
+				if panel.rect.collidepoint(oldpos) or panel.rect.collidepoint(pos):
+					panel.dragOver(pos, rel)
 		
 	def drag(self, start):
 		"""drag(start): 
@@ -66,10 +71,11 @@ class Panel:
 		return None if self is not draggable, and return (self, self.parent) 
 		if self is draggable."""
 		for panel in self.panels:
-			if panel.rect.collidepoint(start):
-				dragged = panel.drag(start)
-				if dragged:
-					return dragged
+			if isinstance(panel,Panel):
+				if panel.rect.collidepoint(start):
+					dragged = panel.drag(start)
+					if dragged:
+						return dragged
 		return None
 		
 	def drop(self, pos, dropped):
@@ -85,10 +91,11 @@ class Panel:
 			...
 			source.endDrag(target.drop(mousePos2, dragged), dragged)"""
 		for panel in self.panels:
-			if panel.rect.collidepoint(pos):
-				result = panel.drop(pos, dropped)
-				if result:
-					return result
+			if isinstance(panel,Panel):
+				if panel.rect.collidepoint(pos):
+					result = panel.drop(pos, dropped)
+					if result:
+						return result
 	
 	def endDrag(self, dragged, result):
 		"""called when a drag from here drops with a non-None result."""
@@ -109,7 +116,8 @@ class Panel:
 			surface.blit(self.image, (rect.left, rect.top), \
 					(0, 0, rect.width, rect.height))
 		for panel in self.panels:
-			panel.draw(surface, rect)
+			if isinstance(panel,Panel):
+				panel.draw(surface, rect)
 			
 class TopLevelPanel(Panel):
 	""" TopLevelPanel(rect) -> TopLevelPanel.

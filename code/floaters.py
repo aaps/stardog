@@ -153,7 +153,6 @@ class Explosion(Floater):
 	life = 0
 	image = None
 	def __init__(self, game, x, y, dx = 0, dy = 0, radius = 10,	time = 1, damage = 0, force = 6000):
-		print "make explotion !"
 		Floater.__init__(self, game, x, y, dx, dy, radius = 0)
 		self.maxRadius = int(radius)
 		self.force = force
