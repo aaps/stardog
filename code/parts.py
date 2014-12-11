@@ -397,6 +397,47 @@ class Cannon(Gun):
 					self.speed * s.cannonSpeedBonus,
 					self.range * s.cannonRangeBonus, image = self.bulletImage))
 
+
+class MineDropper(Gun):
+	baseImage = loadImage("res/parts/minelayer"+ext)
+	mineImage = loadImage("res/mine"+ext)
+	damage = 10
+	speed = 0
+	reloadTime = 2
+	acceleration = 0
+	range = 1
+	turning = 0
+	percision = 0
+	explosionRadius = 120
+	explosionTime = .6
+	force = 6000
+	name = "Mine"
+	
+	def __init__(self, game):
+		Gun.__init__(self, game)
+	def stats(self):
+		stats = (self.speed, self.acceleration)
+		statString = ("\n Mine Speed: %s m/s\nMine Accel: %s m/s/s")
+		return Gun.stats(self)+statString%stats
+	def attach(self):
+		self.mineImage = colorShift(self.mineImage, self.ship.color)
+		Gun.attach(self)
+	def shoot(self):
+		if self.acted: return
+		self.acted = True
+		s = self.ship
+		if self.reload <= 0 and s.energy > self.energyCost:
+			self.reload = self.reloadTime
+			s.energy -= self.energyCost
+			if soundModule:
+				setVolume(shootSound.play(), self, self.game.player)
+			self.game.curSystem.add(Mine(self.game, self,
+					self.damage*s.efficiency*s.damageBonus,
+					self.speed,
+					self.acceleration,
+					self.range, self.explosionRadius,
+					image = self.mineImage))
+
 class MissileLauncher(Gun):
 	baseImage = loadImage("res/parts/missilelauncher" + ext)
 	missileImage = None
@@ -412,7 +453,7 @@ class MissileLauncher(Gun):
 	force = 6000
 	name = 'Missile Launcher'
 	
-	def init(self, game):
+	def __init__(self, game):
 		if self.missileImage == None:
 			self.missileImage = MISSILE_IMAGE.copy()
 		Gun.__init__(self, game)
@@ -437,7 +478,7 @@ class MissileLauncher(Gun):
 					self.acceleration * s.missileSpeedBonus,
 					self.range * s.missileRangeBonus, self.explosionRadius,
 					image = MISSILE_IMAGE))
-							
+
 class Laser(Gun):
 	baseImage = loadImage("res/parts/leftlaser" + ext)
 	damage = 10
@@ -467,11 +508,11 @@ class Laser(Gun):
 					self.range * s.laserRangeBonus))
 	
 class FlakCannon(Cannon):
-	spread = 50
-	damage = 1
-	energyCost = 3
-	reloadTime = .08
-	burstSize = 5
+	spread = 18.75
+	damage = 2.
+	energyCost = .3
+	reloadTime = .04
+	burstSize = 8
 	reloadBurstTime = 1
 	range = 6
 	speed = 150
@@ -672,8 +713,8 @@ class Interconnect(Part):
 class Quarters(Part):
 	baseImage = loadImage("res/parts/quarters"+ext)
 	image = None
-	name = "Crew Quaters"
-	repair = .1
+	name = "Crew Quarters"
+	repair = .2
 	def __init__(self, game):
 		Part.__init__(self, game)
 		self.ports = [Port(Vec2d(-self.width/2,0), 0, self)]
@@ -684,11 +725,13 @@ class Quarters(Part):
 	def shortStats(self):
 		stats = (self.repair,)
 		statString = "\n%s E"
+		return Part.shortStats(self)+statString%(stats)
 	def update(self):
-		for part in self.ship.parts:
-			if self.ship.parts and part.hp < part.maxhp:
-				part.hp = min(part.maxhp, part.hp+self.repair*self.ship.efficiency/self.game.fps)
-				break
+		if self.ship:
+			for part in self.ship.parts:
+				if part.hp < part.maxhp:
+					part.hp = part.hp+self.repair*self.ship.efficiency/self.game.fps
+					break
 		Part.update(self)
 
 class Battery(Part):

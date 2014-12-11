@@ -49,12 +49,18 @@ engines will sometimes not fire in case of multyple forward.
 can a planet have negative gravity ?
 in viewsinview ship direction jitters sometimes, more so when it's got a lot of parts.
 the laser is broken, ;(
-
+* make binding keys actually works. they bind but don't do anything. and moste of the time. it bugs out the guns so they fire randomly or continously.
+* if you bind a key to a engine that isn't in the engine slot. it won't fire if you press that key.
 
 parts
 ======
 * Space mines <easy mode> <Robert ?>
 * A radar that will eventualy suport raytracing. <easy for initial radar> !!!
+* Make mine's de accelerate till they hit thier target spot. 
+* so you can get out of the way intime.
+* maybe implement a arming period. 
+* bigger detonation range.
+* 
 * a gravity well part.
 * a dockingport part <can be hardmode>
 * a disable beam part <easymode>
@@ -89,6 +95,10 @@ DONE
 <Duality>
 
 make menu work on fullscreen. only fighter is displayed right left corner. <fixed Duality>
+
+Commanline interface
+=====
+* a command line interface for manipulating the world so that testing is faster.
 
 crew
 =====

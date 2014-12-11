@@ -73,10 +73,9 @@ class AIScript(Script):
 				
 		if ship.guns:
 			shootingRange = 400 ** 2
-				#(ship.guns[0].bulletRange * ship.guns[0].speed) ** 2 / 2
+			(ship.guns[0].bulletRange * ship.guns[0].speed) ** 2 / 2
 		else: #without guns kamikaze. 
 			if self.turnTowards(ship, target):
-				return
 				ship.forward()
 			return
 		if distance < shootingRange:

@@ -168,7 +168,47 @@ class Missile(Bullet):
 	def takeDamage(self, damage, other):
 		self.impacted = other
 		Floater.takeDamage(self, damage, other)
+
+class Mine(Bullet):
+	life = 1e6
+	tangible = True
+	turning = 0
+	percision = 0
+	hp = 1
+	impacted = None
+	explode = False
+	
+	def __init__(self, game, launcher, damage, speed, acceleration, range,
+				explosionRadius, image=None):
+		Bullet.__init__(self, game, launcher, self.hp, speed, range, image)
+		self.damage = damage
+		self.turning = launcher.turning
+		self.percision = launcher.percision
+		self.acceleration = launcher.acceleration
+		self.explosionRadius = explosionRadius
+		self.time = launcher.explosionTime
+		self.force = launcher.force
+	def update(self):
+		self.dir = (self.dir+180)%360 - 180
 		
+		self.delta = self.delta / 1.05
+		
+		if self.life > self.range:
+			self.kill(self)
+		#Floater.update(self)
+	def detonate(self):
+		delta = self.delta.rotatedd(self.dir, -(self.acceleration*self.life))
+		explosion = Explosion(self.game, self.pos, delta, self.explosionRadius, self.time, self.damage, self.force)
+		self.game.curSystem.add(explosion)
+	def kill(self, other):
+		self.detonate()
+		if soundModule:
+			setVolume(missileSound.play(), self, self.game.player)
+		Floater.kill(self)
+	def takeDamage(self, damage, other):
+		self.impacted = other
+		Floater.takeDamage(self, damage, other)
+
 class Explosion(Floater):
 	life = 0
 
@@ -219,7 +259,7 @@ class Explosion(Floater):
 		
 	def takeDamage(self, damage, other):
 		pass
-	
+
 class Impact(Floater):
 	life = 10
 	tangible = False
@@ -233,8 +273,6 @@ class Impact(Floater):
 		self.maxRadius = int(radius)
 		self.radius = 0
 		self.time = time
-
-
 	def update(self):
 		self.life += 1. / self.game.fps
 		if self.life > self.time:
@@ -245,7 +283,6 @@ class Impact(Floater):
 		else:
 			self.radius = int(self.maxRadius * (self.time * 4 / 3 \
 						- self.life * 4 / 3) / self.time)
-		
 	def draw(self, surface, offset = (0,0)):
 		self.image.fill((0, 0, 0, 0))
 		for circle in range(min(self.radius / 4, 80)):
@@ -258,13 +295,10 @@ class Impact(Floater):
 					  int(sin(theta) * r + self.maxRadius))
 			pygame.draw.circle(self.image, color, poss, radius)
 		Floater.draw(self, surface, offset)
-
 	def kill(self,other):
 		pass
-		
 	def takeDamage(self, damage, other):
 		pass
-		
 
 	
 class LaserBeam(Floater):
@@ -320,7 +354,7 @@ class LaserBeam(Floater):
 		#check rect collide:
 		if floater != self and (skipRect or self.rect.colliderect(floater.rect)):
 			#check line-circle collide:
-			dist = linePointDist(self.start, self.stop, (floater.pos.x, floater.pos.y))
+			dist = linePointDist(self.start, self.stop, (floater.x, floater.y))
 			if dist	< floater.radius:
 				return dist
 				
@@ -332,8 +366,9 @@ class LaserBeam(Floater):
 				colliders.append(floater)
 		if colliders:
 			#recurse for parts in a ship:
-			for floater in colliders[:]:
+			for floater in colliders:
 				if isinstance(floater, Ship):
+					print "hit ship"
 					for part in floater.parts:
 						if self.intersect(part, True):
 							colliders.append(part)

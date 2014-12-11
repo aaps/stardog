@@ -47,24 +47,30 @@ def makeDestroyer(game, pos, delta, dir = 270, script = None, \
 				script = script, color = color)
 	gyro = Gyro(game)
 	generator = Generator(game)
+	lgun = LeftFlakCannon(game)
 	battery = Battery(game)
 	cockpit = Destroyer(game)
-	gun = RightLaser(game)
+	rgun = RightFlakCannon(game)
+	#gun = RightLaser(game)
 	engine = Engine(game)
 	shield = Shield(game)
-	for part in [gyro, generator, battery, cockpit, gun, engine, shield]:
+	for part in [gyro, generator, battery, cockpit, lgun,rgun, engine, shield]:
 		if rand() > .8:
 			addAdjective(part)
 			if rand() > .6:
 				addAdjective(part)
 		part.color = color
 	ship.addPart(cockpit)
-	cockpit.addPart(gun, 2)
+	
+	cockpit.addPart(rgun, 2)
+	cockpit.addPart(lgun, 1)
 	cockpit.addPart(battery, 3)
 	cockpit.addPart(generator, 4)
 	cockpit.addPart(gyro, 5)
 	cockpit.addPart(shield, 6)
+	
 	gyro.addPart(engine, 1)
+	
 	ship.reset()
 	ship.energy = ship.maxEnergy * .8
 	return ship	
@@ -87,7 +93,7 @@ def makeInterceptor(game, pos, delta, dir = 270, script = None, \
 	missile = MissileLauncher(game)
 	engine = Engine(game)
 	engine2 = Engine(game)
-	quarter = Quarters(game)
+	quarter = MineDropper(game)#Quarters(game)
 	for part in [gyro, generator, battery, cockpit, gun, gun2, engine, engine2,
 				missile, quarter]:
 		if rand() > .8:
@@ -191,6 +197,12 @@ class Ship(Floater):
 				color = (255, 255, 255)):
 		Floater.__init__(self, game, pos, delta, dir, 1)
 		self.inventory = []
+		"""
+		self.insertInInventory(Gyro, 3)
+		self.insertInInventory(MineDropper, 2)
+		self.insertInInventory(Generator, 4)
+		self.insertInInventory(Battery, 4)
+		"""
 		self.ports = [Port((0,0), 0, self)]
 		self.energy = 0
 		self.maxEnergy = 0
@@ -207,7 +219,9 @@ class Ship(Floater):
 		for function in self.functions:
 			self.functionDescriptions.append(function.__doc__)
 		self.baseBonuses = self.baseBonuses.copy()
-
+	def insertInInventory(self, part, amount=1):
+		for i in range(amount):
+			self.inventory.append(part(self.game))
 	def addPart(self, part, portIndex = 0):
 		"""ship.addPart(part) -> Sets the main part for this ship.
 		Only used for the base part (usually a cockpit), other parts are added to parts."""
