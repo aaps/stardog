@@ -183,12 +183,14 @@ class ShipPanel(Selecter):
 						+ port.offset[1] * cost 
 						- sin(dummy.dir) * (dummy.width - PART_OVERLAP) / 2)
 					#rotate takes a ccw angle.
-					
+					# print dir(self.view)
 					# dummy.image = self.view.panelDraw(dummy, dummy.offset)
+					# print part.game.view.images[part.image]
 
-					# dummy.image = colorShift(pygame.transform.rotate(
-					# 		dummy.baseImage, -dummy.dir), dummy.color).convert()
-					# dummy.image.set_colorkey((0,0,0))
+
+					dummy.image = colorShift(pygame.transform.rotate(
+							part.game.view.images[part.image], -part.dir), part.color).convert()
+					dummy.image.set_colorkey((0,0,0))
 					self.selectables.append(ShipPartPanel(dummy, self))
 					self.selectables[-1].port = port
 		#update ship stats display:
@@ -226,7 +228,13 @@ class PartDescriptionPanel(Panel):
 		self.image = pygame.Surface((self.rect.width, self.rect.height), 
 					hardwareFlag).convert()
 		self.image.set_colorkey((0,0,0))
-		bigImage = pygame.transform.scale2x(self.part.image)
+
+		if part.image in part.game.view.images:
+			bigImage = pygame.transform.scale2x(part.game.view.images[part.image])
+		else:
+			bigImage = pygame.transform.scale2x(part.game.view.images['default'])
+		
+		# bigImage = pygame.transform.scale2x(self.part.image)
 		bigImage.set_colorkey((255,255,255)) # idk why this one's white.
 		self.image.blit(bigImage, 
 				(self.rect.width / 2 - bigImage.get_width() / 2, 5))
@@ -266,13 +274,13 @@ class ShipPartPanel(DragableSelectable):
 	port = None
 	part = None
 	def __init__(self, part, parent):
-		# width = part.image.get_width() * 2
-		# height = part.image.get_height() * 2
+		width = part.width * 2
+		height = part.height * 2
 		rect = Rect(0,0,10,10)
-		# rect = Rect(
-		# 	part.offset[0] * 2 + parent.rect.width / 2 - width / 2, 
-		# 	part.offset[1] * 2 + parent.rect.height / 2 - height / 2, 
-		# 	width, height)
+		rect = Rect(
+			part.offset[0] * 2 + parent.rect.width / 2 - width / 2, 
+			part.offset[1] * 2 + parent.rect.height / 2 - height / 2, 
+			width, height)
 		DragableSelectable.__init__(self, rect, parent)
 		self.ship = parent.player
 		if not isinstance(part, Dummy):
@@ -281,8 +289,12 @@ class ShipPartPanel(DragableSelectable):
 			for port in part.parent.ports:
 				if port.part == part:
 					self.port = port
-		# self.image = pygame.transform.scale2x(part.image).convert()
-		# self.image.set_colorkey((0,0,0)) 
+		if part.image in part.game.view.images:
+			self.image = pygame.transform.scale2x(part.game.view.images[part.image]).convert()
+		else:
+			self.image = pygame.transform.scale2x(part.game.view.images['default']).convert()
+
+		self.image.set_colorkey((0,0,0)) 
 		
 	def select(self):
 		if self.part:
@@ -368,7 +380,12 @@ class PartTile(DragableSelectable):
 		The menu interface for a part. Display it like a button!"""
 		DragableSelectable.__init__(self, rect, parent)
 		self.part = part
-		bigImage = pygame.transform.scale2x(self.part.image)
+		# bigImage = pygame.transform.scale2x(self.part.image)
+		if part.image in part.game.view.images:
+			bigImage = pygame.transform.scale2x(part.game.view.images[part.image])
+		else:
+			bigImage = pygame.transform.scale2x(part.game.view.images['default'])
+
 		bigImage.set_colorkey((255,255,255)) # idk why this one's white.
 		self.hotSpot = (self.partImageOffset[0] + self.part.width, 
 						self.partImageOffset[1] + self.part.height)

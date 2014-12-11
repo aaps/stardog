@@ -52,7 +52,7 @@ class View:
 					self.mutatedimages[floater.image] = pygame.transform.rotate(self.images['default'], -floater.dir).convert()
 					self.images[floater.image] = self.images['default']
 				if isinstance(floater, Part):
-					floater.setwithheight(self.images[floater.image].get_width()-6, self.images[floater.image].get_height())
+					floater.setwithheight(self.images[floater.image].get_width(), self.images[floater.image].get_height())
 
 		
 

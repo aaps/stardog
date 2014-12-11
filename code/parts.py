@@ -23,7 +23,7 @@ class Port:
 
 class Part(Floater):
 	"""A part of a ship."""
-	height, width = 9, 3
+	height, width = 0, 0
 	parent = None
 	dir = 270
 	mass = 10
