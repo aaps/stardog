@@ -252,7 +252,7 @@ class Ship(Floater):
 		self.__dict__.update(Ship.baseBonuses)
 		#recalculate stats:
 		self.dps = 0
-		self.partRollCall(self.ports[0].part)
+		self.partRollCall(self.ports[0].part) 
 		minX, minY, maxX, maxY = 0, 0, 0, 0
 		#TODO: ? make the center of the ship the center of mass instead of the 
 		#center of the radii. 
@@ -308,7 +308,7 @@ class Ship(Floater):
 				if part.dir == 180:
 					self.reverseEngines.append(part)
 					self.reverseThrust += part.exspeed * part.exmass
-				if part.dir == 0:
+				if part.dir == 0 or part.dir == 360:
 					self.forwardEngines.append(part)
 					self.forwardThrust += part.exspeed * part.exmass
 				if part.dir == 90:

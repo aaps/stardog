@@ -67,7 +67,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 		"""updates this floater based on its variables"""
 		self.pos += self.delta / self.game.fps
 		self.rect.centerx = int(self.pos.x)
-		self.rect.centerx =	int(self.pos.y)
+		self.rect.centery =	int(self.pos.y)
 
 	def takeDamage(self, damage, other):
 		self.hp -= damage
@@ -354,9 +354,10 @@ class LaserBeam(Floater):
 		#check rect collide:
 		if floater != self and (skipRect or self.rect.colliderect(floater.rect)):
 			#check line-circle collide:
-			dist = linePointDist(self.start, self.stop, (floater.x, floater.y))
+			dist = linePointDist(self.start, self.stop, (floater.pos.x, floater.pos.y))
 			if dist	< floater.radius:
 				return dist
+
 				
 	def collision(self):
 		from spaceship import Ship
@@ -368,7 +369,6 @@ class LaserBeam(Floater):
 			#recurse for parts in a ship:
 			for floater in colliders:
 				if isinstance(floater, Ship):
-					print "hit ship"
 					for part in floater.parts:
 						if self.intersect(part, True):
 							colliders.append(part)
