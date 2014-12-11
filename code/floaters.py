@@ -170,7 +170,6 @@ class Missile(Bullet):
 		Floater.takeDamage(self, damage, other)
 
 class Mine(Bullet):
-	life = 1e6
 	tangible = True
 	turning = 0
 	percision = 0
@@ -188,18 +187,13 @@ class Mine(Bullet):
 		self.explosionRadius = explosionRadius
 		self.time = launcher.explosionTime
 		self.force = launcher.force
-	def update(self):
-		self.dir = (self.dir+180)%360 - 180
-		
-		self.delta = self.delta / 1.05
-		
-		if self.life > self.range:
-			self.kill(self)
-		Floater.update(self)
+		self.radius = 15
 	def detonate(self):
 		delta = self.delta.rotatedd(self.dir, -(self.acceleration*self.life))
 		explosion = Explosion(self.game, self.pos, delta, self.explosionRadius, self.time, self.damage, self.force)
 		self.game.curSystem.add(explosion)
+	def update(self):
+		pass
 	def kill(self, other):
 		self.detonate()
 		if soundModule:
