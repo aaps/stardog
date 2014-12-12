@@ -44,6 +44,7 @@ class Game:
 		self.camera = Camera(screen)
 		#messenger, with controls as first message:
 		self.messenger = Messenger(self)
+		self.miniinfo = MiniInfo(self)
 		
 		#key polling:
 		self.keys = []
@@ -145,12 +146,14 @@ class Game:
 					self.top_left = self.player.pos.x - self.width / 2, \
 							self.player.pos.y - self.height / 2
 					self.messenger.update()
+					self.miniinfo.update()
 							
 				#draw the layers:
 				self.screen.fill((0, 0, 0, 0))
 				self.curSystem.draw(self.screen, self.top_left)
 				self.hud.draw(self.screen, self.player)
 				self.messenger.draw(self.screen)
+				self.miniinfo.draw(self.screen)
 				
 				#paused:
 				if self.pause:

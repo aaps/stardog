@@ -256,7 +256,7 @@ class SolarSystem:
 		part.kill()
 		planet.inventory.append(part)
 		
-	def planet_planet_collision(a, b):
+	def planet_planet_collision(self, a, b):
 		if a.mass > b.mass:
 			b.kill()
 		else:
@@ -318,13 +318,13 @@ class SolarA1(SolarSystem):
 			self.add(self.planets[i])
 			d+= 1200
 
-		# for i in range(numStructures):
-		# 	angle = randint(0,360)
-		# 	distanceFromSun = randint(d, d + 2500)
-		# 	color = randint(0,100),randint(0,100),randint(0,100)
-		# 	radius = randint(100,200)
-		# 	self.structures.append(Structure( game, Vec2d(distanceFromSun * cos(angle), \
-		# 		distanceFromSun * sin(angle)), color, radius))
+		for i in range(numStructures):
+			angle = randint(0,360)
+			distanceFromSun = randint(d, d + 2500)
+			color = randint(0,100),randint(0,100),randint(0,100)
+			radius = randint(100,200)
+			self.structures.append(Structure( game, Vec2d(distanceFromSun * cos(angle), \
+				distanceFromSun * sin(angle)), color, radius))
 
 				
 		for planet in self.planets:
@@ -333,9 +333,9 @@ class SolarA1(SolarSystem):
 			planet.respawn = 30
 			self.add(planet)
 
-		# for structure in self.structures:
-		# 	print structure.radius
-		# 	self.add(structure)
+		for structure in self.structures:
+			print structure.radius
+			self.add(structure)
 
 		
 
@@ -343,22 +343,22 @@ class SolarA1(SolarSystem):
 			
 	# def update(self):
 	# 	SolarSystem.update(self)
-		#enemy respawning:
+	# 	enemy respawning:
 		
-		# #tiny fighters
-		# if self.fighterTimer <= 0 and len(self.tinyFighters) < self.maxFighters:
-		# 	numSpawn = randint(1,3)
-		# 	for i in range(numSpawn):
-		# 		angle = randint(0,360)
-		# 		distance = randint(1000, 4000)
-		# 		x = distance * cos(angle) + self.game.player.pos.x
-		# 		y = distance * sin(angle) + self.game.player.pos.y
-		# 		fighter = TinyFighter(self.game, Vec2d(x, y), self.game.player.delta)
-		# 		self.add(fighter)
-		# 		self.tinyFighters.append(fighter)					
-		# 		self.fighterTimer = 60 / self.fightersPerMinute
-		# else:
-		# 	self.fighterTimer -= 1. / self.game.fps
+	# 	#tiny fighters
+	# 	if self.fighterTimer <= 0 and len(self.tinyFighters) < self.maxFighters:
+	# 		numSpawn = randint(1,3)
+	# 		for i in range(numSpawn):
+	# 			angle = randint(0,360)
+	# 			distance = randint(1000, 4000)
+	# 			x = distance * cos(angle) + self.game.player.pos.x
+	# 			y = distance * sin(angle) + self.game.player.pos.y
+	# 			fighter = TinyFighter(self.game, Vec2d(x, y), self.game.player.delta)
+	# 			self.add(fighter)
+	# 			self.tinyFighters.append(fighter)					
+	# 			self.fighterTimer = 60 / self.fightersPerMinute
+	# 	else:
+	# 		self.fighterTimer -= 1. / self.game.fps
 		
 	
 

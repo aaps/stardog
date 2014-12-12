@@ -19,6 +19,7 @@ class Menu(TopLevelPanel):
 		self.parts = PartsPanel(subFrameRect, player)
 		self.keys = Keys(subFrameRect, player)
 		self.skills = Skills(subFrameRect, player)
+		self.info = Info(subFrameRect, player)
 		x = 2
 		y = 2
 		h = 24
@@ -32,6 +33,9 @@ class Menu(TopLevelPanel):
 		y += h + 2
 		self.panels.append(Button(Rect(x,y,w,h), \
 				lambda : self.setActiveMenu(self.skills), "Skills", BIG_FONT))
+		y += h + 2
+		self.panels.append(Button(Rect(x,y,w,h), \
+				lambda : self.setActiveMenu(self.info), "Info", BIG_FONT))
 		y += h + 2
 		y += h + 2
 		self.setActiveMenu(self.parts)
@@ -632,10 +636,45 @@ class Skills(Panel):
 	def skill(self, skillName):
 		pass
 
+class Info(Panel):
+	def __init__(self, rect, player):
+		Panel.__init__(self, rect)
+		self.addPanel(Label(Rect(self.rect.width / 2 - 60, 2, 0, 0),\
+			"Info", BIG_FONT))
+		rect = Rect(100,0,200,300)
+	
+		rect = Rect(rect)
+		rect.y += 150
+		self.addPanel(InfoTile(rect, self, player.game))
+		
+	
+	def skill(self, skillName):
+		pass
+
+
 class SkillTreeTab(Selectable):
 	pass
 class SkillTreeSelector(Selecter):
 	pass
+
+class InfoTile(Button):
+	def __init__(self, rect, parent, game):
+		self.parent = parent 
+		function = None
+		Button.__init__(self, rect, function, None)
+		rect1 = Rect(rect.x + 5, rect.y + 5, 200, rect.width - 10)
+		rect2 =  Rect(rect.x + 5, rect.y + 5, 100, 100)
+		
+
+		
+		self.addPanel(Label(rect1, str(game.curSystem.name), color = (200,200,255)))
+		for planet in game.curSystem.planets:
+			rect2.x += 0
+			rect2.y += 15
+
+			self.addPanel(TextBlock(rect2, planet.name, SMALL_FONT, (100,200,0)))
+	
+
 	
 class SkillTile(Button):
 	def __init__(self, rect, parent, skill, ship):

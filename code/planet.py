@@ -13,6 +13,7 @@ class Planet(Floater):
 	PLANET_DAMAGE = .0004
 	LANDING_SPEED = 200 #pixels per second. Under this, no damage.
 	g = 5000 # the gravitational constant.
+	name = "Unknown"
 	
 	def __init__(self, game, pos, radius = 100, mass = 10000, \
 					color = (100,200,50), image = None, race = None):
@@ -106,5 +107,12 @@ class Structure(Floater):
 			surface.blit(self.image, pos())
 		else:
 			pos = self.pos - offset
-			pygame.draw.circle(surface, self.color, pos.inttup(), int(self.radius))
-			# pygame.draw.rect(surface, self.color, Rect(self.pos.x,self.pos.y,self.radius,self.radius), 0)
+			# pos = pos.inttup()
+			pygame.draw.circle(surface, self.color, pos.inttup(), int(self.radius),1)
+			rect = Rect(pos.x,pos.y,self.radius,self.radius)
+			# print rect
+			# pygame.draw.rect(surface, self.color, rect)
+			pygame.draw.rect(surface, self.color, rect)
+
+	def takeDamage(self, damage, other):
+		pass

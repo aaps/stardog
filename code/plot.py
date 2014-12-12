@@ -14,5 +14,7 @@ def newGameTriggers(game):
 		Trigger(game, seeShipCondition(game), 
 			messageAction(game, 
 			"You: Look!  Other ships!  I wonder if they'll be my friend!")),
+		Trigger(game, solarSystemCondition(game,'Qbert'),
+			messageAction(game, "I have arived at the " + game.curSystem.name + " system at last, how ?, i dont know !") )
 		]
 	return triggers

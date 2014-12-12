@@ -438,13 +438,16 @@ class MineDropper(Gun):
 	
 	def __init__(self, game):
 		Gun.__init__(self, game)
+
 	def stats(self):
 		stats = (self.speed, self.acceleration)
 		statString = ("\n Mine Speed: %s m/s\nMine Accel: %s m/s/s")
 		return Gun.stats(self)+statString%stats
+
 	def attach(self):
 		self.mineImage = colorShift(self.mineImage, self.ship.color)
 		Gun.attach(self)
+
 	def shoot(self):
 		if self.acted: return
 		self.acted = True
@@ -579,6 +582,45 @@ class FlakCannon(Cannon):
 			self.shootDir = baseDir # restore shootDir.
 			if self.burst <= 0:
 				self.reloadBurst = self.reloadBurstTime
+
+class Radar(Part):
+	baseImage = loadImage("res/parts/radar" + ext)
+	image = None
+	exmass = 10
+	energyCost = 1.
+	radarrange = 500
+	radarspeed = 5
+	enabled = False
+	detected = []
+
+	def __init__(self, game):
+		self.ports = []
+		self.radartime = 0
+		self.game = game
+		self.detected = []
+		Part.__init__(self, game)
+
+	def stats(self):
+		return "nothing yet"
+
+	def toggle(self):
+		if self.enabled:
+			self.enabled = False
+		else:
+			self.enabled = True
+
+	def update(self):
+		if self.enabled:
+			self.radartime -= 1. / self.game.fps
+			if self.radartime <= 0 :
+				detected = []
+				disk = RadarDisk(self.game, self.ship.pos, self.ship.delta, self.dir, self.radarrange)
+				self.time = self.radarspeed
+				for floater in self.game.curSystem.floaters:
+					if collisionTest(disk, floater) and floater != self.ship:
+						print floater
+						detected.append(floater)
+
 
 class Engine(Part):
 	baseImage = loadImage("res/parts/engine" + ext)

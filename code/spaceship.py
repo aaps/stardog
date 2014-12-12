@@ -131,6 +131,7 @@ def playerShip(game, pos, delta, dir = 270, script = None, \
 	script.bind(K_LEFT, ship.turnLeft)
 	script.bind(K_RCTRL, ship.shoot)
 	script.bind(K_s, ship.reverse)
+	script.bind(K_r, ship.toggleRadar)
 	script.bind(K_w, ship.forward)
 	script.bind(K_e, ship.left)
 	script.bind(K_q, ship.right)
@@ -138,6 +139,7 @@ def playerShip(game, pos, delta, dir = 270, script = None, \
 	script.bind(K_a, ship.turnLeft)
 	script.bind(K_LCTRL, ship.shoot)
 	script.bind(K_SPACE, ship.launchMissiles)
+	script.bind(K_m, ship.launchMines)
 	
 	return ship
 
@@ -165,6 +167,7 @@ class Ship(Floater):
 	gyros = []
 	number = 0
 	numParts = 0
+	curtarget = None
 	name = 'Ship'
 	skills = []
 	level = 1
@@ -211,7 +214,7 @@ class Ship(Floater):
 		self.baseImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
 		self.baseImage.set_colorkey((0,0,0))
 		self.functions = [self.forward, self.reverse, self.left, self.right, \
-				self.turnLeft, self.turnRight, self.shoot, self.launchMissiles]
+				self.turnLeft, self.turnRight, self.shoot, self.launchMissiles, self.launchMines,  self.toggleRadar]
 		self.functionDescriptions = []
 		for function in self.functions:
 			self.functionDescriptions.append(function.__doc__)
@@ -244,6 +247,8 @@ class Ship(Floater):
 		self.rightEngines = []
 		self.guns = []
 		self.missiles = []
+		self.radars = []
+		self.mines = []
 		self.gyros = []
 		self.partLimit = Ship.partLimit
 		self.__dict__.update(Ship.baseBonuses)
@@ -317,9 +322,13 @@ class Ship(Floater):
 			if isinstance(part, Gyro):
 				self.gyros.append(part)
 				self.torque += part.torque
+			if isinstance(part, Radar):
+				self.radars.append(part)
 			if isinstance(part, Gun):
 				if isinstance(part, MissileLauncher):
 					self.missiles.append(part)
+				if isinstance(part, MineDropper):
+					self.mines.append(part)
 				else:
 					self.guns.append(part)
 				self.dps += part.getDPS()
@@ -356,8 +365,14 @@ class Ship(Floater):
 		for gun in self.guns:
 			gun.shoot()
 	def launchMissiles(self):
-		for missles in self.missiles:
-			missles.shoot()
+		for missle in self.missiles:
+			missle.shoot()
+	def launchMines(self):
+		for mine in self.mines:
+			mine.shoot()
+	def toggleRadar(self):
+		for radar in self.radars:
+			radar.toggle()
 	
 	
 	def update(self):

@@ -79,7 +79,35 @@ class TypeButton(Button):
 		
 	def choose(self):
 		self.parent.chooseType(self.type)
-	
+
+class MiniInfo:
+	color = (100, 100, 255, 250)
+	font = FONT
+	maxChars = 50 #line width
+	bottomleft = 0,0
+
+	def __init__(self, game, font = FONT):
+		self.game = game
+		self.bottomleft = 2,  game.height - int(game.height/ 4 ) 
+		self.targ = None
+		self.image = pygame.Surface((int(game.width / 8),int(game.height/ 4 )))
+		self.image.set_alpha(200)
+
+	def update(self):
+		self.targ = self.game.player.curtarget
+
+		
+	def draw(self, surface):
+		self.image.fill((0, 0, 80))
+		if self.targ:
+			# self.image.blit(userplaatje, (0,0))
+			text = self.font.render(self.targ.name, True, color)
+			self.image.blit(text, (0,0))
+		surface.blit(self.image, self.bottomleft)
+		
+
+
+
 class Messenger:
 	queue = deque() #not capitalized in stand lib
 	speed = 40 #characters per second
@@ -154,7 +182,7 @@ def planetCondition(game, planet):
 	return lambda: game.player.landed == planet
 	
 def solarSystemCondition(game, solarSystem):
-	return lambda: game.curSystem == solarSystem
+	return lambda: game.curSystem.name == solarSystem
 
 def seeShipCondition(game):
 	from spaceship import Ship

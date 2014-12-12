@@ -54,7 +54,6 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 		self.dir = dir
 		self.pos = pos
 		self.delta = delta
-		self.collisions = []
 
 		self.radius = radius
 		if (not image):
@@ -457,5 +456,25 @@ class LaserBeam(Floater):
 		pass
 	
 		
-		
-		
+class RadarDisk(Floater):
+	hp = 5
+	baseImage = None
+	color = (0, 0, 0)
+	mass = 0
+	tangible = False
+
+	def __init__(self, game, pos, delta, dir = 0, radius = 10, image = None):
+		self.game = game
+		self.dir = dir
+		self.pos = pos
+		self.delta = delta
+		self.radius = radius
+
+	def draw(self):
+		pass
+
+	def update(self):
+		self.life -= 1. / self.game.fps
+		Floater.update(self)
+		if self.life < 0:
+			self.kill()
