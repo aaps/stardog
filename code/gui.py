@@ -80,22 +80,24 @@ class HUD:
 			self.image.blit(self.radarImage, \
 				(center[0] - radius, center[1] - radius))
 		#draw floating part dots:
-		for floater in self.game.curSystem.floaters:
-			result = floater.pos - thisShip.pos
-			dotPos = int(center[0] + limit(-radius,	result.x / scale, radius)), \
-					int(center[1] + limit(-radius, result.y / scale, radius))
-			if isinstance(floater, Ship):
-				pygame.draw.circle(self.image, (250, 250, 0), dotPos, 2)
-				color = floater.color
-				r = 1
-				pygame.draw.rect(self.image, color, (dotPos[0]-1,dotPos[1]-1,2,2))
-			elif isinstance(floater, Planet):
-				r = int(floater.radius / radarScale + 2)
-				color = floater.color
-				pygame.draw.circle(self.image, color, dotPos, r)
-			else:
-				color = (150,40,0)
-				pygame.draw.rect(self.image, color, (dotPos[0],dotPos[1],2,2))
+		
+		for radar in thisShip.radars:
+			for floater in radar.detected:
+				result = floater.pos - thisShip.pos
+				dotPos = int(center[0] + limit(-radius,	result.x / scale, radius)), \
+						int(center[1] + limit(-radius, result.y / scale, radius))
+				if isinstance(floater, Ship):
+					pygame.draw.circle(self.image, (250, 250, 0), dotPos, 2)
+					color = floater.color
+					r = 1
+					pygame.draw.rect(self.image, color, (dotPos[0]-1,dotPos[1]-1,2,2))
+				elif isinstance(floater, Planet):
+					r = int(floater.radius / radarScale + 2)
+					color = floater.color
+					pygame.draw.circle(self.image, color, dotPos, r)
+				else:
+					color = (150,40,0)
+					pygame.draw.rect(self.image, color, (dotPos[0],dotPos[1],2,2))
 
 
 numStars = 300

@@ -125,21 +125,22 @@ def playerShip(game, pos, delta, dir = 270, script = None, \
 		ship = makeFighter(game, pos, delta, dir, 
 				script, color, player=True)
 	#default controls:
-	script.bind(K_DOWN, ship.reverse)
-	script.bind(K_UP, ship.forward)
-	script.bind(K_RIGHT, ship.turnRight)
-	script.bind(K_LEFT, ship.turnLeft)
-	script.bind(K_RCTRL, ship.shoot)
-	script.bind(K_s, ship.reverse)
-	script.bind(K_r, ship.toggleRadar)
-	script.bind(K_w, ship.forward)
-	script.bind(K_e, ship.left)
-	script.bind(K_q, ship.right)
-	script.bind(K_d, ship.turnRight)
-	script.bind(K_a, ship.turnLeft)
-	script.bind(K_LCTRL, ship.shoot)
-	script.bind(K_SPACE, ship.launchMissiles)
-	script.bind(K_m, ship.launchMines)
+	# key, function, toggle or not
+	script.bind(K_DOWN, ship.reverse,False)
+	script.bind(K_UP, ship.forward,False)
+	script.bind(K_RIGHT, ship.turnRight,False)
+	script.bind(K_LEFT, ship.turnLeft,False)
+	script.bind(K_RCTRL, ship.shoot,False)
+	script.bind(K_s, ship.reverse,False)
+	script.bind(K_r, ship.toggleRadar,True)
+	script.bind(K_w, ship.forward,False)
+	script.bind(K_e, ship.left,False)
+	script.bind(K_q, ship.right,False)
+	script.bind(K_d, ship.turnRight,False)
+	script.bind(K_a, ship.turnLeft,False)
+	script.bind(K_LCTRL, ship.shoot,False)
+	script.bind(K_SPACE, ship.launchMissiles,False)
+	script.bind(K_m, ship.launchMines,False)
 	
 	return ship
 

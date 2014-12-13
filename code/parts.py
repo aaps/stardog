@@ -587,9 +587,10 @@ class Radar(Part):
 	baseImage = loadImage("res/parts/radar" + ext)
 	image = None
 	exmass = 10
-	energyCost = 1.
-	radarrange = 500
-	radarspeed = 5
+	energyCost = 0.05
+	radarrange = 18000
+	radarspeed = 1
+	radartime = 0
 	enabled = False
 	detected = []
 
@@ -604,22 +605,29 @@ class Radar(Part):
 		return "nothing yet"
 
 	def toggle(self):
+		# toggable parts are now possible see spaceships.py 128
 		if self.enabled:
 			self.enabled = False
 		else:
 			self.enabled = True
 
+
 	def update(self):
 		if self.enabled:
 			self.radartime -= 1. / self.game.fps
-			if self.radartime <= 0 :
-				detected = []
+			if self.radartime <= 0:
+
+				self.detected = []
 				disk = RadarDisk(self.game, self.ship.pos, self.ship.delta, self.dir, self.radarrange)
-				self.time = self.radarspeed
+				self.radartime = self.radarspeed
 				for floater in self.game.curSystem.floaters:
 					if collisionTest(disk, floater) and floater != self.ship:
-						print floater
-						detected.append(floater)
+						self.detected.append(floater)
+
+			self.ship.energy -= self.energyCost / self.game.fps
+		else:
+			self.detected = []
+		# Part.update(self)
 
 
 class Engine(Part):
@@ -855,11 +863,13 @@ class Shield(Part):
 				self.ship.energy -= self.energyCost / self.game.fps
 		Part.update(self)
 
-class Cockpit(Battery, Generator, Gyro):
+class Cockpit(Radar, Battery, Generator, Gyro):
 	baseImage = loadImage("res/parts/cockpit.gif")
 	image = None
 	energyCost = .2 #gyro
 	torque = 35000 #gyro
+	energyCost = 0.01 #radar
+	radarrange = 5000 #radar
 	capacity = 5 #battery
 	rate = .5 #generator
 	name = "Cockpit"
@@ -877,6 +887,12 @@ class Cockpit(Battery, Generator, Gyro):
 					"\nCapacity: %s energy" +
 					"\nEnergy Produced: %s/second")
 		return Part.stats(self) + statString % stats
+
+	def update(self):
+		Generator.update(self)
+		Battery.update(self)
+		Gyro.update(self)
+		Radar.update(self)
 		
 class Interceptor(Cockpit):#move to config
 	mass = 20

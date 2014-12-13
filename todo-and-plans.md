@@ -19,7 +19,7 @@ side dish
 ==========
 * make planet inherit from a Gravless class so stargate will not be effected by graf and 
 
-* not be a planet. !!! also good for space ports, etc.
+* not be a planet. !!! also good for space ports, etc. <Aaps, first refactor the collision detection part>
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
 * make the space structure class that will inherit from gravless as well with a custom 
 http://www.pygame.org/docs/ref/draw.html#pygame.draw.polygon shape
@@ -56,10 +56,12 @@ in viewsinview ship direction jitters sometimes, more so when it's got a lot of 
 the laser is broken, ;( <It is fixed, Aat>
 * make binding keys actually works. they bind but don't do anything. and moste of the time. it bugs out the guns so they fire randomly or continously.
 * if you bind a key to a engine that isn't in the engine slot. it won't fire if you press that key. <??? hu ???>
+* the engines dont animate animate after radar addition, meh
+* radar enabled stateds are seperate, should be synced ? 
 
 parts
 ======
-* Space mines <easy mode> <Robert ?>
+
 * A radar that will eventualy suport raytracing. <easy for initial radar> !!!
 * Make mine's de accelerate till they hit thier target spot. 
 * so you can get out of the way intime.
@@ -97,10 +99,14 @@ DONE
 * fixing a bug that made memmory leak during the drawing of the star map (duality)
 * the solarsystm.py has lots of basic functionality in a specific class can be put in parent class. this leaves space for starsystem specific stuff such as names and planet locations. !!! (Aat)
 * splitout views <nasty stuff> <as good as done, for now i want no part of it Aat>
+* we have parts not that can be toggled on or off, like the radar, no none asked for it still did it <Aat>
+* Space mines <easy mode> <Duality>
+make menu work on fullscreen. only fighter is displayed right left corner. <fixed Duality>
+* and parts for crew quaters.					<part added>
 
 <Duality>
 
-make menu work on fullscreen. only fighter is displayed right left corner. <fixed Duality>
+
 
 Commanline interface
 =====
@@ -109,7 +115,7 @@ Commanline interface
 crew
 =====
 * add crew?
-* and parts for crew quaters.					<part added>
+
 * more crew more efficient ship.
 * maybe if crew then heal x per x seconds.
 

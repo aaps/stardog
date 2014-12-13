@@ -108,18 +108,21 @@ class Game:
 						self.mouse[event.button] = 0
 						self.mouse[0] = event.pos
 					elif event.type == pygame.MOUSEMOTION:
-						self.mouse[0] = event.pos
+						self.mouse[0] = event.pos					
 					elif event.type == pygame.KEYDOWN:
 						self.keys[event.key % 322] = 1
 					elif event.type == pygame.KEYUP:
 						self.keys[event.key % 322] = 0
+
+
+
 					if self.pause:
 						self.menu.handleEvent(event)
-						
+
 				#game-level key input:
 				if self.keys[K_DELETE % 322]:
 					self.keys[K_DELETE % 322] = False
-					self.player.kill(None) #suicide
+					self.player.kill() #suicide
 				if self.keys[K_RETURN % 322]:
 					self.pause = not self.pause #pause/menu
 					self.keys[K_RETURN % 322] = False
