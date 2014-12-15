@@ -280,10 +280,8 @@ class SolarA1(SolarSystem):
 			self.add(planet)
 
 		for structure in self.structures:
-			print structure.radius
 			self.add(structure)
-				# def __init__(self, game, pos, radius = 100, mass = 10000, \
-				# 	color = (100,200,50), image = None, race = None):
+
 		self.add(Portal(game, Vec2d(20000,20000), 200) )
 
 
@@ -335,7 +333,6 @@ class SolarB2(SolarSystem):
 			self.add(planet)
 
 		for structure in self.structures:
-			print structure.radius
 			self.add(structure)
 
 		self.fighterTimer = 60

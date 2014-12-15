@@ -65,6 +65,7 @@ class PartsPanel(Panel):
 		remove = Button(Rect(195, 300, 75, 16), self.remove, " REMOVE")
 		add = Button(Rect(335, 520, 75, 16), self.attach, " ATTACH")
 		paint = Button(Rect(415, 520, 75, 16), self.paint, " PAINT")
+		eject = Button(Rect(495, 520, 75, 16), self.eject, " EJECT")
 		self.inventoryPanel = InventoryPanel(
 				Rect(500, 30, 130, 570), 
 				self, self.player.inventory)
@@ -82,6 +83,7 @@ class PartsPanel(Panel):
 		self.addPanel(remove)
 		self.addPanel(add)
 		self.addPanel(paint)
+		self.addPanel(eject)
 	
 	def update(self):
 		Panel.update(self)
@@ -151,6 +153,17 @@ class PartsPanel(Panel):
 						-part.dir), part.color).convert()
 			part.image.set_colorkey((255,255,255))
 			self.inventoryPanel.reset()
+
+	def eject(self):
+		
+		if self.inventoryPanel.selected:
+			part = self.inventoryPanel.selected.part
+			
+			part.scatter(self.player)
+			self.player.reset()
+			self.player.inventory.remove(part)
+			self.inventoryPanel.reset()
+
 					
 class ShipPanel(Selecter):
 	selected = None

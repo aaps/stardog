@@ -9,8 +9,8 @@ import stardog
 from vec2d import Vec2d
 
 PART_OVERLAP = 0
-DETACH_SPACE = 3
-DETACH_SPEED = 8
+DETACH_SPACE = 100
+DETACH_SPEED = 10
 
 class Port:
 	def __init__(self, offset, dir, parent):
@@ -27,6 +27,7 @@ class Part(Floater):
 	baseImage = loadImage("res/default.gif", (255,255,255))
 	image = None
 	height, width = 9, 3
+	pickuptimeout = 0
 	parent = None
 	dir = 270
 	mass = 10
@@ -172,6 +173,7 @@ class Part(Floater):
 	def scatter(self, ship):
 		"""Like detach, but for parts that are in an inventory when a 
 		ship is destroyed."""
+		self.pickuptimeout = 5
 		angle = randint(0,360)
 		offset = Vec2d(cos(angle) * DETACH_SPACE, sin(angle) * DETACH_SPACE)
 		#set physics to drift away from ship (not collide):
@@ -180,6 +182,7 @@ class Part(Floater):
 		self.pos = ship.pos + self.offset
 		self.delta.x = ship.delta.x + rand() * sign(self.offset[0]) * DETACH_SPEED
 		self.delta.y = ship.delta.y + rand() * sign(self.offset[1]) * DETACH_SPEED
+		self.ship = None
 		self.game.curSystem.add(self)
 		
 	def unequip(self, toInventory = True):
@@ -221,6 +224,9 @@ class Part(Floater):
 		for port in self.ports:
 			if port.part:
 				port.part.update()
+
+		if self.pickuptimeout > 0:
+			self.pickuptimeout -= 1. / self.game.fps
 
 	def draw(self, surface, offset = None):
 		"""draws this part onto the surface."""

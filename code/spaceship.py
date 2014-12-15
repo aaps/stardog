@@ -453,7 +453,6 @@ class Ship(Floater):
 		Floater.kill(self)
 
 	def planetCollision(self, planet):
-		print "planet collide"
 		angle = (planet.pos - self.pos).get_angle()
 		dx, dy = rotate(self.delta.x, self.delta.y, angle)
 		speed = sqrt(dy ** 2 + dx ** 2)
@@ -487,10 +486,11 @@ class Ship(Floater):
 			self.delta.x, self.delta.y = planet.delta.x, planet.delta.y
 
 	def freepartCollision(self, part):
-		part.kill()
-		self.inventory.append(part)
-		if self.game.player == self:
-			self.game.menu.parts.inventoryPanel.reset() #TODO: make not suck
+		if part.pickuptimeout <= 0:
+			part.kill()
+			self.inventory.append(part)
+			if self.game.player == self:
+				self.game.menu.parts.inventoryPanel.reset() #TODO: make not suck
 
 
 class Player(Ship):
