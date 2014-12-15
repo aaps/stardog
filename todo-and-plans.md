@@ -8,27 +8,28 @@ main dish
 
 * multyplayer <hard mode, dependant on code structure, vectors and views split, also a better ui>
 * a particle engine for explotions, engine stuff. <medium stuff, after view splitout>
-* better ui (nasty mode ?, after view splitout)
+
 http://pygame.org/project-planes-2392-4051.html get version 0.6
 * A save function ? <a sqllite file for now with sqlalchemy>
 * replace the part - port system with a part - grid system
 * sounds also need to be in views
-* put the collide logic in the things that collide, planets, floaters, parts etc.
+* put the collide logic in the things that collide, planets, floaters, parts etc. <1/4 done>
+* it needs an economy not yust parts for static $$, < harder >
 
 side dish
 ==========
 * make planet inherit from a Gravless class so stargate will not be effected by graf and 
 
-* not be a planet. !!! also good for space ports, etc. <Aaps, first refactor the collision detection part>
+
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
-* make the space structure class that will inherit from gravless as well with a custom 
-http://www.pygame.org/docs/ref/draw.html#pygame.draw.polygon shape
-* posibility to eject parts <easy mode>
+* more collition handeling refactor !!!
+* posibility to eject parts <easy mode> !!!
+* remember planets that where on radar in list
 * some way to target ships, parts and planets <easy mode>
 * zoom in out option for radar <medium mode ?>
 * weapon heat generation <easy mode>
-* some early implementation of space $ <easy mode>
-* a name to give yourself <as a precursor of network play and to get familiair with gui, after view spitout and vectors> <gui is not nice, but overhaul costs to much time, lets keep it for now>
+
+* a name to give yourself <as a precursor of network play and to get familiair with gui, after view spitout and vectors> <gui is not nice, but overhaul costs to much time, lets keep it for now> !!!
 
 * Display solar system name somewhere
 * other sound for bullet impact on shield and plating and on planet
@@ -103,6 +104,8 @@ DONE
 * Space mines <easy mode> <Duality>
 make menu work on fullscreen. only fighter is displayed right left corner. <fixed Duality>
 * and parts for crew quaters.					<part added>
+* make the space structure class that will inherit from gravless as well with a custom  <done in other way>
+* not be a planet. !!! also good for space ports, etc. <Aaps, first refactor the collision detection part>
 
 <Duality>
 
