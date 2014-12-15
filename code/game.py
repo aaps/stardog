@@ -84,6 +84,7 @@ class Game:
 			self.player = playerShip(self, Vec2d(0,0),Vec2d(0,0), script = self.playerScript,
 							color = self.playerColor, type = self.playerType)
 			self.curSystem = SolarA1(self, self.player)
+			self.nextsystem = SolarB2(self, self.player)
 			self.systems = [self.curSystem]
 			self.curSystem.add(self.player)
 			

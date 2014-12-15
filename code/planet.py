@@ -33,6 +33,7 @@ class Planet(Floater):
 	def update(self):
 		for other in self.game.curSystem.floaters.sprites():
 			if  not isinstance(other, Planet) \
+			and not isinstance(other, Structure) \
 			and not collisionTest(self, other) \
 			and abs(self.pos.get_distance(other.pos)) < self.maxRadius:
 				#accelerate that floater towards this planet:
@@ -104,6 +105,53 @@ class Structure(Floater):
 			rect = Rect(pos.x-self.radius*0.875,pos.y-self.radius*0.875,self.radius*1.75,self.radius*1.75)
 			# pygame.draw.rect(surface, self.color, rect)
 			pygame.draw.rect(surface, self.color, rect)
+
+	def takeDamage(self, damage, other):
+		pass
+
+class Portal(Planet):
+	maxRadius = 1000000 # no gravity felt past this (approximation).
+	tangible = False
+	g = 5000 # the gravitational constant.
+	name = "Portal Unknown"
+	rect = None
+	image = None
+	
+	def __init__(self, game, pos, radius = 100, mass = 10000, \
+					color = (100,200,50), image = None, race = None):
+		image = pygame.Surface((radius * 4, radius * 4), flags = hardwareFlag).convert()
+		image.set_colorkey((0,0,0))
+		Floater.__init__(self, game, pos, Vec2d(0,0), radius = radius, image = image)
+		self.mass = mass #determines gravity.
+		self.color = color
+		self.race = None #race that owns this planet
+		if image == None:
+			self.image = None
+		self.inventory = []
+		
+
+
+
+	
+	def update(self):
+		for other in self.game.curSystem.floaters.sprites():
+			if  not isinstance(other, Planet) \
+			and not isinstance(other, Structure) \
+			and not collisionTest(self, other) \
+			and abs(self.pos.get_distance(other.pos)) < self.radius * 1.2:
+				#accelerate that floater towards this planet:
+				accel = self.g * (self.mass) / dist2(self, other)
+				angle = (self.pos - other.pos).get_angle()
+				other.delta.x += cos(angle) * accel / self.game.fps
+				other.delta.y += sin(angle) * accel / self.game.fps
+	
+	def draw(self, surface, offset = Vec2d(0,0)):
+			self.image.fill((0, 0, 0, 0))
+
+			pos = self.pos - offset
+			pygame.draw.circle(self.image, self.color, pos.inttup(), int(self.radius))
+			pygame.draw.circle(self.image, (0,0,0,0), pos.inttup(), int(self.radius)-30)
+			Floater.draw(self, surface, offset)
 
 	def takeDamage(self, damage, other):
 		pass
