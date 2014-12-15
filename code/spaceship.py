@@ -452,6 +452,47 @@ class Ship(Floater):
 			part.scatter(self)
 		Floater.kill(self)
 
+	def planetCollision(self, planet):
+		print "planet collide"
+		angle = (planet.pos - self.pos).get_angle()
+		dx, dy = rotate(self.delta.x, self.delta.y, angle)
+		speed = sqrt(dy ** 2 + dx ** 2)
+		if speed > planet.LANDING_SPEED:
+			if planet.damage.has_key(self):
+				damage = planet.damage[self]
+			else:
+				if soundModule:
+					setVolume(hitSound.play(), planet, planet.game.player)
+				#set damage based on incoming speed and mass.
+				damage = speed * self.mass * planet.PLANET_DAMAGE
+			for part in self.parts:
+				if collisionTest(planet, part):
+					temp = part.hp
+					part.takeDamage(damage, planet)
+					damage -= temp
+					if damage <= 0:
+						r = self.radius + planet.radius
+						self.delta = self.delta * (self.pos - planet.pos) + self.delta * -(self.pos - planet.pos)
+						if planet.damage.has_key(self):
+							del planet.damage[self]
+						return
+			if damage > 0:
+				planet.damage[self] = damage
+		else:
+			#landing:
+			if self == planet.game.player and not self.landed:
+				planet.game.pause = True
+				self.landed = planet
+				self.game.menu.parts.reset()
+			self.delta.x, self.delta.y = planet.delta.x, planet.delta.y
+
+	def freepartCollision(self, part):
+		part.kill()
+		self.inventory.append(part)
+		if self.game.player == self:
+			self.game.menu.parts.inventoryPanel.reset() #TODO: make not suck
+
+
 class Player(Ship):
 	xp = 0
 	developmentPoints = 12

@@ -13,7 +13,7 @@ class Planet(Floater):
 	PLANET_DAMAGE = .0004
 	LANDING_SPEED = 200 #pixels per second. Under this, no damage.
 	g = 5000 # the gravitational constant.
-	name = "Unknown"
+	name = "Planet Unknown"
 	
 	def __init__(self, game, pos, radius = 100, mass = 10000, \
 					color = (100,200,50), image = None, race = None):
@@ -49,30 +49,21 @@ class Planet(Floater):
 		else:
 			pos = self.pos - offset
 			pygame.draw.circle(surface, self.color, pos.inttup(), int(self.radius))
-	
+
 	def takeDamage(self, damage, other):
 		pass
 
-	def collide(self):
-		pass
+	def freepartCollision(self, part):
+		part.kill()
+		self.inventory.append(part)
 
-	def collidePart(self):
-		pass
+	def planetCollision(self, planet):
+		if self.mass > planet.mass:
+			planet.kill()
+		else:
+			self.kill()
 
-	def collidePlanet(self):
-		pass
 
-
-	# ship - ship
-	# ship - freepart
-	# ship - planet
-	# planet - freepart
-	# bullet - freepart
-	# bullet - planet
-	# ship - bullet
-	# explotion - floater
-	# planet - planet
-	# floater - floater
 	
 class Sun(Planet):
 	PLANET_DAMAGE = 300
@@ -84,7 +75,8 @@ class Sun(Planet):
 
 class Structure(Floater):
 	LANDING_SPEED = 200 #pixels per second. Under this, no damage.
-	
+	PLANET_DAMAGE = 300
+	name = "Structure Unknown"
 	def __init__(self, game, pos, color = (100,200,50), radius = 100, image = None):
 		Floater.__init__(self, game, pos, Vec2d(0,0), 0, image=image)
 		self.color = (0,0,255)
@@ -108,9 +100,8 @@ class Structure(Floater):
 		else:
 			pos = self.pos - offset
 			# pos = pos.inttup()
-			pygame.draw.circle(surface, self.color, pos.inttup(), int(self.radius),1)
-			rect = Rect(pos.x,pos.y,self.radius,self.radius)
-			# print rect
+			# pygame.draw.circle(surface, self.color, pos.inttup(), int(self.radius),1)
+			rect = Rect(pos.x-self.radius*0.875,pos.y-self.radius*0.875,self.radius*1.75,self.radius*1.75)
 			# pygame.draw.rect(surface, self.color, rect)
 			pygame.draw.rect(surface, self.color, rect)
 

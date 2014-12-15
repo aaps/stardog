@@ -288,29 +288,6 @@ class Part(Floater):
 			self.game.curSystem.add(Explosion(self.game, self.pos, \
 						self.delta, radius = self.radius * 4,\
 						time = self.maxhp / 5))
-	def collide(self):
-		pass
-
-	def collideShip(self):
-		pass
-
-	def collidePlanet(self):
-		pass
-
-	def collideBullet(self):
-		pass
-
-
-	# ship - ship
-	# ship - freepart
-	# ship - planet
-	# planet - freepart
-	# bullet - freepart
-	# bullet - planet
-	# ship - bullet
-	# explotion - floater
-	# planet - planet
-	# floater - floater
 
 class Dummy(Part):
 	"""A dummy part used by the parts menu."""

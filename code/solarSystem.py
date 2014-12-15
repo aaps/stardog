@@ -122,6 +122,10 @@ class SolarSystem:
 		self.ships.empty()
 		self.floaters.empty()
 
+
+# refactor this and put all functionality in corresponding classes, be carefull can quickly spinn into mess.
+# piecetime refactor 
+# perhaps this method can be brokenup in a collision method for planet, ship and part
 	def collide(self, a, b):
 		"""test and act on spatial collision of Floaters a and b"""
 		#Because this needs to consider the RTTI of two objects,
@@ -138,15 +142,15 @@ class SolarSystem:
 					return False
 				# planet/ship
 				if isinstance(b, Ship):
-					self.planet_ship_collision(a, b)
+					b.planetCollision(a)
 					return True
 				#planet/part
 				if isinstance(b, Part) and b.parent == None:
-					self.planet_freePart_collision(a, b)
+					a.freepartCollision( b)
 					return True
 				#planet/planet
-				if isinstance(b, Planet):
-					self.planet_planet_collision(a,b)
+				if isinstance(b, Planet) or isinstance(b, Structure) :
+					a.planetCollision(b)
 					return True
 					
 			if isinstance(b, Explosion): a,b = b,a
@@ -158,7 +162,7 @@ class SolarSystem:
 			if isinstance(a, Ship) and a.hp > 0:
 				#shield ship/free part
 				if isinstance(b, Part) and b.parent == None:
-					self.ship_freePart_collision(a, b)
+					a.freepartCollision(b)
 					return True
 				#crash against ship's shields, if any:
 				hit = False
@@ -185,7 +189,7 @@ class SolarSystem:
 			if isinstance(a, Ship):
 				#ship/free part
 				if isinstance(b, Part) and b.parent == None:
-					self.ship_freePart_collision(a, b)
+					a.freepartCollision(b)
 					return True
 								
 				#recurse to ship parts
@@ -208,65 +212,7 @@ class SolarSystem:
 				return True
 		return False
 
-	# ship - ship
-	# ship - freepart
-	# ship - planet
-	# planet - freepart
-	# bullet - freepart
-	# bullet - planet
-	# ship - bullet
-	# explotion - floater
-	# planet - planet
-	# floater - floater
 
-	def planet_ship_collision(self, planet, ship):
-		angle = (planet.pos - ship.pos).get_angle()
-		dx, dy = rotate(ship.delta.x, ship.delta.y, angle)
-		speed = sqrt(dy ** 2 + dx ** 2)
-		if speed > planet.LANDING_SPEED:
-			if planet.damage.has_key(ship):
-				damage = planet.damage[ship]
-			else:
-				if soundModule:
-					setVolume(hitSound.play(), planet, planet.game.player)
-				#set damage based on incoming speed and mass.
-				damage = speed * ship.mass * planet.PLANET_DAMAGE
-			for part in ship.parts:
-				if collisionTest(planet, part):
-					temp = part.hp
-					part.takeDamage(damage, planet)
-					damage -= temp
-					if damage <= 0:
-						r = ship.radius + planet.radius
-						ship.delta = ship.delta * (ship.pos - planet.pos) + ship.delta * -(ship.pos - planet.pos)
-						if planet.damage.has_key(ship):
-							del planet.damage[ship]
-						return
-			if damage > 0:
-				planet.damage[ship] = damage
-		else:
-			#landing:
-			if ship == planet.game.player and not ship.landed:
-				planet.game.pause = True
-				ship.landed = planet
-				ship.game.menu.parts.reset()
-			ship.delta.x, ship.delta.y = planet.delta.x, planet.delta.y
-
-	def planet_freePart_collision(self,planet, part):
-		part.kill()
-		planet.inventory.append(part)
-		
-	def planet_planet_collision(self, a, b):
-		if a.mass > b.mass:
-			b.kill()
-		else:
-			a.kill()
-			
-	def ship_freePart_collision(self,ship, part):
-		part.kill()
-		ship.inventory.append(part)
-		if ship.game.player == ship:
-			ship.game.menu.parts.inventoryPanel.reset() #TODO: make not suck
 		
 	def explosion_push(self, explosion, floater):
 		"""The push of an explosion.  The rest of the effect is handled by the

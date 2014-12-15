@@ -80,27 +80,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 			  self.pos.y - self.image.get_height() / 2 - offset[1]
 		surface.blit(self.image, poss)
 
-	def addCollider(self, floater):
-		self.collisions.append(floater)
 
-	def collide(self):
-		pass
-
-	def floaterCollide(self):
-		pass
-
-
-
-	# ship - ship
-	# ship - freepart
-	# ship - planet
-	# planet - freepart
-	# bullet - freepart
-	# bullet - planet
-	# ship - bullet
-	# explotion - floater
-	# planet - planet
-	# floater - floater
 
 class Bullet(Floater):
 	def __init__(self, game, gun, damage, speed, range, image = None):
@@ -143,29 +123,6 @@ class Bullet(Floater):
 
 	def softkill(self):
 		Floater.kill(self)
-
-
-	def collide(self):
-		pass
-
-	def collidePart(self):
-		pass
-
-	def collidePlanet(self):
-		pass
-
-	
-
-	# ship - ship
-	# ship - freepart
-	# ship - planet
-	# planet - freepart
-	# bullet - freepart
-	# bullet - planet
-	# ship - bullet
-	# explotion - floater
-	# planet - planet
-	# floater - floater
 
 
 
