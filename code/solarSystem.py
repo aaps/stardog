@@ -33,6 +33,7 @@ class SolarSystem:
 		"""Runs the game."""
 		self.floaters.update()
 		
+		
 		#collision:
 		# TODO: sort lists to minimize collision tests.
 		floaters = self.floaters.sprites()
@@ -149,7 +150,7 @@ class SolarSystem:
 					a.freepartCollision( b)
 					return True
 				#planet/planet
-				if isinstance(b, Planet) or isinstance(b, Structure) :
+				if isinstance(b, Planet):
 					a.planetCollision(b)
 					return True
 					

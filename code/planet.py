@@ -32,15 +32,17 @@ class Planet(Floater):
 	
 	def update(self):
 		for other in self.game.curSystem.floaters.sprites():
-			if  not isinstance(other, Planet) \
+			if other != self \
 			and not isinstance(other, Structure) \
+			and not isinstance(other, Planet) \
 			and not collisionTest(self, other) \
-			and abs(self.pos.get_distance(other.pos)) < self.maxRadius:
+			and abs(self.pos.get_distance(other.pos)) < self.maxRadius: # remove planets test for gravity sensitive planets
 				#accelerate that floater towards this planet:
-				accel = self.g * (self.mass) / dist2(self, other)
+				accel = self.g * (self.mass) / (dist2(self, other) + 0.001)
 				angle = (self.pos - other.pos).get_angle()
 				other.delta.x += cos(angle) * accel / self.game.fps
 				other.delta.y += sin(angle) * accel / self.game.fps
+		# Floater.update(self) # for gravity sensitive planets update
 	
 	def draw(self, surface, offset = Vec2d(0,0)):
 		if self.image:
@@ -74,9 +76,9 @@ class Sun(Planet):
 	# 	Floater.__init__(self, game, pos, radius = radius, image = image)
 
 
-class Structure(Floater):
+class Structure(Planet):
 	LANDING_SPEED = 200 #pixels per second. Under this, no damage.
-	PLANET_DAMAGE = 300
+	PLANET_DAMAGE = .0004
 	name = "Structure Unknown"
 	def __init__(self, game, pos, color = (100,200,50), radius = 100, image = None):
 		Floater.__init__(self, game, pos, Vec2d(0,0), 0, image=image)
@@ -91,7 +93,16 @@ class Structure(Floater):
 		self.inventory = []
 
 	def update(self):
-		pass
+		for other in self.game.curSystem.floaters.sprites():
+			if  not isinstance(other, Planet) \
+			and not isinstance(other, Structure) \
+			and not collisionTest(self, other) \
+			and abs(self.pos.get_distance(other.pos)) < self.maxRadius:
+				#accelerate that floater towards this planet:
+				accel = self.g * 100 / dist2(self, other)
+				angle = (self.pos - other.pos).get_angle()
+				other.delta.x += cos(angle) * accel / self.game.fps
+				other.delta.y += sin(angle) * accel / self.game.fps
 
 	def draw(self, surface, offset = Vec2d(0,0)):
 		if self.image:
@@ -129,9 +140,6 @@ class Portal(Planet):
 			self.image = None
 		self.inventory = []
 		
-
-
-
 	
 	def update(self):
 		for other in self.game.curSystem.floaters.sprites():
