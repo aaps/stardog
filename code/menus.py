@@ -7,14 +7,49 @@ from spaceship import Ship
 
 DEFAULT_SELECTED_IMAGE = loadImage("res/defaultselected" + ext)
 
+class ChatConsole(TopLevelPanel):
+	drawBorder = True
+	activeMenu = None
+	color = (100, 100, 255, 250)
+	game = None
+
+	def __init__(self, game, rect, player):
+		TopLevelPanel.__init__(self, rect)
+		subFrameRect = Rect(0, 0, self.rect.width, self.rect.height)
+		self.player = player
+		self.game = game
+		self.info = Info(subFrameRect, player)
+
+		x = 2
+		y = 2
+		h = 24
+		w = 80
+
+		self.panels.append(Button(Rect(x,y,w,h), \
+			lambda : self.setActiveMenu(self.info), "Info", BIG_FONT))
+
+	
+	def update(self):
+		pass
+
+	def handleEvent(self, event):
+		if event.type == pygame.KEYDOWN:
+			if event.key == K_6:
+				self.game.console = False
+				
+					# self.reset()
+		TopLevelPanel.handleEvent(self, event)
+
+
 class Menu(TopLevelPanel):
 	"""The top level menu object. Menu(mouse, rect) -> new Menu"""
 	activeMenu = None
 	color = (100, 100, 255, 250)
+	game = None
 	def __init__(self, game, rect, player):
 		TopLevelPanel.__init__(self, rect)
-		subFrameRect = Rect(0, 0, \
-					self.rect.width, self.rect.height)
+		subFrameRect = Rect(0, 0, self.rect.width, self.rect.height)
+		self.game = game
 		self.player = player
 		self.parts = PartsPanel(subFrameRect, player)
 		self.keys = Keys(subFrameRect, player)
@@ -51,6 +86,14 @@ class Menu(TopLevelPanel):
 		Panel.update(self)
 		if self.activeMenu:
 			self.activeMenu.update()
+
+	def handleEvent(self, event):
+		if event.type == pygame.KEYDOWN:
+			if event.key == K_RETURN:
+				self.game.pause = False
+				
+					# self.reset()
+		TopLevelPanel.handleEvent(self, event)
 
 class PartsPanel(Panel):
 	baseImage = loadImage('res/menus/partsmenubg.bmp')
@@ -723,5 +766,13 @@ class Store(Panel):
 			"Store", BIG_FONT))
 
 
+# class Console(TopLevelPanel):
+# 	activeMenu = None
+# 	color = (100, 100, 255, 250)
+# 	def __init__(self, game, rect, player):
+# 		TopLevelPanel.__init__(self, rect)
+# 		subFrameRect = Rect(0, 0, \
+# 					self.rect.width, self.rect.height)
+# 		self.player = player
 
 

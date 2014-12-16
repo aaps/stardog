@@ -179,6 +179,11 @@ class Part(Floater):
 		#set physics to drift away from ship (not collide):
 		# self.pos.x = ship.pos.x + self.offset[0] 
 		# self.pos.y = ship.pos.y + self.offset[1]
+		self.image = colorShift(pygame.transform.rotate(self.baseImage, angle), self.color).convert()
+		self.image.set_colorkey((0,0,0))
+		# part.image = colorShift(pygame.transform.rotate(part.baseImage, \
+		# 				-part.dir), part.color).convert()
+
 		self.pos = ship.pos + self.offset
 		self.delta.x = ship.delta.x + rand() * sign(self.offset[0]) * DETACH_SPEED
 		self.delta.y = ship.delta.y + rand() * sign(self.offset[1]) * DETACH_SPEED

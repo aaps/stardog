@@ -31,6 +31,7 @@ class Game:
 	menu = None
 	def __init__(self, screen):
 		self.pause = False
+		self.console = False
 		self.debug = False
 		self.fps = FPS
 		self.screen = screen
@@ -44,6 +45,7 @@ class Game:
 		self.camera = Camera(screen)
 		#messenger, with controls as first message:
 		self.messenger = Messenger(self)
+		
 		self.miniinfo = MiniInfo(self)
 		
 		#key polling:
@@ -91,6 +93,11 @@ class Game:
 			self.menu = Menu(self, Rect((self.width - 800) / 2,
 										(self.height - 600) / 2,
 										800, 600), self.player)
+
+			self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-100, self.width - int(self.width/ 8) , 100), self.player)
+
+			# self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8) - self.width, 30,	int(self.width/ 8), self.width-30), self.player)
+
 			for x in range(10):
 				self.clock.tick()
 			
@@ -99,36 +106,43 @@ class Game:
 			#The in-round loop (while player is alive):
 			while self.running and self.curSystem.ships.has(self.player):
 				#event polling:
+				
 				for event in pygame.event.get():
 					if event.type == pygame.QUIT:
 						self.running = 0
-					elif event.type == pygame.MOUSEBUTTONDOWN:
-						self.mouse[event.button] = 1
-						self.mouse[0] = event.pos
-					elif event.type == pygame.MOUSEBUTTONUP:
-						self.mouse[event.button] = 0
-						self.mouse[0] = event.pos
-					elif event.type == pygame.MOUSEMOTION:
-						self.mouse[0] = event.pos					
-					elif event.type == pygame.KEYDOWN:
-						self.keys[event.key % 322] = 1
-					elif event.type == pygame.KEYUP:
-						self.keys[event.key % 322] = 0
-
-
-
+					if not self.pause and not self.console:
+						if event.type == pygame.MOUSEBUTTONDOWN:
+							self.mouse[event.button] = 1
+							self.mouse[0] = event.pos
+						elif event.type == pygame.MOUSEBUTTONUP:
+							self.mouse[event.button] = 0
+							self.mouse[0] = event.pos
+						elif event.type == pygame.MOUSEMOTION:
+							self.mouse[0] = event.pos
+						elif event.type == pygame.KEYDOWN:
+							self.keys[event.key % 322] = 1
+						elif event.type == pygame.KEYUP:
+							self.keys[event.key % 322] = 0
 					if self.pause:
 						self.menu.handleEvent(event)
+					if self.console:
+						self.chatconsole.handleEvent(event)
+
 
 				#game-level key input:
 				if self.keys[K_DELETE % 322]:
 					self.keys[K_DELETE % 322] = False
 					self.player.kill() #suicide
 				if self.keys[K_RETURN % 322]:
-					self.pause = not self.pause #pause/menu
+					self.pause = True #pause/menu
 					self.keys[K_RETURN % 322] = False
 					if self.pause:
 						self.menu.reset()
+				if self.keys[K_6 % 322]:
+					self.console = True
+					self.keys[K_6 % 322] = False
+					if self.console:
+						self.chatconsole.reset()
 				self.debug = False
 				if self.keys[K_BACKSPACE % 322]:
 					self.debug = True #print debug information
@@ -142,15 +156,15 @@ class Game:
 					self.running = False
 					
 				#unpaused:
-				if not self.pause:
-					#update action:
-					for trigger in self.triggers:
-						trigger.update()
-					self.curSystem.update()
-					self.top_left = self.player.pos.x - self.width / 2, \
-							self.player.pos.y - self.height / 2
-					self.messenger.update()
-					self.miniinfo.update()
+				# if not self.pause:
+				#update action:
+				for trigger in self.triggers:
+					trigger.update()
+				self.curSystem.update()
+				self.top_left = self.player.pos.x - self.width / 2, \
+						self.player.pos.y - self.height / 2
+				self.messenger.update()
+				self.miniinfo.update()
 							
 				#draw the layers:
 				self.screen.fill((0, 0, 0, 0))
@@ -158,11 +172,15 @@ class Game:
 				self.hud.draw(self.screen, self.player)
 				self.messenger.draw(self.screen)
 				self.miniinfo.draw(self.screen)
-				
+
 				#paused:
 				if self.pause:
 					self.menu.update()
 					self.menu.draw(self.screen)
+
+				if self.console:
+					self.chatconsole.update()
+					self.chatconsole.draw(self.screen)
 					
 				#frame maintainance:
 				pygame.display.flip()

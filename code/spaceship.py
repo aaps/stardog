@@ -487,8 +487,11 @@ class Ship(Floater):
 
 	def freepartCollision(self, part):
 		if part.pickuptimeout <= 0:
-			part.kill()
+			part.dir = 0
+			part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert()
+			part.image.set_colorkey((0,0,0))
 			self.inventory.append(part)
+			part.kill()
 			if self.game.player == self:
 				self.game.menu.parts.inventoryPanel.reset() #TODO: make not suck
 

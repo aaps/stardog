@@ -105,8 +105,20 @@ class MiniInfo:
 			self.image.blit(text, (0,0))
 		surface.blit(self.image, self.bottomleft)
 		
+# class ChatConsole(textInput):
+# 	color = (100,100,255,250)
+# 	font = FONT
+# 	maxChars = 50
+# 	rect = None
 
+# 	def __init__(self, game, font = FONT):
+# 		# bottomleft = int(game.width / 8)-game.width, self.font.get_linesize()
+# 		# self.rect = Rect(self.font.get_linesize()-game.height, int(game.width / 8)-game.width, int(game.width / 8)-game.width,self.font.get_linesize())
+# 		self.rect = Rect(0, 200, game.width - int(game.width / 8),self.font.get_linesize())
+# 		textInput.__init__(self, self.rect, font = FONT, color =(100, 200, 100))
 
+# 	def draw(self, surface):
+# 		textInput.draw(self, surface, self.rect)
 
 class Messenger:
 	queue = deque() #not capitalized in stand lib

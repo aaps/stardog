@@ -159,11 +159,15 @@ class TopLevelPanel(Panel):
 			pass
 		elif event.type == pygame.KEYUP:
 			pass
+
+		return []
+
 	
 	def draw(self, surface, rect = None):
 		"""draw(suface) -> draws subpanels to a buffer and draws that to the 
 		surface."""
 		rect = Rect(0,0, self.rect.width, self.rect.height)
+		
 		self.image.fill((0, 0, 0, 0))
 		if self.bgColor:
 			pygame.draw.rect(self.image, self.bgColor, rect)
@@ -637,17 +641,28 @@ class Selecter(ScrollPanel):
 			panel.draw(self.image, self.visibleRect)
 		ScrollPanel.draw(self, surface, rect)
 
+class textInput(Panel):
+
+	drawBorder = True
+	def __init__(self, rect, font = FONT, color =(100, 200, 100)):
+		Panel.__init__(self, rect)
+		self.color = color
+		self.rect = rect
+
+	def keyInput(self, key):
+		self.test += key
+
+
 class Label(Panel):
 	"""Label(self,  rect, text, color = (100, 200, 100), font = FONT) ->
 	A panel with a single line of text."""
 	drawBorder = False
 	def __init__(self, rect, text, font = FONT, color =(100, 200, 100)):
 		Panel.__init__(self, rect)
-		self.text = text
+		self.text = ""
 		self.color = color
-		if fontModule:
-			self.image = font.render(self.text, True, self.color)
-			self.rect = Rect(rect.topleft, self.image.get_size())
+
+
 			
 class FunctionLabel(Panel):
 	"""A label that updates its text by calling a string function."""
