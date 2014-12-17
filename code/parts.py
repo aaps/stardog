@@ -623,7 +623,8 @@ class Engine(Part):
 	baseImage = loadImage("res/parts/engine" + ext)
 	image = None
 	name = "Engine"
-
+	animatedtime = 0
+	animatedspeed = 0.5
 	exspeed = 5000
 	exmass = 10
 	thrusting = False
@@ -651,12 +652,17 @@ class Engine(Part):
 
 	def update(self):
 		""""""
-
-		if self.thrusting:
+		if self.animatedtime > 0:
+			self.animatedtime -= 1. / self.game.fps
 			self.animated = True
 		else:
-			self.animated = False
-		self.thrusting = False
+			self.animated = False	
+
+		# if self.thrusting:
+		# 	self.animated = True
+		# else:
+		# 	self.animated = False
+		# self.thrusting = False
 		# if self.ship:
 		# 	self.ship.delta * 0.9
 
@@ -683,7 +689,7 @@ class Engine(Part):
 				
 			
 			self.ship.energy -= self.energyCost / self.game.fps
-			self.thrusting = True
+			self.animatedtime = self.animatedspeed
 			# print self.thrusting
 
 class Gyro(FlippablePart):
@@ -981,20 +987,21 @@ class Drone(Cockpit, Engine, Cannon):
 		self.functionDescriptions = ['shoot', 'turn left', 'turn right', 'thrust']
 	
 	def update(self):
-		self.animated = self.thrusted
-		self.shot = False
-		self.thrusted = False
-		self.turned = False
-		self.reload -= 1. / self.game.fps
-		self.reloadBurst -= 1. / self.game.fps
-		if self.reloadBurst <= 0 :
-			self.burst = self.burstSize
-			self.reloadBurst = self.reloadBurstTime
-		#generator:
-		if self.ship and self.ship.energy < self.ship.maxEnergy:
-			self.ship.energy = min(self.ship.maxEnergy, \
-								self.ship.energy + self.rate / self.game.fps)
-		Part.update(self)
+		pass
+		# self.animated = self.thrusted
+		# self.shot = False
+		# self.thrusted = False
+		# self.turned = False
+		# self.reload -= 1. / self.game.fps
+		# self.reloadBurst -= 1. / self.game.fps
+		# if self.reloadBurst <= 0 :
+		# 	self.burst = self.burstSize
+		# 	self.reloadBurst = self.reloadBurstTime
+		# #generator:
+		# if self.ship and self.ship.energy < self.ship.maxEnergy:
+		# 	self.ship.energy = min(self.ship.maxEnergy, \
+		# 						self.ship.energy + self.rate / self.game.fps)
+		# Part.update(self)
 		
 	def attach(self):
 		#battery:
