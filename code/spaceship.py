@@ -453,8 +453,10 @@ class Ship(Floater):
 		Floater.kill(self)
 
 	def planetCollision(self, planet):
-		angle = (planet.pos - self.pos).get_angle()
-		dx, dy = rotate(self.delta.x, self.delta.y, angle)
+		shipangle = (planet.pos - self.pos).get_angle()
+		planetangle = (self.pos - planet.pos).get_angle()
+
+		dx, dy = rotate(self.delta.x-planet.delta.y, self.delta.y-planet.delta.y, shipangle-planetangle)
 		speed = sqrt(dy ** 2 + dx ** 2)
 		if speed > planet.LANDING_SPEED:
 			if planet.damage.has_key(self):

@@ -238,6 +238,7 @@ class SolarA1(SolarSystem):
 	maxFighters = 15
 	respawnTime = 30
 	fightersPerMinute = 2
+	g=5000
 	def __init__(self, game, player, numPlanets = 10, numStructures = 2):
 		SolarSystem.__init__(self, game)
 		self.sun = (Sun( game, Vec2d(0,0), radius = 2000, mass = 180000, \
@@ -259,8 +260,12 @@ class SolarA1(SolarSystem):
 			color = randint(40,200),randint(40,200),randint(40,200)
 			radius = randint(300,700)
 			mass = randnorm(radius * 10, 800)
-			self.planets.append(Planet(game, Vec2d(distanceFromSun * cos(angle), \
-				distanceFromSun * sin(angle)), radius = radius, mass = mass, \
+			startpos = Vec2d(distanceFromSun * cos(angle), distanceFromSun * sin(angle))
+			startdir = startpos.get_angle_between(self.sun.pos) - 90
+			accel = ((self.g * mass) / distanceFromSun) / 10
+			startdelta = Vec2d(0,0).rotatedd(startdir, accel) # preps for gravity sensitive planets
+			startdelta = Vec2d(0,0)
+			self.planets.append(Planet(game, startpos, startdelta ,self.g,radius = radius, mass = mass, \
 				color = color))
 			self.add(self.planets[i])
 			d+= 1200

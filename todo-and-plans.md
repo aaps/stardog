@@ -58,7 +58,7 @@ the laser is broken, ;( <It is fixed, Aat>
 * the engines dont animate animate after radar addition, meh !!!
 * radar enabled states are seperate, should be synced ? 
 * after menu and chat console prototype independance of game pause the menu will now show info, skills etc the right way.
-* still cant land on strucutre class. !!!
+* still cant land on strucutre class. !!! <fixed Aat>
 
 parts
 ======

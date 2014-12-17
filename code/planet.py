@@ -12,14 +12,14 @@ class Planet(Floater):
 	maxRadius = 1000000 # no gravity felt past this (approximation).
 	PLANET_DAMAGE = .0004
 	LANDING_SPEED = 200 #pixels per second. Under this, no damage.
-	g = 5000 # the gravitational constant.
 	name = "Planet Unknown"
 	
-	def __init__(self, game, pos, radius = 100, mass = 10000, \
+	def __init__(self, game, pos, delta = Vec2d(0,0), grav=5000, radius = 100, mass = 10000, \
 					color = (100,200,50), image = None, race = None):
-		Floater.__init__(self, game, pos, Vec2d(0,0), radius = radius, image = image)
+		Floater.__init__(self, game, pos, delta, radius = radius, image = image)
 		self.mass = mass #determines gravity.
 		self.color = color
+		self.g = grav
 		self.damage = {}	
 		#damage[ships] = amount of damage ship will take. 
 		#see solarSystem.planet_ship_collision
@@ -38,7 +38,7 @@ class Planet(Floater):
 			and not collisionTest(self, other) \
 			and abs(self.pos.get_distance(other.pos)) < self.maxRadius: # remove planets test for gravity sensitive planets
 				#accelerate that floater towards this planet:
-				accel = self.g * (self.mass) / (dist2(self, other) + 0.001)
+				accel = self.g * (self.mass) / (dist2(self, other))
 				angle = (self.pos - other.pos).get_angle()
 				other.delta.x += cos(angle) * accel / self.game.fps
 				other.delta.y += sin(angle) * accel / self.game.fps
@@ -80,9 +80,10 @@ class Structure(Planet):
 	LANDING_SPEED = 200 #pixels per second. Under this, no damage.
 	PLANET_DAMAGE = .0004
 	name = "Structure Unknown"
-	def __init__(self, game, pos, color = (100,200,50), radius = 100, image = None):
+	def __init__(self, game, pos, delta, grav=5000, color = (100,200,50), radius = 100, image = None):
 		Floater.__init__(self, game, pos, Vec2d(0,0), 0, image=image)
 		self.color = (0,0,255)
+		self.g = grav
 		self.damage = {}	
 		self.radius = radius
 		#damage[ships] = amount of damage ship will take. 

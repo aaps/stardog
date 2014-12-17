@@ -255,6 +255,7 @@ class Part(Floater):
 		"""redraw(surface, offset) -> draws 
 		animated elements of this part to surface. 
 		This should circumvent the ship surface and draw directly onto space."""
+
 		if self.animated and self.animatedImage and self.ship:
 			image = pygame.transform.rotate(self.animatedImage, \
 								- self.dir - self.ship.dir).convert_alpha()
@@ -650,6 +651,7 @@ class Engine(Part):
 
 	def update(self):
 		""""""
+
 		if self.thrusting:
 			self.animated = True
 		else:
@@ -657,7 +659,10 @@ class Engine(Part):
 		self.thrusting = False
 		# if self.ship:
 		# 	self.ship.delta * 0.9
+
 		Part.update(self)
+
+
 	
 	def thrust(self):
 		"""thrust: pushes the ship from the direction this engine points."""
@@ -679,6 +684,7 @@ class Engine(Part):
 			
 			self.ship.energy -= self.energyCost / self.game.fps
 			self.thrusting = True
+			# print self.thrusting
 
 class Gyro(FlippablePart):
 	baseImage = loadImage("res/parts/gyro" + ext)
