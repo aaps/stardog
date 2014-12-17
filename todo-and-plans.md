@@ -34,9 +34,11 @@ side dish
 * palaxing background, the image
 * menu volume controll for music and effects
 * instead of restart directly, wait for keypress and see your lifeless ship float into the distance
-* a camera to capture different places, in stead of only player.
-* make the game run from the beginning, so if choosing ship and color the game is already running
-* give ships a atention score that goes up when ships are sooting and dying drops off over time.
+* a camera to capture different places, in stead of only player. !!!
+* make the game run from the beginning, so if choosing ship and color the game is already running !!!
+* give ships a atention score that goes up when ships are sooting and dying drops off over time. <done, aat>
+* the portal stargate warp dent could use some drag inside it, for temp usability
+grav anomalys are easy to make, game element ?
 
 Housekeeping
 ===
@@ -48,17 +50,17 @@ bugs
 =====
 * remove the self.kill(other) thing see master branch, this is not working should be other way of both coliders to know about each other.
 * on branch viewsinview an explotion will make another one.<so what for now>
-* I can make a crash by bowing up my own ship in missile difference collision on branch * all2vector <Fixed Aat>
+* I can make a crash by blowing up my own ship in missile difference collision on branch * all2vector <Fixed Aat>
 engines will sometimes not fire in case of multyple forward. <fixed , Aat>
-can a planet have negative gravity ? <seen once>
 in viewsinview ship direction jitters sometimes, more so when it's got a lot of parts.
 the laser is broken, ;( <It is fixed, Aat>
 * make binding keys actually works. they bind but don't do anything. and moste of the time. it bugs out the guns so they fire randomly or continously. <it works>
 * if you bind a key to a engine that isn't in the engine slot. it won't fire if you press that key. <??? hu ???>
-* the engines dont animate animate after radar addition, meh !!!
+* the engines dont animate animate after radar addition, meh !!! <ok this was a timing problem , when more code time in programm passes differently, it was done in a messy way, this will come back in a different form and place, fixed this however>
 * radar enabled states are seperate, should be synced ? 
 * after menu and chat console prototype independance of game pause the menu will now show info, skills etc the right way.
-* still cant land on strucutre class. !!! <fixed Aat>
+* still cant land on strucutre class. <fixed Aat>
+when ejecting parts planet inventory will not put them streight when caught
 
 parts
 ======
@@ -69,7 +71,7 @@ so you can get out of the way in time.
 maybe implement a arming period. 
 bigger detonation range.
 
-* a coliniser part
+* a coloniser part
 * a cargo part to hold the cargo
 * a gravity well part.
 * a dockingport part <can be hardmode>
@@ -105,7 +107,7 @@ DONE
 * we have parts not that can be toggled on or off, like the radar, no none asked for it still did it <Aat>
 * Space mines <easy mode> <Duality>
 make menu work on fullscreen. only fighter is displayed right left corner. <fixed Duality>
-* and parts for crew quaters.					<part added>
+* and parts for crew quaters. <part added>
 * make the space structure class that will inherit from gravless as well with a custom  <done in other way>
 * not be a planet. !!! also good for space ports, etc. <Aaps, first refactor the collision detection part>
 * posibility to eject parts <easy mode, done aat> !!!

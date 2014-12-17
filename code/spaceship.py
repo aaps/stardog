@@ -152,6 +152,7 @@ class Ship(Floater):
 	mass = 0
 	moment = 0
 	parts = []
+	attention = 0
 	forwardEngines = []
 	maxhp = 0
 	hp = 0
@@ -363,12 +364,15 @@ class Ship(Floater):
 			gyro.turnRight(angle)
 	def shoot(self):
 		"""fires all guns."""
+		self.attention += 1
 		for gun in self.guns:
 			gun.shoot()
 	def launchMissiles(self):
+		self.attention += 2
 		for missle in self.missiles:
 			missle.shoot()
 	def launchMines(self):
+		self.attention += 0.5
 		for mine in self.mines:
 			mine.shoot()
 	def toggleRadar(self):
@@ -382,7 +386,8 @@ class Ship(Floater):
 			self.kill()
 		#run script, get choices.
 		self.script.update(self)
-		
+		if self.attention > 0:
+			self.attention -= 0.1 / self.game.fps
 		# actual updating:
 		Floater.update(self)
 		#parts updating:
@@ -440,6 +445,7 @@ class Ship(Floater):
 		surface.blit(buffer, pos) 
 		
 	def takeDamage(self, damage, other):
+		self.attention += 5
 		self.hp = max(self.hp - damage, 0)
 		if isinstance(other, Bullet) and other.ship == self.game.player:
 			self.game.player.xpDamage(self, damage)
@@ -523,7 +529,7 @@ class Player(Ship):
 			self.developmentPoints += 1
 			self.xp = 0
 		if self.landed \
-		and dist2(self, self.landed) > (self.landed.radius * 2) ** 2:
+		and dist2(self, self.landed) > (self.landed.radius * 1.1) ** 2:
 			self.landed = False
 		Ship.update(self)
 	

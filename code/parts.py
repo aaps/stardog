@@ -9,8 +9,8 @@ import stardog
 from vec2d import Vec2d
 
 PART_OVERLAP = 0
-DETACH_SPACE = 100
-DETACH_SPEED = 10
+DETACH_SPACE = 10
+DETACH_SPEED = 20
 
 class Port:
 	def __init__(self, offset, dir, parent):
@@ -138,37 +138,38 @@ class Part(Floater):
 			if port.part:
 				port.part.detach()
 		#set physics to drift away from ship (not collide):
-		cost = cos(self.ship.dir) #cost is short for cos(theta)
-		sint = sin(self.ship.dir)
-		
-		self.pos.x = self.ship.pos.x + DETACH_SPACE * self.offset.x * cost \
-				- DETACH_SPACE * self.offset.y * sint
-		self.pos.y = self.ship.pos.y + DETACH_SPACE * self.offset.x * sint \
-				+ DETACH_SPACE * self.offset.y * cost
+		if self.parent:
+			cost = cos(self.ship.dir) #cost is short for cos(theta)
+			sint = sin(self.ship.dir)
 
-		self.delta.x = self.ship.delta.x \
-				+ rand() * sign(self.offset.x) * cost * DETACH_SPEED\
-				- rand() * sign(self.offset.y) * sint * DETACH_SPEED
-		self.delta.y = self.ship.delta.y \
-				+ rand() * sign(self.offset.x) * sint * DETACH_SPEED\
-				+ rand() * sign(self.offset.y) * cost * DETACH_SPEED
-		#if this is the root of the ship, kill the ship:
-		root = False
-		if self.parent and self.parent == self.ship:
-			self.ship.kill()
-			root = True
-		#cleanup relations:
-		if self.parent and self.parent != self.ship:
-			for port in self.parent.ports:
-				if port.part == self:
-					port.part = None
-		self.ship.parts.remove(self)
-		self.ship.reset()
-		self.ship = None
-		self.parent = None
-		#otherwise add this to the game as an independent Floater:
-		if not root:
-			self.game.curSystem.add(self)
+			self.pos.x = self.ship.pos.x + DETACH_SPACE * self.offset.x * cost \
+					- DETACH_SPACE * self.offset.y * sint
+			self.pos.y = self.ship.pos.y + DETACH_SPACE * self.offset.x * sint \
+					+ DETACH_SPACE * self.offset.y * cost
+
+			self.delta.x = self.ship.delta.x \
+					+ rand() * sign(self.offset.x) * cost * DETACH_SPEED\
+					- rand() * sign(self.offset.y) * sint * DETACH_SPEED
+			self.delta.y = self.ship.delta.y \
+					+ rand() * sign(self.offset.x) * sint * DETACH_SPEED\
+					+ rand() * sign(self.offset.y) * cost * DETACH_SPEED
+			#if this is the root of the ship, kill the ship:
+			root = False
+			if self.parent and self.parent == self.ship:
+				self.ship.kill()
+				root = True
+			#cleanup relations:
+			if self.parent and self.parent != self.ship:
+				for port in self.parent.ports:
+					if port.part == self:
+						port.part = None
+			self.ship.parts.remove(self)
+			self.ship.reset()
+			self.ship = None
+			self.parent = None
+			#otherwise add this to the game as an independent Floater:
+			if not root:
+				self.game.curSystem.add(self)
 		
 	def scatter(self, ship):
 		"""Like detach, but for parts that are in an inventory when a 
@@ -280,6 +281,8 @@ class Part(Floater):
 	def takeDamage(self, damage, other):
 		from spaceship import Player
 		hitByPlayer = False
+		if isinstance(self, Part) and self.parent:
+			self.ship.attention += 5
 		if isinstance(other, Bullet) and other.ship == self.game.player:
 			hitByPlayer = True
 			self.game.player.xpDamage(self, damage)
