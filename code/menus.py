@@ -373,6 +373,7 @@ class PartDescriptionPanel(Panel):
 		w, h = self.rect.width, self.rect.height
 		self.name = Label(Rect(x + 4, y + 44, w, 20), part.name, FONT, 
 				(100, 200, 0))
+		
 		self.text = TextBlock(Rect(x + 4, y + 64, w, h), string, SMALL_FONT, 
 				(0, 150, 0))
 		self.addPanel(self.name)
@@ -517,6 +518,7 @@ class PartTile(DragableSelectable):
 		self.panels[-1].rect.width = self.rect.width
 		rect = Rect(rect)
 		rect.y += 12
+
 		self.addPanel(TextBlock(rect, string[i+1:], color = (0, 150, 0),
 					font = SMALL_FONT))
 
@@ -791,16 +793,15 @@ class InfoTile(Button):
 		Button.__init__(self, rect, function, None)
 		rect1 = Rect(rect.x + 5, rect.y + 5, 200, rect.width - 10)
 		rect2 =  Rect(rect.x + 5, rect.y + 5, 100, 100)
-		
-
-		
 		self.addPanel(Label(rect1, str(game.curSystem.name), color = (200,200,255)))
+
 		for planet in game.curSystem.planets:
 			rect2.x += 0
 			rect2.y += 15
 
 			self.addPanel(TextBlock(rect2, planet.name, SMALL_FONT, (100,200,0)))
-	
+		
+
 
 	
 class SkillTile(Button):
