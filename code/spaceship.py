@@ -152,6 +152,7 @@ class Ship(Floater):
 	mass = 0
 	moment = 0
 	parts = []
+	knownplanets = []
 	attention = 0
 	forwardEngines = []
 	maxhp = 0
@@ -241,6 +242,7 @@ class Ship(Floater):
 		self.forwardEngines = []
 		self.forwardThrust = 0
 		self.reverseThrust = 0
+		knownplanets = []
 		self.leftThrust = 0
 		self.rightThrust = 0
 		self.torque = 0

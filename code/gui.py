@@ -123,13 +123,19 @@ class HUD(Drawable):
 					color = floater.color
 					r = 1
 					pygame.draw.rect(self.image, color, (dotPos[0]-1,dotPos[1]-1,2,2))
-				elif isinstance(floater, Planet):
-					r = int(floater.radius / radarScale + 2)
-					color = floater.color
-					pygame.draw.circle(self.image, color, dotPos, r)
-				else:
+				elif not isinstance(floater, Planet):
 					color = (150,40,0)
 					pygame.draw.rect(self.image, color, (dotPos[0],dotPos[1],2,2))
+
+		for planet in thisShip.knownplanets:
+			if isinstance(planet, Planet):
+				result = planet.pos - thisShip.pos
+				dotPos = int(center[0] + limit(-radius,	result.x / scale, radius)), int(center[1] + limit(-radius, result.y / scale, radius))
+				r = int(planet.radius / radarScale + 2)
+				color = planet.color
+				pygame.draw.circle(self.image, color, dotPos, r)
+			else:
+				thisShip.knownplanets.remove(planet)
 
 
 numStars = 300

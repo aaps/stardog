@@ -605,6 +605,7 @@ class Radar(Part):
 
 
 	def update(self):
+		
 		if self.enabled:
 			self.radartime -= 1. / self.game.fps
 			if self.radartime <= 0:
@@ -615,6 +616,8 @@ class Radar(Part):
 				for floater in self.game.curSystem.floaters:
 					if collisionTest(disk, floater) and floater != self.ship:
 						self.detected.append(floater)
+						if floater not in self.ship.knownplanets:
+							self.ship.knownplanets.append(floater)
 
 			self.ship.energy -= self.energyCost / self.game.fps
 		else:

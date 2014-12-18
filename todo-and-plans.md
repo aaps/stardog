@@ -5,6 +5,7 @@ main dish
 * quad trees (hardmode, after vector and view splitout, wil replace current collision check mess)
 
 * wormholes/star gates to other systems. (medium mode ?, after Gravless class) <might be soon done>!!!
+make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system.
 
 * multyplayer <hard mode, dependant on code structure, vectors and views split, also a better ui>
 * a particle engine for explotions, engine stuff. <medium stuff, after view splitout>
@@ -19,10 +20,11 @@ http://pygame.org/project-planes-2392-4051.html get version 0.6
 side dish
 ==========
 
+* clean up this text file !!!
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
-* more collition handeling refactor !!!
-
-* remember planets that where on radar in list
+* more collision handeling refactor
+* more to vec2d verctor work !!!
+* remember planets that where on radar in list !!!
 * some way to target ships, parts and planets <easy mode>
 * zoom in out option for radar <medium mode ?>
 * weapon heat generation <easy mode>
@@ -33,15 +35,18 @@ side dish
 * other sound for bullet impact on shield and plating and on planet
 * palaxing background, the image
 * menu volume controll for music and effects
-* instead of restart directly, wait for keypress and see your lifeless ship float into the distance
-* a camera to capture different places, in stead of only player. !!!
-* make the game run from the beginning, so if choosing ship and color the game is already running !!!
+* instead of restart directly, wait for keypress and see your lifeless ship float into the distance.
+* a camera to capture different places, in stead of only player.
+* make the game run from the beginning, so if choosing ship and color the game is already running
 * give ships a atention score that goes up when ships are sooting and dying drops off over time. <done, aat>
 * the portal stargate warp dent could use some drag inside it, for temp usability
 * grav anomalys are easy to make, game element ?
-cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fitt parts on your ship when on planet or structure, when container gets destroyed or dissconnected from ship you lose parts untill you are at capacity
-when special key than lifebars on parts and some effect for parts that are on, or some extra type of ship info.
-in camera splitout functionality make a layer class for the layers that will not do the drawing but perhaps the updating, anyhow updates dont belong in camera ?
+* cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fitt parts on your ship when on planet or structure, when container gets destroyed or dissconnected from ship you lose parts untill you are at capacity
+* when special key than lifebars on parts and some effect for parts that are on, or some extra type of ship info.
+* in camera splitout functionality make a layer class for the layers that will not do the drawing but perhaps the updating, anyhow updates doesnt belong in camera ?
+* landed can go to ship class so the ai can do extra stuff
+* ai could use some more bains and variation
+
 
 Housekeeping
 ===
@@ -63,7 +68,9 @@ the laser is broken, ;( <It is fixed, Aat>
 * radar enabled states are seperate, should be synced ? 
 * after menu and chat console prototype independance of game pause the menu will now show info, skills etc the right way.
 * still cant land on strucutre class. <fixed Aat>
-when ejecting parts planet inventory will not put them streight when caught
+* when ejecting parts planet inventory will not put them streight when caught
+* engines seem to light up nice, but the purple color of the engines doesnt color to ship color.
+in case of button pressed when you open menu, the ship will continue to do that action.
 
 parts
 ======
