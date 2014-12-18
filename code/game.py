@@ -33,6 +33,7 @@ class Game:
 		self.pause = False
 		self.console = False
 		self.debug = False
+		self.player = None
 		self.fps = FPS
 		self.screen = screen
 		self.top_left = 0, 0
@@ -42,11 +43,12 @@ class Game:
 		self.timer = 0
 		self.systems = []
 		self.triggers = []
-		self.camera = Camera(screen)
+		self.camera = Camera(self)
 		#messenger, with controls as first message:
-		self.messenger = Messenger(self)
-		
-		self.miniinfo = MiniInfo(self)
+		self.messenger = Messenger(self, 1)
+		self.camera.layerAdd(self.messenger)
+		self.camera.layerAdd(MiniInfo(self, 1))
+		# self.miniinfo = 
 		
 		#key polling:
 		self.keys = []
@@ -58,7 +60,8 @@ class Game:
 		#pygame setup:
 		self.clock = pygame.time.Clock()
 		
-		self.hud = HUD(self) # the heads up display
+		# self.hud =  # the heads up display
+		self.camera.layerAdd(HUD(self, 1))
 				
 	def run(self):
 		"""Runs the game."""
@@ -71,7 +74,7 @@ class Game:
 										800,600))
 			self.messenger.empty()
 			while self.running and intro.running:
-				#event polling:
+			# 	#event polling:
 				for event in pygame.event.get():
 					if event.type == pygame.QUIT:
 						pygame.quit()
@@ -85,18 +88,16 @@ class Game:
 			self.playerScript = InputScript(self)
 			self.player = playerShip(self, Vec2d(0,0),Vec2d(0,0), script = self.playerScript,
 							color = self.playerColor, type = self.playerType)
-			self.curSystem = SolarA1(self, self.player)
-			self.nextsystem = SolarB2(self, self.player)
-			self.systems = [self.curSystem]
+			self.curSystem = SolarA1(self)
+			self.camera.setBG(self.curSystem.bg)
+			self.nextsystem = SolarB2(self)
+			# self.systems = [self.curSystem]
 			self.curSystem.add(self.player)
 			
-			self.menu = Menu(self, Rect((self.width - 800) / 2,
-										(self.height - 600) / 2,
-										800, 600), self.player)
+			self.menu = Menu(self, Rect((self.width - 800) / 2,	(self.height - 600) / 2, 800, 600))
 
-			self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-100, self.width - int(self.width/ 8) , 100), self.player)
+			self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-100, self.width - int(self.width/ 8) , 100))
 
-			# self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8) - self.width, 30,	int(self.width/ 8), self.width-30), self.player)
 
 			for x in range(10):
 				self.clock.tick()
@@ -161,17 +162,19 @@ class Game:
 				for trigger in self.triggers:
 					trigger.update()
 				self.curSystem.update()
-				self.top_left = self.player.pos.x - self.width / 2, \
-						self.player.pos.y - self.height / 2
-				self.messenger.update()
-				self.miniinfo.update()
+				# self.top_left = self.player.pos.x - self.width / 2, \
+				# 		self.player.pos.y - self.height / 2
+				# self.messenger.update()
+				# self.miniinfo.update()
+				self.camera.update()
 							
 				#draw the layers:
 				self.screen.fill((0, 0, 0, 0))
-				self.curSystem.draw(self.screen, self.top_left)
-				self.hud.draw(self.screen, self.player)
-				self.messenger.draw(self.screen)
-				self.miniinfo.draw(self.screen)
+				# self.curSystem.draw(self.screen, self.top_left)
+				self.camera.draw(self.screen)
+				# self.hud.draw(self.screen, self.player)
+				# self.messenger.draw(self.screen)
+				# self.miniinfo.draw(self.screen)
 
 				#paused:
 				if self.pause:

@@ -38,7 +38,10 @@ side dish
 * make the game run from the beginning, so if choosing ship and color the game is already running !!!
 * give ships a atention score that goes up when ships are sooting and dying drops off over time. <done, aat>
 * the portal stargate warp dent could use some drag inside it, for temp usability
-grav anomalys are easy to make, game element ?
+* grav anomalys are easy to make, game element ?
+cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fitt parts on your ship when on planet or structure, when container gets destroyed or dissconnected from ship you lose parts untill you are at capacity
+when special key than lifebars on parts and some effect for parts that are on, or some extra type of ship info.
+in camera splitout functionality make a layer class for the layers that will not do the drawing but perhaps the updating, anyhow updates dont belong in camera ?
 
 Housekeeping
 ===
@@ -92,6 +95,7 @@ unknowns
 * test if planet orbit is posible and if no what is needed to make it so !
 * a orbit calculator <depends on simulator ception>
 * simulator ception for calculation of trajectorys, targeting and future positions <hard ?>
+* imports in methods, do we want that ?
 
 
 

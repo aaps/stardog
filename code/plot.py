@@ -11,7 +11,7 @@ def newGameTriggers(game):
 		Trigger(game, timerCondition(game, 20), 
 			messageAction(game, 
 			"You: I'm thinking thoughts! Have I always had thoughts?  I don't know.")),
-		Trigger(game, timerCondition(game, 25), 
+		Trigger(game, [seePlanetCondition(game), timerCondition(game, 20)], 
 			messageAction(game, 
 			"You: Hey, I see planets.  I wonder what they're like.")),
 		Trigger(game, seeShipCondition(game), 

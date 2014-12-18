@@ -12,10 +12,41 @@ radarScale = 200.0 # 1 radar pixel = radarScale space pixels
 radarRadiusBig = 400
 radarScaleBig = 200.0 # 1 radar pixel = radarScale space pixels
 edgeWarning = loadImage('res/edgeofsystem.bmp')
-class HUD:
 
-	def __init__(self, game):
+class Drawable:
+	enabled = True
+	game = None
+	drawBorder = True
+	rect = None
+	zindex = 0
+
+	def __init__(self, game, zindex = 0):
 		self.game = game
+		self.zindex = zindex
+		self.rect = Rect(0 ,0 ,game.width, game.height)
+
+	def setRect(self, rect):
+		self.rect = rect
+
+	def setZindex(self, zindex = 0):
+		self.zindex = zindex
+
+	def setEnabled(self, enabled=False):
+		self.enabled = enabled
+
+	def update(self):
+		pass
+
+	def draw(self):
+		pass
+
+
+
+class HUD(Drawable):
+
+	def __init__(self, game, zindex):
+		Drawable.__init__(self, game, zindex)
+		# self.game = game
 		self.image = pygame.Surface((self.game.width, self.game.height), \
 							flags = (SRCALPHA)).convert_alpha()
 		self.keys = game.keys
@@ -27,11 +58,12 @@ class HUD:
 					"res/radar large.png").convert_alpha()
 		self.radarImageBig.set_colorkey((0,0,0))
 
-	def draw(self, surface, thisShip):
+
+	def draw(self, surface):
 		"""updates the HUD and draws it."""
 		self.image.fill((0, 0, 0, 0))
 		#TODO: don't hard-code this key:
-		self.drawRadar(surface, thisShip, self.game.keys[K_TAB])
+		self.drawRadar(surface, self.game.player, self.game.keys[K_TAB])
 
 		# energy:
 		x = self.game.width - 25
@@ -41,8 +73,8 @@ class HUD:
 			5, h), 1) # empty bar
 
 		pygame.draw.rect(self.image, (0, 50, 230), (x, y \
-			+ h - h * thisShip.energy / thisShip.maxEnergy, 5, h \
-			* thisShip.energy / thisShip.maxEnergy)) # full bar
+			+ h - h * self.game.player.energy / self.game.player.maxEnergy, 5, h \
+			* self.game.player.energy / self.game.player.maxEnergy)) # full bar
 			
 		#XP:
 		x += 15
@@ -50,17 +82,17 @@ class HUD:
 			5, self.game.height / 6), 1) # empty bar
 
 		pygame.draw.rect(self.image, (0, 180, 80), \
-			(x, y + h - h * thisShip.xp / thisShip.next(), 5, \
-			h * thisShip.xp / thisShip.next())) # full bar
-		if(fontModule) and thisShip.developmentPoints:
-			self.image.blit(FONT.render(str(thisShip.developmentPoints), \
+			(x, y + h - h * self.game.player.xp / self.game.player.next(), 5, \
+			h * self.game.player.xp / self.game.player.next())) # full bar
+		if(fontModule) and self.game.player.developmentPoints:
+			self.image.blit(FONT.render(str(self.game.player.developmentPoints), \
 						False, (0, 180, 80)), (x, y - 20))
 						
 		#FPS
 		if(fontModule):
 			self.image.blit(FONT.render(str(self.game.fps), \
 						False, (200, 20, 255)), (100, 100))
-		if thisShip.game.curSystem.drawEdgeWarning:
+		if self.game.player.game.curSystem.drawEdgeWarning:
 			self.image.blit(edgeWarning, (20, self.game.height - 100))
 		#blit the HUD to the screen:
 		surface.blit(self.image, (0, 0))
@@ -101,11 +133,11 @@ class HUD:
 
 
 numStars = 300
-class BG:
-	def __init__(self, game):
-		self.game = game
+class BG(Drawable):
+	def __init__(self, game, zindex):
+		Drawable.__init__(self, game, zindex)
+		# self.game = game
 		self.stars = []
-		dimmer = 1
 		for star in range(numStars):
 			brightness = int(randint(100, 255))
 			# a position, a color, and a depth.
@@ -132,34 +164,28 @@ class BG:
 			pa[x,y+1] = star[3]
 			pa[x+1,y+1] = star[3]
 			
-class BGNova:
-	def __init__(self, game):
-		self.game = game
-		nova1 = pygame.image.load("res/bgnova1.jpg").convert(32, HWSURFACE)
-		nova2 = pygame.image.load("res/bgnova2.jpg").convert(32, HWSURFACE)
-		nova3 = pygame.image.load("res/bgnova3.jpg").convert(32, HWSURFACE)
-		nova4 = pygame.image.load("res/bgnova4.jpg").convert(32, HWSURFACE)
-		self.bg = [nova1, nova2, nova3, nova4]
-		nova4.set_alpha(30)
-		nova3.set_alpha(40)
-		nova2.set_alpha(50)
-		nova1.set_alpha(60)
-		self.width = nova1.get_width()
-		self.height = nova1.get_height()
+class MiniInfo(Drawable):
+	color = (100, 100, 255, 250)
+	font = FONT
+	maxChars = 50 #line width
+	bottomleft = 0,0
 
-	def draw(self, surface, thisShip):
-		depth = 10
-		for layer in self.bg:
-			offset = thisShip.x / depth % 800, thisShip.y / depth % 800
-			rects = (((0, 0, offset[0], offset[1]), \
-						(self.width - offset[0], self.height - offset[1])), \
-					((offset[0], 0, self.width - offset[0], offset[1]), \
-						(0, self.height - offset[1])), \
-					((0, offset[1], offset[0], self.height - offset[1]), \
-						(self.width - offset[0], 0)), \
-					((offset[0], offset[1], 	self.width - offset[0], \
-											self.width - offset[1]), \
-						(0, 0)))
-			for rect in rects:
-				surface.blit(layer, rect[1], area = rect[0])
-			depth = depth * 2
+	def __init__(self, game, zindex,font = FONT):
+		Drawable.__init__(self, game, zindex)
+		# self.game = game
+		self.bottomleft = 2,  game.height - int(game.height/ 4 ) 
+		self.targ = None
+		self.image = pygame.Surface((int(game.width / 8),int(game.height/ 4 )))
+		self.image.set_alpha(200)
+
+	def update(self):
+		self.targ = self.game.player.curtarget
+
+		
+	def draw(self, surface):
+		self.image.fill((0, 0, 80))
+		if self.targ:
+			# self.image.blit(userplaatje, (0,0))
+			text = self.font.render(self.targ.name, True, color)
+			self.image.blit(text, (0,0))
+		surface.blit(self.image, self.bottomleft)

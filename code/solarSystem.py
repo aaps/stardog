@@ -19,8 +19,8 @@ class SolarSystem:
 		self.floaters = pygame.sprite.Group()
 		self.ships = pygame.sprite.Group()
 		self.specialOperations = []
-		self.onScreen = []
-		self.bg = BG(self.game) # the background layer
+		# self.onScreen = []
+		self.bg = BG(self.game, 1) # the background layer
 		pygame.mixer.music.load("res/sound/space music.ogg")
 		pygame.mixer.music.play(-1)
 		pygame.mixer.music.set_volume(.15)
@@ -73,16 +73,16 @@ class SolarSystem:
 					except TypeError:
 						print floater
 		#list floaters that are on screen now:
-		self.onScreen = []
-		offset = Vec2d(self.game.player.pos.x - self.game.width / 2, 
-				self.game.player.pos.y - self.game.height / 2)
-		for floater in self.floaters:
-			r = floater.radius
-			if (r + floater.pos.x > offset[0] \
-				and floater.pos.x - r < offset[0] + self.game.width)\
-			and (r + floater.pos.y > offset[1] \
-				and floater.pos.y - r < offset[1] + self.game.height):
-					self.onScreen.append(floater)
+		# self.onScreen = []
+		# offset = Vec2d(self.game.player.pos.x - self.game.width / 2, 
+		# 		self.game.player.pos.y - self.game.height / 2)
+		# for floater in self.floaters:
+		# 	r = floater.radius
+		# 	if (r + floater.pos.x > offset[0] \
+		# 		and floater.pos.x - r < offset[0] + self.game.width)\
+		# 	and (r + floater.pos.y > offset[1] \
+		# 		and floater.pos.y - r < offset[1] + self.game.height):
+		# 			self.onScreen.append(floater)
 					
 		#do any special actions that don't fit elsewhere:
 		#(currently just laser collisions)
@@ -108,10 +108,10 @@ class SolarSystem:
 						self.add(ship)
 						ship.planet = planet
 		
-	def draw(self, surface, offset):
-		self.bg.draw(surface, self.game.player)
-		for floater in self.onScreen:
-				floater.draw(surface, offset)
+	# def draw(self, surface, offset):
+	# 	self.bg.draw(surface, self.game.player)
+	# 	for floater in self.onScreen:
+	# 			floater.draw(surface, offset)
 		
 	def add(self, floater):
 		"""adds a floater to this game."""
@@ -239,16 +239,16 @@ class SolarA1(SolarSystem):
 	respawnTime = 30
 	fightersPerMinute = 2
 	g=5000
-	def __init__(self, game, player, numPlanets = 10, numStructures = 2):
+	def __init__(self, game, numPlanets = 10, numStructures = 2):
 		SolarSystem.__init__(self, game)
 		self.sun = (Sun( game, Vec2d(0,0), radius = 2000, mass = 180000, \
 					color = (255, 255, 255), image = None)) # the star
 		#place player:
 		angle = randint(0,360)
 		distanceFromSun = randint(8000, 18000)
-
-		player.pos.x = distanceFromSun * cos(angle)
-		player.pos.y = distanceFromSun * sin(angle)
+		if game.player:
+			game.player.pos.x = distanceFromSun * cos(angle)
+			game.player.pos.y = distanceFromSun * sin(angle)
 		self.add(self.sun)
 		self.name = "Qbert"
 		
@@ -296,16 +296,16 @@ class SolarB2(SolarSystem):
 	maxFighters = 15
 	respawnTime = 30
 	fightersPerMinute = 2
-	def __init__(self, game, player, numPlanets = 3, numStructures = 1):
+	def __init__(self, game, numPlanets = 3, numStructures = 1):
 		SolarSystem.__init__(self, game)
 		self.sun = (Sun( game, Vec2d(0,0), radius = 2000, mass = 180000, \
 					color = (255, 255, 255), image = None)) # the star
 		#place player:
 		angle = randint(0,360)
 		distanceFromSun = randint(8000, 18000)
-
-		player.pos.x = distanceFromSun * cos(angle)
-		player.pos.y = distanceFromSun * sin(angle)
+		if game.player:
+			game.player.pos.x = distanceFromSun * cos(angle)
+			game.player.pos.y = distanceFromSun * sin(angle)
 		self.add(self.sun)
 		self.name = "Oglaf"
 		

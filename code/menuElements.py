@@ -3,6 +3,7 @@ from utils import *
 import pygame
 import math
 import random
+from gui import *
 from pygame.locals import *
 
 class Panel:
