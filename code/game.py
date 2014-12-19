@@ -156,25 +156,18 @@ class Game:
 				or self.keys[K_RCTRL % 322] and self.keys[K_q % 322]:
 					self.running = False
 					
-				#unpaused:
-				# if not self.pause:
-				#update action:
+
 				for trigger in self.triggers:
 					trigger.update()
 				self.curSystem.update()
-				# self.top_left = self.player.pos.x - self.width / 2, \
-				# 		self.player.pos.y - self.height / 2
-				# self.messenger.update()
-				# self.miniinfo.update()
+
 				self.camera.update()
 							
 				#draw the layers:
 				self.screen.fill((0, 0, 0, 0))
-				# self.curSystem.draw(self.screen, self.top_left)
+
 				self.camera.draw(self.screen)
-				# self.hud.draw(self.screen, self.player)
-				# self.messenger.draw(self.screen)
-				# self.miniinfo.draw(self.screen)
+
 
 				#paused:
 				if self.pause:

@@ -142,10 +142,8 @@ class Part(Floater):
 			cost = cos(self.ship.dir) #cost is short for cos(theta)
 			sint = sin(self.ship.dir)
 
-			self.pos.x = self.ship.pos.x + DETACH_SPACE * self.offset.x * cost \
-					- DETACH_SPACE * self.offset.y * sint
-			self.pos.y = self.ship.pos.y + DETACH_SPACE * self.offset.x * sint \
-					+ DETACH_SPACE * self.offset.y * cost
+			self.pos = self.ship.pos +  self.offset * DETACH_SPACE
+
 
 			self.delta.x = self.ship.delta.x \
 					+ rand() * sign(self.offset.x) * cost * DETACH_SPEED\

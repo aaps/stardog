@@ -72,17 +72,7 @@ class SolarSystem:
 						floater.kill(Floater())
 					except TypeError:
 						print floater
-		#list floaters that are on screen now:
-		# self.onScreen = []
-		# offset = Vec2d(self.game.player.pos.x - self.game.width / 2, 
-		# 		self.game.player.pos.y - self.game.height / 2)
-		# for floater in self.floaters:
-		# 	r = floater.radius
-		# 	if (r + floater.pos.x > offset[0] \
-		# 		and floater.pos.x - r < offset[0] + self.game.width)\
-		# 	and (r + floater.pos.y > offset[1] \
-		# 		and floater.pos.y - r < offset[1] + self.game.height):
-		# 			self.onScreen.append(floater)
+		
 					
 		#do any special actions that don't fit elsewhere:
 		#(currently just laser collisions)
@@ -101,17 +91,12 @@ class SolarSystem:
 					planet.numShips += 1
 					for i in range(planet.numShips):
 						angle = randint(0, 360)
-						x = planet.pos.x + cos(angle) * (planet.radius + 300)
-						y = planet.pos.y + sin(angle) * (planet.radius + 300)
-						ship = Strafebat(self.game, Vec2d(x,y), color = planet.color)
+						pos = Vec2d(0,0).rotatedd(angle, planet.radius + 300)
+						ship = Strafebat(self.game, pos, color = planet.color)
 						planet.ships.add(ship)
 						self.add(ship)
 						ship.planet = planet
 		
-	# def draw(self, surface, offset):
-	# 	self.bg.draw(surface, self.game.player)
-	# 	for floater in self.onScreen:
-	# 			floater.draw(surface, offset)
 		
 	def add(self, floater):
 		"""adds a floater to this game."""
@@ -220,10 +205,12 @@ class SolarSystem:
 		collision branching, which continues."""
 		force = (explosion.force / 
 				not0(dist2(explosion, floater)) * explosion.radius ** 2)
-		dir = atan2(floater.pos.y - explosion.pos.y, floater.pos.x - explosion.pos.x)
+		# dir = atan2(floater.pos.y - explosion.pos.y, floater.pos.x - explosion.pos.x)
+		dir = floater.pos.get_angle_between(explosion.pos)
 		accel = force / not0(floater.mass)
-		floater.delta.x += accel * cos(dir) / explosion.game.fps
-		floater.delta.y += accel * sin(dir) / explosion.game.fps
+		floater.delta += Vec2d(0,0).rotatedd(dir, accel) / explosion.game.fps
+		# floater.delta.x += accel * cos(dir) / explosion.game.fps
+		# floater.delta.y += accel * sin(dir) / explosion.game.fps
 		
 	def crash(self, a, b):
 		if soundModule:
@@ -247,8 +234,7 @@ class SolarA1(SolarSystem):
 		angle = randint(0,360)
 		distanceFromSun = randint(8000, 18000)
 		if game.player:
-			game.player.pos.x = distanceFromSun * cos(angle)
-			game.player.pos.y = distanceFromSun * sin(angle)
+			game.player.pos.rotatedd(angle, distanceFromSun)
 		self.add(self.sun)
 		self.name = "Qbert"
 		
@@ -304,8 +290,7 @@ class SolarB2(SolarSystem):
 		angle = randint(0,360)
 		distanceFromSun = randint(8000, 18000)
 		if game.player:
-			game.player.pos.x = distanceFromSun * cos(angle)
-			game.player.pos.y = distanceFromSun * sin(angle)
+			game.player.pos.rotatedd(angle, distanceFromSun)
 		self.add(self.sun)
 		self.name = "Oglaf"
 		

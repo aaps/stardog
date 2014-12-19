@@ -112,10 +112,7 @@ class Structure(Planet):
 			surface.blit(self.image, pos())
 		else:
 			pos = self.pos - offset
-			# pos = pos.inttup()
-			# pygame.draw.circle(surface, self.color, pos.inttup(), int(self.radius),1)
 			rect = Rect(pos.x-self.radius*0.875,pos.y-self.radius*0.875,self.radius*1.75,self.radius*1.75)
-			# pygame.draw.rect(surface, self.color, rect)
 			pygame.draw.rect(surface, self.color, rect)
 
 	def takeDamage(self, damage, other):

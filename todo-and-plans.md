@@ -72,6 +72,7 @@ the laser is broken, ;( [It is fixed, Aat]
 * engines seem to light up nice, but the purple color of the engines doesnt color to ship color.
 * in case of button pressed when you open menu, the ship will continue to do that action.
 * known planets is a list of all the known planets not the known planets in the current system
+* In case of open planet part panel and parts 'land' on planet they will not show up at the parts panel right away. only after a menu out/in
 
 parts
 ======

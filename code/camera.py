@@ -28,10 +28,8 @@ class Camera:
 				self.game.player.pos.y - self.height / 2)
 		for floater in self.game.curSystem.floaters:
 			r = floater.radius
-			if (r + floater.pos.x > self.offset.x \
-				and floater.pos.x - r < self.offset.x + self.width)\
-			and (r + floater.pos.y > self.offset.y \
-				and floater.pos.y - r < self.offset.y + self.height):
+			if (r + floater.pos.x > self.offset.x and floater.pos.x - r < self.offset.x + self.width)\
+			and (r + floater.pos.y > self.offset.y 	and floater.pos.y - r < self.offset.y + self.height):
 					self.onScreen.append(floater)
 
 		for layer in self.layers:

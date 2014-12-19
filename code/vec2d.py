@@ -279,6 +279,7 @@ class Vec2d(object):
         if (self.get_length_sqrd() == 0):
             return 0
         return math.degrees(math.atan2(self.y, self.x))
+        
     def __setangle(self, angle_degrees):
         self.x = self.length
         self.y = 0
