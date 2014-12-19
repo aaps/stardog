@@ -90,8 +90,9 @@ class SolarSystem:
 					planet.respawn = self.respawnTime #reset respawn timer
 					planet.numShips += 1
 					for i in range(planet.numShips):
+					
 						angle = randint(0, 360)
-						pos = Vec2d(0,0).rotatedd(angle, planet.radius + 300)
+						pos = planet.pos.rotatedd(angle, planet.radius + 300)
 						ship = Strafebat(self.game, pos, color = planet.color)
 						planet.ships.add(ship)
 						self.add(ship)
@@ -231,7 +232,7 @@ class SolarA1(SolarSystem):
 		angle = randint(0,360)
 		distanceFromSun = randint(8000, 18000)
 		if game.player:
-			game.player.pos = Vec2d(0,0).rotatedd(angle, distanceFromSun)
+			game.player.pos = self.sun.pos.rotatedd(angle, distanceFromSun)
 		self.add(self.sun)
 		self.name = "Qbert"
 		
@@ -246,7 +247,7 @@ class SolarA1(SolarSystem):
 			startpos = Vec2d(distanceFromSun * cos(angle), distanceFromSun * sin(angle))
 			startdir = startpos.get_angle_between(self.sun.pos) - 90
 			accel = ((self.g * mass) / distanceFromSun) / 10
-			startdelta = Vec2d(0,0).rotatedd(startdir, accel) # preps for gravity sensitive planets
+			# startdelta = Vec2d(0,0).rotatedd(startdir, accel) # preps for gravity sensitive planets
 			startdelta = Vec2d(0,0)
 			self.planets.append(Planet(game, startpos, startdelta ,self.g,radius = radius, mass = mass, \
 				color = color))
@@ -287,7 +288,7 @@ class SolarB2(SolarSystem):
 		angle = randint(0,360)
 		distanceFromSun = randint(8000, 18000)
 		if game.player:
-			game.player.pos = Vec2d(0,0).rotatedd(angle, distanceFromSun)
+			game.player.pos = self.sun.pos.rotatedd(angle, distanceFromSun)
 		self.add(self.sun)
 		self.name = "Oglaf"
 		
