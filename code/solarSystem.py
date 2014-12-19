@@ -205,12 +205,9 @@ class SolarSystem:
 		collision branching, which continues."""
 		force = (explosion.force / 
 				not0(dist2(explosion, floater)) * explosion.radius ** 2)
-		# dir = atan2(floater.pos.y - explosion.pos.y, floater.pos.x - explosion.pos.x)
 		dir = floater.pos.get_angle_between(explosion.pos)
 		accel = force / not0(floater.mass)
 		floater.delta += Vec2d(0,0).rotatedd(dir, accel) / explosion.game.fps
-		# floater.delta.x += accel * cos(dir) / explosion.game.fps
-		# floater.delta.y += accel * sin(dir) / explosion.game.fps
 		
 	def crash(self, a, b):
 		if soundModule:
@@ -234,7 +231,7 @@ class SolarA1(SolarSystem):
 		angle = randint(0,360)
 		distanceFromSun = randint(8000, 18000)
 		if game.player:
-			game.player.pos.rotatedd(angle, distanceFromSun)
+			game.player.pos = Vec2d(0,0).rotatedd(angle, distanceFromSun)
 		self.add(self.sun)
 		self.name = "Qbert"
 		
@@ -290,7 +287,7 @@ class SolarB2(SolarSystem):
 		angle = randint(0,360)
 		distanceFromSun = randint(8000, 18000)
 		if game.player:
-			game.player.pos.rotatedd(angle, distanceFromSun)
+			game.player.pos = Vec2d(0,0).rotatedd(angle, distanceFromSun)
 		self.add(self.sun)
 		self.name = "Oglaf"
 		
