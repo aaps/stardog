@@ -24,7 +24,7 @@ side dish
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
 * more collision handeling refactor
 * more to vec2d verctor work !!!
-* remember planets that where on radar in list !!! [done , aat]
+* remember planets that where on radar in list [done , aat]
 * some way to target ships, parts and planets [easy mode]
 * zoom in out option for radar [medium mode ?]
 * weapon heat generation [easy mode]
@@ -76,7 +76,7 @@ the laser is broken, ;( [It is fixed, Aat]
 parts
 ======
 
-* A radar that will eventualy suport raytracing. [easy for initial radar] !!!
+* A radar that will eventualy suport raytracing. [easy for initial radar]
 * Make mine's de accelerate till they hit thier target spot. 
 so you can get out of the way in time.
 maybe implement a arming period. 

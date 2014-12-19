@@ -88,31 +88,28 @@ class ChatConsole(TopLevelPanel):
 	color = (100, 100, 255, 250)
 	game = None
 
-	def __init__(self, game, rect,):
+	def __init__(self, game, rect):
 		TopLevelPanel.__init__(self, rect)
 		subFrameRect = Rect(0, 0, self.rect.width, self.rect.height)
 		self.game = game
 		
-
 		x = 2
 		y = 2
 		h = 24
 		w = 80
 
-		self.info = Info(subFrameRect, game)
-		self.panels.append(Button(Rect(x,y,w,h), \
-			lambda : self.setActiveMenu(self.info), "Info", BIG_FONT))
+		self.panels.append(Console(subFrameRect, game))
 
-	
-	def update(self):
-		pass
+
+
 
 	def handleEvent(self, event):
 		if event.type == pygame.KEYDOWN:
 			if event.key == K_6:
 				self.game.console = False
-				
-					# self.reset()
+		for panel in self.panels:
+			panel.handleEvent( event)
+
 		TopLevelPanel.handleEvent(self, event)
 
 
@@ -772,8 +769,8 @@ class Info(Panel):
 			"Info", BIG_FONT))
 		rect = Rect(100,0,200,300)
 	
-		rect = Rect(rect)
-		rect.y += 150
+		# rect = Rect(rect)
+		rect.y += 105
 		self.addPanel(InfoTile(rect, self, game))
 		
 	
@@ -781,8 +778,25 @@ class Info(Panel):
 		pass
 
 
+
+class Console(Panel):
+	drawBorder = True
+	color = (100, 100, 255, 250)
+
+	def __init__(self,rect, game):
+		Panel.__init__(self,rect)
+		rect = Rect(10,20,self.rect.width,200)
+		self.addPanel(InputField(rect, game))
+
+
+	def handleEvent(self,event):
+		for panel in self.panels:
+			panel.handleEvent(event)
+
+
 class SkillTreeTab(Selectable):
 	pass
+
 class SkillTreeSelector(Selecter):
 	pass
 
@@ -802,6 +816,7 @@ class InfoTile(Panel):
 
 	def planetnames(self):
 		planetnames = ""
+		cursystemknown = list(set(self.game.player.knownplanets) & set(self.game.curSystem.planets))
 		for planet in self.game.player.knownplanets:
 			if isinstance(planet, Planet):
 				planetnames += planet.name + "\n"
@@ -809,6 +824,65 @@ class InfoTile(Panel):
 
 	def systemname(self):
 		return self.game.curSystem.name
+
+class InputField(Panel):
+	drawBorder = False
+	image = None
+
+	def __init__(self, rect, game, font = FONT, color = (255,255,255), width = 200):
+		self.text = ""
+		self.game = game
+		
+		self.preftext = []
+		self.cursortimeout = 1
+		self.color = color
+		self.lineHeight = font.get_height()
+		self.temprect = rect
+		if not fontModule:
+			return
+		self.font = font
+		Panel.__init__(self, rect)
+
+	def handleEvent(self, event):
+		allowedkeys = list(range(97,122)) + list(range(32,71))
+
+
+		
+		if event.type == pygame.KEYDOWN:
+			print event.key
+			if event.key in allowedkeys:
+				self.text += event.unicode
+			
+			elif event.key == K_RETURN:
+				
+				self.preftext.reverse()
+				self.preftext.append(self.text)
+				self.preftext.reverse()
+				self.text = ""
+
+			elif event.key == K_BACKSPACE:
+				self.text = self.text[:-1]
+			
+
+	def update(self):
+		if self.cursortimeout <= 1.5:
+			self.cursortimeout += 1.01 / self.game.fps
+		else:
+			self.cursortimeout = 0
+
+
+		w,h = self.font.size(self.text)
+		self.image = pygame.Surface((w+20,h),
+		hardwareFlag | SRCALPHA).convert_alpha()
+		y = 0
+		cursorrect = Rect(w + 5,0,3,self.font.get_height())
+		
+		pygame.draw.rect(self.image, (255,255,255,self.cursortimeout*60), cursorrect)
+		
+		self.image.blit(self.font.render(self.text, True, self.color), (0, 0))
+
+		self.rect = Rect(self.temprect.topleft, self.image.get_size())
+		
 
 	
 class SkillTile(Button):
@@ -845,13 +919,6 @@ class Store(Panel):
 			"Store", BIG_FONT))
 
 
-# class Console(TopLevelPanel):
-# 	activeMenu = None
-# 	color = (100, 100, 255, 250)
-# 	def __init__(self, game, rect, player):
-# 		TopLevelPanel.__init__(self, rect)
-# 		subFrameRect = Rect(0, 0, \
-# 					self.rect.width, self.rect.height)
-# 		self.player = player
+
 
 

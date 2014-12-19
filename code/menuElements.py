@@ -108,6 +108,10 @@ class Panel:
 					(0, 0, rect.width, rect.height))
 		for panel in self.panels:
 			panel.draw(surface, rect)
+
+	def handleEvent(self, keys):
+		for panel in self.panels:
+			panel.handleKeys(keys)
 			
 class TopLevelPanel(Panel):
 	""" TopLevelPanel(rect) -> TopLevelPanel.
@@ -642,16 +646,16 @@ class Selecter(ScrollPanel):
 			panel.draw(self.image, self.visibleRect)
 		ScrollPanel.draw(self, surface, rect)
 
-class textInput(Panel):
+# class textInput(Panel):
 
-	drawBorder = True
-	def __init__(self, rect, font = FONT, color =(100, 200, 100)):
-		Panel.__init__(self, rect)
-		self.color = color
-		self.rect = rect
+# 	drawBorder = True
+# 	def __init__(self, rect, font = FONT, color =(100, 200, 100)):
+# 		Panel.__init__(self, rect)
+# 		self.color = color
+# 		self.rect = rect
 
-	def keyInput(self, key):
-		self.test += key
+# 	def keyInput(self, key):
+# 		self.test += key
 
 
 class Label(Panel):
@@ -682,13 +686,13 @@ class FunctionLabel(Panel):
 			self.image = self.font.render(self.textFunction(), True, self.color)
 		
 class TextBlock(Panel):
-	drawBorder = False
 	"""TextBlock(self,  rect, text, font = FONT) 
 	A panel with multi-line text. rect height is reset based on font and 
 	number of lines in text."""
+
+	drawBorder = False
 	image = None
 	def __init__(self, rect, textFunction, font = FONT, color = (0,0,0), width = 200):
-		# self.text = text.split("\n")
 		self.textFunction = textFunction
 		self.color = color
 		self.lineHeight = font.get_height()
@@ -696,8 +700,6 @@ class TextBlock(Panel):
 		if not fontModule:
 			return
 		self.font = font
-		
-
 		Panel.__init__(self, rect)
 
 		

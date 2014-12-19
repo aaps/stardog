@@ -128,6 +128,7 @@ class Portal(Planet):
 	name = "Portal Unknown"
 	rect = None
 	image = None
+	sister = None
 	
 	def __init__(self, game, pos, radius = 100, mass = 10000, \
 					color = (100,200,50), image = None, race = None):
@@ -140,7 +141,11 @@ class Portal(Planet):
 		if image == None:
 			self.image = None
 		self.inventory = []
-		
+	
+	def setSister(self, portal):
+		if instance(portal, Portal):
+			self.sister = portal
+
 	
 	def update(self):
 		for other in self.game.curSystem.floaters.sprites():

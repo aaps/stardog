@@ -96,7 +96,7 @@ class Game:
 			
 			self.menu = Menu(self, Rect((self.width - 800) / 2,	(self.height - 600) / 2, 800, 600))
 
-			self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-100, self.width - int(self.width/ 8) , 100))
+			self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-50, self.width - int(self.width/ 8) , 50))
 
 
 			for x in range(10):

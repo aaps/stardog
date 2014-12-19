@@ -13,8 +13,8 @@ except ImportError:
 
 
 
-FULL = False; RESOLUTION = 1024, 768 #test
-# FULL = True; RESOLUTION = None
+# FULL = False; RESOLUTION = 1024, 768 #test
+FULL = True; RESOLUTION = None
 #FULL = True; RESOLUTION = None #play
 hardwareFlag = pygame.HWSURFACE|pygame.DOUBLEBUF
 
