@@ -16,11 +16,8 @@ try:
 	from swampy.Lumpy import Lumpy
 except ImportError:
 	print "no way to build a class diagram now!! "
-# import yaml
-# import yamlpygame
-
-# lumpy = Lumpy()
-# lumpy.make_reference()
+#command parsing
+from commandParse import *
 
 FPS = 300
 
@@ -60,7 +57,11 @@ class Game:
 		
 		# self.hud =  # the heads up display
 		self.camera.layerAdd(HUD(self, 1))
-				
+		
+		#create a chatconsole for text input capabilities
+		self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-50, self.width - int(self.width/ 8) , 50))
+		#create a parser that parses chatconsole input for command and such.
+		self.commandParse = CommandParse(self, self.chatconsole)
 	def run(self):
 		"""Runs the game."""
 		
@@ -94,9 +95,6 @@ class Game:
 			self.curSystem.add(self.player)
 			
 			self.menu = Menu(self, Rect((self.width - 800) / 2,	(self.height - 600) / 2, 800, 600))
-
-			self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-50, self.width - int(self.width/ 8) , 50))
-
 			for x in range(10):
 				self.clock.tick()
 			
@@ -183,10 +181,7 @@ class Game:
 					self.chatconsole.update()
 					self.chatconsole.draw(self.screen)
 				
-				#get console input
-				text = self.chatconsole.console.inputfield.getText()
-				if text:
-					print text
+				self.commandParse.update()
 				
 				#frame maintainance:
 				pygame.display.flip()

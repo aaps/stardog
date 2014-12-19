@@ -129,12 +129,11 @@ make menu work on fullscreen. only fighter is displayed right left corner. [fixe
 
 Commanline interface
 =====
-* a command line interface for manipulating the world so that testing is faster.
+* a command line interface for manipulating the world so that testing is faster. [W.I.P]
 
 crew
 =====
 * add crew?
-
 * more crew more efficient ship.
 * maybe if crew then heal x per x seconds.
 

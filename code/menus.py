@@ -837,10 +837,12 @@ class InputField(Panel):
 		self.font = font
 		Panel.__init__(self, rect)
 	def getText(self):
-		text = list(self.preftext)
+		text = self.preftext
 		if self.preftext:
 			self.preftext = []
-			return text
+			return str(text[0])
+	def setText(self, text):
+		self.preftext = text
 	def handleEvent(self, event):
 		allowedkeys = list(range(97,122)) + list(range(32,71))
 		
