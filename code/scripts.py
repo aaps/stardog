@@ -55,14 +55,22 @@ class InputScript(Script):
 				ship.forward()
 			if self.game.mouse[1]:
 				ship.shoot()
-	
-	def bind(self, key, function, toggle):
+
+	def initbind(self, key, function, toggle):
 		"""binds function to key so function will be called if key is pressed.
 		Can bind more than one function to a key, and more than one key to
 		a function."""
 		key = key % 322
 		if not self.bindings.count((key, function,toggle, True)):
-			self.bindings.append((key, function,toggle, True))
+			self.bindings.append((key, function, toggle, True))	
+	
+	def bind(self, key, function):
+		"""binds function to key so function will be called if key is pressed.
+		Can bind more than one function to a key, and more than one key to
+		a function."""
+		key = key % 322
+		if not self.bindings.count((key, function,False, True)):
+			self.bindings.append((key, function,False, True))
 			
 	def unbind(self, key, function):
 		"""removes the exact binding key > function"""

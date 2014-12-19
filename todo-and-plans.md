@@ -64,13 +64,14 @@ in viewsinview ship direction jitters sometimes, more so when it's got a lot of 
 the laser is broken, ;( [It is fixed, Aat]
 * make binding keys actually works. they bind but don't do anything. and moste of the time. it bugs out the guns so they fire randomly or continously. [it works]
 * if you bind a key to a engine that isn't in the engine slot. it won't fire if you press that key. [??? hu ???]
-* the engines dont animate animate after radar addition, meh [ok this was a timing problem , when more code time in programm passes differently, it was done in a messy way, this will come back in a different form and place, fixed this however]
+* the engines dont animate after radar addition, meh [ok this was a timing problem , when more code time in programm passes differently, it was done in a messy way, this will come back in a different form and place, fixed this however]
 * radar enabled states are seperate, should be synced ? 
-* after menu and chat console prototype independance of game pause the menu will not show info, skills etc the right way.
+* after menu and chat console prototype independance of game pause the menu will not show info, skills etc the right way. [fixed aat]
 * still cant land on strucutre class. [fixed Aat]
 * when ejecting parts planet inventory will not put them streight when caught
 * engines seem to light up nice, but the purple color of the engines doesnt color to ship color.
-in case of button pressed when you open menu, the ship will continue to do that action.
+* in case of button pressed when you open menu, the ship will continue to do that action.
+* known planets is a list of all the known planets not the known planets in the current system
 
 parts
 ======

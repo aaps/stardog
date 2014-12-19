@@ -126,21 +126,21 @@ def playerShip(game, pos, delta, dir = 270, script = None, \
 				script, color, player=True)
 	#default controls:
 	# key, function, toggle or not
-	script.bind(K_DOWN, ship.reverse,False)
-	script.bind(K_UP, ship.forward,False)
-	script.bind(K_RIGHT, ship.turnRight,False)
-	script.bind(K_LEFT, ship.turnLeft,False)
-	script.bind(K_RCTRL, ship.shoot,False)
-	script.bind(K_s, ship.reverse,False)
-	script.bind(K_r, ship.toggleRadar,True)
-	script.bind(K_w, ship.forward,False)
-	script.bind(K_e, ship.left,False)
-	script.bind(K_q, ship.right,False)
-	script.bind(K_d, ship.turnRight,False)
-	script.bind(K_a, ship.turnLeft,False)
-	script.bind(K_LCTRL, ship.shoot,False)
-	script.bind(K_SPACE, ship.launchMissiles,False)
-	script.bind(K_m, ship.launchMines,False)
+	script.initbind(K_DOWN, ship.reverse,False)
+	script.initbind(K_UP, ship.forward,False)
+	script.initbind(K_RIGHT, ship.turnRight,False)
+	script.initbind(K_LEFT, ship.turnLeft,False)
+	script.initbind(K_RCTRL, ship.shoot,False)
+	script.initbind(K_s, ship.reverse,False)
+	script.initbind(K_r, ship.toggleRadar,True)
+	script.initbind(K_w, ship.forward,False)
+	script.initbind(K_e, ship.left,False)
+	script.initbind(K_q, ship.right,False)
+	script.initbind(K_d, ship.turnRight,False)
+	script.initbind(K_a, ship.turnLeft,False)
+	script.initbind(K_LCTRL, ship.shoot,False)
+	script.initbind(K_SPACE, ship.launchMissiles,False)
+	script.initbind(K_m, ship.launchMines,False)
 	
 	return ship
 
@@ -152,7 +152,7 @@ class Ship(Floater):
 	mass = 0
 	moment = 0
 	parts = []
-	knownplanets = []
+	
 	attention = 0
 	forwardEngines = []
 	maxhp = 0
@@ -211,6 +211,10 @@ class Ship(Floater):
 		self.maxEnergy = 0
 		self.color = color
 		self.part = None
+		if hasattr(self, 'knownplanets'):
+			self.knownplanets[:] = []
+		else:
+			self.knownplanets = []
 		self.__dict__.update(self.baseBonuses)
 		if script: self.script = script
 		else: self.script = Script(game)
@@ -242,7 +246,7 @@ class Ship(Floater):
 		self.forwardEngines = []
 		self.forwardThrust = 0
 		self.reverseThrust = 0
-		knownplanets = []
+		
 		self.leftThrust = 0
 		self.rightThrust = 0
 		self.torque = 0
@@ -305,6 +309,8 @@ class Ship(Floater):
 		self.baseImage.set_colorkey((0,0,0))
 		if self.ports[0].part:
 			self.ports[0].part.draw(self.baseImage)
+
+
 
 	def partRollCall(self, part):
 		"""adds parts to self.parts recursively."""

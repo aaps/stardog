@@ -786,22 +786,29 @@ class SkillTreeTab(Selectable):
 class SkillTreeSelector(Selecter):
 	pass
 
-class InfoTile(Button):
+class InfoTile(Panel):
 	def __init__(self, rect, parent, game):
 		self.parent = parent 
-		function = None
-		Button.__init__(self, rect, function, None)
+		self.game  = game
+		Panel.__init__(self, rect)
 		rect1 = Rect(rect.x + 5, rect.y + 5, 200, rect.width - 10)
-		rect2 =  Rect(rect.x + 5, rect.y + 5, 100, 100)
-		self.addPanel(Label(rect1, str(game.curSystem.name), color = (200,200,255)))
+		rect2 =  Rect(rect.x + 5, rect.y + 30, 100, 100)
+		self.addPanel(FunctionLabel(rect1, self.systemname))
+		self.addPanel(TextBlock(rect2, self.planetnames, SMALL_FONT, (100,200,0)))
+	
+	def update(self):
+		for panel in self.panels:
+			panel.update()
 
-		for planet in game.curSystem.planets:
-			rect2.x += 0
-			rect2.y += 15
+	def planetnames(self):
+		planetnames = ""
+		for planet in self.game.player.knownplanets:
+			if isinstance(planet, Planet):
+				planetnames += planet.name + "\n"
+		return planetnames
 
-			self.addPanel(TextBlock(rect2, planet.name, SMALL_FONT, (100,200,0)))
-		
-
+	def systemname(self):
+		return self.game.curSystem.name
 
 	
 class SkillTile(Button):

@@ -660,8 +660,11 @@ class Label(Panel):
 	drawBorder = False
 	def __init__(self, rect, text, font = FONT, color =(100, 200, 100)):
 		Panel.__init__(self, rect)
-		self.text = ""
+		self.text = text
 		self.color = color
+		if fontModule:
+			self.image = font.render(self.text, True, self.color)
+			self.rect = Rect(rect.topleft, self.image.get_size())
 
 
 			
@@ -671,8 +674,8 @@ class FunctionLabel(Panel):
 	def __init__(self, rect, textFunction, font = FONT):
 		Panel.__init__(self, rect)
 		self.textFunction = textFunction
-		self.update()
 		self.font = font
+		self.update()
 		
 	def update(self):
 		if fontModule:
@@ -684,22 +687,35 @@ class TextBlock(Panel):
 	A panel with multi-line text. rect height is reset based on font and 
 	number of lines in text."""
 	image = None
-	def __init__(self, rect, text, font = FONT, color = (0,0,0), width = 200):
-		self.text = text.split("\n")
-		if not fontModule:
-			Panel.__init__(self, rect)
-			return
+	def __init__(self, rect, textFunction, font = FONT, color = (0,0,0), width = 200):
+		# self.text = text.split("\n")
+		self.textFunction = textFunction
 		self.color = color
-		lineHeight = font.get_height()
-		self.image = pygame.Surface((rect.width, lineHeight * len(self.text)),
-				hardwareFlag | SRCALPHA).convert_alpha()
-		y = 0
-		for line in self.text:
-			self.image.blit(font.render(line, True, self.color), (0, y))
-			y += lineHeight
-		self.rect = Rect(rect.topleft, self.image.get_size())
-		Panel.__init__(self, self.rect)
+		self.lineHeight = font.get_height()
+		self.temprect = rect
+		if not fontModule:
+			return
+		self.font = font
+		
+
+		Panel.__init__(self, rect)
 
 		
-		
-		
+	def update(self):
+
+		if isinstance(self.textFunction, basestring):
+			self.image = pygame.Surface((self.temprect.width, self.lineHeight * len(self.textFunction.split("\n"))),
+			hardwareFlag | SRCALPHA).convert_alpha()
+			y = 0
+			for line in self.textFunction.split("\n"):
+				self.image.blit(self.font.render(line, True, self.color), (0, y))
+				y += self.lineHeight
+			self.rect = Rect(self.temprect.topleft, self.image.get_size())
+		else:
+			self.image = pygame.Surface((self.temprect.width, self.lineHeight * len(self.textFunction().split("\n"))),
+			hardwareFlag | SRCALPHA).convert_alpha()
+			y = 0
+			for line in self.textFunction().split("\n"):
+				self.image.blit(self.font.render(line, True, self.color), (0, y))
+				y += self.lineHeight
+			self.rect = Rect(self.temprect.topleft, self.image.get_size())
