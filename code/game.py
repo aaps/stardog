@@ -16,11 +16,8 @@ try:
 	from swampy.Lumpy import Lumpy
 except ImportError:
 	print "no way to build a class diagram now!! "
-# import yaml
-# import yamlpygame
-
-# lumpy = Lumpy()
-# lumpy.make_reference()
+#command parsing
+from commandParse import *
 
 FPS = 300
 
@@ -51,9 +48,7 @@ class Game:
 		# self.miniinfo = 
 		
 		#key polling:
-		self.keys = []
-		for _i in range (322):
-			self.keys.append(False)
+		self.keys = [False]*322
 		#mouse is [pos, button1, button2, button3,..., button6].
 		#new Apple mice think they have 6 buttons.
 		self.mouse = [(0, 0), 0, 0, 0, 0, 0, 0]
@@ -62,7 +57,11 @@ class Game:
 		
 		# self.hud =  # the heads up display
 		self.camera.layerAdd(HUD(self, 1))
-				
+		
+		#create a chatconsole for text input capabilities
+		self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-50, self.width - int(self.width/ 8) , 50))
+		#create a parser that parses chatconsole input for command and such.
+		self.commandParse = CommandParse(self, self.chatconsole)
 	def run(self):
 		"""Runs the game."""
 		
@@ -75,6 +74,7 @@ class Game:
 			self.messenger.empty()
 			while self.running and intro.running:
 			# 	#event polling:
+				pygame.event.pump()
 				for event in pygame.event.get():
 					if event.type == pygame.QUIT:
 						pygame.quit()
@@ -95,10 +95,6 @@ class Game:
 			self.curSystem.add(self.player)
 			
 			self.menu = Menu(self, Rect((self.width - 800) / 2,	(self.height - 600) / 2, 800, 600))
-
-			self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-50, self.width - int(self.width/ 8) , 50))
-
-
 			for x in range(10):
 				self.clock.tick()
 			
@@ -107,7 +103,7 @@ class Game:
 			#The in-round loop (while player is alive):
 			while self.running and self.curSystem.ships.has(self.player):
 				#event polling:
-				
+				pygame.event.pump()
 				for event in pygame.event.get():
 					if event.type == pygame.QUIT:
 						self.running = 0
@@ -177,7 +173,9 @@ class Game:
 				if self.console:
 					self.chatconsole.update()
 					self.chatconsole.draw(self.screen)
-					
+				
+				self.commandParse.update()
+				
 				#frame maintainance:
 				pygame.display.flip()
 				self.clock.tick(FPS)#aim for FPS but adjust vars for self.fps.
