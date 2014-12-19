@@ -51,9 +51,7 @@ class Game:
 		# self.miniinfo = 
 		
 		#key polling:
-		self.keys = []
-		for _i in range (322):
-			self.keys.append(False)
+		self.keys = [False]*322
 		#mouse is [pos, button1, button2, button3,..., button6].
 		#new Apple mice think they have 6 buttons.
 		self.mouse = [(0, 0), 0, 0, 0, 0, 0, 0]
@@ -75,6 +73,7 @@ class Game:
 			self.messenger.empty()
 			while self.running and intro.running:
 			# 	#event polling:
+				pygame.event.pump()
 				for event in pygame.event.get():
 					if event.type == pygame.QUIT:
 						pygame.quit()
@@ -98,7 +97,6 @@ class Game:
 
 			self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-50, self.width - int(self.width/ 8) , 50))
 
-
 			for x in range(10):
 				self.clock.tick()
 			
@@ -107,7 +105,7 @@ class Game:
 			#The in-round loop (while player is alive):
 			while self.running and self.curSystem.ships.has(self.player):
 				#event polling:
-				
+				pygame.event.pump()
 				for event in pygame.event.get():
 					if event.type == pygame.QUIT:
 						self.running = 0
@@ -184,7 +182,12 @@ class Game:
 				if self.console:
 					self.chatconsole.update()
 					self.chatconsole.draw(self.screen)
-					
+				
+				#get console input
+				text = self.chatconsole.console.inputfield.getText()
+				if text:
+					print text
+				
 				#frame maintainance:
 				pygame.display.flip()
 				self.clock.tick(FPS)#aim for FPS but adjust vars for self.fps.

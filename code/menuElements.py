@@ -130,6 +130,7 @@ class TopLevelPanel(Panel):
 							
 	def handleEvent(self, event):
 		"""Examines the event and passes it down to children as appropriate."""
+		
 		if event.type == pygame.MOUSEBUTTONDOWN:
 			self.internalPos = event.pos[0] - self.rect.left, \
 							event.pos[1] - self.rect.top
@@ -159,12 +160,6 @@ class TopLevelPanel(Panel):
 					self.dragOver(self.internalPos, event.rel)
 			else: 
 				self.move(self.internalPos, event.rel)
-				
-		elif event.type == pygame.KEYDOWN:
-			pass
-		elif event.type == pygame.KEYUP:
-			pass
-
 		return []
 
 	

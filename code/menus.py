@@ -87,7 +87,6 @@ class ChatConsole(TopLevelPanel):
 	activeMenu = None
 	color = (100, 100, 255, 250)
 	game = None
-
 	def __init__(self, game, rect):
 		TopLevelPanel.__init__(self, rect)
 		subFrameRect = Rect(0, 0, self.rect.width, self.rect.height)
@@ -97,12 +96,8 @@ class ChatConsole(TopLevelPanel):
 		y = 2
 		h = 24
 		w = 80
-
-		self.panels.append(Console(subFrameRect, game))
-
-
-
-
+		self.console = Console(subFrameRect, game)
+		self.panels.append(self.console)
 	def handleEvent(self, event):
 		if event.type == pygame.KEYDOWN:
 			if event.key == K_6:
@@ -155,7 +150,7 @@ class Menu(TopLevelPanel):
 		#print "self.panels len: %d"%(len(self.panels))
 	
 	def update(self):
-		Panel.update(self)
+		self.game.player.reset()
 		if self.activeMenu:
 			self.activeMenu.update()
 
@@ -786,9 +781,8 @@ class Console(Panel):
 	def __init__(self,rect, game):
 		Panel.__init__(self,rect)
 		rect = Rect(10,20,self.rect.width,200)
-		self.addPanel(InputField(rect, game))
-
-
+		self.inputfield = InputField(rect, game)
+		self.addPanel(self.inputfield)
 	def handleEvent(self,event):
 		for panel in self.panels:
 			panel.handleEvent(event)
@@ -842,28 +836,23 @@ class InputField(Panel):
 			return
 		self.font = font
 		Panel.__init__(self, rect)
-
+	def getText(self):
+		text = list(self.preftext)
+		if self.preftext:
+			self.preftext = []
+			return text
 	def handleEvent(self, event):
 		allowedkeys = list(range(97,122)) + list(range(32,71))
-
-
 		
 		if event.type == pygame.KEYDOWN:
-			print event.key
 			if event.key in allowedkeys:
 				self.text += event.unicode
 			
 			elif event.key == K_RETURN:
-				
-				self.preftext.reverse()
 				self.preftext.append(self.text)
-				self.preftext.reverse()
 				self.text = ""
-
 			elif event.key == K_BACKSPACE:
 				self.text = self.text[:-1]
-			
-
 	def update(self):
 		if self.cursortimeout <= 1.5:
 			self.cursortimeout += 1.01 / self.game.fps
