@@ -756,7 +756,7 @@ class Skills(Panel):
 		for skill in game.player.skills:
 			rect = Rect(rect)
 			rect.y += 150
-			self.addPanel(SkillTile(rect, self, skill, game))
+			self.addPanel(SkillTile(rect, self, skill, game.player))
 		
 	
 	def skill(self, skillName):
