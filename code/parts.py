@@ -827,7 +827,7 @@ class GatewayFocus(Part):
 		print 'toggle'
 		if self.enabled:
 			self.enabled = False
-			if self.jumpenergy => self.neededenergy:
+			if self.jumpenergy >= self.neededenergy:
 				self.jump()
 		else:
 			self.enabled = True
