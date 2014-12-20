@@ -111,6 +111,44 @@ def makeInterceptor(game, pos, delta, dir = 270, script = None, \
 	ship.reset()
 	ship.energy = ship.maxEnergy * .8
 	return ship
+
+def makeJuggernaut(game, pos, delta, dir=27, script = None, \
+				color = (255,255,255), player=False):
+	if player:
+		ship = Player(game, pos, delta, dir=dir, \
+			script = script, color = color)
+	else:
+		ship = Ship(game, pos, delta, dir=dir, \
+			script = script, color = color)
+	
+	cockpit = Interceptor(game)
+	gyro = Gyro(game)
+	generator = Generator(game)
+	battery = Battery(game)
+	gun = LeftFlakCannon(game)
+	gun2 = RightFlakCannon(game)
+	engine = Engine(game)
+	engine2 = Engine(game)
+	quarter = Quarters(game)#Quarters(game)
+	
+	for part in [gyro, generator, battery, cockpit, gun, gun2, engine, engine2, quarter]:
+		if rand() > .8:
+			addAdjective(part)
+			if rand() > .6:
+				addAdjective(part)
+		part.color = color
+	ship.addPart(cockpit)
+	cockpit.addPart(gun, 2)
+	cockpit.addPart(gun2, 3)
+	cockpit.addPart(generator, 4)
+	cockpit.addPart(gyro, 5)
+	generator.addPart(battery, 0)
+	battery.addPart(engine, 0)
+	gyro.addPart(engine2, 1)
+	gyro.addPart(quarter, 2)
+	ship.reset()
+	ship.energy = ship.maxEnergy * .8
+	return ship
 	
 def playerShip(game, pos, delta, dir = 270, script = None, \
 				color = (255, 255, 255), type = 'fighter'):
@@ -121,6 +159,8 @@ def playerShip(game, pos, delta, dir = 270, script = None, \
 	elif type == 'interceptor':
 		ship = makeInterceptor(game, pos, delta, dir, 
 				script, color, player=True)
+	elif type == 'juggernaut':
+		ship = makeJuggernaut(game, pos, delta, dir, script, color, player=True)
 	else:
 		ship = makeFighter(game, pos, delta, dir, 
 				script, color, player=True)
