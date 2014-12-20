@@ -133,6 +133,7 @@ def playerShip(game, pos, delta, dir = 270, script = None, \
 	script.initbind(K_RCTRL, ship.shoot,False)
 	script.initbind(K_s, ship.reverse,False)
 	script.initbind(K_r, ship.toggleRadar,True)
+	script.initbind(K_j, ship.toggleGatewayFocus,True)
 	script.initbind(K_w, ship.forward,False)
 	script.initbind(K_e, ship.left,False)
 	script.initbind(K_q, ship.right,False)
@@ -152,7 +153,7 @@ class Ship(Floater):
 	mass = 0
 	moment = 0
 	parts = []
-	
+	atgateway = False
 	attention = 0
 	forwardEngines = []
 	maxhp = 0
@@ -221,14 +222,16 @@ class Ship(Floater):
 		self.baseImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
 		self.baseImage.set_colorkey((0,0,0))
 		self.functions = [self.forward, self.reverse, self.left, self.right, \
-				self.turnLeft, self.turnRight, self.shoot, self.launchMissiles, self.launchMines,  self.toggleRadar]
+				self.turnLeft, self.turnRight, self.shoot, self.launchMissiles, self.launchMines, self.toggleGatewayFocus, self.toggleRadar]
 		self.functionDescriptions = []
 		for function in self.functions:
 			self.functionDescriptions.append(function.__doc__)
 		self.baseBonuses = self.baseBonuses.copy()
+
 	def insertInInventory(self, part, amount=1):
 		for i in range(amount):
 			self.inventory.append(part(self.game))
+
 	def addPart(self, part, portIndex = 0):
 		"""ship.addPart(part) -> Sets the main part for this ship.
 		Only used for the base part (usually a cockpit), other parts are added to parts."""
@@ -256,6 +259,7 @@ class Ship(Floater):
 		self.guns = []
 		self.missiles = []
 		self.radars = []
+		self.gwfocusus = []
 		self.mines = []
 		self.gyros = []
 		self.partLimit = Ship.partLimit
@@ -334,6 +338,8 @@ class Ship(Floater):
 				self.torque += part.torque
 			if isinstance(part, Radar):
 				self.radars.append(part)
+			if isinstance(part, GatewayFocus):
+				self.gwfocusus.append(part)
 			if isinstance(part, Gun):
 				if isinstance(part, MissileLauncher):
 					self.missiles.append(part)
@@ -386,6 +392,9 @@ class Ship(Floater):
 	def toggleRadar(self):
 		for radar in self.radars:
 			radar.toggle()
+	def toggleGatewayFocus(self):
+		for gwfocus in self.gwfocusus:
+			gwfocus.toggle()
 	
 	
 	def update(self):
@@ -407,6 +416,10 @@ class Ship(Floater):
 			effect(self)
 		for effect in self.partEffects:
 			effect(self)
+
+		if self.atgateway and dist2(self, self.atgateway) > (self.atgateway.radius * 1.1) ** 2:
+			self.atgateway = False
+
 
 	def draw(self, surface, offset = None, pos = (0, 0)):
 		"""ship.draw(surface, offset) -> Blits this ship onto the surface. 
@@ -501,6 +514,9 @@ class Ship(Floater):
 				self.game.menu.parts.reset()
 			self.delta.x, self.delta.y = planet.delta.x, planet.delta.y
 
+	def gatewayCollision(self, gateway):
+		self.atgateway = gateway
+
 	def freepartCollision(self, part):
 		if part.pickuptimeout <= 0:
 			part.dir = 0
@@ -520,16 +536,21 @@ class Player(Ship):
 				color = (255, 255, 255)):
 		Ship.__init__(self, game, pos, delta, dir, script, color)
 		self.skills = [Modularity(self), Agility(self), Composure(self)]
+
 	def xpQuest(self, xp):
 		self.xp += xp
+
 	def xpKill(self, ship):
 		self.xp +=  10. * ship.level / self.level
+
 	def xpDamage(self, target, damage):
 		if isinstance(target, Part) and target.parent:
 			target = target.parent #count the ship, not the part.
 		self.xp += 1. * target.level / self.level * damage
+
 	def xpDestroy(self, target):
 		self.xp += 2. * target.level / self.level
+
 	def update(self):
 		if self.game.debug: print 'xp:',self.xp
 		if self.xp >= self.next():

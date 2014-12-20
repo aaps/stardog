@@ -662,17 +662,7 @@ class Engine(Part):
 		else:
 			self.animated = False	
 
-		# if self.thrusting:
-		# 	self.animated = True
-		# else:
-		# 	self.animated = False
-		# self.thrusting = False
-		# if self.ship:
-		# 	self.ship.delta * 0.9
-
 		Part.update(self)
-
-
 	
 	def thrust(self):
 		"""thrust: pushes the ship from the direction this engine points."""
@@ -784,7 +774,6 @@ class Interconnect(Part):
 				Port(Vec2d(-self.width / 2 , 0), 0, self), \
 				Port(Vec2d(0, -self.height / 2 ), 90, self)]
 
-#<duality> added this part it works it regenerates health really nice and slow :)
 class Quarters(Part):
 	baseImage = loadImage("res/parts/quarters"+ext)
 	image = None
@@ -793,14 +782,17 @@ class Quarters(Part):
 	def __init__(self, game):
 		Part.__init__(self, game)
 		self.ports = [Port(Vec2d(-self.width/2,0), 0, self)]
+
 	def stats(self):
 		stats = (self.repair,)
 		statString = "\nRepairy: %s hp/s"
 		return Part.stats(self) + statString % stats
+
 	def shortStats(self):
 		stats = (self.repair,)
 		statString = "\n%s E"
 		return Part.shortStats(self)+statString%(stats)
+
 	def update(self):
 		if self.ship:
 			for part in self.ship.parts:
@@ -808,6 +800,48 @@ class Quarters(Part):
 					part.hp = part.hp+self.repair*self.ship.efficiency/self.game.fps
 					break
 		Part.update(self)
+
+class GatewayFocus(Part):
+	baseImage = loadImage("res/parts/gateway_focus"+ext)
+	image = None
+	name = "Gateway Focus"
+	neededenergy = 100
+	jumpenergy = 0
+	enabled = False
+	energyCost = 10
+
+
+	def __init__(self, game):
+		Part.__init__(self, game)
+		self.ports = []
+
+	def stats(self):
+		statString = "Will jump to other system"
+		return statString
+
+	def shortStats(self):
+		return "Nothing"
+
+
+	def toggle(self):
+		print 'toggle'
+		if self.enabled:
+			self.enabled = False
+			if self.jumpenergy => self.neededenergy:
+				self.jump()
+		else:
+			self.enabled = True
+
+	def update(self):
+		if self.enabled and self.ship.energy > self.energyCost and self.jumpenergy < self.neededenergy:
+			self.ship.energy -= (self.energyCost / self.ship.efficiency) / self.game.fps
+			self.jumpenergy = (self.ship.efficiency * self.energyCost) / self.game.fps
+
+	def jump(self):
+		print "jump"
+		# print self.atgateway
+		
+		
 
 class Battery(Part):
 	baseImage = loadImage("res/parts/battery" + ext)

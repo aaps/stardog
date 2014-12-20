@@ -128,15 +128,18 @@ class SolarSystem:
 				and sign(b.pos.y - a.pos.y) == sign(b.delta.y - a.delta.y):# moving away from planet.
 					return False
 				# planet/ship
-				if isinstance(b, Ship):
-					b.planetCollision(a)
-					return True
 				#planet/part
-				if isinstance(b, Part) and b.parent == None:
+				elif isinstance(b, Part) and b.parent == None:
 					a.freepartCollision( b)
 					return True
+				elif isinstance(b, Ship):
+					if isinstance(a, Gateway):
+						b.gatewayCollision(a)
+					else:	
+						b.planetCollision(a)
+					return True
 				#planet/planet
-				if isinstance(b, Planet):
+				elif isinstance(b, Planet):
 					a.planetCollision(b)
 					return True
 					
@@ -272,7 +275,7 @@ class SolarA1(SolarSystem):
 		for structure in self.structures:
 			self.add(structure)
 
-		self.add(Portal(game, Vec2d(20000,20000), 200) )
+		self.add(Gateway(game, Vec2d(20000,20000), 200) )
 
 
 class SolarB2(SolarSystem):
