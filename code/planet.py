@@ -118,11 +118,11 @@ class Structure(Planet):
 	def takeDamage(self, damage, other):
 		pass
 
-class Portal(Planet):
-	maxRadius = 1000000 # no gravity felt past this (approximation).
-	tangible = False
+class Gateway(Planet):
+	maxRadius = 50000 # no gravity felt past this (approximation).
+	tangible = True
 	g = 5000 # the gravitational constant.
-	name = "Portal Unknown"
+	name = "Gateway Unknown"
 	rect = None
 	image = None
 	sister = None
@@ -139,9 +139,9 @@ class Portal(Planet):
 			self.image = None
 		self.inventory = []
 	
-	def setSister(self, portal):
-		if instance(portal, Portal):
-			self.sister = portal
+	def setSister(self, gateway):
+		if instance(gateway, Gateway):
+			self.sister = gateway
 
 	
 	def update(self):

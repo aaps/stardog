@@ -16,6 +16,8 @@ http://pygame.org/project-planes-2392-4051.html get version 0.6
 * sounds also need to be in views
 * put the collide logic in the things that collide, planets, floaters, parts etc. [1/4 done]
 * it needs an economy not yust parts for static $$, [ harder ]
+* nebula and atmosphere
+
 
 side dish
 ==========
@@ -28,15 +30,14 @@ side dish
 * some way to target ships, parts and planets [easy mode]
 * zoom in out option for radar [medium mode ?]
 * weapon heat generation [easy mode]
-
-* a name to give yourself [as a precursor of network play and to get familiair with gui, after view spitout and vectors] [gui is not nice, but overhaul costs to much time, lets keep it for now] !!!
-
+* engines that are good for space travel but bad for landing and visaversa
+* a name to give yourself [as a precursor of network play and to get familiair with gui, after view spitout and vectors] [gui is not nice, but overhaul costs to much time, lets keep it for now]
 * Display solar system name somewhere [was suposed to be in menu untill the no pause game refactor]
 * other sound for bullet impact on shield and plating and on planet
 * palaxing background, the image
 * menu volume controll for music and effects
 * instead of restart directly, wait for keypress and see your lifeless ship float into the distance.
-* a camera to capture different places, in stead of only player.
+* a camera to capture different places, in stead of only player. !!!
 * make the game run from the beginning, so if choosing ship and color the game is already running
 * give ships a atention score that goes up when ships are sooting and dying drops off over time. [done, aat]
 * the portal stargate warp dent could use some drag inside it, for temp usability
@@ -125,6 +126,7 @@ make menu work on fullscreen. only fighter is displayed right left corner. [fixe
 * not be a planet. !!! also good for space ports, etc. [Aaps, first refactor the collision detection part]
 * posibility to eject parts [easy mode, done aat] !!!
 * make planet inherit from a Gravless class so stargate will not be effected by graf [done in another way]
+* removed names from the code, duality, your name can go here !
 
 [Duality]
 

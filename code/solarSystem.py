@@ -90,8 +90,9 @@ class SolarSystem:
 					planet.respawn = self.respawnTime #reset respawn timer
 					planet.numShips += 1
 					for i in range(planet.numShips):
+					
 						angle = randint(0, 360)
-						pos = Vec2d(0,0).rotatedd(angle, planet.radius + 300)
+						pos = planet.pos.rotatedd(angle, planet.radius + 300)
 						ship = Strafebat(self.game, pos, color = planet.color)
 						planet.ships.add(ship)
 						self.add(ship)
@@ -127,15 +128,18 @@ class SolarSystem:
 				and sign(b.pos.y - a.pos.y) == sign(b.delta.y - a.delta.y):# moving away from planet.
 					return False
 				# planet/ship
-				if isinstance(b, Ship):
-					b.planetCollision(a)
-					return True
 				#planet/part
-				if isinstance(b, Part) and b.parent == None:
+				elif isinstance(b, Part) and b.parent == None:
 					a.freepartCollision( b)
 					return True
+				elif isinstance(b, Ship):
+					if isinstance(a, Gateway):
+						b.gatewayCollision(a)
+					else:	
+						b.planetCollision(a)
+					return True
 				#planet/planet
-				if isinstance(b, Planet):
+				elif isinstance(b, Planet):
 					a.planetCollision(b)
 					return True
 					
@@ -231,7 +235,7 @@ class SolarA1(SolarSystem):
 		angle = randint(0,360)
 		distanceFromSun = randint(8000, 18000)
 		if game.player:
-			game.player.pos = Vec2d(0,0).rotatedd(angle, distanceFromSun)
+			game.player.pos = self.sun.pos.rotatedd(angle, distanceFromSun)
 		self.add(self.sun)
 		self.name = "Qbert"
 		
@@ -246,7 +250,7 @@ class SolarA1(SolarSystem):
 			startpos = Vec2d(distanceFromSun * cos(angle), distanceFromSun * sin(angle))
 			startdir = startpos.get_angle_between(self.sun.pos) - 90
 			accel = ((self.g * mass) / distanceFromSun) / 10
-			startdelta = Vec2d(0,0).rotatedd(startdir, accel) # preps for gravity sensitive planets
+			# startdelta = Vec2d(0,0).rotatedd(startdir, accel) # preps for gravity sensitive planets
 			startdelta = Vec2d(0,0)
 			self.planets.append(Planet(game, startpos, startdelta ,self.g,radius = radius, mass = mass, \
 				color = color))
@@ -271,7 +275,7 @@ class SolarA1(SolarSystem):
 		for structure in self.structures:
 			self.add(structure)
 
-		self.add(Portal(game, Vec2d(20000,20000), 200) )
+		self.add(Gateway(game, Vec2d(20000,20000), 200) )
 
 
 class SolarB2(SolarSystem):
@@ -287,7 +291,7 @@ class SolarB2(SolarSystem):
 		angle = randint(0,360)
 		distanceFromSun = randint(8000, 18000)
 		if game.player:
-			game.player.pos = Vec2d(0,0).rotatedd(angle, distanceFromSun)
+			game.player.pos = self.sun.pos.rotatedd(angle, distanceFromSun)
 		self.add(self.sun)
 		self.name = "Oglaf"
 		
