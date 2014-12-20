@@ -1,4 +1,10 @@
 class CommandParse(object):
+	helpText = [
+	"!print <object> <attributes> <...>\n"
+	"wil print all the atributes of the object\n"
+	"or atributes specified, and or the elements\n"
+	"in that atributes list\n"
+	]
 	def __init__(self, game, chatconsole):
 		self.game = game
 		self.chatconsole = chatconsole
@@ -26,8 +32,9 @@ class CommandParse(object):
 					if 'game' in args:
 						for element in self.game.__dict__:
 							print element
-				elif command == 'thing':
-					pass
+				elif command == 'help':
+					for text in self.helpText:
+						print text
 				elif command == 'printdbg':
 					print "input: %s \ncommand: %s \narguments: %s"%(text, command, args)
 			else:
