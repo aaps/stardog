@@ -153,7 +153,8 @@ ship
 * implement droping mines and implement a part for it that does that?
 or only give the destroyer that capability?
 * display ship stats closer to the ship like health energy xp bar can stay where it is?
-
+* make a scout ship
+* make a juggernaut ship [W.I.P]
 parts
 ======
 * blocks with different shapes so that you can better position parts.

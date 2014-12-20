@@ -129,23 +129,30 @@ def makeJuggernaut(game, pos, delta, dir=27, script = None, \
 	gun2 = RightFlakCannon(game)
 	engine = Engine(game)
 	engine2 = Engine(game)
-	quarter = Quarters(game)#Quarters(game)
+	quarter = Quarters(game)
+	shield = Shield(game)
 	
-	for part in [gyro, generator, battery, cockpit, gun, gun2, engine, engine2, quarter]:
+	for part in [gyro, generator, battery, cockpit, gun, gun2, engine, engine2, quarter, shield]:
 		if rand() > .8:
 			addAdjective(part)
 			if rand() > .6:
 				addAdjective(part)
 		part.color = color
 	ship.addPart(cockpit)
+	
+	cockpit.addPart(quarter, 1)
 	cockpit.addPart(gun, 2)
 	cockpit.addPart(gun2, 3)
 	cockpit.addPart(generator, 4)
 	cockpit.addPart(gyro, 5)
-	cockpit.addPart(quarter, 1)
+	cockpit.addPart(shield, 0)
+	
 	generator.addPart(battery, 0)
+	
 	battery.addPart(engine, 0)
+	
 	gyro.addPart(engine2, 1)
+	
 	ship.reset()
 	ship.energy = ship.maxEnergy * .8
 	return ship
@@ -604,9 +611,3 @@ class Player(Ship):
 	
 	def next(self):
 		return 1.1 ** self.level * 10
-	
-	
-	
-	
-	
-	

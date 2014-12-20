@@ -410,7 +410,6 @@ class Cannon(Gun):
 					self.speed * s.cannonSpeedBonus,
 					self.range * s.cannonRangeBonus, image = self.bulletImage))
 
-
 class MineDropper(Gun):
 	baseImage = loadImage("res/parts/minelayer"+ext)
 	mineImage = loadImage("res/mine"+ext)
@@ -620,8 +619,6 @@ class Radar(Part):
 			self.ship.energy -= self.energyCost / self.game.fps
 		else:
 			self.detected = []
-		# Part.update(self)
-
 
 class Engine(Part):
 	baseImage = loadImage("res/parts/engine" + ext)
@@ -684,7 +681,6 @@ class Engine(Part):
 			
 			self.ship.energy -= self.energyCost / self.game.fps
 			self.animatedtime = self.animatedspeed
-			# print self.thrusting
 
 class Gyro(FlippablePart):
 	baseImage = loadImage("res/parts/gyro" + ext)
@@ -839,9 +835,6 @@ class GatewayFocus(Part):
 
 	def jump(self):
 		print "jump"
-		# print self.atgateway
-		
-		
 
 class Battery(Part):
 	baseImage = loadImage("res/parts/battery" + ext)
