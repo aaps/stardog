@@ -142,10 +142,10 @@ def makeJuggernaut(game, pos, delta, dir=27, script = None, \
 	cockpit.addPart(gun2, 3)
 	cockpit.addPart(generator, 4)
 	cockpit.addPart(gyro, 5)
+	cockpit.addPart(quarter, 1)
 	generator.addPart(battery, 0)
 	battery.addPart(engine, 0)
 	gyro.addPart(engine2, 1)
-	cockpit.addPart(quarter, 1)
 	ship.reset()
 	ship.energy = ship.maxEnergy * .8
 	return ship
