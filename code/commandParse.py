@@ -16,6 +16,20 @@ class CommandParse(object):
 		if text:
 			#if the first character is a ! then it's a command
 			if text[0] == '!':
-				print "command"
+				#remove the ! and split the text up in a list of words.
+				text = text[1:].split(' ')
+				#extract the command from the text.
+				command = text[0]
+				#extract a list of arguments.
+				args = text[1:]
+				if command == 'print':
+					if 'game' in args:
+						for element in self.game.__dict__:
+							print element
+				elif command == 'thing':
+					pass
+				elif command == 'printdbg':
+					print "input: %s \ncommand: %s \narguments: %s"%(text, command, args)
 			else:
+				print "text: "
 				print text

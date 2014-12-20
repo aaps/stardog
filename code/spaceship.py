@@ -156,7 +156,11 @@ def makeJuggernaut(game, pos, delta, dir=27, script = None, \
 	ship.reset()
 	ship.energy = ship.maxEnergy * .8
 	return ship
-	
+
+def makeScout(game, pos, delta, dir=27, script=None, \
+				color = (255,255,255), player=False):
+	pass
+
 def playerShip(game, pos, delta, dir = 270, script = None, \
 				color = (255, 255, 255), type = 'fighter'):
 	"""starterShip(x,y) -> default starting ship at x,y."""
