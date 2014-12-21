@@ -41,12 +41,8 @@ class CommandParse(object):
 				#extract a list of arguments.
 				args = text[1:]
 				if command == 'print':
-					if 'game' in args:
-						for element in self.game.__dict__:
-							self.printWithColor(element, self.game.__dict__[element])
-					elif 'player' in args:
-						for element in self.game.player.__dict__:
-							self.printWithColor(element, self.game.player.__dict__[element])
+					attribute = getattr(self, args[0])
+					print getattr(attribute, args[1])
 				if command == 'set':
 					attribute = getattr(self, args[0])
 					if len(args) > 1:
