@@ -107,9 +107,9 @@ def messageAction(game, text, color = (200,200,100)):
 
 def cameraAction(game, floater):
 	
-	return lambda: game.camera.setPos(floater) and game.camera.setTransTime(10) and game.camera.gotoTarget()
+	#return lambda: game.camera.setPos(floater) and game.camera.setTransTime(10) and game.camera.gotoTarget()
 	
-	# return True
+	 return True
 	
 
 		
