@@ -44,7 +44,7 @@ class CommandParse(object):
 					if command == 'print':
 						attribute = getattr(self, args[0])
 						self.printWithColor(args[1], getattr(attribute, args[1]))
-					if command == 'set':
+					elif command == 'set':
 						attribute = getattr(self, args[0])
 						if len(args) > 1:
 							setattr(attribute, args[1], int(args[2]))
