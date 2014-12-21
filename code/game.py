@@ -124,8 +124,6 @@ class Game:
 						self.menu.handleEvent(event)
 					if self.console:
 						self.chatconsole.handleEvent(event)
-
-
 				#game-level key input:
 				if self.keys[K_DELETE % 322]:
 					self.keys[K_DELETE % 322] = False

@@ -1,3 +1,12 @@
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    WHITE = '\033'
+
 class CommandParse(object):
 	helpText = [
 	"!print <object> <attributes> <...>\n"
@@ -16,6 +25,9 @@ class CommandParse(object):
 		self.text = []
 	def handleInput(self, event):
 		pass
+	def printWithColor(self, first, second):
+		print "%s%s %s%s"%(bcolors.OKBLUE,first, \
+			bcolors.OKGREEN, second)
 	def update(self):
 		#get console input
 		text = self.getText()
@@ -31,7 +43,14 @@ class CommandParse(object):
 				if command == 'print':
 					if 'game' in args:
 						for element in self.game.__dict__:
-							print element
+							self.printWithColor(element, self.game.__dict__[element])
+					elif 'player' in args:
+						for element in self.game.player.__dict__:
+							self.printWithColor(element, self.game.player.__dict__[element])
+				if command == 'set':
+					attribute = getattr(self, args[0])
+					if len(args) > 1:
+						attribute.__dict__[args[1]] = int(args[2])
 				elif command == 'help':
 					for text in self.helpText:
 						print text
