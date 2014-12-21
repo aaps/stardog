@@ -1,0 +1,16 @@
+window_sizes 1445 945 450 1350 720 82
+diagrams
+  classdiagram_ref 128057 // SolarSystem
+    770 629 100 4 0 0
+  sequencediagram_ref 134841 // game loop
+    898 631 100 4 0 0
+  active  sequencediagram_ref 141369 // part effect
+    787 631 100 4 0 0
+end
+show_stereotypes
+selected sequencediagram_ref 141369 // part effect
+open
+  class_ref 128441 // Ship
+  class_ref 128569 // Part
+end
+end

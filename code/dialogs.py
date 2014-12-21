@@ -16,7 +16,7 @@ class Messenger(Drawable):
 	topleft = 2,2
 	maxMessages = 8
 	def __init__(self, game, font = FONT, dir = 1):
-		Drawable.__init__(self, game, zindex = 0)
+		Drawable.__init__(self, game)
 		self.dir = dir# -1 means the messages stack upward.
 		# self.game = game
 		self.image = pygame.Surface((game.width - 202, self.font.get_linesize()))
@@ -101,10 +101,15 @@ def seeShipCondition(game):
 					return True
 		return False
 	return see
-
 	
 def messageAction(game, text, color = (200,200,100)):
 	return lambda: game.messenger.message(text, color)
+
+def cameraAction(game, floater):
+	
+	return lambda: game.camera.setPos(floater) and game.camera.setTransTime(10) and game.camera.gotoTarget()
+	
+	# return True
 	
 
 		

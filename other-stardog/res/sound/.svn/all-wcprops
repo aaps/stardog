@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/svn/!svn/ver/68/trunk/res/sound
+END
+ship explosion.ogg
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/65/trunk/res/sound/ship%20explosion.ogg
+END
+music alert.ogg
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/64/trunk/res/sound/music%20alert.ogg
+END
+thrust.ogg
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/68/trunk/res/sound/thrust.ogg
+END
+music simple.ogg
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/64/trunk/res/sound/music%20simple.ogg
+END
+music.py
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/65/trunk/res/sound/music.py
+END
+space music.ogg
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/58/trunk/res/sound/space%20music.ogg
+END
+message pip.ogg
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/58/trunk/res/sound/message%20pip.ogg
+END
+lazer.ogg
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/58/trunk/res/sound/lazer.ogg
+END

@@ -525,11 +525,11 @@ class Laser(Gun):
 	
 class FlakCannon(Cannon):
 	spread = 18.75
-	damage = 2.
-	energyCost = .3
-	reloadTime = .04
+	damage = 1
+	energyCost = 1
+	reloadTime = 0.2
 	burstSize = 8
-	reloadBurstTime = 1
+	reloadBurstTime = 4
 	range = 6
 	speed = 150
 	def __init__(self, game):
