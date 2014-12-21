@@ -270,7 +270,6 @@ class PartsPanel(Panel):
 			self.player.inventory.remove(part)
 			self.inventoryPanel.reset()
 
-					
 class ShipPanel(Selecter):
 	selected = None
 	text = None
@@ -514,7 +513,6 @@ class PartTile(DragableSelectable):
 		self.addPanel(TextBlock(rect, string[i+1:], color = (0, 150, 0),
 					font = SMALL_FONT))
 
-		
 class InventoryPanel(Selecter):
 	drawBorder = False
 	selected = None
@@ -568,7 +566,7 @@ class InventoryPanel(Selecter):
 				self.partList.remove(dropped.part)
 			self.setSelected(None)
 			self.parent.dirtyParts = True
-			
+
 class Keys(Panel):
 	bindingMessage = pygame.image.load("res/menus/keybind.gif")
 	"""the Keys panel of the menu."""
@@ -642,7 +640,7 @@ class Keys(Panel):
 				elif event.type == pygame.KEYDOWN:
 					return event.key
 		return 0
-		
+
 class PartFunctionsPanel(ShipPanel):
 	labels = []
 	
@@ -658,7 +656,7 @@ class PartFunctionsPanel(ShipPanel):
 					font = BIG_FONT))
 			self.addPanel(self.labels[-1])
 		Panel.reset(self)
-		
+
 class FunctionSelecter(Selecter):
 	def __init__(self, rect, ship):
 		Selecter.__init__(self, rect)
@@ -681,7 +679,7 @@ class FunctionSelecter(Selecter):
 				self.addSelectable(FunctionSelectable(function, \
 						Rect(20, 0, self.rect.width - 20, 16)))
 		Selecter.reset(self)
-							
+
 class PresetSelectable(Selectable):
 	def __init__(self, string, rect):
 		self.name = string
@@ -772,8 +770,6 @@ class Info(Panel):
 	def skill(self, skillName):
 		pass
 
-
-
 class Console(Panel):
 	drawBorder = True
 	color = (100, 100, 255, 250)
@@ -786,7 +782,6 @@ class Console(Panel):
 	def handleEvent(self,event):
 		for panel in self.panels:
 			panel.handleEvent(event)
-
 
 class SkillTreeTab(Selectable):
 	pass
@@ -873,9 +868,7 @@ class InputField(Panel):
 		self.image.blit(self.font.render(self.text, True, self.color), (0, 0))
 
 		self.rect = Rect(self.temprect.topleft, self.image.get_size())
-		
 
-	
 class SkillTile(Button):
 	def __init__(self, rect, parent, skill, ship):
 		self.skill = skill
@@ -901,7 +894,7 @@ class SkillTile(Button):
 			self.levelLabel = Label(rect, 'level ' + str(self.skill.level),\
 						color = (100,200,0))
 			self.addPanel(self.levelLabel)
-	
+
 class Store(Panel):
 	def __init__(self, rect, player):
 		self.player = player
