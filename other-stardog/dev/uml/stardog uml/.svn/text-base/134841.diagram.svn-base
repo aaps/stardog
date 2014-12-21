@@ -1,0 +1,179 @@
+format 72
+
+classinstance 128185 class_ref 128057 // Game
+  name ""   xyz 11 4 2000 life_line_z 2000
+classinstance 128313 class_ref 128185 // SolarSystem
+  name ""   xyz 90 4 2000 life_line_z 2000
+classinstance 128441 class_ref 128313 // Floater
+  name ""   xyz 199 4 2000 life_line_z 2000
+classinstance 128569 class_ref 128441 // Ship
+  name ""   xyz 272 4 2005 life_line_z 2000
+classinstance 129849 class_ref 128569 // Part
+  name ""   xyz 342 4 2010 life_line_z 2000
+classinstance 133049 class_ref 135737 // GUI
+  name ""   xyz 488 4 2015 life_line_z 2000
+classinstance 133177 class_ref 135865 // BG
+  name ""   xyz 415 4 2020 life_line_z 2000
+classinstance 133817 class_ref 135993 // Menu
+  name ""   xyz 556 4 2020 life_line_z 2000
+note 134457 "if not paused"
+  xyzwh 53 100 2020 57 47
+note 134713 "if paused"
+  xyzwh 53 152 2025 57 49
+note 138041 "if paused"
+  xyzwh 227 475 2000 59 45
+durationcanvas 128697 classinstance_ref 128185 // :Game
+  xyzwh 31 51 2010 11 436
+end
+durationcanvas 128825 classinstance_ref 128313 // :SolarSystem
+  xyzwh 122 71 2010 11 145
+end
+durationcanvas 129081 classinstance_ref 128441 // :Floater
+  xyzwh 218 82 2010 11 26
+end
+durationcanvas 129593 classinstance_ref 128569 // :Ship
+  xyzwh 291 112 2010 11 70
+end
+durationcanvas 130105 classinstance_ref 129849 // :Part
+  xyzwh 362 121 2010 11 25
+end
+durationcanvas 130617 classinstance_ref 128441 // :Floater
+  xyzwh 218 193 2010 11 26
+end
+durationcanvas 131001 classinstance_ref 128313 // :SolarSystem
+  xyzwh 122 247 2010 11 160
+end
+durationcanvas 131257 classinstance_ref 128441 // :Floater
+  xyzwh 218 272 2010 11 25
+end
+durationcanvas 131513 classinstance_ref 128569 // :Ship
+  xyzwh 291 306 2010 11 68
+end
+durationcanvas 131769 classinstance_ref 129849 // :Part
+  xyzwh 362 315 2010 11 25
+end
+durationcanvas 132281 classinstance_ref 128441 // :Floater
+  xyzwh 218 361 2010 11 25
+end
+durationcanvas 132537 classinstance_ref 129849 // :Part
+  xyzwh 362 158 2010 11 25
+end
+durationcanvas 132793 classinstance_ref 129849 // :Part
+  xyzwh 362 350 2010 11 25
+end
+durationcanvas 133305 classinstance_ref 133177 // :BG
+  xyzwh 434 251 2010 11 25
+end
+durationcanvas 133561 classinstance_ref 133049 // :GUI
+  xyzwh 507 414 2010 11 28
+end
+durationcanvas 133945 classinstance_ref 133817 // :Menu
+  xyzwh 575 447 2010 11 28
+end
+durationcanvas 134201 classinstance_ref 133817 // :Menu
+  xyzwh 575 217 2010 11 26
+end
+msg 128953 synchronous
+  from durationcanvas_ref 128697
+  to durationcanvas_ref 128825
+  yz 71 2015 explicitmsg "update()"
+  show_full_operations_definition default drawing_language default
+  label_xy 66 57
+msg 129209 synchronous
+  from durationcanvas_ref 128825
+  to durationcanvas_ref 129081
+  yz 82 2015 msg operation_ref 128057 // "update()"
+  show_full_operations_definition default drawing_language default
+  label_xy 155 68
+msg 129721 synchronous
+  from durationcanvas_ref 128825
+  to durationcanvas_ref 129593
+  yz 123 2015 msg operation_ref 128057 // "update()"
+  show_full_operations_definition default drawing_language default
+  label_xy 192 109
+msg 130233 synchronous
+  from durationcanvas_ref 129593
+  to durationcanvas_ref 130105
+  yz 122 2020 msg operation_ref 128057 // "update()"
+  show_full_operations_definition default drawing_language default
+  label_xy 312 108
+msg 130745 synchronous
+  from durationcanvas_ref 128825
+  to durationcanvas_ref 130617
+  yz 193 2015 msg operation_ref 128057 // "update()"
+  show_full_operations_definition default drawing_language default
+  label_xy 155 179
+msg 131129 synchronous
+  from durationcanvas_ref 128697
+  to durationcanvas_ref 131001
+  yz 249 2015 explicitmsg "draw()"
+  show_full_operations_definition default drawing_language default
+  label_xy 65 235
+msg 131385 synchronous
+  from durationcanvas_ref 131001
+  to durationcanvas_ref 131257
+  yz 279 2015 explicitmsg "draw()"
+  show_full_operations_definition default drawing_language default
+  label_xy 158 265
+msg 131641 synchronous
+  from durationcanvas_ref 131001
+  to durationcanvas_ref 131513
+  yz 317 2015 explicitmsg "draw()"
+  show_full_operations_definition default drawing_language default
+  label_xy 195 303
+msg 131897 synchronous
+  from durationcanvas_ref 131513
+  to durationcanvas_ref 131769
+  yz 316 2020 explicitmsg "draw()"
+  show_full_operations_definition default drawing_language default
+  label_xy 315 302
+msg 132409 synchronous
+  from durationcanvas_ref 131001
+  to durationcanvas_ref 132281
+  yz 364 2015 explicitmsg "draw()"
+  show_full_operations_definition default drawing_language default
+  label_xy 158 350
+msg 132665 synchronous
+  from durationcanvas_ref 129593
+  to durationcanvas_ref 132537
+  yz 158 2015 msg operation_ref 128057 // "update()"
+  show_full_operations_definition default drawing_language default
+  label_xy 312 144
+msg 132921 synchronous
+  from durationcanvas_ref 131513
+  to durationcanvas_ref 132793
+  yz 351 2015 explicitmsg "draw()"
+  show_full_operations_definition default drawing_language default
+  label_xy 315 337
+msg 133433 synchronous
+  from durationcanvas_ref 131001
+  to durationcanvas_ref 133305
+  yz 254 3005 unspecifiedmsg
+  show_full_operations_definition default drawing_language default
+msg 133689 synchronous
+  from durationcanvas_ref 128697
+  to durationcanvas_ref 133561
+  yz 414 2015 explicitmsg "draw()"
+  show_full_operations_definition default drawing_language default
+  label_xy 257 400
+msg 134073 synchronous
+  from durationcanvas_ref 128697
+  to durationcanvas_ref 133945
+  yz 447 2015 explicitmsg "draw()"
+  show_full_operations_definition default drawing_language default
+  label_xy 260 436
+msg 134329 synchronous
+  from durationcanvas_ref 128697
+  to durationcanvas_ref 134201
+  yz 217 3005 explicitmsg "update()"
+  show_full_operations_definition default drawing_language default
+  label_xy 288 203
+line 134585 -_-_
+  from ref 134457 z 2021 to ref 128953
+line 134841 -_-_ geometry VHV decenter_end 74
+  from ref 134713 z 3006 to point 79 206
+  line 137785 z 3006 to point 79 206
+  line 137913 z 3006 to ref 134329
+line 138169 -_-_ decenter_begin 524 decenter_end 404
+  from ref 138041 z 2016 to ref 134073
+end

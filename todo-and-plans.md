@@ -22,10 +22,11 @@ http://pygame.org/project-planes-2392-4051.html get version 0.6
 side dish
 ==========
 
+* making the rest of screen changeable ?, posibility to chage window with and or height ?
 * clean up this text file !!!
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
 * more collision handeling refactor
-* more to vec2d verctor work !!!
+* more to vec2d verctor work.
 * remember planets that where on radar in list [done , aat]
 * some way to target ships, parts and planets [easy mode]
 * zoom in out option for radar [medium mode ?]
@@ -47,6 +48,8 @@ side dish
 * in camera splitout functionality make a layer class for the layers that will not do the drawing but perhaps the updating, anyhow updates doesnt belong in camera ?
 * landed can go to ship class so the ai can do extra stuff
 * ai could use some more bains and variation
+* also add the chat console and menu to the camera
+* draw planets over things like explotions, and other ships.
 
 
 Housekeeping
@@ -79,7 +82,7 @@ parts
 ======
 
 * A radar that will eventualy suport raytracing. [easy for initial radar]
-* Make mine's de accelerate till they hit thier target spot. 
+* Make mine's de accelerate till they hit their target spot. 
 so you can get out of the way in time.
 maybe implement a arming period. 
 bigger detonation range.
@@ -133,6 +136,17 @@ make menu work on fullscreen. only fighter is displayed right left corner. [fixe
 Commanline interface
 =====
 * a command line interface for manipulating the world so that testing is faster. [W.I.P]
+- a command to add parts to a ship
+- a command to change name of ship
+- a command to change name of planet
+- a command to add parts to planets
+- a command to make ships / planets
+- a command to remove ships / planets
+- above also for other floaters/structures ?
+- a command to make a star system and link it to existing system
+- a command to reate a specific part with x stats on planet or ship, integrate with one of above ?
+- a command to manipulate your camera (need work)
+- a command for teleporting ships to other starsystem
 
 crew
 =====

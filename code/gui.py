@@ -14,25 +14,17 @@ radarScaleBig = 200.0 # 1 radar pixel = radarScale space pixels
 edgeWarning = loadImage('res/edgeofsystem.bmp')
 
 class Drawable:
-	enabled = True
 	game = None
 	drawBorder = True
 	rect = None
-	zindex = 0
 
-	def __init__(self, game, zindex = 0):
+	def __init__(self, game):
 		self.game = game
-		self.zindex = zindex
+
 		self.rect = Rect(0 ,0 ,game.width, game.height)
 
 	def setRect(self, rect):
 		self.rect = rect
-
-	def setZindex(self, zindex = 0):
-		self.zindex = zindex
-
-	def setEnabled(self, enabled=False):
-		self.enabled = enabled
 
 	def update(self):
 		pass
@@ -44,8 +36,8 @@ class Drawable:
 
 class HUD(Drawable):
 
-	def __init__(self, game, zindex):
-		Drawable.__init__(self, game, zindex)
+	def __init__(self, game):
+		Drawable.__init__(self, game)
 		# self.game = game
 		self.image = pygame.Surface((self.game.width, self.game.height), \
 							flags = (SRCALPHA)).convert_alpha()
@@ -140,8 +132,8 @@ class HUD(Drawable):
 
 numStars = 300
 class BG(Drawable):
-	def __init__(self, game, zindex):
-		Drawable.__init__(self, game, zindex)
+	def __init__(self, game):
+		Drawable.__init__(self, game)
 		# self.game = game
 		self.stars = []
 		for star in range(numStars):
@@ -157,14 +149,14 @@ class BG(Drawable):
 		self.pic = pygame.transform.scale(loadImage('res/Tarantula Nebula.jpg', None), 
 					(game.width,game.height))
 
-	def draw(self, surface, thisShip):
+	def draw(self, surface):
 		surface.blit(self.pic, (0,0))
 		pa = pygame.PixelArray(surface)
 		"""updates the HUD and draws it."""
 		depth = 1.
 		for star in self.stars:
-			x = int(star[0] - thisShip.pos.x / star[2]) % (self.game.width-1)
-			y =	int(star[1] - thisShip.pos.y / star[2]) % (self.game.height-1)
+			x = int(star[0] - self.game.player.pos.x / star[2]) % (self.game.width-1)
+			y =	int(star[1] - self.game.player.pos.y / star[2]) % (self.game.height-1)
 			pa[x,y] = star[3]
 			pa[x+1,y] = star[3]
 			pa[x,y+1] = star[3]
@@ -176,8 +168,8 @@ class MiniInfo(Drawable):
 	maxChars = 50 #line width
 	bottomleft = 0,0
 
-	def __init__(self, game, zindex,font = FONT):
-		Drawable.__init__(self, game, zindex)
+	def __init__(self, game,font = FONT):
+		Drawable.__init__(self, game)
 		# self.game = game
 		self.bottomleft = 2,  game.height - int(game.height/ 4 ) 
 		self.targ = None

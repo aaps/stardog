@@ -12,6 +12,7 @@ from dialogs import *
 from camera import *
 import plot
 from vec2d import Vec2d
+import time
 try:
 	from swampy.Lumpy import Lumpy
 except ImportError:
@@ -42,10 +43,10 @@ class Game:
 		self.triggers = []
 		self.camera = Camera(self)
 		#messenger, with controls as first message:
-		self.messenger = Messenger(self, 1)
-		self.camera.layerAdd(self.messenger)
-		self.camera.layerAdd(MiniInfo(self, 1))
-		# self.miniinfo = 
+		self.messenger = Messenger(self)
+		self.camera.layerAdd(self.messenger,5)
+		self.camera.layerAdd(MiniInfo(self),4)
+
 		
 		#key polling:
 		self.keys = [False]*322
@@ -56,12 +57,13 @@ class Game:
 		self.clock = pygame.time.Clock()
 		
 		# self.hud =  # the heads up display
-		self.camera.layerAdd(HUD(self, 1))
-		
+		self.camera.layerAdd(HUD(self),3)
+		self.camera.layerAdd(SpaceView(self),2)
 		#create a chatconsole for text input capabilities
 		self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-50, self.width - int(self.width/ 8) , 50))
 		#create a parser that parses chatconsole input for command and such.
 		self.commandParse = CommandParse(self, self.chatconsole)
+	
 	def run(self):
 		"""Runs the game."""
 		
@@ -88,8 +90,10 @@ class Game:
 			self.playerScript = InputScript(self)
 			self.player = playerShip(self, Vec2d(0,0),Vec2d(0,0), script = self.playerScript,
 							color = self.playerColor, type = self.playerType)
+			# self.camera.setPos(self.player)
 			self.curSystem = SolarA1(self)
-			self.camera.setBG(self.curSystem.bg)
+			self.camera.layerAdd(self.curSystem.bg,1)
+
 			self.nextsystem = SolarB2(self)
 			# self.systems = [self.curSystem]
 			self.curSystem.add(self.player)
@@ -153,12 +157,8 @@ class Game:
 
 				for trigger in self.triggers:
 					trigger.update()
-				self.curSystem.update()
 
 				self.camera.update()
-							
-				#draw the layers:
-				self.screen.fill((0, 0, 0, 0))
 
 				self.camera.draw(self.screen)
 
