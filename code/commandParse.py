@@ -18,6 +18,7 @@ class CommandParse(object):
 	]
 	def __init__(self, game, chatconsole):
 		self.game = game
+		self.player = game.player
 		self.chatconsole = chatconsole
 		#a reference to a function that gets the text from the chatconsole
 		self.getText = self.chatconsole.console.inputfield.getText
@@ -30,6 +31,9 @@ class CommandParse(object):
 	def printWithColor(self, first, second):
 		print "%s%s%s=%s%s"%(bcolors.OKBLUE,first, bcolors.WARNING,\
 			bcolors.OKGREEN, second)
+	def printAttributes(self, obj):
+		for element in obj.__dict__:
+			self.printWithColor(element, obj.__dict__[element])
 	def update(self):
 		#get console input
 		text = self.getText()
@@ -44,13 +48,22 @@ class CommandParse(object):
 					#extract a list of arguments.
 					args = text[1:]
 					if command == 'print':
+						if not args:
+							return
 						attribute = getattr(self, args[0])
+						argument = args[-1:][0]
+						#if only one argument just print that ones value or attribute list.
 						if len(args) == 1:
-							self.printWithColor(args[-1:][0], getattr(self, args[-1:][0]))
+							if type(attribute) == InstanceType or type(attribute) == ClassType:
+								self.printAttributes(attribute)
+							else:
+								self.printWithColor(argument, getattr(self, argument))
+						#else if we got more arguments traverse list and print value/attribute list.
 						else:
 							for index in range(1, len(args)-1):
 								attribute = getattr(attribute, args[index])
-							self.printWithColor(args[-1:][0], getattr(attribute, args[-1:][0]) )
+							self.printWithColor(argument, getattr(attribute, argument) )
+						print
 					elif command == 'set':
 						attribute = getattr(self, args[0])
 						if len(args) > 1:
