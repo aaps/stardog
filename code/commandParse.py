@@ -1,3 +1,5 @@
+from types import *
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -9,7 +11,7 @@ class bcolors:
 
 class CommandParse(object):
 	helpText = [
-	"!print <object> <attributes> <...>\n"
+	"!print <object...> <attributes> <...>\n"
 	"wil print all the atributes of the object\n"
 	"or atributes specified, and or the elements\n"
 	"in that atributes list\n"
@@ -43,11 +45,18 @@ class CommandParse(object):
 					args = text[1:]
 					if command == 'print':
 						attribute = getattr(self, args[0])
-						self.printWithColor(args[1], getattr(attribute, args[1]))
+						if len(args) == 1:
+							self.printWithColor(args[-1:][0], getattr(self, args[-1:][0]))
+						else:
+							for index in range(1, len(args)-1):
+								attribute = getattr(attribute, args[index])
+							self.printWithColor(args[-1:][0], getattr(attribute, args[-1:][0]) )
 					elif command == 'set':
 						attribute = getattr(self, args[0])
 						if len(args) > 1:
 							setattr(attribute, args[1], int(args[2]))
+					elif command == 'exit' or command == 'quit':
+						self.game.running = False
 					elif command == 'help':
 						for text in self.helpText:
 							print text
@@ -56,5 +65,5 @@ class CommandParse(object):
 				else:
 					print "text: "
 					print text
-			except Exception, e:
+			except AttributeError, e:
 				print e
