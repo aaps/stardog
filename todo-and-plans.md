@@ -136,7 +136,7 @@ make menu work on fullscreen. only fighter is displayed right left corner. [fixe
 Commanline interface
 =====
 * a command line interface for manipulating the world so that testing is faster. [W.I.P]
-* convert all oldstyle classes into new style that is easier to check with type()
+* convert all oldstyle classes into new style that is easier to check with type() [done]
 - a command to add parts to a ship
 - a command to change name of ship
 - a command to change name of planet

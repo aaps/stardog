@@ -6,7 +6,7 @@ import random
 from gui import *
 from pygame.locals import *
 
-class Panel:
+class Panel(object):
 	"""Panel(mouse, rect) -> new Panel. 
 	The basic building block of the menu system. """
 	color = (100, 200, 100)

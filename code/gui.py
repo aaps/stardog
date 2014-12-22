@@ -13,7 +13,7 @@ radarRadiusBig = 400
 radarScaleBig = 200.0 # 1 radar pixel = radarScale space pixels
 edgeWarning = loadImage('res/edgeofsystem.bmp')
 
-class Drawable:
+class Drawable(object):
 	game = None
 	drawBorder = True
 	rect = None

@@ -1,7 +1,7 @@
 
 from vec2d import Vec2d
 
-class Camera:
+class Camera(object):
 	game = None
 	width = 100
 	height = 100
@@ -77,7 +77,7 @@ class Camera:
 
 # this could be somewhat overkill, and refactored in an other structures, i just dont want drawabled be dependant on
 # drawing height and other stuff that dont concerns these things
-class Layer:
+class Layer(object):
 	zindex = 0
 	enabled = True
 	drawable = None
@@ -113,7 +113,7 @@ class Layer:
 				self.drawable.draw(surface)
 
 
-class SpaceView:
+class SpaceView(object):
 
 	onScreen = []
 	game = None

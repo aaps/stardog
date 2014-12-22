@@ -12,7 +12,7 @@ PART_OVERLAP = 0
 DETACH_SPACE = 10
 DETACH_SPEED = 20
 
-class Port:
+class Port(object):
 	def __init__(self, offset, dir, parent):
 		self.offset = offset
 		self.dir = dir

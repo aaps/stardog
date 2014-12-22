@@ -28,7 +28,7 @@ def addAdjective(part, level = 1):
 	
 ENERGY_USING = [Gun, Engine, Gyro, Shield]
 
-class Adjective:
+class Adjective(object):
 	level = 1
 	types = [Gun, Engine, Gyro, Battery, Generator, Cockpit, Shield, Interconnect, Quarters, GatewayFocus, MineDropper, Radar]
 	def effect(self, part):

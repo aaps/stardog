@@ -27,7 +27,7 @@ DEFAULT_IMAGE = loadImage("res/default" + ext)
 
 
 		
-class Ballistic:
+class Ballistic(object):
 	"""an abstraction of a Floater.  Just has a Vec2d,Vec2d."""
 	def __init__(self, pos, delta):
 		self.pos = pos

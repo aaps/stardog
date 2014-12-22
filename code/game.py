@@ -22,7 +22,7 @@ from commandParse import *
 
 FPS = 300
 
-class Game:
+class Game(object):
 	"""Game(resolution = None, fullscreen = False)
 	-> new game instance. Multiple game instances
 	are probably a bad idea."""

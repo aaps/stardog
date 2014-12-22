@@ -50,7 +50,7 @@ class Messenger(Drawable):
 	def empty(self):
 		self.queue = deque()
 		
-class Trigger:
+class Trigger(object):
 	def __init__(self, game, conditions, actions, repeat = False):
 		self.repeat = repeat
 		if type(conditions) != type([]):
