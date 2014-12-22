@@ -20,7 +20,7 @@ class SolarSystem:
 		self.ships = pygame.sprite.Group()
 		self.specialOperations = []
 		# self.onScreen = []
-		self.bg = BG(self.game) # the background layer
+		self.bg = BGImage(self.game) # the background layer
 		pygame.mixer.music.load("res/sound/space music.ogg")
 		pygame.mixer.music.play(-1)
 		pygame.mixer.music.set_volume(.15)

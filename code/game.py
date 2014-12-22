@@ -44,8 +44,8 @@ class Game:
 		self.camera = Camera(self)
 		#messenger, with controls as first message:
 		self.messenger = Messenger(self)
-		self.camera.layerAdd(self.messenger,5)
-		self.camera.layerAdd(MiniInfo(self),4)
+		self.camera.layerAdd(self.messenger,6)
+		self.camera.layerAdd(MiniInfo(self),5)
 
 		
 		#key polling:
@@ -57,8 +57,8 @@ class Game:
 		self.clock = pygame.time.Clock()
 		
 		# self.hud =  # the heads up display
-		self.camera.layerAdd(HUD(self),3)
-		self.camera.layerAdd(SpaceView(self),2)
+		self.camera.layerAdd(HUD(self),4)
+		self.camera.layerAdd(SpaceView(self),3)
 		#create a chatconsole for text input capabilities
 		self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-50, self.width - int(self.width/ 8) , 50))
 		#create a parser that parses chatconsole input for command and such.
@@ -92,12 +92,14 @@ class Game:
 							color = self.playerColor, type = self.playerType)
 			# self.camera.setPos(self.player)
 			self.curSystem = SolarA1(self)
+			self.camera.setPos(self.player)
+			self.camera.layerAdd(StarField(self),2)
 			self.camera.layerAdd(self.curSystem.bg,1)
 
 			self.nextsystem = SolarB2(self)
 			# self.systems = [self.curSystem]
 			self.curSystem.add(self.player)
-			
+			self.camera.setPos(self.player.pos)
 			self.menu = Menu(self, Rect((self.width - 800) / 2,	(self.height - 600) / 2, 800, 600))
 			for x in range(10):
 				self.clock.tick()

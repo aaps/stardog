@@ -829,9 +829,9 @@ class GatewayFocus(Part):
 			self.enabled = True
 
 	def update(self):
-		if self.enabled and self.ship.energy > self.energyCost and self.jumpenergy < self.neededenergy:
+		if self.enabled and self.ship.energy > self.energyCost and self.jumpenergy <= self.neededenergy:
 			self.ship.energy -= (self.energyCost / self.ship.efficiency) / self.game.fps
-			self.jumpenergy = (self.ship.efficiency * self.energyCost) / self.game.fps
+			self.jumpenergy += (self.ship.efficiency * self.energyCost) / self.game.fps
 
 	def jump(self):
 		print "jump"

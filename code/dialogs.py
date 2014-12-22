@@ -101,15 +101,11 @@ def seeShipCondition(game):
 					return True
 		return False
 	return see
+
 	
 def messageAction(game, text, color = (200,200,100)):
 	return lambda: game.messenger.message(text, color)
 
-def cameraAction(game, floater):
-	
-	return lambda: game.camera.setPos(floater) and game.camera.setTransTime(10) and game.camera.gotoTarget()
-	
-	# return True
 	
 
 		

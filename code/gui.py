@@ -131,7 +131,7 @@ class HUD(Drawable):
 
 
 numStars = 300
-class BG(Drawable):
+class StarField(Drawable):
 	def __init__(self, game):
 		Drawable.__init__(self, game)
 		# self.game = game
@@ -146,11 +146,10 @@ class BG(Drawable):
 				(randint(brightness * 3 / 4, brightness), 
 				 randint(brightness * 3 / 4, brightness), 
 				 randint(brightness * 3 / 4, brightness))))
-		self.pic = pygame.transform.scale(loadImage('res/Tarantula Nebula.jpg', None), 
-					(game.width,game.height))
+		
 
 	def draw(self, surface):
-		surface.blit(self.pic, (0,0))
+		# surface.blit(self.pic, (0,0))
 		pa = pygame.PixelArray(surface)
 		"""updates the HUD and draws it."""
 		depth = 1.
@@ -161,6 +160,17 @@ class BG(Drawable):
 			pa[x+1,y] = star[3]
 			pa[x,y+1] = star[3]
 			pa[x+1,y+1] = star[3]
+
+class BGImage(Drawable):
+	pic = None
+	def __init__(self, game):
+		Drawable.__init__(self, game)
+		self.pic = pygame.transform.scale(loadImage('res/Tarantula Nebula.jpg', None), 
+					(game.width,game.height))
+
+	
+	def draw(self, surface):
+		surface.blit(self.pic, (0,0))
 			
 class MiniInfo(Drawable):
 	color = (100, 100, 255, 250)

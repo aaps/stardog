@@ -3,23 +3,21 @@ from vec2d import Vec2d
 
 class Camera:
 	game = None
-	pos = None
 	width = 100
 	height = 100
 	transcurve = None
 	transitioning = False
 	transtime = 10
 	# onScreen = []
+	pos = None
 	layers = []
 	target = None
-	# bg = None
 
-	def __init__(self, game, pos = Vec2d(0,0)):
+	def __init__(self, game, pos=Vec2d(0,0)):
 		self.game = game
-		pos = Vec2d(0,0)
+		self.pos = pos
 		self.width = game.width
 		self.height = game.height
-		# self.onScreen = []
 
 
 	def update(self):
@@ -41,6 +39,8 @@ class Camera:
 	def linear(self, t, b, c, d): 
 		return c*t/d + b
 
+	def setPos(self,pos):
+		self.pos = pos
 
 	def setTransTime(self, time):
 		self.transtime = time
@@ -53,7 +53,8 @@ class Camera:
 
 
 	def layerAdd(self, drawable, zindex):
-		layer = Layer(drawable, zindex)
+
+		layer = Layer(drawable, zindex, self)
 
 		self.layers.append(layer)
 
@@ -80,10 +81,16 @@ class Layer:
 	zindex = 0
 	enabled = True
 	drawable = None
+	camera = None
 
-	def __init__(self, drawable ,zindex):
+
+	def __init__(self, drawable ,zindex, camera):
 		self.zindex = zindex
 		self.drawable = drawable
+		self.camera = camera
+		if isinstance(drawable, SpaceView):
+			self.drawable.camera = camera
+
 
 	def setEnabled(self, enabled):
 		self.enabled = enabled
@@ -100,7 +107,10 @@ class Layer:
 
 	def draw(self, surface):
 		if self.enabled:
-			self.drawable.draw(surface)
+			if isinstance(self.drawable, SpaceView):
+				self.drawable.draw(surface, self.camera.pos)
+			else:
+				self.drawable.draw(surface)
 
 
 class SpaceView:
@@ -109,26 +119,27 @@ class SpaceView:
 	game = None
 	width = 100
 	height = 100
+	camera = None
+	offset = Vec2d(0,0)
 
 	def __init__(self, game):
 		self.game = game
-		pos = Vec2d(0,0)
-		self.width = game.width
-		self.height = game.height
+		self.width = 100
+		self.height = 100
 
 
 	def update(self):
 		self.game.curSystem.update()
 
 		self.onScreen = []
-		self.offset = Vec2d(self.game.player.pos.x - self.width / 2, 
-				self.game.player.pos.y - self.height / 2)
+		self.offset = Vec2d(self.camera.pos.x - self.camera.width / 2, 
+				self.camera.pos.y - self.camera.height / 2)
 		for floater in self.game.curSystem.floaters:
 			r = floater.radius
-			if (r + floater.pos.x > self.offset.x and floater.pos.x - r < self.offset.x + self.width)\
-			and (r + floater.pos.y > self.offset.y 	and floater.pos.y - r < self.offset.y + self.height):
+			if (r + floater.pos.x > self.offset.x and floater.pos.x - r < self.offset.x + self.camera.width)\
+			and (r + floater.pos.y > self.offset.y 	and floater.pos.y - r < self.offset.y + self.camera.height):
 					self.onScreen.append(floater)
 
-	def draw(self, surface):
+	def draw(self, surface, pos):
 		for floater in self.onScreen:
 			floater.draw(surface, self.offset)
