@@ -38,7 +38,6 @@ class HUD(Drawable):
 
 	def __init__(self, game):
 		Drawable.__init__(self, game)
-		# self.game = game
 		self.image = pygame.Surface((self.game.width, self.game.height), \
 							flags = (SRCALPHA)).convert_alpha()
 		self.keys = game.keys
@@ -134,7 +133,6 @@ numStars = 300
 class StarField(Drawable):
 	def __init__(self, game):
 		Drawable.__init__(self, game)
-		# self.game = game
 		self.stars = []
 		for star in range(numStars):
 			brightness = int(randint(100, 255))
@@ -180,7 +178,6 @@ class MiniInfo(Drawable):
 
 	def __init__(self, game,font = FONT):
 		Drawable.__init__(self, game)
-		# self.game = game
 		self.bottomleft = 2,  game.height - int(game.height/ 4 ) 
 		self.targ = None
 		self.image = pygame.Surface((int(game.width / 8),int(game.height/ 4 )))

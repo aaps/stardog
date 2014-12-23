@@ -53,10 +53,8 @@ class Game(object):
 		#mouse is [pos, button1, button2, button3,..., button6].
 		#new Apple mice think they have 6 buttons.
 		self.mouse = [(0, 0), 0, 0, 0, 0, 0, 0]
-		#pygame setup:
 		self.clock = pygame.time.Clock()
 		
-		# self.hud =  # the heads up display
 		self.camera.layerAdd(HUD(self),4)
 		self.camera.layerAdd(SpaceView(self),3)
 		#create a chatconsole for text input capabilities
@@ -96,7 +94,6 @@ class Game(object):
 			self.camera.layerAdd(self.curSystem.bg,1)
 
 			self.nextsystem = SolarB2(self)
-			# self.systems = [self.curSystem]
 			self.curSystem.add(self.player)
 			self.camera.setPos(self.player.pos)
 			self.menu = Menu(self, Rect((self.width - 800) / 2,	(self.height - 600) / 2, 800, 600))

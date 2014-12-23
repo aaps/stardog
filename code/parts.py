@@ -391,7 +391,12 @@ class Cannon(Gun):
 		return Gun.stats(self) + statString % stats
 				
 	def attach(self):
-		self.bulletImage = colorShift(BULLET_IMAGE, self.ship.color)
+		# if self.damage > 2.5:
+
+		# 	self.bulletImage = colorShift(BULLET_IMAGE, self.ship.color)
+		# else:
+		self.bulletImage = colorShift(BULLET_IMAGE, bulletColor(self.damage))
+		
 		Part.attach(self)
 			
 	def shoot(self):
@@ -524,7 +529,7 @@ class Laser(Gun):
 	
 class FlakCannon(Cannon):
 	spread = 18.75
-	damage = 1
+	damage = 0.5
 	energyCost = 1
 	reloadTime = 0.2
 	burstSize = 8

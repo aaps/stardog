@@ -18,7 +18,6 @@ class Messenger(Drawable):
 	def __init__(self, game, font = FONT, dir = 1):
 		Drawable.__init__(self, game)
 		self.dir = dir# -1 means the messages stack upward.
-		# self.game = game
 		self.image = pygame.Surface((game.width - 202, self.font.get_linesize()))
 		self.image.set_alpha(200)
 	

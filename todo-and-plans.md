@@ -28,7 +28,7 @@ side dish
 * making the rest of screen changeable ?, posibility to chage window with and or height ?
 * clean up this text file and source code !!!
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
-* more collision handeling refactor !!!
+* more collision handeling refactor !!! [after that the impact can come back]
 * more to vec2d verctor work.
 * remember planets that where on radar in list [done , aat]
 * some way to target ships, parts and planets [easy mode]
@@ -54,7 +54,8 @@ side dish
 * ai could use some more bains and variation
 * also add the chat console and menu to the camera
 * draw planets over things like explotions, and other ships.
-
+* make the color of the color of the star dependant on the size of the star, bigger is blueer, smaller redisher
+make the color og bullets dependent on their damage, bigger damage is bleuer/ whiter, smaller redder dimmer
 
 
 Housekeeping

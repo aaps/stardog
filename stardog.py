@@ -31,7 +31,6 @@ if __name__=="__main__":
             print("bad command line arguments.")
     #set up the disply:
     pygame.init()
-    #pygame.display.init()
     if not RESOLUTION:
         RESOLUTION = pygame.display.list_modes()[0]
     if FULL:
