@@ -16,6 +16,7 @@ class CommandParse(object):
     "or atributes specified, and or the elements\n"
     "in that atributes list\n"
     ]
+    
     def __init__(self, game, chatconsole):
         self.game = game
         self.player = game.player
@@ -26,14 +27,18 @@ class CommandParse(object):
         #for for example auto complete (future)
         self.setText = self.chatconsole.console.inputfield.setText
         self.text = []
+        
     def handleInput(self, event):
         pass
+        
     def printWithColor(self, first, second):
         print "%s%s%s=%s%s"%(bcolors.OKBLUE,first, bcolors.WARNING,\
             bcolors.OKGREEN, second)
+            
     def printAttributes(self, obj):
         for element in obj.__dict__:
             self.printWithColor(element, obj.__dict__[element])
+            
     def update(self):
         #get console input
         text = self.getText()
@@ -51,26 +56,38 @@ class CommandParse(object):
                         if not args:
                             return
                         attribute = getattr(self, args[0])
-                        argument = args[-1:][0]
+                        last_argument = args[-1:][0]
                         #if only one argument just print that ones value or attribute list.
                         if len(args) == 1:
                             try:
                                 self.printAttributes(attribute)
                             except Exception, e:
-                                self.printWithColor(argument, getattr(self, argument))
+                                self.printWithColor(last_argument, getattr(self, last_argument))
                         #else if we got more arguments traverse list and print value/attribute list.
                         else:
                             for index in range(1, len(args)-1):
                                 attribute = getattr(attribute, args[index])
                             try:
-                                self.printAttributes(getattr(attribute, argument))
+                                self.printAttributes(getattr(attribute, last_argument))
                             except Exception, e:
-                                self.printWithColor(argument, getattr(attribute, argument) )
+                                self.printWithColor(last_argument, getattr(attribute, last_argument) )
                         print
                     elif command == 'set':
+                        if not args:
+                            return
                         attribute = getattr(self, args[0])
-                        if len(args) > 1:
+                        last_argument = args[-1:][0]
+                        sec_last_argument = args[-2:][0]
+                        if len(args) == 1:
                             setattr(attribute, args[1], int(args[2]))
+                        else:
+                            for index in range(1, len(args)-1):
+                                attribute = getattr(attribute, args[index])
+                            attribute = getattr(attribute, sec_last_argument)
+                            setattr(attribute, sec_last_argument, int(last_argument))
+                        #attribute = getattr(self, args[0])
+                        #if len(args) > 1:
+                        #    setattr(attribute, args[1], int(args[2]))
                     elif command == 'exit' or command == 'quit':
                         self.game.running = False
                     elif command == 'help':

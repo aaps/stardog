@@ -83,6 +83,8 @@ the laser is broken, ;( [It is fixed, Aat]
 * in case of button pressed when you open menu, the ship will continue to do that action.
 * known planets is a list of all the known planets not the known planets in the current system
 * In case of open planet part panel and parts 'land' on planet they will not show up at the parts panel right away. only after a menu out/in
+* Canons don't work anymore they don't shoot.
+* putting a engine on a radar "part" it doesn't fire.
 
 parts
 ======
