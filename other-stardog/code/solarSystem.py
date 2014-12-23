@@ -86,7 +86,7 @@ class SolarSystem:
 
 
 	def draw(self, surface, offset):
-		self.bg.draw(surface, self.game.player)
+		self.bg.draw(surface)
 		for floater in self.onScreen:
 				floater.draw(surface, offset)
 

@@ -17,6 +17,8 @@ http://pygame.org/project-planes-2392-4051.html get version 0.6
 * put the collide logic in the things that collide, planets, floaters, parts etc. [1/4 done]
 * it needs an economy not yust parts for static $$, [ harder ]
 * nebula and atmosphere
+* sometime in future convert the entity views to something like this:
+http://www.pygame.org/project-OpenGL+Library+(glLib*)-877-.html
 
 
 side dish
@@ -50,6 +52,7 @@ side dish
 * ai could use some more bains and variation
 * also add the chat console and menu to the camera
 * draw planets over things like explotions, and other ships.
+
 
 
 Housekeeping

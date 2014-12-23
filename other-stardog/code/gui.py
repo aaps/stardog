@@ -121,7 +121,7 @@ class HUD:
 		#blit the HUD to the screen:
 		surface.blit(self.image, (0, 0))
 
-	def drawRadar(self, surface, self.game.player.pos, big = False):
+	def drawRadar(self, surface, game, big = False):
 		if big:
 			#these temp locals replace the globals:
 			radius = radarRadiusBig

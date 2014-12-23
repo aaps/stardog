@@ -88,7 +88,7 @@ def seePlanetCondition(game):
 	def see():
 		for radar in game.player.radars:
 			for floater in radar.detected:
-				if isinstance(floater,Planet):
+				if isinstance(floater,Planet) and not isinstance(floater,Sun):
 					return True
 		return False
 	return see
