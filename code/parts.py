@@ -580,7 +580,6 @@ class FlakCannon(Cannon):
 class Radar(Part):
     baseImage = loadImage("res/parts/radar" + ext)
     image = None
-    mass = 10
     name = "Radar"
     energyCost = 0.05
     radarrange = 18000
