@@ -22,7 +22,7 @@ from commandParse import *
 
 FPS = 300
 
-class Game:
+class Game(object):
 	"""Game(resolution = None, fullscreen = False)
 	-> new game instance. Multiple game instances
 	are probably a bad idea."""
@@ -61,8 +61,7 @@ class Game:
 		self.camera.layerAdd(SpaceView(self),3)
 		#create a chatconsole for text input capabilities
 		self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-50, self.width - int(self.width/ 8) , 50))
-		#create a parser that parses chatconsole input for command and such.
-		self.commandParse = CommandParse(self, self.chatconsole)
+		
 	
 	def run(self):
 		"""Runs the game."""
@@ -105,7 +104,8 @@ class Game:
 				self.clock.tick()
 			
 			self.triggers = plot.newGameTriggers(self)
-				
+			#create a parser that parses chatconsole input for command and such.
+			self.commandParse = CommandParse(self, self.chatconsole)
 			#The in-round loop (while player is alive):
 			while self.running and self.curSystem.ships.has(self.player):
 				#event polling:

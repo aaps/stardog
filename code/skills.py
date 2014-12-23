@@ -1,6 +1,6 @@
 #skills.py
 
-class Skill:
+class Skill(object):
 	"""A skill."""
 	def __init__(self, ship, level = 0):
 		self.level = level

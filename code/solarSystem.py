@@ -10,7 +10,7 @@ from gui import *
 import stardog
 from vec2d import Vec2d
 
-class SolarSystem:
+class SolarSystem(object):
 	"""A SolarSystem holds ships and other floaters."""
 	boundries = ((-30000, 30000), (-30000, 30000))
 	drawEdgeWarning = False

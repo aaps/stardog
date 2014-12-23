@@ -6,7 +6,7 @@ from menuElements import *
 from spaceship import *
 from floaters import *
 
-class View:
+class View(object):
 
 	def __init__(self, game,screen):
 		self.game = game

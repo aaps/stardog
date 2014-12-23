@@ -5,7 +5,7 @@ from pygame.locals import *
 from floaters import *
 import stardog
 
-class Script:
+class Script(object):
 	def __init__(self, game):
 		self.game = game
 	

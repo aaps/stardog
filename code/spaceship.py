@@ -190,8 +190,8 @@ def playerShip(game, pos, delta, dir = 270, script = None, \
 	script.initbind(K_q, ship.right,False)
 	script.initbind(K_d, ship.turnRight,False)
 	script.initbind(K_a, ship.turnLeft,False)
-	script.initbind(K_LCTRL, ship.shoot,False)
-	script.initbind(K_SPACE, ship.launchMissiles,False)
+	#script.initbind(K_LCTRL, ship.shoot,False)
+	script.initbind(K_SPACE, ship.shoot,False)
 	script.initbind(K_m, ship.launchMines,False)
 	
 	return ship

@@ -139,6 +139,7 @@ make menu work on fullscreen. only fighter is displayed right left corner. [fixe
 Commanline interface
 =====
 * a command line interface for manipulating the world so that testing is faster. [W.I.P]
+* convert all oldstyle classes into new style that is easier to check with type() [done]
 - a command to add parts to a ship
 - a command to change name of ship
 - a command to change name of planet
@@ -150,6 +151,7 @@ Commanline interface
 - a command to reate a specific part with x stats on planet or ship, integrate with one of above ?
 - a command to manipulate your camera (need work)
 - a command for teleporting ships to other starsystem
+
 
 crew
 =====
