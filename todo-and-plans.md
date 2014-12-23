@@ -101,7 +101,7 @@ bigger detonation range.
 * a disable beam part [easymode]
 * ship lights [easy mode once particles is done]
 * a part with a cog on it that will keep a copy of the ship it is in and refreshes that every x seconds
-
+* make images for ships in the menu to choose from. 
 
 
 unknowns
@@ -144,6 +144,7 @@ Commanline interface
 =====
 * a command line interface for manipulating the world so that testing is faster. [W.I.P]
 * convert all oldstyle classes into new style that is easier to check with type() [done]
+* make command interface check against a list of keys that it may ignore for printing or using.
 - a command to add parts to a ship
 - a command to change name of ship
 - a command to change name of planet

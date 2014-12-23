@@ -48,10 +48,13 @@ class CommandParse(object):
                 if text[0] == '!':
                     #remove the ! and split the text up in a list of words.
                     text = text[1:].split(' ')
+                    while '' in text:
+                        text.remove('')
                     #extract the command from the text.
                     command = text[0]
                     #extract a list of arguments.
                     args = text[1:]
+                    print "input: %s \ncommand: %s \narguments: %s"%(text, command, args)
                     if command == 'print':
                         if not args:
                             return
@@ -78,16 +81,15 @@ class CommandParse(object):
                         attribute = getattr(self, args[0])
                         last_argument = args[-1:][0]
                         sec_last_argument = args[-2:][0]
-                        if len(args) == 1:
-                            setattr(attribute, args[1], int(args[2]))
+                        if len(args) == 2:
+                            setattr(attribute, sec_last_argument, eval(last_argument))
                         else:
-                            for index in range(1, len(args)-1):
+                            for index in xrange(1, len(args)-2):
                                 attribute = getattr(attribute, args[index])
-                            attribute = getattr(attribute, sec_last_argument)
-                            setattr(attribute, sec_last_argument, int(last_argument))
-                        #attribute = getattr(self, args[0])
-                        #if len(args) > 1:
-                        #    setattr(attribute, args[1], int(args[2]))
+                                print "attr: %s, arg: %s"%(str(attribute), args[index])
+                            setattr(attribute, sec_last_argument, eval(last_argument) )
+                    elif command == 'reload':
+                        print 'reload invoked'
                     elif command == 'exit' or command == 'quit':
                         self.game.running = False
                     elif command == 'help':
@@ -96,7 +98,7 @@ class CommandParse(object):
                     elif command == 'printdbg':
                         print "input: %s \ncommand: %s \narguments: %s"%(text, command, args)
                 else:
-                    print "text: "
+                    print "invalid input: "
                     print text
             except AttributeError, e:
                 print e
