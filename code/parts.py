@@ -577,6 +577,9 @@ class FlakCannon(Cannon):
             if self.burst <= 0:
                 self.reloadBurst = self.reloadBurstTime
 
+
+
+
 class Radar(Part):
     baseImage = loadImage("res/parts/radar" + ext)
     image = None
@@ -585,27 +588,34 @@ class Radar(Part):
     radarrange = 18000
     radarspeed = 1
     radartime = 0
-    enabled = False
     detected = []
+    enabled = False
 
     def __init__(self, game):
-        self.ports = []
+        # self.ports = []
         self.radartime = 0
         self.game = game
         self.detected = []
         Part.__init__(self, game)
-
-    def stats(self):
-        return "nothing yet"
+    
 
     def toggle(self):
-        # toggable parts are now possible see spaceships.py 128
         if self.enabled:
             self.enabled = False
         else:
             self.enabled = True
+        
+    def shortStats(self):
+        return "nothing"
 
+    def shortStats(self):
+        return "nothing yet"
 
+    def stats(self):
+        return "nothing yet"
+        
+
+    #     
     def update(self):
         
         if self.enabled:
@@ -624,6 +634,10 @@ class Radar(Part):
             self.ship.energy -= self.energyCost / self.game.fps
         else:
             self.detected = []
+        Part.update(self)
+
+
+
 
 class Engine(Part):
     baseImage = loadImage("res/parts/engine" + ext)

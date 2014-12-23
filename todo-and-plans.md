@@ -26,7 +26,6 @@ side dish
 ==========
 
 * making the rest of screen changeable ?, posibility to chage window with and or height ?
-* clean up this text file and source code !!!
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
 * more collision handeling refactor !!! [after that the impact can come back]
 * more to vec2d verctor work.

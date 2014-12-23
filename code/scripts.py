@@ -81,6 +81,12 @@ class InputScript(Script):
 		"""removes all bindings with the given key."""
 		self.bindings = [x for x in self.bindings if x[0] != key]
 
+	def setAllUnpressed(self):
+		for bind in self.bindings:
+			bind = (bind[0], bind[1], False, bind[3])
+		
+		print self.bindings
+
 class AIScript(Script):
 	interceptSpeed = 200. / 3
 	acceptableError = 10

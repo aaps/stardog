@@ -482,7 +482,14 @@ class Ship(Floater):
         if not self.parts or self.parts[0].hp <= 0:
             self.kill()
         #run script, get choices.
-        self.script.update(self)
+        
+        if self.game.player == self:
+             if not self.game.pause and not self.game.console:
+                self.script.update(self)
+        else:
+            self.script.update(self)
+
+
         if self.attention > 0:
             self.attention -= 0.1 / self.game.fps
         # actual updating:

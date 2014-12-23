@@ -124,6 +124,7 @@ class Game(object):
                             self.keys[event.key % 322] = 1
                         elif event.type == pygame.KEYUP:
                             self.keys[event.key % 322] = 0
+
                     if self.pause:
                         self.menu.handleEvent(event)
                     if self.console:
@@ -135,10 +136,13 @@ class Game(object):
                 if self.keys[K_RETURN % 322]:
                     self.pause = True #pause/menu
                     self.keys[K_RETURN % 322] = False
+
+
                     if self.pause:
                         self.menu.reset()
                 if self.keys[K_6 % 322]:
                     self.console = True
+
                     self.keys[K_6 % 322] = False
                     if self.console:
                         self.chatconsole.reset()
