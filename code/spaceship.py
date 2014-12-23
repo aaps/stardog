@@ -180,10 +180,10 @@ def makeScout(game, pos, delta, dir=27, script=None, \
                 addAdjective(part)
         part.color = color
     ship.addPart(cockpit)
-    cockpit.addPart(radar, 1)
+    cockpit.addPart(battery, 1)
     cockpit.addPart(cannon, 2)
-    cockpit.addPart(battery, 3)
-    battery.addPart(engine, 0)
+    cockpit.addPart(radar, 3)
+    radar.addPart(engine, 0)
     ship.reset()
     ship.energy = ship.maxEnergy * .8
     return ship
