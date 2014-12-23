@@ -19,15 +19,16 @@ http://pygame.org/project-planes-2392-4051.html get version 0.6
 * nebula and atmosphere
 * sometime in future convert the entity views to something like this:
 http://www.pygame.org/project-OpenGL+Library+(glLib*)-877-.html
+http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 
 side dish
 ==========
 
 * making the rest of screen changeable ?, posibility to chage window with and or height ?
-* clean up this text file !!!
+* clean up this text file and source code !!!
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
-* more collision handeling refactor
+* more collision handeling refactor !!!
 * more to vec2d verctor work.
 * remember planets that where on radar in list [done , aat]
 * some way to target ships, parts and planets [easy mode]
@@ -40,7 +41,8 @@ side dish
 * palaxing background, the image
 * menu volume controll for music and effects
 * instead of restart directly, wait for keypress and see your lifeless ship float into the distance.
-* a camera to capture different places, in stead of only player. !!!
+* a camera to capture different places, in stead of only player. [done and then some, aat]
+* make the camera so that it can smoothly transition from one place to another
 * make the game run from the beginning, so if choosing ship and color the game is already running
 * give ships a atention score that goes up when ships are sooting and dying drops off over time. [done, aat]
 * the portal stargate warp dent could use some drag inside it, for temp usability
@@ -122,7 +124,7 @@ DONE
 * revamp to use vectors [as good as done Aat]
 * every planet own part list, nope but fixed [Aat fixed it]
 * fixing a bug that made memmory leak during the drawing of the star map (duality)
-* the solarsystm.py has lots of basic functionality in a specific class can be put in parent class. this leaves space for starsystem specific stuff such as names and planet locations. !!! (Aat)
+
 * splitout views [nasty stuff] [as good as done, for now i want no part of it Aat]
 * we have parts not that can be toggled on or off, like the radar, no none asked for it still did it [Aat]
 * Space mines [easy mode] [Duality]

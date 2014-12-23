@@ -5,11 +5,6 @@ import pygame
 from pygame.locals import *
 import sys
 import cProfile
-try:
-    import psyco
-    psyco.full()
-except ImportError:
-    print 'this game may run faster if you install psyco.'
 
 
 
