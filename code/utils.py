@@ -168,8 +168,6 @@ def linePointDist(linePoint1, linePoint2, point, infinite = False):
 	
 	
 def bulletColor(damage):
-	# damage *= 10
-	print damage
 	if damage >= 0 and damage <= 2:
 		return (255, int(125*damage), int(125*damage))
 	if damage <= 10 and damage >= 2:

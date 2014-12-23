@@ -641,16 +641,6 @@ class Selecter(ScrollPanel):
 			panel.draw(self.image, self.visibleRect)
 		ScrollPanel.draw(self, surface, rect)
 
-# class textInput(Panel):
-
-# 	drawBorder = True
-# 	def __init__(self, rect, font = FONT, color =(100, 200, 100)):
-# 		Panel.__init__(self, rect)
-# 		self.color = color
-# 		self.rect = rect
-
-# 	def keyInput(self, key):
-# 		self.test += key
 
 
 class Label(Panel):
