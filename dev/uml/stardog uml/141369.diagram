@@ -1,0 +1,73 @@
+format 72
+
+classinstance 128185 class_ref 128441 // Ship
+  name ""   xyz 158 4 2005 life_line_z 2000
+classinstance 128313 class_ref 128057 // Game
+  name ""   xyz -9 4 2000 life_line_z 2000
+classinstance 128825 class_ref 142521 // Adjective
+  name ""   xyz 87 4 2005 life_line_z 2000
+note 129593 "part.attachEffects.append(addBonus)
+part.shipEffects.append(slowMotion)"
+  xyzwh 274 60 2020 203 49
+classinstance 129849 class_ref 128569 // Part
+  name ""   xyz 221 4 2000 life_line_z 2000
+note 130233 "addBonus(self.ship)
+self.ship.append(slowMotion)"
+  xyzwh 272 149 2000 167 45
+note 131001 "slowMotion(self)"
+  xyzwh 284 245 2000 119 35
+durationcanvas 128441 classinstance_ref 128313 // :Game
+  xyzwh 10 52 2010 11 506
+end
+durationcanvas 128569 classinstance_ref 128185 // :Ship
+  xyzwh 177 137 2010 11 74
+end
+durationcanvas 129337 classinstance_ref 128825 // :Adjective
+  xyzwh 111 55 2010 11 57
+end
+durationcanvas 129977 classinstance_ref 129849 // :Part
+  xyzwh 240 150 2010 11 38
+end
+durationcanvas 130489 classinstance_ref 128185 // :Ship
+  xyzwh 177 220 2010 11 83
+end
+durationcanvas 130745 classinstance_ref 129849 // :Part
+  xyzwh 240 226 2010 11 25
+end
+msg 128697 synchronous
+  from durationcanvas_ref 128441
+  to durationcanvas_ref 128569
+  yz 138 2015 explicitmsg "addPart"
+  show_full_operations_definition default drawing_language default
+  label_xy 28 124
+msg 129465 synchronous
+  from durationcanvas_ref 128441
+  to durationcanvas_ref 129337
+  yz 55 2015 explicitmsg "effect(part)"
+  show_full_operations_definition default drawing_language default
+  label_xy 38 41
+msg 130105 synchronous
+  from durationcanvas_ref 128569
+  to durationcanvas_ref 129977
+  yz 150 2015 msg operation_ref 135609 // "attach()"
+  show_full_operations_definition default drawing_language default
+  label_xy 208 136
+msg 130617 synchronous
+  from durationcanvas_ref 128441
+  to durationcanvas_ref 130489
+  yz 220 2015 msg operation_ref 128057 // "update()"
+  show_full_operations_definition default drawing_language default
+  label_xy 79 206
+msg 130873 synchronous
+  from durationcanvas_ref 130489
+  to durationcanvas_ref 130745
+  yz 229 2020 msg operation_ref 128057 // "update()"
+  show_full_operations_definition default drawing_language default
+  label_xy 194 215
+line 129721 -_-_
+  from ref 129593 z 2021 to ref 129337
+line 130361 -_-_
+  from ref 130233 z 2011 to ref 129977
+line 131129 -_-_
+  from ref 131001 z 2011 to ref 130489
+end
