@@ -158,7 +158,6 @@ class Game(object):
 					trigger.update()
 
 				self.camera.update()
-
 				self.camera.draw(self.screen)
 
 

@@ -66,11 +66,16 @@ class Planet(Floater):
 			self.kill()
 
 
-	
+
 class Sun(Planet):
 	PLANET_DAMAGE = 300
 	LANDING_SPEED = -999 
-	
+	def __init__(self, game, pos, delta = Vec2d(0,0), grav=5000, radius = 100, mass = 10000, image = None):
+
+		color = bulletColor((mass+.1)/250000)
+
+		Planet.__init__(self, game, pos, delta, grav, radius, mass, color, image )
+
 
 
 class Structure(Planet):

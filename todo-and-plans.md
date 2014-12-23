@@ -55,7 +55,7 @@ side dish
 * also add the chat console and menu to the camera
 * draw planets over things like explotions, and other ships.
 * make the color of the color of the star dependant on the size of the star, bigger is blueer, smaller redisher
-make the color og bullets dependent on their damage, bigger damage is bleuer/ whiter, smaller redder dimmer
+
 
 
 Housekeeping
