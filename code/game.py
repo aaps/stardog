@@ -60,7 +60,6 @@ class Game(object):
         #create a chatconsole for text input capabilities
         self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-50, self.width - int(self.width/ 8) , 50))
         
-    
     def run(self):
         """Runs the game."""
         
