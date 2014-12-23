@@ -16,6 +16,7 @@ class CommandParse(object):
     "or atributes specified, and or the elements\n"
     "in that atributes list\n"
     ]
+    
     def __init__(self, game, chatconsole):
         self.game = game
         self.player = game.player
@@ -26,14 +27,18 @@ class CommandParse(object):
         #for for example auto complete (future)
         self.setText = self.chatconsole.console.inputfield.setText
         self.text = []
+        
     def handleInput(self, event):
         pass
+        
     def printWithColor(self, first, second):
         print "%s%s%s=%s%s"%(bcolors.OKBLUE,first, bcolors.WARNING,\
             bcolors.OKGREEN, second)
+            
     def printAttributes(self, obj):
         for element in obj.__dict__:
             self.printWithColor(element, obj.__dict__[element])
+            
     def update(self):
         #get console input
         text = self.getText()

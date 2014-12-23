@@ -159,8 +159,34 @@ def makeJuggernaut(game, pos, delta, dir=27, script = None, \
 
 def makeScout(game, pos, delta, dir=27, script=None, \
                 color = (255,255,255), player=False):
-    pass
-    
+    if player:
+        ship = Player(game, pos, delta, dir = dir, \
+                script = script, color = color)
+    else:
+        ship = Ship(game, pos, delta, dir = dir, \
+                script = script, color = color)
+    cockpit = Fighter(game)
+    battery = Battery(game)
+    cannon = RightFlakCannon(game)
+    radar = Radar(game)
+    engine = Engine(game)
+    #gun = MachineGun(game)
+    #engine = Engine(game)
+    #shield = FighterShield(game)
+    for part in [cockpit, battery, cannon, radar, engine]:
+        if rand() > .8:
+            addAdjective(part)
+            if rand() > .6:
+                addAdjective(part)
+        part.color = color
+    ship.addPart(cockpit)
+    cockpit.addPart(radar, 1)
+    cockpit.addPart(cannon, 2)
+    cockpit.addPart(battery, 3)
+    battery.addPart(engine, 0)
+    ship.reset()
+    ship.energy = ship.maxEnergy * .8
+    return ship
 
 def playerShip(game, pos, delta, dir = 270, script = None, \
                 color = (255, 255, 255), type = 'fighter'):
@@ -173,6 +199,8 @@ def playerShip(game, pos, delta, dir = 270, script = None, \
                 script, color, player=True)
     elif type == 'juggernaut':
         ship = makeJuggernaut(game, pos, delta, dir, script, color, player=True)
+    elif type == 'scout':
+        ship = makeScout(game, pos, delta, dir, script, color, player=True)
     else:
         ship = makeFighter(game, pos, delta, dir, 
                 script, color, player=True)
