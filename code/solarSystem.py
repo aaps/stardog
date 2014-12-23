@@ -229,8 +229,7 @@ class SolarA1(SolarSystem):
 	g=5000
 	def __init__(self, game, numPlanets = 10, numStructures = 2):
 		SolarSystem.__init__(self, game)
-		self.sun = (Sun( game, Vec2d(0,0), radius = 2000, mass = 180000, \
-					color = (255, 255, 255), image = None)) # the star
+		self.sun = (Sun( game, Vec2d(0,0), radius = 2000, mass = 180000, image = None)) # the star
 		#place player:
 		angle = randint(0,360)
 		distanceFromSun = randint(8000, 18000)
@@ -285,8 +284,7 @@ class SolarB2(SolarSystem):
 	fightersPerMinute = 2
 	def __init__(self, game, numPlanets = 3, numStructures = 1):
 		SolarSystem.__init__(self, game)
-		self.sun = (Sun( game, Vec2d(0,0), radius = 2000, mass = 180000, \
-					color = (255, 255, 255), image = None)) # the star
+		self.sun = (Sun( game, Vec2d(0,0), radius = 2000, mass = 180000, image = None)) # the star
 		#place player:
 		angle = randint(0,360)
 		distanceFromSun = randint(8000, 18000)
