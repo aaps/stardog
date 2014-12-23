@@ -103,7 +103,7 @@ class Game(object):
             
             self.triggers = plot.newGameTriggers(self)
             #create a parser that parses chatconsole input for command and such.
-            self.commandParse = CommandParse(self, self.chatconsole)
+            self.commandParse = CommandParse(self, self.chatconsole, self.messenger)
             #The in-round loop (while player is alive):
             while self.running and self.curSystem.ships.has(self.player):
                 #event polling:
@@ -168,7 +168,8 @@ class Game(object):
                 if self.console:
                     self.chatconsole.update()
                     self.chatconsole.draw(self.screen)
-                
+                #update actually parses input.
+                #and does actions based upon that.
                 self.commandParse.update()
                 
                 #frame maintainance:

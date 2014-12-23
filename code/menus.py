@@ -812,7 +812,7 @@ class InputField(Panel):
     drawBorder = False
     image = None
 
-    def __init__(self, rect, game, font = FONT, color = (255,255,255), width = 200):
+    def __init__(self, rect, game, font = BIG_FONT, color = (255,255,255), width = 200):
         self.text = ""
         self.game = game
         

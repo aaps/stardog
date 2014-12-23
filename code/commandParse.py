@@ -1,4 +1,5 @@
 from types import *
+from utils import *
 
 class bcolors:
     HEADER = '\033[95m'
@@ -9,6 +10,10 @@ class bcolors:
     ENDC = '\033[0m'
     WHITE = '\033'
 
+RED = (255,0,0)
+GREEN = (0,255,0)
+BLUE = (0,0,255)
+
 class CommandParse(object):
     helpText = [
     "!print <object...> <attributes> <...>\n"
@@ -17,9 +22,10 @@ class CommandParse(object):
     "in that atributes list\n"
     ]
     
-    def __init__(self, game, chatconsole):
+    def __init__(self, game, chatconsole, messenger):
         self.game = game
         self.player = game.player
+        self.messenger = messenger
         self.chatconsole = chatconsole
         #a reference to a function that gets the text from the chatconsole
         self.getText = self.chatconsole.console.inputfield.getText
@@ -30,14 +36,21 @@ class CommandParse(object):
         
     def handleInput(self, event):
         pass
+    
+    def printout(self, text):
+        #if '\n' in text:
+        #    text = text.split('\n')
+        #    for item in text:
+        #        self.messenger.message(str(item), (244,244,200))
+        #else:
+        self.messenger.message(str(text), (244,244,200))
         
-    def printWithColor(self, first, second):
-        print "%s%s%s=%s%s"%(bcolors.OKBLUE,first, bcolors.WARNING,\
-            bcolors.OKGREEN, second)
-            
+    def printAttrVal(self, attribute, value):
+        self.printout(str(attribute)+" = "+str(value))
+        
     def printAttributes(self, obj):
         for element in obj.__dict__:
-            self.printWithColor(element, obj.__dict__[element])
+            self.printAttrVal(element, obj.__dict__[element])
             
     def update(self):
         #get console input
@@ -54,7 +67,7 @@ class CommandParse(object):
                     command = text[0]
                     #extract a list of arguments.
                     args = text[1:]
-                    print "input: %s \ncommand: %s \narguments: %s"%(text, command, args)
+                    #self.printout("input: %s \ncommand: %s \narguments: %s"%(text, command, args))
                     if command == 'print':
                         if not args:
                             return
@@ -65,7 +78,7 @@ class CommandParse(object):
                             try:
                                 self.printAttributes(attribute)
                             except Exception, e:
-                                self.printWithColor(last_argument, getattr(self, last_argument))
+                                self.printAttrVal(last_argument, getattr(self, last_argument))
                         #else if we got more arguments traverse list and print value/attribute list.
                         else:
                             for index in range(1, len(args)-1):
@@ -73,8 +86,8 @@ class CommandParse(object):
                             try:
                                 self.printAttributes(getattr(attribute, last_argument))
                             except Exception, e:
-                                self.printWithColor(last_argument, getattr(attribute, last_argument) )
-                        print
+                                self.printAttrVal(last_argument, getattr(attribute, last_argument) )
+                        self.printout("")
                     elif command == 'set':
                         if not args:
                             return
@@ -86,19 +99,18 @@ class CommandParse(object):
                         else:
                             for index in xrange(1, len(args)-2):
                                 attribute = getattr(attribute, args[index])
-                                print "attr: %s, arg: %s"%(str(attribute), args[index])
+                                self.printout("attr: %s, arg: %s"%(str(attribute), args[index]))
                             setattr(attribute, sec_last_argument, eval(last_argument) )
                     elif command == 'reload':
-                        print 'reload invoked'
+                        self.printout('reload invoked')
                     elif command == 'exit' or command == 'quit':
                         self.game.running = False
                     elif command == 'help':
                         for text in self.helpText:
-                            print text
+                            self.printout(text)
                     elif command == 'printdbg':
-                        print "input: %s \ncommand: %s \narguments: %s"%(text, command, args)
+                        self.printout("input: %s \ncommand: %s \narguments: %s"%(text, command, args))
                 else:
-                    print "invalid input: "
-                    print text
+                    self.printout("me: "+text)
             except AttributeError, e:
                 print e
