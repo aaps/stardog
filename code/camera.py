@@ -8,7 +8,6 @@ class Camera(object):
 	transcurve = None
 	transitioning = False
 	transtime = 10
-	# onScreen = []
 	pos = None
 	layers = []
 	target = None

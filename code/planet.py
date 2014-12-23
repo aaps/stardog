@@ -21,7 +21,6 @@ class Planet(Floater):
 		self.color = color
 		self.g = grav
 		self.damage = {}	
-		#damage[ships] = amount of damage ship will take. 
 		#see solarSystem.planet_ship_collision
 		self.race = None #race that owns this planet
 		if image == None:
@@ -70,10 +69,8 @@ class Planet(Floater):
 	
 class Sun(Planet):
 	PLANET_DAMAGE = 300
-	LANDING_SPEED = -999 #no landing on the sun.
-	# def __init__(self, game, pos, radius = 100, mass = 10000, \
-	# 				color = (100,200,50), image = None, race = None):
-	# 	Floater.__init__(self, game, pos, radius = radius, image = image)
+	LANDING_SPEED = -999 
+	
 
 
 class Structure(Planet):
@@ -86,7 +83,6 @@ class Structure(Planet):
 		self.g = grav
 		self.damage = {}	
 		self.radius = radius
-		#damage[ships] = amount of damage ship will take. 
 		#see solarSystem.planet_ship_collision
 		self.race = None #race that owns this planet
 		if image == None:

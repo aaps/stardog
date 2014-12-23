@@ -46,8 +46,6 @@ class Game(object):
         self.messenger = Messenger(self)
         self.camera.layerAdd(self.messenger,6)
         self.camera.layerAdd(MiniInfo(self),5)
-
-        
         #key polling:
         self.keys = [False]*322
         #mouse is [pos, button1, button2, button3,..., button6].
@@ -155,7 +153,6 @@ class Game(object):
                 or self.keys[K_LCTRL % 322] and self.keys[K_q % 322] \
                 or self.keys[K_RCTRL % 322] and self.keys[K_q % 322]:
                     self.running = False
-                    
 
                 for trigger in self.triggers:
                     trigger.update()

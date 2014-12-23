@@ -116,7 +116,6 @@ class Bullet(Floater):
 		self.game.curSystem.add(impact)
 
 	def kill(self):
-		# self.detonate(other)
 		if soundModule:
 			setVolume(missileSound.play(), self, self.game.player)
 		Floater.kill(self)

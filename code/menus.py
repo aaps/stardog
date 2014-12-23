@@ -147,7 +147,6 @@ class Menu(TopLevelPanel):
 			self.panels.remove(self.activeMenu)
 		self.activeMenu = menu
 		self.panels.append(menu)
-		#print "self.panels len: %d"%(len(self.panels))
 	
 	def update(self):
 		self.game.player.reset()
@@ -198,7 +197,6 @@ class PartsPanel(Panel):
 			self.dirtyParts = True
 		if self.dirtyParts:
 			self.dirtyParts = False
-			# self.tradePanel.set_partlist(self.player.landed.inventory)
 			self.reset()
 			
 	def reset(self):
@@ -324,7 +322,6 @@ class ShipPanel(Selecter):
 					color = (100,200,0), font = SMALL_FONT))
 		self.addPanel(self.text)
 		Panel.reset(self) 
-		#not Selectable.reset(), because that rearranges the selectables.
 		
 class PartDescriptionPanel(Panel):
 	drawBorder = False
@@ -590,10 +587,6 @@ class Keys(Panel):
 					self.bind, "Bind"))
 		self.addPanel(Button(Rect(self.rect.width - 106, buttonTop, 100, 20), \
 					self.unbind, "Unbind"))
-		# self.addPanel(PartFunctionsPanel(Rect(self.rect.left + 2, \
-					# self.rect.top + 2, 	self.rect.width / 2 - 4, \
-					# self.rect.height - self.keyboardRect.height - 2), self, \
-					# player))
 		self.toggleMouseButton = Button(Rect(self.rect.left, self.rect.bottom - 20, 
 								200,20), self.toggleMouse, "Turn Mouse Off")
 		self.addPanel(self.toggleMouseButton)
