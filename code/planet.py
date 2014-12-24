@@ -74,6 +74,8 @@ class Planet(Floater):
 		elif isinstance(other, Planet):
 			self.planetCollision(other)
 			return True
+		else:
+			other.crash(self)
 
 	def freepartCollision(self, part):
 		part.kill()

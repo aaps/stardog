@@ -46,6 +46,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	color = (200, 200, 0)
 	mass = 1
 	tangible = True
+	lastDamageFrom = None
 
 	def __init__(self, game, pos, delta, dir = 270, radius = 10, \
 			image = None):
@@ -70,6 +71,8 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 		self.rect.centery =	int(self.pos.y)
 
 	def takeDamage(self, damage, other):
+		
+		self.lastDamageFrom = other
 		self.hp -= damage
 		if self.hp <= 0:
 			self.kill()
@@ -79,6 +82,14 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 		poss = self.pos.x - self.image.get_width()  / 2 - offset[0], \
 			  self.pos.y - self.image.get_height() / 2 - offset[1]
 		surface.blit(self.image, poss)
+
+	def crash(self, other):
+		if soundModule:
+			setVolume(hitSound.play(), self, other)
+		hpA = self.hp
+		hpB = other.hp
+		if hpB > 0: self.takeDamage(hpB, other)
+		if hpA > 0: other.takeDamage(hpA, self)
 
 
 
@@ -110,17 +121,23 @@ class Bullet(Floater):
 		if self.life > self.range:
 			self.softkill()
 
-	def detonate(self,other):
-		delta = other.delta / 10
+	def detonate(self):
+		if self.lastDamageFrom:
+			delta = (self.lastDamageFrom.delta + self.delta) / 2
+			print delta
+		else:
+			delta = self.delta
 		impact = Impact(self.game, self.pos, delta, 20, 14)
 		self.game.curSystem.add(impact)
 
 	def kill(self):
 		if soundModule:
 			setVolume(missileSound.play(), self, self.game.player)
+		self.detonate()
 		Floater.kill(self)
 
 	def softkill(self):
+		self.detonate()
 		Floater.kill(self)
 
 
@@ -292,6 +309,7 @@ class Impact(Floater):
 		else:
 			self.radius = int(self.maxRadius * (self.time * 4 / 3 \
 						- self.life * 4 / 3) / self.time)
+		Floater.update(self)
 
 	def draw(self, surface, offset = (0,0)):
 		self.image.fill((0, 0, 0, 0))
