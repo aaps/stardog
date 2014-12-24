@@ -53,7 +53,8 @@ side dish
 * ai could use some more bains and variation
 * also add the chat console and menu to the camera
 * draw planets over things like explotions, and other ships.
-* make the color of the color of the star dependant on the size of the star, bigger is blueer, smaller redisher
+* make the color of the color of the star dependant on the size of the star, bigger is blueer, smaller redisher [done could use some tweaking]
+* when destroyed a part has a change it will become scrap
 
 
 
@@ -134,7 +135,7 @@ make menu work on fullscreen. only fighter is displayed right left corner. [fixe
 * and parts for crew quaters. [part added]
 * make the space structure class that will inherit from gravless as well with a custom  [done in other way]
 * not be a planet. !!! also good for space ports, etc. [Aaps, first refactor the collision detection part]
-* posibility to eject parts [easy mode, done aat] !!!
+* posibility to eject parts [easy mode, done aat]
 * make planet inherit from a Gravless class so stargate will not be effected by graf [done in another way]
 * removed names from the code, duality, your name can go here !
 

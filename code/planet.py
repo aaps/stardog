@@ -3,7 +3,8 @@
 from utils import *
 from floaters import Floater
 from adjectives import randItem
-import parts
+from parts import *
+from spaceship import *
 import stardog
 from vec2d import Vec2d
 
@@ -54,6 +55,25 @@ class Planet(Floater):
 
 	def takeDamage(self, damage, other):
 		pass
+
+	def collision(self, other):
+		if  sign(other.pos.x - self.pos.x) == sign(other.delta.x - self.delta.x) \
+			and sign(other.pos.y - self.pos.y) == sign(other.delta.y - self.delta.y):# moving away from planet.
+				return False
+		# planet/ship
+		#planet/part
+		elif isinstance(other, Part) and other.parent == None:
+			self.freepartCollision(other)
+			return True
+		elif isinstance(other, Ship):
+			if isinstance(self, Gateway):
+				other.gatewayCollision(self)
+			else:	
+				other.planetCollision(self)
+		#planet/planet
+		elif isinstance(other, Planet):
+			self.planetCollision(other)
+			return True
 
 	def freepartCollision(self, part):
 		part.kill()

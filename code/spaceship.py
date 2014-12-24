@@ -566,6 +566,8 @@ class Ship(Floater):
             part.scatter(self)
         Floater.kill(self)
 
+        
+
     def planetCollision(self, planet):
         shipangle = (planet.pos - self.pos).get_angle()
         planetangle = (self.pos - planet.pos).get_angle()

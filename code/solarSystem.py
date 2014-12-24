@@ -124,78 +124,57 @@ class SolarSystem(object):
 			#planet/?
 			if isinstance(b, Planet): a,b = b,a
 			if isinstance(a, Planet):
-				if  sign(b.pos.x - a.pos.x) == sign(b.delta.x - a.delta.x) \
-				and sign(b.pos.y - a.pos.y) == sign(b.delta.y - a.delta.y):# moving away from planet.
-					return False
-				# planet/ship
-				#planet/part
-				elif isinstance(b, Part) and b.parent == None:
-					a.freepartCollision( b)
-					return True
-				elif isinstance(b, Ship):
-					if isinstance(a, Gateway):
-						b.gatewayCollision(a)
-					else:	
-						b.planetCollision(a)
-					return True
-				#planet/planet
-				elif isinstance(b, Planet):
-					a.planetCollision(b)
-					return True
+				return a.collision(b)
+
 					
 			if isinstance(b, Explosion): a,b = b,a
 			if isinstance(a, Explosion):
 				self.explosion_push(a,b)
 				#but don't return!
 			#shield ship/?
-			if isinstance(b, Ship) and b.hp > 0: a,b = b,a
-			if isinstance(a, Ship) and a.hp > 0:
-				#shield ship/free part
+
+			if isinstance(b, Ship) : a,b = b,a
+			if isinstance(a, Ship):
+				
 				if isinstance(b, Part) and b.parent == None:
 					a.freepartCollision(b)
 					return True
-				#crash against ship's shields, if any:
+
 				hit = False
-				if b.hp >= 0 and (sign(b.pos.x - a.pos.x) == - sign(b.delta.x - a.delta.x) \
-								or sign(b.pos.y - a.pos.y) == - sign(b.delta.y - a.delta.y)):
-					# moving into ship, not out of it.
-					self.crash(a,b)
-					hit = True
-					#if this ship no longer has shields, start over:
-					if a.hp <= 0:
-						self.collide(a, b)
-						return True
-				#shield ship/no shield ship (or less shield than this one)
-				if isinstance(b, Ship) and b.hp <= 0:
-					for part in b.parts:
-						if self.collide(a, part):
+				if a.hp > 0:
+					
+					if b.hp >= 0 and (sign(b.pos.x - a.pos.x) == - sign(b.delta.x - a.delta.x) \
+									or sign(b.pos.y - a.pos.y) == - sign(b.delta.y - a.delta.y)):
+						# moving into ship, not out of it.
+						self.crash(a,b)
+						hit = True
+						#if this ship no longer has shields, start over:
+						if a.hp <= 0:
+							self.collide(a, b)
+							return True
+					#shield ship/no shield ship (or less shield than this one)
+					if isinstance(b, Ship) and b.hp <= 0:
+						for part in b.parts:
+							if self.collide(a, part):
+								#if that returned true, everything
+								#should be done already.
+								return True
+					return hit
+				else:
+
+					#recurse to ship parts
+					for part in a.parts:
+						if self.collide(b, part):#works for ship/ship, too.
 							#if that returned true, everything
 							#should be done already.
-							return True
-				return hit
-
-			#ship / ?
-			if isinstance(b, Ship): a,b = b,a
-			if isinstance(a, Ship):
-				#ship/free part
-				if isinstance(b, Part) and b.parent == None:
-					a.freepartCollision(b)
-					return True
-								
-				#recurse to ship parts
-				hit = False
-				for part in a.parts:
-					if self.collide(b, part):#works for ship/ship, too.
-						#if that returned true, everything
-						#should be done already.
-						hit = True
-				return hit
+							hit = True
+					return hit
 				
 			#free part/free part
 			if isinstance(b, Part) and b.parent == None \
 			and isinstance(a, Part) and a.parent == None:
 				return False #pass through each other, no crash.
-			
+
 			#floater/floater (no ship, planet)
 			else:
 				self.crash(a, b)
@@ -327,24 +306,7 @@ class SolarB2(SolarSystem):
 
 		self.fighterTimer = 60
 			
-	# def update(self):
-	# 	SolarSystem.update(self)
-	# 	enemy respawning:
-		
-	# 	#tiny fighters
-	# 	if self.fighterTimer <= 0 and len(self.tinyFighters) < self.maxFighters:
-	# 		numSpawn = randint(1,3)
-	# 		for i in range(numSpawn):
-	# 			angle = randint(0,360)
-	# 			distance = randint(1000, 4000)
-	# 			x = distance * cos(angle) + self.game.player.pos.x
-	# 			y = distance * sin(angle) + self.game.player.pos.y
-	# 			fighter = TinyFighter(self.game, Vec2d(x, y), self.game.player.delta)
-	# 			self.add(fighter)
-	# 			self.tinyFighters.append(fighter)					
-	# 			self.fighterTimer = 60 / self.fightersPerMinute
-	# 	else:
-	# 		self.fighterTimer -= 1. / self.game.fps
+
 		
 	
 
