@@ -9,6 +9,7 @@ from planet import *
 from gui import *
 import stardog
 from vec2d import Vec2d
+from nameMaker import *
 
 class SolarSystem(object):
 	"""A SolarSystem holds ships and other floaters."""
@@ -93,7 +94,10 @@ class SolarSystem(object):
 					
 						angle = randint(0, 360)
 						pos = planet.pos.rotatedd(angle, planet.radius + 300)
-						ship = Strafebat(self.game, pos, color = planet.color)
+						name = nameMaker().getUniqePilotName(self.ships)
+						
+						ship = Strafebat(self.game, pos,  planet.color, name)
+						
 						planet.ships.add(ship)
 						self.add(ship)
 						ship.planet = planet

@@ -252,7 +252,8 @@ class Ship(Floater):
     number = 0
     numParts = 0
     curtarget = None
-    name = 'Ship'
+    firstname = None
+    secondname = None
     skills = []
     level = 1
     partEffects = []
@@ -278,7 +279,7 @@ class Ship(Floater):
 
     
     def __init__(self, game, pos, delta, dir = 270, script = None, \
-                color = (255, 255, 255)):
+                color = (255, 255, 255), name=("shippy","Mcshipperson")):
         Floater.__init__(self, game, pos, delta, dir, 1)
         self.inventory = []
         """
@@ -287,6 +288,9 @@ class Ship(Floater):
         self.insertInInventory(Generator, 4)
         self.insertInInventory(Battery, 4)
         """
+
+        self.firstname = name[0]
+        self.secondname = name[1]
         self.ports = [Port((0,0), 0, self)]
         self.energy = 0
         self.maxEnergy = 0

@@ -85,7 +85,6 @@ class InputScript(Script):
 		for bind in self.bindings:
 			bind = (bind[0], bind[1], False, bind[3])
 		
-		print self.bindings
 
 class AIScript(Script):
 	interceptSpeed = 200. / 3

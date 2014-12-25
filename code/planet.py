@@ -13,7 +13,8 @@ class Planet(Floater):
 	maxRadius = 1000000 # no gravity felt past this (approximation).
 	PLANET_DAMAGE = .0004
 	LANDING_SPEED = 200 #pixels per second. Under this, no damage.
-	name = "Planet Unknown"
+	firstname = "Planet"
+	secondname = "Unknown"
 	
 	def __init__(self, game, pos, delta = Vec2d(0,0), grav=5000, radius = 100, mass = 10000, \
 					color = (100,200,50), image = None, race = None):

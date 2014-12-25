@@ -1,5 +1,7 @@
 
 from vec2d import Vec2d
+from planet import *
+from floaters import *
 
 class Camera(object):
 	game = None
@@ -139,6 +141,18 @@ class SpaceView(object):
 			and (r + floater.pos.y > self.offset.y 	and floater.pos.y - r < self.offset.y + self.camera.height):
 					self.onScreen.append(floater)
 
+	def sortFloaterHeight(self, onscreen):
+		if isinstance(onscreen, Planet):
+			return 4
+		elif isinstance(onscreen, Impact):
+			return 5
+		elif isinstance(onscreen, Explosion):
+			return 3
+		else:
+			return 2
+
+
 	def draw(self, surface, pos):
+		self.onScreen = sorted(self.onScreen, key=lambda onscreen: self.sortFloaterHeight(onscreen))
 		for floater in self.onScreen:
 			floater.draw(surface, self.offset)

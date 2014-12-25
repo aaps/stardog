@@ -27,10 +27,10 @@ side dish
 
 * making the rest of screen changeable ?, posibility to chage window with and or height ?
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
-* more collision handeling refactor !!! [after that the impact can come back]
-* more to vec2d verctor work.
+* more collision handeling refactor !! [still need more refactoring]
+* more to vec2d verctor work. !!! [can alwais use some work]
 * remember planets that where on radar in list [done , aat]
-* some way to target ships, parts and planets [easy mode]
+* some way to target ships, parts and planets !!! [easy mode]
 * zoom in out option for radar [medium mode ?]
 * weapon heat generation [easy mode]
 * engines that are good for space travel but bad for landing and visaversa
@@ -134,7 +134,7 @@ DONE
 make menu work on fullscreen. only fighter is displayed right left corner. [fixed Duality]
 * and parts for crew quaters. [part added]
 * make the space structure class that will inherit from gravless as well with a custom  [done in other way]
-* not be a planet. !!! also good for space ports, etc. [Aaps, first refactor the collision detection part]
+
 * posibility to eject parts [easy mode, done aat]
 * make planet inherit from a Gravless class so stargate will not be effected by graf [done in another way]
 * removed names from the code, duality, your name can go here !

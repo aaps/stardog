@@ -124,7 +124,6 @@ class Bullet(Floater):
 	def detonate(self):
 		if self.lastDamageFrom:
 			delta = (self.lastDamageFrom.delta + self.delta) / 2
-			print delta
 		else:
 			delta = self.delta
 		impact = Impact(self.game, self.pos, delta, 20, 14)
