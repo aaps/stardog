@@ -14,6 +14,12 @@ RED = (255,0,0)
 GREEN = (0,255,0)
 BLUE = (0,0,255)
 
+class AttributeFilter(object):
+    def __init__(self):
+        pass
+    def getFilteredList(self):
+        pass
+
 class CommandParse(object):
     helpText = [
     "!print <object...> <attributes> <...>\n"
@@ -88,6 +94,9 @@ class CommandParse(object):
                             except Exception, e:
                                 self.printAttrVal(last_argument, getattr(attribute, last_argument) )
                         self.printout("")
+                    elif command == 'func':
+                        print ' '.join(args)
+                        exec ' '.join(args)
                     elif command == 'set':
                         if not args:
                             return
