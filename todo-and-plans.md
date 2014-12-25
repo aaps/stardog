@@ -25,10 +25,11 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ==========
 
+* making the universe class to hold starsystems
 * making the rest of screen changeable ?, posibility to chage window with and or height ?
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
 * more collision handeling refactor !! [still need more refactoring]
-* more to vec2d verctor work. !!! [can alwais use some work]
+* more to vec2d verctor work. !! [can alwais use some work]
 * remember planets that where on radar in list [done , aat]
 * some way to target ships, parts and planets !!! [easy mode]
 * zoom in out option for radar [medium mode ?]

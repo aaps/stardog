@@ -839,7 +839,6 @@ class GatewayFocus(Part):
 
 
     def toggle(self):
-        print 'toggle'
         if self.enabled:
             self.enabled = False
             if self.jumpenergy >= self.neededenergy:

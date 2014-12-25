@@ -16,8 +16,8 @@ class nameMaker(object):
 
 	def getUniqePilotName(self, listoffloaters):
 		while True:
-			first = random.sample(self.firstnames,1)
-			second = random.sample(self.secondnames,1)
+			first = random.sample(self.firstnames,1)[0]
+			second = random.sample(self.secondnames,1)[0]
 			ships = False
 			if len(listoffloaters) > 0:
 				for floater in listoffloaters:

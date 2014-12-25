@@ -4,6 +4,7 @@ from utils import *
 from parts import *
 from partCatalog import *
 from floaters import *
+
 from pygame.locals import *
 import stardog
 from adjectives import addAdjective
@@ -213,6 +214,12 @@ def playerShip(game, pos, delta, dir = 270, script = None, \
     script.initbind(K_RCTRL, ship.shoot,False)
     script.initbind(K_s, ship.reverse,False)
     script.initbind(K_r, ship.toggleRadar,True)
+    script.initbind(K_t, ship.targetNextShip,True)
+    script.initbind(K_y, ship.targetPrefShip,True)
+    script.initbind(K_g, ship.targetNextPlanet,True)
+    script.initbind(K_h, ship.targetPrefPlanet,True)
+    script.initbind(K_b, ship.targetNextPart,True)
+    script.initbind(K_n, ship.targetPrefPart,True)
     script.initbind(K_j, ship.toggleGatewayFocus,True)
     script.initbind(K_w, ship.forward,False)
     script.initbind(K_e, ship.left,False)
@@ -288,7 +295,6 @@ class Ship(Floater):
         self.insertInInventory(Generator, 4)
         self.insertInInventory(Battery, 4)
         """
-
         self.firstname = name[0]
         self.secondname = name[1]
         self.ports = [Port((0,0), 0, self)]
@@ -476,9 +482,108 @@ class Ship(Floater):
     def toggleRadar(self):
         for radar in self.radars:
             radar.toggle()
+
+    def targetNextShip(self):
+        # from planet import Planet
+        resultList = []
+        
+        for radar in self.radars:
+            resultList= list(set(radar.detected)|set(resultList))
+        resultList =  filter(lambda f: isinstance(f, Ship), resultList)
+        length = len(resultList)
+
+
+        if self.curtarget and self.curtarget in resultList  and length-1 > resultList.index(self.curtarget):
+            self.curtarget = resultList[resultList.index(self.curtarget)+1]
+        elif length > 0:
+            self.curtarget = resultList[0]
+        else:
+            self.curtarget = None
+
+
+    def targetPrefShip(self):
+        # from planet import Planet
+        resultList = []
+        
+        for radar in self.radars:
+            resultList= list(set(radar.detected)|set(resultList))
+        resultList = filter(lambda f: isinstance(f, Ship), resultList)
+        length = len(resultList)
+
+
+        if self.curtarget and self.curtarget in resultList  and  resultList.index(self.curtarget) > 0:
+            self.curtarget = resultList[resultList.index(self.curtarget)-1]
+        elif length > 0:
+            self.curtarget = resultList[length-1]
+        else:
+            self.curtarget = None
+
+    def targetNextPlanet(self):
+        from planet import Planet
+
+        length = len(self.knownplanets)
+
+
+        if self.curtarget and self.curtarget in self.knownplanets  and length-1 > self.knownplanets.index(self.curtarget):
+            self.curtarget = self.knownplanets[self.knownplanets.index(self.curtarget)+1]
+        elif length > 0:
+            self.curtarget = self.knownplanets[0]
+        else:
+            self.curtarget = None
+
+    def targetPrefPlanet(self):
+        from planet import Planet
+
+        length = len(self.knownplanets)
+
+
+        if self.curtarget and self.curtarget in self.knownplanets  and self.knownplanets.index(self.curtarget) > 0:
+            self.curtarget = self.knownplanets[self.knownplanets.index(self.curtarget)-1]
+        elif length > 0:
+            self.curtarget = self.knownplanets[length-1]
+        else:
+            self.curtarget = None
+
+    def targetNextPart(self):
+        resultList = []
+        
+        for radar in self.radars:
+            
+            resultList= list(set(radar.detected)|set(resultList))
+        resultList =  filter(lambda f: isinstance(f, Part), resultList)
+        length = len(resultList)
+
+
+        if self.curtarget and self.curtarget in resultList  and length-1 > resultList.index(self.curtarget):
+            self.curtarget = resultList[resultList.index(self.curtarget)+1]
+        elif length > 0:
+            self.curtarget = resultList[0]
+        else:
+            self.curtarget = None
+
+    def targetPrefPart(self):
+        resultList = []
+        
+        for radar in self.radars:
+            
+            resultList= list(set(radar.detected)|set(resultList))
+        resultList =  filter(lambda f: isinstance(f, Part), resultList)
+        length = len(resultList)
+
+
+        if self.curtarget and self.curtarget in resultList  and resultList.index(self.curtarget) > 0:
+            self.curtarget = resultList[self.knownplanets.index(self.curtarget)-1]
+        elif length > 0:
+            self.curtarget = resultList[length-1]
+        else:
+            self.curtarget = None
+
     def toggleGatewayFocus(self):
         for gwfocus in self.gwfocusus:
             gwfocus.toggle()
+
+    def combineLists(self, atype):
+        pass
     
     
     def update(self):
@@ -492,6 +597,12 @@ class Ship(Floater):
                 self.script.update(self)
         else:
             self.script.update(self)
+
+        resultList = []
+        for radar in self.radars:
+            resultList= list(set(radar.detected)|set(resultList))
+        if not self.curtarget in resultList:
+            self.curtarget = None
 
 
         if self.attention > 0:

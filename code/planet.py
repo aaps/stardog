@@ -92,7 +92,8 @@ class Planet(Floater):
 
 class Sun(Planet):
 	PLANET_DAMAGE = 300
-	LANDING_SPEED = -999 
+	LANDING_SPEED = -999
+	firstname = "Star Unknown"
 	def __init__(self, game, pos, delta = Vec2d(0,0), grav=5000, radius = 100, mass = 10000, image = None):
 
 		color = bulletColor((mass+.1)/250000)
@@ -104,7 +105,7 @@ class Sun(Planet):
 class Structure(Planet):
 	LANDING_SPEED = 200 #pixels per second. Under this, no damage.
 	PLANET_DAMAGE = .0004
-	name = "Structure Unknown"
+	firstname = "Structure Unknown"
 	def __init__(self, game, pos, delta, grav=5000, color = (100,200,50), radius = 100, image = None):
 		Floater.__init__(self, game, pos, Vec2d(0,0), 0, image=image)
 		self.color = (0,0,255)
@@ -146,7 +147,7 @@ class Gateway(Planet):
 	maxRadius = 50000 # no gravity felt past this (approximation).
 	tangible = True
 	g = 5000 # the gravitational constant.
-	name = "Gateway Unknown"
+	firstname = "Gateway Unknown"
 	rect = None
 	image = None
 	sister = None

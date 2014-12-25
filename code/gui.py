@@ -110,13 +110,17 @@ class HUD(Drawable):
 				dotPos = int(center[0] + limit(-radius,	result.x / scale, radius)), \
 						int(center[1] + limit(-radius, result.y / scale, radius))
 				if isinstance(floater, Ship):
+					if thisShip.curtarget == floater:
+						pygame.draw.circle(self.image, (0, 100, 250), dotPos, 4, 1)
 					pygame.draw.circle(self.image, (250, 250, 0), dotPos, 2)
 					color = floater.color
 					r = 1
 					pygame.draw.rect(self.image, color, (dotPos[0]-1,dotPos[1]-1,2,2))
 				elif not isinstance(floater, Planet):
 					color = (150,40,0)
-					pygame.draw.rect(self.image, color, (dotPos[0],dotPos[1],2,2))
+					if thisShip.curtarget == floater:
+						pygame.draw.circle(self.image, (0, 100, 250), dotPos, 2, 1)
+					pygame.draw.rect(self.image, color, (dotPos[0]-1,dotPos[1]-1,2,2))
 
 		for planet in thisShip.knownplanets:
 			if isinstance(planet, Planet):
@@ -124,6 +128,8 @@ class HUD(Drawable):
 				dotPos = int(center[0] + limit(-radius,	result.x / scale, radius)), int(center[1] + limit(-radius, result.y / scale, radius))
 				r = int(planet.radius / radarScale + 2)
 				color = planet.color
+				if thisShip.curtarget == planet:
+					pygame.draw.circle(self.image, (0, 100, 250), dotPos, r+3, 1)
 				pygame.draw.circle(self.image, color, dotPos, r)
 			else:
 				thisShip.knownplanets.remove(planet)
@@ -171,7 +177,7 @@ class BGImage(Drawable):
 		surface.blit(self.pic, (0,0))
 			
 class MiniInfo(Drawable):
-	color = (100, 100, 255, 250)
+	color = (100, 100, 255)
 	font = FONT
 	maxChars = 50 #line width
 	bottomleft = 0,0
@@ -190,7 +196,13 @@ class MiniInfo(Drawable):
 	def draw(self, surface):
 		self.image.fill((0, 0, 80))
 		if self.targ:
-			# self.image.blit(userplaatje, (0,0))
-			text = self.font.render(self.targ.name, True, color)
+			if isinstance(self.targ, Ship):
+				name = self.targ.firstname + " " + self.targ.secondname
+			elif isinstance(self.targ, Planet):
+				name = self.targ.firstname
+			else:
+				name = self.targ.name
+
+			text = self.font.render(name, True, self.color)
 			self.image.blit(text, (0,0))
 		surface.blit(self.image, self.bottomleft)
