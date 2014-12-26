@@ -19,6 +19,7 @@ except ImportError:
     print "no way to build a class diagram now!! "
 #command parsing
 import commandParse
+import pympler
 
 
 FPS = 300
@@ -175,6 +176,7 @@ class Game(object):
                 #update actually parses input.
                 #and does actions based upon that.
                 self.commandParse.update()
+                #reloading logic, couldn't make it work from inside the commandParse class
                 if self.commandParse.reload:
                     self.commandParse.reload = False
                     reload(commandParse)

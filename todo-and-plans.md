@@ -11,7 +11,7 @@ make jump part(takes energy to load), bind to j, time out and some effect like e
 * a particle engine for explotions, engine stuff. [medium stuff, after view splitout]
 
 http://pygame.org/project-planes-2392-4051.html get version 0.6
-* A save function ? [a sqllite file for now with sqlalchemy] [Robert ?]
+* A save function ? [a sqllite file for now with sqlalchemy]
 * replace the part - port system with a part - grid system
 * sounds also need to be in views
 * put the collide logic in the things that collide, planets, floaters, parts etc. [1/4 done]

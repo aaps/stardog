@@ -613,9 +613,7 @@ class Radar(Part):
 
     def stats(self):
         return "nothing yet"
-        
-
-    #     
+     
     def update(self):
         
         if self.enabled:
@@ -635,8 +633,6 @@ class Radar(Part):
         else:
             self.detected = []
         Part.update(self)
-
-
 
 
 class Engine(Part):
@@ -805,7 +801,7 @@ class Quarters(Part):
 
     def shortStats(self):
         stats = (self.repair,)
-        statString = "\n%s E"
+        statString = "\n%s hp/s"
         return Part.shortStats(self)+statString%(stats)
 
     def update(self):
@@ -815,6 +811,30 @@ class Quarters(Part):
                     part.hp = part.hp+self.repair*self.ship.efficiency/self.game.fps
                     break
         Part.update(self)
+
+class GargoHold(Part):
+    baseImage = loadImage("res/parts/quarters"+ext)
+    image = None
+    name = "GargoHold"
+    energyCost = 10
+    mass = 1
+    def __init__(self, game):
+        Part.__init__(self, game)
+        self.ports = [  Port(Vec2d(0, self.height / 2 ), 270, self), \
+                        Port(Vec2d(-self.width / 2 , 0), 0, self), \
+                        Port(Vec2d(0, -self.height / 2 ), 90, self)]
+    def stats(self):
+        stats = (self.energyCost,)
+        statString = "\nCosts for carrying cargo per part: %s E/p"
+        return Part.stats(self)+statString%(stats)
+    def shortStats(self):
+        stats = (self.energyCost,)
+        statString = "\n %s E/p"
+        return Part.shortStats(self)+statString%(stats)
+    def update(self):
+        if self.ship:
+            numOfParts = len(self.ship.inventory)
+            energyCost = numOfParts
 
 class GatewayFocus(Part):
     baseImage = loadImage("res/parts/gateway_focus"+ext)
