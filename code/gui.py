@@ -6,6 +6,8 @@ from utils import *
 import stardog
 from spaceship import Ship
 from planet import Planet
+from parts import *
+import time
 
 radarRadius = 100
 radarScale = 200.0 # 1 radar pixel = radarScale space pixels
@@ -117,10 +119,13 @@ class HUD(Drawable):
 					r = 1
 					pygame.draw.rect(self.image, color, (dotPos[0]-1,dotPos[1]-1,2,2))
 				elif not isinstance(floater, Planet):
-					color = (150,40,0)
+					# color = (150,40,0)
 					if thisShip.curtarget == floater:
-						pygame.draw.circle(self.image, (0, 100, 250), dotPos, 2, 1)
-					pygame.draw.rect(self.image, color, (dotPos[0]-1,dotPos[1]-1,2,2))
+						pygame.draw.circle(self.image, (0, 100, 250), dotPos, 3, 1)
+					if isinstance(floater, Bullet):
+						pygame.draw.rect(self.image, (150,40,0), (dotPos[0]-1,dotPos[1]-1,2,2))
+					elif isinstance(floater, Part):
+						pygame.draw.rect(self.image, (200,200,0), (dotPos[0]-1,dotPos[1]-1,2,2))
 
 		for planet in thisShip.knownplanets:
 			if isinstance(planet, Planet):
@@ -186,6 +191,8 @@ class MiniInfo(Drawable):
 		Drawable.__init__(self, game)
 		self.bottomleft = 2,  game.height - int(game.height/ 4 ) 
 		self.targ = None
+		self.width = int(game.width / 8)
+		self.height = int(game.height/ 4 )
 		self.image = pygame.Surface((int(game.width / 8),int(game.height/ 4 )))
 		self.image.set_alpha(200)
 
@@ -198,10 +205,21 @@ class MiniInfo(Drawable):
 		if self.targ:
 			if isinstance(self.targ, Ship):
 				name = self.targ.firstname + " " + self.targ.secondname
+				image = pygame.transform.rotate(self.targ.baseImage, 90)
+				offset = ((self.width/2) - (self.targ.baseImage.get_width()/2), (self.height/2)-(self.targ.baseImage.get_height()/2))
+				self.image.blit(image, offset)
+				
 			elif isinstance(self.targ, Planet):
 				name = self.targ.firstname
-			else:
+				r = int(self.targ.radius / radarScale + 2)
+				
+				pygame.draw.circle(self.image, self.targ.color, (self.width/2,self.height/2), r)
+			elif isinstance(self.targ, Part):
 				name = self.targ.name
+
+				self.image.blit(self.targ.image,(self.width/2,self.height/2))
+
+
 
 			text = self.font.render(name, True, self.color)
 			self.image.blit(text, (0,0))

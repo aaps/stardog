@@ -232,7 +232,7 @@ class Part(Floater):
         if self.pickuptimeout > 0:
             self.pickuptimeout -= 1. / self.game.fps
 
-    def draw(self, surface, offset = None):
+    def draw(self, surface, offset = None, redraw = True):
         """draws this part onto the surface."""
         if not offset:
             offset = Vec2d((surface.get_width() \
@@ -247,8 +247,20 @@ class Part(Floater):
         for port in self.ports:
             if port.part:
                 port.part.draw(surface)
-        if not self.parent:
+        if not self.parent and redraw:
             self.redraw(surface, offset)
+
+    def exdraw(self, surface, offset = None, redraw = True):
+        """draws this part onto the surface."""
+        if not offset:
+            offset = Vec2d((surface.get_width() \
+                    - self.image.get_width()) / 2 + self.offset[0], \
+                    (surface.get_height() \
+                    - self.image.get_height()) / 2 + self.offset[1])
+        if self.ship == None:
+            Floater.draw(self, surface, offset)
+        else:
+            surface.blit(self.image, offset)
 
     def redraw(self, surface, offset):
         """redraw(surface, offset) -> draws 

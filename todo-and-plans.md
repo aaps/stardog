@@ -31,7 +31,7 @@ side dish
 * more collision handeling refactor !! [still need more refactoring]
 * more to vec2d verctor work. !! [can alwais use some work]
 * remember planets that where on radar in list [done , aat]
-* some way to target ships, parts and planets !!! [easy mode]
+* some way to target ships, parts and planets !!! [easy mode,done Aatr]
 * zoom in out option for radar [medium mode ?]
 * weapon heat generation [easy mode]
 * engines that are good for space travel but bad for landing and visaversa
@@ -56,6 +56,7 @@ side dish
 * draw planets over things like explotions, and other ships.
 * make the color of the color of the star dependant on the size of the star, bigger is blueer, smaller redisher [done could use some tweaking]
 * when destroyed a part has a change it will become scrap
+* adding info from weapon used on part to part, like plasma burns, impact damage etc.
 
 
 
