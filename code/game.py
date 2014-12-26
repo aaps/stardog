@@ -18,7 +18,8 @@ try:
 except ImportError:
     print "no way to build a class diagram now!! "
 #command parsing
-from commandParse import *
+import commandParse
+
 
 FPS = 300
 
@@ -102,7 +103,7 @@ class Game(object):
             
             self.triggers = plot.newGameTriggers(self)
             #create a parser that parses chatconsole input for command and such.
-            self.commandParse = CommandParse(self, self.chatconsole, self.messenger)
+            self.commandParse = commandParse.CommandParse(self, self.chatconsole, self.messenger)
             #The in-round loop (while player is alive):
             while self.running and self.curSystem.ships.has(self.player):
                 #event polling:
@@ -174,7 +175,10 @@ class Game(object):
                 #update actually parses input.
                 #and does actions based upon that.
                 self.commandParse.update()
-                
+                if self.commandParse.reload:
+                    self.commandParse.reload = False
+                    reload(commandParse)
+                    self.commandParse = commandParse.CommandParse(self, self.chatconsole, self.messenger)
                 #frame maintainance:
                 pygame.display.flip()
                 self.clock.tick(FPS)#aim for FPS but adjust vars for self.fps.
