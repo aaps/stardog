@@ -177,7 +177,7 @@ ship
 =====
 * every ship a individual mid section that defines what the ship is.
 * implement droping mines and implement a part for it that does that?
-or only give the destroyer that capability?
+or only give the destroyer that capability? [implemented by duality the mine laying device part]
 * display ship stats closer to the ship like health energy xp bar can stay where it is?
 * make a scout ship
 * make a juggernaut ship [Done, also increased parts that can be fixed to the ship by 2 because it was 10/8 parts attached]

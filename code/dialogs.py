@@ -21,7 +21,7 @@ class Messenger(Drawable):
         self.image = pygame.Surface((game.width - 202, self.font.get_linesize()))
         self.image.set_alpha(200)
     def chunks(self, the_list, length):
-        """ Yield successive n-size chucks from l.
+        """ Yield successive n-size chucks from the_list.
         """
         for i in xrange(0, len(the_list), length):
             yield the_list[i:i+length]
