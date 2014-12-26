@@ -19,7 +19,7 @@ except ImportError:
     print "no way to build a class diagram now!! "
 #command parsing
 import commandParse
-import pympler
+from pympler import muppy
 
 
 FPS = 300
@@ -123,6 +123,9 @@ class Game(object):
                             self.mouse[0] = event.pos
                         elif event.type == pygame.KEYDOWN:
                             self.keys[event.key % 322] = 1
+                            if event.key == pygame.K_t:
+                                all_objects = muppy.get_objects()
+                                print len(all_objects)
                         elif event.type == pygame.KEYUP:
                             self.keys[event.key % 322] = 0
 
@@ -181,6 +184,7 @@ class Game(object):
                     self.commandParse.reload = False
                     reload(commandParse)
                     self.commandParse = commandParse.CommandParse(self, self.chatconsole, self.messenger)
+                
                 #frame maintainance:
                 pygame.display.flip()
                 self.clock.tick(FPS)#aim for FPS but adjust vars for self.fps.
