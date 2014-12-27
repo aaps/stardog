@@ -14,6 +14,7 @@ class TinyFighter(Ship):
 	stage = 0
 	timeOut = 30
 	level = .5
+	
 	def __init__(self, game, pos, delta, color = (70, 180,0)):
 		pass
 		# self.target = game.player
@@ -33,6 +34,7 @@ class TinyFighterScript(AIScript):
 	acceptableError = 8
 	shootingRange = 280
 	interceptSpeed = 200
+	
 	def update(self, ship):
 		pass
 		# target = ship.target

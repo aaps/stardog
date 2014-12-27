@@ -12,7 +12,7 @@ make jump part(takes energy to load), bind to j, time out and some effect like e
 
 http://pygame.org/project-planes-2392-4051.html get version 0.6
 * A save function ? [a sqllite file for now with sqlalchemy]
-* replace the part - port system with a part - grid system
+* replace the part - port system with a part - grid system [first implement part collition checking to temp eliminate problem]
 * sounds also need to be in views
 * put the collide logic in the things that collide, planets, floaters, parts etc. [1/2 done]
 * it needs an economy not yust parts for static $$, [ harder ]
@@ -24,6 +24,10 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ==========
+
+* trying all options in search of bugs !!!
+* comments in code and keeping the standards !!!
+* merging the allto2dvector into master, or even replace master !!
 
 * making the universe class to hold starsystems
 * making the rest of screen changeable ?, posibility to chage window with and or height ?
@@ -38,7 +42,6 @@ side dish
 * palaxing background, the image
 * menu volume controll for music and effects
 * instead of restart directly, wait for keypress and see your lifeless ship float into the distance.
-
 * make the camera so that it can smoothly transition from one place to another
 * make the game run from the beginning, so if choosing ship and color the game is already running
 * make camera translatable instead of direct snap
@@ -51,44 +54,47 @@ side dish
 * ai could use some more bains and variation
 * also add the chat console and menu to the camera
 * draw planets over things like explotions, and other ships.
-* make the color of the color of the star dependant on the size of the star, bigger is blueer, smaller redisher [done could use some tweaking]
 * when destroyed a part has a change it will become scrap
 * adding info from weapon used on part to part, like plasma burns, impact damage etc.
-
+* deciding what gui cgraphics to update
+* compile a list of games like this one to 'loan' elements from !!!
 
 
 Housekeeping
 ===
 * cleanup class diagram
 * impost original stagdog svn
-* integrate wishlist of: http://code.google.com/p/stardog/
+* integrate wishlist of: http://code.google.com/p/stardog/ !!!
 
 bugs
 =====
-* remove the self.kill(other) thing see master branch, this is not working should be other way of both coliders to know about each other.
+
+* remove the self.kill(other) thing see master branch, this is not working should be other way of both coliders to know about each other. [done]
 * on branch viewsinview an explotion will make another one.[so what for now]
 * I can make a crash by blowing up my own ship in missile difference collision on branch * all2vector [Fixed Aat]
-engines will sometimes not fire in case of multyple forward. [fixed , Aat]
-in viewsinview ship direction jitters sometimes, more so when it's got a lot of parts.
-the laser is broken, ;( [It is fixed, Aat]
+* engines will sometimes not fire in case of multyple forward. [fixed , Aat]
+in viewsinview ship direction jitters sometimes, more so when it's got a lot of parts. !!!
+* the laser is broken, ;( [It is fixed, Aat]
 * make binding keys actually works. they bind but don't do anything. and moste of the time. it bugs out the guns so they fire randomly or continously. [it works]
 * if you bind a key to a engine that isn't in the engine slot. it won't fire if you press that key. [??? hu ???]
-* the engines dont animate after radar addition, meh [ok this was a timing problem , when more code time in programm passes differently, it was done in a messy way, this will come back in a different form and place, fixed this however]
-* radar enabled states are seperate, should be synced ? 
+
+* radar enabled states are seperate, should be synced ? !!!
 * after menu and chat console prototype independance of game pause the menu will not show info, skills etc the right way. [fixed aat]
 * still cant land on strucutre class. [fixed Aat]
-* when ejecting parts planet inventory will not put them streight when caught
-* engines seem to light up nice, but the purple color of the engines doesnt color to ship color.
-* in case of button pressed when you open menu, the ship will continue to do that action.
+* when ejecting parts planet inventory will not put them at 0 degrees when caught
+* engines seem to light up nice, but the purple color of the engines doesnt color to ship color. [will be done with implementation of animated sprites class]
+* in case of button pressed when you open menu, the ship will continue to do that action. [partial fix for now but needs more practical solution] !!!
 * known planets is a list of all the known planets not the known planets in the current system
 * In case of open planet part panel and parts 'land' on planet they will not show up at the parts panel right away. only after a menu out/in
-* Canons don't work anymore they don't shoot.
-* putting a engine on a radar "part" it doesn't fire.
+
+* planets should be targetable when not in radar range, couse they are remembered, still it doesnt work out that way, check it out
+* if you try to target a ship that doesnt exist it still trys to put an image on mini screen and all the processing that comes with it.
+
 
 parts
 ======
 
-* A radar that will eventualy suport raytracing. [easy for initial radar]
+* A radar that will eventualy suport raytracing. [easy for initial radar, perhaps use laser code for raytrace]
 * Make mine's de accelerate till they hit their target spot. 
 so you can get out of the way in time.
 maybe implement a arming period. 
@@ -100,7 +106,7 @@ bigger detonation range.
 * a dockingport part [can be hardmode]
 * a disable beam part [easymode]
 * ship lights [easy mode once particles is done]
-* a part with a cog on it that will keep a copy of the ship it is in and refreshes that every x seconds
+* a part with a cog on it that will keep a copy of the ship it is in and refreshes that every x seconds [can only read ship values, not hange them, also needs filter list on what props to make avalable, might be hardmode food for tought]
 * make images for ships in the menu to choose from. 
 
 
@@ -126,14 +132,12 @@ DONE
 * revamp to use vectors [as good as done Aat]
 * every planet own part list, nope but fixed [Aat fixed it]
 * fixing a bug that made memmory leak during the drawing of the star map (duality)
-
 * splitout views [nasty stuff] [as good as done, for now i want no part of it Aat]
 * we have parts not that can be toggled on or off, like the radar, no none asked for it still did it [Aat]
 * Space mines [easy mode] [Duality]
 make menu work on fullscreen. only fighter is displayed right left corner. [fixed Duality]
 * and parts for crew quaters. [part added]
 * make the space structure class that will inherit from gravless as well with a custom  [done in other way]
-
 * posibility to eject parts [easy mode, done aat]
 * make planet inherit from a Gravless class so stargate will not be effected by graf [done in another way]
 * removed names from the code, duality, your name can go here !
@@ -142,6 +146,12 @@ make menu work on fullscreen. only fighter is displayed right left corner. [fixe
 * a name to give yourself [as a precursor of network play and to get familiair with gui, after view spitout and vectors] [gui is not nice, but overhaul costs to much time, lets keep it for now, Done Aat]
 * a camera to capture different places, in stead of only player. [done and then some, aat]
 * give ships a atention score that goes up when ships are sooting and dying, drops off over time. [done, aat]
+* make the color of the color of the star dependant on the size of the star, bigger is blueer, smaller redisher [done could use some tweaking]
+* the engines dont animate after radar addition, meh [ok this was a timing problem , when more code time in programm passes differently, it was done in a messy way, this will come back in a different form and place, fixed this however, ok done]
+* Canons don't work anymore they don't shoot. [done , aat] 
+* putting a engine on a radar "part" it doesn't fire [done aat].
+* putting an engine on crew quarters part it doesnt fire [done aat]
+* radar will still work when there is no energy [done, aat]
 
 [Duality]
 
@@ -181,8 +191,8 @@ ship
 * every ship a individual mid section that defines what the ship is.
 * implement droping mines and implement a part for it that does that?
 or only give the destroyer that capability? [implemented by duality the mine laying device part]
-* display ship stats closer to the ship like health energy xp bar can stay where it is?
-* make a scout ship
+* display ship stats closer to the ship like health energy xp bar can stay where it is? [yes health bars can stay where they are, need to look better tho, aat, enemy health bars can be removed]
+* make a scout ship [done duality] 
 * make a juggernaut ship [Done, also increased parts that can be fixed to the ship by 2 because it was 10/8 parts attached]
 parts
 ======

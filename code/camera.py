@@ -20,7 +20,6 @@ class Camera(object):
 		self.width = game.width
 		self.height = game.height
 
-
 	def update(self):
 		for layer in self.layers:
 			if layer.enabled:
@@ -52,7 +51,6 @@ class Camera(object):
 	def gotoTarget(self):
 		self.transitioning = True
 
-
 	def layerAdd(self, drawable, zindex):
 
 		layer = Layer(drawable, zindex, self)
@@ -67,8 +65,6 @@ class Camera(object):
 				return layer
 		return None
 		
-
-	
 	def layerRemove(self, zindex=0):
 		self.layers[zindex] = None
 		self.layers = sorted(self.layers, key=lambda layer: layer.zindex)
@@ -84,14 +80,12 @@ class Layer(object):
 	drawable = None
 	camera = None
 
-
 	def __init__(self, drawable ,zindex, camera):
 		self.zindex = zindex
 		self.drawable = drawable
 		self.camera = camera
 		if isinstance(drawable, SpaceView):
 			self.drawable.camera = camera
-
 
 	def setEnabled(self, enabled):
 		self.enabled = enabled
@@ -128,7 +122,6 @@ class SpaceView(object):
 		self.width = 100
 		self.height = 100
 
-
 	def update(self):
 		self.game.curSystem.update()
 
@@ -150,7 +143,6 @@ class SpaceView(object):
 			return 3
 		else:
 			return 2
-
 
 	def draw(self, surface, pos):
 		self.onScreen = sorted(self.onScreen, key=lambda onscreen: self.sortFloaterHeight(onscreen))

@@ -18,8 +18,6 @@ class IntroMenu(TopLevelPanel):
         self.running = True
         self.colorChoose()
     
-
-
     def colorChoose(self):
         self.panels = []
         self.addPanel(Label(Rect(100,30,200,20), \
@@ -27,10 +25,8 @@ class IntroMenu(TopLevelPanel):
                 font = BIG_FONT))
         for x in range((self.rect.width - 100) / (squareSpacing)):
             for y in range((self.rect.height - 120) / (squareSpacing)):
-                self.addPanel(ColorButton(self, \
-                        Rect(x * squareSpacing + 50, y * squareSpacing + 70,\
-                        squareWidth, squareWidth),\
-                        (randint(0,255),randint(0,255),randint(0,255))))
+                self.addPanel(ColorButton(self, Rect(x * squareSpacing + 50, y * squareSpacing + 70,\
+                        squareWidth, squareWidth), (randint(0,255),randint(0,255),randint(0,255))))
 
     def nameChoose(self):
         self.panels = []
@@ -79,15 +75,16 @@ class IntroMenu(TopLevelPanel):
         self.nameChoose()
 
 class NameInputField(InputField):
+    
     def __init__(self, parent, rect):
         self.parent = parent
         InputField.__init__(self, rect, parent.game, self.choose)
 
     def choose(self):
-        # print "choose"
         self.parent.chooseName(self.text)
     
 class ColorButton(Button):
+    
     def __init__(self, parent, rect, color):
         self.myColor = color
         self.parent = parent
@@ -101,6 +98,7 @@ class ColorButton(Button):
         self.parent.chooseColor(self.myColor)
         
 class TypeButton(Button):
+    
     def __init__(self, parent, rect, type):
         self.image = colorShift(loadImage('res/menus/'+type+'.bmp', None),
                         parent.game.playerColor,None)
@@ -116,6 +114,7 @@ class ChatConsole(TopLevelPanel):
     activeMenu = None
     color = (100, 100, 255, 250)
     game = None
+    
     def __init__(self, game, rect):
         TopLevelPanel.__init__(self, rect)
         subFrameRect = Rect(0, 0, self.rect.width, self.rect.height)
@@ -143,6 +142,7 @@ class Menu(TopLevelPanel):
     activeMenu = None
     color = (100, 100, 255, 250)
     game = None
+    
     def __init__(self, game, rect):
         TopLevelPanel.__init__(self, rect)
         subFrameRect = Rect(0, 0, self.rect.width, self.rect.height)
@@ -195,6 +195,7 @@ class PartsPanel(Panel):
     baseImage = loadImage('res/menus/partsmenubg.bmp')
     tradeImage = loadImage('res/menus/partstrademenubg.bmp')
     dirtyParts = False
+    
     def __init__(self, rect, game):
         Panel.__init__(self, rect)
         self.player = game.player
@@ -241,8 +242,7 @@ class PartsPanel(Panel):
             self.removePanel(self.tradePanel)
             self.tradePanel = None
         Panel.reset(self)
-        
-            
+              
     def flip(self):
         """flips the selected part if it is a FlippablePart."""
         if self.shipPanel.selected and self.shipPanel.selected.part:
@@ -289,10 +289,8 @@ class PartsPanel(Panel):
             self.inventoryPanel.reset()
 
     def eject(self):
-        
         if self.inventoryPanel.selected:
             part = self.inventoryPanel.selected.part
-            
             part.scatter(self.player)
             self.player.reset()
             self.player.inventory.remove(part)
@@ -356,6 +354,7 @@ class ShipPanel(Selecter):
 class PartDescriptionPanel(Panel):
     drawBorder = False
     """displays descriptions of parts."""
+    
     def __init__(self, rect, selecter = None):
         Panel.__init__(self, rect)
         self.part = None
@@ -371,13 +370,11 @@ class PartDescriptionPanel(Panel):
             if self.image:
                 self.image.fill((0,0,0,0))
             return
-        self.image = pygame.Surface((self.rect.width, self.rect.height), 
-                    hardwareFlag).convert()
+        self.image = pygame.Surface((self.rect.width, self.rect.height), hardwareFlag).convert()
         self.image.set_colorkey((0,0,0))
         bigImage = pygame.transform.scale2x(self.part.image)
         bigImage.set_colorkey((255,255,255)) # idk why this one's white.
-        self.image.blit(bigImage, 
-                (self.rect.width / 2 - bigImage.get_width() / 2, 5))
+        self.image.blit(bigImage, (self.rect.width / 2 - bigImage.get_width() / 2, 5))
         string = part.stats()
         string += '\nFunctions: '
         for function in part.functions:
@@ -385,15 +382,11 @@ class PartDescriptionPanel(Panel):
         if not part.functions: string += 'None'
         string += '\n'
         for adj in part.adjectives:
-            string += "\n  %s: %s"%(str(adj.__class__).split('.')[-1],
-                                                        adj.__doc__)
+            string += "\n  %s: %s"%(str(adj.__class__).split('.')[-1],adj.__doc__)
         x, y = self.rect.left, self.rect.top
         w, h = self.rect.width, self.rect.height
-        self.name = Label(Rect(x + 4, y + 44, w, 20), part.name, FONT, 
-                (100, 200, 0))
-        
-        self.text = TextBlock(Rect(x + 4, y + 64, w, h), string, SMALL_FONT, 
-                (0, 150, 0))
+        self.name = Label(Rect(x + 4, y + 44, w, 20), part.name, FONT, (100, 200, 0))
+        self.text = TextBlock(Rect(x + 4, y + 64, w, h), string, SMALL_FONT, (0, 150, 0))
         self.addPanel(self.name)
         self.addPanel(self.text)
     
@@ -414,6 +407,7 @@ class ShipPartPanel(DragableSelectable):
     drawBorder = False
     port = None
     part = None
+    
     def __init__(self, part, parent):
         width = part.image.get_width() * 2
         height = part.image.get_height() * 2
@@ -437,13 +431,11 @@ class ShipPartPanel(DragableSelectable):
             color = self.part.color
             color = color[0] // 4 + 192, color[1] // 2 + 128, color[2] // 2 + 128
             self.image = colorShift(pygame.transform.scale2x(\
-                    pygame.transform.rotate(self.part.baseImage, -self.part.dir)), \
-                    color).convert()
+                    pygame.transform.rotate(self.part.baseImage, -self.part.dir)), color).convert()
             self.image.set_colorkey((0,0,0)) 
         else:
             dir = self.port.dir + self.port.parent.dir
-            self.image = pygame.transform.scale2x(\
-                    pygame.transform.rotate(DEFAULT_SELECTED_IMAGE, -dir)).convert()
+            self.image = pygame.transform.scale2x(pygame.transform.rotate(DEFAULT_SELECTED_IMAGE, -dir)).convert()
             self.image.set_colorkey((0,0,0)) 
         
     def unselect(self):
@@ -513,6 +505,7 @@ class PartTile(DragableSelectable):
     bgInactive = None
     bgActive = (110, 110, 75)
     bgSelected = (80, 50, 110)
+    
     def __init__(self, part, rect, parent):
         """PartTile(part, rect) -> new PartTile.
         The menu interface for a part. Display it like a button!"""
@@ -543,6 +536,7 @@ class PartTile(DragableSelectable):
 class InventoryPanel(Selecter):
     drawBorder = False
     selected = None
+    
     def __init__(self, rect, parent, partList):
         """InventoryPanel(rect, partList) -> a Selecter that resets to the 
         provided list of parts."""
@@ -597,6 +591,7 @@ class InventoryPanel(Selecter):
 class Keys(Panel):
     bindingMessage = pygame.image.load("res/menus/keybind.gif")
     """the Keys panel of the menu."""
+    
     def __init__(self, rect, game):
         Panel.__init__(self, rect)
         self.player = game.player
@@ -681,6 +676,7 @@ class PartFunctionsPanel(ShipPanel):
         Panel.reset(self)
 
 class FunctionSelecter(Selecter):
+    
     def __init__(self, rect, ship):
         Selecter.__init__(self, rect)
         self.partsList = ship.parts
@@ -704,18 +700,21 @@ class FunctionSelecter(Selecter):
         Selecter.reset(self)
 
 class PresetSelectable(Selectable):
+    
     def __init__(self, string, rect):
         self.name = string
         Selectable.__init__(self, rect)
         self.addPanel(Label(rect, string))
             
 class FunctionSelectable(Selectable):
+    
     def __init__(self, function, rect):
         self.function = function
         Selectable.__init__(self, rect)
         self.addPanel(Label(rect, function.__name__))
         
 class PartHeaderSelectable(Selectable):
+    
     def __init__(self, part, rect):
         self.part = part
         Selectable.__init__(self, rect)
@@ -725,12 +724,14 @@ class PartHeaderSelectable(Selectable):
             self.addPanel(Label(rect, part.name))
 
 class FunctionSelectable(Selectable):
+    
     def __init__(self, function, rect):
         self.function = function
         Selectable.__init__(self, rect)
         self.addPanel(Label(rect, " " + function.__name__))
         
 class BindingSelecter(Selecter):
+    
     def __init__(self, rect, ship):
         Selecter.__init__(self, rect)
         self.bindings = ship.script.bindings
@@ -748,6 +749,7 @@ class BindingSelecter(Selecter):
         self.reset()
         
 class BindingSelectable(Selectable):
+    
     def __init__(self, binding, rect):
         self.keyNum = binding[0]
         self.function = binding[1]
@@ -764,6 +766,7 @@ class BindingSelectable(Selectable):
                     str(self.function.__name__), color = (200,100,100)))	
         
 class Skills(Panel):
+    
     def __init__(self, rect, game):
         Panel.__init__(self, rect)
         self.addPanel(Label(Rect(self.rect.width / 2 - 60, 2, 0, 0),\
@@ -779,6 +782,7 @@ class Skills(Panel):
         pass
 
 class Info(Panel):
+    
     def __init__(self, rect, game):
         Panel.__init__(self, rect)
         self.addPanel(Label(Rect(self.rect.width / 2 - 60, 2, 0, 0),\
@@ -814,6 +818,7 @@ class SkillTreeSelector(Selecter):
     pass
 
 class InfoTile(Panel):
+    
     def __init__(self, rect, parent, game):
         self.parent = parent 
         self.game  = game
@@ -840,6 +845,7 @@ class InfoTile(Panel):
 
 
 class SkillTile(Button):
+    
     def __init__(self, rect, parent, skill, ship):
         self.skill = skill
         self.parent = parent 
@@ -866,6 +872,7 @@ class SkillTile(Button):
             self.addPanel(self.levelLabel)
 
 class Store(Panel):
+    
     def __init__(self, rect, player):
         self.player = player
         Panel.__init__(self, rect)

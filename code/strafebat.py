@@ -11,6 +11,7 @@ class Strafebat(Ship):
 	strafeRadius = 100
 	planet = None
 	level = 3
+	
 	def __init__(self, game, pos, color, name):
 		roll = rand()
 		self.target = game.player
@@ -49,7 +50,6 @@ class Strafebat(Ship):
 			battery.addPart(lCannon, 0)
 		self.energy = self.maxEnergy
 
-
 class StrafebatScript(AIScript):
 	"""A scripts with basic physics calculation functions."""
 	interceptSpeed = 100.
@@ -57,6 +57,7 @@ class StrafebatScript(AIScript):
 	acceptableError = 2
 	sensorRange = 10000
 	shootingRange = 400
+	
 	def update(self, ship):
 		# if too close to planet
 		if dist2(ship.planet, ship) < (300 + ship.planet.radius) ** 2: \
@@ -80,7 +81,6 @@ class StrafebatScript(AIScript):
 			return
 			
 		self.intercept(ship, target, self.interceptSpeed)
-		
 			
 	def closestShip(self, ship, ships):
 		"""finds the closest ship not-friendly to this one."""
@@ -96,8 +96,5 @@ class StrafebatScript(AIScript):
 					target = ship2
 		return target, distance2
 		
-
-	
-	
 class StrafebatCockpit(Cockpit):
 	pass

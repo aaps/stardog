@@ -10,6 +10,7 @@ from parts import *
 import time
 import numpy
 
+numStars = 300
 radarRadius = 100
 radarScale = 200.0 # 1 radar pixel = radarScale space pixels
 radarRadiusBig = 400
@@ -35,8 +36,6 @@ class Drawable(object):
 	def draw(self):
 		pass
 
-
-
 class HUD(Drawable):
 
 	def __init__(self, game):
@@ -51,7 +50,6 @@ class HUD(Drawable):
 		self.radarImageBig = pygame.image.load(
 					"res/radar large.png").convert_alpha()
 		self.radarImageBig.set_colorkey((0,0,0))
-
 
 	def draw(self, surface):
 		"""updates the HUD and draws it."""
@@ -69,23 +67,18 @@ class HUD(Drawable):
 		pygame.draw.rect(self.image, (0, 50, 230), (x, y \
 			+ h - h * self.game.player.energy / self.game.player.maxEnergy, 5, h \
 			* self.game.player.energy / self.game.player.maxEnergy)) # full bar
-			
 		#XP:
 		x += 15
 		pygame.draw.rect(self.image, (0, 180, 80), (x, y, \
 			5, self.game.height / 6), 1) # empty bar
-
 		pygame.draw.rect(self.image, (0, 180, 80), \
 			(x, y + h - h * self.game.player.xp / self.game.player.next(), 5, \
 			h * self.game.player.xp / self.game.player.next())) # full bar
 		if(fontModule) and self.game.player.developmentPoints:
-			self.image.blit(FONT.render(str(self.game.player.developmentPoints), \
-						False, (0, 180, 80)), (x, y - 20))
-						
+			self.image.blit(FONT.render(str(self.game.player.developmentPoints), False, (0, 180, 80)), (x, y - 20))			
 		#FPS
 		if(fontModule):
-			self.image.blit(FONT.render(str(self.game.fps), \
-						False, (200, 20, 255)), (100, 100))
+			self.image.blit(FONT.render(str(self.game.fps), False, (200, 20, 255)), (100, 100))
 		if self.game.player.game.curSystem.drawEdgeWarning:
 			self.image.blit(edgeWarning, (20, self.game.height - 100))
 		#blit the HUD to the screen:
@@ -141,8 +134,9 @@ class HUD(Drawable):
 				thisShip.knownplanets.remove(planet)
 
 
-numStars = 300
+
 class StarField(Drawable):
+	
 	def __init__(self, game):
 		Drawable.__init__(self, game)
 		self.stars = []
@@ -157,7 +151,6 @@ class StarField(Drawable):
 				 randint(brightness * 3 / 4, brightness), 
 				 randint(brightness * 3 / 4, brightness))))
 		
-
 	def draw(self, surface):
 		# surface.blit(self.pic, (0,0))
 		pa = pygame.PixelArray(surface)
@@ -173,12 +166,12 @@ class StarField(Drawable):
 
 class BGImage(Drawable):
 	pic = None
+	
 	def __init__(self, game):
 		Drawable.__init__(self, game)
 		self.pic = pygame.transform.scale(loadImage('res/Tarantula Nebula.jpg', None), 
 					(game.width,game.height))
 
-	
 	def draw(self, surface):
 		surface.blit(self.pic, (0,0))
 			
@@ -203,19 +196,16 @@ class MiniInfo(Drawable):
 	def update(self):
 		self.targ = self.game.player.curtarget
 
-
-		
 	def draw(self, surface):
 		self.image.fill((0, 0, 80))
 		if self.targ:
 			self.texts = []
 			speed = round(self.targ.delta.get_length(), 2)
-			
+			name = ""
 			linedeltastart = Vec2d(10,40)
 			pygame.draw.circle(self.image, (255,255,255), linedeltastart, 10, 1)
 			pygame.draw.line(self.image, (255,255,255), linedeltastart, self.targ.delta.normalized()*10+linedeltastart)
 			
-
 			if isinstance(self.targ, Ship):
 				linedirstart = Vec2d(40,40)
 				pygame.draw.circle(self.image, (255,255,255), linedirstart, 10, 1)
@@ -227,7 +217,6 @@ class MiniInfo(Drawable):
 					self.mutatedimage = pygame.transform.rotozoom(self.mutatedimage, 90,2)
 					self.mutatedimage.set_colorkey((0,0,0))       
 				offset = ((self.width/2) - (self.mutatedimage.get_width()/2), (self.height/2)-(self.mutatedimage.get_height()/2))
-				
 				self.image.blit(self.mutatedimage, offset)
 				
 			elif isinstance(self.targ, Planet):
@@ -243,9 +232,6 @@ class MiniInfo(Drawable):
 					self.mutatedimage = pygame.transform.scale(self.mutatedimage, (self.targimage.get_width()*2,self.targimage.get_height()*2) )
 					self.mutatedimage.set_colorkey((0,0,0))     
 				self.image.blit(self.mutatedimage,(self.width/2,self.height/2))
-
-
-
 			self.texts.append(self.font.render(name , True, self.color))
 			self.texts.append(self.font.render("speed: " + str(speed) , True, self.color))
 			for text in self.texts:

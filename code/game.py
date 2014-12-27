@@ -88,14 +88,12 @@ class Game(object):
             self.playerScript = InputScript(self)
             self.player = playerShip(self, Vec2d(0,0),Vec2d(0,0), script = self.playerScript,
                             color = self.playerColor, name = self.PlayerName, type = self.playerType)
-            # self.camera.setPos(self.player)
             self.curSystem = SolarA1(self)
             self.camera.setPos(self.player)
             self.camera.layerAdd(StarField(self),2)
             self.camera.layerAdd(self.curSystem.bg,1)
-
             self.nextsystem = SolarB2(self)
-            # self.systems = [self.curSystem]
+
             self.curSystem.add(self.player)
             self.camera.setPos(self.player.pos)
             self.menu = Menu(self, Rect((self.width - 800) / 2,	(self.height - 600) / 2, 800, 600))
@@ -125,7 +123,6 @@ class Game(object):
                             self.keys[event.key % 322] = 1
                             if event.key == pygame.K_t:
                                 all_objects = muppy.get_objects()
-                                print len(all_objects)
                         elif event.type == pygame.KEYUP:
                             self.keys[event.key % 322] = 0
 

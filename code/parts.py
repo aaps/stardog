@@ -13,6 +13,7 @@ DETACH_SPACE = 5
 DETACH_SPEED = 100
 
 class Port(object):
+    
     def __init__(self, offset, dir, parent):
         self.offset = offset
         self.dir = dir
@@ -67,7 +68,6 @@ class Part(Floater):
          #each element is the part there, (x,y,dir) position of the connection.
          #the example is at the bottom of the part, pointed down.
         self.ports = [Port(Vec2d(-self.width / 2, 0), 0, self)]
-
     
     def stats(self):
         stats = (self.hp, self.maxhp, self.mass, len(self.ports))
@@ -98,8 +98,7 @@ class Part(Floater):
         #calculate offsets:
 
         part.offset = self.offset + port.offset.rotated(self.dir) - Vec2d(0,0).rotatedd(part.dir,(part.width - PART_OVERLAP) / 2)
-        
-
+    
         #rotate takes a ccw angle and color.
         part.image = colorShift(pygame.transform.rotate(part.baseImage, \
                     -part.dir), part.color)
@@ -141,12 +140,9 @@ class Part(Floater):
         if self.parent:
             cost = cos(self.ship.dir) #cost is short for cos(theta)
             sint = sin(self.ship.dir)
-
             self.pos = self.ship.pos +  self.offset * DETACH_SPACE
 
             self.delta = self.ship.delta + Vec2d(0,0).rotatedd(random.randrange(0,360), DETACH_SPEED)
-
-
             #if this is the root of the ship, kill the ship:
             root = False
             if self.parent and self.parent == self.ship:
@@ -172,13 +168,8 @@ class Part(Floater):
         angle = randint(0,360)
         offset = Vec2d(cos(angle) * DETACH_SPACE, sin(angle) * DETACH_SPACE)
         #set physics to drift away from ship (not collide):
-        # self.pos.x = ship.pos.x + self.offset[0] 
-        # self.pos.y = ship.pos.y + self.offset[1]
         self.image = colorShift(pygame.transform.rotate(self.baseImage, angle), self.color).convert()
         self.image.set_colorkey((0,0,0))
-        # part.image = colorShift(pygame.transform.rotate(part.baseImage, \
-        # 				-part.dir), part.color).convert()
-
         self.pos = ship.pos + self.offset
         self.delta.x = ship.delta.x + rand() * sign(self.offset[0]) * DETACH_SPEED
         self.delta.y = ship.delta.y + rand() * sign(self.offset[1]) * DETACH_SPEED
@@ -205,7 +196,6 @@ class Part(Floater):
             self.ship.inventory.append(self)
         self.ship.reset()
         
-        
     def update(self):
         """updates this part."""
         #reset so this part can act again this frame:
@@ -214,9 +204,7 @@ class Part(Floater):
         if self.parent:
             cost = cos(self.ship.dir) #cost is short for cos(theta)
             sint = sin(self.ship.dir)
-
             self.pos = self.ship.pos + self.offset.rotated(self.ship.dir)
-
         #if it's floating in space, act like a floater:
         else:
             Floater.update(self)
@@ -224,7 +212,6 @@ class Part(Floater):
         for port in self.ports:
             if port.part:
                 port.part.update()
-
         if self.pickuptimeout > 0:
             self.pickuptimeout -= 1. / self.game.fps
 
@@ -264,8 +251,7 @@ class Part(Floater):
         This should circumvent the ship surface and draw directly onto space."""
 
         if self.animated and self.animatedImage and self.ship:
-            image = pygame.transform.rotate(self.animatedImage, \
-                                - self.dir - self.ship.dir).convert_alpha()
+            image = pygame.transform.rotate(self.animatedImage,- self.dir - self.ship.dir).convert_alpha()
             image.set_colorkey((0,0,0))
             pos = self.pos.x - image.get_width() / 2 - offset[0], \
                   self.pos.y - image.get_height() / 2 - offset[1]
@@ -399,12 +385,7 @@ class Cannon(Gun):
         return Gun.stats(self) + statString % stats
                 
     def attach(self):
-        # if self.damage > 2.5:
-
-        # 	self.bulletImage = colorShift(BULLET_IMAGE, self.ship.color)
-        # else:
         self.bulletImage = colorShift(BULLET_IMAGE, bulletColor(self.damage))
-        
         Part.attach(self)
             
     def shoot(self):
@@ -544,6 +525,7 @@ class FlakCannon(Cannon):
     reloadBurstTime = 4
     range = 6
     speed = 150
+
     def __init__(self, game):
         self.burst = self.burstSize
         self.reloadBurst = self.reloadBurstTime
@@ -554,6 +536,7 @@ class FlakCannon(Cannon):
         statString = ("\nBullet Speed: %i m/s\nBurst Size: %i"
                     "\nBurst reload: %i seconds\nBullet Spread: %i degrees")
         return Gun.stats(self) + statString % stats
+
     def update(self):
         Gun.update(self)
         self.reloadBurst -= 1. / self.game.fps
@@ -585,14 +568,11 @@ class FlakCannon(Cannon):
             if self.burst <= 0:
                 self.reloadBurst = self.reloadBurstTime
 
-
-
-
 class Radar(Part):
     baseImage = loadImage("res/parts/radar" + ext)
     image = None
     name = "Radar"
-    energyCost = 0.05
+    energyCost = 0.5
     radarrange = 18000
     radarspeed = 1
     radartime = 0
@@ -606,7 +586,6 @@ class Radar(Part):
         self.detected = []
         Part.__init__(self, game)
     
-
     def toggle(self):
         if self.enabled:
             self.enabled = False
@@ -624,7 +603,7 @@ class Radar(Part):
      
     def update(self):
         
-        if self.enabled:
+        if self.enabled and self.ship.energy > self.energyCost:
             self.radartime -= 1. / self.game.fps
             if self.radartime <= 0:
 
@@ -638,6 +617,7 @@ class Radar(Part):
                             self.ship.knownplanets.append(floater)
 
             self.ship.energy -= self.energyCost / self.game.fps
+
         else:
             self.detected = []
         Part.update(self)
@@ -653,6 +633,7 @@ class Engine(Part):
     exmass = 10
     thrusting = False
     energyCost = 1.
+    
     def __init__(self, game):
         if Engine.animatedImage == None:
             Engine.animatedImage = loadImage(\
@@ -675,7 +656,6 @@ class Engine(Part):
         return Part.shortStats(self) + statString % stats
 
     def update(self):
-        """"""
         if self.animatedtime > 0:
             self.animatedtime -= 1. / self.game.fps
             self.animated = True
@@ -711,6 +691,7 @@ class Gyro(FlippablePart):
     name = "Gyro"
     torque = 180000 #N m degrees== m m kg degrees /s /s
     energyCost = .8
+    
     def __init__(self, game):
         Part.__init__(self, game)
         self.ports = [Port(Vec2d(0, self.height / 2 ), 270, self), \
@@ -798,9 +779,12 @@ class Quarters(Part):
     image = None
     name = "Crew Quarters"
     repair = .2
+    
     def __init__(self, game):
         Part.__init__(self, game)
-        self.ports = [Port(Vec2d(-self.width/2,0), 0, self)]
+        # self.detected = []
+        Part.__init__(self, game)
+        # self.ports = [Port(Vec2d(-self.width/2,0), 0, self)]
 
     def stats(self):
         stats = (self.repair,)
@@ -826,6 +810,7 @@ class GargoHold(Part):
     name = "GargoHold"
     energyCost = 10
     mass = 1
+    
     def __init__(self, game):
         Part.__init__(self, game)
         self.ports = [  Port(Vec2d(0, self.height / 2 ), 270, self), \
@@ -835,10 +820,12 @@ class GargoHold(Part):
         stats = (self.energyCost,)
         statString = "\nCosts for carrying cargo per part: %s E/p"
         return Part.stats(self)+statString%(stats)
+
     def shortStats(self):
         stats = (self.energyCost,)
         statString = "\n %s E/p"
         return Part.shortStats(self)+statString%(stats)
+
     def update(self):
         if self.ship:
             numOfParts = len(self.ship.inventory)
@@ -853,7 +840,6 @@ class GatewayFocus(Part):
     enabled = False
     energyCost = 10
 
-
     def __init__(self, game):
         Part.__init__(self, game)
         self.ports = []
@@ -864,7 +850,6 @@ class GatewayFocus(Part):
 
     def shortStats(self):
         return "Nothing"
-
 
     def toggle(self):
         if self.enabled:
@@ -1111,8 +1096,6 @@ class Drone(Cockpit, Engine, Cannon):
         self.thrusted = True
         if self.ship and self.ship.energy >= self.thrustCost * self.energyCost:
             dir = self.ship.dir
-            # self.ship.delta.x += cos(dir) * self.force / self.ship.mass / self.game.fps
-            # self.ship.delta.y += sin(dir) * self.force / self.ship.mass / self.game.fps
             
             self.ship.delta = self.ship.delta.rotatedd(dir, self.force / self.ship.mass / self.game.fps)
 

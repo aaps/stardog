@@ -94,6 +94,7 @@ class Sun(Planet):
 	PLANET_DAMAGE = 300
 	LANDING_SPEED = -999
 	firstname = "Star Unknown"
+	
 	def __init__(self, game, pos, delta = Vec2d(0,0), grav=5000, radius = 3000, image = None):
 
 		mass = radius * 100
@@ -107,6 +108,7 @@ class Structure(Planet):
 	LANDING_SPEED = 200 #pixels per second. Under this, no damage.
 	PLANET_DAMAGE = .0004
 	firstname = "Structure Unknown"
+	
 	def __init__(self, game, pos, delta, grav=5000, color = (100,200,50), radius = 100, image = None):
 		Floater.__init__(self, game, pos, Vec2d(0,0), 0, image=image)
 		self.color = (0,0,255)
@@ -169,7 +171,6 @@ class Gateway(Planet):
 		if instance(gateway, Gateway):
 			self.sister = gateway
 
-	
 	def update(self):
 		for other in self.game.curSystem.floaters.sprites():
 			if  not isinstance(other, Planet) \

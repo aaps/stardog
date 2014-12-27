@@ -190,8 +190,7 @@ def makeScout(game, pos, delta, dir=27, script=None, \
     ship.energy = ship.maxEnergy * .8
     return ship
 
-def makeFreighter(game, pos, delta, dir=27, script=None, \
-                    color = (255,255,255), name=("Shippy","mcShipperson"), player=False):
+def makeFreighter(game, pos, delta, dir=27, script=None, color = (255,255,255), name=("Shippy","mcShipperson"), player=False):
     pass
 
 def playerShip(game, pos, delta, dir = 270, script = None, \
@@ -203,7 +202,6 @@ def playerShip(game, pos, delta, dir = 270, script = None, \
     if len(name) == 1:
          name.append("LOL")
     name = (name[0],name[1])
-
 
     if type == 'destroyer':
         ship = makeDestroyer(game, pos, delta, dir, 
@@ -297,7 +295,6 @@ class Ship(Floater):
     'cannonSpeedBonus' : 1., 'missileSpeedBonus' : 1.\
     }
 
-    
     def __init__(self, game, pos, delta, dir = 270, script = None, \
                 color = (255, 255, 255), name=("shippy","Mcshipperson")):
         Floater.__init__(self, game, pos, delta, dir, 1)
@@ -417,8 +414,6 @@ class Ship(Floater):
         if self.ports[0].part:
             self.ports[0].part.draw(self.baseImage)
 
-
-
     def partRollCall(self, part):
         """adds parts to self.parts recursively."""
         if part:
@@ -459,39 +454,48 @@ class Ship(Floater):
         """thrust forward using all forward engines"""
         for engine in self.forwardEngines:
             engine.thrust()
+
     def reverse(self):
         """thrust backward using all reverse engines"""
         for engine in self.reverseEngines:
             engine.thrust()
+
     def left(self):
         """strafes left using all left engines"""
         for engine in self.leftEngines:
             engine.thrust()
+
     def right(self):
         """strafes right using all right engines"""
         for engine in self.rightEngines:
             engine.thrust()
+
     def turnLeft(self, angle = None):
         """Turns ccw using all gyros."""
         for gyro in self.gyros:
             gyro.turnLeft(angle)
+
     def turnRight(self, angle = None):
         """Turns cw using all gyros."""
         for gyro in self.gyros:
             gyro.turnRight(angle)
+
     def shoot(self):
         """fires all guns."""
         self.attention += 1
         for gun in self.guns:
             gun.shoot()
+
     def launchMissiles(self):
         self.attention += 2
         for missle in self.missiles:
             missle.shoot()
+
     def launchMines(self):
         self.attention += 0.5
         for mine in self.mines:
             mine.shoot()
+
     def toggleRadar(self):
         for radar in self.radars:
             radar.toggle()
@@ -499,13 +503,10 @@ class Ship(Floater):
     def targetNextShip(self):
         # from planet import Planet
         resultList = []
-        
         for radar in self.radars:
             resultList= list(set(radar.detected)|set(resultList))
         resultList =  filter(lambda f: isinstance(f, Ship), resultList)
         length = len(resultList)
-
-
         if self.curtarget and self.curtarget in resultList  and length-1 > resultList.index(self.curtarget):
             self.curtarget = resultList[resultList.index(self.curtarget)+1]
         elif length > 0:
@@ -517,7 +518,6 @@ class Ship(Floater):
     def targetPrefShip(self):
         # from planet import Planet
         resultList = []
-        
         for radar in self.radars:
             resultList= list(set(radar.detected)|set(resultList))
         resultList = filter(lambda f: isinstance(f, Ship), resultList)
@@ -533,10 +533,7 @@ class Ship(Floater):
 
     def targetNextPlanet(self):
         from planet import Planet
-
         length = len(self.knownplanets)
-
-
         if self.curtarget and self.curtarget in self.knownplanets  and length-1 > self.knownplanets.index(self.curtarget):
             self.curtarget = self.knownplanets[self.knownplanets.index(self.curtarget)+1]
         elif length > 0:
@@ -546,10 +543,7 @@ class Ship(Floater):
 
     def targetPrefPlanet(self):
         from planet import Planet
-
         length = len(self.knownplanets)
-
-
         if self.curtarget and self.curtarget in self.knownplanets  and self.knownplanets.index(self.curtarget) > 0:
             self.curtarget = self.knownplanets[self.knownplanets.index(self.curtarget)-1]
         elif length > 0:
@@ -559,14 +553,10 @@ class Ship(Floater):
 
     def targetNextPart(self):
         resultList = []
-        
         for radar in self.radars:
-            
             resultList= list(set(radar.detected)|set(resultList))
         resultList =  filter(lambda f: isinstance(f, Part), resultList)
         length = len(resultList)
-
-
         if self.curtarget and self.curtarget in resultList  and length-1 > resultList.index(self.curtarget):
             self.curtarget = resultList[resultList.index(self.curtarget)+1]
         elif length > 0:
@@ -576,14 +566,10 @@ class Ship(Floater):
 
     def targetPrefPart(self):
         resultList = []
-        
-        for radar in self.radars:
-            
+        for radar in self.radars: 
             resultList= list(set(radar.detected)|set(resultList))
         resultList =  filter(lambda f: isinstance(f, Part), resultList)
         length = len(resultList)
-
-
         if self.curtarget and self.curtarget in resultList  and resultList.index(self.curtarget) > 0:
             self.curtarget = resultList[self.knownplanets.index(self.curtarget)-1]
         elif length > 0:
@@ -604,20 +590,16 @@ class Ship(Floater):
         if not self.parts or self.parts[0].hp <= 0:
             self.kill()
         #run script, get choices.
-        
         if self.game.player == self:
              if not self.game.pause and not self.game.console:
                 self.script.update(self)
         else:
             self.script.update(self)
-
         resultList = []
         for radar in self.radars:
             resultList= list(set(radar.detected)|set(resultList))
         if not self.curtarget in resultList:
             self.curtarget = None
-
-
         if self.attention > 0:
             self.attention -= 0.1 / self.game.fps
         # actual updating:
@@ -694,8 +676,6 @@ class Ship(Floater):
             part.scatter(self)
         Floater.kill(self)
 
-        
-
     def planetCollision(self, planet):
         shipangle = (planet.pos - self.pos).get_angle()
         planetangle = (self.pos - planet.pos).get_angle()
@@ -748,6 +728,7 @@ class Player(Ship):
     xp = 0
     developmentPoints = 12
     landed = False
+    
     def __init__(self, game, pos, delta, dir = 270, script = None, \
                 color = (255, 255, 255), name = ("Shippy","mcShipperson")):
         Ship.__init__(self, game, pos, delta, dir, script, color, name)
