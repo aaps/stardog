@@ -164,9 +164,7 @@ class Missile(Bullet):
 		
 		self.life += 1. / self.game.fps
 		self.dir = (self.dir + 180) % 360 - 180
-		
-		self.delta.x += self.acceleration * cos(self.dir) / self.game.fps
-		self.delta.y += self.acceleration * sin(self.dir) / self.game.fps
+		self.delta += Vec2d(0,0).rotatedd(self.dir, self.acceleration) / self.game.fps
 		if self.life > self.range:
 			self.kill()
 		Floater.update(self)

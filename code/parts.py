@@ -9,8 +9,8 @@ import stardog
 from vec2d import Vec2d
 
 PART_OVERLAP = 0
-DETACH_SPACE = 10
-DETACH_SPEED = 20
+DETACH_SPACE = 5
+DETACH_SPEED = 100
 
 class Port(object):
     def __init__(self, offset, dir, parent):
@@ -144,13 +144,9 @@ class Part(Floater):
 
             self.pos = self.ship.pos +  self.offset * DETACH_SPACE
 
+            self.delta = self.ship.delta + Vec2d(0,0).rotatedd(random.randrange(0,360), DETACH_SPEED)
 
-            self.delta.x = self.ship.delta.x \
-                    + rand() * sign(self.offset.x) * cost * DETACH_SPEED\
-                    - rand() * sign(self.offset.y) * sint * DETACH_SPEED
-            self.delta.y = self.ship.delta.y \
-                    + rand() * sign(self.offset.x) * sint * DETACH_SPEED\
-                    + rand() * sign(self.offset.y) * cost * DETACH_SPEED
+
             #if this is the root of the ship, kill the ship:
             root = False
             if self.parent and self.parent == self.ship:

@@ -691,8 +691,7 @@ class Ship(Floater):
         shipangle = (planet.pos - self.pos).get_angle()
         planetangle = (self.pos - planet.pos).get_angle()
 
-        dx, dy = rotate(self.delta.x-planet.delta.y, self.delta.y-planet.delta.y, shipangle-planetangle)
-        speed = sqrt(dy ** 2 + dx ** 2)
+        speed = (self.delta-planet.delta).get_length()
         if speed > planet.LANDING_SPEED:
             if planet.damage.has_key(self):
                 damage = planet.damage[self]
