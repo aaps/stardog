@@ -18,7 +18,9 @@ try:
 except ImportError:
     print "no way to build a class diagram now!! "
 #command parsing
-from commandParse import *
+import commandParse
+from pympler import muppy
+
 
 FPS = 300
 
@@ -102,7 +104,7 @@ class Game(object):
             
             self.triggers = plot.newGameTriggers(self)
             #create a parser that parses chatconsole input for command and such.
-            self.commandParse = CommandParse(self, self.chatconsole, self.messenger)
+            self.commandParse = commandParse.CommandParse(self, self.chatconsole, self.messenger)
             #The in-round loop (while player is alive):
             while self.running and self.curSystem.ships.has(self.player):
                 #event polling:
@@ -121,6 +123,9 @@ class Game(object):
                             self.mouse[0] = event.pos
                         elif event.type == pygame.KEYDOWN:
                             self.keys[event.key % 322] = 1
+                            if event.key == pygame.K_t:
+                                all_objects = muppy.get_objects()
+                                print len(all_objects)
                         elif event.type == pygame.KEYUP:
                             self.keys[event.key % 322] = 0
 
@@ -174,6 +179,11 @@ class Game(object):
                 #update actually parses input.
                 #and does actions based upon that.
                 self.commandParse.update()
+                #reloading logic, couldn't make it work from inside the commandParse class
+                if self.commandParse.reload:
+                    self.commandParse.reload = False
+                    reload(commandParse)
+                    self.commandParse = commandParse.CommandParse(self, self.chatconsole, self.messenger)
                 
                 #frame maintainance:
                 pygame.display.flip()

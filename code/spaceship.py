@@ -189,6 +189,10 @@ def makeScout(game, pos, delta, dir=27, script=None, \
     ship.energy = ship.maxEnergy * .8
     return ship
 
+def makeFreighter(game, pos, delta, dir=27, script=None, \
+                    color = (255,255,255), player=False):
+    pass
+
 def playerShip(game, pos, delta, dir = 270, script = None, \
                 color = (255, 255, 255), type = 'fighter'):
     """starterShip(x,y) -> default starting ship at x,y."""
@@ -736,6 +740,7 @@ class Player(Ship):
     xp = 0
     developmentPoints = 12
     landed = False
+    name = "Player X"
     def __init__(self, game, pos, delta, dir = 270, script = None, \
                 color = (255, 255, 255)):
         Ship.__init__(self, game, pos, delta, dir, script, color)
