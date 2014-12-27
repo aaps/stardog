@@ -94,11 +94,12 @@ class Sun(Planet):
 	PLANET_DAMAGE = 300
 	LANDING_SPEED = -999
 	firstname = "Star Unknown"
-	def __init__(self, game, pos, delta = Vec2d(0,0), grav=5000, radius = 100, mass = 10000, image = None):
+	def __init__(self, game, pos, delta = Vec2d(0,0), grav=5000, radius = 3000, image = None):
 
+		mass = radius * 100
 		color = bulletColor((mass+.1)/250000)
 
-		Planet.__init__(self, game, pos, delta, grav, radius, mass, color, image )
+		Planet.__init__(self, game, pos, delta, grav, radius, mass, color, image)
 
 
 

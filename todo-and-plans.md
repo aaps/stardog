@@ -14,7 +14,7 @@ http://pygame.org/project-planes-2392-4051.html get version 0.6
 * A save function ? [a sqllite file for now with sqlalchemy]
 * replace the part - port system with a part - grid system
 * sounds also need to be in views
-* put the collide logic in the things that collide, planets, floaters, parts etc. [1/4 done]
+* put the collide logic in the things that collide, planets, floaters, parts etc. [1/2 done]
 * it needs an economy not yust parts for static $$, [ harder ]
 * nebula and atmosphere
 * sometime in future convert the entity views to something like this:
@@ -30,21 +30,18 @@ side dish
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
 * more collision handeling refactor !! [still need more refactoring]
 * more to vec2d verctor work. !! [can alwais use some work]
-* remember planets that where on radar in list [done , aat]
-* some way to target ships, parts and planets !!! [easy mode,done Aatr]
 * zoom in out option for radar [medium mode ?]
 * weapon heat generation [easy mode]
 * engines that are good for space travel but bad for landing and visaversa
-* a name to give yourself [as a precursor of network play and to get familiair with gui, after view spitout and vectors] [gui is not nice, but overhaul costs to much time, lets keep it for now]
 * Display solar system name somewhere [was suposed to be in menu untill the no pause game refactor]
 * other sound for bullet impact on shield and plating and on planet
 * palaxing background, the image
 * menu volume controll for music and effects
 * instead of restart directly, wait for keypress and see your lifeless ship float into the distance.
-* a camera to capture different places, in stead of only player. [done and then some, aat]
+
 * make the camera so that it can smoothly transition from one place to another
 * make the game run from the beginning, so if choosing ship and color the game is already running
-* give ships a atention score that goes up when ships are sooting and dying drops off over time. [done, aat]
+* make camera translatable instead of direct snap
 * the portal stargate warp dent could use some drag inside it, for temp usability
 * grav anomalys are easy to make, game element ?
 * cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fitt parts on your ship when on planet or structure, when container gets destroyed or dissconnected from ship you lose parts untill you are at capacity
@@ -140,6 +137,11 @@ make menu work on fullscreen. only fighter is displayed right left corner. [fixe
 * posibility to eject parts [easy mode, done aat]
 * make planet inherit from a Gravless class so stargate will not be effected by graf [done in another way]
 * removed names from the code, duality, your name can go here !
+* remember planets that where on radar in list [done , aat]
+* some way to target ships, parts and planets !!! [easy mode,done Aat]
+* a name to give yourself [as a precursor of network play and to get familiair with gui, after view spitout and vectors] [gui is not nice, but overhaul costs to much time, lets keep it for now, Done Aat]
+* a camera to capture different places, in stead of only player. [done and then some, aat]
+* give ships a atention score that goes up when ships are sooting and dying, drops off over time. [done, aat]
 
 [Duality]
 
