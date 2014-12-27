@@ -740,7 +740,6 @@ class Player(Ship):
     xp = 0
     developmentPoints = 12
     landed = False
-    name = "Player X"
     def __init__(self, game, pos, delta, dir = 270, script = None, \
                 color = (255, 255, 255)):
         Ship.__init__(self, game, pos, delta, dir, script, color)
