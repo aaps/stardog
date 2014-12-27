@@ -8,6 +8,7 @@ from spaceship import Ship
 from planet import Planet
 from parts import *
 import time
+import numpy
 
 radarRadius = 100
 radarScale = 200.0 # 1 radar pixel = radarScale space pixels
@@ -113,7 +114,7 @@ class HUD(Drawable):
 						int(center[1] + limit(-radius, result.y / scale, radius))
 				if isinstance(floater, Ship):
 					if thisShip.curtarget == floater:
-						pygame.draw.circle(self.image, (0, 100, 250), dotPos, 4, 1)
+						pygame.draw.circle(self.image, (0, 250, 250), dotPos, 4, 1)
 					pygame.draw.circle(self.image, (250, 250, 0), dotPos, 2)
 					color = floater.color
 					r = 1
@@ -121,7 +122,7 @@ class HUD(Drawable):
 				elif not isinstance(floater, Planet):
 					# color = (150,40,0)
 					if thisShip.curtarget == floater:
-						pygame.draw.circle(self.image, (0, 100, 250), dotPos, 3, 1)
+						pygame.draw.circle(self.image, (0, 250, 250), dotPos, 3, 1)
 					if isinstance(floater, Bullet):
 						pygame.draw.rect(self.image, (150,40,0), (dotPos[0]-1,dotPos[1]-1,2,2))
 					elif isinstance(floater, Part):
@@ -134,7 +135,7 @@ class HUD(Drawable):
 				r = int(planet.radius / radarScale + 2)
 				color = planet.color
 				if thisShip.curtarget == planet:
-					pygame.draw.circle(self.image, (0, 100, 250), dotPos, r+3, 1)
+					pygame.draw.circle(self.image, (0, 250, 250), dotPos, r+3, 1)
 				pygame.draw.circle(self.image, color, dotPos, r)
 			else:
 				thisShip.knownplanets.remove(planet)
@@ -186,6 +187,9 @@ class MiniInfo(Drawable):
 	font = FONT
 	maxChars = 50 #line width
 	bottomleft = 0,0
+	targimage = None
+	mutatedimage = None
+	texts = []
 
 	def __init__(self, game,font = FONT):
 		Drawable.__init__(self, game)
@@ -199,28 +203,58 @@ class MiniInfo(Drawable):
 	def update(self):
 		self.targ = self.game.player.curtarget
 
+
 		
 	def draw(self, surface):
 		self.image.fill((0, 0, 80))
 		if self.targ:
+			self.texts = []
+			speed = round(self.targ.delta.get_length(), 2)
+			
+			linedeltastart = Vec2d(10,40)
+			pygame.draw.circle(self.image, (255,255,255), linedeltastart, 10, 1)
+			pygame.draw.line(self.image, (255,255,255), linedeltastart, self.targ.delta.normalized()*10+linedeltastart)
+			
+
 			if isinstance(self.targ, Ship):
+				linedirstart = Vec2d(40,40)
+				pygame.draw.circle(self.image, (255,255,255), linedirstart, 10, 1)
+				pygame.draw.line(self.image, (255,255,255), linedirstart, linedirstart.normalized().rotated(self.targ.dir)*10+linedirstart)
 				name = self.targ.firstname + " " + self.targ.secondname
-				image = pygame.transform.rotate(self.targ.baseImage, 90)
-				offset = ((self.width/2) - (self.targ.baseImage.get_width()/2), (self.height/2)-(self.targ.baseImage.get_height()/2))
-				self.image.blit(image, offset)
+				if not self.targimage == self.targ.baseImage:
+					self.targimage = self.targ.baseImage
+					self.mutatedimage = self.grayscale(self.targimage)
+					self.mutatedimage = pygame.transform.rotozoom(self.mutatedimage, 90,2)
+					self.mutatedimage.set_colorkey((0,0,0))       
+				offset = ((self.width/2) - (self.mutatedimage.get_width()/2), (self.height/2)-(self.mutatedimage.get_height()/2))
+				
+				self.image.blit(self.mutatedimage, offset)
 				
 			elif isinstance(self.targ, Planet):
 				name = self.targ.firstname
 				r = int(self.targ.radius / radarScale + 2)
 				
-				pygame.draw.circle(self.image, self.targ.color, (self.width/2,self.height/2), r)
+				pygame.draw.circle(self.image, self.targ.color, ((self.width/2,self.height/2)), r)
 			elif isinstance(self.targ, Part):
 				name = self.targ.name
+				if not self.targimage == self.targ.baseImage:
+					self.targimage = self.targ.baseImage
+					self.mutatedimage = self.grayscale(self.targimage)
+					self.mutatedimage = pygame.transform.scale(self.mutatedimage, (self.targimage.get_width()*2,self.targimage.get_height()*2) )
+					self.mutatedimage.set_colorkey((0,0,0))     
+				self.image.blit(self.mutatedimage,(self.width/2,self.height/2))
 
-				self.image.blit(self.targ.image,(self.width/2,self.height/2))
 
 
-
-			text = self.font.render(name, True, self.color)
-			self.image.blit(text, (0,0))
+			self.texts.append(self.font.render(name , True, self.color))
+			self.texts.append(self.font.render("speed: " + str(speed) , True, self.color))
+			for text in self.texts:
+				self.image.blit(text, (0,self.texts.index(text)*10))
 		surface.blit(self.image, self.bottomleft)
+
+	def grayscale(self, img):
+	    arr = pygame.surfarray.array3d(img)
+	    #luminosity filter
+	    avgs = [[(r*0.298 + g*0.587 + b*0.114) for (r,g,b) in col] for col in arr]
+	    arr = numpy.array([[[avg,avg,avg] for avg in col] for col in avgs])
+	    return pygame.surfarray.make_surface(arr)
