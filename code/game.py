@@ -87,7 +87,7 @@ class Game(object):
             #setup initial state:
             self.playerScript = InputScript(self)
             self.player = playerShip(self, Vec2d(0,0),Vec2d(0,0), script = self.playerScript,
-                            color = self.playerColor, type = self.playerType)
+                            color = self.playerColor, name = self.PlayerName, type = self.playerType)
             # self.camera.setPos(self.player)
             self.curSystem = SolarA1(self)
             self.camera.setPos(self.player)

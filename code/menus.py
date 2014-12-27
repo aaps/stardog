@@ -17,7 +17,9 @@ class IntroMenu(TopLevelPanel):
         self.game = game
         self.running = True
         self.colorChoose()
-        
+    
+
+
     def colorChoose(self):
         self.panels = []
         self.addPanel(Label(Rect(100,30,200,20), \
@@ -29,6 +31,18 @@ class IntroMenu(TopLevelPanel):
                         Rect(x * squareSpacing + 50, y * squareSpacing + 70,\
                         squareWidth, squareWidth),\
                         (randint(0,255),randint(0,255),randint(0,255))))
+
+    def nameChoose(self):
+        self.panels = []
+        self.addPanel(Label(Rect(100,30,200,20), "Choose a name:", color = (250,250,250),font = BIG_FONT))
+        self.inputfield = NameInputField(self, Rect(100,50,200,20))
+        self.addPanel(self.inputfield)
+
+    def handleEvent(self, event):
+        for panel in self.panels:
+            panel.handleEvent(event)
+
+        TopLevelPanel.handleEvent(self, event)
                         
     def typeChoose(self):
         self.panels = []
@@ -51,13 +65,27 @@ class IntroMenu(TopLevelPanel):
         x += 200
         self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'freighter'))
         #exit(1)
+    
     def chooseColor(self, color):
         self.game.playerColor = color
         self.typeChoose()
+
+    def chooseName(self, name):
+        self.game.PlayerName = name
+        self.running = False
     
     def chooseType(self, type):
         self.game.playerType = type
-        self.running = False
+        self.nameChoose()
+
+class NameInputField(InputField):
+    def __init__(self, parent, rect):
+        self.parent = parent
+        InputField.__init__(self, rect, parent.game, self.choose)
+
+    def choose(self):
+        # print "choose"
+        self.parent.chooseName(self.text)
     
 class ColorButton(Button):
     def __init__(self, parent, rect, color):
@@ -99,6 +127,7 @@ class ChatConsole(TopLevelPanel):
         w = 80
         self.console = Console(subFrameRect, game)
         self.panels.append(self.console)
+    
     def handleEvent(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == K_6:
@@ -771,8 +800,9 @@ class Console(Panel):
     def __init__(self,rect, game):
         Panel.__init__(self,rect)
         rect = Rect(10,20,self.rect.width,200)
-        self.inputfield = InputField(rect, game)
+        self.inputfield = InputField( rect, game)
         self.addPanel(self.inputfield)
+    
     def handleEvent(self,event):
         for panel in self.panels:
             panel.handleEvent(event)
@@ -808,60 +838,65 @@ class InfoTile(Panel):
     def systemname(self):
         return self.game.curSystem.name
 
-class InputField(Panel):
-    drawBorder = False
-    image = None
+# class InputField(Panel):
+#     drawBorder = False
+#     image = None
+    
 
-    def __init__(self, rect, game, font = BIG_FONT, color = (255,255,255), width = 200):
-        self.text = ""
-        self.game = game
+#     def __init__(self, rect, game, callback = None, font = BIG_FONT, color = (255,255,255), width = 200):
+#         self.text = ""
+#         self.game = game
         
-        self.preftext = []
-        self.cursortimeout = 1
-        self.color = color
-        self.lineHeight = font.get_height()
-        self.temprect = rect
-        if not fontModule:
-            return
-        self.font = font
-        Panel.__init__(self, rect)
-    def getText(self):
-        text = self.preftext
-        if self.preftext:
-            self.preftext = []
-            return str(text[0])
-    def setText(self, text):
-        self.preftext = text
-    def handleEvent(self, event):
-        allowedkeys = list(range(97,122)) + list(range(32,71))
+#         self.preftext = []
+#         self.cursortimeout = 1
+#         self.color = color
+#         self.lineHeight = font.get_height()
+#         self.temprect = rect
+#         if not fontModule:
+#             return
+#         self.font = font
+#         Panel.__init__(self, rect)
+
+#     def getText(self):
+#         text = self.preftext
+#         if self.preftext:
+#             self.preftext = []
+#             return str(text[0])
+
+#     def setText(self, text):
+#         self.preftext = text
+
+#     def handleEvent(self, event):
+#         allowedkeys = list(range(97,122)) + list(range(32,71))
         
-        if event.type == pygame.KEYDOWN:
-            if event.key in allowedkeys:
-                self.text += event.unicode
+#         if event.type == pygame.KEYDOWN:
+#             if event.key in allowedkeys:
+#                 self.text += event.unicode
             
-            elif event.key == K_RETURN:
-                self.preftext.append(self.text)
-                self.text = ""
-            elif event.key == K_BACKSPACE:
-                self.text = self.text[:-1]
-    def update(self):
-        if self.cursortimeout <= 1.5:
-            self.cursortimeout += 1.01 / self.game.fps
-        else:
-            self.cursortimeout = 0
+#             elif event.key == K_RETURN:
+#                 self.preftext.append(self.text)
+#                 self.text = ""
+#             elif event.key == K_BACKSPACE:
+#                 self.text = self.text[:-1]
+
+#     def update(self):
+#         if self.cursortimeout <= 1.5:
+#             self.cursortimeout += 1.01 / self.game.fps
+#         else:
+#             self.cursortimeout = 0
 
 
-        w,h = self.font.size(self.text)
-        self.image = pygame.Surface((w+20,h),
-        hardwareFlag | SRCALPHA).convert_alpha()
-        y = 0
-        cursorrect = Rect(w + 5,0,3,self.font.get_height())
+#         w,h = self.font.size(self.text)
+#         self.image = pygame.Surface((w+20,h),
+#         hardwareFlag | SRCALPHA).convert_alpha()
+#         y = 0
+#         cursorrect = Rect(w + 5,0,3,self.font.get_height())
         
-        pygame.draw.rect(self.image, (255,255,255,self.cursortimeout*60), cursorrect)
+#         pygame.draw.rect(self.image, (255,255,255,self.cursortimeout*60), cursorrect)
         
-        self.image.blit(self.font.render(self.text, True, self.color), (0, 0))
+#         self.image.blit(self.font.render(self.text, True, self.color), (0, 0))
 
-        self.rect = Rect(self.temprect.topleft, self.image.get_size())
+#         self.rect = Rect(self.temprect.topleft, self.image.get_size())
 
 class SkillTile(Button):
     def __init__(self, rect, parent, skill, ship):
