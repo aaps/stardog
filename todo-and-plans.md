@@ -5,7 +5,7 @@ main dish
 * quad trees (hardmode, after vector and view splitout, wil replace current collision check mess)
 
 * wormholes/star gates to other systems. (medium mode ?, after Gravless class) [might be soon done]!!!
-make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system.
+make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump]
 
 * multyplayer [hard mode, dependant on code structure, vectors and views split, also a better ui]
 * a particle engine for explotions, engine stuff. [medium stuff, after view splitout]
@@ -20,12 +20,21 @@ http://pygame.org/project-planes-2392-4051.html get version 0.6
 * sometime in future convert the entity views to something like this:
 http://www.pygame.org/project-OpenGL+Library+(glLib*)-877-.html
 http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
-
+* the posibility for stations and planets to have facilitys, like bars, trading hubs, etc
 
 side dish
 ==========
 
-* trying all options in search of bugs !!!
+
+* mke sure planets have a minimum distance from eachother
+* make shure onboard radar / initial radar has small scanning range and has low energy ussage
+* when in console up / down to browse history
+* improve name input with a box around name
+* make a startmenu with: start, options and quit
+* make a options menu with, sound
+* make a sound menu with music volume and fx volume
+* rename solarsystems to starsystems sun to stars etc
+* trying all options in search of bugs !!! [WIP cant find more for now]
 * comments in code and keeping the standards !!!
 * merging the allto2dvector into master, or even replace master !!
 
@@ -69,36 +78,31 @@ Housekeeping
 bugs
 =====
 
-* remove the self.kill(other) thing see master branch, this is not working should be other way of both coliders to know about each other. [done]
+
 * on branch viewsinview an explotion will make another one.[so what for now]
-* I can make a crash by blowing up my own ship in missile difference collision on branch * all2vector [Fixed Aat]
-* engines will sometimes not fire in case of multyple forward. [fixed , Aat]
-in viewsinview ship direction jitters sometimes, more so when it's got a lot of parts. !!!
 * the laser is broken, ;( [It is fixed, Aat]
 * make binding keys actually works. they bind but don't do anything. and moste of the time. it bugs out the guns so they fire randomly or continously. [it works]
 * if you bind a key to a engine that isn't in the engine slot. it won't fire if you press that key. [??? hu ???]
-
-* radar enabled states are seperate, should be synced ? !!!
-* after menu and chat console prototype independance of game pause the menu will not show info, skills etc the right way. [fixed aat]
-* still cant land on strucutre class. [fixed Aat]
+* radar enabled states are seperate, should be synced ? [done, aat]
+* after menu and chat console prototype independance of game pause the menu will not 
 * when ejecting parts planet inventory will not put them at 0 degrees when caught
 * engines seem to light up nice, but the purple color of the engines doesnt color to ship color. [will be done with implementation of animated sprites class]
 * in case of button pressed when you open menu, the ship will continue to do that action. [partial fix for now but needs more practical solution] !!!
 * known planets is a list of all the known planets not the known planets in the current system
 * In case of open planet part panel and parts 'land' on planet they will not show up at the parts panel right away. only after a menu out/in
-
 * planets should be targetable when not in radar range, couse they are remembered, still it doesnt work out that way, check it out
-* if you try to target a ship that doesnt exist it still trys to put an image on mini screen and all the processing that comes with it.
+* if you try to target a ship that doesnt exist it still trys to put an image on mini screen and all the processing that comes with it. !!!
+* processing of ship image on mini screen is a slow afair perhaps first: https://github.com/Mekire/pygame-image-outline/blob/master/outline.py and after that a thred that will fill in the ship part by part ?
 
 
 parts
 ======
 
 * A radar that will eventualy suport raytracing. [easy for initial radar, perhaps use laser code for raytrace]
-* Make mine's de accelerate till they hit their target spot. 
-so you can get out of the way in time.
-maybe implement a arming period. 
-bigger detonation range.
+* Make mine's de accelerate till they hit their target spot
+so you can get out of the way in time. [done, aat]
+* maybe implement a arming period. 
+* bigger detonation range.
 
 * a coloniser part
 * a cargo part to hold the cargo
@@ -106,8 +110,8 @@ bigger detonation range.
 * a dockingport part [can be hardmode]
 * a disable beam part [easymode]
 * ship lights [easy mode once particles is done]
-* a part with a cog on it that will keep a copy of the ship it is in and refreshes that every x seconds [can only read ship values, not hange them, also needs filter list on what props to make avalable, might be hardmode food for tought]
-* make images for ships in the menu to choose from. 
+* a part with a cog/chip on it that will keep a copy of the ship it is in and refreshes that every x seconds [can only read ship values, not hange them, also needs filter list on what props to make avalable, might be hardmode food for tought]
+* make images for ships in the menu to choose from. [and make them better, color to shift]
 
 
 unknowns
@@ -117,11 +121,11 @@ unknowns
 * The edge of the system is a stupid idea, and can be replaced with a: when over boundry go to next star system independent of direction, will alwais travel to next star system even is only one ajacent
 
 * a cource line for a ship that will include gravity pulls. [depends on simulator ception]
-* astroids in orbits (hard mode, depends on quad tree, simulatorception)
+* astroids in orbits (hard mode, depends on quad trees)
 * test if planet orbit is posible and if no what is needed to make it so !
-* a orbit calculator [depends on simulator ception]
+* a orbit calculator so your ship can go into orbit [depends on simulator ception]
 * simulator ception for calculation of trajectorys, targeting and future positions [hard ?]
-* imports in methods, do we want that ?
+* imports in methods, do we want that ? [cant always find a way around that]
 
 
 
@@ -152,6 +156,11 @@ make menu work on fullscreen. only fighter is displayed right left corner. [fixe
 * putting a engine on a radar "part" it doesn't fire [done aat].
 * putting an engine on crew quarters part it doesnt fire [done aat]
 * radar will still work when there is no energy [done, aat]
+* remove the self.kill(other) thing see master branch, this is not working should be other way of both coliders to know about each other. [done, aat]
+* I can make a crash by blowing up my own ship in missile difference collision on branch * all2vector [Fixed Aat]
+* engines will sometimes not fire in case of multyple forward. [fixed , Aat]
+* show info, skills etc the right way. [fixed aat]
+* still cant land on strucutre class. [fixed Aat]
 
 [Duality]
 

@@ -121,7 +121,7 @@ class Game(object):
                             self.mouse[0] = event.pos
                         elif event.type == pygame.KEYDOWN:
                             self.keys[event.key % 322] = 1
-                            if event.key == pygame.K_t:
+                            if event.key == pygame.K_m:
                                 all_objects = muppy.get_objects()
                         elif event.type == pygame.KEYUP:
                             self.keys[event.key % 322] = 0

@@ -497,85 +497,25 @@ class Ship(Floater):
             mine.shoot()
 
     def toggleRadar(self):
-        for radar in self.radars:
-            radar.toggle()
+        self.radars[0].toggle()
 
     def targetNextShip(self):
-        # from planet import Planet
-        resultList = []
-        for radar in self.radars:
-            resultList= list(set(radar.detected)|set(resultList))
-        resultList =  filter(lambda f: isinstance(f, Ship), resultList)
-        length = len(resultList)
-        if self.curtarget and self.curtarget in resultList  and length-1 > resultList.index(self.curtarget):
-            self.curtarget = resultList[resultList.index(self.curtarget)+1]
-        elif length > 0:
-            self.curtarget = resultList[0]
-        else:
-            self.curtarget = None
-
+        self.radars[0].targetNextShip()
 
     def targetPrefShip(self):
-        # from planet import Planet
-        resultList = []
-        for radar in self.radars:
-            resultList= list(set(radar.detected)|set(resultList))
-        resultList = filter(lambda f: isinstance(f, Ship), resultList)
-        length = len(resultList)
-
-
-        if self.curtarget and self.curtarget in resultList  and  resultList.index(self.curtarget) > 0:
-            self.curtarget = resultList[resultList.index(self.curtarget)-1]
-        elif length > 0:
-            self.curtarget = resultList[length-1]
-        else:
-            self.curtarget = None
+        self.radars[0].targetPrefShip()
 
     def targetNextPlanet(self):
-        from planet import Planet
-        length = len(self.knownplanets)
-        if self.curtarget and self.curtarget in self.knownplanets  and length-1 > self.knownplanets.index(self.curtarget):
-            self.curtarget = self.knownplanets[self.knownplanets.index(self.curtarget)+1]
-        elif length > 0:
-            self.curtarget = self.knownplanets[0]
-        else:
-            self.curtarget = None
+        self.radars[0].targetNextPlanet()
 
     def targetPrefPlanet(self):
-        from planet import Planet
-        length = len(self.knownplanets)
-        if self.curtarget and self.curtarget in self.knownplanets  and self.knownplanets.index(self.curtarget) > 0:
-            self.curtarget = self.knownplanets[self.knownplanets.index(self.curtarget)-1]
-        elif length > 0:
-            self.curtarget = self.knownplanets[length-1]
-        else:
-            self.curtarget = None
+        self.radars[0].targetPrefPlanet()
 
     def targetNextPart(self):
-        resultList = []
-        for radar in self.radars:
-            resultList= list(set(radar.detected)|set(resultList))
-        resultList =  filter(lambda f: isinstance(f, Part), resultList)
-        length = len(resultList)
-        if self.curtarget and self.curtarget in resultList  and length-1 > resultList.index(self.curtarget):
-            self.curtarget = resultList[resultList.index(self.curtarget)+1]
-        elif length > 0:
-            self.curtarget = resultList[0]
-        else:
-            self.curtarget = None
+        self.radars[0].targetNextPart()
 
     def targetPrefPart(self):
-        resultList = []
-        for radar in self.radars: 
-            resultList= list(set(radar.detected)|set(resultList))
-        resultList =  filter(lambda f: isinstance(f, Part), resultList)
-        length = len(resultList)
-        if self.curtarget and self.curtarget in resultList  and resultList.index(self.curtarget) > 0:
-            self.curtarget = resultList[self.knownplanets.index(self.curtarget)-1]
-        elif length > 0:
-            self.curtarget = resultList[length-1]
-        else:
-            self.curtarget = None
+        self.radars[0].targetPrefPart()
 
     def toggleGatewayFocus(self):
         for gwfocus in self.gwfocusus:

@@ -122,16 +122,13 @@ class HUD(Drawable):
 						pygame.draw.rect(self.image, (200,200,0), (dotPos[0]-1,dotPos[1]-1,2,2))
 
 		for planet in thisShip.knownplanets:
-			if isinstance(planet, Planet):
-				result = planet.pos - thisShip.pos
-				dotPos = int(center[0] + limit(-radius,	result.x / scale, radius)), int(center[1] + limit(-radius, result.y / scale, radius))
-				r = int(planet.radius / radarScale + 2)
-				color = planet.color
-				if thisShip.curtarget == planet:
-					pygame.draw.circle(self.image, (0, 250, 250), dotPos, r+3, 1)
-				pygame.draw.circle(self.image, color, dotPos, r)
-			else:
-				thisShip.knownplanets.remove(planet)
+			result = planet.pos - thisShip.pos
+			dotPos = int(center[0] + limit(-radius,	result.x / scale, radius)), int(center[1] + limit(-radius, result.y / scale, radius))
+			r = int(planet.radius / radarScale + 2)
+			color = planet.color
+			if thisShip.curtarget == planet:
+				pygame.draw.circle(self.image, (0, 250, 250), dotPos, r+3, 1)
+			pygame.draw.circle(self.image, color, dotPos, r)
 
 
 

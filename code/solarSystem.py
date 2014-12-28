@@ -14,13 +14,13 @@ from nameMaker import *
 class SolarSystem(object):
 	"""A SolarSystem holds ships and other floaters."""
 	boundries = ((-30000, 30000), (-30000, 30000))
+	boundrad = 20000
 	drawEdgeWarning = False
-	def __init__(self, game):
+	def __init__(self, game, position=Vec2d(0,0)):
 		self.game = game
 		self.floaters = pygame.sprite.Group()
 		self.ships = pygame.sprite.Group()
 		self.specialOperations = []
-		# self.onScreen = []
 		self.bg = BGImage(self.game) # the background layer
 		pygame.mixer.music.load("res/sound/space music.ogg")
 		pygame.mixer.music.play(-1)
@@ -61,7 +61,7 @@ class SolarSystem(object):
 					try:
 						floater.kill()
 					except TypeError:
-						print floater
+						print floater, "exception error"
 			if floater.pos.y < edge[1][0] and floater.delta.y < 0 \
 			or floater.pos.y > edge[1][1] and floater.delta.y > 0:
 				if isinstance(floater, Ship):
@@ -72,7 +72,7 @@ class SolarSystem(object):
 					try:
 						floater.kill(Floater())
 					except TypeError:
-						print floater
+						print floater, "exception error"
 		
 					
 		#do any special actions that don't fit elsewhere:

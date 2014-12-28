@@ -8,6 +8,7 @@ from floaters import *
 import stardog
 from vec2d import Vec2d
 
+
 PART_OVERLAP = 0
 DETACH_SPACE = 5
 DETACH_SPEED = 100
@@ -580,17 +581,18 @@ class Radar(Part):
     enabled = False
 
     def __init__(self, game):
-        # self.ports = []
+
         self.radartime = 0
         self.game = game
         self.detected = []
         Part.__init__(self, game)
     
     def toggle(self):
-        if self.enabled:
-            self.enabled = False
-        else:
-            self.enabled = True
+        for radar in self.ship.radars:
+            if radar.enabled:
+                radar.enabled = False
+            else:
+                radar.enabled = True
         
     def shortStats(self):
         return "nothing"
@@ -602,7 +604,7 @@ class Radar(Part):
         return "nothing yet"
      
     def update(self):
-        
+        from planet import Planet
         if self.enabled and self.ship.energy > self.energyCost:
             self.radartime -= 1. / self.game.fps
             if self.radartime <= 0:
@@ -613,14 +615,107 @@ class Radar(Part):
                 for floater in self.game.curSystem.floaters:
                     if collisionTest(disk, floater) and floater != self.ship:
                         self.detected.append(floater)
-                        if floater not in self.ship.knownplanets:
+                        if floater not in self.ship.knownplanets and isinstance (floater,Planet):
                             self.ship.knownplanets.append(floater)
-
             self.ship.energy -= self.energyCost / self.game.fps
-
         else:
             self.detected = []
         Part.update(self)
+
+    def targetNextShip(self):
+        from spaceship import Ship
+        resultList = []
+        for radar in self.ship.radars:
+            resultList= list(set(radar.detected)|set(resultList))
+        resultList =  filter(lambda f: isinstance(f, Ship), resultList)
+        resultList = sorted(resultList, key = self.radarDistance)
+        length = len(resultList)
+        if self.ship.curtarget and self.ship.curtarget in resultList  and length-1 > resultList.index(self.ship.curtarget):
+            self.ship.curtarget = resultList[resultList.index(self.ship.curtarget)+1]
+        elif length > 0:
+            self.ship.curtarget = resultList[0]
+        else:
+            self.ship.curtarget = None
+
+    def targetPrefShip(self):
+        from spaceship import Ship
+        resultList = []
+        for radar in self.ship.radars:
+            resultList= list(set(radar.detected)|set(resultList))
+        resultList = filter(lambda f: isinstance(f, Ship), resultList)
+        resultList = sorted(resultList, key = self.radarDistance)
+        length = len(resultList)
+        if self.ship.curtarget and self.ship.curtarget in resultList  and  resultList.index(self.ship.curtarget) > 0:
+            self.ship.curtarget = resultList[resultList.index(self.ship.curtarget)-1]
+        elif length > 0:
+            self.ship.curtarget = resultList[length-1]
+        else:
+            self.ship.curtarget = None
+
+    def targetNextPlanet(self):
+        from planet import Planet
+        self.ship.knownplanets = sorted(self.ship.knownplanets, key = self.radarDistance)
+
+        if self.ship.curtarget in self.ship.knownplanets:
+            index = self.ship.knownplanets.index(self.ship.curtarget)
+            if index+1 < len(self.ship.knownplanets):
+                self.ship.curtarget = self.ship.knownplanets[index+1]
+            else:
+                self.ship.curtarget = self.ship.knownplanets[0]
+           
+        elif len(self.ship.knownplanets) > 0:
+            self.ship.curtarget = self.ship.knownplanets[0]
+        else:
+            self.ship.curtarget = None
+
+
+    def targetPrefPlanet(self):
+        from planet import Planet
+        self.ship.knownplanets = sorted(self.ship.knownplanets, key = self.radarDistance)
+
+        if self.ship.curtarget in self.ship.knownplanets:
+            index = self.ship.knownplanets.index(self.ship.curtarget)
+            if index-1 < len(self.ship.knownplanets):
+                self.ship.curtarget = self.ship.knownplanets[index-1]
+            else:
+                self.ship.curtarget = self.ship.knownplanets[len(self.ship.knownplanets)]
+        elif len(self.ship.knownplanets) > 0:
+            self.ship.curtarget = self.ship.knownplanets[len(self.ship.knownplanets)]
+        else:
+            self.ship.curtarget = None
+
+    def targetNextPart(self):
+        resultList = []
+        for radar in self.ship.radars:
+            resultList= list(set(radar.detected)|set(resultList))
+        resultList =  filter(lambda f: isinstance(f, Part), resultList)
+        resultList = sorted(resultList, key = self.radarDistance)
+        length = len(resultList)
+        if self.ship.curtarget and self.ship.curtarget in resultList  and length-1 > resultList.index(self.ship.curtarget):
+            self.ship.curtarget = resultList[resultList.index(self.ship.curtarget)+1]
+        elif length > 0:
+            self.ship.curtarget = resultList[0]
+        else:
+            self.ship.curtarget = None
+
+    def targetPrefPart(self):
+        resultList = []
+        for radar in self.ship.radars: 
+            resultList= list(set(radar.detected)|set(resultList))
+        resultList =  filter(lambda f: isinstance(f, Part), resultList)
+        resultList = sorted(resultList, key = self.radarDistance)
+        length = len(resultList)
+        if self.ship.curtarget and self.ship.curtarget in resultList  and resultList.index(self.ship.curtarget) > 0:
+            self.ship.curtarget = resultList[self.ship.knownplanets.index(self.ship.curtarget)-1]
+        elif length > 0:
+            self.ship.curtarget = resultList[length-1]
+        else:
+            self.ship.curtarget = None
+
+    def radarDistance(self, floater):
+        return floater.pos.get_distance(self.ship.pos)
+
+
 
 
 class Engine(Part):
@@ -805,7 +900,7 @@ class Quarters(Part):
         Part.update(self)
 
 class GargoHold(Part):
-    baseImage = loadImage("res/parts/quarters"+ext)
+    baseImage = loadImage("res/parts/cargo"+ext)
     image = None
     name = "GargoHold"
     energyCost = 10

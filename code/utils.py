@@ -162,11 +162,6 @@ def linePointDist(linePoint1, linePoint2, point, infinite = False):
 		
 	return dist(closest[0], closest[1], point[0], point[1])
 	
-	
-	
-	
-	
-	
 def bulletColor(damage):
 	if damage >= 0 and damage <= 2:
 		return (255, int(125*damage), int(125*damage))
