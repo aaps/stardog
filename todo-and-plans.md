@@ -2,10 +2,13 @@
 main dish
 ==========
 
+(warning this file could describe things in faul language, cursing and poor grammar !)
+
 * quad trees (hardmode, after vector and view splitout, wil replace current collision check mess)
 
 * wormholes/star gates to other systems. (medium mode ?, after Gravless class) [might be soon done]!!!
-make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump]
+
+* make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump]
 
 * multyplayer [hard mode, dependant on code structure, vectors and views split, also a better ui]
 * a particle engine for explotions, engine stuff. [medium stuff, after view splitout]
@@ -25,6 +28,7 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ==========
 
+* more randomization of enemy ships
 * player should go into univese and not into game
 * systems now have a seperate list for planets and structures and perhaps portals, should be one list of statics
 * make a script that will install the requirements, like pygame, etc
@@ -72,14 +76,16 @@ side dish
 * when destroyed a part has a change it will become scrap
 * adding info from weapon used on part to part, like plasma burns, impact damage etc.
 * deciding what gui cgraphics to update
+* put certain things into threads like : update cycle and draw cycle, also the drawing of mini info panel.
 * compile a list of games like this one to 'loan' elements from !!!
+- naev
+- hardwar
 
 
 Housekeeping
 ===
 * cleanup class diagram
 * impost original stagdog svn
-* integrate wishlist of: http://code.google.com/p/stardog/ !!!
 
 bugs
 =====
@@ -89,7 +95,7 @@ bugs
 * the laser is broken, ;( [It is fixed, Aat]
 * make binding keys actually works. they bind but don't do anything. and moste of the time. it bugs out the guns so they fire randomly or continously. [it works]
 * if you bind a key to a engine that isn't in the engine slot. it won't fire if you press that key. [??? hu ???]
-* radar enabled states are seperate, should be synced ? [done, aat]
+
 * after menu and chat console prototype independance of game pause the menu will not 
 * when ejecting parts planet inventory will not put them at 0 degrees when caught
 * engines seem to light up nice, but the purple color of the engines doesnt color to ship color. [will be done with implementation of animated sprites class]
@@ -97,7 +103,6 @@ bugs
 * known planets is a list of all the known planets not the known planets in the current system
 * In case of open planet part panel and parts 'land' on planet they will not show up at the parts panel right away. only after a menu out/in
 * planets should be targetable when not in radar range, couse they are remembered, still it doesnt work out that way, check it out
-* if you try to target a ship that doesnt exist it still trys to put an image on mini screen and all the processing that comes with it. !!!
 * processing of ship image on mini screen is a slow afair perhaps first: https://github.com/Mekire/pygame-image-outline/blob/master/outline.py and after that a thred that will fill in the ship part by part ?
 
 
@@ -167,6 +172,7 @@ make menu work on fullscreen. only fighter is displayed right left corner. [fixe
 * engines will sometimes not fire in case of multyple forward. [fixed , Aat]
 * show info, skills etc the right way. [fixed aat]
 * still cant land on strucutre class. [fixed Aat]
+* radar enabled states are seperate, should be synced ? [done, aat]
 
 [Duality]
 

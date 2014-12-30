@@ -588,11 +588,16 @@ class Radar(Part):
         Part.__init__(self, game)
     
     def toggle(self):
+        
+        if self.enabled:
+            self.enabled = False
+        else:
+            self.enabled = True
+        
         for radar in self.ship.radars:
-            if radar.enabled:
-                radar.enabled = False
-            else:
-                radar.enabled = True
+            if radar.enabled and not radar ==  self:
+                radar.enabled = self.enabled
+
         
     def shortStats(self):
         return "nothing"
