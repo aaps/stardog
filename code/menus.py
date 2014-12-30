@@ -147,7 +147,8 @@ class Menu(TopLevelPanel):
         TopLevelPanel.__init__(self, rect)
         subFrameRect = Rect(0, 0, self.rect.width, self.rect.height)
         self.game = game
-        self.player = game.player
+       
+        self.player = game.universe.player
         self.parts = PartsPanel(subFrameRect, game)
         self.keys = Keys(subFrameRect, game)
         self.skills = Skills(subFrameRect, game)
@@ -198,7 +199,7 @@ class PartsPanel(Panel):
     
     def __init__(self, rect, game):
         Panel.__init__(self, rect)
-        self.player = game.player
+        self.player = game.universe.player
         inventoryColor = (20,50,35)
         shipColor = (50,20,70)
         flip = Button(Rect(115, 300, 75, 16), self.flip, " FLIP")
@@ -834,14 +835,16 @@ class InfoTile(Panel):
 
     def planetnames(self):
         planetnames = ""
-        cursystemknown = list(set(self.game.player.knownplanets) & set(self.game.curSystem.planets))
+        cursystemknown = list(set(self.game.player.knownplanets) & set(self.game.universe.curSystem.planets))
         for planet in self.game.player.knownplanets:
             if isinstance(planet, Planet):
                 planetnames += planet.firstname + "\n"
         return planetnames
 
     def systemname(self):
-        return self.game.curSystem.name
+        if self.game.universe.curSystem:
+            return self.game.universe.curSystem.name
+        return 'No name'
 
 
 class SkillTile(Button):

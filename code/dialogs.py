@@ -15,16 +15,20 @@ class Messenger(Drawable):
     font = FONT
     topleft = 2,2
     maxMessages = 100
-    def __init__(self, game, font = FONT, dir = 1):
-        Drawable.__init__(self, game)
+    def __init__(self, universe, font = FONT, dir = 1):
+        Drawable.__init__(self, universe.game)
         self.dir = dir# -1 means the messages stack upward.
-        self.image = pygame.Surface((game.width - 202, self.font.get_linesize()))
+        self.image = pygame.Surface((universe.game.width - 202, self.font.get_linesize()))
         self.image.set_alpha(200)
+        self.universe = universe
+        self.game = universe.game
+   
     def chunks(self, the_list, length):
         """ Yield successive n-size chucks from the_list.
         """
         for i in xrange(0, len(the_list), length):
             yield the_list[i:i+length]
+    
     def message(self, text, color = (250,250,250)):
         """message(text,color) -> add a message to the Messenger."""
         text = '   ' + text
@@ -55,7 +59,7 @@ class Messenger(Drawable):
         self.queue = deque()
         
 class Trigger(object):
-    def __init__(self, game, conditions, actions, repeat = False):
+    def __init__(self, universe, conditions, actions, repeat = False):
         self.repeat = repeat
         if type(conditions) != type([]):
             conditions = [conditions]
@@ -63,7 +67,7 @@ class Trigger(object):
         if type(actions) != type([]):
             actions = [actions]
         self.actions = actions
-        self.game = game
+        self.game = universe.game
         
     def update(self):
         for condition in self.conditions:
@@ -74,32 +78,32 @@ class Trigger(object):
         if not self.repeat:
             self.game.triggers.remove(self)
         
-def timerCondition(game, time, relative = True):
+def timerCondition(universe, time, relative = True):
     if relative:
-        time = game.timer + time
-    return lambda: game.timer >= time
+        time = universe.game.timer + time
+    return lambda: universe.game.timer >= time
     
-def levelCondition(game, level):
-    return lambda: game.player.level >= level
+def levelCondition(universe, level):
+    return lambda: universe.curSystem.player.level >= level
     
-def planetCondition(game, planet):
-    return lambda: game.player.landed == planet
+def planetCondition(universe, planet):
+    return lambda: universe.curSystem.player.landed == planet
     
-def solarSystemCondition(game, solarSystem):
-    return lambda: game.curSystem.name == solarSystem
+def solarSystemCondition(universe, solarSystem):
+    return lambda: universe.curSystem.name == solarSystem
 
-def seePlanetCondition(game):
+def seePlanetCondition(universe):
     def see():
-        for radar in game.player.radars:
+        for radar in universe.player.radars:
             for floater in radar.detected:
-                if isinstance(floater,Planet) and not isinstance(floater,Sun):
+                if isinstance(floater,Planet) and not isinstance(floater,Star):
                     return True
         return False
     return see
 
-def seeShipCondition(game):
+def seeShipCondition(universe):
     def see():
-        for radar in game.player.radars:
+        for radar in universe.player.radars:
             for floater in radar.detected:
                 if isinstance(floater,Ship):
                     return True
@@ -107,8 +111,8 @@ def seeShipCondition(game):
     return see
 
     
-def messageAction(game, text, color = (200,200,100)):
-    return lambda: game.messenger.message(text, color)
+def messageAction(universe, text, color = (200,200,100)):
+    return lambda: universe.game.messenger.message(text, color)
 
     
 

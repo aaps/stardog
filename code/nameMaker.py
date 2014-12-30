@@ -34,7 +34,7 @@ class nameMaker(object):
 			starsp = False
 			if len(stars) > 0:
 				for star in stars:
-					if isinstance(sun, Sun):
+					if isinstance(sun, Star):
 						starsp = True
 						if not star.firstname == starname:
 							return starname

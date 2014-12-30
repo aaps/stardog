@@ -1,4 +1,4 @@
-#solarSystem.py
+#starSystem.py
 
 from utils import *
 from floaters import *
@@ -11,14 +11,15 @@ import stardog
 from vec2d import Vec2d
 from nameMaker import *
 
-class SolarSystem(object):
-	"""A SolarSystem holds ships and other floaters."""
-	boundries = ((-30000, 30000), (-30000, 30000))
-	boundrad = 20000
+class StarSystem(object):
+	"""A StarSystem holds ships and other floaters."""
+	boundrad = 30000
 	drawEdgeWarning = False
-	def __init__(self, game, position=Vec2d(0,0)):
-		self.game = game
+	def __init__(self, universe, position=Vec2d(0,0)):
+		self.game = universe.game
+		self.universe = universe
 		self.floaters = pygame.sprite.Group()
+		self.player = None
 		self.ships = pygame.sprite.Group()
 		self.specialOperations = []
 		self.bg = BGImage(self.game) # the background layer
@@ -44,15 +45,15 @@ class SolarSystem(object):
 				#see collide() at bottom of this module.
 				
 		#keep ships in system for now:
-		edge = self.boundries
+		# edge = self.boundries
 		if self.drawEdgeWarning:
 			self.drawEdgeWarning -= 1. / self.game.fps
 			if self.drawEdgeWarning <=0:
 				self.drawEdgeWarning = False
 				
 		for floater in self.floaters:
-			if floater.pos.x < edge[0][0] and floater.delta.x < 0 \
-			or floater.pos.x > edge[0][1] and floater.delta.x > 0:
+			if floater.pos.get_distance(Vec2d(0,0)) > self.boundrad:
+
 				if isinstance(floater, Ship):
 					floater.dx = 0
 					if floater == self.game.player:
@@ -62,17 +63,7 @@ class SolarSystem(object):
 						floater.kill()
 					except TypeError:
 						print floater, "exception error"
-			if floater.pos.y < edge[1][0] and floater.delta.y < 0 \
-			or floater.pos.y > edge[1][1] and floater.delta.y > 0:
-				if isinstance(floater, Ship):
-					floater.delta.y = 0
-					if floater == self.game.player:
-						self.drawEdgeWarning = self.game.fps
-				else:
-					try:
-						floater.kill(Floater())
-					except TypeError:
-						print floater, "exception error"
+
 		
 					
 		#do any special actions that don't fit elsewhere:
@@ -96,7 +87,7 @@ class SolarSystem(object):
 						pos = planet.pos.rotatedd(angle, planet.radius + 300)
 						name = nameMaker().getUniqePilotName(self.ships)
 						
-						ship = Strafebat(self.game, pos,  planet.color, name)
+						ship = Strafebat(self.universe, pos,  planet.color, name)
 						
 						planet.ships.add(ship)
 						self.add(ship)
@@ -106,8 +97,15 @@ class SolarSystem(object):
 	def add(self, floater):
 		"""adds a floater to this game."""
 		self.floaters.add(floater)
+		# print floater
 		if isinstance(floater, Ship):
 			self.ships.add(floater)
+		if isinstance(floater, Player):
+			distanceFromStar = randint(8000, 18000)
+			if self.universe.curSystem == self:
+				angle = randint(0,360)
+				self.universe.player.pos = self.star.pos.rotatedd(angle, distanceFromStar)
+				self.player = floater
 		
 	def empty(self):
 		self.ships.empty()
@@ -204,48 +202,46 @@ class SolarSystem(object):
 		if hpB > 0: a.takeDamage(hpB, b)
 		if hpA > 0: b.takeDamage(hpA, a)
 
-class SolarA1(SolarSystem):
+class SolarA1(StarSystem):
 	tinyFighters = []
 	maxFighters = 15
 	respawnTime = 30
 	fightersPerMinute = 2
 	g=5000
-	def __init__(self, game, numPlanets = 10, numStructures = 2):
-		SolarSystem.__init__(self, game)
-		self.sun = (Sun( game, Vec2d(0,0), radius = 4000, image = None)) # the star
+	def __init__(self, universe, name, numPlanets = 10, numStructures = 2):
+		StarSystem.__init__(self, universe)
+		self.star = (Star( self, Vec2d(0,0), radius = 4000, image = None)) # the star
 		#place player:
 		angle = randint(0,360)
-		distanceFromSun = randint(8000, 18000)
-		if game.player:
-			game.player.pos = self.sun.pos.rotatedd(angle, distanceFromSun)
-		self.add(self.sun)
-		self.name = "Qbert"
+
+		self.add(self.star)
+		self.name = name
 		
 		#add planets:
 		d = 10000
 		for i in range(numPlanets):
 			angle = randint(0,360)
-			distanceFromSun = randint(d, d + 1200)
+			distanceFromStar = randint(d, d + 1200)
 			color = randint(40,200),randint(40,200),randint(40,200)
 			radius = randint(500,900)
 			mass = randnorm(radius * 10, 800)
-			startpos = Vec2d(distanceFromSun * cos(angle), distanceFromSun * sin(angle))
-			startdir = startpos.get_angle_between(self.sun.pos) - 90
-			accel = ((self.g * mass) / distanceFromSun) / 10
+			startpos = Vec2d(distanceFromStar * cos(angle), distanceFromStar * sin(angle))
+			startdir = startpos.get_angle_between(self.star.pos) - 90
+			accel = ((self.g * mass) / distanceFromStar) / 10
 			# startdelta = Vec2d(0,0).rotatedd(startdir, accel) # preps for gravity sensitive planets
 			startdelta = Vec2d(0,0)
-			self.planets.append(Planet(game, startpos, startdelta ,self.g,radius = radius, mass = mass, \
+			self.planets.append(Planet(self, startpos, startdelta ,self.g,radius = radius, mass = mass, \
 				color = color))
 			self.add(self.planets[i])
 			d+= 1200
 
 		for i in range(numStructures):
 			angle = randint(0,360)
-			distanceFromSun = randint(d, d + 2500)
+			distanceFromStar = randint(d, d + 2500)
 			color = randint(0,100),randint(0,100),randint(0,100)
 			radius = randint(100,200)
-			self.structures.append(Structure( game, Vec2d(distanceFromSun * cos(angle), \
-				distanceFromSun * sin(angle)), color, radius))
+			self.structures.append(Structure( self, Vec2d(distanceFromStar * cos(angle), \
+				distanceFromStar * sin(angle)), color, radius))
 
 				
 		for planet in self.planets:
@@ -257,58 +253,58 @@ class SolarA1(SolarSystem):
 		for structure in self.structures:
 			self.add(structure)
 
-		self.add(Gateway(game, Vec2d(20000,20000), 200) )
+		self.add(Gateway(self, Vec2d(20000,20000), 200) )
 
 
-class SolarB2(SolarSystem):
-	tinyFighters = []
-	maxFighters = 15
-	respawnTime = 30
-	fightersPerMinute = 2
-	def __init__(self, game, numPlanets = 3, numStructures = 1):
-		SolarSystem.__init__(self, game)
-		self.sun = (Sun( game, Vec2d(0,0), radius = 2000, image = None)) # the star
-		#place player:
-		angle = randint(0,360)
-		distanceFromSun = randint(8000, 18000)
-		if game.player:
-			game.player.pos = self.sun.pos.rotatedd(angle, distanceFromSun)
-		self.add(self.sun)
-		self.name = "Oglaf"
+# class SolarB2(StarSystem):
+# 	tinyFighters = []
+# 	maxFighters = 15
+# 	respawnTime = 30
+# 	fightersPerMinute = 2
+# 	def __init__(self, universe, numPlanets = 3, numStructures = 1):
+# 		StarSystem.__init__(self, universe)
+# 		self.star = (Star( self, Vec2d(0,0), radius = 2000, image = None)) # the star
+# 		#place player:
+# 		angle = randint(0,360)
+# 		distanceFromStar = randint(8000, 18000)
+# 		if self.player:
+# 			self.player.pos = self.star.pos.rotatedd(angle, distanceFromStar)
+# 		self.add(self.star)
+# 		self.name = "Oglaf"
 		
-		#add planets:
-		d = 5000
-		for i in range(numPlanets):
-			angle = randint(0,360)
-			distanceFromSun = randint(d, d + 1200)
-			color = randint(40,200),randint(40,200),randint(40,200)
-			radius = randint(300,700)
-			mass = randnorm(radius * 10, 800)
-			self.planets.append(Planet(game, Vec2d(distanceFromSun * cos(angle), \
-				distanceFromSun * sin(angle)), radius = radius, mass = mass, \
-				color = color))
-			self.add(self.planets[i])
-			d+= 1200
+# 		#add planets:
+# 		d = 5000
+# 		for i in range(numPlanets):
+# 			angle = randint(0,360)
+# 			distanceFromStar = randint(d, d + 1200)
+# 			color = randint(40,200),randint(40,200),randint(40,200)
+# 			radius = randint(300,700)
+# 			mass = randnorm(radius * 10, 800)
+# 			self.planets.append(Planet(self, Vec2d(distanceFromStar * cos(angle), \
+# 				distanceFromStar * sin(angle)), radius = radius, mass = mass, \
+# 				color = color))
+# 			self.add(self.planets[i])
+# 			d+= 1200
 
-		for i in range(numStructures):
-			angle = randint(0,360)
-			distanceFromSun = randint(d, d + 2500)
-			color = randint(0,100),randint(0,100),randint(0,100)
-			radius = randint(100,200)
-			self.structures.append(Structure( game, Vec2d(distanceFromSun * cos(angle), \
-				distanceFromSun * sin(angle)), color, radius))
+# 		for i in range(numStructures):
+# 			angle = randint(0,360)
+# 			distanceFromStar = randint(d, d + 2500)
+# 			color = randint(0,100),randint(0,100),randint(0,100)
+# 			radius = randint(100,200)
+# 			self.structures.append(Structure( self, Vec2d(distanceFromStar * cos(angle), \
+# 				distanceFromStar * sin(angle)), color, radius))
 
 				
-		for planet in self.planets:
-			planet.numShips = 0
-			planet.ships = pygame.sprite.Group()
-			planet.respawn = 30
-			self.add(planet)
+# 		for planet in self.planets:
+# 			planet.numShips = 0
+# 			planet.ships = pygame.sprite.Group()
+# 			planet.respawn = 30
+# 			self.add(planet)
 
-		for structure in self.structures:
-			self.add(structure)
+# 		for structure in self.structures:
+# 			self.add(structure)
 
-		self.fighterTimer = 60
+# 		self.fighterTimer = 60
 			
 
 		

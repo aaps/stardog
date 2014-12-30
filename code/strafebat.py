@@ -12,21 +12,22 @@ class Strafebat(Ship):
 	planet = None
 	level = 3
 	
-	def __init__(self, game, pos, color, name):
+	def __init__(self, universe, pos, color, name):
 		roll = rand()
-		self.target = game.player
+		self.target = universe.curSystem.player
+		self.universe = universe
 		self.circling = False
-		Ship.__init__(self, game, pos, Vec2d(0,0), script = StrafebatScript(game), color = color, name=name)
+		Ship.__init__(self, universe.game, pos, Vec2d(0,0), script = StrafebatScript(universe.game), color = color, name=name)
 		self.baseBonuses['damageBonus'] = .5
-		cockpit =StrafebatCockpit(game)
-		gyro = Gyro(game)
-		gun = StrafebatCannon(game)
-		engine = Engine(game)
-		generator = Generator(game)
-		battery = Battery(game)
-		shield = Shield(game)
-		rCannon = RightCannon(game)
-		lCannon = LeftCannon(game)
+		cockpit =StrafebatCockpit(universe.game)
+		gyro = Gyro(universe.game)
+		gun = StrafebatCannon(universe.game)
+		engine = Engine(universe.game)
+		generator = Generator(universe.game)
+		battery = Battery(universe.game)
+		shield = Shield(universe.game)
+		rCannon = RightCannon(universe.game)
+		lCannon = LeftCannon(universe.game)
 		for part in [cockpit, gyro, gun, engine, generator, battery, shield, 
 						rCannon, lCannon]:
 			if rand() > .8:
@@ -68,7 +69,7 @@ class StrafebatScript(AIScript):
 				return
 				
 		# find closest ship:
-		ships = ship.game.curSystem.ships.sprites()
+		ships = ship.universe.curSystem.ships.sprites()
 		target, distance2 = self.closestShip(ship, ships)
 		
 		if not target:# no target

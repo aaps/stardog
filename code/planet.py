@@ -16,11 +16,12 @@ class Planet(Floater):
 	firstname = "Planet"
 	secondname = "Unknown"
 	
-	def __init__(self, game, pos, delta = Vec2d(0,0), grav=5000, radius = 100, mass = 10000, \
+	def __init__(self, starsystem, pos, delta = Vec2d(0,0), grav=5000, radius = 100, mass = 10000, \
 					color = (100,200,50), image = None, race = None):
-		Floater.__init__(self, game, pos, delta, radius = radius, image = image)
+		Floater.__init__(self, starsystem.game, pos, delta, radius = radius, image = image)
 		self.mass = mass #determines gravity.
 		self.color = color
+		self.starSystem = starsystem
 		self.g = grav
 		self.damage = {}	
 		#see solarSystem.planet_ship_collision
@@ -29,10 +30,10 @@ class Planet(Floater):
 			self.image = None
 		self.inventory = []
 		for x in range(randint(1,8)):
-			self.inventory.append(randItem(game, 1))
+			self.inventory.append(randItem(self.game, 1))
 	
 	def update(self):
-		for other in self.game.curSystem.floaters.sprites():
+		for other in self.starSystem.floaters.sprites():
 			if other != self \
 			and not isinstance(other, Structure) \
 			and not isinstance(other, Planet) \
@@ -90,17 +91,17 @@ class Planet(Floater):
 
 
 
-class Sun(Planet):
+class Star(Planet):
 	PLANET_DAMAGE = 300
 	LANDING_SPEED = -999
 	firstname = "Star Unknown"
 	
-	def __init__(self, game, pos, delta = Vec2d(0,0), grav=5000, radius = 3000, image = None):
+	def __init__(self, starsystem, pos, delta = Vec2d(0,0), grav=5000, radius = 3000, image = None):
 
 		mass = radius * 100
 		color = bulletColor((mass+.1)/250000)
 
-		Planet.__init__(self, game, pos, delta, grav, radius, mass, color, image)
+		Planet.__init__(self, starsystem, pos, delta, grav, radius, mass, color, image)
 
 
 
@@ -109,10 +110,11 @@ class Structure(Planet):
 	PLANET_DAMAGE = .0004
 	firstname = "Structure Unknown"
 	
-	def __init__(self, game, pos, delta, grav=5000, color = (100,200,50), radius = 100, image = None):
-		Floater.__init__(self, game, pos, Vec2d(0,0), 0, image=image)
+	def __init__(self, starsystem, pos, delta, grav=5000, color = (100,200,50), radius = 100, image = None):
+		Floater.__init__(self, starsystem.game, pos, Vec2d(0,0), 0, image=image)
 		self.color = (0,0,255)
 		self.g = grav
+		self.starsystem = starsystem
 		self.damage = {}	
 		self.radius = radius
 		#see solarSystem.planet_ship_collision
@@ -122,7 +124,7 @@ class Structure(Planet):
 		self.inventory = []
 
 	def update(self):
-		for other in self.game.curSystem.floaters.sprites():
+		for other in self.starsystem.floaters.sprites():
 			if  not isinstance(other, Planet) \
 			and not isinstance(other, Structure) \
 			and not collisionTest(self, other) \
@@ -155,12 +157,13 @@ class Gateway(Planet):
 	image = None
 	sister = None
 	
-	def __init__(self, game, pos, radius = 100, mass = 10000, \
+	def __init__(self, starsystem, pos, radius = 100, mass = 10000, \
 					color = (100,200,50), image = None, race = None):
 		image = pygame.Surface((radius * 4, radius * 4), flags = hardwareFlag).convert()
 		image.set_colorkey((0,0,0))
-		Floater.__init__(self, game, pos, Vec2d(0,0), radius = radius, image = image)
+		Floater.__init__(self, starsystem.game, pos, Vec2d(0,0), radius = radius, image = image)
 		self.mass = mass #determines gravity.
+		self.starsystem = starsystem
 		self.color = color
 		self.race = None #race that owns this planet
 		if image == None:
@@ -172,7 +175,7 @@ class Gateway(Planet):
 			self.sister = gateway
 
 	def update(self):
-		for other in self.game.curSystem.floaters.sprites():
+		for other in self.starsystem.floaters.sprites():
 			if  not isinstance(other, Planet) \
 			and not isinstance(other, Structure) \
 			and not collisionTest(self, other) \
@@ -182,6 +185,9 @@ class Gateway(Planet):
 				angle = (self.pos - other.pos).get_angle()
 				other.delta.x += cos(angle) * accel / self.game.fps
 				other.delta.y += sin(angle) * accel / self.game.fps
+
+	def getSister(self):
+		return self.sister
 	
 	def draw(self, surface, offset = Vec2d(0,0)):
 			self.image.fill((0, 0, 0, 0))

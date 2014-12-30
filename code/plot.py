@@ -1,23 +1,23 @@
 #plot.py
 from dialogs import *
-def newGameTriggers(game):
+def newGameTriggers(universe):
 	triggers = [
-		Trigger(game, timerCondition(game, 5), 
-			messageAction(game,
+		Trigger(universe, timerCondition(universe, 5), 
+			messageAction(universe,
 			'You: I should turn on the RADAR, where is the R button ?')),
-		Trigger(game, timerCondition(game, 10), 
-			messageAction(game,
+		Trigger(universe, timerCondition(universe, 10), 
+			messageAction(universe,
 			'You: Wow, the stars are beautiful.')),
-		Trigger(game, timerCondition(game, 20), 
-			messageAction(game, 
+		Trigger(universe, timerCondition(universe, 20), 
+			messageAction(universe, 
 			"You: I'm thinking thoughts! Have I always had thoughts?  I don't know.")),
-		Trigger(game, [seePlanetCondition(game), timerCondition(game, 20)], 
-			messageAction(game, 
+		Trigger(universe, [seePlanetCondition(universe), timerCondition(universe, 20)], 
+			messageAction(universe, 
 			"You: Hey, I see planets.  I wonder what they're like.")),
-		Trigger(game, seeShipCondition(game), 
-			messageAction(game, 
+		Trigger(universe, seeShipCondition(universe), 
+			messageAction(universe, 
 			"You: Look!  Other ships!  I wonder if they'll be my friend!")),
-		Trigger(game, solarSystemCondition(game,'Qbert'),
-			messageAction(game, "You: I have arived at the " + game.curSystem.name + " system at last, the question is . . . How ?") )
+		Trigger(universe, solarSystemCondition(universe,'Qbert'),
+			messageAction(universe, "You: I have arived at the " + universe.curSystem.name + " system at last, the question is . . . How ?") )
 		]
 	return triggers

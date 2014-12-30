@@ -25,8 +25,14 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ==========
 
-
-* mke sure planets have a minimum distance from eachother
+* player should go into univese and not into game
+* systems now have a seperate list for planets and structures and perhaps portals, should be one list of statics
+* make a script that will install the requirements, like pygame, etc
+* radar detects stuff when it is in the middle make it so it detects the edges or some average
+* implement backspace and cursor back front in input field
+* implement the new font
+* implement game time in menu, some fictional time
+* mke sure planets have a minimum distance from each other
 * make shure onboard radar / initial radar has small scanning range and has low energy ussage
 * when in console up / down to browse history
 * improve name input with a box around name

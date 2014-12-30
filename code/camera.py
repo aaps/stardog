@@ -123,12 +123,12 @@ class SpaceView(object):
 		self.height = 100
 
 	def update(self):
-		self.game.curSystem.update()
+		self.game.universe.curSystem.update()
 
 		self.onScreen = []
 		self.offset = Vec2d(self.camera.pos.x - self.camera.width / 2, 
 				self.camera.pos.y - self.camera.height / 2)
-		for floater in self.game.curSystem.floaters:
+		for floater in self.game.universe.curSystem.floaters:
 			r = floater.radius
 			if (r + floater.pos.x > self.offset.x and floater.pos.x - r < self.offset.x + self.camera.width)\
 			and (r + floater.pos.y > self.offset.y 	and floater.pos.y - r < self.offset.y + self.camera.height):
@@ -142,7 +142,7 @@ class SpaceView(object):
 		elif isinstance(onscreen, Explosion):
 			return 3
 		else:
-			return 2
+			return 1
 
 	def draw(self, surface, pos):
 		self.onScreen = sorted(self.onScreen, key=lambda onscreen: self.sortFloaterHeight(onscreen))

@@ -160,7 +160,7 @@ class Part(Floater):
             self.parent = None
             #otherwise add this to the game as an independent Floater:
             if not root:
-                self.game.curSystem.add(self)
+                self.game.universe.curSystem.add(self)
         
     def scatter(self, ship):
         """Like detach, but for parts that are in an inventory when a 
@@ -175,7 +175,7 @@ class Part(Floater):
         self.delta.x = ship.delta.x + rand() * sign(self.offset[0]) * DETACH_SPEED
         self.delta.y = ship.delta.y + rand() * sign(self.offset[1]) * DETACH_SPEED
         self.ship = None
-        self.game.curSystem.add(self)
+        self.game.universe.curSystem.add(self)
         
     def unequip(self, toInventory = True):
         """move a part from on a ship to a ship's inventory"""
@@ -293,7 +293,7 @@ class Part(Floater):
                 self.detach()
             self.kill()
             #if dead, make an explosion here.
-            self.game.curSystem.add(Explosion(self.game, self.pos, \
+            self.game.universe.curSystem.add(Explosion(self.game, self.pos, \
                         self.delta, radius = self.radius * 4,\
                         time = self.maxhp / 5))
 
@@ -399,7 +399,7 @@ class Cannon(Gun):
             s.energy -= self.energyCost
             if soundModule:
                 setVolume(shootSound.play(), self, self.game.player)
-            self.game.curSystem.add( 
+            self.game.universe.curSystem.add( 
                     Bullet(self.game, self, 
                     self.damage * s.efficiency * s.damageBonus * s.cannonBonus, 
                     self.speed * s.cannonSpeedBonus,
@@ -441,7 +441,7 @@ class MineDropper(Gun):
             s.energy -= self.energyCost
             if soundModule:
                 setVolume(shootSound.play(), self, self.game.player)
-            self.game.curSystem.add(Mine(self.game, self,
+            self.game.universe.curSystem.add(Mine(self.game, self,
                     self.damage*s.efficiency*s.damageBonus,
                     self.speed,
                     self.acceleration,
@@ -482,7 +482,7 @@ class MissileLauncher(Gun):
             s.energy -= self.energyCost
             if soundModule:
                 setVolume(shootSound.play(), self, self.game.player)
-            self.game.curSystem.add( Missile(self.game, self, 
+            self.game.universe.curSystem.add( Missile(self.game, self, 
                     self.damage * s.efficiency * s.damageBonus * s.missileBonus,
                     self.speed * s.missileSpeedBonus,
                     self.acceleration * s.missileSpeedBonus,
@@ -512,7 +512,7 @@ class Laser(Gun):
             self.ship.energy -= self.energyCost
             if soundModule:
                 setVolume(shootSound.play(), self, self.game.player)
-            self.game.curSystem.add( \
+            self.game.universe.curSystem.add( \
                     LaserBeam(self.game, self, \
                     self.damage * s.efficiency * s.damageBonus * s.laserBonus, \
                     self.range * s.laserRangeBonus))
@@ -560,7 +560,7 @@ class FlakCannon(Cannon):
             #shoot several bullets, changing shootDir for each:
             baseDir = self.shootDir
             self.shootDir = baseDir + rand() * self.spread - self.spread / 2
-            self.game.curSystem.add( 
+            self.game.universe.curSystem.add( 
                 Bullet(self.game, self, 
                 self.damage * s.efficiency * s.damageBonus * s.cannonBonus, 
                 self.speed * s.cannonSpeedBonus,
@@ -612,7 +612,7 @@ class Radar(Part):
                 self.detected = []
                 disk = RadarDisk(self.game, self.ship.pos, self.ship.delta, self.dir, self.radarrange)
                 self.radartime = self.radarspeed
-                for floater in self.game.curSystem.floaters:
+                for floater in self.game.universe.curSystem.floaters:
                     if collisionTest(disk, floater) and floater != self.ship:
                         self.detected.append(floater)
                         if floater not in self.ship.knownplanets and isinstance (floater,Planet):
@@ -1177,7 +1177,7 @@ class Drone(Cockpit, Engine, Cannon):
             s = self.ship
             s.energy -= self.shotCost * self.energyCost
             if soundModule:
-                self.game.curSystem.floaters.add( 
+                self.game.universe.curSystem.floaters.add( 
                     Bullet(self.game, self, 
                     self.damage * s.efficiency * s.damageBonus * s.cannonBonus,
                     self.speed * s.cannonSpeedBonus,

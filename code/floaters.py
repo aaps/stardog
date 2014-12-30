@@ -127,7 +127,7 @@ class Bullet(Floater):
 		else:
 			delta = self.delta
 		impact = Impact(self.game, self.pos, delta, 20, 14)
-		self.game.curSystem.add(impact)
+		self.game.universe.curSystem.add(impact)
 
 	def kill(self):
 		if soundModule:
@@ -172,7 +172,7 @@ class Missile(Bullet):
 	def detonate(self):
 		delta = self.delta.rotatedd(self.dir, -(self.acceleration * self.life))
 		explosion = Explosion(self.game, self.pos, delta, self.explosionRadius, self.time, self.damage, self.force)
-		self.game.curSystem.add(explosion)
+		self.game.universe.curSystem.add(explosion)
 
 	def kill(self):
 		self.detonate()
@@ -217,7 +217,7 @@ class Mine(Bullet):
 	def detonate(self):
 		delta = self.delta.rotatedd(self.dir, -(self.acceleration*self.life))
 		explosion = Explosion(self.game, self.pos, delta, self.explosionRadius, self.time, self.damage, self.force)
-		self.game.curSystem.add(explosion)
+		self.game.universe.curSystem.add(explosion)
 
 
 	def kill(self):
@@ -371,7 +371,7 @@ class LaserBeam(Floater):
 					(int(length), 5)), -dir)
 		if 'target' in laser.ship.__dict__:
 			self.target = laser.ship.target
-		self.game.curSystem.specialOperations.append(self.collision)
+		self.game.universe.curSystem.specialOperations.append(self.collision)
 
 		
 	def intersect(self, floater, skipRect = False):
@@ -386,7 +386,7 @@ class LaserBeam(Floater):
 	def collision(self):
 		from spaceship import Ship
 		colliders = []
-		for floater in self.game.curSystem.floaters:
+		for floater in self.game.universe.curSystem.floaters:
 			if floater.tangible and self.intersect(floater):
 				colliders.append(floater)
 		if colliders:

@@ -79,7 +79,7 @@ class HUD(Drawable):
 		#FPS
 		if(fontModule):
 			self.image.blit(FONT.render(str(self.game.fps), False, (200, 20, 255)), (100, 100))
-		if self.game.player.game.curSystem.drawEdgeWarning:
+		if self.game.player.game.universe.curSystem.drawEdgeWarning:
 			self.image.blit(edgeWarning, (20, self.game.height - 100))
 		#blit the HUD to the screen:
 		surface.blit(self.image, (0, 0))

@@ -3,13 +3,14 @@
 from utils import *
 from menus import *
 from scripts import *
-from solarSystem import *
+from starSystem import *
 from gui import *
 from planet import *
 from spaceship import *
 from strafebat import *
 from dialogs import *
 from camera import *
+from universe import *
 import plot
 from vec2d import Vec2d
 import time
@@ -37,15 +38,19 @@ class Game(object):
         self.fps = FPS
         self.screen = screen
         self.top_left = 0, 0
+        self.universe = Universe(self)
         self.width = screen.get_width()
         self.height = screen.get_height()
         self.mouseControl = True
         self.timer = 0
-        self.systems = []
+        # self.systems = []
         self.triggers = []
         self.camera = Camera(self)
         #messenger, with controls as first message:
-        self.messenger = Messenger(self)
+        self.messenger = Messenger(self.universe)
+        self.universe.addStarSystem(SolarA1(self.universe, "theone"))
+        self.universe.addStarSystem(SolarA1(self.universe, "thesecond"))
+        
         self.camera.layerAdd(self.messenger,6)
         self.camera.layerAdd(MiniInfo(self),5)
         #key polling:
@@ -88,23 +93,28 @@ class Game(object):
             self.playerScript = InputScript(self)
             self.player = playerShip(self, Vec2d(0,0),Vec2d(0,0), script = self.playerScript,
                             color = self.playerColor, name = self.PlayerName, type = self.playerType)
-            self.curSystem = SolarA1(self)
-            self.camera.setPos(self.player)
+   
+            # self.camera.setPos(self.player)
             self.camera.layerAdd(StarField(self),2)
-            self.camera.layerAdd(self.curSystem.bg,1)
-            self.nextsystem = SolarB2(self)
+            # self.camera.layerAdd(self.universe.curSystem.bg,1)
 
-            self.curSystem.add(self.player)
+            self.universe.setCurrentStarSystem("theone")
+            self.camera.layerAdd(self.universe.curSystem.bg,1)
+            
+            self.universe.setPlayer(self.player)
             self.camera.setPos(self.player.pos)
-            self.menu = Menu(self, Rect((self.width - 800) / 2,	(self.height - 600) / 2, 800, 600))
+            
+            self.menu = Menu(self, Rect((self.width - 800) / 2,    (self.height - 600) / 2, 800, 600))
+
+           
             for x in range(10):
                 self.clock.tick()
             
-            self.triggers = plot.newGameTriggers(self)
+            self.triggers = plot.newGameTriggers(self.universe)
             #create a parser that parses chatconsole input for command and such.
             self.commandParse = commandParse.CommandParse(self, self.chatconsole, self.messenger)
             #The in-round loop (while player is alive):
-            while self.running and self.curSystem.ships.has(self.player):
+            while self.running and self.universe.curSystem.ships.has(self.player):
                 #event polling:
                 pygame.event.pump()
                 for event in pygame.event.get():
