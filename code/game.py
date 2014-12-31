@@ -60,8 +60,7 @@ class Game(object):
         self.mouse = [(0, 0), 0, 0, 0, 0, 0, 0]
         #pygame setup:
         self.clock = pygame.time.Clock()
-        
-        # self.hud =  # the heads up display
+    
         self.camera.layerAdd(HUD(self),4)
         self.camera.layerAdd(SpaceView(self),3)
         #create a chatconsole for text input capabilities
@@ -91,20 +90,21 @@ class Game(object):
                 pygame.display.flip()
             #setup initial state:
             self.playerScript = InputScript(self)
-            self.player = playerShip(self, Vec2d(0,0),Vec2d(0,0), script = self.playerScript,
+            self.player = playerShip(self, Vec2d(0,0),Vec2d(0,0),
                             color = self.playerColor, name = self.PlayerName, type = self.playerType)
-   
-            # self.camera.setPos(self.player)
+            
             self.camera.layerAdd(StarField(self),2)
-            # self.camera.layerAdd(self.universe.curSystem.bg,1)
-
             self.universe.setCurrentStarSystem("theone")
             self.camera.layerAdd(self.universe.curSystem.bg,1)
             
             self.universe.setPlayer(self.player)
             self.camera.setPos(self.player.pos)
-            
+            makePlayerBindings(self.playerScript, self.player)
+
             self.menu = Menu(self, Rect((self.width - 800) / 2,    (self.height - 600) / 2, 800, 600))
+            makeGameBindings(self.playerScript , self)
+            
+            self.player.setScript(self.playerScript)
 
            
             for x in range(10):
@@ -120,43 +120,33 @@ class Game(object):
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         self.running = 0
-                    if not self.pause and not self.console:
-                        if event.type == pygame.MOUSEBUTTONDOWN:
-                            self.mouse[event.button] = 1
-                            self.mouse[0] = event.pos
-                        elif event.type == pygame.MOUSEBUTTONUP:
-                            self.mouse[event.button] = 0
-                            self.mouse[0] = event.pos
-                        elif event.type == pygame.MOUSEMOTION:
-                            self.mouse[0] = event.pos
-                        elif event.type == pygame.KEYDOWN:
-                            self.keys[event.key % 322] = 1
-                            if event.key == pygame.K_m:
-                                all_objects = muppy.get_objects()
-                        elif event.type == pygame.KEYUP:
-                            self.keys[event.key % 322] = 0
+                    # if not self.pause and not self.console:
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        self.mouse[event.button] = 1
+                        self.mouse[0] = event.pos
+                    elif event.type == pygame.MOUSEBUTTONUP:
+                        self.mouse[event.button] = 0
+                        self.mouse[0] = event.pos
+                    elif event.type == pygame.MOUSEMOTION:
+                        self.mouse[0] = event.pos
+                    elif event.type == pygame.KEYDOWN:
+                        self.keys[event.key % 322] = 1
+                        if event.key == pygame.K_m:
+                            all_objects = muppy.get_objects()
+                    elif event.type == pygame.KEYUP:
+                        self.keys[event.key % 322] = 0
 
-                    if self.pause:
+                    if self.menu.active:
                         self.menu.handleEvent(event)
-                    if self.console:
+                    if self.chatconsole.active:
                         self.chatconsole.handleEvent(event)
-                #game-level key input:
+                # game-level key input:
+                # somehow delete key will destroy ship and when back out of menu will again destroy ship
+                # when this schript part is in scripts thats why it is still here.
                 if self.keys[K_DELETE % 322]:
                     self.keys[K_DELETE % 322] = False
                     self.player.kill() #suicide
-                if self.keys[K_RETURN % 322]:
-                    self.pause = True #pause/menu
-                    self.keys[K_RETURN % 322] = False
 
-
-                    if self.pause:
-                        self.menu.reset()
-                if self.keys[K_6 % 322]:
-                    self.console = True
-
-                    self.keys[K_6 % 322] = False
-                    if self.console:
-                        self.chatconsole.reset()
                 self.debug = False
                 if self.keys[K_BACKSPACE % 322]:
                     self.debug = True #print debug information
@@ -175,14 +165,15 @@ class Game(object):
                 self.camera.update()
                 self.camera.draw(self.screen)
 
-                #paused:
-                if self.pause:
+                # paused:
+                if self.menu.active:
                     self.menu.update()
                     self.menu.draw(self.screen)
 
-                if self.console:
+                if self.chatconsole.active:
                     self.chatconsole.update()
                     self.chatconsole.draw(self.screen)
+                    
                 #update actually parses input.
                 #and does actions based upon that.
                 self.commandParse.update()

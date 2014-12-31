@@ -17,7 +17,8 @@ class Strafebat(Ship):
 		self.target = universe.curSystem.player
 		self.universe = universe
 		self.circling = False
-		Ship.__init__(self, universe.game, pos, Vec2d(0,0), script = StrafebatScript(universe.game), color = color, name=name)
+		Ship.__init__(self, universe.game, pos, Vec2d(0,0), color = color, name=name)
+		self.script = StrafebatScript(universe.game)
 		self.baseBonuses['damageBonus'] = .5
 		cockpit =StrafebatCockpit(universe.game)
 		gyro = Gyro(universe.game)

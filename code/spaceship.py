@@ -10,15 +10,13 @@ import stardog
 from adjectives import addAdjective
 from skills import *
 
-def makeFighter(game, pos, delta, dir = 270, script = None, \
+def makeFighter(game, pos, delta, dir = 270, \
                 color = (255, 255, 255),name=("Shippy","mcShipperson"), player = False):
     """starterShip(x,y) -> default starting ship at x,y."""
     if player:
-        ship = Player(game, pos, delta, dir = dir, \
-                script = script, color = color,name=name)
+        ship = Player(game, pos, delta, dir = dir, color = color,name=name)
     else:
-        ship = Ship(game, pos, delta, dir = dir, \
-                script = script, color = color,name=name)
+        ship = Ship(game, pos, delta, dir = dir, color = color,name=name)
     cockpit = Fighter(game)
     gun = MachineGun(game)
     engine = Engine(game)
@@ -37,16 +35,13 @@ def makeFighter(game, pos, delta, dir = 270, script = None, \
     ship.energy = ship.maxEnergy * .8
     return ship
     
-def makeDestroyer(game, pos, delta, dir = 270, script = None, \
-                color = (255, 255, 255),name=("Shippy","mcShipperson"), player = False):
+def makeDestroyer(game, pos, delta, dir = 270, color = (255, 255, 255),name=("Shippy","mcShipperson"), player = False):
     """starterShip(x,y) -> default starting ship at x,y."""
 
     if player:
-        ship = Player(game, pos, delta, dir = dir, \
-                script = script, color = color, name=name)
+        ship = Player(game, pos, delta, dir = dir, color = color, name=name)
     else:
-        ship = Ship(game, pos, delta, dir = dir, \
-                script = script, color = color,name=name)
+        ship = Ship(game, pos, delta, dir = dir, color = color,name=name)
     gyro = Gyro(game)
     generator = Generator(game)
     battery = Battery(game)
@@ -74,15 +69,12 @@ def makeDestroyer(game, pos, delta, dir = 270, script = None, \
     ship.energy = ship.maxEnergy * .8
     return ship	
     
-def makeInterceptor(game, pos, delta, dir = 270, script = None, \
-                color = (255, 255, 255),name=("Shippy","mcShipperson"), player = False):
+def makeInterceptor(game, pos, delta, dir = 270, color = (255, 255, 255),name=("Shippy","mcShipperson"), player = False):
     """starterShip(x,y) -> default starting ship at x,y."""
     if player:
-        ship = Player(game, pos, delta, dir = dir, \
-                script = script, color = color,name=name)
+        ship = Player(game, pos, delta, dir = dir, color = color,name=name)
     else:
-        ship = Ship(game, pos, delta, dir = dir, \
-                script = script, color = color,name=name)
+        ship = Ship(game, pos, delta, dir = dir, color = color,name=name)
     cockpit = Interceptor(game)
     gyro = Gyro(game)
     generator = Generator(game)
@@ -114,14 +106,11 @@ def makeInterceptor(game, pos, delta, dir = 270, script = None, \
     ship.energy = ship.maxEnergy * .8
     return ship
 
-def makeJuggernaut(game, pos, delta, dir=27, script = None, \
-                color = (255,255,255), name=("Shippy","mcShipperson"), player=False):
+def makeJuggernaut(game, pos, delta, dir=27, color = (255,255,255), name=("Shippy","mcShipperson"), player=False):
     if player:
-        ship = Player(game, pos, delta, dir=dir, \
-            script = script, color = color, name=name)
+        ship = Player(game, pos, delta, dir=dir, color = color, name=name)
     else:
-        ship = Ship(game, pos, delta, dir=dir, \
-            script = script, color = color, name=name)
+        ship = Ship(game, pos, delta, dir=dir, color = color, name=name)
     
     cockpit = Interceptor(game)
     gyro = Gyro(game)
@@ -159,22 +148,16 @@ def makeJuggernaut(game, pos, delta, dir=27, script = None, \
     ship.energy = ship.maxEnergy * .8
     return ship
 
-def makeScout(game, pos, delta, dir=27, script=None, \
-                color = (255,255,255), name=("Shippy","mcShipperson"), player=False):
+def makeScout(game, pos, delta, dir=27, color = (255,255,255), name=("Shippy","mcShipperson"), player=False):
     if player:
-        ship = Player(game, pos, delta, dir = dir, \
-                script = script, color = color,name=name)
+        ship = Player(game, pos, delta, dir = dir, color = color,name=name)
     else:
-        ship = Ship(game, pos, delta, dir = dir, \
-                script = script, color = color,name=name)
+        ship = Ship(game, pos, delta, dir = dir, color = color,name=name)
     cockpit = Fighter(game)
     battery = Battery(game)
     cannon = RightFlakCannon(game)
     radar = Radar(game)
     engine = Engine(game)
-    #gun = MachineGun(game)
-    #engine = Engine(game)
-    #shield = FighterShield(game)
     for part in [cockpit, battery, cannon, radar, engine]:
         if rand() > .8:
             addAdjective(part)
@@ -190,10 +173,10 @@ def makeScout(game, pos, delta, dir=27, script=None, \
     ship.energy = ship.maxEnergy * .8
     return ship
 
-def makeFreighter(game, pos, delta, dir=27, script=None, color = (255,255,255), name=("Shippy","mcShipperson"), player=False):
+def makeFreighter(game, pos, delta, dir=27, color = (255,255,255), name=("Shippy","mcShipperson"), player=False):
     pass
 
-def playerShip(game, pos, delta, dir = 270, script = None, \
+def playerShip(game, pos, delta, dir = 270, \
                 color = (255, 255, 255), name = ("Shippy","mcShipperson"), type = 'fighter'):
     """starterShip(x,y) -> default starting ship at x,y."""
 
@@ -204,44 +187,45 @@ def playerShip(game, pos, delta, dir = 270, script = None, \
     name = (name[0],name[1])
 
     if type == 'destroyer':
-        ship = makeDestroyer(game, pos, delta, dir, 
-                script, color, name, player=True)
+        ship = makeDestroyer(game, pos, delta, dir, color, name, player=True)
     elif type == 'interceptor':
-        ship = makeInterceptor(game, pos, delta, dir, 
-                script, color, name, player=True)
+        ship = makeInterceptor(game, pos, delta, dir, color, name, player=True)
     elif type == 'juggernaut':
-        ship = makeJuggernaut(game, pos, delta, dir, script, color, name, player=True)
+        ship = makeJuggernaut(game, pos, delta, dir, color, name, player=True)
     elif type == 'scout':
-        ship = makeScout(game, pos, delta, dir, script, color, name, player=True)
+        ship = makeScout(game, pos, delta, dir, color, name, player=True)
     else:
-        ship = makeFighter(game, pos, delta, dir, 
-                script, color, name, player=True)
+        ship = makeFighter(game, pos, delta, dir, color, name, player=True)
     #default controls:
     # key, function, toggle or not
-    script.initbind(K_DOWN, ship.reverse,False)
-    script.initbind(K_UP, ship.forward,False)
-    script.initbind(K_RIGHT, ship.turnRight,False)
-    script.initbind(K_LEFT, ship.turnLeft,False)
-    script.initbind(K_RCTRL, ship.shoot,False)
-    script.initbind(K_s, ship.reverse,False)
-    script.initbind(K_r, ship.toggleRadar,True)
-    script.initbind(K_t, ship.targetNextShip,True)
-    script.initbind(K_y, ship.targetPrefShip,True)
-    script.initbind(K_g, ship.targetNextPlanet,True)
-    script.initbind(K_h, ship.targetPrefPlanet,True)
-    script.initbind(K_b, ship.targetNextPart,True)
-    script.initbind(K_n, ship.targetPrefPart,True)
-    script.initbind(K_j, ship.toggleGatewayFocus,True)
-    script.initbind(K_w, ship.forward,False)
-    script.initbind(K_e, ship.left,False)
-    script.initbind(K_q, ship.right,False)
-    script.initbind(K_d, ship.turnRight,False)
-    script.initbind(K_a, ship.turnLeft,False)
-    #script.initbind(K_LCTRL, ship.shoot,False)
-    script.initbind(K_SPACE, ship.shoot,False)
-    script.initbind(K_m, ship.launchMines,False)
+    # script.initbind(K_DOWN, ship.reverse,False)
+    # script.initbind(K_UP, ship.forward,False)
+    # script.initbind(K_RIGHT, ship.turnRight,False)
+    # script.initbind(K_LEFT, ship.turnLeft,False)
+    # script.initbind(K_RCTRL, ship.shoot,False)
+    # script.initbind(K_s, ship.reverse,False)
+    # script.initbind(K_r, ship.toggleRadar,True)
+    # script.initbind(K_t, ship.targetNextShip,True)
+    # script.initbind(K_y, ship.targetPrefShip,True)
+    # script.initbind(K_g, ship.targetNextPlanet,True)
+    # script.initbind(K_h, ship.targetPrefPlanet,True)
+    # script.initbind(K_b, ship.targetNextPart,True)
+    # script.initbind(K_n, ship.targetPrefPart,True)
+    # script.initbind(K_j, ship.toggleGatewayFocus,True)
+    # script.initbind(K_w, ship.forward,False)
+    # script.initbind(K_e, ship.left,False)
+    # script.initbind(K_q, ship.right,False)
+    # script.initbind(K_d, ship.turnRight,False)
+    # script.initbind(K_a, ship.turnLeft,False)
+    # #script.initbind(K_LCTRL, ship.shoot,False)
+    # script.initbind(K_SPACE, ship.shoot,False)
+    # script.initbind(K_m, ship.launchMines,False)
     
     return ship
+
+
+
+
 
 class Ship(Floater):
     """Ship(x, y, dx = 0, dy = 0, dir = 270,
@@ -251,6 +235,7 @@ class Ship(Floater):
     mass = 0
     moment = 0
     parts = []
+    script = None
     atgateway = False
     attention = 0
     forwardEngines = []
@@ -295,7 +280,7 @@ class Ship(Floater):
     'cannonSpeedBonus' : 1., 'missileSpeedBonus' : 1.\
     }
 
-    def __init__(self, game, pos, delta, dir = 270, script = None, \
+    def __init__(self, game, pos, delta, dir = 270, \
                 color = (255, 255, 255), name=("shippy","Mcshipperson")):
         Floater.__init__(self, game, pos, delta, dir, 1)
         self.inventory = []
@@ -317,8 +302,9 @@ class Ship(Floater):
         else:
             self.knownplanets = []
         self.__dict__.update(self.baseBonuses)
-        if script: self.script = script
-        else: self.script = Script(game)
+        # if script: 
+        #     self.script = script
+        # else: self.script = Script(game)
         self.baseImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
         self.baseImage.set_colorkey((0,0,0))
         self.functions = [self.forward, self.reverse, self.left, self.right, \
@@ -331,6 +317,9 @@ class Ship(Floater):
     def insertInInventory(self, part, amount=1):
         for i in range(amount):
             self.inventory.append(part(self.game))
+
+    def setScript(self, script):
+        self.script = script
 
     def addPart(self, part, portIndex = 0):
         """ship.addPart(part) -> Sets the main part for this ship.
@@ -530,10 +519,7 @@ class Ship(Floater):
         if not self.parts or self.parts[0].hp <= 0:
             self.kill()
         #run script, get choices.
-        if self.game.player == self:
-             if not self.game.pause and not self.game.console:
-                self.script.update(self)
-        else:
+        if self.script:
             self.script.update(self)
         resultList = []
         for radar in self.radars:
@@ -669,9 +655,8 @@ class Player(Ship):
     developmentPoints = 12
     landed = False
     
-    def __init__(self, game, pos, delta, dir = 270, script = None, \
-                color = (255, 255, 255), name = ("Shippy","mcShipperson")):
-        Ship.__init__(self, game, pos, delta, dir, script, color, name)
+    def __init__(self, game, pos, delta, dir = 270, color = (255, 255, 255), name = ("Shippy","mcShipperson")):
+        Ship.__init__(self, game, pos, delta, dir, color, name)
         self.skills = [Modularity(self), Agility(self), Composure(self)]
 
     def xpQuest(self, xp):
@@ -701,3 +686,5 @@ class Player(Ship):
     
     def next(self):
         return 1.1 ** self.level * 10
+
+

@@ -114,6 +114,7 @@ class ChatConsole(TopLevelPanel):
     activeMenu = None
     color = (100, 100, 255, 250)
     game = None
+    active = False
     
     def __init__(self, game, rect):
         TopLevelPanel.__init__(self, rect)
@@ -130,11 +131,19 @@ class ChatConsole(TopLevelPanel):
     def handleEvent(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == K_6:
-                self.game.console = False
+                self.toggleActive()
         for panel in self.panels:
             panel.handleEvent( event)
 
         TopLevelPanel.handleEvent(self, event)
+
+    def toggleActive(self):
+        self.game.player.script.toggleActive()
+        if self.active:
+            self.active = False
+        else:
+            self.active = True
+            self.reset()
 
 
 class Menu(TopLevelPanel):
@@ -142,6 +151,7 @@ class Menu(TopLevelPanel):
     activeMenu = None
     color = (100, 100, 255, 250)
     game = None
+    active = False
     
     def __init__(self, game, rect):
         TopLevelPanel.__init__(self, rect)
@@ -187,10 +197,18 @@ class Menu(TopLevelPanel):
     def handleEvent(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == K_RETURN:
-                self.game.pause = False
+                self.toggleActive()
                 
                     # self.reset()
         TopLevelPanel.handleEvent(self, event)
+
+    def toggleActive(self):
+        self.game.player.script.toggleActive()
+        if self.active:
+            self.active = False
+        else:
+            self.active = True
+            self.reset()
 
 class PartsPanel(Panel):
     baseImage = loadImage('res/menus/partsmenubg.bmp')
@@ -735,14 +753,15 @@ class BindingSelecter(Selecter):
     
     def __init__(self, rect, ship):
         Selecter.__init__(self, rect)
-        self.bindings = ship.script.bindings
+        if ship.script:
+            self.bindings = ship.script.bindings
         self.reset()
         
     def reset(self):
         self.selectables = []
-        for binding in self.bindings:
-            Selecter.addSelectable(self,BindingSelectable(binding, \
-                        Rect(0, 0, self.rect.width, 20)))
+        if hasattr(self,'bindings'):
+            for binding in self.bindings:
+                Selecter.addSelectable(self,BindingSelectable(binding, Rect(0, 0, self.rect.width, 20)))
         self.selectables.sort(cmp = lambda x,y: y.keyNum)
         Selecter.reset(self)
         

@@ -6,11 +6,11 @@ main dish
 
 * quad trees (hardmode, after vector and view splitout, wil replace current collision check mess)
 
-* wormholes/star gates to other systems. (medium mode ?, after Gravless class) [might be soon done]!!!
+* wormholes/star gates to other systems. (medium mode ?, after Gravless class) [might be soon done]!!! [more work than anticipated]
 
 * make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump]
 
-* multyplayer [hard mode, dependant on code structure, vectors and views split, also a better ui]
+* multyplayer [hard mode, dependant on code structure]
 * a particle engine for explotions, engine stuff. [medium stuff, after view splitout]
 
 http://pygame.org/project-planes-2392-4051.html get version 0.6
@@ -28,27 +28,34 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ==========
 
-* more randomization of enemy ships
-* player should go into univese and not into game
+* now that more keys can rebound binded ? with the goal to bind all the keys that way, there should be the option to restrict some key rebinding or unsetting, or there is the posibility to rebind the quit key or something like that, or to rebind the menu key in the menu itself
+* rework of menu active and keybindings, activemenu and active better differenciation, update part en draw part if active, the var active in toplevelpanel.
+* inputscript in scripts.py should be playerinputscript, also scripts needed for chatconsole and for menu, this makes it posible to have keys for inflight and for menu command on the same key.
+
+* more randomization of enemy ships !!!
+* player should go into univese and not into game !!!
 * systems now have a seperate list for planets and structures and perhaps portals, should be one list of statics
 * make a script that will install the requirements, like pygame, etc
 * radar detects stuff when it is in the middle make it so it detects the edges or some average
-* implement backspace and cursor back front in input field
+* implement backspace and cursor back front in input field !!!
 * implement the new font
-* implement game time in menu, some fictional time
-* mke sure planets have a minimum distance from each other
-* make shure onboard radar / initial radar has small scanning range and has low energy ussage
-* when in console up / down to browse history
-* improve name input with a box around name
-* make a startmenu with: start, options and quit
+* names of ship selection should come from ship it self, if posible
+* implement game time in menu, some fictional time !!!
+* mke sure planets have a minimum distance from each other !!!
+* make shure onboard radar / initial radar has small scanning range and has low energy ussage !!!
+* some buttons should not be rebindable ingame, like quit, menu and console
+* when in console up / down to browse history !!!
+* improve name input with a box around name !!!
+* a slider button for the ui
+* make a startmenu with: start, options
 * make a options menu with, sound
 * make a sound menu with music volume and fx volume
-* rename solarsystems to starsystems sun to stars etc
+* rename solarsystems to starsystems sun to stars etc [done]
 * trying all options in search of bugs !!! [WIP cant find more for now]
 * comments in code and keeping the standards !!!
 * merging the allto2dvector into master, or even replace master !!
 
-* making the universe class to hold starsystems
+* making the universe class to hold starsystems [WIP]
 * making the rest of screen changeable ?, posibility to chage window with and or height ?
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
 * more collision handeling refactor !! [still need more refactoring]
@@ -56,10 +63,9 @@ side dish
 * zoom in out option for radar [medium mode ?]
 * weapon heat generation [easy mode]
 * engines that are good for space travel but bad for landing and visaversa
-* Display solar system name somewhere [was suposed to be in menu untill the no pause game refactor]
 * other sound for bullet impact on shield and plating and on planet
 * palaxing background, the image
-* menu volume controll for music and effects
+* make bullets that dont impact just disapear
 * instead of restart directly, wait for keypress and see your lifeless ship float into the distance.
 * make the camera so that it can smoothly transition from one place to another
 * make the game run from the beginning, so if choosing ship and color the game is already running
@@ -90,7 +96,7 @@ Housekeeping
 bugs
 =====
 
-
+* the binded keys dont display annymore, check it out and fix.
 * on branch viewsinview an explotion will make another one.[so what for now]
 * the laser is broken, ;( [It is fixed, Aat]
 * make binding keys actually works. they bind but don't do anything. and moste of the time. it bugs out the guns so they fire randomly or continously. [it works]

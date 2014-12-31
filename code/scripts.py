@@ -21,6 +21,7 @@ class InputScript(Script):
 	mouseControl = True
 	def __init__(self, game):
 		Script.__init__(self, game)
+		self.active = True
 		self.keys = game.keys
 		self.mouse = game.mouse
 		self.bindings = []
@@ -28,33 +29,34 @@ class InputScript(Script):
 
 	def update(self, ship):
 		"""decides what to do each frame."""
-		for binding in self.bindings:
-			if self.keys[binding[0]] == 1:
+		if self.active:
+			for binding in self.bindings:
+				if self.keys[binding[0]] == 1:
 
-				if binding[2]:
-					if binding[3]:
-						self.bindings[self.bindings.index(binding)] = (binding[0], binding[1],binding[2], False)
+					if binding[2]:
+						if binding[3]:
+							self.bindings[self.bindings.index(binding)] = (binding[0], binding[1],binding[2], False)
+							binding[1]()
+					else:
 						binding[1]()
-				else:
-					binding[1]()
-			elif self.keys[binding[0]] == 0:
-				if binding[2]:
-					self.bindings[self.bindings.index(binding)] = (binding[0], binding[1],binding[2], True)
-						
+				elif self.keys[binding[0]] == 0:
+					if binding[2]:
+						self.bindings[self.bindings.index(binding)] = (binding[0], binding[1],binding[2], True)
+							
 
-		if self.game.mouseControl:
-			dir = angleNorm(atan2(self.game.mouse[0][1] - self.center[1], \
-								  self.game.mouse[0][0] - self.center[0])\
-								  -ship.dir)
-			
-			if dir < 0:
-				ship.turnLeft(dir)
-			elif dir > 0:
-				ship.turnRight(dir)
-			if self.game.mouse[3]:
-				ship.forward()
-			if self.game.mouse[1]:
-				ship.shoot()
+			if self.game.mouseControl:
+				dir = angleNorm(atan2(self.game.mouse[0][1] - self.center[1], \
+									  self.game.mouse[0][0] - self.center[0])\
+									  -ship.dir)
+				
+				if dir < 0:
+					ship.turnLeft(dir)
+				elif dir > 0:
+					ship.turnRight(dir)
+				if self.game.mouse[3]:
+					ship.forward()
+				if self.game.mouse[1]:
+					ship.shoot()
 
 	def initbind(self, key, function, toggle):
 		"""binds function to key so function will be called if key is pressed.
@@ -82,8 +84,20 @@ class InputScript(Script):
 		self.bindings = [x for x in self.bindings if x[0] != key]
 
 	def setAllUnpressed(self):
+
+		for key in self.keys:
+			self.keys[key] = False
+
 		for bind in self.bindings:
 			bind = (bind[0], bind[1], False, bind[3])
+
+	def toggleActive(self):
+		if self.active:
+			self.active = False
+		else:
+			self.active = True
+
+
 		
 
 class AIScript(Script):
@@ -252,9 +266,37 @@ class AIScript(Script):
 		else:
 			self.intercept(ship, dummy, 500)
 		
+def makeGameBindings(script, game):
+	script.initbind(K_6, game.chatconsole.toggleActive, True)
+	script.initbind(K_RETURN, game.menu.toggleActive, True)
+	
+def makePlayerBindings(script, ship):
+	
+	script.initbind(K_DOWN, ship.reverse,False)
+	script.initbind(K_UP, ship.forward,False)
+	script.initbind(K_RIGHT, ship.turnRight,False)
+	script.initbind(K_LEFT, ship.turnLeft,False)
+	script.initbind(K_RCTRL, ship.shoot,False)
+	
 
-	
-	
+	script.initbind(K_s, ship.reverse,False)
+	script.initbind(K_r, ship.toggleRadar,True)
+	script.initbind(K_t, ship.targetNextShip,True)
+	script.initbind(K_y, ship.targetPrefShip,True)
+	script.initbind(K_g, ship.targetNextPlanet,True)
+	script.initbind(K_h, ship.targetPrefPlanet,True)
+	script.initbind(K_b, ship.targetNextPart,True)
+	script.initbind(K_n, ship.targetPrefPart,True)
+	script.initbind(K_j, ship.toggleGatewayFocus,True)
+	script.initbind(K_w, ship.forward,False)
+
+	script.initbind(K_e, ship.left,False)
+	script.initbind(K_q, ship.right,False)
+	script.initbind(K_d, ship.turnRight,False)
+	script.initbind(K_a, ship.turnLeft,False)
+	#script.initbind(K_LCTRL, ship.shoot,False)
+	script.initbind(K_SPACE, ship.shoot,False)
+	script.initbind(K_m, ship.launchMines,False)
 	
 	
 	
