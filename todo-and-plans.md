@@ -28,23 +28,26 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ==========
 
-* now that more keys can rebound binded ? with the goal to bind all the keys that way, there should be the option to restrict some key rebinding or unsetting, or there is the posibility to rebind the quit key or something like that, or to rebind the menu key in the menu itself
+* the intro menu doesnt calculate with fps, and that is why the curor speed is off, fix that
+* make sure a ship cant spawn in planet, count for player
+* the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed
+* now that more keys can rebound/binded ? with the goal to bind all the keys that way, there should be the option to restrict some key rebinding or unsetting, or there is the posibility to rebind the quit key or something like that, or to rebind the menu key in the menu itself
 * rework of menu active and keybindings, activemenu and active better differenciation, update part en draw part if active, the var active in toplevelpanel.
 * inputscript in scripts.py should be playerinputscript, also scripts needed for chatconsole and for menu, this makes it posible to have keys for inflight and for menu command on the same key.
 
 * more randomization of enemy ships !!!
-* player should go into univese and not into game !!!
+* player should go into univese and not into game ?
 * systems now have a seperate list for planets and structures and perhaps portals, should be one list of statics
 * make a script that will install the requirements, like pygame, etc
 * radar detects stuff when it is in the middle make it so it detects the edges or some average
 * implement backspace and cursor back front in input field !!!
 * implement the new font
-* names of ship selection should come from ship it self, if posible
+* names of ship selection should come from ship it self, if posible, intro menu
 * implement game time in menu, some fictional time !!!
 * mke sure planets have a minimum distance from each other !!!
 * make shure onboard radar / initial radar has small scanning range and has low energy ussage !!!
 * some buttons should not be rebindable ingame, like quit, menu and console
-* when in console up / down to browse history !!!
+* when in console up / down to browse history !!! [done]
 * improve name input with a box around name !!!
 * a slider button for the ui
 * make a startmenu with: start, options
@@ -80,8 +83,9 @@ side dish
 * also add the chat console and menu to the camera
 * draw planets over things like explotions, and other ships.
 * when destroyed a part has a change it will become scrap
+* parts that disconnect have a change they will be destroyed
 * adding info from weapon used on part to part, like plasma burns, impact damage etc.
-* deciding what gui cgraphics to update
+* deciding what gui graphics to update
 * put certain things into threads like : update cycle and draw cycle, also the drawing of mini info panel.
 * compile a list of games like this one to 'loan' elements from !!!
 - naev
@@ -105,7 +109,7 @@ bugs
 * after menu and chat console prototype independance of game pause the menu will not 
 * when ejecting parts planet inventory will not put them at 0 degrees when caught
 * engines seem to light up nice, but the purple color of the engines doesnt color to ship color. [will be done with implementation of animated sprites class]
-* in case of button pressed when you open menu, the ship will continue to do that action. [partial fix for now but needs more practical solution] !!!
+* in case of button pressed when you open menu, the ship will continue to do that action. [done]
 * known planets is a list of all the known planets not the known planets in the current system
 * In case of open planet part panel and parts 'land' on planet they will not show up at the parts panel right away. only after a menu out/in
 * planets should be targetable when not in radar range, couse they are remembered, still it doesnt work out that way, check it out

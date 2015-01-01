@@ -266,12 +266,13 @@ class InputField(Panel):
     drawBorder = False
     image = None
     
-
     def __init__(self, rect, game, function = None, font = BIG_FONT, color = (255,255,255), width = 200):
         self.text = ""
         self.game = game
         self.function = function
         self.preftext = []
+        self.index = 0
+        self.cursorloc = 0
         self.cursortimeout = 1
         self.color = color
         self.lineHeight = font.get_height()
@@ -282,10 +283,12 @@ class InputField(Panel):
         Panel.__init__(self, rect)
 
     def getText(self):
-        text = self.preftext
-        if self.preftext:
-            self.preftext = []
-            return str(text[0])
+        # thou shalt not erase the text history
+        # text = self.preftext
+        # if self.preftext:
+        #     # self.preftext = []
+        #     return str(text[0])
+        return None
 
     def setText(self, text):
         self.preftext = text
@@ -295,35 +298,76 @@ class InputField(Panel):
         
         if event.type == pygame.KEYDOWN:
             if event.key in allowedkeys:
-                self.text += event.unicode
+                length = len(self.text) - self.cursorloc
+                one = self.text[:length]
+                
+                two = self.text[length:]
+                self.text = one + event.unicode + two
+
+            elif event.key == K_UP:
+                if self.index > 0:
+                    self.index -= 1
+                    self.text = self.preftext[self.index]
+
+
+            elif event.key == K_DOWN:
+                if self.index < len(self.preftext)-1:
+                    self.index += 1
+                    self.text = self.preftext[self.index]
+                elif self.index < len(self.preftext):
+                    self.index += 1
+                    self.text = ""
+                    
             
             elif event.key == K_RETURN:
                 if self.function:
                     self.function()
 
                 self.preftext.append(self.text)
+                self.index = len(self.preftext)
                 self.text = ""
+                
+
             elif event.key == K_BACKSPACE:
-                self.text = self.text[:-1]
+                length = len(self.text) - self.cursorloc
+                one = self.text[:length-1]
+                two = self.text[length:]
+
+
+                self.text = one + two
+
+            elif event.key == K_RIGHT and self.cursorloc > 0:
+                self.cursorloc -= 1
+                
+            elif event.key == K_LEFT and self.cursorloc < len(self.text):
+                self.cursorloc += 1
 
     def update(self):
-        if self.cursortimeout <= 1.5:
+        if self.cursortimeout <= 0.5:
             self.cursortimeout += 1.01 / self.game.fps
         else:
             self.cursortimeout = 0
 
 
+        # print 
         w,h = self.font.size(self.text)
         self.image = pygame.Surface((w+20,h),
         hardwareFlag | SRCALPHA).convert_alpha()
         y = 0
-        cursorrect = Rect(w + 5,0,3,self.font.get_height())
+        
+        cursorrect = Rect(w - self.cursoroffset() ,0,3,self.font.get_height())
         
         pygame.draw.rect(self.image, (255,255,255,self.cursortimeout*60), cursorrect)
         
         self.image.blit(self.font.render(self.text, True, self.color), (0, 0))
 
         self.rect = Rect(self.temprect.topleft, self.image.get_size())
+
+    def cursoroffset(self):
+        length = len(self.text) - self.cursorloc
+        return self.font.size(self.text[:-length])[0]
+            
+        # return total
   
 class ScrollPanel(Panel):
     """A panel with a scrollbar."""
