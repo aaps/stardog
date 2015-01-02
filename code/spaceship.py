@@ -241,6 +241,7 @@ class Ship(Floater):
     forwardEngines = []
     maxhp = 0
     hp = 0
+    landed = False
     forwardThrust = 0
     reverseThrust = 0
     leftThrust = 0
@@ -284,12 +285,6 @@ class Ship(Floater):
                 color = (255, 255, 255), name=("shippy","Mcshipperson")):
         Floater.__init__(self, game, pos, delta, dir, 1)
         self.inventory = []
-        """
-        self.insertInInventory(Gyro, 3)
-        self.insertInInventory(MineDropper, 2)
-        self.insertInInventory(Generator, 4)
-        self.insertInInventory(Battery, 4)
-        """
         self.firstname = name[0]
         self.secondname = name[1]
         self.ports = [Port((0,0), 0, self)]
@@ -542,6 +537,8 @@ class Ship(Floater):
 
         if self.atgateway and dist2(self, self.atgateway) > (self.atgateway.radius * 1.1) ** 2:
             self.atgateway = False
+        if self.landed and dist2(self, self.landed) > (self.landed.radius * 1.1) ** 2:
+            self.landed = False
 
 
     def draw(self, surface, offset = None, pos = (0, 0)):
@@ -653,7 +650,7 @@ class Ship(Floater):
 class Player(Ship):
     xp = 0
     developmentPoints = 12
-    landed = False
+    
     
     def __init__(self, game, pos, delta, dir = 270, color = (255, 255, 255), name = ("Shippy","mcShipperson")):
         Ship.__init__(self, game, pos, delta, dir, color, name)
@@ -679,9 +676,7 @@ class Player(Ship):
             self.level += 1
             self.developmentPoints += 1
             self.xp = 0
-        if self.landed \
-        and dist2(self, self.landed) > (self.landed.radius * 1.1) ** 2:
-            self.landed = False
+
         Ship.update(self)
     
     def next(self):

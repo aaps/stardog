@@ -930,6 +930,7 @@ class GargoHold(Part):
         if self.ship:
             numOfParts = len(self.ship.inventory)
             energyCost = numOfParts
+        Part.update(self)
 
 class GatewayFocus(Part):
     baseImage = loadImage("res/parts/gateway_focus"+ext)
@@ -965,6 +966,8 @@ class GatewayFocus(Part):
             self.jumpenergy += (self.ship.efficiency * self.energyCost) / self.game.fps
 
     def jump(self):
+        print "gateway",self.ship.atgateway
+        print "gateway sister",self.ship.atgateway.sister
         print "jump"
 
 class Battery(Part):

@@ -4,6 +4,8 @@ from menuElements import *
 import stardog
 from parts import Dummy, PART_OVERLAP, DEFAULT_IMAGE, FlippablePart
 from spaceship import Ship
+import datetime
+
 
 DEFAULT_SELECTED_IMAGE = loadImage("res/defaultselected" + ext)
 squareWidth = 80
@@ -31,7 +33,8 @@ class IntroMenu(TopLevelPanel):
     def nameChoose(self):
         self.panels = []
         self.addPanel(Label(Rect(100,30,200,20), "Choose a name:", color = (250,250,250),font = BIG_FONT))
-        self.inputfield = NameInputField(self, Rect(100,50,200,20))
+        self.inputfield = NameInputField(self, Rect(100,60,500,30))
+        self.inputfield.drawBorder = True
         self.addPanel(self.inputfield)
 
     def handleEvent(self, event):
@@ -78,7 +81,7 @@ class NameInputField(InputField):
     
     def __init__(self, parent, rect):
         self.parent = parent
-        InputField.__init__(self, rect, parent.game, self.choose)
+        InputField.__init__(self, rect, parent.game, self.choose, BIG_FONT, (100, 100, 200))
 
     def choose(self):
         self.parent.chooseName(self.text)
@@ -807,11 +810,12 @@ class Info(Panel):
         Panel.__init__(self, rect)
         self.addPanel(Label(Rect(self.rect.width / 2 - 60, 2, 0, 0),\
             "Info", BIG_FONT))
-        rect = Rect(100,0,200,300)
-    
+        rect = Rect(100,105,200,300)
+        rect2 = Rect(350,105,200,100)
         # rect = Rect(rect)
-        rect.y += 105
-        self.addPanel(InfoTile(rect, self, game))
+        # rect.y += 105
+        self.addPanel(NavigationTile(rect, self, game))
+        self.addPanel(TimeTile(rect2, self, game))
         
     
     def skill(self, skillName):
@@ -837,7 +841,7 @@ class SkillTreeTab(Selectable):
 class SkillTreeSelector(Selecter):
     pass
 
-class InfoTile(Panel):
+class NavigationTile(Panel):
     
     def __init__(self, rect, parent, game):
         self.parent = parent 
@@ -864,6 +868,25 @@ class InfoTile(Panel):
         if self.game.universe.curSystem:
             return self.game.universe.curSystem.name
         return 'No name'
+
+class TimeTile(Panel):
+
+    def __init__(self, rect, parent, game):
+        self.parent = parent 
+        self.game  = game
+        Panel.__init__(self, rect)
+        rect1 = Rect(rect.x + 5, rect.y + 5, 200, rect.width - 10)
+        self.addPanel(TextBlock(rect1, self.gametime, SMALL_FONT, (100,200,0)))
+
+    def update(self):
+        for panel in self.panels:
+            panel.update()
+
+    def gametime(self):
+        print self.game.timer
+        time = round(self.game.timer + self.game.starttime,1)
+        timeobj = datetime.datetime.fromtimestamp(time)
+        return timeobj.strftime('YEAR:     %Y\nMONTH: %m\nDAY:       %d\nTIME:      %H:%M:%S.%f')[:-5]
 
 
 class SkillTile(Button):

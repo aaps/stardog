@@ -13,7 +13,7 @@ from camera import *
 from universe import *
 import plot
 from vec2d import Vec2d
-import time
+import datetime
 try:
     from swampy.Lumpy import Lumpy
 except ImportError:
@@ -35,6 +35,7 @@ class Game(object):
         self.console = False
         self.debug = False
         self.player = None
+        self.starttime = 1899463445
         self.fps = FPS
         self.screen = screen
         self.top_left = 0, 0
@@ -188,6 +189,7 @@ class Game(object):
                 self.clock.tick(FPS)#aim for FPS but adjust vars for self.fps.
                 self.fps = max(1, int(self.clock.get_fps()))
                 self.timer += 1. / self.fps
+                # print self.timer
             #end round loop (until gameover)
         #end game loop
 

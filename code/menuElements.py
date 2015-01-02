@@ -266,13 +266,14 @@ class InputField(Panel):
     drawBorder = False
     image = None
     
-    def __init__(self, rect, game, function = None, font = BIG_FONT, color = (255,255,255), width = 200):
+    def __init__(self, rect, game, function = None, font = BIG_FONT, color = (100, 200, 100), width = 20):
         self.text = ""
         self.game = game
         self.function = function
         self.preftext = []
         self.index = 0
         self.cursorloc = 0
+        self.width = width
         self.cursortimeout = 1
         self.color = color
         self.lineHeight = font.get_height()
@@ -295,9 +296,9 @@ class InputField(Panel):
 
     def handleEvent(self, event):
         allowedkeys = list(range(97,122)) + list(range(32,71))
-        
+        print self.width, len(self.text)
         if event.type == pygame.KEYDOWN:
-            if event.key in allowedkeys:
+            if event.key in allowedkeys and self.width >= len(self.text):
                 length = len(self.text) - self.cursorloc
                 one = self.text[:length]
                 
@@ -361,7 +362,7 @@ class InputField(Panel):
         
         self.image.blit(self.font.render(self.text, True, self.color), (0, 0))
 
-        self.rect = Rect(self.temprect.topleft, self.image.get_size())
+        # self.rect = Rect(self.temprect.topleft, self.image.get_size())
 
     def cursoroffset(self):
         length = len(self.text) - self.cursorloc

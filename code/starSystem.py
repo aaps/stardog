@@ -45,7 +45,6 @@ class StarSystem(object):
 				#see collide() at bottom of this module.
 				
 		#keep ships in system for now:
-		# edge = self.boundries
 		if self.drawEdgeWarning:
 			self.drawEdgeWarning -= 1. / self.game.fps
 			if self.drawEdgeWarning <=0:
@@ -202,6 +201,14 @@ class StarSystem(object):
 		if hpB > 0: a.takeDamage(hpB, b)
 		if hpA > 0: b.takeDamage(hpA, a)
 
+	def minDistFromOthers(self, floater):
+		mindist = 100000
+		for otherfloater in self.planets:
+			distance = floater.pos.get_distance(otherfloater.pos)
+			if distance < mindist:
+				mindist = distance
+		return mindist
+
 class SolarA1(StarSystem):
 	tinyFighters = []
 	maxFighters = 15
@@ -230,9 +237,14 @@ class SolarA1(StarSystem):
 			accel = ((self.g * mass) / distanceFromStar) / 10
 			# startdelta = Vec2d(0,0).rotatedd(startdir, accel) # preps for gravity sensitive planets
 			startdelta = Vec2d(0,0)
-			self.planets.append(Planet(self, startpos, startdelta ,self.g,radius = radius, mass = mass, \
-				color = color))
-			self.add(self.planets[i])
+			planet = Planet(self, startpos, startdelta ,self.g,radius = radius, mass = mass, \
+				color = color)
+			
+			if self.minDistFromOthers(planet) > (radius * 2):
+				self.planets.append(planet)
+				self.add(planet)
+			else:
+				i-=1
 			d+= 1200
 
 		for i in range(numStructures):

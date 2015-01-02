@@ -23,14 +23,17 @@ class Strafebat(Ship):
 		cockpit =StrafebatCockpit(universe.game)
 		gyro = Gyro(universe.game)
 		gun = StrafebatCannon(universe.game)
+		quarters = Quarters(universe.game)
 		engine = Engine(universe.game)
 		generator = Generator(universe.game)
 		battery = Battery(universe.game)
 		shield = Shield(universe.game)
 		rCannon = RightCannon(universe.game)
 		lCannon = LeftCannon(universe.game)
+		interconnect = Interconnect(universe.game)
+		missilelaunch = MissileLauncher(universe.game)
 		for part in [cockpit, gyro, gun, engine, generator, battery, shield, 
-						rCannon, lCannon]:
+						rCannon, lCannon, quarters, interconnect]:
 			if rand() > .8:
 				addAdjective(part)
 				if rand() > .6:
@@ -50,7 +53,13 @@ class Strafebat(Ship):
 			generator.addPart(rCannon, 0)
 		if .7 < roll < .8:
 			battery.addPart(lCannon, 0)
-		self.energy = self.maxEnergy
+		if .6 < roll < .7:
+			battery.addPart(quarters, 0)
+		if .5 < roll < .6:
+			battery.addPart(interconnect, 0)
+			interconnect.addPart(missilelaunch, 2)
+			self.energy = self.maxEnergy
+
 
 class StrafebatScript(AIScript):
 	"""A scripts with basic physics calculation functions."""
