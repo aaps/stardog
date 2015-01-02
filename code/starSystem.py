@@ -100,11 +100,16 @@ class StarSystem(object):
 		if isinstance(floater, Ship):
 			self.ships.add(floater)
 		if isinstance(floater, Player):
-			distanceFromStar = randint(8000, 18000)
+			
+			
 			if self.universe.curSystem == self:
-				angle = randint(0,360)
-				self.universe.player.pos = self.star.pos.rotatedd(angle, distanceFromStar)
-				self.player = floater
+				init = False
+				while self.minDistFromOthers(floater) < 300 or init == False:
+					init = True
+					angle = randint(0,360)
+					distanceFromStar = randint(8000, 18000)
+					self.universe.player.pos = self.star.pos.rotatedd(angle, distanceFromStar)
+			self.player = floater
 		
 	def empty(self):
 		self.ships.empty()

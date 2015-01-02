@@ -200,9 +200,13 @@ class MiniInfo(Drawable):
 			speed = round(self.targ.delta.get_length(), 2)
 			name = ""
 			linedeltastart = Vec2d(10,40)
-			pygame.draw.circle(self.image, (255,255,255), linedeltastart, 10, 1)
-			pygame.draw.line(self.image, (255,255,255), linedeltastart, self.targ.delta.normalized()*10+linedeltastart)
-			
+			linedirstart = Vec2d(10,60)
+			pygame.draw.circle(self.image, (0,255,255), linedeltastart, 10, 1)
+			pygame.draw.line(self.image, (0,255,255), linedeltastart, self.targ.delta.normalized()*10+linedeltastart)
+			distance = "Distance:" + str(round(self.game.player.pos.get_distance(self.targ.pos),1))
+			pygame.draw.circle(self.image, (0,255,255), linedirstart, 10, 1)
+			pygame.draw.line(self.image, (0,255,255), linedirstart, (self.targ.pos-self.game.player.pos).normalized()*10+linedirstart)
+
 			if isinstance(self.targ, Ship):
 				linedirstart = Vec2d(40,40)
 				pygame.draw.circle(self.image, (255,255,255), linedirstart, 10, 1)
@@ -229,7 +233,10 @@ class MiniInfo(Drawable):
 					self.mutatedimage = pygame.transform.scale(self.mutatedimage, (self.targimage.get_width()*2,self.targimage.get_height()*2) )
 					self.mutatedimage.set_colorkey((0,0,0))     
 				self.image.blit(self.mutatedimage,(self.width/2,self.height/2))
+			
+			
 			self.texts.append(self.font.render(name , True, self.color))
+			self.texts.append(self.font.render(distance , True, self.color))
 			self.texts.append(self.font.render("speed: " + str(speed) , True, self.color))
 			for text in self.texts:
 				self.image.blit(text, (0,self.texts.index(text)*10))

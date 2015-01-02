@@ -28,10 +28,11 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ==========
 
-* see if it is posible to get part and dummy ollition in parts panel !!!
+* draw out the design of the mini panel
+* see if it is posible to get part and dummy collition in parts panel !!!
 * a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
 * the intro menu doesnt calculate with fps, and that is why the curor speed is off, fix that
-* make sure a ship cant spawn in planet, count for player !!!
+* make sure a ship cant spawn in planet, count for player !!! [done]
 * the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed
 * now that more keys can rebound/binded ? with the goal to bind all the keys that way, there should be the option to restrict some key rebinding or unsetting, or there is the posibility to rebind the quit key or something like that, or to rebind the menu key in the menu itself
 * rework of menu active and keybindings, activemenu and active better differenciation, update part en draw part if active, the var active in toplevelpanel. !!!
