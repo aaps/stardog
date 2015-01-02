@@ -5,7 +5,7 @@ from pygame.locals import *
 from floaters import *
 import stardog
 
-class Script:
+class Script(object):
 	def __init__(self, game):
 		self.game = game
 	
@@ -21,6 +21,7 @@ class InputScript(Script):
 	mouseControl = True
 	def __init__(self, game):
 		Script.__init__(self, game)
+		self.active = True
 		self.keys = game.keys
 		self.mouse = game.mouse
 		self.bindings = []
@@ -28,30 +29,50 @@ class InputScript(Script):
 
 	def update(self, ship):
 		"""decides what to do each frame."""
-		for binding in self.bindings:
-			if self.keys[binding[0]]:
-				binding[1]()
-		if self.game.mouseControl:
-			dir = angleNorm(atan2(self.game.mouse[0][1] - self.center[1], \
-								  self.game.mouse[0][0] - self.center[0])\
-								  -ship.dir)
-			
-			if dir < 0:
-				ship.turnLeft(dir)
-			elif dir > 0:
-				ship.turnRight(dir)
-			if self.game.mouse[3]:
-				ship.forward()
-			if self.game.mouse[1]:
-				ship.shoot()
+		if self.active:
+			for binding in self.bindings:
+				if self.keys[binding[0]] == 1:
+
+					if binding[2]:
+						if binding[3]:
+							self.bindings[self.bindings.index(binding)] = (binding[0], binding[1],binding[2], False)
+							binding[1]()
+					else:
+						binding[1]()
+				elif self.keys[binding[0]] == 0:
+					if binding[2]:
+						self.bindings[self.bindings.index(binding)] = (binding[0], binding[1],binding[2], True)
+							
+
+			if self.game.mouseControl:
+				dir = angleNorm(atan2(self.game.mouse[0][1] - self.center[1], \
+									  self.game.mouse[0][0] - self.center[0])\
+									  -ship.dir)
+				
+				if dir < 0:
+					ship.turnLeft(dir)
+				elif dir > 0:
+					ship.turnRight(dir)
+				if self.game.mouse[3]:
+					ship.forward()
+				if self.game.mouse[1]:
+					ship.shoot()
+
+	def initbind(self, key, function, toggle):
+		"""binds function to key so function will be called if key is pressed.
+		Can bind more than one function to a key, and more than one key to
+		a function."""
+		key = key % 322
+		if not self.bindings.count((key, function,toggle, True)):
+			self.bindings.append((key, function, toggle, True))	
 	
 	def bind(self, key, function):
 		"""binds function to key so function will be called if key is pressed.
 		Can bind more than one function to a key, and more than one key to
 		a function."""
 		key = key % 322
-		if not self.bindings.count((key, function)):
-			self.bindings.append((key, function))
+		if not self.bindings.count((key, function,False, True)):
+			self.bindings.append((key, function,False, True))
 			
 	def unbind(self, key, function):
 		"""removes the exact binding key > function"""
@@ -62,9 +83,26 @@ class InputScript(Script):
 		"""removes all bindings with the given key."""
 		self.bindings = [x for x in self.bindings if x[0] != key]
 
+	def setAllUnpressed(self):
+
+		for key in self.keys:
+			self.keys[key] = False
+
+		for bind in self.bindings:
+			bind = (bind[0], bind[1], False, bind[3])
+
+	def toggleActive(self):
+		if self.active:
+			self.active = False
+		else:
+			self.active = True
+
+
+		
+
 class AIScript(Script):
 	interceptSpeed = 200. / 3
-	acceptableError = 5
+	acceptableError = 10
 	"""A scripts with basic physics calculation functions.  Virtual."""
 	def update(self, ship):
 		# find closest ship:
@@ -73,7 +111,7 @@ class AIScript(Script):
 				
 		if ship.guns:
 			shootingRange = 400 ** 2
-				#(ship.guns[0].bulletRange * ship.guns[0].speed) ** 2 / 2
+			(ship.guns[0].bulletRange * ship.guns[0].speed) ** 2 / 2
 		else: #without guns kamikaze. 
 			if self.turnTowards(ship, target):
 				ship.forward()
@@ -119,9 +157,9 @@ class AIScript(Script):
 		returns True if the ship is pointed within self.acceptableError degrees 
 		of the target."""
 		if isinstance(target, Floater):
-			angleToTarget = atan2(target.y - ship.y, target.x - ship.x) - ship.dir
+			angleToTarget = atan2(target.pos.y - ship.pos.y, target.pos.x - ship.pos.x) - ship.dir
 		else:#target is a point
-			angleToTarget = atan2(target[1] - ship.y, target[0] - ship.x) - ship.dir
+			angleToTarget = atan2(target[1] - ship.pos.y, target[0] - ship.pos.x) - ship.dir
 			
 		angleToTarget = (angleToTarget - angleOffset + 180) % 360 - 180
 		if angleToTarget < 0:
@@ -134,9 +172,9 @@ class AIScript(Script):
 		"""relativeSpeed2(ship, target) -> the relative speed between two 
 		floaters. Note that this is negative if they are getting closer."""
 		#distance next second - distance this second (preserves sign):
-		return sqrt((ship.x + ship.dx - target.x - target.dx)**2 \
-					+ (ship.y + ship.dy - target.y - target.dy)**2) \
-				- sqrt((ship.x - target.x)**2 + (ship.y - target.y)**2)
+		return sqrt((ship.pos.x + ship.delta.x - target.pos.x - target.delta.x)**2 \
+					+ (ship.pos.y + ship.delta.y - target.pos.y - target.delta.y)**2) \
+				- sqrt((ship.pos.x - target.pos.x)**2 + (ship.pos.y - target.pos.y)**2)
 	
 	def intercept(self, ship, target, relativeSpeedLimit = 0):
 		"""intercept(ship, target) -> ship moves to intercept target. 
@@ -148,13 +186,12 @@ class AIScript(Script):
 		else: 
 			#roughly guess speed:
 			accel = ship.forwardThrust / ship.mass
-			speed = sqrt( dist(ship.x, ship.y, target.x, target.y) / not0(accel))
-		time = dist(ship.x, ship.y, target.x, target.y) / not0(speed)
-		if self.game.debug: print time, ship
-		dummy = Ballistic(target.x, target.y, \
-						target.dx - ship.dx, target.dy - ship.dy)
+			speed = sqrt( dist(ship.pos.x, ship.pos.y, target.pos.x, target.pos.y) / not0(accel))
+		time = dist(ship.pos.x, ship.pos.y, target.pos.x, target.pos.y) / not0(speed)
+		dummy = Ballistic(target.pos, \
+						target.delta - ship.delta)
 		pos = self.predictBallistic(dummy, time)
-		angle = atan2(pos[1] - ship.y, pos[0] - ship.x)
+		angle = atan2(pos[1] - ship.pos.y, pos[0] - ship.pos.x)
 		if self.turn(ship, angle):
 			if not relativeSpeedLimit\
 			or self.relativeSpeed(ship, target) > - relativeSpeedLimit:
@@ -170,11 +207,11 @@ class AIScript(Script):
 		if not ship.guns:
 			return
 		speed = ship.guns[0].speed
-		time = dist(ship.x, ship.y, target.x, target.y) / speed
-		dummy = Ballistic(target.x, target.y, \
-						target.dx - ship.dx, target.dy - ship.dy)
+		time = dist(ship.pos.x, ship.pos.y, target.pos.x, target.pos.y) / speed
+		dummy = Ballistic(target.pos, \
+						target.delta - ship.delta)
 		pos = self.predictBallistic(dummy, time)
-		angle = atan2(pos[1] - ship.y, pos[0] - ship.x)
+		angle = atan2(pos[1] - ship.pos.y, pos[0] - ship.pos.x)
 		if self.turn(ship, angle):
 			ship.shoot()
 	
@@ -182,8 +219,8 @@ class AIScript(Script):
 		"""predictBallistic(floater, time) ->
 		the point (x,y) the floater will be in after time seconds if there is 
 		no acceleration."""
-		return (floater.x + time * floater.dx, \
-				floater.y + time * floater.dy)
+		return (floater.pos.x + time * floater.delta.x, \
+				floater.pos.y + time * floater.delta.y)
 		
 	def predictTimeMin(self, ship, distance):
 		"""predictTimeMin(ship, distance) ->
@@ -211,16 +248,16 @@ class AIScript(Script):
 		"""directs the ship to fly to the position. 
 		If target, pos is a position relative to the target."""
 		accel = ship.forwardThrust / ship.mass
-		time = sqrt(dist(ship.x, ship.y, pos[0], pos[1]) / accel)
+		time = sqrt(dist(ship.pos.x, ship.pos.y, pos[0], pos[1]) / accel)
 		if not target:
 			dummy = Ballistic(pos[0], pos[1], 0, 0)
 		else:
-			dummy = Ballistic(pos[0] + target.x, pos[1] + target.y,\
-								target.dx, target.dy)
+			dummy = Ballistic(pos[0] + target.pos.x, pos[1] + target.pos.y,\
+								target.delta.x, target.delta.y)
 		
 		turnTime = ship.moment / ship.torque * 180
-		angle = atan2(dummy.y - ship.y, dummy.x - ship.x)
-		distance = dist(dummy.x, dummy.y, ship.x, ship.y)
+		angle = atan2(dummy.pos.y - ship.pos.y, dummy.pos.x - ship.pos.x)
+		distance = dist(dummy.pos.x, dummy.pos.y, ship.pos.x, ship.pos.y)
 		relativeSpeed = self.relativeSpeed(ship, dummy)
 		if - relativeSpeed / not0(accel) + turnTime > distance / abs(not0(relativeSpeed)):
 			#slow down
@@ -229,9 +266,37 @@ class AIScript(Script):
 		else:
 			self.intercept(ship, dummy, 500)
 		
+def makeGameBindings(script, game):
+	script.initbind(K_6, game.chatconsole.toggleActive, True)
+	script.initbind(K_RETURN, game.menu.toggleActive, True)
+	
+def makePlayerBindings(script, ship):
+	
+	script.initbind(K_DOWN, ship.reverse,False)
+	script.initbind(K_UP, ship.forward,False)
+	script.initbind(K_RIGHT, ship.turnRight,False)
+	script.initbind(K_LEFT, ship.turnLeft,False)
+	script.initbind(K_RCTRL, ship.shoot,False)
+	
 
-	
-	
+	script.initbind(K_s, ship.reverse,False)
+	script.initbind(K_r, ship.toggleRadar,True)
+	script.initbind(K_t, ship.targetNextShip,True)
+	script.initbind(K_y, ship.targetPrefShip,True)
+	script.initbind(K_g, ship.targetNextPlanet,True)
+	script.initbind(K_h, ship.targetPrefPlanet,True)
+	script.initbind(K_b, ship.targetNextPart,True)
+	script.initbind(K_n, ship.targetPrefPart,True)
+	script.initbind(K_j, ship.toggleGatewayFocus,True)
+	script.initbind(K_w, ship.forward,False)
+
+	script.initbind(K_e, ship.left,False)
+	script.initbind(K_q, ship.right,False)
+	script.initbind(K_d, ship.turnRight,False)
+	script.initbind(K_a, ship.turnLeft,False)
+	#script.initbind(K_LCTRL, ship.shoot,False)
+	script.initbind(K_SPACE, ship.shoot,False)
+	script.initbind(K_m, ship.launchMines,False)
 	
 	
 	

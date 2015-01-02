@@ -1,7 +1,7 @@
 #races.py
 
 
-class Race:
+class Race(object):
 	planets = []
 	parts = []
 	adjectives = []
@@ -27,9 +27,3 @@ class Race:
 					systems.append(system)
 				else:
 					ownAll = False
-				
-			
-			
-			
-			
-			

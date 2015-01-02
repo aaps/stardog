@@ -3,7 +3,7 @@ from parts import *
 from partCatalog import *
 PARTS = [LeftCannon, RightCannon, Engine, Gyro, Generator, Battery, Shield,
 		LeftLaser, RightLaser, MissileLauncher, MachineGun, FighterShield, 
-		LeftFlakCannon, RightFlakCannon]
+		LeftFlakCannon, RightFlakCannon, Interconnect, Quarters,GatewayFocus, MineDropper, Radar, GargoHold]
 		
 def randItem(game, level = 1):
 	roll = randint(0, len(PARTS) -1)
@@ -28,9 +28,9 @@ def addAdjective(part, level = 1):
 	
 ENERGY_USING = [Gun, Engine, Gyro, Shield]
 
-class Adjective:
+class Adjective(object):
 	level = 1
-	types = [Gun, Engine, Gyro, Battery, Generator, Cockpit, Shield]
+	types = [Gun, Engine, Gyro, Battery, Generator, Cockpit, Shield, Interconnect, Quarters, GatewayFocus, MineDropper, Radar, GargoHold]
 	def effect(self, part):
 		pass
 		

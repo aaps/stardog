@@ -1,17 +1,17 @@
 #!/usr/bin/python
 
 import pygame
+
 from pygame.locals import *
 import sys
-try:
-    import psyco
-    psyco.full()
-except ImportError:
-    print 'this game may run faster if you install psyco.'
-    
-FULL = False; RESOLUTION = 1024, 800 #test
-#FULL = True; RESOLUTION = None #play
-hardwareFlag = pygame.HWSURFACE
+import cProfile
+
+
+
+FULL = False; RESOLUTION = 1024, 768 #test
+# FULL = True; RESOLUTION = None
+# FULL = True; RESOLUTION = None #play
+hardwareFlag = pygame.HWSURFACE|pygame.DOUBLEBUF
 
 
 if __name__=="__main__":
@@ -31,7 +31,6 @@ if __name__=="__main__":
             print("bad command line arguments.")
     #set up the disply:
     pygame.init()
-    #pygame.display.init()
     if not RESOLUTION:
         RESOLUTION = pygame.display.list_modes()[0]
     if FULL:
@@ -52,7 +51,7 @@ if __name__=="__main__":
       "X.oooo.X        ",
       "X.ooooo.X       ",
       "X.ooo....X      ",
-      "Xoo..XXXXXX     ",
+      "X.o..XXXXXX     ",
       "X..XXX          ",
       "X.XX            ",
       "XX              ",
@@ -65,4 +64,5 @@ if __name__=="__main__":
 import code.game
 if __name__ == '__main__':
     game = code.game.Game(screen)
+    
     game.run()

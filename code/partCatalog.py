@@ -34,5 +34,4 @@ class FighterShield(Shield):
 
 generalSellable = [LeftFlakCannon, MachineGun, LeftLaser, LeftCannon, 
 	StrafebatCannon, FighterShield, MissileLauncher, Engine, Generator,
-	Gyro, Battery, Shield, ]
-	
+	Gyro, Battery, Shield]
