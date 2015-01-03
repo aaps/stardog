@@ -28,6 +28,7 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ==========
 
+* minelayer part get color automaticly, fix that !!!
 * a random seed for xtra fun
 * some parts ont get a delta upon ejecting
 * the radar range circle doesnt yet scale
@@ -35,15 +36,16 @@ side dish
 * when opening part the radar will be reset to the ockpit radar
 * time to consider a differen graph lib like gfxdraw
 * draw out the design of the mini panel
+* plitout parts and cargo , different files, is part cargo or cargo part ?
 * see if it is posible to get part and dummy collition in parts panel !!!
 * a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
 * the intro menu doesnt calculate with fps, and that is why the curor speed is off, fix that
-* make sure a ship cant spawn in planet, count for player !!!
+* make sure a ship cant spawn in planet, count for player
 * the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed
 * now that more keys can rebound/binded ? with the goal to bind all the keys that way, there should be the option to restrict some key rebinding or unsetting, or there is the posibility to rebind the quit key or something like that, or to rebind the menu key in the menu itself
-* rework of menu active and keybindings, activemenu and active better differenciation, update part en draw part if active, the var active in toplevelpanel. !!!
+* rework of menu active and keybindings, activemenu and active better differenciation, update part en draw part if active, the var active in toplevelpanel.
 * inputscript in scripts.py should be playerinputscript, also scripts needed for chatconsole and for menu, this makes it posible to have keys for inflight and for menu command on the same key.
-* the on mini tagetting field the distance to target and angle to target !!! [done]
+* the on mini tagetting field the distance to target and angle to target [done]
 * player should go into univese and not into game ?
 * systems now have a seperate list for planets and structures and perhaps portals, should be one list of statics !!!
 * make a script that will install the requirements, like pygame, etc
@@ -57,7 +59,6 @@ side dish
 * make a startmenu with: start, options
 * make a options menu with, sound
 * make a sound menu with music volume and fx volume
-* trying all options in search of bugs !!! [WIP cant find more for now]
 * comments in code and keeping the standards
 * merging the allto2dvector into master, or even replace master [ok done, aat]
 * making the universe class to hold starsystems [WIP]
@@ -65,7 +66,7 @@ side dish
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
 * more collision handeling refactor !!! [still need more refactoring]
 * more to vec2d verctor work. !!! [can alwais use some work]
-* zoom in out option for radar [medium mode ?] !!! [done]
+* zoom in out option for radar [medium mode ?] [doneish]
 * weapon heat generation [easy mode]
 * engines that are good for space travel but bad for landing and visaversa
 * other sound for bullet impact on shield and plating and on planet
@@ -81,8 +82,8 @@ side dish
 * in camera splitout functionality make a layer class for the layers that will not do the drawing but perhaps the updating, anyhow updates doesnt belong in camera ?
 
 * ai could use some more bains and variation
-* also add the chat console and menu to the camera !!!
-* when destroyed a part has a change it will become scrap !!!
+* also add the chat console and menu to the camera
+* when destroyed a part has a change it will become scrap [done]
 * parts that disconnect/scatter have a change they will be destroyed
 * adding info from weapon used on part to part, like plasma burns, impact damage etc.
 * deciding what gui graphics to update:
@@ -90,7 +91,7 @@ side dish
 - some way to texture menu borders and buttons in a dynamic way
 * put certain things into threads like : update cycle and draw cycle, also the drawing of mini info panel.
 * the planet's and structure's and same kind of problem, when landed one can fly into a planet and gravity can pull you from a structure, need something for that
-* compile a list of games like this one to 'loan' elements from !!!
+* compile a list of games like this one to 'loan' elements from
 - naev
 - hardwar
 - Transcendence
@@ -104,9 +105,9 @@ Housekeeping
 bugs
 =====
 
-* when blowing up an enemy error happens
+* when blowing up an enemy error could happen
 * cargo part doesnt update and does not accelerate fall etc. [done]
-* the binded keys dont display annymore, check it out and fix.
+* the binded keys dont display annymore, check it out and fix. !!!
 * on branch viewsinview an explotion will make another one.[so what for now]
 * the laser is broken, ;( [It is fixed, Aat]
 * make binding keys actually works. they bind but don't do anything. and moste of the time. it bugs out the guns so they fire randomly or continously. [it works]
