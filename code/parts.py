@@ -10,7 +10,7 @@ from vec2d import Vec2d
 
 
 PART_OVERLAP = 0
-DETACH_SPACE = 5
+DETACH_SPACE = 50
 DETACH_SPEED = 100
 
 class Port(object):
@@ -30,6 +30,8 @@ class Part(Floater):
     image = None
     height, width = 9, 3
     pickuptimeout = 0
+    volume = 1
+    equipable = True
     parent = None
     dir = 270
     mass = 10
@@ -115,6 +117,7 @@ class Part(Floater):
                     # part.unequip()
         #allow the ship to re-adjust:
         self.ship.reset()
+
             
     def attach(self):
         """attaches this part to a ship. This includes increases ship mass
@@ -172,8 +175,8 @@ class Part(Floater):
         self.image = colorShift(pygame.transform.rotate(self.baseImage, angle), self.color).convert()
         self.image.set_colorkey((0,0,0))
         self.pos = ship.pos + self.offset
-        self.delta.x = ship.delta.x + rand() * sign(self.offset[0]) * DETACH_SPEED
-        self.delta.y = ship.delta.y + rand() * sign(self.offset[1]) * DETACH_SPEED
+        self.delta.x = ship.delta.x + (rand()  * DETACH_SPEED)
+
         self.ship = None
         self.game.universe.curSystem.add(self)
         
@@ -257,19 +260,7 @@ class Part(Floater):
             pos = self.pos.x - image.get_width() / 2 - offset[0], \
                   self.pos.y - image.get_height() / 2 - offset[1]
             surface.blit(image, pos)
-        #hp rings:
-        pos = 	self.pos - offset - self.radius
-        if self.hp / self.maxhp < .9:
-            #color fades green to red as hp decreases.
-            color = limit(0, int((1 - self.hp * 1. / self.maxhp ) * 255),255), \
-                    limit(0, int(1. * self.hp / self.maxhp * 255), 255), 0, 100 
-            rect = (0,0, self.radius * 2, self.radius * 2)
-            #arc from - hp/maxhp*360 to -90:
-            pygame.draw.arc(self.buffer, color, rect, \
-                    math.pi/2 - math.pi * 2 * (1 - 1. * self.hp / self.maxhp),\
-                    math.pi/2, 2)
-            surface.blit(self.buffer, pos.inttup())
-            self.buffer.fill((0,0,0,0))
+
 
     def takeDamage(self, damage, other):
         from spaceship import Player
@@ -291,11 +282,20 @@ class Part(Floater):
                     self.game.player.xpKill(self.ship)
             if self.parent:
                 self.detach()
+            if rand() < 0.3 and not isinstance(self, Scrap):
+                scrap = Scrap(self.game)
+                scrap.pos = self.pos
+                scrap.delta = self.delta
+
+                self.game.universe.curSystem.add(scrap)
             self.kill()
+
+            
             #if dead, make an explosion here.
             self.game.universe.curSystem.add(Explosion(self.game, self.pos, \
                         self.delta, radius = self.radius * 4,\
                         time = self.maxhp / 5))
+
 
 class Dummy(Part):
     """A dummy part used by the parts menu."""
@@ -312,6 +312,26 @@ class Dummy(Part):
                     port.part = None
                     self.kill()
                     self.ship.reset()
+
+class Scrap(Part):
+    name = "Scrap"
+    baseImage = loadImage("res/goods/scrap" + ext)
+    image = None
+    damage = 1
+    equipable = False
+
+
+    def __init__(self, game):
+        Part.__init__(self, game)
+
+    def update(self):
+        Part.update(self)
+
+    def shortStats(self):
+        return "Scrap"
+
+    def stats(self):
+        return "It is Scrap"
 
 class FlippablePart(Part):
     def flip(self):
@@ -456,6 +476,7 @@ class MissileLauncher(Gun):
     reloadTime = 5
     acceleration = 600
     range = 1
+
     turning = 0
     percision = 0
     explosionRadius = 120
@@ -572,6 +593,7 @@ class FlakCannon(Cannon):
 class Radar(Part):
     baseImage = loadImage("res/parts/radar" + ext)
     image = None
+    disk = None
     name = "Radar"
     energyCost = 0.5
     radarrange = 18000
@@ -594,8 +616,10 @@ class Radar(Part):
         else:
             self.enabled = True
         
+        self.ship.radars = sorted(self.ship.radars, key=lambda radar: radar.radarrange, reverse=True)
+
         for radar in self.ship.radars:
-            if radar.enabled and not radar ==  self:
+            if not radar == self:
                 radar.enabled = self.enabled
 
         
@@ -615,10 +639,10 @@ class Radar(Part):
             if self.radartime <= 0:
 
                 self.detected = []
-                disk = RadarDisk(self.game, self.ship.pos, self.ship.delta, self.dir, self.radarrange)
+                self.disk = RadarDisk(self.game, self.ship.pos, self.ship.delta, self.dir, self.radarrange)
                 self.radartime = self.radarspeed
                 for floater in self.game.universe.curSystem.floaters:
-                    if collisionTest(disk, floater) and floater != self.ship:
+                    if collisionTest(self.disk, floater) and floater != self.ship:
                         self.detected.append(floater)
                         if floater not in self.ship.knownplanets and isinstance (floater,Planet):
                             self.ship.knownplanets.append(floater)
@@ -902,7 +926,7 @@ class Quarters(Part):
                 if part.hp < part.maxhp:
                     part.hp = part.hp+self.repair*self.ship.efficiency/self.game.fps
                     break
-        Part.update(self)
+        # Part.update(self)
 
 class GargoHold(Part):
     baseImage = loadImage("res/parts/cargo"+ext)

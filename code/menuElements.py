@@ -296,7 +296,6 @@ class InputField(Panel):
 
     def handleEvent(self, event):
         allowedkeys = list(range(97,122)) + list(range(32,71))
-        print self.width, len(self.text)
         if event.type == pygame.KEYDOWN:
             if event.key in allowedkeys and self.width >= len(self.text):
                 length = len(self.text) - self.cursorloc
@@ -349,8 +348,6 @@ class InputField(Panel):
         else:
             self.cursortimeout = 0
 
-
-        # print 
         w,h = self.font.size(self.text)
         self.image = pygame.Surface((w+20,h),
         hardwareFlag | SRCALPHA).convert_alpha()

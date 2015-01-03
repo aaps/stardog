@@ -81,8 +81,11 @@ class Planet(Floater):
 
 	def freepartCollision(self, part):
 		part.kill()
-		part.dir = 0
-		part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert()
+		if rand() > .8 and not isinstance(part, Scrap):
+			part.dir = 0
+			part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert()
+		else:
+			part = Scrap(self.game)
 		self.inventory.append(part)
 
 	def planetCollision(self, planet):

@@ -40,17 +40,16 @@ class HUD(Drawable):
 
 	def __init__(self, game):
 		Drawable.__init__(self, game)
-		self.image = pygame.Surface((self.game.width, self.game.height), \
-							flags = (SRCALPHA)).convert_alpha()
+		
+		self.zoomModifier = 1
 		self.keys = game.keys
 		self.center = (game.width - radarRadius, radarRadius)
-		self.radarImage = pygame.image.load(
-					"res/radar small.png").convert_alpha()
+		self.radarImage = pygame.image.load("res/radar small.png").convert_alpha()
 		self.radarImage.set_colorkey((0,0,0))
-		self.radarImageBig = pygame.image.load(
-					"res/radar large.png").convert_alpha()
+		self.radarImageBig = pygame.image.load("res/radar large.png").convert_alpha()
 		self.radarImageBig.set_colorkey((0,0,0))
-
+		self.image = pygame.Surface((self.game.width, self.game.height), flags = (SRCALPHA)).convert_alpha()
+		
 	def draw(self, surface):
 		"""updates the HUD and draws it."""
 		self.image.fill((0, 0, 0, 0))
@@ -89,19 +88,24 @@ class HUD(Drawable):
 			#these temp locals replace the globals:
 			radius = radarRadiusBig
 			center = (self.game.width / 2, self.game.height / 2)
-			scale = radarScaleBig
+			scale = radarScaleBig * self.zoomModifier
 			self.image.blit(self.radarImageBig, \
 				(center[0] - radius, center[1] - radius))
 		else:
 			radius = radarRadius
 			center = self.center
-			scale = radarScale
+			scale = radarScale * self.zoomModifier
 			self.image.blit(self.radarImage, \
 				(center[0] - radius, center[1] - radius))
+
+
 		#draw floating part dots:
-		
+		if thisShip.radars[0].disk and thisShip.radars[0].enabled:
+			pygame.draw.circle(self.image, (255,255,255, 50), center, int(thisShip.radars[0].disk.radius / radarScale + 2), 1)
+
 		for radar in thisShip.radars:
 			for floater in radar.detected:
+				
 				result = floater.pos - thisShip.pos
 				dotPos = int(center[0] + limit(-radius,	result.x / scale, radius)), \
 						int(center[1] + limit(-radius, result.y / scale, radius))
@@ -122,14 +126,23 @@ class HUD(Drawable):
 						pygame.draw.rect(self.image, (200,200,0), (dotPos[0]-1,dotPos[1]-1,2,2))
 
 		for planet in thisShip.knownplanets:
+			
 			result = planet.pos - thisShip.pos
 			dotPos = int(center[0] + limit(-radius,	result.x / scale, radius)), int(center[1] + limit(-radius, result.y / scale, radius))
-			r = int(planet.radius / radarScale + 2)
-			color = planet.color
-			if thisShip.curtarget == planet:
-				pygame.draw.circle(self.image, (0, 250, 250), dotPos, r+3, 1)
-			pygame.draw.circle(self.image, color, dotPos, r)
+			r = int(planet.radius / scale + 2)
+			if collisionTest(Floater(self.game, Vec2d(dotPos), Vec2d(0,0), 0, 1), Floater(self.game, Vec2d(center), Vec2d(0,0), 0, 100)):
+				color = planet.color
+				if thisShip.curtarget == planet:
+					pygame.draw.circle(self.image, (0, 250, 250), dotPos, r+3, 1)
+				pygame.draw.circle(self.image, color, dotPos, r)
 
+	def zoomInRadar(self):
+		if self.zoomModifier <= 2.4:
+			self.zoomModifier += 0.2
+
+	def zoomOutRadar(self):
+		if self.zoomModifier > 0.4:
+			self.zoomModifier -= 0.2
 
 
 class StarField(Drawable):
@@ -243,8 +256,35 @@ class MiniInfo(Drawable):
 		surface.blit(self.image, self.bottomleft)
 
 	def grayscale(self, img):
-	    arr = pygame.surfarray.array3d(img)
-	    #luminosity filter
-	    avgs = [[(r*0.298 + g*0.587 + b*0.114) for (r,g,b) in col] for col in arr]
-	    arr = numpy.array([[[avg,avg,avg] for avg in col] for col in avgs])
-	    return pygame.surfarray.make_surface(arr)
+		arr = pygame.surfarray.array3d(img)
+		#luminosity filter
+		avgs = [[(r*0.298 + g*0.587 + b*0.114) for (r,g,b) in col] for col in arr]
+		arr = numpy.array([[[avg,avg,avg] for avg in col] for col in avgs])
+		return pygame.surfarray.make_surface(arr)
+
+class shipDamage(Drawable):
+
+	def __init__(self, game, font=SMALL_FONT):
+		self.game = game
+		self.player = self.game.player
+		self.font = font
+		
+	
+
+	def draw(self,surface):
+		self.startrect = Rect(self.game.width-120, 220, 100, 5)
+		for part in self.player.parts:
+			
+
+			#color fades green to red as hp decreases.
+			color = limit(0, int((1 - part.hp * 1. / part.maxhp ) * 255),255), \
+					limit(0, int(1. * part.hp / part.maxhp * 255), 255), 0, 100 
+			rect = (0,0, part.radius * 2, part.radius * 2)
+			text = self.font.render(part.name, False, (0, 180, 80))
+			surface.blit(text, (self.game.width-120, self.startrect[1]+10))
+			pygame.draw.rect(surface, color, self.startrect)
+			self.startrect[1] += 30
+			self.startrect[2] = limit(0, int(1. * part.hp / part.maxhp * 100), 100)
+
+				
+

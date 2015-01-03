@@ -96,7 +96,6 @@ class StarSystem(object):
 	def add(self, floater):
 		"""adds a floater to this game."""
 		self.floaters.add(floater)
-		# print floater
 		if isinstance(floater, Ship):
 			self.ships.add(floater)
 		if isinstance(floater, Player):
@@ -104,7 +103,7 @@ class StarSystem(object):
 			
 			if self.universe.curSystem == self:
 				init = False
-				while self.minDistFromOthers(floater) < 300 or init == False:
+				while self.minDistFromOthers(floater) < 3000 or init == False:
 					init = True
 					angle = randint(0,360)
 					distanceFromStar = randint(8000, 18000)
@@ -226,6 +225,7 @@ class SolarA1(StarSystem):
 		#place player:
 		angle = randint(0,360)
 
+		self.planets.append(self.star)
 		self.add(self.star)
 		self.name = name
 		
@@ -242,10 +242,10 @@ class SolarA1(StarSystem):
 			accel = ((self.g * mass) / distanceFromStar) / 10
 			# startdelta = Vec2d(0,0).rotatedd(startdir, accel) # preps for gravity sensitive planets
 			startdelta = Vec2d(0,0)
-			planet = Planet(self, startpos, startdelta ,self.g,radius = radius, mass = mass, \
-				color = color)
+			planet = Planet(self, startpos, startdelta ,self.g,radius = radius, mass = mass, color = color)
 			
-			if self.minDistFromOthers(planet) > (radius * 2):
+			mindistance = self.minDistFromOthers(planet)
+			if mindistance > (radius * 6):
 				self.planets.append(planet)
 				self.add(planet)
 			else:

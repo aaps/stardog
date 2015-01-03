@@ -28,20 +28,26 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ==========
 
+* a random seed for xtra fun
+* some parts ont get a delta upon ejecting
+* the radar range circle doesnt yet scale
+* mini game explotion push stuff, space socker ?
+* when opening part the radar will be reset to the ockpit radar
+* time to consider a differen graph lib like gfxdraw
 * draw out the design of the mini panel
 * see if it is posible to get part and dummy collition in parts panel !!!
 * a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
 * the intro menu doesnt calculate with fps, and that is why the curor speed is off, fix that
-* make sure a ship cant spawn in planet, count for player !!! [done]
+* make sure a ship cant spawn in planet, count for player !!!
 * the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed
 * now that more keys can rebound/binded ? with the goal to bind all the keys that way, there should be the option to restrict some key rebinding or unsetting, or there is the posibility to rebind the quit key or something like that, or to rebind the menu key in the menu itself
 * rework of menu active and keybindings, activemenu and active better differenciation, update part en draw part if active, the var active in toplevelpanel. !!!
 * inputscript in scripts.py should be playerinputscript, also scripts needed for chatconsole and for menu, this makes it posible to have keys for inflight and for menu command on the same key.
-* the on mini tagetting field the distance to target and angle to target !!!
+* the on mini tagetting field the distance to target and angle to target !!! [done]
 * player should go into univese and not into game ?
 * systems now have a seperate list for planets and structures and perhaps portals, should be one list of statics !!!
 * make a script that will install the requirements, like pygame, etc
-* radar detects stuff when it is in the middle make it so it detects the edges or some average !!!
+* radar detects stuff when it is in the middle make it so it detects the edges or some average [first remove the part that renews the radar disk] [ok done and then some]
 * implement backspace and cursor back front in input field !!!
 * implement the new font
 * names of ship selection should come from ship it self, if posible, intro menu !!!
@@ -53,13 +59,13 @@ side dish
 * make a sound menu with music volume and fx volume
 * trying all options in search of bugs !!! [WIP cant find more for now]
 * comments in code and keeping the standards
-* merging the allto2dvector into master, or even replace master !!!
+* merging the allto2dvector into master, or even replace master [ok done, aat]
 * making the universe class to hold starsystems [WIP]
 * making the rest of screen changeable ?, posibility to chage window with and or height ?
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
 * more collision handeling refactor !!! [still need more refactoring]
 * more to vec2d verctor work. !!! [can alwais use some work]
-* zoom in out option for radar [medium mode ?] !!!
+* zoom in out option for radar [medium mode ?] !!! [done]
 * weapon heat generation [easy mode]
 * engines that are good for space travel but bad for landing and visaversa
 * other sound for bullet impact on shield and plating and on planet
@@ -71,7 +77,7 @@ side dish
 * make camera translatable instead of direct snap
 * the portal stargate warp dent could use some drag inside it, for temp usability
 * cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fitt parts on your ship when on planet or structure, when container gets destroyed or dissconnected from ship you lose parts untill you are at capacity !!!
-* when special key than lifebars on parts and some effect for parts that are on, or some extra type of ship info. !!!
+* when special key than lifebars on parts and some effect for parts that are on, or some extra type of ship info. [move drawing of arc from parts to ui] !!!
 * in camera splitout functionality make a layer class for the layers that will not do the drawing but perhaps the updating, anyhow updates doesnt belong in camera ?
 
 * ai could use some more bains and variation
@@ -98,7 +104,8 @@ Housekeeping
 bugs
 =====
 
-* cargo part doesnt update and does not accelerate fall etc.
+* when blowing up an enemy error happens
+* cargo part doesnt update and does not accelerate fall etc. [done]
 * the binded keys dont display annymore, check it out and fix.
 * on branch viewsinview an explotion will make another one.[so what for now]
 * the laser is broken, ;( [It is fixed, Aat]

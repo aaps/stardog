@@ -52,8 +52,9 @@ class Game(object):
         self.universe.addStarSystem(SolarA1(self.universe, "theone"))
         self.universe.addStarSystem(SolarA1(self.universe, "thesecond"))
         
-        self.camera.layerAdd(self.messenger,6)
-        self.camera.layerAdd(MiniInfo(self),5)
+        self.camera.layerAdd(self.messenger,7)
+        self.camera.layerAdd(MiniInfo(self),6)
+        
         #key polling:
         self.keys = [False]*322
         #mouse is [pos, button1, button2, button3,..., button6].
@@ -61,8 +62,8 @@ class Game(object):
         self.mouse = [(0, 0), 0, 0, 0, 0, 0, 0]
         #pygame setup:
         self.clock = pygame.time.Clock()
-    
-        self.camera.layerAdd(HUD(self),4)
+        self.hud = HUD(self)
+        self.camera.layerAdd(self.hud,4)
         self.camera.layerAdd(SpaceView(self),3)
         #create a chatconsole for text input capabilities
         self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-50, self.width - int(self.width/ 8) , 50))
@@ -94,6 +95,7 @@ class Game(object):
             self.player = playerShip(self, Vec2d(0,0),Vec2d(0,0),
                             color = self.playerColor, name = self.PlayerName, type = self.playerType)
             
+            self.camera.layerAdd(shipDamage(self),5)
             self.camera.layerAdd(StarField(self),2)
             self.universe.setCurrentStarSystem("theone")
             self.camera.layerAdd(self.universe.curSystem.bg,1)
@@ -189,7 +191,6 @@ class Game(object):
                 self.clock.tick(FPS)#aim for FPS but adjust vars for self.fps.
                 self.fps = max(1, int(self.clock.get_fps()))
                 self.timer += 1. / self.fps
-                # print self.timer
             #end round loop (until gameover)
         #end game loop
 

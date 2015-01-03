@@ -490,6 +490,8 @@ class ShipPartPanel(DragableSelectable):
                 return #dropped on self: do nothing.
             if self.part and self.checkParent(self.part,dropped.part):
                 return #trying to drop a part on it's parent.  Do nothing.
+            if dropped.part and not dropped.part.equipable:
+                return # cant equip this part
             dropped.part.unequip(toInventory = False)
             if not self.port.parent in self.ship.parts:
                 #unequiping dropped messed up this node!

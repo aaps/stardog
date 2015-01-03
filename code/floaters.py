@@ -429,7 +429,6 @@ class LaserBeam(Floater):
 	
 		
 class RadarDisk(Floater):
-	hp = 5
 	baseImage = None
 	color = (0, 0, 0)
 	mass = 0
@@ -446,7 +445,4 @@ class RadarDisk(Floater):
 		pass
 
 	def update(self):
-		self.life -= 1. / self.game.fps
-		Floater.update(self)
-		if self.life < 0:
-			self.kill()
+		pass

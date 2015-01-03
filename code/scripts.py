@@ -269,6 +269,9 @@ class AIScript(Script):
 def makeGameBindings(script, game):
 	script.initbind(K_6, game.chatconsole.toggleActive, True)
 	script.initbind(K_RETURN, game.menu.toggleActive, True)
+
+	script.initbind(K_EQUALS, game.hud.zoomInRadar,False)
+	script.initbind(K_MINUS, game.hud.zoomOutRadar,False)
 	
 def makePlayerBindings(script, ship):
 	
@@ -278,6 +281,7 @@ def makePlayerBindings(script, ship):
 	script.initbind(K_LEFT, ship.turnLeft,False)
 	script.initbind(K_RCTRL, ship.shoot,False)
 	
+
 
 	script.initbind(K_s, ship.reverse,False)
 	script.initbind(K_r, ship.toggleRadar,True)
