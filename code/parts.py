@@ -7,6 +7,8 @@ from pygame.locals import *
 from floaters import *
 import stardog
 from vec2d import Vec2d
+import copy
+
 
 
 PART_OVERLAP = 0
@@ -39,6 +41,7 @@ class Part(Floater):
     # position in relation to the center of the ship
     #and the center of this part:
     offset = Vec2d(0, 0)
+    shipoffset = Vec2d(0, 0)
     #whether this should be redrawn each frame:
     color = (150,150,150)
     animated = False
@@ -85,6 +88,8 @@ class Part(Floater):
     def addPart(self, part, port):
         """addPart(part, port) -> connects part to port of this part.
         port can be a port number or a reference to the port."""
+        from spaceship import Player
+        from strafebat import Strafebat
         if port in self.ports:
             pass
         else:
@@ -94,14 +99,40 @@ class Part(Floater):
         #detach old part, if any:
         if port.part:
             port.part.unequip()
-        port.part = part
-        part.parent = self
+        
         part.ship = self.ship
         part.dir = port.dir + self.dir
+        part.offset = self.offset + port.offset.rotated(self.dir) - Vec2d(0,0).rotatedd(part.dir,(part.width - PART_OVERLAP) / 2)
+
+        part.parent = self
+
+
+        if isinstance(self.parent, Player) or isinstance(self.parent, Strafebat):
+            part.shipoffset = part.offset
+        else:
+            part.shipoffset = part.offset + self.parent.shipoffset
+
+        for other in self.ship.parts:
+            if other is not self and other is not part:                
+                if part.shipoffset.get_distance(other.shipoffset) < round((part.radius + other.radius)/2):                   
+                    if part in self.ship.inventory:
+                        self.ship.inventory.remove(part)
+                        part = copy.copy(part)
+                        
+
+                    self.ship.inventory.append(part)
+                    return
+
+        port.part = part
+
+
+        
+        
         #calculate offsets:
 
-        part.offset = self.offset + port.offset.rotated(self.dir) - Vec2d(0,0).rotatedd(part.dir,(part.width - PART_OVERLAP) / 2)
-    
+        
+
+
         #rotate takes a ccw angle and color.
         part.image = colorShift(pygame.transform.rotate(part.baseImage, \
                     -part.dir), part.color)
@@ -110,11 +141,9 @@ class Part(Floater):
             part.animatedImage = colorShift(part.animatedBaseImage, part.color)
             part.animatedImage.set_colorkey((0,0,0))
         #unequip the part if it collides with others, except parent(self).
-        # for other in self.ship.parts:
-            # if other is not self and other is not part:
-                # if abs(part.offset[0] - other.offset[0]) < 7 \
-                # and abs(part.offset[1] - other.offset[1]) < 7:
-                    # part.unequip()
+        
+
+
         #allow the ship to re-adjust:
         self.ship.reset()
 
@@ -264,6 +293,7 @@ class Part(Floater):
 
     def takeDamage(self, damage, other):
         from spaceship import Player
+        
         hitByPlayer = False
         if isinstance(self, Part) and self.parent:
             self.ship.attention += 5
@@ -271,7 +301,7 @@ class Part(Floater):
             hitByPlayer = True
             self.game.player.xpDamage(self, damage)
         if self.parent and self.parent != self.ship \
-        and not isinstance(self.ship, Player) \
+        and not isinstance(self.ship, Player)  \
         and rand() <  1. * damage / (self.hp + 1):
             self.detach()
         self.hp -= damage
@@ -448,9 +478,6 @@ class MineDropper(Gun):
         statString = ("\n Mine Speed: %s m/s\nMine Accel: %s m/s/s")
         return Gun.stats(self)+statString%stats
 
-    def attach(self):
-        self.mineImage = colorShift(self.mineImage, self.ship.color)
-        Gun.attach(self)
 
     def shoot(self):
         if self.acted: return

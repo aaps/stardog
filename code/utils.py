@@ -138,12 +138,23 @@ def colorShift(surface, color, colorkey = (0,0,0)):
 
 def collisionTest(a, b):
 	"""test spatial collision of Floaters a and b"""
-	r = a.radius + b. radius
+	r = a.radius + b.radius
 	return a != b \
 	and a.pos.x < b.pos.x + r \
 	and b.pos.x < a.pos.x + r \
 	and a.pos.y < b.pos.y + r \
 	and b.pos.y < a.pos.y + r \
+	and dist2(a, b) < r ** 2
+
+
+def partsCollisionTest(a, b):
+	"""test spatial collision of Floaters a and b"""
+	r = a.radius + b.radius
+	return a != b \
+	and a.offset.x < b.offset.x + r \
+	and b.offset.x < a.offset.x + r \
+	and a.offset.y < b.offset.y + r \
+	and b.offset.y < a.offset.y + r \
 	and dist2(a, b) < r ** 2
 
 def linePointDist(linePoint1, linePoint2, point, infinite = False):

@@ -28,7 +28,6 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ==========
 
-* minelayer part get color automaticly, fix that !!!
 * a random seed for xtra fun
 * some parts ont get a delta upon ejecting
 * the radar range circle doesnt yet scale
@@ -37,8 +36,8 @@ side dish
 * time to consider a differen graph lib like gfxdraw
 * draw out the design of the mini panel
 * plitout parts and cargo , different files, is part cargo or cargo part ?
-* see if it is posible to get part and dummy collition in parts panel !!!
-* a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
+* see if it is posible to get part and dummy collition in parts panel [1/2 DONE	CAN PLACE OVER other part, however parts might disapear]
+]* a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
 * the intro menu doesnt calculate with fps, and that is why the curor speed is off, fix that
 * make sure a ship cant spawn in planet, count for player
 * the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed
@@ -110,7 +109,7 @@ bugs
 * the binded keys dont display annymore, check it out and fix. !!!
 * on branch viewsinview an explotion will make another one.[so what for now]
 * the laser is broken, ;( [It is fixed, Aat]
-* make binding keys actually works. they bind but don't do anything. and moste of the time. it bugs out the guns so they fire randomly or continously. [it works]
+* make binding keys actually works. they bind but don't do anything. and moste of the time. it bugs out the guns so they fire randomly or continously. [it works, done]
 * after menu and chat console prototype independance of game pause the menu will not 
 * engines seem to light up nice, but the purple color of the engines doesnt color to ship color. [will be done with implementation of animated sprites class]
 * known planets is a list of all the known planets not the known planets in the current system

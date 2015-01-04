@@ -84,9 +84,8 @@ def makeInterceptor(game, pos, delta, dir = 270, color = (255, 255, 255),name=("
     missile = MissileLauncher(game)
     engine = Engine(game)
     engine2 = Engine(game)
-    quarter = MineDropper(game)#Quarters(game)
     for part in [gyro, generator, battery, cockpit, gun, gun2, engine, engine2,
-                missile, quarter]:
+                missile]:
         if rand() > .8:
             addAdjective(part)
             if rand() > .6:
@@ -101,7 +100,7 @@ def makeInterceptor(game, pos, delta, dir = 270, color = (255, 255, 255),name=("
     generator.addPart(battery, 0)
     battery.addPart(engine, 0)
     gyro.addPart(engine2, 1)
-    gyro.addPart(quarter, 2)
+
     ship.reset()
     ship.energy = ship.maxEnergy * .8
     return ship
