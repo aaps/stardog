@@ -71,9 +71,7 @@ class StrafebatScript(AIScript):
 	
 	def update(self, ship):
 		# if too close to planet
-		if dist2(ship.planet, ship) < (300 + ship.planet.radius) ** 2: \
-		#and (sign(ship.dx - ship.planet.dx) == - sign(ship.x - ship.planet.x) \
-		#or sign(ship.dy - ship.planet.dy) == - sign(ship.y - ship.planet.y)): 
+		if dist2(ship.planet, ship) < (300 + ship.planet.radius) ** 2:
 			if self.turnTowards(ship, ship.planet, 180):
 				ship.forward()# move away from planet.
 				return

@@ -711,18 +711,18 @@ class Radar(Part):
     def targetNextPlanet(self):
         from planet import Planet
         self.ship.knownplanets = sorted(self.ship.knownplanets, key = self.radarDistance)
-
+        
         if self.ship.curtarget in self.ship.knownplanets:
             index = self.ship.knownplanets.index(self.ship.curtarget)
             if index+1 < len(self.ship.knownplanets):
                 self.ship.curtarget = self.ship.knownplanets[index+1]
             else:
                 self.ship.curtarget = self.ship.knownplanets[0]
-           
         elif len(self.ship.knownplanets) > 0:
             self.ship.curtarget = self.ship.knownplanets[0]
         else:
             self.ship.curtarget = None
+
 
 
     def targetPrefPlanet(self):
@@ -731,12 +731,12 @@ class Radar(Part):
 
         if self.ship.curtarget in self.ship.knownplanets:
             index = self.ship.knownplanets.index(self.ship.curtarget)
-            if index-1 < len(self.ship.knownplanets):
+            if index > 0:
                 self.ship.curtarget = self.ship.knownplanets[index-1]
             else:
-                self.ship.curtarget = self.ship.knownplanets[len(self.ship.knownplanets)]
+                self.ship.curtarget = self.ship.knownplanets[len(self.ship.knownplanets)-1]
         elif len(self.ship.knownplanets) > 0:
-            self.ship.curtarget = self.ship.knownplanets[len(self.ship.knownplanets)]
+            self.ship.curtarget = self.ship.knownplanets[len(self.ship.knownplanets)-1]
         else:
             self.ship.curtarget = None
 

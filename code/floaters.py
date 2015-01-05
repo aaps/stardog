@@ -77,10 +77,10 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 		if self.hp <= 0:
 			self.kill()
 
-	def draw(self, surface, offset = (0,0)):
+	def draw(self, surface, offset = Vec2d(0,0)):
 		"""Blits this floater onto the surface. """
-		poss = self.pos.x - self.image.get_width()  / 2 - offset[0], \
-			  self.pos.y - self.image.get_height() / 2 - offset[1]
+		poss = self.pos.x - self.image.get_width()  / 2 - offset.x, \
+			  self.pos.y - self.image.get_height() / 2 - offset.y
 		surface.blit(self.image, poss)
 
 	def crash(self, other):

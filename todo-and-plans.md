@@ -28,6 +28,7 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ==========
 
+* a arrow on radar when targeting a known planet that is out of radar reach.
 * a random seed for xtra fun
 * some parts ont get a delta upon ejecting
 * the radar range circle doesnt yet scale
@@ -64,7 +65,7 @@ side dish
 * making the rest of screen changeable ?, posibility to chage window with and or height ?
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
 * more collision handeling refactor !!! [still need more refactoring]
-* more to vec2d verctor work. !!! [can alwais use some work]
+* more to vec2d vector work. !!! [can alwais use some work]
 * zoom in out option for radar [medium mode ?] [doneish]
 * weapon heat generation [easy mode]
 * engines that are good for space travel but bad for landing and visaversa
@@ -104,6 +105,8 @@ Housekeeping
 bugs
 =====
 
+* remove the big radar display, until we have the small display down, then put it in again
+* invalid rect assignment bug somewhere same as explotion
 * when blowing up an enemy error could happen
 * cargo part doesnt update and does not accelerate fall etc. [done]
 * the binded keys dont display annymore, check it out and fix. !!!

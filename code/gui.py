@@ -100,8 +100,8 @@ class HUD(Drawable):
 
 
 		#draw floating part dots:
-		if thisShip.radars[0].disk and thisShip.radars[0].enabled:
-			pygame.draw.circle(self.image, (255,255,255, 50), center, int(thisShip.radars[0].disk.radius / radarScale + 2), 1)
+		if thisShip.radars[0].disk and thisShip.radars[0].enabled and int(thisShip.radars[0].disk.radius / scale + 2) < 100:
+			pygame.draw.circle(self.image, (255,255,255, 50), center, int(thisShip.radars[0].disk.radius / scale + 2), 1)
 
 		for radar in thisShip.radars:
 			for floater in radar.detected:
@@ -109,28 +109,29 @@ class HUD(Drawable):
 				result = floater.pos - thisShip.pos
 				dotPos = int(center[0] + limit(-radius,	result.x / scale, radius)), \
 						int(center[1] + limit(-radius, result.y / scale, radius))
-				if isinstance(floater, Ship):
-					if thisShip.curtarget == floater:
-						pygame.draw.circle(self.image, (0, 250, 250), dotPos, 4, 1)
-					pygame.draw.circle(self.image, (250, 250, 0), dotPos, 2)
-					color = floater.color
-					r = 1
-					pygame.draw.rect(self.image, color, (dotPos[0]-1,dotPos[1]-1,2,2))
-				elif not isinstance(floater, Planet):
-					# color = (150,40,0)
-					if thisShip.curtarget == floater:
-						pygame.draw.circle(self.image, (0, 250, 250), dotPos, 3, 1)
-					if isinstance(floater, Bullet):
-						pygame.draw.rect(self.image, (150,40,0), (dotPos[0]-1,dotPos[1]-1,2,2))
-					elif isinstance(floater, Part):
-						pygame.draw.rect(self.image, (200,200,0), (dotPos[0]-1,dotPos[1]-1,2,2))
+				if collisionTest(Floater(self.game, Vec2d(dotPos), Vec2d(0,0), 0, 0), Floater(self.game, Vec2d(center), Vec2d(0,0), 0, 100)):
+					if isinstance(floater, Ship):
+						if thisShip.curtarget == floater:
+							pygame.draw.circle(self.image, (0, 250, 250), dotPos, 4, 1)
+						pygame.draw.circle(self.image, (250, 250, 0), dotPos, 2)
+						color = floater.color
+						r = 1
+						pygame.draw.rect(self.image, color, (dotPos[0]-1,dotPos[1]-1,2,2))
+					elif not isinstance(floater, Planet):
+						# color = (150,40,0)
+						if thisShip.curtarget == floater:
+							pygame.draw.circle(self.image, (0, 250, 250), dotPos, 3, 1)
+						if isinstance(floater, Bullet):
+							pygame.draw.rect(self.image, (150,40,0), (dotPos[0]-1,dotPos[1]-1,2,2))
+						elif isinstance(floater, Part):
+							pygame.draw.rect(self.image, (200,200,0), (dotPos[0]-1,dotPos[1]-1,2,2))
 
 		for planet in thisShip.knownplanets:
 			
 			result = planet.pos - thisShip.pos
 			dotPos = int(center[0] + limit(-radius,	result.x / scale, radius)), int(center[1] + limit(-radius, result.y / scale, radius))
 			r = int(planet.radius / scale + 2)
-			if collisionTest(Floater(self.game, Vec2d(dotPos), Vec2d(0,0), 0, 1), Floater(self.game, Vec2d(center), Vec2d(0,0), 0, 100)):
+			if collisionTest(Floater(self.game, Vec2d(dotPos), Vec2d(0,0), 0, 0), Floater(self.game, Vec2d(center), Vec2d(0,0), 0, 100)):
 				color = planet.color
 				if thisShip.curtarget == planet:
 					pygame.draw.circle(self.image, (0, 250, 250), dotPos, r+3, 1)

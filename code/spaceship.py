@@ -518,8 +518,8 @@ class Ship(Floater):
         resultList = []
         for radar in self.radars:
             resultList= list(set(radar.detected)|set(resultList))
-        if not self.curtarget in resultList:
-            self.curtarget = None
+        # if not self.curtarget in resultList:
+        #     self.curtarget = None
         if self.attention > 0:
             self.attention -= 0.1 / self.game.fps
         # actual updating:
