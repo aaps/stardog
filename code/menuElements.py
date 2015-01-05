@@ -285,11 +285,10 @@ class InputField(Panel):
 
     def getText(self):
         # thou shalt not erase the text history
-        # text = self.preftext
-        # if self.preftext:
-        #     # self.preftext = []
-        #     return str(text[0])
-        return None
+        text = self.preftext
+        if self.preftext:
+            self.preftext = []
+            return str(text[0])
 
     def setText(self, text):
         self.preftext = text

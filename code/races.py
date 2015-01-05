@@ -23,7 +23,7 @@ class Race(object):
 		for system in self.game.systems:
 			ownAll = True
 			for planet in system:
-				if planet.race = self:
+				if planet.race == self:
 					systems.append(system)
 				else:
 					ownAll = False

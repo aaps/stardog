@@ -132,6 +132,8 @@ class CommandParse(object):
                     #if arguments available.
                     if len(text) > 1:
                         args = text[1:]
+                    else:
+                        args = None
                     #self.printout("input: %s \ncommand: %s \narguments: %s"%(text, command, args))
                     if command == 'print':
                         self.printFunc(args)
@@ -153,6 +155,8 @@ class CommandParse(object):
                         pass
                     elif command == 'printdbg':
                         self.printout("input: %s \ncommand: %s \narguments: %s"%(text, command, args))
+                    else:
+                        self.printout("Invalid input.")
                 else:
                     self.printout("me: "+text)
             except AttributeError, e:

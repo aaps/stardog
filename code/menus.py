@@ -112,6 +112,21 @@ class TypeButton(Button):
     def choose(self):
         self.parent.chooseType(self.type)
 
+
+class Console(Panel):
+    drawBorder = True
+    color = (100, 100, 255, 250)
+
+    def __init__(self,rect, game):
+        Panel.__init__(self,rect)
+        rect = Rect(10,20,self.rect.width,200)
+        self.inputfield = InputField( rect, game)
+        self.addPanel(self.inputfield)
+    
+    def handleEvent(self,event):
+        for panel in self.panels:
+            panel.handleEvent(event)
+            
 class ChatConsole(TopLevelPanel):
     drawBorder = True
     activeMenu = None
@@ -822,20 +837,6 @@ class Info(Panel):
     
     def skill(self, skillName):
         pass
-
-class Console(Panel):
-    drawBorder = True
-    color = (100, 100, 255, 250)
-
-    def __init__(self,rect, game):
-        Panel.__init__(self,rect)
-        rect = Rect(10,20,self.rect.width,200)
-        self.inputfield = InputField( rect, game)
-        self.addPanel(self.inputfield)
-    
-    def handleEvent(self,event):
-        for panel in self.panels:
-            panel.handleEvent(event)
 
 class SkillTreeTab(Selectable):
     pass
