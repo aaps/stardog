@@ -27,7 +27,6 @@ class StarSystem(object):
 		pygame.mixer.music.play(-1)
 		pygame.mixer.music.set_volume(.15)
 		self.planets = []
-		# self.structures = []
 		self.name = ""
 		
 		
@@ -226,6 +225,7 @@ class SolarA1(StarSystem):
 		angle = randint(0,360)
 
 		self.planets.append(self.star)
+		self.star.numShips = 0
 		self.add(self.star)
 		self.name = name
 		
@@ -247,18 +247,17 @@ class SolarA1(StarSystem):
 			mindistance = self.minDistFromOthers(planet)
 			if mindistance > (radius * 6):
 				self.planets.append(planet)
-				self.add(planet)
 			else:
 				i-=1
 			d+= 1200
 
-		# for i in range(numStructures):
-		# 	angle = randint(0,360)
-		# 	distanceFromStar = randint(d, d + 2500)
-		# 	color = randint(0,100),randint(0,100),randint(0,100)
-		# 	radius = randint(100,200)
-		# 	self.structures.append(Structure( self, Vec2d(distanceFromStar * cos(angle), \
-		# 		distanceFromStar * sin(angle)), color, radius))
+		for i in range(numStructures):
+			angle = randint(0,360)
+			distanceFromStar = randint(d, d + 2500)
+			color = randint(0,100),randint(0,100),randint(0,100)
+			radius = randint(100,200)
+			self.add(Structure( self, Vec2d(distanceFromStar * cos(angle), distanceFromStar * sin(angle)), color, radius))
+
 
 				
 		for planet in self.planets:
@@ -267,8 +266,6 @@ class SolarA1(StarSystem):
 			planet.respawn = 30
 			self.add(planet)
 
-		# for structure in self.structures:
-		# 	self.add(structure)
 
 		self.add(Gateway(self, Vec2d(20000,20000), 200) )
 

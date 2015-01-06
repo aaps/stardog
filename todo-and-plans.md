@@ -28,6 +28,8 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ==========
 
+* make some formula to convert the pix into m, km  something like that
+* make a detection score for a ship, based on the parts, that also need a detection score.
 * a arrow on radar when targeting a known planet that is out of radar reach.
 * a random seed for xtra fun
 * some parts ont get a delta upon ejecting
@@ -105,6 +107,7 @@ Housekeeping
 bugs
 =====
 
+* radar range wrong radar dradius when in and out of menu, chekout !
 * remove the big radar display, until we have the small display down, then put it in again
 * invalid rect assignment bug somewhere same as explotion
 * when blowing up an enemy error could happen

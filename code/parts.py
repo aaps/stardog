@@ -762,7 +762,7 @@ class Radar(Part):
         resultList = sorted(resultList, key = self.radarDistance)
         length = len(resultList)
         if self.ship.curtarget and self.ship.curtarget in resultList  and resultList.index(self.ship.curtarget) > 0:
-            self.ship.curtarget = resultList[self.ship.knownplanets.index(self.ship.curtarget)-1]
+            self.ship.curtarget = resultList[resultList.index(self.ship.curtarget)-1]
         elif length > 0:
             self.ship.curtarget = resultList[length-1]
         else:
