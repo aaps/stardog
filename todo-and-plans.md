@@ -28,6 +28,7 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ==========
 
+* put laser one one color, perhaps same as the plasma cannon colors ?
 * make some formula to convert the pix into m, km  something like that
 * make a detection score for a ship, based on the parts, that also need a detection score.
 * a arrow on radar when targeting a known planet that is out of radar reach.
@@ -49,7 +50,7 @@ side dish
 * inputscript in scripts.py should be playerinputscript, also scripts needed for chatconsole and for menu, this makes it posible to have keys for inflight and for menu command on the same key.
 * the on mini tagetting field the distance to target and angle to target [done]
 * player should go into univese and not into game ?
-* systems now have a seperate list for planets and structures and perhaps portals, should be one list of statics !!!
+
 * make a script that will install the requirements, like pygame, etc
 * radar detects stuff when it is in the middle make it so it detects the edges or some average [first remove the part that renews the radar disk] [ok done and then some]
 * implement backspace and cursor back front in input field !!!
@@ -199,6 +200,7 @@ so you can get out of the way in time. [done, aat]
  improve name input with a box around name [done]
  * rename solarsystems to starsystems sun to stars etc [done]
  * landed can go to ship class so the ai can do extra stuff [done]
+ * systems now have a seperate list for planets and structures and perhaps portals, should be one list of statics !!! [done] 
 
 [Duality]
 

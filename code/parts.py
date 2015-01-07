@@ -863,23 +863,23 @@ class Gyro(FlippablePart):
         statString = """\n%s N*m"""
         return Part.shortStats(self) + statString % stats
         
-    def turnLeft(self, angle = None):
+    def turnLeft(self, angle = None, index=0):
         """rotates the ship counter-clockwise."""
-        if self.acted or angle and abs(angle) < 1: return
+        if self.acted or angle and abs(angle) < 2*index: return
         self.acted = True
         if angle:
             angle = max(- self.torque / self.ship.moment / self.ship.game.fps \
                     * self.ship.efficiency * self.ship.torqueBonus, -abs(angle) )
         else:
-            angle = - self.torque / self.ship.moment / self.ship.game.fps \
+            angle =  self.torque / self.ship.moment / self.ship.game.fps \
                     * self.ship.efficiency * self.ship.torqueBonus
         if self.ship and self.ship.energy >= self.energyCost:
             self.ship.dir = angleNorm(self.ship.dir + angle)
             self.ship.energy -= self.energyCost / self.game.fps
         
-    def turnRight(self, angle = None):
+    def turnRight(self, angle = None, index=0):
         """rotates the ship clockwise."""
-        if self.acted: return
+        if self.acted or angle and abs(angle) < 2*index: return
         self.acted = True
         if angle:
             angle = min(self.torque / self.ship.moment / self.ship.game.fps \
@@ -953,7 +953,7 @@ class Quarters(Part):
                 if part.hp < part.maxhp:
                     part.hp = part.hp+self.repair*self.ship.efficiency/self.game.fps
                     break
-        # Part.update(self)
+        Part.update(self)
 
 class GargoHold(Part):
     baseImage = loadImage("res/parts/cargo"+ext)
@@ -1107,7 +1107,7 @@ class Cockpit(Radar, Battery, Generator, Gyro):
     def update(self):
         Generator.update(self)
         Battery.update(self)
-        Gyro.update(self)
+        # Gyro.update(self)
         Radar.update(self)
         
 class Interceptor(Cockpit):#move to config

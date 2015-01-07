@@ -456,12 +456,12 @@ class Ship(Floater):
     def turnLeft(self, angle = None):
         """Turns ccw using all gyros."""
         for gyro in self.gyros:
-            gyro.turnLeft(angle)
+            gyro.turnLeft(angle,self.gyros.index(gyro))
 
     def turnRight(self, angle = None):
         """Turns cw using all gyros."""
         for gyro in self.gyros:
-            gyro.turnRight(angle)
+            gyro.turnRight(angle, self.gyros.index(gyro))
 
     def shoot(self):
         """fires all guns."""

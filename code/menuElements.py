@@ -328,11 +328,11 @@ class InputField(Panel):
                 
 
             elif event.key == K_BACKSPACE:
+                one  = two = ''
                 length = len(self.text) - self.cursorloc
-                one = self.text[:length-1]
+                if length > 0:
+                    one = self.text[:length-1]
                 two = self.text[length:]
-
-
                 self.text = one + two
 
             elif event.key == K_RIGHT and self.cursorloc > 0:
