@@ -28,6 +28,7 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ==========
 
+* make factorys for planets starsystems and ships
 * put laser one one color, perhaps same as the plasma cannon colors ?
 * make some formula to convert the pix into m, km  something like that
 * make a detection score for a ship, based on the parts, that also need a detection score.

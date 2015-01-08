@@ -681,4 +681,8 @@ class Player(Ship):
     def next(self):
         return 1.1 ** self.level * 10
 
+    def kill(self):
+        self.parts = []
+        Ship.kill(self)
+
 

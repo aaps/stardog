@@ -269,23 +269,24 @@ class shipDamage(Drawable):
 		self.game = game
 		self.player = self.game.player
 		self.font = font
+		self.image = pygame.Surface((self.game.width, self.game.height), flags = (SRCALPHA)).convert_alpha()
 		
 	
 
 	def draw(self,surface):
 		self.startrect = Rect(self.game.width-120, 220, 100, 5)
+		self.image.fill((0, 0, 0, 0))
 		for part in self.player.parts:
-			
-
-			#color fades green to red as hp decreases.
+			print part
 			color = limit(0, int((1 - part.hp * 1. / part.maxhp ) * 255),255), \
 					limit(0, int(1. * part.hp / part.maxhp * 255), 255), 0, 100 
 			rect = (0,0, part.radius * 2, part.radius * 2)
 			text = self.font.render(part.name, False, (0, 180, 80))
-			surface.blit(text, (self.game.width-120, self.startrect[1]+10))
-			pygame.draw.rect(surface, color, self.startrect)
+			self.image.blit(text, (self.game.width-120, self.startrect[1]+10))
+			pygame.draw.rect(self.image, color, self.startrect)
 			self.startrect[1] += 30
 			self.startrect[2] = limit(0, int(1. * part.hp / part.maxhp * 100), 100)
 
+		surface.blit(self.image, (0, 0))
 				
 
