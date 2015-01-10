@@ -895,7 +895,7 @@ class Gyro(FlippablePart):
             angle = max(- self.torque / self.ship.moment / self.ship.game.fps \
                     * self.ship.efficiency * self.ship.torqueBonus, -abs(angle) )
         else:
-            angle =  self.torque / self.ship.moment / self.ship.game.fps \
+            angle = -  self.torque / self.ship.moment / self.ship.game.fps \
                     * self.ship.efficiency * self.ship.torqueBonus
         if self.ship and self.ship.energy >= self.energyCost:
             self.ship.dir = angleNorm(self.ship.dir + angle)
