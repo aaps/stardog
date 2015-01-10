@@ -76,7 +76,9 @@ class Part(Floater):
          #each element is the part there, (x,y,dir) position of the connection.
          #the example is at the bottom of the part, pointed down.
         self.ports = [Port(Vec2d(-self.width / 2, 0), 0, self)]
-        self.emitters = []
+        self.emitters.append(Emitter(self.game, self, self.condHalfDamage , 180, 10, 20, (0,0,0,255), (100,100,100,0), 2, 4, 5, 3, 5, True))
+        self.emitters.append(Emitter(self.game, self, self.condThQuarterDamage , 180, 5, 10, (0,0,255,255), (255,255,0,0), 2, 4, 5, 3, 5, True))
+        
     
     def stats(self):
         stats = (self.hp, self.maxhp, self.mass, len(self.ports))
@@ -291,8 +293,6 @@ class Part(Floater):
         animated elements of this part to surface. 
         This should circumvent the ship surface and draw directly onto space."""
 
-        # print offset
-
         if self.animated and self.animatedImage and self.ship:
             image = pygame.transform.rotate(self.animatedImage,- self.dir - self.ship.dir).convert_alpha()
             image.set_colorkey((0,0,0))
@@ -339,8 +339,17 @@ class Part(Floater):
                         self.delta, radius = self.radius * 4,\
                         time = self.maxhp / 5))
 
-    def addEmitter(self, emitter):
-        self.emitters.append(emitter)
+    def condHalfDamage(self):
+        return self.hp <= self.maxhp/2 and self.hp > self.maxhp/4
+
+    def condThQuarterDamage(self):
+        return self.hp <= self.maxhp/4
+
+    # def condActive(self):
+    #     return False
+
+    def condAlways(self):
+        return True
 
 
 
@@ -813,9 +822,12 @@ class Engine(Part):
         self.ports = []
         self.functions.append(self.thrust)
         self.functionDescriptions.append('thrust')
-        # self.emitters.append(Emitter(self.game, self.pos, self.dir-2, self.dir+2, 10, 10, (100,100,255,255), (255,50,50,255), 1, 3, 10, 3, 1))
-        self.emitters.append(Emitter(self.game, self, 5, 10, 10, (100,100,255,255), (255,100,100,100), 4, 4, 50, 5, 1))
+        self.emitters.append(Emitter(self.game, self, self.condActive , 5, 50, 100, (75,75,255,255), (255,100,100,0), 2, 4, 100, 2, 5, True))
         
+    
+    def condActive(self):
+        return self.animated
+
     def stats(self):
         stats = (self.exspeed,self.exmass, self.energyCost)
         statString = """\nexhoustspeed: %s m/s\nexhoustmass: %s k/g\nCost: %s /second thrusting"""
@@ -830,11 +842,9 @@ class Engine(Part):
         if self.animatedtime > 0:
             self.animatedtime -= 1. / self.game.fps
             self.animated = True
-            for emitter in self.emitters:
-                emitter.enable()
+            
         else:
-            for emitter in self.emitters:
-                emitter.disable()
+
             self.animated = False	
 
         Part.update(self)

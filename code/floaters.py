@@ -48,6 +48,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	tangible = True
 	lastDamageFrom = None
 
+
 	def __init__(self, game, pos, delta, dir = 270, radius = 10, \
 			image = None):
 		pygame.sprite.Sprite.__init__(self)
@@ -55,6 +56,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 		self.dir = dir
 		self.pos = pos
 		self.delta = delta
+		self.emitters = []
 
 		self.radius = radius
 		if (not image):
@@ -92,6 +94,9 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 		hpB = other.hp
 		if hpB > 0: self.takeDamage(hpB, other)
 		if hpA > 0: other.takeDamage(hpA, self)
+
+	def addEmitter(self, emitter):
+		self.emitters.append(emitter)
 
 
 

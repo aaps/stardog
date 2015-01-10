@@ -214,46 +214,60 @@ class Dragable(Panel):
     def handleKeys(self, keys):
         pass
 
-class ScrollBar(Panel):
+class Slider(Panel):
 
     def __init__(self,rect, function, parent = None, hori = False):
         self.parent = parent
         self.hori = hori
-
         self.function = function
         Panel.__init__(self, rect)
-        newrect = Rect(rect[0] + (rect[2]/2)-5,rect[1], 10, 10)
-        self.addPanel(Dragable(newrect,self))
+        if self.hori:
+            newrect = Rect(rect[0]+rect[2]-10 ,rect[1]+ (rect[3]/2)-8, 10, rect[3]-4)
+        else:
+            
+            newrect = Rect(rect[0] + (rect[2]/2)-8,rect[3]+rect[1]-10, rect[2]-4, 10)
+        self.dragable = Dragable(newrect,self)
+        self.dragable.color = (50, 150, 50)
+        self.dragable.bgColor = (75,175,75)
+        self.addPanel(self.dragable)
         
 
+        self.function(0)
 
     def drop(self, pos, dropped):
+        pass
+        
 
-        if self.rect.collidepoint(pos):
-            dropped.rect[0] = pos[0]
-            dropped.rect[1] = pos[1]
-
-            
-            if self.function:
-                if self.hori:
-                    self.function((pos[0] - self.rect[0] + 0.01) / self.rect[2])
-                else:
-                    self.function((pos[1] - self.rect[1] + 0.01) / self.rect[3])
 
     def dragOver(self, pos, rel):
         """called when the mouse moves to or from this panel."""
         
         oldpos = pos[0] - rel[0] , pos[1] - rel[1]
         for panel in self.panels:
+
             if not panel.rect.collidepoint(oldpos) and not panel.rect.collidepoint(pos):
-                panel.rect[0] = oldpos[0] - (panel.rect[2] / 2)
-                panel.rect[1] = oldpos[1] - (panel.rect[3] / 2)
-        
-    
+                if self.hori:
+                    panel.rect[0] = oldpos[0] - panel.rect[2]
+                    if self.rect[2] > (pos[0] - self.rect[0]):
+                        self.function((self.rect[2] - (pos[0] - self.rect[0]) + 0.001) / self.rect[2])
+                else:
+                    panel.rect[1] = oldpos[1] - panel.rect[3]
+
+                    if self.rect[3] > (pos[1] - self.rect[1]):
+                        self.function((self.rect[3] - (pos[1] - self.rect[1]) + 0.001) / self.rect[3])
 
     def handleKeys(self, keys):
         pass
 
+class ColorPanel(Panel):
+    def __init__(self, parent, rect, color):
+        self.myColor = color
+        self.parent = parent
+        Panel.__init__(self, rect)
+
+    def draw(self, surface, rect):
+        pygame.draw.rect(surface, self.myColor, self.rect) 
+        Panel.draw(self, surface, rect)
             
 class Button(Panel):
     """Button(rect, function, text) -> a button that says text and does

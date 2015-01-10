@@ -18,19 +18,24 @@ class IntroMenu(TopLevelPanel):
         TopLevelPanel.__init__(self, rect)
         self.game = game
         self.running = True
+        self.game.playerColor = [255,255,255]
         self.colorChoose()
+        
     
     def colorChoose(self):
         self.panels = []
-        self.addPanel(Label(Rect(100,30,200,20), \
-                "Choose a color:", color = (250,250,250),\
-                font = BIG_FONT))
-        for x in range((self.rect.width - 100) / (squareSpacing)):
-            # for y in range((self.rect.height - 120) / (squareSpacing)):
-            self.addPanel(ColorButton(self, Rect(x * squareSpacing + 50, squareSpacing + 70,\
-                    squareWidth, squareWidth), (randint(0,255),randint(0,255),randint(0,255))))
+        self.addPanel(Label(Rect(100,30,200,20), "Choose a color:", color = (250,250,250), font = BIG_FONT))
+        self.addPanel(Label(Rect(120,50,200,20), "Red:", color = (250,250,250), font = BIG_FONT))
+        self.addPanel(Label(Rect(220,50,200,20), "Green:", color = (250,250,250), font = BIG_FONT))
+        self.addPanel(Label(Rect(320,50,200,20), "Blue:", color = (250,250,250), font = BIG_FONT))
 
-        self.addPanel(ScrollBar( Rect(10,10,20,175),self.chooseRed,self))
+        self.addPanel(Button( Rect(120, 280, 100, 20), self.chooseColor, "Confirm"))
+        
+        self.addPanel(ColorPanel(self, Rect(120, 320, 100, 100), self.game.playerColor))
+
+        self.addPanel(Slider( Rect(120,80,20,175),self.chooseRed,self))
+        self.addPanel(Slider( Rect(220,80,20,175),self.chooseGreen,self))
+        self.addPanel(Slider( Rect(320,80,20,175),self.chooseBlue,self))
 
     def nameChoose(self):
         self.panels = []
@@ -67,21 +72,17 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'freighter'))
         #exit(1)
     
-    def chooseColor(self, color):
-        self.game.playerColor = color
+    def chooseColor(self):
         self.typeChoose()
 
-    def chooseRed(self, red):
-        print red * 255
-        # self.game.playerColor[0] = red
+    def chooseRed(self, red): 
+        self.game.playerColor[0] = int(red * 255)
 
-    def chooseGreen(self, green):
-        print green
-        # self.game.playerColor[1] = green
+    def chooseGreen(self, green): 
+        self.game.playerColor[1] = int(green * 255)
 
     def chooseBlue(self, blue):
-        print blue
-        # self.game.playerColor[2] = blue
+        self.game.playerColor[2] = int(blue * 255)
 
     def chooseName(self, name):
         self.game.PlayerName = name
@@ -99,7 +100,9 @@ class NameInputField(InputField):
 
     def choose(self):
         self.parent.chooseName(self.text)
-    
+
+
+
 class ColorButton(Button):
     
     def __init__(self, parent, rect, color):
