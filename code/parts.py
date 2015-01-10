@@ -77,7 +77,7 @@ class Part(Floater):
          #the example is at the bottom of the part, pointed down.
         self.ports = [Port(Vec2d(-self.width / 2, 0), 0, self)]
         self.emitters.append(Emitter(self.game, self, self.condHalfDamage , 180, 10, 20, (0,0,0,255), (100,100,100,0), 2, 4, 5, 3, 5, True))
-        self.emitters.append(Emitter(self.game, self, self.condThQuarterDamage , 180, 5, 10, (0,0,255,255), (255,255,0,0), 2, 4, 5, 3, 5, True))
+        self.emitters.append(Emitter(self.game, self, self.condThQuarterDamage , 180, 5, 10, (255,255,0,255), (255,0,0,100), 2, 4, 5, 3, 5, True))
         
     
     def stats(self):
@@ -185,7 +185,8 @@ class Part(Floater):
                 for port in self.parent.ports:
                     if port.part == self:
                         port.part = None
-            self.ship.parts.remove(self)
+
+                self.ship.parts.remove(self)
             self.ship.reset()
             self.ship = None
             self.parent = None
