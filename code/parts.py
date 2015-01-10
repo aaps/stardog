@@ -8,6 +8,7 @@ from floaters import *
 import stardog
 from vec2d import Vec2d
 import copy
+from particles import *
 
 
 
@@ -53,6 +54,7 @@ class Part(Floater):
     buffer = pygame.Surface((30,30), flags = hardwareFlag | SRCALPHA).convert_alpha()
     buffer.set_colorkey((0,0,0))
     acted = False
+    
     #a list of functions that are called on the ship during ship.update:
     shipEffects = []
     #a list of functions that are called on this part at attach time:
@@ -74,6 +76,7 @@ class Part(Floater):
          #each element is the part there, (x,y,dir) position of the connection.
          #the example is at the bottom of the part, pointed down.
         self.ports = [Port(Vec2d(-self.width / 2, 0), 0, self)]
+        self.emitters = []
     
     def stats(self):
         stats = (self.hp, self.maxhp, self.mass, len(self.ports))
@@ -124,14 +127,8 @@ class Part(Floater):
                     return
 
         port.part = part
-
-
-        
         
         #calculate offsets:
-
-        
-
 
         #rotate takes a ccw angle and color.
         part.image = colorShift(pygame.transform.rotate(part.baseImage, \
@@ -242,11 +239,17 @@ class Part(Floater):
         else:
             Floater.update(self)
         #update children:
+        #
         for port in self.ports:
             if port.part:
                 port.part.update()
+
         if self.pickuptimeout > 0:
             self.pickuptimeout -= 1. / self.game.fps
+
+        for emitter in self.emitters:
+            emitter.update()
+
 
     def draw(self, surface, offset = None, redraw = True):
         """draws this part onto the surface."""
@@ -255,16 +258,20 @@ class Part(Floater):
                     - self.image.get_width()) / 2 + self.offset[0], \
                     (surface.get_height() \
                     - self.image.get_height()) / 2 + self.offset[1])
+        
         if self.ship == None:
             Floater.draw(self, surface, offset)
         else:
             surface.blit(self.image, offset)
+
         #draw children:
         for port in self.ports:
             if port.part:
                 port.part.draw(surface)
+                
         if not self.parent and redraw:
             self.redraw(surface, offset)
+        
 
     def exdraw(self, surface, offset = None, redraw = True):
         """draws this part onto the surface."""
@@ -273,6 +280,7 @@ class Part(Floater):
                     - self.image.get_width()) / 2 + self.offset[0], \
                     (surface.get_height() \
                     - self.image.get_height()) / 2 + self.offset[1])
+        
         if self.ship == None:
             Floater.draw(self, surface, offset)
         else:
@@ -283,12 +291,17 @@ class Part(Floater):
         animated elements of this part to surface. 
         This should circumvent the ship surface and draw directly onto space."""
 
+        # print offset
+
         if self.animated and self.animatedImage and self.ship:
             image = pygame.transform.rotate(self.animatedImage,- self.dir - self.ship.dir).convert_alpha()
             image.set_colorkey((0,0,0))
             pos = self.pos.x - image.get_width() / 2 - offset[0], \
                   self.pos.y - image.get_height() / 2 - offset[1]
             surface.blit(image, pos)
+        
+        for emitter in self.emitters:
+            emitter.draw(surface, offset)
 
 
     def takeDamage(self, damage, other):
@@ -325,6 +338,11 @@ class Part(Floater):
             self.game.universe.curSystem.add(Explosion(self.game, self.pos, \
                         self.delta, radius = self.radius * 4,\
                         time = self.maxhp / 5))
+
+    def addEmitter(self, emitter):
+        self.emitters.append(emitter)
+
+
 
 
 class Dummy(Part):
@@ -795,6 +813,8 @@ class Engine(Part):
         self.ports = []
         self.functions.append(self.thrust)
         self.functionDescriptions.append('thrust')
+        # self.emitters.append(Emitter(self.game, self.pos, self.dir-2, self.dir+2, 10, 10, (100,100,255,255), (255,50,50,255), 1, 3, 10, 3, 1))
+        self.emitters.append(Emitter(self.game, self, 5, 10, 10, (100,100,255,255), (255,100,100,100), 4, 4, 50, 5, 1))
         
     def stats(self):
         stats = (self.exspeed,self.exmass, self.energyCost)
@@ -810,7 +830,11 @@ class Engine(Part):
         if self.animatedtime > 0:
             self.animatedtime -= 1. / self.game.fps
             self.animated = True
+            for emitter in self.emitters:
+                emitter.enable()
         else:
+            for emitter in self.emitters:
+                emitter.disable()
             self.animated = False	
 
         Part.update(self)

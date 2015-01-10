@@ -277,7 +277,6 @@ class shipDamage(Drawable):
 		self.startrect = Rect(self.game.width-120, 220, 100, 5)
 		self.image.fill((0, 0, 0, 0))
 		for part in self.player.parts:
-			print part
 			color = limit(0, int((1 - part.hp * 1. / part.maxhp ) * 255),255), \
 					limit(0, int(1. * part.hp / part.maxhp * 255), 255), 0, 100 
 			rect = (0,0, part.radius * 2, part.radius * 2)

@@ -11,7 +11,7 @@ main dish
 * make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump]
 
 * multyplayer [hard mode, dependant on code structure]
-* a particle engine for explotions, engine stuff. [medium stuff] !!!
+* a particle engine for explotions, engine stuff. [medium stuff] [almost done] !!!
 
 http://pygame.org/project-planes-2392-4051.html get version 0.6
 * A save function ? [a sqllite file for now with sqlalchemy]
@@ -109,6 +109,7 @@ Housekeeping
 bugs
 =====
 
+* ai ships are rotating like there is no tomorrow ? !!!
 * radar range wrong radar dradius when in and out of menu, chekout !
 * remove the big radar display, until we have the small display down, then put it in again
 * invalid rect assignment bug somewhere same as explotion
@@ -235,6 +236,11 @@ bays
 * a part that is weapons bay
 * a part that is the armory
 * a part that is a cargo bay
+
+Freighter
+=====
+
+from the sides of cockpit interconnects with an engine on the back side of interconnect, and a tail of cargo containers.
 
 ship
 =====

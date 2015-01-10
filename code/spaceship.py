@@ -9,6 +9,7 @@ from pygame.locals import *
 import stardog
 from adjectives import addAdjective
 from skills import *
+from particles import *
 
 def makeFighter(game, pos, delta, dir = 270, \
                 color = (255, 255, 255),name=("Shippy","mcShipperson"), player = False):
@@ -100,7 +101,7 @@ def makeInterceptor(game, pos, delta, dir = 270, color = (255, 255, 255),name=("
     generator.addPart(battery, 0)
     battery.addPart(engine, 0)
     gyro.addPart(engine2, 1)
-
+    # engine.addEmitter(Emitter(game, engine, 5, 10, 10, (100,100,255,255), (255,50,50,255), 1, 3, 10, 3, 1))
     ship.reset()
     ship.energy = ship.maxEnergy * .8
     return ship

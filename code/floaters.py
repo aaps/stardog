@@ -79,9 +79,11 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 
 	def draw(self, surface, offset = Vec2d(0,0)):
 		"""Blits this floater onto the surface. """
+		
 		poss = self.pos.x - self.image.get_width()  / 2 - offset.x, \
 			  self.pos.y - self.image.get_height() / 2 - offset.y
 		surface.blit(self.image, poss)
+
 
 	def crash(self, other):
 		if soundModule:
