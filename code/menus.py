@@ -26,9 +26,11 @@ class IntroMenu(TopLevelPanel):
                 "Choose a color:", color = (250,250,250),\
                 font = BIG_FONT))
         for x in range((self.rect.width - 100) / (squareSpacing)):
-            for y in range((self.rect.height - 120) / (squareSpacing)):
-                self.addPanel(ColorButton(self, Rect(x * squareSpacing + 50, y * squareSpacing + 70,\
-                        squareWidth, squareWidth), (randint(0,255),randint(0,255),randint(0,255))))
+            # for y in range((self.rect.height - 120) / (squareSpacing)):
+            self.addPanel(ColorButton(self, Rect(x * squareSpacing + 50, squareSpacing + 70,\
+                    squareWidth, squareWidth), (randint(0,255),randint(0,255),randint(0,255))))
+
+        self.addPanel(ScrollBar( Rect(10,10,20,175),self.chooseRed,self))
 
     def nameChoose(self):
         self.panels = []
@@ -68,6 +70,18 @@ class IntroMenu(TopLevelPanel):
     def chooseColor(self, color):
         self.game.playerColor = color
         self.typeChoose()
+
+    def chooseRed(self, red):
+        print red * 255
+        # self.game.playerColor[0] = red
+
+    def chooseGreen(self, green):
+        print green
+        # self.game.playerColor[1] = green
+
+    def chooseBlue(self, blue):
+        print blue
+        # self.game.playerColor[2] = blue
 
     def chooseName(self, name):
         self.game.PlayerName = name
@@ -886,7 +900,6 @@ class TimeTile(Panel):
             panel.update()
 
     def gametime(self):
-        print self.game.timer
         time = round(self.game.timer + self.game.starttime,1)
         timeobj = datetime.datetime.fromtimestamp(time)
         return timeobj.strftime('YEAR:     %Y\nMONTH: %m\nDAY:       %d\nTIME:      %H:%M:%S.%f')[:-5]

@@ -109,7 +109,6 @@ Housekeeping
 bugs
 =====
 
-* ai ships are rotating like there is no tomorrow ? !!!
 * radar range wrong radar dradius when in and out of menu, chekout !
 * remove the big radar display, until we have the small display down, then put it in again
 * invalid rect assignment bug somewhere same as explotion

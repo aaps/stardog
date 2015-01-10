@@ -210,6 +210,50 @@ class Dragable(Panel):
             panel.rect.top += pos[1] - self.rect.top
             panel.draw(surface, rect = None)
             panel.rect.topleft = tmp
+
+    def handleKeys(self, keys):
+        pass
+
+class ScrollBar(Panel):
+
+    def __init__(self,rect, function, parent = None, hori = False):
+        self.parent = parent
+        self.hori = hori
+
+        self.function = function
+        Panel.__init__(self, rect)
+        newrect = Rect(rect[0] + (rect[2]/2)-5,rect[1], 10, 10)
+        self.addPanel(Dragable(newrect,self))
+        
+
+
+    def drop(self, pos, dropped):
+
+        if self.rect.collidepoint(pos):
+            dropped.rect[0] = pos[0]
+            dropped.rect[1] = pos[1]
+
+            
+            if self.function:
+                if self.hori:
+                    self.function((pos[0] - self.rect[0] + 0.01) / self.rect[2])
+                else:
+                    self.function((pos[1] - self.rect[1] + 0.01) / self.rect[3])
+
+    def dragOver(self, pos, rel):
+        """called when the mouse moves to or from this panel."""
+        
+        oldpos = pos[0] - rel[0] , pos[1] - rel[1]
+        for panel in self.panels:
+            if not panel.rect.collidepoint(oldpos) and not panel.rect.collidepoint(pos):
+                panel.rect[0] = oldpos[0] - (panel.rect[2] / 2)
+                panel.rect[1] = oldpos[1] - (panel.rect[3] / 2)
+        
+    
+
+    def handleKeys(self, keys):
+        pass
+
             
 class Button(Panel):
     """Button(rect, function, text) -> a button that says text and does
