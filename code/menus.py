@@ -216,7 +216,7 @@ class Menu(TopLevelPanel):
                 lambda : self.setActiveMenu(self.info), "Info", BIG_FONT))
         y += h + 2
         y += h + 2
-        self.setActiveMenu(self.parts)
+        self.setActiveMenu(self.info)
 
     def setActiveMenu(self, menu):
         if self.activeMenu:
@@ -225,7 +225,7 @@ class Menu(TopLevelPanel):
         self.panels.append(menu)
     
     def update(self):
-        self.game.player.reset()
+        # self.game.player.reset()
         if self.activeMenu:
             self.activeMenu.update()
 
@@ -234,7 +234,7 @@ class Menu(TopLevelPanel):
             if event.key == K_RETURN:
                 self.toggleActive()
                 
-                    # self.reset()
+                # self.reset()
         TopLevelPanel.handleEvent(self, event)
 
     def toggleActive(self):

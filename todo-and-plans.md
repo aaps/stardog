@@ -11,7 +11,7 @@ main dish
 * make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump]
 
 * multyplayer [hard mode, dependant on code structure]
-* a particle engine for explotions, engine stuff. [medium stuff] [almost done] !!!
+
 
 http://pygame.org/project-planes-2392-4051.html get version 0.6
 * A save function ? [a sqllite file for now with sqlalchemy]
@@ -28,8 +28,9 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ==========
 
-* make factorys for planets starsystems and ships
-* put laser one one color, perhaps same as the plasma cannon colors ?
+* place all menu elements in menuelements instead of menu for example
+* make factorys for planets starsystems and ships, the design pattern
+* put laser one one color, perhaps same as the plasma cannon colors !!!
 * make some formula to convert the pix into m, km  something like that
 * make a detection score for a ship, based on the parts, that also need a detection score.
 * a arrow on radar when targeting a known planet that is out of radar reach.
@@ -49,17 +50,16 @@ side dish
 * now that more keys can rebound/binded ? with the goal to bind all the keys that way, there should be the option to restrict some key rebinding or unsetting, or there is the posibility to rebind the quit key or something like that, or to rebind the menu key in the menu itself
 * rework of menu active and keybindings, activemenu and active better differenciation, update part en draw part if active, the var active in toplevelpanel.
 * inputscript in scripts.py should be playerinputscript, also scripts needed for chatconsole and for menu, this makes it posible to have keys for inflight and for menu command on the same key.
-* the on mini tagetting field the distance to target and angle to target [done]
+
 * player should go into univese and not into game ?
 
 * make a script that will install the requirements, like pygame, etc
-* radar detects stuff when it is in the middle make it so it detects the edges or some average [first remove the part that renews the radar disk] [ok done and then some]
 * implement backspace and cursor back front in input field !!!
 * implement the new font
 * names of ship selection should come from ship it self, if posible, intro menu !!!
 * some buttons should not be rebindable ingame, like quit, menu and console
 * center the text in the input box
-* a slider button for the ui !!!
+
 * make a startmenu with: start, options
 * make a options menu with, sound
 * make a sound menu with music volume and fx volume
@@ -82,12 +82,12 @@ side dish
 * make camera translatable instead of direct snap
 * the portal stargate warp dent could use some drag inside it, for temp usability
 * cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fitt parts on your ship when on planet or structure, when container gets destroyed or dissconnected from ship you lose parts untill you are at capacity !!!
-* when special key than lifebars on parts and some effect for parts that are on, or some extra type of ship info. [move drawing of arc from parts to ui] !!!
+
 * in camera splitout functionality make a layer class for the layers that will not do the drawing but perhaps the updating, anyhow updates doesnt belong in camera ?
 
 * ai could use some more bains and variation
 * also add the chat console and menu to the camera
-* when destroyed a part has a change it will become scrap [done]
+
 * parts that disconnect/scatter have a change they will be destroyed
 * adding info from weapon used on part to part, like plasma burns, impact damage etc.
 * deciding what gui graphics to update:
@@ -101,15 +101,13 @@ side dish
 - Transcendence
 
 
-Housekeeping
-===
-* cleanup class diagram
-* impost original stagdog svn
 
 bugs
 =====
 
-* radar range wrong radar dradius when in and out of menu, chekout !
+* slider buttons should have the option for min max that also sould be guarded
+* part damage screen hud has names of parts that are too long, fixit
+* radar range wrong radar radius when in and out of menu, chekout ! [done]
 * remove the big radar display, until we have the small display down, then put it in again
 * invalid rect assignment bug somewhere same as explotion
 * when blowing up an enemy error could happen
@@ -201,7 +199,12 @@ so you can get out of the way in time. [done, aat]
  improve name input with a box around name [done]
  * rename solarsystems to starsystems sun to stars etc [done]
  * landed can go to ship class so the ai can do extra stuff [done]
- * systems now have a seperate list for planets and structures and perhaps portals, should be one list of statics !!! [done] 
+ * systems now have a seperate list for planets and structures and perhaps portals, should be one list of statics !!! [done]
+ * the on mini tagetting field the distance to target and angle to target [done]
+ * when destroyed a part has a change it will become scrap [done]
+* a particle engine for explotions, engine stuff. [medium stuff] [done]
+* a slider button for the ui [done]
+* move drawing of arc from parts to ui [done]
 
 [Duality]
 

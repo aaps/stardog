@@ -54,7 +54,7 @@ class HUD(Drawable):
 		"""updates the HUD and draws it."""
 		self.image.fill((0, 0, 0, 0))
 		#TODO: don't hard-code this key:
-		self.drawRadar(surface, self.game.player, self.game.keys[K_TAB])
+		self.drawRadar(surface, self.game.player)
 
 		# energy:
 		x = self.game.width - 25
@@ -83,20 +83,14 @@ class HUD(Drawable):
 		#blit the HUD to the screen:
 		surface.blit(self.image, (0, 0))
 		
-	def drawRadar(self, surface, thisShip, big = False):
-		if big:
-			#these temp locals replace the globals:
-			radius = radarRadiusBig
-			center = (self.game.width / 2, self.game.height / 2)
-			scale = radarScaleBig * self.zoomModifier
-			self.image.blit(self.radarImageBig, \
-				(center[0] - radius, center[1] - radius))
-		else:
-			radius = radarRadius
-			center = self.center
-			scale = radarScale * self.zoomModifier
-			self.image.blit(self.radarImage, \
-				(center[0] - radius, center[1] - radius))
+	def drawRadar(self, surface, thisShip):
+
+
+		radius = radarRadius
+		center = self.center
+		scale = radarScale * self.zoomModifier
+		self.image.blit(self.radarImage, \
+			(center[0] - radius, center[1] - radius))
 
 
 		#draw floating part dots:
@@ -201,7 +195,7 @@ class MiniInfo(Drawable):
 		self.targ = None
 		self.width = int(game.width / 8)
 		self.height = int(game.height/ 4 )
-		self.image = pygame.Surface((int(game.width / 8),int(game.height/ 4 )))
+		self.image = pygame.Surface((self.width,self.height))
 		self.image.set_alpha(200)
 
 	def update(self):
@@ -268,24 +262,40 @@ class shipDamage(Drawable):
 	def __init__(self, game, font=SMALL_FONT):
 		self.game = game
 		self.player = self.game.player
+		self.totalhealth = 0
 		self.font = font
-		self.image = pygame.Surface((self.game.width, self.game.height), flags = (SRCALPHA)).convert_alpha()
-		
+		self.shownparts = []
+		self.width = int(game.width / 5)
+		self.height = int(game.height/ 4 )
+		self.image = pygame.Surface((self.width,self.height), flags = (SRCALPHA)).convert_alpha()
 	
+	def update(self):
+		totalhealth = sum(c.hp for c in self.player.parts)
+		if totalhealth != self.totalhealth:
+			totalhealth = self.totalhealth
+			self.active = True
+			self.shownparts = sorted(self.player.parts, key=lambda part: part.hp / part.maxhp)
+			self.shownparts = self.shownparts[:6]
+		else:
+			self.active = False
+
 
 	def draw(self,surface):
-		self.startrect = Rect(self.game.width-120, 220, 100, 5)
-		self.image.fill((0, 0, 0, 0))
-		for part in self.player.parts:
-			color = limit(0, int((1 - part.hp * 1. / part.maxhp ) * 255),255), \
-					limit(0, int(1. * part.hp / part.maxhp * 255), 255), 0, 100 
-			rect = (0,0, part.radius * 2, part.radius * 2)
-			text = self.font.render(part.name, False, (0, 180, 80))
-			self.image.blit(text, (self.game.width-120, self.startrect[1]+10))
-			pygame.draw.rect(self.image, color, self.startrect)
-			self.startrect[1] += 30
-			self.startrect[2] = limit(0, int(1. * part.hp / part.maxhp * 100), 100)
+		
+		if self.active:
+			self.startrect = Rect(10, 0, 150, 5)
+			self.image.fill((0, 0, 80, 200))
+			for part in self.shownparts:
+				partfactor = part.hp / part.maxhp
+				self.startrect[2] = partfactor * 150
+				self.startrect[1] += 30
+				color = (int((1-partfactor) * 255) , int(partfactor * 255), 50)
+				pygame.draw.rect(self.image, color, self.startrect)
+				text = self.font.render(part.name + " " + str(part.hp) + "/" + str(part.maxhp), False, (0, 180, 80))
+				self.image.blit(text, (10, self.startrect[1]-15))
+			
+			
 
-		surface.blit(self.image, (0, 0))
+		surface.blit(self.image, (self.game.width-self.width, 200))
 				
 

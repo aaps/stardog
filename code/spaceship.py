@@ -196,30 +196,7 @@ def playerShip(game, pos, delta, dir = 270, \
         ship = makeScout(game, pos, delta, dir, color, name, player=True)
     else:
         ship = makeFighter(game, pos, delta, dir, color, name, player=True)
-    #default controls:
-    # key, function, toggle or not
-    # script.initbind(K_DOWN, ship.reverse,False)
-    # script.initbind(K_UP, ship.forward,False)
-    # script.initbind(K_RIGHT, ship.turnRight,False)
-    # script.initbind(K_LEFT, ship.turnLeft,False)
-    # script.initbind(K_RCTRL, ship.shoot,False)
-    # script.initbind(K_s, ship.reverse,False)
-    # script.initbind(K_r, ship.toggleRadar,True)
-    # script.initbind(K_t, ship.targetNextShip,True)
-    # script.initbind(K_y, ship.targetPrefShip,True)
-    # script.initbind(K_g, ship.targetNextPlanet,True)
-    # script.initbind(K_h, ship.targetPrefPlanet,True)
-    # script.initbind(K_b, ship.targetNextPart,True)
-    # script.initbind(K_n, ship.targetPrefPart,True)
-    # script.initbind(K_j, ship.toggleGatewayFocus,True)
-    # script.initbind(K_w, ship.forward,False)
-    # script.initbind(K_e, ship.left,False)
-    # script.initbind(K_q, ship.right,False)
-    # script.initbind(K_d, ship.turnRight,False)
-    # script.initbind(K_a, ship.turnLeft,False)
-    # #script.initbind(K_LCTRL, ship.shoot,False)
-    # script.initbind(K_SPACE, ship.shoot,False)
-    # script.initbind(K_m, ship.launchMines,False)
+
     
     return ship
 
