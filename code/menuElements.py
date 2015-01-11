@@ -222,10 +222,10 @@ class Slider(Panel):
         self.function = function
         Panel.__init__(self, rect)
         if self.hori:
-            newrect = Rect(rect[0]+rect[2]-10 ,rect[1]+ (rect[3]/2)-8, 10, rect[3]-4)
+            newrect = Rect(rect[0]+rect[2]-10 ,rect[1]+ (rect[3]/2)-10, 10, rect[3])
         else:
             
-            newrect = Rect(rect[0] + (rect[2]/2)-8,rect[3]+rect[1]-10, rect[2]-4, 10)
+            newrect = Rect(rect[0] + (rect[2]/2)-10,rect[3]+rect[1]-10, rect[2], 10)
         self.dragable = Dragable(newrect,self)
         self.dragable.color = (50, 150, 50)
         self.dragable.bgColor = (75,175,75)
@@ -248,13 +248,25 @@ class Slider(Panel):
             if not panel.rect.collidepoint(oldpos) and not panel.rect.collidepoint(pos):
                 if self.hori:
                     panel.rect[0] = oldpos[0] - panel.rect[2]
-                    if self.rect[2] > (pos[0] - self.rect[0]):
+                    if self.rect[2] > (pos[0] - self.rect[0]) and self.rect[0] < pos[0]:
                         self.function((self.rect[2] - (pos[0] - self.rect[0]) + 0.001) / self.rect[2])
+
                 else:
                     panel.rect[1] = oldpos[1] - panel.rect[3]
-
-                    if self.rect[3] > (pos[1] - self.rect[1]):
+                    if self.rect[1] < pos[1] and self.rect[3] > (pos[1] - self.rect[1]):
                         self.function((self.rect[3] - (pos[1] - self.rect[1]) + 0.001) / self.rect[3])
+
+                    
+    def click(self, button, pos):
+        if self.hori:
+            self.dragable.rect[0] = pos[0]
+            self.function((self.rect[2] - (pos[0] - self.rect[0]) + 0.001) / self.rect[2])
+        else:
+            self.dragable.rect[1] = pos[1]
+            self.function((self.rect[3] - (pos[1] - self.rect[1]) + 0.001) / self.rect[3])
+
+
+
 
     def handleKeys(self, keys):
         pass
@@ -420,10 +432,8 @@ class InputField(Panel):
 
     def cursoroffset(self):
         length = len(self.text) - self.cursorloc
-        return self.font.size(self.text[:-length])[0]
-            
-        # return total
-  
+        return self.font.size(self.text[length:])[0]
+
 class ScrollPanel(Panel):
     """A panel with a scrollbar."""
     scrollRate = 48

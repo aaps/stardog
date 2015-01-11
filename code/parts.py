@@ -76,8 +76,8 @@ class Part(Floater):
          #each element is the part there, (x,y,dir) position of the connection.
          #the example is at the bottom of the part, pointed down.
         self.ports = [Port(Vec2d(-self.width / 2, 0), 0, self)]
-        self.emitters.append(Emitter(self.game, self, self.condHalfDamage , 180, 10, 20, (0,0,0,255), (100,100,100,0), 2, 4, 5, 3, 5, True))
-        self.emitters.append(Emitter(self.game, self, self.condThQuarterDamage , 180, 5, 10, (255,255,0,255), (255,0,0,100), 2, 4, 5, 3, 5, True))
+        self.emitters.append(Emitter(self.game, self, self.condHalfDamage , 180, 10, 20, (0,0,0,255), (150,150,150,50), 4, 5, 5, 3, 5, True))
+        self.emitters.append(Emitter(self.game, self, self.condThQuarterDamage , 180, 40, 50, (255,255,0,255), (255,0,0,255), 0, 1, 1, 1, 2.5, True))
         
     
     def stats(self):
@@ -341,7 +341,7 @@ class Part(Floater):
                         time = self.maxhp / 5))
 
     def condHalfDamage(self):
-        return self.hp <= self.maxhp/2 and self.hp > self.maxhp/4
+        return self.hp <= self.maxhp/2
 
     def condThQuarterDamage(self):
         return self.hp <= self.maxhp/4
@@ -689,7 +689,7 @@ class Radar(Part):
      
     def update(self):
         from planet import Planet
-        if self.enabled and self.ship.energy > self.energyCost:
+        if self.enabled and self.ship and self.ship.energy > self.energyCost:
             self.radartime -= 1. / self.game.fps
             if self.radartime <= 0:
 

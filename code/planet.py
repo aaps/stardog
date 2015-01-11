@@ -188,7 +188,7 @@ class Gateway(Planet):
 				#accelerate that floater towards this planet:
 				accel = self.g * (self.mass) / dist2(self, other)
 				angle = (self.pos - other.pos).get_angle()
-				other.delta += vect2d(0,0).rotatedd(angle, accel) / self.game.fps
+				other.delta += Vec2d(0,0).rotatedd(angle, accel) / self.game.fps
 				# other.delta.y += sin(angle) * accel / self.game.fps
 
 	def getSister(self):

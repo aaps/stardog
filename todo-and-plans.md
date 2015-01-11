@@ -27,8 +27,9 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ==========
-
-* place all menu elements in menuelements instead of menu for example
+* a selection box for tageted floaters on radar and on main screen
+* need a file with all the theme's colors to use
+* place all menu elements in menuelements.py instead of menu for example
 * make factorys for planets starsystems and ships, the design pattern
 * put laser one one color, perhaps same as the plasma cannon colors !!!
 * make some formula to convert the pix into m, km  something like that
@@ -50,11 +51,9 @@ side dish
 * now that more keys can rebound/binded ? with the goal to bind all the keys that way, there should be the option to restrict some key rebinding or unsetting, or there is the posibility to rebind the quit key or something like that, or to rebind the menu key in the menu itself
 * rework of menu active and keybindings, activemenu and active better differenciation, update part en draw part if active, the var active in toplevelpanel.
 * inputscript in scripts.py should be playerinputscript, also scripts needed for chatconsole and for menu, this makes it posible to have keys for inflight and for menu command on the same key.
-
 * player should go into univese and not into game ?
-
 * make a script that will install the requirements, like pygame, etc
-* implement backspace and cursor back front in input field !!!
+* implement backspace and cursor back front in input field [done]
 * implement the new font
 * names of ship selection should come from ship it self, if posible, intro menu !!!
 * some buttons should not be rebindable ingame, like quit, menu and console
@@ -104,11 +103,11 @@ side dish
 
 bugs
 =====
-
-* slider buttons should have the option for min max that also sould be guarded
-* part damage screen hud has names of parts that are too long, fixit
+* particles also alter delta of part they come from, fix that
+* slider buttons should have the option for min max that also sould be guarded [done]
+* part damage screen hud has names of parts that are too long, fixit [done]
 * radar range wrong radar radius when in and out of menu, chekout ! [done]
-* remove the big radar display, until we have the small display down, then put it in again
+* remove the big radar display, until we have the small display down, then put it in again [done]
 * invalid rect assignment bug somewhere same as explotion
 * when blowing up an enemy error could happen
 * cargo part doesnt update and does not accelerate fall etc. [done]

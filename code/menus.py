@@ -216,7 +216,7 @@ class Menu(TopLevelPanel):
                 lambda : self.setActiveMenu(self.info), "Info", BIG_FONT))
         y += h + 2
         y += h + 2
-        self.setActiveMenu(self.info)
+        self.setActiveMenu(self.parts)
 
     def setActiveMenu(self, menu):
         if self.activeMenu:
@@ -364,7 +364,7 @@ class ShipPanel(Selecter):
     def reset(self):
         s = self.player
         self.setSelected(None)
-        self.player.reset()
+        # self.player.reset()
         self.panels = []
         self.selectables = []
         if not s.parts:
@@ -662,6 +662,7 @@ class Keys(Panel):
                     Rect(self.rect.width * 3 / 4 + self.rect.left,\
                     self.rect.top, self.rect.width / 4 - 4,\
                     self.rect.height - self.keyboardRect.height - 26), self.player)
+        
         self.addPanel(self.bindings)
         buttonTop = self.rect.height - self.keyboardRect.height - 24
         self.addPanel(Button(Rect(self.rect.width - 204, buttonTop, 100, 20), \
