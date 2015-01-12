@@ -791,15 +791,21 @@ class BindingSelecter(Selecter):
     
     def __init__(self, rect, ship):
         Selecter.__init__(self, rect)
+        self.bindings = []
+        self.ship = ship
         if ship.script:
             self.bindings = ship.script.bindings
         self.reset()
         
     def reset(self):
         self.selectables = []
-        if hasattr(self,'bindings'):
+       
+        if hasattr(self,'bindings'): 
             for binding in self.bindings:
-                Selecter.addSelectable(self,BindingSelectable(binding, Rect(0, 0, self.rect.width, 20)))
+                # ok we now know there is a ship here, but when we want menus rebindable we will have to change this
+                # messy stuff
+                if hasattr(binding[1].im_self, 'hp'):
+                    Selecter.addSelectable(self,BindingSelectable(binding, Rect(0, 0, self.rect.width, 20)))
         self.selectables.sort(cmp = lambda x,y: y.keyNum)
         Selecter.reset(self)
         

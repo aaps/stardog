@@ -103,6 +103,7 @@ side dish
 
 bugs
 =====
+* still cant rebind keys
 * particles also alter delta of part they come from, fix that
 * slider buttons should have the option for min max that also sould be guarded [done]
 * part damage screen hud has names of parts that are too long, fixit [done]
@@ -111,7 +112,7 @@ bugs
 * invalid rect assignment bug somewhere same as explotion
 * when blowing up an enemy error could happen
 * cargo part doesnt update and does not accelerate fall etc. [done]
-* the binded keys dont display annymore, check it out and fix. !!!
+* the binded keys dont display annymore, check it out and fix. [well they display, but dont bind]
 * on branch viewsinview an explotion will make another one.[so what for now]
 * the laser is broken, ;( [It is fixed, Aat]
 * make binding keys actually works. they bind but don't do anything. and moste of the time. it bugs out the guns so they fire randomly or continously. [it works, done]

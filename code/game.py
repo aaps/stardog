@@ -106,9 +106,12 @@ class Game(object):
 
             self.menu = Menu(self, Rect((self.width - 800) / 2,    (self.height - 600) / 2, 800, 600))
             makeGameBindings(self.playerScript , self)
-            
+            # two rules below should be integrated into their classes
+            self.menu.keys.bindings.bindings = self.playerScript.bindings
+            self.menu.keys.bindings.reset()
+            # print self.menu.keys.bindings
             self.player.setScript(self.playerScript)
-
+            
            
             for x in range(10):
                 self.clock.tick()
