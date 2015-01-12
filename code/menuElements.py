@@ -341,6 +341,7 @@ class InputField(Panel):
         self.game = game
         self.function = function
         self.preftext = []
+        self.newText = False
         self.index = 0
         self.cursorloc = 0
         self.width = width
@@ -355,10 +356,11 @@ class InputField(Panel):
 
     def getText(self):
         # thou shalt not erase the text history
-        text = self.preftext
-        if self.preftext:
-            self.preftext = []
-            return str(text[0])
+        text = self.text
+        if self.newText:
+            self.newText = False
+            self.text = ""
+            return text
 
     def setText(self, text):
         self.preftext = text
@@ -389,12 +391,12 @@ class InputField(Panel):
                     
             
             elif event.key == K_RETURN:
+                self.newText = True
                 if self.function:
                     self.function()
 
                 self.preftext.append(self.text)
                 self.index = len(self.preftext)
-                self.text = ""
                 
 
             elif event.key == K_BACKSPACE:
