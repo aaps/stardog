@@ -69,8 +69,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	def update(self):
 		"""updates this floater based on its variables"""
 		self.pos += self.delta / self.game.fps
-		self.rect.centerx = int(self.pos.x)
-		self.rect.centery =	int(self.pos.y)
+		self.rect.center = (int(self.pos.x), int(self.pos.y))
 
 	def takeDamage(self, damage, other):
 		
@@ -374,7 +373,7 @@ class LaserBeam(Floater):
 		self.width = laser.beamWidth
 		self.image = pygame.transform.rotate(
 					pygame.transform.scale(
-					colorShift(self.baseImage, self.ship.color),
+					colorShift(self.baseImage, (bulletColor(self.damage))),
 					(int(length), 5)), -dir)
 		if 'target' in laser.ship.__dict__:
 			self.target = laser.ship.target

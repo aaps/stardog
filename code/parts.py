@@ -486,7 +486,7 @@ class Cannon(Gun):
 class MineDropper(Gun):
     baseImage = loadImage("res/parts/minelayer"+ext)
     mineImage = loadImage("res/mine"+ext)
-    damage = 10
+    damage = 30
     speed = 0
     reloadTime = 2
     acceleration = 0
@@ -671,7 +671,7 @@ class Radar(Part):
         else:
             self.enabled = True
         
-        self.ship.radars = sorted(self.ship.radars, key=lambda radar: radar.radarrange, reverse=True)
+        
 
         for radar in self.ship.radars:
             if not radar == self:
@@ -690,9 +690,9 @@ class Radar(Part):
     def update(self):
         from planet import Planet
         if self.enabled and self.ship and self.ship.energy > self.energyCost:
-            self.radartime -= 1. / self.game.fps
+            self.radartime -= .2 / self.game.fps
             if self.radartime <= 0:
-
+                self.ship.radars = sorted(self.ship.radars, key=lambda radar: radar.radarrange, reverse=True)
                 self.detected = []
                 self.disk = RadarDisk(self.game, self.ship.pos, self.ship.delta, self.dir, self.radarrange)
                 self.radartime = self.radarspeed

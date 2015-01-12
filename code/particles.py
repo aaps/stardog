@@ -35,8 +35,8 @@ class Particle(object):
 			poss = self.emitter.floater.pos + self.relpos
 		else:
 			poss = self.pos
-		poss = int(poss[0] - offset.x), \
-			  int(poss[1] - offset.y)
+		poss = int(poss[0] - offset.x - int(self.image.get_width()/2)), \
+			  int(poss[1] - offset.y - int(self.image.get_height()/2))
 		pygame.draw.circle(self.image, self.transcolor, (int(self.image.get_width()/2), int(self.image.get_height()/2)), self.size)
 		surface.blit(self.image, poss)		
 
@@ -56,9 +56,6 @@ class Particle(object):
 class Emitter(object):
 	
 	def __init__(self, game, floater, condfunc ,anglewidth, startvelocity, stopvelocity, startcolor, stopcolor, startlife, stoplife, maximum, startsize, stopsize, relative):
-		# pass
-		# self.image = pygame.Surface((game.width, game.height),
-  #       hardwareFlag | SRCALPHA).convert_alpha()
 		self.game =  game
 		self.relative = relative
 		self.condfunc = condfunc
@@ -77,10 +74,9 @@ class Emitter(object):
 		self.enabled = True
 	
 	def draw(self, surface, offset = Vec2d(0,0)):
-		# self.image.fill((0, 0, 0,0))
 		for particle in self.particles:
 			particle.draw(surface, offset)
-		# surface.blit(self.image, (0, 0))
+
 
 	def update(self):
 		for particle in self.particles:
@@ -90,8 +86,8 @@ class Emitter(object):
 
 		if self.condfunc():
 			if self.floater.ship:
-				startdir = self.floater.ship.dir + self.anglewidth
-				stopdir = self.floater.ship.dir - self.anglewidth	
+				startdir = self.floater.ship.dir + self.floater.dir + self.anglewidth
+				stopdir = self.floater.ship.dir + self.floater.dir - self.anglewidth	
 			else:
 				startdir = self.floater.dir + self.anglewidth
 				stopdir = self.floater.dir - self.anglewidth

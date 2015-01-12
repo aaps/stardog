@@ -284,16 +284,19 @@ class shipDamage(Drawable):
 		
 		if self.active:
 			self.startrect = Rect(10, 0, 150, 5)
+			self.image.fill((0, 0, 0, 255))
 			self.image.fill((0, 0, 80, 200))
 			for part in self.shownparts:
-				partfactor = part.hp / part.maxhp + 0.001
-				self.startrect[2] = partfactor * 150
-				self.startrect[1] += 30
-				color = (int((1-partfactor) * 255) , int(partfactor * 255), 50)
+				partfactor = part.hp / part.maxhp 
 				
-				pygame.draw.rect(self.image, color, self.startrect)
-				text = self.font.render(part.name + " " + str(part.hp) + "/" + str(part.maxhp), False, (0, 180, 80))
-				self.image.blit(text, (10, self.startrect[1]-15))
+				if partfactor >= 0 and partfactor <= 1:
+					self.startrect[2] = partfactor * 150
+					self.startrect[1] += 30
+					color = (int((1-partfactor) * 255) , int(partfactor * 255), 50)
+					
+					pygame.draw.rect(self.image, color, self.startrect)
+					text = self.font.render(part.name + " " + str(round(part.hp,1)) + "/" + str(part.maxhp), False, (0, 180, 80))
+					self.image.blit(text, (10, self.startrect[1]-15))
 			
 			
 

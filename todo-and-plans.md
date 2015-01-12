@@ -27,16 +27,17 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ==========
+* a cursor for on mian screen in form of crosshair
 * a selection box for tageted floaters on radar and on main screen
 * need a file with all the theme's colors to use
 * place all menu elements in menuelements.py instead of menu for example
 * make factorys for planets starsystems and ships, the design pattern
-* put laser one one color, perhaps same as the plasma cannon colors !!!
-* make some formula to convert the pix into m, km  something like that
+* put laser one one color, perhaps same as the plasma cannon colors [done lasers are green now]
+* make some formula to convert the pix into m, km  something like that !!!
 * make a detection score for a ship, based on the parts, that also need a detection score.
-* a arrow on radar when targeting a known planet that is out of radar reach.
+* a arrow on radar when targeting a known planet that is out of radar reach. !!!
 * a random seed for xtra fun
-* some parts ont get a delta upon ejecting
+* some parts dont get a delta upon ejecting
 * the radar range circle doesnt yet scale
 * mini game explotion push stuff, space socker ?
 * when opening part the radar will be reset to the ockpit radar
@@ -53,7 +54,7 @@ side dish
 * inputscript in scripts.py should be playerinputscript, also scripts needed for chatconsole and for menu, this makes it posible to have keys for inflight and for menu command on the same key.
 * player should go into univese and not into game ?
 * make a script that will install the requirements, like pygame, etc
-* implement backspace and cursor back front in input field [done]
+
 * implement the new font
 * names of ship selection should come from ship it self, if posible, intro menu !!!
 * some buttons should not be rebindable ingame, like quit, menu and console
@@ -103,6 +104,10 @@ side dish
 
 bugs
 =====
+* particle emitters dont have the exact right position in gase of part
+* putting engines on cockpit and perhaps other parts off shipp will prefent the engine of firering.
+* trust of engine has the direction of ship not of slot of part
+* if part targeted and picked up it still exists
 * still cant rebind keys
 * particles also alter delta of part they come from, fix that
 * slider buttons should have the option for min max that also sould be guarded [done]
@@ -116,7 +121,7 @@ bugs
 * on branch viewsinview an explotion will make another one.[so what for now]
 * the laser is broken, ;( [It is fixed, Aat]
 * make binding keys actually works. they bind but don't do anything. and moste of the time. it bugs out the guns so they fire randomly or continously. [it works, done]
-* after menu and chat console prototype independance of game pause the menu will not 
+* after menu and chat console prototype independance of game pause the menu will not ??? [gues it is done]
 * engines seem to light up nice, but the purple color of the engines doesnt color to ship color. [will be done with implementation of animated sprites class]
 * known planets is a list of all the known planets not the known planets in the current system
 * In case of open planet part panel and parts 'land' on planet they will not show up at the parts panel right away. only after a menu out/in
@@ -205,6 +210,7 @@ so you can get out of the way in time. [done, aat]
 * a particle engine for explotions, engine stuff. [medium stuff] [done]
 * a slider button for the ui [done]
 * move drawing of arc from parts to ui [done]
+* implement backspace and cursor back front in input field [done]
 
 [Duality]
 

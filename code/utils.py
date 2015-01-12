@@ -165,4 +165,4 @@ def bulletColor(damage):
 	if damage <= 10 and damage >= 2:
 		return (255-(20*damage+50), 255-(20*damage+50), 255)
 	else:
-		return (0,0,0)
+		return (0,255,0, 125)
