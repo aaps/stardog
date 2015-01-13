@@ -671,8 +671,7 @@ class Radar(Part):
         else:
             self.enabled = True
         
-        
-
+    
         for radar in self.ship.radars:
             if not radar == self:
                 radar.enabled = self.enabled
@@ -690,7 +689,7 @@ class Radar(Part):
     def update(self):
         from planet import Planet
         if self.enabled and self.ship and self.ship.energy > self.energyCost:
-            self.radartime -= .2 / self.game.fps
+            self.radartime -= .4 / self.game.fps
             if self.radartime <= 0:
                 self.ship.radars = sorted(self.ship.radars, key=lambda radar: radar.radarrange, reverse=True)
                 self.detected = []

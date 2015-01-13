@@ -103,6 +103,8 @@ class RadarField(Drawable):
 			pygame.draw.circle(self.image, (0,0,150), center, int(self.game.player.radars[0].disk.radius / scale + 2), 1)
 
 		for radar in self.game.player.radars:
+			
+			
 			for floater in radar.detected:
 				
 				result = floater.pos - self.game.player.pos
@@ -125,11 +127,13 @@ class RadarField(Drawable):
 							pygame.draw.rect(self.image, (200,200,0), (dotPos[0]-1,dotPos[1]-1,2,2))
 				else:
 					color = (255, 0, 0)
+					modi = 7
 					if self.game.player.curtarget == floater:
 						color = (0,255,255)
+						modi = 10
 					normalised = result.normalized()
 					pos = []
-					pos.append(normalised * 90 + center)
+					pos.append(normalised * (100 - modi) + center)
 					pos.append((normalised * 100).rotated(2)  + center)
 					pos.append((normalised * 100).rotated(-2) + center)
 					pygame.draw.polygon(self.image, color, pos)
@@ -149,11 +153,13 @@ class RadarField(Drawable):
 		
 			else:
 				color = (255, 250, 0)
+				modi = 5
 				if self.game.player.curtarget == planet:
 					color = (0,255,250)
+					modi = 10
 				normalised = result.normalized()
 				pos = []
-				pos.append(normalised * 90 + center)
+				pos.append(normalised * (100 - modi) + center)
 				pos.append((normalised * 100).rotated(2)  + center)
 				pos.append((normalised * 100).rotated(-2) + center)
 				pygame.draw.polygon(self.image, color, pos)
