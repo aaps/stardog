@@ -2,6 +2,7 @@ import random
 import math
 from pygame.locals import *
 import pygame
+from vec2d import *
 
 hardwareFlag = pygame.HWSURFACE
 
@@ -166,3 +167,15 @@ def bulletColor(damage):
 		return (255-(20*damage+50), 255-(20*damage+50), 255)
 	else:
 		return (0,255,0, 125)
+
+def targetRect(surface, color, mincolor, pos, radius, spacing):
+
+	pygame.draw.rect(surface, color, (pos[0]-radius-spacing,pos[1]-radius-spacing,radius*2+(spacing*2),radius*2+(spacing*2)), 1)
+	
+	pygame.draw.rect(surface, mincolor, (pos[0]-radius-spacing,pos[1]-int(radius/2)-int(spacing/2),(radius*2)+(spacing*2),radius+spacing), 1)
+	pygame.draw.rect(surface, mincolor, (pos[0]-int(radius/2)-int(spacing/2),pos[1]-radius-spacing,radius+spacing,(radius*2)+(spacing*2)), 1)
+	
+def makeKMdistance(floaterx, floatery):
+	return str(round((floaterx.pos.get_distance(floatery.pos)-floaterx.radius-floatery.radius)/10,1))
+
+	# self.game.player.pos.get_distance(self.targ.pos)

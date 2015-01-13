@@ -6,7 +6,7 @@ main dish
 
 * quad trees (hardmode, after vector and view splitout, wil replace current collision check mess)
 
-* wormholes/star gates to other systems. (medium mode ?, after Gravless class) [might be soon done]!!! [more work than anticipated]
+* wormholes/star gates to other systems. (medium mode ?, after Gravless class) [might be soon done] [more work than anticipated]
 
 * make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump]
 
@@ -27,15 +27,20 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ==========
+*make sure all the hud elements have a way to be easily re/positioned
+* radar and gud are one thing should be two seperate things.
+* an small addaptation that makes this standout from other stardog. The accounting software ?
+* add some screen shots to the github repo
+* a buton to make screen shots ?
 * a cursor for on mian screen in form of crosshair
-* a selection box for tageted floaters on radar and on main screen
-* need a file with all the theme's colors to use
+* a selection box for tageted floaters on radar and on main screen [done]
+* need a file with all the theme's colors to use !!!
 * place all menu elements in menuelements.py instead of menu for example
 * make factorys for planets starsystems and ships, the design pattern
 * put laser one one color, perhaps same as the plasma cannon colors [done lasers are green now]
-* make some formula to convert the pix into m, km  something like that !!!
+* make some formula to convert the pix into m, km  something like that !!! [done 1000 px is 100 km now from floater rim to floater rim, all the rimming all the time]
 * make a detection score for a ship, based on the parts, that also need a detection score.
-* a arrow on radar when targeting a known planet that is out of radar reach. !!!
+* a arrow on radar when targeting a known planet that is out of radar reach. !!! [done]
 * a random seed for xtra fun
 * some parts dont get a delta upon ejecting
 * the radar range circle doesnt yet scale
@@ -68,8 +73,8 @@ side dish
 * making the universe class to hold starsystems [WIP]
 * making the rest of screen changeable ?, posibility to chage window with and or height ?
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
-* more collision handeling refactor !!! [still need more refactoring]
-* more to vec2d vector work. !!! [can alwais use some work]
+* more collision handeling refactor [still need more refactoring]
+* more to vec2d vector work. [can alwais use some work]
 * zoom in out option for radar [medium mode ?] [doneish]
 * weapon heat generation [easy mode]
 * engines that are good for space travel but bad for landing and visaversa
@@ -81,7 +86,7 @@ side dish
 * make the game run from the beginning, so if choosing ship and color the game is already running
 * make camera translatable instead of direct snap
 * the portal stargate warp dent could use some drag inside it, for temp usability
-* cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fitt parts on your ship when on planet or structure, when container gets destroyed or dissconnected from ship you lose parts untill you are at capacity !!!
+* cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fitt parts on your ship when on planet or structure, when container gets destroyed or dissconnected from ship you lose parts untill you are at capacity.
 
 * in camera splitout functionality make a layer class for the layers that will not do the drawing but perhaps the updating, anyhow updates doesnt belong in camera ?
 
@@ -104,10 +109,11 @@ side dish
 
 bugs
 =====
+* pure black should not be a color to choose ship from !!!
 * particle emitters dont have the exact right position in gase of part
 * putting engines on cockpit and perhaps other parts off shipp will prefent the engine of firering.
 * trust of engine has the direction of ship not of slot of part
-* if part targeted and picked up it still exists
+* if part targeted and picked up it still exists on target screen !!!
 * still cant rebind keys
 * particles also alter delta of part they come from, fix that
 * slider buttons should have the option for min max that also sould be guarded [done]
@@ -125,7 +131,7 @@ bugs
 * engines seem to light up nice, but the purple color of the engines doesnt color to ship color. [will be done with implementation of animated sprites class]
 * known planets is a list of all the known planets not the known planets in the current system
 * In case of open planet part panel and parts 'land' on planet they will not show up at the parts panel right away. only after a menu out/in
-* planets should be targetable when not in radar range, couse they are remembered, still it doesnt work out that way, check it out
+* planets should be targetable when not in radar range, couse they are remembered, still it doesnt work out that way, check it out [done]
 * processing of ship image on mini screen is a slow afair perhaps first: https://github.com/Mekire/pygame-image-outline/blob/master/outline.py and after that a thred that will fill in the ship part by part ?
 
 
@@ -204,7 +210,7 @@ so you can get out of the way in time. [done, aat]
  improve name input with a box around name [done]
  * rename solarsystems to starsystems sun to stars etc [done]
  * landed can go to ship class so the ai can do extra stuff [done]
- * systems now have a seperate list for planets and structures and perhaps portals, should be one list of statics !!! [done]
+ * systems now have a seperate list for planets and structures and perhaps portals, should be one list of statics [done]
  * the on mini tagetting field the distance to target and angle to target [done]
  * when destroyed a part has a change it will become scrap [done]
 * a particle engine for explotions, engine stuff. [medium stuff] [done]

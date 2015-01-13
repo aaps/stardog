@@ -63,8 +63,14 @@ class Game(object):
         #pygame setup:
         self.clock = pygame.time.Clock()
         self.hud = HUD(self)
+        self.tageting = TargetingRect(self)
+        self.radarfield = RadarField(self)
+        
         self.camera.layerAdd(self.hud,4)
-        self.camera.layerAdd(SpaceView(self),3)
+        self.camera.layerAdd(self.radarfield,4)
+        self.camera.layerAdd(self.tageting,4)
+        self.spaceview = SpaceView(self)
+        self.camera.layerAdd(self.spaceview,3)
         #create a chatconsole for text input capabilities
         self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-50, self.width - int(self.width/ 8) , 50))
         

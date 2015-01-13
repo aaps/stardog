@@ -270,8 +270,8 @@ def makeGameBindings(script, game):
 	script.initbind(K_6, game.chatconsole.toggleActive, True)
 	script.initbind(K_RETURN, game.menu.toggleActive, True)
 
-	script.initbind(K_MINUS, game.hud.zoomInRadar,False)
-	script.initbind(K_EQUALS, game.hud.zoomOutRadar,False)
+	script.initbind(K_MINUS, game.radarfield.zoomInRadar,False)
+	script.initbind(K_EQUALS, game.radarfield.zoomOutRadar,False)
 	
 def makePlayerBindings(script, ship):
 	
