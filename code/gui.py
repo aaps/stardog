@@ -99,8 +99,8 @@ class RadarField(Drawable):
 
 		pygame.draw.circle(self.image,(0, 0, 60), self.center, radarRadius )
 		#draw floating part dots:
-		if self.game.player.radars[0].disk and self.game.player.radars[0].enabled and int(self.game.player.radars[0].disk.radius / scale + 2) < 100:
-			pygame.draw.circle(self.image, (0,0,150), center, int(self.game.player.radars[0].disk.radius / scale + 2), 1)
+		if self.game.player.radars[-1].disk and self.game.player.radars[-1].enabled and int(self.game.player.radars[-1].disk.radius / scale + 2) < 100:
+			pygame.draw.circle(self.image, (0,0,150), center, int(self.game.player.radars[-1].disk.radius / scale + 2), 1)
 
 		for radar in self.game.player.radars:
 			
@@ -125,7 +125,7 @@ class RadarField(Drawable):
 							pygame.draw.rect(self.image, (150,40,0), (dotPos[0]-1,dotPos[1]-1,2,2))
 						elif isinstance(floater, Part):
 							pygame.draw.rect(self.image, (200,200,0), (dotPos[0]-1,dotPos[1]-1,2,2))
-				else:
+				elif not isinstance(floater, Planet):
 					color = (255, 0, 0)
 					modi = 7
 					if self.game.player.curtarget == floater:
@@ -256,7 +256,9 @@ class MiniInfo(Drawable):
 		self.image.set_alpha(200)
 
 	def update(self):
+
 		self.targ = self.game.player.curtarget
+
 
 	def draw(self, surface):
 		self.image.fill((0, 0, 80))

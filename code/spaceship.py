@@ -458,25 +458,32 @@ class Ship(Floater):
             mine.shoot()
 
     def toggleRadar(self):
-        self.radars[0].toggle()
+        for radar in self.radars:
+            radar.toggle()
 
     def targetNextShip(self):
-        self.radars[0].targetNextShip()
+        for radar in self.radars:
+            radar.targetNextShip()
 
     def targetPrefShip(self):
-        self.radars[0].targetPrefShip()
+        for radar in self.radars:
+            radar.targetPrefShip()
 
     def targetNextPlanet(self):
-        self.radars[0].targetNextPlanet()
+        for radar in self.radars:
+            radar.targetNextPlanet()
 
     def targetPrefPlanet(self):
-        self.radars[0].targetPrefPlanet()
+        for radar in self.radars:
+            radar.targetPrefPlanet()
 
     def targetNextPart(self):
-        self.radars[0].targetNextPart()
+        for radar in self.radars:
+            radar.targetNextPart()
 
     def targetPrefPart(self):
-        self.radars[0].targetPrefPart()
+        for radar in self.radars:
+            radar.targetPrefPart()
 
     def toggleGatewayFocus(self):
         for gwfocus in self.gwfocusus:

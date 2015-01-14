@@ -601,7 +601,7 @@ class FlakCannon(Cannon):
     burstSize = 8
     reloadBurstTime = 4
     range = 6
-    speed = 150
+    speed = 200
 
     def __init__(self, game):
         self.burst = self.burstSize
@@ -666,15 +666,10 @@ class Radar(Part):
     
     def toggle(self):
         
-        if self.enabled:
-            self.enabled = False
-        else:
-            self.enabled = True
+        if self.ship.radars[-1] == self:
+            self.enabled = not self.enabled
+
         
-    
-        for radar in self.ship.radars:
-            if not radar == self:
-                radar.enabled = self.enabled
 
         
     def shortStats(self):
@@ -688,112 +683,121 @@ class Radar(Part):
      
     def update(self):
         from planet import Planet
-        if self.enabled and self.ship and self.ship.energy > self.energyCost:
-            self.radartime -= .4 / self.game.fps
-            if self.radartime <= 0:
-                self.ship.radars = sorted(self.ship.radars, key=lambda radar: radar.radarrange, reverse=True)
+        if self == self.ship.radars[-1]:
+            if self.enabled and self.ship and self.ship.energy > self.energyCost:
+                self.radartime -= 1.0 / self.game.fps
+                if self.radartime <= 0:
+                    self.ship.radars = sorted(self.ship.radars, key=lambda radar: radar.radarrange)
+                    if self == self.ship.radars[-1]:
+                        self.detected = []
+                        self.disk = RadarDisk(self.game, self.ship.pos, self.ship.delta, self.dir, self.radarrange)
+                        self.radartime = self.radarspeed
+                        for floater in self.game.universe.curSystem.floaters:
+                            if collisionTest(self.disk, floater) and floater != self.ship:
+                                self.detected.append(floater)
+                                if floater not in self.ship.knownplanets and isinstance (floater,Planet):
+                                    self.ship.knownplanets.append(floater)
+                        if not self.ship.curtarget in self.detected and not isinstance (self.ship.curtarget,Planet):
+                            self.ship.curtarget = None
+                self.ship.energy -= self.energyCost / self.game.fps
+
+            else:
                 self.detected = []
-                self.disk = RadarDisk(self.game, self.ship.pos, self.ship.delta, self.dir, self.radarrange)
-                self.radartime = self.radarspeed
-                for floater in self.game.universe.curSystem.floaters:
-                    if collisionTest(self.disk, floater) and floater != self.ship:
-                        self.detected.append(floater)
-                        if floater not in self.ship.knownplanets and isinstance (floater,Planet):
-                            self.ship.knownplanets.append(floater)
-            self.ship.energy -= self.energyCost / self.game.fps
-        else:
-            self.detected = []
         Part.update(self)
 
     def targetNextShip(self):
         from spaceship import Ship
-        resultList = []
-        for radar in self.ship.radars:
-            resultList= list(set(radar.detected)|set(resultList))
-        resultList =  filter(lambda f: isinstance(f, Ship), resultList)
-        resultList = sorted(resultList, key = self.radarDistance)
-        length = len(resultList)
-        if self.ship.curtarget and self.ship.curtarget in resultList  and length-1 > resultList.index(self.ship.curtarget):
-            self.ship.curtarget = resultList[resultList.index(self.ship.curtarget)+1]
-        elif length > 0:
-            self.ship.curtarget = resultList[0]
-        else:
-            self.ship.curtarget = None
+        if self == self.ship.radars[-1]:
+            resultList = []
+            for radar in self.ship.radars:
+                resultList= list(set(radar.detected)|set(resultList))
+            resultList =  filter(lambda f: isinstance(f, Ship), resultList)
+            resultList = sorted(resultList, key = self.radarDistance)
+            length = len(resultList)
+            if self.ship.curtarget and self.ship.curtarget in resultList  and length-1 > resultList.index(self.ship.curtarget):
+                self.ship.curtarget = resultList[resultList.index(self.ship.curtarget)+1]
+            elif length > 0:
+                self.ship.curtarget = resultList[0]
+            else:
+                self.ship.curtarget = None
 
     def targetPrefShip(self):
         from spaceship import Ship
-        resultList = []
-        for radar in self.ship.radars:
-            resultList= list(set(radar.detected)|set(resultList))
-        resultList = filter(lambda f: isinstance(f, Ship), resultList)
-        resultList = sorted(resultList, key = self.radarDistance)
-        length = len(resultList)
-        if self.ship.curtarget and self.ship.curtarget in resultList  and  resultList.index(self.ship.curtarget) > 0:
-            self.ship.curtarget = resultList[resultList.index(self.ship.curtarget)-1]
-        elif length > 0:
-            self.ship.curtarget = resultList[length-1]
-        else:
-            self.ship.curtarget = None
+        if self == self.ship.radars[-1]:
+            resultList = []
+            for radar in self.ship.radars:
+                resultList= list(set(radar.detected)|set(resultList))
+            resultList = filter(lambda f: isinstance(f, Ship), resultList)
+            resultList = sorted(resultList, key = self.radarDistance)
+            length = len(resultList)
+            if self.ship.curtarget and self.ship.curtarget in resultList  and  resultList.index(self.ship.curtarget) > 0:
+                self.ship.curtarget = resultList[resultList.index(self.ship.curtarget)-1]
+            elif length > 0:
+                self.ship.curtarget = resultList[length-1]
+            else:
+                self.ship.curtarget = None
 
     def targetNextPlanet(self):
         from planet import Planet
-        self.ship.knownplanets = sorted(self.ship.knownplanets, key = self.radarDistance)
-        
-        if self.ship.curtarget in self.ship.knownplanets:
-            index = self.ship.knownplanets.index(self.ship.curtarget)
-            if index+1 < len(self.ship.knownplanets):
-                self.ship.curtarget = self.ship.knownplanets[index+1]
-            else:
+        if self == self.ship.radars[-1]:
+            self.ship.knownplanets = sorted(self.ship.knownplanets, key = self.radarDistance)
+            if self.ship.curtarget in self.ship.knownplanets:
+                index = self.ship.knownplanets.index(self.ship.curtarget)
+                if index+1 < len(self.ship.knownplanets):
+                    self.ship.curtarget = self.ship.knownplanets[index+1]
+                else:
+                    self.ship.curtarget = self.ship.knownplanets[0]
+            elif len(self.ship.knownplanets) > 0:
                 self.ship.curtarget = self.ship.knownplanets[0]
-        elif len(self.ship.knownplanets) > 0:
-            self.ship.curtarget = self.ship.knownplanets[0]
-        else:
-            self.ship.curtarget = None
+            else:
+                self.ship.curtarget = None
 
 
 
     def targetPrefPlanet(self):
         from planet import Planet
-        self.ship.knownplanets = sorted(self.ship.knownplanets, key = self.radarDistance)
-
-        if self.ship.curtarget in self.ship.knownplanets:
-            index = self.ship.knownplanets.index(self.ship.curtarget)
-            if index > 0:
-                self.ship.curtarget = self.ship.knownplanets[index-1]
-            else:
+        if self == self.ship.radars[-1]:
+            self.ship.knownplanets = sorted(self.ship.knownplanets, key = self.radarDistance)
+            if self.ship.curtarget in self.ship.knownplanets:
+                index = self.ship.knownplanets.index(self.ship.curtarget)
+                if index > 0:
+                    self.ship.curtarget = self.ship.knownplanets[index-1]
+                else:
+                    self.ship.curtarget = self.ship.knownplanets[len(self.ship.knownplanets)-1]
+            elif len(self.ship.knownplanets) > 0:
                 self.ship.curtarget = self.ship.knownplanets[len(self.ship.knownplanets)-1]
-        elif len(self.ship.knownplanets) > 0:
-            self.ship.curtarget = self.ship.knownplanets[len(self.ship.knownplanets)-1]
-        else:
-            self.ship.curtarget = None
+            else:
+                self.ship.curtarget = None
 
     def targetNextPart(self):
-        resultList = []
-        for radar in self.ship.radars:
-            resultList= list(set(radar.detected)|set(resultList))
-        resultList =  filter(lambda f: isinstance(f, Part), resultList)
-        resultList = sorted(resultList, key = self.radarDistance)
-        length = len(resultList)
-        if self.ship.curtarget and self.ship.curtarget in resultList  and length-1 > resultList.index(self.ship.curtarget):
-            self.ship.curtarget = resultList[resultList.index(self.ship.curtarget)+1]
-        elif length > 0:
-            self.ship.curtarget = resultList[0]
-        else:
-            self.ship.curtarget = None
+        if self == self.ship.radars[-1]:
+            resultList = []
+            for radar in self.ship.radars:
+                resultList= list(set(radar.detected)|set(resultList))
+            resultList =  filter(lambda f: isinstance(f, Part), resultList)
+            resultList = sorted(resultList, key = self.radarDistance)
+            length = len(resultList)
+            if self.ship.curtarget and self.ship.curtarget in resultList  and length-1 > resultList.index(self.ship.curtarget):
+                self.ship.curtarget = resultList[resultList.index(self.ship.curtarget)+1]
+            elif length > 0:
+                self.ship.curtarget = resultList[0]
+            else:
+                self.ship.curtarget = None
 
     def targetPrefPart(self):
-        resultList = []
-        for radar in self.ship.radars: 
-            resultList= list(set(radar.detected)|set(resultList))
-        resultList =  filter(lambda f: isinstance(f, Part), resultList)
-        resultList = sorted(resultList, key = self.radarDistance)
-        length = len(resultList)
-        if self.ship.curtarget and self.ship.curtarget in resultList  and resultList.index(self.ship.curtarget) > 0:
-            self.ship.curtarget = resultList[resultList.index(self.ship.curtarget)-1]
-        elif length > 0:
-            self.ship.curtarget = resultList[length-1]
-        else:
-            self.ship.curtarget = None
+        if self == self.ship.radars[-1]:
+            resultList = []
+            for radar in self.ship.radars: 
+                resultList= list(set(radar.detected)|set(resultList))
+            resultList =  filter(lambda f: isinstance(f, Part), resultList)
+            resultList = sorted(resultList, key = self.radarDistance)
+            length = len(resultList)
+            if self.ship.curtarget and self.ship.curtarget in resultList  and resultList.index(self.ship.curtarget) > 0:
+                self.ship.curtarget = resultList[resultList.index(self.ship.curtarget)-1]
+            elif length > 0:
+                self.ship.curtarget = resultList[length-1]
+            else:
+                self.ship.curtarget = None
 
     def radarDistance(self, floater):
         return floater.pos.get_distance(self.ship.pos)

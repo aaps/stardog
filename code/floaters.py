@@ -312,7 +312,7 @@ class Impact(Floater):
 		else:
 			self.radius = int(self.maxRadius * (self.time * 4 / 3 \
 						- self.life * 4 / 3) / self.time)
-		Floater.update(self)
+		# Floater.update(self)
 
 	def draw(self, surface, offset = (0,0)):
 		self.image.fill((0, 0, 0, 0))

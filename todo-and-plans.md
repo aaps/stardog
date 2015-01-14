@@ -27,7 +27,10 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ==========
-*make sure all the hud elements have a way to be easily re/positioned
+* the ai should abide by its own radar range
+* ai can talk to player, when targeting player for example and disengaging
+* ai can use an fsm to flee attack, explore
+* make sure all the hud elements have a way to be easily re/positioned
 * radar and gud are one thing should be two seperate things.
 * an small addaptation that makes this standout from other stardog. The accounting software ?
 * add some screen shots to the github repo
@@ -38,9 +41,9 @@ side dish
 * place all menu elements in menuelements.py instead of menu for example
 * make factorys for planets starsystems and ships, the design pattern
 * put laser one one color, perhaps same as the plasma cannon colors [done lasers are green now]
-* make some formula to convert the pix into m, km  something like that !!! [done 1000 px is 100 km now from floater rim to floater rim, all the rimming all the time]
+* make some formula to convert the pix into m, km  something like that [done 1000 px is 100 km now from floater rim to floater rim, all the rimming all the time]
 * make a detection score for a ship, based on the parts, that also need a detection score.
-* a arrow on radar when targeting a known planet that is out of radar reach. !!! [done]
+* a arrow on radar when targeting a known planet that is out of radar reach. [done]
 * a random seed for xtra fun
 * some parts dont get a delta upon ejecting
 * the radar range circle doesnt yet scale
@@ -61,7 +64,7 @@ side dish
 * make a script that will install the requirements, like pygame, etc
 
 * implement the new font
-* names of ship selection should come from ship it self, if posible, intro menu !!!
+* names of ship selection should come from ship it self, if posible, intro menu [done]
 * some buttons should not be rebindable ingame, like quit, menu and console
 * center the text in the input box
 
@@ -109,11 +112,13 @@ side dish
 
 bugs
 =====
-* pure black should not be a color to choose ship from !!!
+* the slider part is still not slidable
+* when a part of your ship is, are destroyed parts realy removed ?
+* pure black should not be a color to choose ship from  [done]
 * particle emitters dont have the exact right position in gase of part
 * putting engines on cockpit and perhaps other parts off shipp will prefent the engine of firering.
 * trust of engine has the direction of ship not of slot of part
-* if part targeted and picked up it still exists on target screen !!!
+* if part targeted and picked up it still exists on target screen  [done]
 * still cant rebind keys
 * particles also alter delta of part they come from, fix that
 * slider buttons should have the option for min max that also sould be guarded [done]

@@ -57,22 +57,23 @@ class IntroMenu(TopLevelPanel):
         x,y,width,height = self.rect
         x = (width/5)
         y = (height/4)
-        self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'fighter'))
+        self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'fighter', FONT))
         x += 200
-        self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'interceptor'))
+        self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'interceptor', FONT))
         x += 200
-        self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'destroyer'))
+        self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'destroyer', FONT))
         x = (width/5)
         y += 200
-        self.addPanel(TypeButton(self, Rect(x, y, image_width, image_height), 'scout'))
-        #self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'minelayer'))
+        self.addPanel(TypeButton(self, Rect(x, y, image_width, image_height), 'scout', FONT))
         x += 200
-        self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'juggernaut'))
+        self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'juggernaut', FONT))
         x += 200
-        self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'freighter'))
+        self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'freighter', FONT))
         #exit(1)
     
     def chooseColor(self):
+        if self.game.playerColor == [0,0,0]:
+            self.game.playerColor = [10,10,10]
         self.typeChoose()
 
     def chooseRed(self, red): 
@@ -119,11 +120,15 @@ class ColorButton(Button):
         
 class TypeButton(Button):
     
-    def __init__(self, parent, rect, type):
+    def __init__(self, parent, rect, type, font):
         self.image = colorShift(loadImage('res/menus/'+type+'.bmp', None),
                         parent.game.playerColor,None)
         self.parent = parent
         self.type = type
+        if fontModule:
+            toblit = font.render(self.type.title(), True, (100,255,100))
+
+            self.image.blit(toblit,(20,rect[3] - toblit.get_height() - 20))
         Button.__init__(self, rect, self.choose, None)
         
     def choose(self):
