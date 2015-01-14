@@ -61,6 +61,7 @@ class Part(Floater):
     attachEffects = []
 
     def __init__(self, game):
+        self.enabled = False
         self.functions = []
         self.functionDescriptions = []
         self.adjectives = []

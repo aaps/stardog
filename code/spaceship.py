@@ -667,7 +667,8 @@ class Player(Ship):
         return 1.1 ** self.level * 10
 
     def kill(self):
-        self.parts = []
+        for part in self.parts:
+            part.enabled = False
         Ship.kill(self)
 
 

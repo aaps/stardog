@@ -141,8 +141,8 @@ class Console(Panel):
 
     def __init__(self,rect, game):
         Panel.__init__(self,rect)
-        rect = Rect(10,20,self.rect.width,200)
-        self.inputfield = InputField( rect, game)
+        rect = Rect(10,10,self.rect.width,200)
+        self.inputfield = InputField( rect, game, width =  200)
         self.addPanel(self.inputfield)
     
     def handleEvent(self,event):
@@ -262,9 +262,9 @@ class PartsPanel(Panel):
         # shipColor = (50,20,70)
         flip = Button(Rect(115, 300, 75, 16), self.flip, " FLIP")
         remove = Button(Rect(195, 300, 75, 16), self.remove, " REMOVE")
-        add = Button(Rect(335, 520, 75, 16), self.attach, " ATTACH")
-        paint = Button(Rect(415, 520, 75, 16), self.paint, " PAINT")
-        eject = Button(Rect(495, 520, 75, 16), self.eject, " EJECT")
+        add = Button(Rect(335, 570, 75, 16), self.attach, " ATTACH")
+        paint = Button(Rect(415, 570, 75, 16), self.paint, " PAINT")
+        eject = Button(Rect(495, 570, 75, 16), self.eject, " EJECT")
         self.inventoryPanel = InventoryPanel(Rect(500, 30, 130, 570), self, self.player.inventory)
         self.tradePanel = None
         self.shipPanel = ShipPanel(Rect(100, 0, 401, 300), self, self.player)
@@ -431,9 +431,9 @@ class PartDescriptionPanel(Panel):
             return
         self.image = pygame.Surface((self.rect.width, self.rect.height), hardwareFlag).convert()
         self.image.set_colorkey(BLACK)
-        bigImage = pygame.transform.scale2x(self.part.image)
-        bigImage.set_colorkey(SUPER_WHITE) # idk why this one's white.
-        self.image.blit(bigImage, (self.rect.width / 2 - bigImage.get_width() / 2, 5))
+        # bigImage = pygame.transform.scale2x(self.part.image)
+        # bigImage.set_colorkey(SUPER_WHITE) # idk why this one's white.
+        # self.image.blit(bigImage, (self.rect.width / 2 - bigImage.get_width() / 2, 5))
         string = part.stats()
         string += '\nFunctions: '
         for function in part.functions:
@@ -444,8 +444,8 @@ class PartDescriptionPanel(Panel):
             string += "\n  %s: %s"%(str(adj.__class__).split('.')[-1],adj.__doc__)
         x, y = self.rect.left, self.rect.top
         w, h = self.rect.width, self.rect.height
-        self.name = Label(Rect(x + 4, y + 44, w, 20), part.name, FONT, PDP2_GREEN)
-        self.text = TextBlock(Rect(x + 4, y + 64, w, h), string, SMALL_FONT, PDP_GREEN)
+        self.name = Label(Rect(x + 4, y + 14, w, 20), part.name, FONT, PDP2_GREEN)
+        self.text = TextBlock(Rect(x + 4, y + 34, w, h), string, SMALL_FONT, PDP_GREEN)
         self.addPanel(self.name)
         self.addPanel(self.text)
     

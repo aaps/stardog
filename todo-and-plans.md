@@ -28,21 +28,24 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ==========
+the console , input chatconsole panel hyrargy is a bit much
+* realy a better way to reset stuff on death, like radar error thing, enging trust should be off menus all inactive
+* alle set variables moeten in de init van een class anders zijn ze global
 * http://cyrille.rossant.net/create-a-standalone-windows-installer-for-your-python-application/
-* the targeting reticule of a selected part of ship should go over planet etc in radar. !!!
-* the ai should abide by its own radar range !!!
+* the targeting reticule of a selected part of ship should go over planet etc in radar. [done]
+* the ai should abide by its own radar range [done, it is still as stupid as can be]
 * ai can talk to player, when targeting player for example and disengaging !!
 * make sure all the hud elements have a way to be easily re/positioned !!
 
-* remove fps measurment and make an average fps for in game, can be read with console !!!
-* place energy en xp bars in seperate rect !!!
-* an small addaptation that makes this standout from other stardog. The accounting software  !!!
-* add some screen shots to the github repo !!!
+* remove fps measurment and make an average fps for in game, can be read with console [done]
+* place energy and xp bars in seperate rectfrom rest og gui [done]]
+* an small addaptation that makes this standout from other stardog. The accounting software  [star/space rats]
+* add some screen shots to the github repo [done]
 * a buton to make screen shots ?
 * a cursor for on mian screen in form of crosshair
 
 
-* place all menu elements in menuelements.py instead of menu for example !!!
+* place all menu elements in menuelements.py instead of menu for example [ok nothing wrong here menu has all the menu element compositions, and menu elements all the menu elements]
 * make factorys for planets starsystems and ships, the design pattern
 
 
@@ -53,7 +56,6 @@ side dish
 * mini game explotion push stuff, space socker ?
 
 * time to consider a differen graph lib like gfxdraw [we did, but we not gonna do it !, ha]
-* draw out the design of the mini panel !!!
 * plitout parts and cargo , different files, is part cargo or cargo part ?
 * see if it is posible to get part and dummy collition in parts panel [done]
 ]* a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
@@ -65,10 +67,9 @@ side dish
 * inputscript in scripts.py should be playerinputscript, also scripts needed for chatconsole and for menu, this makes it posible to have keys for inflight and for menu command on the same key.
 * make a script that will install the requirements, like pygame, etc
 
-* implement the new font !!!
-
+* implement the new font [done]
 * some buttons should not be rebindable ingame, like quit, menu and console
-* center the text in the input box !!!
+* center the text in the input box [done]
 
 * make a startmenu with: start, options
 * make a options menu with, sound
@@ -85,7 +86,7 @@ side dish
 * engines that are good for space travel but bad for landing and visaversa
 * other sound for bullet impact on shield and plating and on planet
 * palaxing background, the image
-* make bullets that dont impact just disapear !!!
+* make bullets that dont impact just disapear [done]
 * instead of restart directly, wait for keypress and see your lifeless ship float into the distance. !!
 * make the camera so that it can smoothly transition from one place to another
 * make the game run from the beginning, so if choosing ship and color the game is already running !!
@@ -100,7 +101,7 @@ side dish
 
 * adding info from weapon used on part to part, like plasma burns, impact damage etc. [a list of 3 things that happend last]
 * deciding what gui graphics to update:
-- part menu background !!!
+- part menu background [done]
 - tryout a 45 angle on a menu corner !!
 * put certain things into threads like : update cycle and draw cycle, also the drawing of mini info panel.
 * the planet's and structure's and same kind of problem, when landed one can fly into a planet and gravity can pull you from a structure, need something for that [can fix that by making planets ignore floters that are landed unless landed on self]
@@ -113,6 +114,7 @@ side dish
 
 bugs
 =====
+* somewhere in console there is a max, textfield length that is reached to soon [done]
 * the slider part is still not slidable !!!
 * pure black should not be a color to choose ship from  [done]
 * particle emitters dont have the exact right position in case of part [done]

@@ -106,7 +106,9 @@ class AIScript(Script):
 	"""A scripts with basic physics calculation functions.  Virtual."""
 	def update(self, ship):
 		# find closest ship:
-		ships = ship.game.curSystem.ships.sprites()
+		if not ship.radars[-1].enabled:
+			ship.radars[-1].toggle()
+		ships = ship.radars[-1].detected
 		target, distance = self.closestShip(ship, ships)
 				
 		if ship.guns:

@@ -231,6 +231,9 @@ def targetRect(surface, color, mincolor, pos, radius, spacing):
 	pygame.draw.rect(surface, mincolor, (pos[0]-int(radius/2)-int(spacing/2),pos[1]-radius-spacing,radius+spacing,(radius*2)+(spacing*2)), 1)
 	
 def makeKMdistance(floaterx, floatery):
-	return str(round((floaterx.pos.get_distance(floatery.pos)-floaterx.radius-floatery.radius)/10,1))
+	return str(max(round((floaterx.pos.get_distance(floatery.pos)-floaterx.radius-floatery.radius)/10,1),0))
 
 	# self.game.player.pos.get_distance(self.targ.pos)
+
+def makeKMs(floater):
+	return str(round(floater.delta.get_length()/10,1))

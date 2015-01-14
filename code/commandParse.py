@@ -158,6 +158,6 @@ class CommandParse(object):
                     else:
                         self.printout("Invalid input.")
                 else:
-                    self.printout("me: "+text)
+                    self.printout(self.player.firstname + " " + self.player.secondname +": "+text)
             except AttributeError, e:
                 self.printout(e)

@@ -71,7 +71,7 @@ class StarSystem(object):
 		self.specialOperations = []
 
 		for planet in self.planets:
-			if not planet.ships.sprites():
+			if not planet.ships.sprites() and not isinstance(planet, Star):
 				if planet.respawn > 0:#countdown the timer
 					planet.respawn -= 1. / self.game.fps
 					continue

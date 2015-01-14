@@ -77,55 +77,48 @@ class RadarField(Drawable):
 	
 	def __init__(self, game):
 		Drawable.__init__(self, game)
-		self.center = (radarRadius, radarRadius)
-		self.image = pygame.Surface((radarRadius*2, radarRadius*2))
+		self.radarRadius = int(game.width / 10)
+		self.center = (self.radarRadius, self.radarRadius)
+		self.image = pygame.Surface((self.radarRadius*2, self.radarRadius*2))
 		self.image.set_alpha(200)
 		self.zoomModifier = 1
-		self.maskimage = pygame.Surface((radarRadius*2, radarRadius*2))
+		self.maskimage = pygame.Surface((self.radarRadius*2, self.radarRadius*2))
 		self.maskimage.fill((0, 0, 80))
-		pygame.draw.circle(self.maskimage,BLACK, self.center, radarRadius )
+		pygame.draw.circle(self.maskimage,BLACK, self.center, self.radarRadius )
 		self.maskimage.set_colorkey(BLACK)
+		self.targimage = pygame.Surface((8, 8))
+		targetRect(self.targimage, RADAR4, BLACK , (4,4), 2, 2)
+		self.targimage.set_colorkey(BLACK)
 
 	def draw(self, surface):
-		radius = radarRadius
+		radius = self.radarRadius
 		center = self.center
 		self.image.fill((0, 0, 80))
 		
-		scale = radarScale * self.zoomModifier
+		scale = self.radarRadius * self.zoomModifier
 
-		pygame.draw.circle(self.image,(0, 0, 60), self.center, radarRadius )
+		pygame.draw.circle(self.image,(0, 0, 60), self.center, self.radarRadius )
 		#draw floating part dots:
 		if self.game.player.radars[-1].disk and self.game.player.radars[-1].enabled and int(self.game.player.radars[-1].disk.radius / scale + 2) < 100:
 			pygame.draw.circle(self.image, RADAR3, center, int(self.game.player.radars[-1].disk.radius / scale + 2), 1)
 
-		for radar in self.game.player.radars:
+
+		for planet in self.game.player.knownplanets:
 			
-			
-			for floater in radar.detected:
-				
-				result = floater.pos - self.game.player.pos
-				dotPos = int(center[0] + limit(-radius,	result.x / scale, radius)), \
-						int(center[1] + limit(-radius, result.y / scale, radius))
+				result = planet.pos - self.game.player.pos
+				dotPos = int(center[0] + limit(-radius,	result.x / scale, self.radarRadius)), int(center[1] + limit(-self.radarRadius, result.y / scale, self.radarRadius))
+				r = int(planet.radius / scale + 2)
 				if collisionTest(Floater(self.game, Vec2d(dotPos), Vec2d(0,0), 0, 0), Floater(self.game, Vec2d(center), Vec2d(0,0), 0, 100)):
-					if isinstance(floater, Ship):
-						if self.game.player.curtarget == floater:
-							targetRect(self.image, RADAR4, RADAR2 , dotPos, 4, 1)
-						pygame.draw.circle(self.image, (250, 250, 0), dotPos, 2)
-						color = floater.color
-						r = 1
-						pygame.draw.rect(self.image, color, (dotPos[0]-1,dotPos[1]-1,2,2))
-					elif not isinstance(floater, Planet):
-						if self.game.player.curtarget == floater:
-							targetRect(self.image, RADAR4, RADAR2 , dotPos, 2, 2)
-						if isinstance(floater, Bullet):
-							pygame.draw.rect(self.image, (150,40,0), (dotPos[0]-1,dotPos[1]-1,2,2))
-						elif isinstance(floater, Part):
-							pygame.draw.rect(self.image, (200,200,0), (dotPos[0]-1,dotPos[1]-1,2,2))
-				elif not isinstance(floater, Planet):
-					color = (255, 0, 0)
-					modi = 7
-					if self.game.player.curtarget == floater:
-						color = MINI2
+					color = planet.color
+					if self.game.player.curtarget == planet:
+						targetRect(self.image, RADAR4, RADAR2 , dotPos, r, 2)
+					pygame.draw.circle(self.image, color, dotPos, r)
+			
+				else:
+					color = (255, 250, 0)
+					modi = 5
+					if self.game.player.curtarget == planet:
+						color = (0,255,250)
 						modi = 10
 					normalised = result.normalized()
 					pos = []
@@ -135,23 +128,34 @@ class RadarField(Drawable):
 					pygame.draw.polygon(self.image, color, pos)
 
 
-
-		for planet in self.game.player.knownplanets:
 			
-			result = planet.pos - self.game.player.pos
-			dotPos = int(center[0] + limit(-radius,	result.x / scale, radius)), int(center[1] + limit(-radius, result.y / scale, radius))
-			r = int(planet.radius / scale + 2)
+		for floater in self.game.player.radars[-1].detected:
+			
+			result = floater.pos - self.game.player.pos
+			dotPos = int(center[0] + limit(-self.radarRadius,	result.x / scale, self.radarRadius)), \
+					int(center[1] + limit(-self.radarRadius, result.y / scale, self.radarRadius))
 			if collisionTest(Floater(self.game, Vec2d(dotPos), Vec2d(0,0), 0, 0), Floater(self.game, Vec2d(center), Vec2d(0,0), 0, 100)):
-				color = planet.color
-				if self.game.player.curtarget == planet:
-					targetRect(self.image, RADAR4, RADAR2 , dotPos, r, 2)
-				pygame.draw.circle(self.image, color, dotPos, r)
-		
-			else:
-				color = (255, 250, 0)
-				modi = 5
-				if self.game.player.curtarget == planet:
-					color = (0,255,250)
+				if isinstance(floater, Ship):
+					if self.game.player.curtarget == floater:
+						self.image.blit(self.targimage,(dotPos[0]-4,dotPos[1]-4))
+
+					pygame.draw.circle(self.image, (250, 250, 0), dotPos, 2)
+					color = floater.color
+					r = 1
+					pygame.draw.rect(self.image, color, (dotPos[0]-1,dotPos[1]-1,2,2))
+				elif not isinstance(floater, Planet):
+					if self.game.player.curtarget == floater:
+						self.image.blit(self.targimage,(dotPos[0]-4,dotPos[1]-4))
+						
+					if isinstance(floater, Bullet):
+						pygame.draw.rect(self.image, (150,40,0), (dotPos[0]-1,dotPos[1]-1,2,2))
+					elif isinstance(floater, Part):
+						pygame.draw.rect(self.image, (200,200,0), (dotPos[0]-1,dotPos[1]-1,2,2))
+			elif not isinstance(floater, Planet):
+				color = (255, 0, 0)
+				modi = 7
+				if self.game.player.curtarget == floater:
+					color = MINI2
 					modi = 10
 				normalised = result.normalized()
 				pos = []
@@ -161,11 +165,15 @@ class RadarField(Drawable):
 				pygame.draw.polygon(self.image, color, pos)
 
 
-		pygame.draw.line(self.image, SUPER_WHITE, (0,radarRadius), (radarRadius*2,radarRadius),1)
-		pygame.draw.line(self.image, SUPER_WHITE, (radarRadius,0), (radarRadius,radarRadius*2),1)
+
+		
+
+
+		pygame.draw.line(self.image, SUPER_WHITE, (0,self.radarRadius), (self.radarRadius*2,self.radarRadius),1)
+		pygame.draw.line(self.image, SUPER_WHITE, (self.radarRadius,0), (self.radarRadius,self.radarRadius*2),1)
 		self.image.blit(self.maskimage,(0,0))
-		pygame.draw.circle(self.image,SUPER_WHITE, self.center, radarRadius,1 )
-		surface.blit(self.image, (0, 0))
+		pygame.draw.circle(self.image,SUPER_WHITE, self.center, self.radarRadius,1 )
+		surface.blit(self.image, (self.game.width - self.image.get_width(), 0))
 
 	def zoomInRadar(self):
 		if self.zoomModifier <= 2.4:
@@ -245,6 +253,7 @@ class MiniInfo(Drawable):
 	def __init__(self, game,font = SMALL_FONT):
 		Drawable.__init__(self, game)
 		self.bottomleft = 2,  game.height - int(game.height/ 4 ) 
+		self.game = game
 		self.targ = None
 		self.width = int(game.width / 8)
 		self.height = int(game.height/ 4 )
@@ -260,10 +269,10 @@ class MiniInfo(Drawable):
 		self.image.fill((0, 0, 80))
 		if self.targ:
 			self.texts = []
-			speed = round(self.targ.delta.get_length(), 2)
+			# speed = makeMs(self.targ)
 			name = ""
-			linedeltastart = Vec2d(10,60)
-			linedirstart = Vec2d(40,60)
+			linedeltastart = Vec2d(10,180)
+			linedirstart = Vec2d(40,180)
 			pygame.draw.circle(self.image, MINI2, linedeltastart, 10, 1)
 			pygame.draw.line(self.image, MINI2, linedeltastart, self.targ.delta.normalized()*10+linedeltastart)
 			distance = "Distance Km:" + makeKMdistance(self.game.player,self.targ)
@@ -271,7 +280,7 @@ class MiniInfo(Drawable):
 			pygame.draw.line(self.image, MINI2, linedirstart, (self.targ.pos-self.game.player.pos).normalized()*10+linedirstart)
 
 			if isinstance(self.targ, Ship):
-				linedirstart = Vec2d(70,90)
+				linedirstart = Vec2d(100,180)
 				pygame.draw.circle(self.image, SUPER_WHITE, linedirstart, 10, 1)
 				pygame.draw.line(self.image, SUPER_WHITE, linedirstart, linedirstart.normalized().rotated(self.targ.dir)*10+linedirstart)
 				name = self.targ.firstname + " " + self.targ.secondname
@@ -285,8 +294,13 @@ class MiniInfo(Drawable):
 				
 			elif isinstance(self.targ, Planet):
 				name = self.targ.firstname
-				r = int(self.targ.radius / radarScale + 2)
-				
+				scale = self.game.radarfield.radarRadius * self.game.radarfield.zoomModifier
+				print (self.targ.radius / scale), self.width
+				if (self.targ.radius / scale) < self.width/2:
+					r = int(self.targ.radius / scale)
+				else:
+					r = self.width / 2
+				print r
 				pygame.draw.circle(self.image, self.targ.color, ((self.width/2,self.height/2)), r)
 			elif isinstance(self.targ, Part):
 				name = self.targ.name
@@ -300,7 +314,7 @@ class MiniInfo(Drawable):
 			
 			self.texts.append(self.font.render(name , True, self.color))
 			self.texts.append(self.font.render(distance , True, self.color))
-			self.texts.append(self.font.render("speed: " + str(speed) , True, self.color))
+			self.texts.append(self.font.render("speed: " + makeKMs(self.targ) + "Km/s" , True, self.color))
 			for text in self.texts:
 				self.image.blit(text, (0,self.texts.index(text)*15))
 		surface.blit(self.image, self.bottomleft)
@@ -322,7 +336,8 @@ class shipDamage(Drawable):
 		self.shownparts = []
 		self.width = int(game.width / 5)
 		self.height = int(game.height/ 4 )
-		self.image = pygame.Surface((self.width,self.height), flags = (SRCALPHA)).convert_alpha()
+		self.image = pygame.Surface((self.width,self.height))
+		self.image.set_alpha(200)
 	
 	def update(self):
 		totalhealth = sum(c.hp for c in self.player.parts)
@@ -354,6 +369,6 @@ class shipDamage(Drawable):
 			
 			
 
-		surface.blit(self.image, (self.game.width-self.width, 200))
+		surface.blit(self.image, (self.game.width-self.width, 204))
 				
 

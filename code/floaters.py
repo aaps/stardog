@@ -142,7 +142,7 @@ class Bullet(Floater):
 		Floater.kill(self)
 
 	def softkill(self):
-		self.detonate()
+		# self.detonate()
 		Floater.kill(self)
 
 
