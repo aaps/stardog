@@ -54,24 +54,24 @@ class HUD(Drawable):
 		x = self.game.width - 25
 		y = self.game.height - 20 - self.game.height / 6
 		h = self.game.height / 6
-		pygame.draw.rect(self.image, (20, 25, 130), (x, y, \
+		pygame.draw.rect(self.image, HUD1, (x, y, \
 			5, h), 1) # empty bar
 
-		pygame.draw.rect(self.image, (0, 50, 230), (x, y \
+		pygame.draw.rect(self.image, HUD2, (x, y \
 			+ h - h * self.game.player.energy / self.game.player.maxEnergy, 5, h \
 			* self.game.player.energy / self.game.player.maxEnergy)) # full bar
 		#XP:
 		x += 15
-		pygame.draw.rect(self.image, (0, 180, 80), (x, y, \
+		pygame.draw.rect(self.image, HUD3, (x, y, \
 			5, self.game.height / 6), 1) # empty bar
-		pygame.draw.rect(self.image, (0, 180, 80), \
+		pygame.draw.rect(self.image, HUD3, \
 			(x, y + h - h * self.game.player.xp / self.game.player.next(), 5, \
 			h * self.game.player.xp / self.game.player.next())) # full bar
 		if(fontModule) and self.game.player.developmentPoints:
-			self.image.blit(FONT.render(str(self.game.player.developmentPoints), False, (0, 180, 80)), (x, y - 20))			
+			self.image.blit(FONT.render(str(self.game.player.developmentPoints), False, HUD3), (x, y - 20))			
 		#FPS
 		if(fontModule):
-			self.image.blit(FONT.render(str(self.game.fps), False, (200, 20, 255)), (100, 100))
+			self.image.blit(FONT.render(str(self.game.fps), False, HUD6), (100, 100))
 		if self.game.player.game.universe.curSystem.drawEdgeWarning:
 			self.image.blit(edgeWarning, (20, self.game.height - 100))
 		#blit the HUD to the screen:
@@ -87,8 +87,8 @@ class RadarField(Drawable):
 		self.zoomModifier = 1
 		self.maskimage = pygame.Surface((radarRadius*2, radarRadius*2))
 		self.maskimage.fill((0, 0, 80))
-		pygame.draw.circle(self.maskimage,(0,0,0), self.center, radarRadius )
-		self.maskimage.set_colorkey((0,0,0))
+		pygame.draw.circle(self.maskimage,BLACK, self.center, radarRadius )
+		self.maskimage.set_colorkey(BLACK)
 
 	def draw(self, surface):
 		radius = radarRadius
@@ -100,7 +100,7 @@ class RadarField(Drawable):
 		pygame.draw.circle(self.image,(0, 0, 60), self.center, radarRadius )
 		#draw floating part dots:
 		if self.game.player.radars[-1].disk and self.game.player.radars[-1].enabled and int(self.game.player.radars[-1].disk.radius / scale + 2) < 100:
-			pygame.draw.circle(self.image, (0,0,150), center, int(self.game.player.radars[-1].disk.radius / scale + 2), 1)
+			pygame.draw.circle(self.image, RADAR3, center, int(self.game.player.radars[-1].disk.radius / scale + 2), 1)
 
 		for radar in self.game.player.radars:
 			
@@ -113,14 +113,14 @@ class RadarField(Drawable):
 				if collisionTest(Floater(self.game, Vec2d(dotPos), Vec2d(0,0), 0, 0), Floater(self.game, Vec2d(center), Vec2d(0,0), 0, 100)):
 					if isinstance(floater, Ship):
 						if self.game.player.curtarget == floater:
-							targetRect(self.image, (0, 250, 250), (0,0,80) , dotPos, 4, 1)
+							targetRect(self.image, RADAR4, RADAR5 , dotPos, 4, 1)
 						pygame.draw.circle(self.image, (250, 250, 0), dotPos, 2)
 						color = floater.color
 						r = 1
 						pygame.draw.rect(self.image, color, (dotPos[0]-1,dotPos[1]-1,2,2))
 					elif not isinstance(floater, Planet):
 						if self.game.player.curtarget == floater:
-							targetRect(self.image, (0, 250, 250), (0,0,80) , dotPos, 2, 2)
+							targetRect(self.image, RADAR4, RADAR5 , dotPos, 2, 2)
 						if isinstance(floater, Bullet):
 							pygame.draw.rect(self.image, (150,40,0), (dotPos[0]-1,dotPos[1]-1,2,2))
 						elif isinstance(floater, Part):
@@ -129,7 +129,7 @@ class RadarField(Drawable):
 					color = (255, 0, 0)
 					modi = 7
 					if self.game.player.curtarget == floater:
-						color = (0,255,255)
+						color = MINI2
 						modi = 10
 					normalised = result.normalized()
 					pos = []
@@ -148,7 +148,7 @@ class RadarField(Drawable):
 			if collisionTest(Floater(self.game, Vec2d(dotPos), Vec2d(0,0), 0, 0), Floater(self.game, Vec2d(center), Vec2d(0,0), 0, 100)):
 				color = planet.color
 				if self.game.player.curtarget == planet:
-					targetRect(self.image, (0, 250, 250), (0,0,80) , dotPos, r, 2)
+					targetRect(self.image, RADAR4, RADAR5 , dotPos, r, 2)
 				pygame.draw.circle(self.image, color, dotPos, r)
 		
 			else:
@@ -165,10 +165,10 @@ class RadarField(Drawable):
 				pygame.draw.polygon(self.image, color, pos)
 
 
-		pygame.draw.line(self.image, (255,255,255), (0,radarRadius), (radarRadius*2,radarRadius),1)
-		pygame.draw.line(self.image, (255,255,255), (radarRadius,0), (radarRadius,radarRadius*2),1)
+		pygame.draw.line(self.image, SUPER_WHITE, (0,radarRadius), (radarRadius*2,radarRadius),1)
+		pygame.draw.line(self.image, SUPER_WHITE, (radarRadius,0), (radarRadius,radarRadius*2),1)
 		self.image.blit(self.maskimage,(0,0))
-		pygame.draw.circle(self.image,(255, 255, 255), self.center, radarRadius,1 )
+		pygame.draw.circle(self.image,SUPER_WHITE, self.center, radarRadius,1 )
 		surface.blit(self.image, (0, 0))
 
 	def zoomInRadar(self):
@@ -190,8 +190,8 @@ class TargetingRect(Drawable):
 		if self.game.player.curtarget and not isinstance(self.game.player.curtarget, Planet) and self.game.player.curtarget in self.game.spaceview.onScreen:
 			if self.image.get_width() != self.game.player.curtarget.radius:
 				self.image = pygame.Surface((self.game.player.curtarget.radius*2+4, self.game.player.curtarget.radius*2+4))
-				targetRect(self.image, (0, 255, 255), (0,0,0) , (self.image.get_width()/2, self.image.get_height()/2), self.game.player.curtarget.radius, 2)
-				self.image.set_colorkey((0,0,0))
+				targetRect(self.image, RADAR12, BLACK , (self.image.get_width()/2, self.image.get_height()/2), self.game.player.curtarget.radius, 2)
+				self.image.set_colorkey(BLACK)
 
 			result = (self.game.player.curtarget.pos - self.game.player.pos).inttup()
 			result = result[0] + self.game.width / 2 - self.image.get_width() / 2,  result[1] + self.game.height / 2 - self.image.get_height() / 2,
@@ -268,22 +268,22 @@ class MiniInfo(Drawable):
 			name = ""
 			linedeltastart = Vec2d(10,40)
 			linedirstart = Vec2d(10,60)
-			pygame.draw.circle(self.image, (0,255,255), linedeltastart, 10, 1)
-			pygame.draw.line(self.image, (0,255,255), linedeltastart, self.targ.delta.normalized()*10+linedeltastart)
+			pygame.draw.circle(self.image, MINI2, linedeltastart, 10, 1)
+			pygame.draw.line(self.image, MINI2, linedeltastart, self.targ.delta.normalized()*10+linedeltastart)
 			distance = "Distance Km:" + makeKMdistance(self.game.player,self.targ)
-			pygame.draw.circle(self.image, (0,255,255), linedirstart, 10, 1)
-			pygame.draw.line(self.image, (0,255,255), linedirstart, (self.targ.pos-self.game.player.pos).normalized()*10+linedirstart)
+			pygame.draw.circle(self.image, MINI2, linedirstart, 10, 1)
+			pygame.draw.line(self.image, MINI2, linedirstart, (self.targ.pos-self.game.player.pos).normalized()*10+linedirstart)
 
 			if isinstance(self.targ, Ship):
 				linedirstart = Vec2d(40,40)
-				pygame.draw.circle(self.image, (255,255,255), linedirstart, 10, 1)
-				pygame.draw.line(self.image, (255,255,255), linedirstart, linedirstart.normalized().rotated(self.targ.dir)*10+linedirstart)
+				pygame.draw.circle(self.image, SUPER_WHITE, linedirstart, 10, 1)
+				pygame.draw.line(self.image, SUPER_WHITE, linedirstart, linedirstart.normalized().rotated(self.targ.dir)*10+linedirstart)
 				name = self.targ.firstname + " " + self.targ.secondname
 				if not self.targimage == self.targ.baseImage:
 					self.targimage = self.targ.baseImage
 					self.mutatedimage = self.grayscale(self.targimage)
 					self.mutatedimage = pygame.transform.rotozoom(self.mutatedimage, 90,2)
-					self.mutatedimage.set_colorkey((0,0,0))       
+					self.mutatedimage.set_colorkey(BLACK)       
 				offset = ((self.width/2) - (self.mutatedimage.get_width()/2), (self.height/2)-(self.mutatedimage.get_height()/2))
 				self.image.blit(self.mutatedimage, offset)
 				
@@ -298,7 +298,7 @@ class MiniInfo(Drawable):
 					self.targimage = self.targ.baseImage
 					self.mutatedimage = self.grayscale(self.targimage)
 					self.mutatedimage = pygame.transform.scale(self.mutatedimage, (self.targimage.get_width()*2,self.targimage.get_height()*2) )
-					self.mutatedimage.set_colorkey((0,0,0))     
+					self.mutatedimage.set_colorkey(BLACK)     
 				self.image.blit(self.mutatedimage,(self.width/2,self.height/2))
 			
 			
@@ -343,8 +343,7 @@ class shipDamage(Drawable):
 		
 		if self.active:
 			self.startrect = Rect(10, 0, 150, 5)
-			self.image.fill((0, 0, 0, 255))
-			self.image.fill((0, 0, 80, 200))
+			self.image.fill(SHIPDAMAGE)
 			for part in self.shownparts:
 				partfactor = part.hp / part.maxhp 
 				
@@ -354,7 +353,7 @@ class shipDamage(Drawable):
 					color = (int((1-partfactor) * 255) , int(partfactor * 255), 50)
 					
 					pygame.draw.rect(self.image, color, self.startrect)
-					text = self.font.render(part.name + " " + str(round(part.hp,1)) + "/" + str(part.maxhp), False, (0, 180, 80))
+					text = self.font.render(part.name + " " + str(round(part.hp,1)) + "/" + str(part.maxhp), False, HUD3)
 					self.image.blit(text, (10, self.startrect[1]-15))
 			
 			

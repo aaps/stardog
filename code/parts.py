@@ -29,7 +29,7 @@ class Port(object):
 
 class Part(Floater):
     """A part of a ship."""
-    baseImage = loadImage("res/default.gif", (255,255,255))
+    baseImage = loadImage("res/default.gif", SUPER_WHITE)
     image = None
     height, width = 9, 3
     pickuptimeout = 0
@@ -44,7 +44,7 @@ class Part(Floater):
     offset = Vec2d(0, 0)
     shipoffset = Vec2d(0, 0)
     #whether this should be redrawn each frame:
-    color = (150,150,150)
+    color = PART1
     animated = False
     animatedBaseImage = None
     animatedImage = None
@@ -52,7 +52,7 @@ class Part(Floater):
     name = 'part'
     level = 1
     buffer = pygame.Surface((30,30), flags = hardwareFlag | SRCALPHA).convert_alpha()
-    buffer.set_colorkey((0,0,0))
+    buffer.set_colorkey(BLACK)
     acted = False
     
     #a list of functions that are called on the ship during ship.update:
@@ -76,8 +76,8 @@ class Part(Floater):
          #each element is the part there, (x,y,dir) position of the connection.
          #the example is at the bottom of the part, pointed down.
         self.ports = [Port(Vec2d(-self.width / 2, 0), 0, self)]
-        self.emitters.append(Emitter(self.game, self, self.condHalfDamage , 180, 10, 20, (0,0,0,255), (150,150,150,50), 4, 5, 5, 3, 5, True))
-        self.emitters.append(Emitter(self.game, self, self.condThQuarterDamage , 180, 40, 50, (255,255,0,255), (255,0,0,255), 0, 1, 1, 1, 2.5, True))
+        self.emitters.append(Emitter(self.game, self, self.condHalfDamage , 180, 10, 20, PARTICLE2, PARTICLE1, 4, 5, 5, 3, 5, True))
+        self.emitters.append(Emitter(self.game, self, self.condThQuarterDamage , 180, 40, 50, PARTICLE3, PARTICLE4, 0, 1, 1, 1, 2.5, True))
         
     
     def stats(self):
@@ -135,10 +135,10 @@ class Part(Floater):
         #rotate takes a ccw angle and color.
         part.image = colorShift(pygame.transform.rotate(part.baseImage, \
                     -part.dir), part.color)
-        part.image.set_colorkey((0,0,0))
+        part.image.set_colorkey(BLACK)
         if part.animatedBaseImage:
             part.animatedImage = colorShift(part.animatedBaseImage, part.color)
-            part.animatedImage.set_colorkey((0,0,0))
+            part.animatedImage.set_colorkey(BLACK)
         #unequip the part if it collides with others, except parent(self).
         
 
@@ -202,7 +202,7 @@ class Part(Floater):
         offset = Vec2d(cos(angle) * DETACH_SPACE, sin(angle) * DETACH_SPACE)
         #set physics to drift away from ship (not collide):
         self.image = colorShift(pygame.transform.rotate(self.baseImage, angle), self.color).convert()
-        self.image.set_colorkey((0,0,0))
+        self.image.set_colorkey(BLACK)
         self.pos = ship.pos + self.offset
         self.delta.x = ship.delta.x + (rand()  * DETACH_SPEED)
 
@@ -296,7 +296,7 @@ class Part(Floater):
 
         if self.animated and self.animatedImage and self.ship:
             image = pygame.transform.rotate(self.animatedImage,- self.dir - self.ship.dir).convert_alpha()
-            image.set_colorkey((0,0,0))
+            image.set_colorkey(BLACK)
             pos = self.pos.x - image.get_width() / 2 - offset[0], \
                   self.pos.y - image.get_height() / 2 - offset[1]
             surface.blit(image, pos)
@@ -826,7 +826,7 @@ class Engine(Part):
         self.ports = []
         self.functions.append(self.thrust)
         self.functionDescriptions.append('thrust')
-        self.emitters.append(Emitter(self.game, self, self.condActive , 5, 50, 100, (75,75,255,255), (255,100,100,0), 2, 4, 100, 2, 5, True))
+        self.emitters.append(Emitter(self.game, self, self.condActive , 5, 50, 100, PARTICLE5, PARTICLE6, 2, 4, 100, 2, 5, True))
         
     
     def condActive(self):

@@ -27,6 +27,8 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ==========
+* http://cyrille.rossant.net/create-a-standalone-windows-installer-for-your-python-application/
+* the targeting reticule of a selected part of ship should go over planet etc in radar.
 * the ai should abide by its own radar range
 * ai can talk to player, when targeting player for example and disengaging
 * ai can use an fsm to flee attack, explore

@@ -6,6 +6,59 @@ from vec2d import *
 
 hardwareFlag = pygame.HWSURFACE
 
+SUPER_WHITE = (255,255,255)
+WHITE = (250,250,250)
+BLACK = (0,0,0)
+MIN_BLACK = (10,10,10)
+NAME_INPUT_BLUE = (100, 100, 200)
+TYPE_BUTTON_GREEN = (100,255,100)
+CONSOLE_BLUE = (100, 100, 255, 250)
+SHIP_PANEL_BLUE = (100,200,0)
+PDP_GREEN = (0, 150, 0)
+PDP2_GREEN = (100, 200, 0)
+SELECTED_COLOR = (255,200,200)
+BGACTIVE = (110, 110, 75)
+BGSELECTED = (80, 50, 110)
+DS_SELECTED = (255,75,51)
+BS1 = (100,200,100)
+BS3 = (200,100,100)
+ST = (200,200,255)
+DRAGGABLE = (50, 150, 50)
+DRAGGABLE2 = (75,175,75)
+BUTTON_ACTIVE = (200,255,200)
+SBUTTON_ACTIVE = (255,140,0)
+SBUTTON_INACTIVE = (200,100,0)
+INPUTFIELD = (100, 200, 100)
+FLOATER = (200, 200, 0)
+HUD1 = (20, 25, 130)
+HUD2 = (0, 50, 230)
+HUD3 = (0, 180, 80)
+HUD6 = (200, 20, 255)
+RADAR2 = (0, 0, 80)
+RADAR3 = (0,0,150)
+RADAR4 = (0, 250, 250)
+RADAR6 = (250, 250, 0)
+RADAR7 = (0, 250, 250)
+RADAR8 = (150,40,0)
+RADAR9 = (200,200,0)
+RADAR10 = (0, 250, 250)
+RADAR11 = (0,0,80)
+RADAR12 = (0, 255, 255)
+MINI1 = (100, 100, 255)
+MINI2 = (0,255,255)
+SHIPDAMAGE = (0, 0, 80, 200)
+RED = (255,0,0)
+GREEN = (0,255,0)
+BLUE = (0,0,255)
+PART1 =  (150,150,150)
+PARTICLE1 =  (150,150,150,50)
+PARTICLE2 = (0,0,0,255)
+PARTICLE3 = (255,255,0,255)
+PARTICLE4 = (255,0,0,255)
+PARTICLE5 = (75,75,255,255)
+PARTICLE6 = (255,100,100,0)
+
+
 #TODO: write fast sloppy trig functions. 
 def sin(theta):
 	return math.sin(math.radians(theta))
@@ -100,16 +153,16 @@ if pygame.image.get_extended():
 else:
 	ext = ".bmp"
 	
-def loadImage(filename, colorkey=(0,0,0)):
+def loadImage(filename, colorkey=BLACK):
 	try:
 		image = pygame.image.load(filename).convert()
 		image.set_colorkey(colorkey)
 	except pygame.error:
 		image = pygame.image.load("res/default" + ext).convert()
-		image.set_colorkey((255,255,255))
+		image.set_colorkey(SUPER_WHITE)
 	return image
 	
-def colorShift(surface, color, colorkey = (0,0,0)):
+def colorShift(surface, color, colorkey = BLACK):
 	"""Converts every pixel with equal red and blue values to a shade of 
 	color.  Attempts to maintain value and saturation of surface. 
 	Returns a new Surface."""

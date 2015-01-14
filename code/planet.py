@@ -117,7 +117,7 @@ class Structure(Planet):
 	
 	def __init__(self, starsystem, pos, delta, grav=5000, color = (100,200,50), radius = 100, image = None):
 		Floater.__init__(self, starsystem.game, pos, Vec2d(0,0), 0, image=image)
-		self.color = (0,0,255)
+		self.color = BLUE
 		self.g = grav
 		self.starsystem = starsystem
 		self.damage = {}	
@@ -165,7 +165,7 @@ class Gateway(Planet):
 	def __init__(self, starsystem, pos, radius = 100, mass = 10000, \
 					color = (100,200,50), image = None, race = None):
 		image = pygame.Surface((radius * 4, radius * 4), flags = hardwareFlag).convert()
-		image.set_colorkey((0,0,0))
+		image.set_colorkey(BLACK)
 		Floater.__init__(self, starsystem.game, pos, Vec2d(0,0), radius = radius, image = image)
 		self.mass = mass #determines gravity.
 		self.starsystem = starsystem

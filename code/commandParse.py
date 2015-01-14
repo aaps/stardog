@@ -10,9 +10,9 @@ class bcolors:
     ENDC = '\033[0m'
     WHITE = '\033'
 
-RED = (255,0,0)
-GREEN = (0,255,0)
-BLUE = (0,0,255)
+# RED = (255,0,0)
+# GREEN = (0,255,0)
+# BLUE = (0,0,255)
 
 class AttributeFilter(object):
     def __init__(self):

@@ -9,7 +9,7 @@ from pygame.locals import *
 class Panel(object):
     """Panel(mouse, rect) -> new Panel. 
     The basic building block of the menu system. """
-    color = (100, 200, 100)
+    color = INPUTFIELD
     image = None
     drawBorder = True
     bgColor = None
@@ -186,7 +186,7 @@ class Dragable(Panel):
         Panel.__init__(self, rect)
         self.parent = parent
         self.image = pygame.Surface(rect.size).convert()
-        self.image.set_colorkey((0,0,0))
+        self.image.set_colorkey(BLACK)
             
     def drag(self, start):
         drag = Panel.drag(self, start)
@@ -227,8 +227,8 @@ class Slider(Panel):
             
             newrect = Rect(rect[0] + (rect[2]/2)-10,rect[3]+rect[1]-10, rect[2], 10)
         self.dragable = Dragable(newrect,self)
-        self.dragable.color = (50, 150, 50)
-        self.dragable.bgColor = (75,175,75)
+        self.dragable.color = DRAGGABLE
+        self.dragable.bgColor = DRAGGABLE2
         self.addPanel(self.dragable)
         
 
@@ -284,8 +284,8 @@ class ColorPanel(Panel):
 class Button(Panel):
     """Button(rect, function, text) -> a button that says text and does
     function when clicked. """
-    activeColor = (200,255,200)
-    inactiveColor = (100,200,100)
+    activeColor = BUTTON_ACTIVE
+    inactiveColor = BS1
     
     def __init__(self, rect, function, text, font = FONT):
         Panel.__init__(self, rect)
@@ -316,8 +316,8 @@ class ShapeButton(Button):
     You may want to change self.activeColor, self.inactiveColor, or
     self.weight . """
     weight = 3
-    activeColor = (255,140,0)
-    inactiveColor = (200,100,0)
+    activeColor = SBUTTON_ACTIVE
+    inactiveColor = SBUTTON_INACTIVE
     
     
     def __init__(self, rect, function, points):
@@ -336,7 +336,7 @@ class InputField(Panel):
     drawBorder = False
     image = None
     
-    def __init__(self, rect, game, function = None, font = BIG_FONT, color = (100, 200, 100), width = 20):
+    def __init__(self, rect, game, function = None, font = BIG_FONT, color = INPUTFIELD, width = 20):
         self.text = ""
         self.game = game
         self.function = function
@@ -445,7 +445,7 @@ class ScrollPanel(Panel):
                         fullDimensions[0], fullDimensions[1])
         self.image = pygame.Surface(fullRect.size, \
                         hardwareFlag | SRCALPHA).convert_alpha()
-        self.image.set_colorkey((0,0,0))
+        self.image.set_colorkey(BLACK)
         self.visibleRect = Rect((0, 0), displayRect.size)
         self.up = ShapeButton(Rect(self.rect.right - 14,\
                     self.rect.top, 14, 14),\
@@ -566,9 +566,9 @@ class ScrollPanel(Panel):
                 panel.dragOver(pos, rel)
     
 class Selectable(Panel):
-    activeColor = (200,255,200)
-    inactiveColor = (100,200,100)
-    selectedColor = (200,50,50)
+    activeColor = BUTTON_ACTIVE
+    inactiveColor = BS1
+    selectedColor = DS_SELECTED
     selected = False
     bgInactive = None
     bgActive = None
@@ -599,9 +599,9 @@ class Selectable(Panel):
         self.bgColor = self.bgInactive
         
 class DragableSelectable(Dragable):
-    activeColor = (200,255,200)
-    inactiveColor = (100,200,100)
-    selectedColor = (200,50,50)
+    activeColor = BUTTON_ACTIVE
+    inactiveColor = BS1
+    selectedColor = DS_SELECTED
     bgInactive = None
     bgActive = None
     bgSelected = None
@@ -713,7 +713,7 @@ class Selecter(ScrollPanel):
             if self.image.get_height() < y:
                 self.image = pygame.Surface((self.image.get_width(),\
                         y * 1.5), hardwareFlag | SRCALPHA).convert_alpha()
-                self.image.set_colorkey((0,0,0))
+                self.image.set_colorkey(BLACK)
         else: #horizontal
             x = 2
             for panel in self.selectables:
@@ -725,7 +725,7 @@ class Selecter(ScrollPanel):
             if self.image.get_width() < x:
                 self.image = pygame.Surface((x * 1.5,\
                         self.image.get_height()), hardwareFlag | SRCALPHA).convert_alpha()
-                self.image.set_colorkey((0,0,0))
+                self.image.set_colorkey(BLACK)
         self.selectables.append(selectable)
         
     def removeSelectable(self, selectable):
@@ -750,12 +750,12 @@ class Selecter(ScrollPanel):
             if self.image.get_height() < y:
                 self.image = pygame.Surface((self.image.get_width(),\
                         y * 1.5), hardwareFlag | SRCALPHA).convert_alpha()
-                self.image.set_colorkey((0,0,0))
+                self.image.set_colorkey(BLACK)
             #grow full image:
             if self.image.get_height() > y * 3:
                 self.image = pygame.Surface((self.image.get_width(),\
                         y * 1.5), hardwareFlag | SRCALPHA).convert_alpha()
-                self.image.set_colorkey((0,0,0))
+                self.image.set_colorkey(BLACK)
                 # if the new real image is smaller than the visible image, 
                 #set the offset to 0.
                 if self.image.get_height() < self.visibleRect.height:
@@ -773,12 +773,12 @@ class Selecter(ScrollPanel):
                 self.image = pygame.Surface((x * 1.5,\
                         self.image.get_height()), hardwareFlag | SRCALPHA)\
                         .convert_alpha()
-                self.image.set_colorkey((0,0,0))
+                self.image.set_colorkey(BLACK)
             #grow full image:
             if self.image.get_width() > x * 3:
                 self.image = pygame.Surface((x * 1.5,\
                         self.image.get_height()), hardwareFlag | SRCALPHA).convert_alpha()
-                self.image.set_colorkey((0,0,0))
+                self.image.set_colorkey(BLACK)
                 # if the new real image is smaller than the visible image, 
                 #set the offset to 0.
                 if self.image.get_width() < self.visibleRect.width:
@@ -818,10 +818,10 @@ class Selecter(ScrollPanel):
 
 
 class Label(Panel):
-    """Label(self,  rect, text, color = (100, 200, 100), font = FONT) ->
+    """Label(self,  rect, text, color = INPUTFIELD, font = FONT) ->
     A panel with a single line of text."""
     drawBorder = False
-    def __init__(self, rect, text, font = FONT, color =(100, 200, 100)):
+    def __init__(self, rect, text, font = FONT, color =INPUTFIELD):
         Panel.__init__(self, rect)
         self.text = text
         self.color = color
@@ -851,7 +851,7 @@ class TextBlock(Panel):
 
     drawBorder = False
     image = None
-    def __init__(self, rect, textFunction, font = FONT, color = (0,0,0), width = 200):
+    def __init__(self, rect, textFunction, font = FONT, color = BLACK, width = 200):
         self.textFunction = textFunction
         self.color = color
         self.lineHeight = font.get_height()

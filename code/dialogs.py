@@ -29,7 +29,7 @@ class Messenger(Drawable):
         for i in xrange(0, len(the_list), length):
             yield the_list[i:i+length]
     
-    def message(self, text, color = (250,250,250)):
+    def message(self, text, color = SUPER_WHITE):
         """message(text,color) -> add a message to the Messenger."""
         text = '   ' + text
         if len(text) > self.maxChars: #line length limit

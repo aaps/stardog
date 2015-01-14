@@ -13,7 +13,7 @@ class Race(object):
 	shipScripts = []
 	script = None
 	
-	def __init__(self, game, name, color = (255,0,0)):
+	def __init__(self, game, name, color = RED):
 		self.game = game
 		self.name = name
 		self.color = color
