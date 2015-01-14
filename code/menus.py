@@ -128,7 +128,7 @@ class TypeButton(Button):
         if fontModule:
             toblit = font.render(self.type.title(), True, TYPE_BUTTON_GREEN)
 
-            self.image.blit(toblit,(20,rect[3] - toblit.get_height() - 20))
+            self.image.blit(toblit,(5,rect[3] - toblit.get_height() - 10))
         Button.__init__(self, rect, self.choose, None)
         
     def choose(self):
@@ -781,16 +781,16 @@ class PartHeaderSelectable(Selectable):
         self.part = part
         Selectable.__init__(self, rect)
         if part.number != -1:
-            self.addPanel(Label(rect, '#' + str(part.number) + ' ' + part.name))
+            self.addPanel(Label(rect, '#' + str(part.number) + ' ' + part.name, SMALL_FONT))
         else:
-            self.addPanel(Label(rect, part.name))
+            self.addPanel(Label(rect, part.name, SMALL_FONT))
 
 class FunctionSelectable(Selectable):
     
     def __init__(self, function, rect):
         self.function = function
         Selectable.__init__(self, rect)
-        self.addPanel(Label(rect, " " + function.__name__))
+        self.addPanel(Label(rect, " " + function.__name__, SMALL_FONT))
         
 class BindingSelecter(Selecter):
     
@@ -826,13 +826,13 @@ class BindingSelectable(Selectable):
         self.name = pygame.key.name(self.keyNum)
         Selectable.__init__(self, rect)
         self.addPanel(Label(rect, \
-                    " " + self.name + " - ", color = (100,200,100)))
+                    " " + self.name + " - ", SMALL_FONT,  BS1))
         self.addPanel(Label( \
                     Rect(self.panels[-1].rect.right, self.rect.top,0,0), \
-                    str(self.partNum) + ": ", color = (200,200,100)))
+                    str(self.partNum) + ": ", SMALL_FONT,  SOME))
         self.addPanel(Label( \
                     Rect(self.panels[-1].rect.right, self.rect.top,0,0), \
-                    str(self.function.__name__), color = BS3))	
+                    str(self.function.__name__), SMALL_FONT,  BS3))	
         
 class Skills(Panel):
     

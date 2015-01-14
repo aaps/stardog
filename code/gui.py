@@ -44,16 +44,16 @@ class HUD(Drawable):
 		
 		self.keys = game.keys
 		
-		self.image = pygame.Surface((self.game.width, self.game.height), flags = (SRCALPHA))
+		self.image = pygame.Surface((70, 220), flags = (SRCALPHA))
 		
 	def draw(self, surface):
 		"""updates the HUD and draws it."""
-		self.image.fill((0, 0, 0, 0))
+		self.image.fill(SHIPDAMAGE)
 
 		# energy:
-		x = self.game.width - 25
-		y = self.game.height - 20 - self.game.height / 6
-		h = self.game.height / 6
+		x = 25
+		y = 20 
+		h = 180
 		pygame.draw.rect(self.image, HUD1, (x, y, \
 			5, h), 1) # empty bar
 
@@ -63,19 +63,15 @@ class HUD(Drawable):
 		#XP:
 		x += 15
 		pygame.draw.rect(self.image, HUD3, (x, y, \
-			5, self.game.height / 6), 1) # empty bar
+			5, 180), 1) # empty bar
 		pygame.draw.rect(self.image, HUD3, \
 			(x, y + h - h * self.game.player.xp / self.game.player.next(), 5, \
 			h * self.game.player.xp / self.game.player.next())) # full bar
 		if(fontModule) and self.game.player.developmentPoints:
 			self.image.blit(FONT.render(str(self.game.player.developmentPoints), False, HUD3), (x, y - 20))			
-		#FPS
-		if(fontModule):
-			self.image.blit(FONT.render(str(self.game.fps), False, HUD6), (100, 100))
-		if self.game.player.game.universe.curSystem.drawEdgeWarning:
-			self.image.blit(edgeWarning, (20, self.game.height - 100))
+
 		#blit the HUD to the screen:
-		surface.blit(self.image, (0, 0))
+		surface.blit(self.image, (self.game.width-70, self.game.height-200))
 	
 class RadarField(Drawable):
 	
@@ -113,14 +109,14 @@ class RadarField(Drawable):
 				if collisionTest(Floater(self.game, Vec2d(dotPos), Vec2d(0,0), 0, 0), Floater(self.game, Vec2d(center), Vec2d(0,0), 0, 100)):
 					if isinstance(floater, Ship):
 						if self.game.player.curtarget == floater:
-							targetRect(self.image, RADAR4, RADAR5 , dotPos, 4, 1)
+							targetRect(self.image, RADAR4, RADAR2 , dotPos, 4, 1)
 						pygame.draw.circle(self.image, (250, 250, 0), dotPos, 2)
 						color = floater.color
 						r = 1
 						pygame.draw.rect(self.image, color, (dotPos[0]-1,dotPos[1]-1,2,2))
 					elif not isinstance(floater, Planet):
 						if self.game.player.curtarget == floater:
-							targetRect(self.image, RADAR4, RADAR5 , dotPos, 2, 2)
+							targetRect(self.image, RADAR4, RADAR2 , dotPos, 2, 2)
 						if isinstance(floater, Bullet):
 							pygame.draw.rect(self.image, (150,40,0), (dotPos[0]-1,dotPos[1]-1,2,2))
 						elif isinstance(floater, Part):
@@ -148,7 +144,7 @@ class RadarField(Drawable):
 			if collisionTest(Floater(self.game, Vec2d(dotPos), Vec2d(0,0), 0, 0), Floater(self.game, Vec2d(center), Vec2d(0,0), 0, 100)):
 				color = planet.color
 				if self.game.player.curtarget == planet:
-					targetRect(self.image, RADAR4, RADAR5 , dotPos, r, 2)
+					targetRect(self.image, RADAR4, RADAR2 , dotPos, r, 2)
 				pygame.draw.circle(self.image, color, dotPos, r)
 		
 			else:
@@ -239,14 +235,14 @@ class BGImage(Drawable):
 			
 class MiniInfo(Drawable):
 	color = (100, 100, 255)
-	font = FONT
+	font = SMALL_FONT
 	maxChars = 50 #line width
 	bottomleft = 0,0
 	targimage = None
 	mutatedimage = None
 	texts = []
 
-	def __init__(self, game,font = FONT):
+	def __init__(self, game,font = SMALL_FONT):
 		Drawable.__init__(self, game)
 		self.bottomleft = 2,  game.height - int(game.height/ 4 ) 
 		self.targ = None
@@ -266,8 +262,8 @@ class MiniInfo(Drawable):
 			self.texts = []
 			speed = round(self.targ.delta.get_length(), 2)
 			name = ""
-			linedeltastart = Vec2d(10,40)
-			linedirstart = Vec2d(10,60)
+			linedeltastart = Vec2d(10,60)
+			linedirstart = Vec2d(40,60)
 			pygame.draw.circle(self.image, MINI2, linedeltastart, 10, 1)
 			pygame.draw.line(self.image, MINI2, linedeltastart, self.targ.delta.normalized()*10+linedeltastart)
 			distance = "Distance Km:" + makeKMdistance(self.game.player,self.targ)
@@ -275,7 +271,7 @@ class MiniInfo(Drawable):
 			pygame.draw.line(self.image, MINI2, linedirstart, (self.targ.pos-self.game.player.pos).normalized()*10+linedirstart)
 
 			if isinstance(self.targ, Ship):
-				linedirstart = Vec2d(40,40)
+				linedirstart = Vec2d(70,90)
 				pygame.draw.circle(self.image, SUPER_WHITE, linedirstart, 10, 1)
 				pygame.draw.line(self.image, SUPER_WHITE, linedirstart, linedirstart.normalized().rotated(self.targ.dir)*10+linedirstart)
 				name = self.targ.firstname + " " + self.targ.secondname
@@ -306,7 +302,7 @@ class MiniInfo(Drawable):
 			self.texts.append(self.font.render(distance , True, self.color))
 			self.texts.append(self.font.render("speed: " + str(speed) , True, self.color))
 			for text in self.texts:
-				self.image.blit(text, (0,self.texts.index(text)*10))
+				self.image.blit(text, (0,self.texts.index(text)*15))
 		surface.blit(self.image, self.bottomleft)
 
 	def grayscale(self, img):

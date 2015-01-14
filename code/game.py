@@ -145,6 +145,9 @@ class Game(object):
                         self.keys[event.key % 322] = 1
                         if event.key == pygame.K_m:
                             all_objects = muppy.get_objects()
+                        if event.key == pygame.K_BACKSLASH:
+
+                            pygame.image.save(self.screen, "screenshot.jpeg")
                     elif event.type == pygame.KEYUP:
                         self.keys[event.key % 322] = 0
 

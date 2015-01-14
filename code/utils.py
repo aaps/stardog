@@ -57,6 +57,7 @@ PARTICLE3 = (255,255,0,255)
 PARTICLE4 = (255,0,0,255)
 PARTICLE5 = (75,75,255,255)
 PARTICLE6 = (255,100,100,0)
+SOME = (200,200,100)
 
 
 #TODO: write fast sloppy trig functions. 
@@ -119,15 +120,16 @@ def randColor(min, max):
 
 #setup fonts
 try:
-	pygame.font.init()
-	#SHADOW_FONT = pygame.font.SysFont(name = None, size = 20, bold = True)     
-	SMALL_FONT = pygame.font.SysFont(name = None, size = 16)    
-	FONT = pygame.font.SysFont(name = None, size = 20)
-	BIG_FONT = pygame.font.SysFont(name = None, size = 36)
+	pygame.font.init()  
+	SMALL_FONT = pygame.font.Font("res/hardfont.ttf", 14)    
+	FONT = pygame.font.Font("res/hardfont.ttf", 18)
+	BIG_FONT = pygame.font.Font("res/hardfont.ttf", 24)
 	fontModule = True
+
 except:
 	FONT = None
 	BIG_FONT = None
+	SMALL_FONT = None
 	fontModule = False
 	print "Font module not found. Text will not be printed."
 

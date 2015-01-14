@@ -6,7 +6,7 @@ main dish
 
 * quad trees (hardmode, after vector and view splitout, wil replace current collision check mess)
 
-* wormholes/star gates to other systems. (medium mode ?, after Gravless class) [might be soon done] [more work than anticipated]
+* wormholes/star gates to other systems. (medium mode ?, after Gravless class) [might be soon done] [more work than anticipated] !!!
 
 * make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump]
 
@@ -24,71 +24,71 @@ http://pygame.org/project-planes-2392-4051.html get version 0.6
 http://www.pygame.org/project-OpenGL+Library+(glLib*)-877-.html
 http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 * the posibility for stations and planets to have facilitys, like bars, trading hubs, etc
+* ai can use an fsm to flee attack, explore
 
 side dish
 ==========
 * http://cyrille.rossant.net/create-a-standalone-windows-installer-for-your-python-application/
-* the targeting reticule of a selected part of ship should go over planet etc in radar.
-* the ai should abide by its own radar range
-* ai can talk to player, when targeting player for example and disengaging
-* ai can use an fsm to flee attack, explore
-* make sure all the hud elements have a way to be easily re/positioned
-* radar and gud are one thing should be two seperate things.
-* an small addaptation that makes this standout from other stardog. The accounting software ?
-* add some screen shots to the github repo
+* the targeting reticule of a selected part of ship should go over planet etc in radar. !!!
+* the ai should abide by its own radar range !!!
+* ai can talk to player, when targeting player for example and disengaging !!
+* make sure all the hud elements have a way to be easily re/positioned !!
+
+* remove fps measurment and make an average fps for in game, can be read with console !!!
+* place energy en xp bars in seperate rect !!!
+* an small addaptation that makes this standout from other stardog. The accounting software  !!!
+* add some screen shots to the github repo !!!
 * a buton to make screen shots ?
 * a cursor for on mian screen in form of crosshair
-* a selection box for tageted floaters on radar and on main screen [done]
-* need a file with all the theme's colors to use !!!
-* place all menu elements in menuelements.py instead of menu for example
+
+
+* place all menu elements in menuelements.py instead of menu for example !!!
 * make factorys for planets starsystems and ships, the design pattern
-* put laser one one color, perhaps same as the plasma cannon colors [done lasers are green now]
-* make some formula to convert the pix into m, km  something like that [done 1000 px is 100 km now from floater rim to floater rim, all the rimming all the time]
-* make a detection score for a ship, based on the parts, that also need a detection score.
-* a arrow on radar when targeting a known planet that is out of radar reach. [done]
+
+
+* make a detection score for a ship, based on the parts, that also need a detection score. [remove totalhp from shipdamage indicatiors and put it in ship, this will be detection score] !!
+
 * a random seed for xtra fun
-* some parts dont get a delta upon ejecting
-* the radar range circle doesnt yet scale
+
 * mini game explotion push stuff, space socker ?
-* when opening part the radar will be reset to the ockpit radar
-* time to consider a differen graph lib like gfxdraw
-* draw out the design of the mini panel
+
+* time to consider a differen graph lib like gfxdraw [we did, but we not gonna do it !, ha]
+* draw out the design of the mini panel !!!
 * plitout parts and cargo , different files, is part cargo or cargo part ?
-* see if it is posible to get part and dummy collition in parts panel [1/2 DONE	CAN PLACE OVER other part, however parts might disapear]
+* see if it is posible to get part and dummy collition in parts panel [done]
 ]* a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
-* the intro menu doesnt calculate with fps, and that is why the curor speed is off, fix that
-* make sure a ship cant spawn in planet, count for player
-* the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed
-* now that more keys can rebound/binded ? with the goal to bind all the keys that way, there should be the option to restrict some key rebinding or unsetting, or there is the posibility to rebind the quit key or something like that, or to rebind the menu key in the menu itself
-* rework of menu active and keybindings, activemenu and active better differenciation, update part en draw part if active, the var active in toplevelpanel.
+* the intro menu doesnt calculate with fps, and that is why the curor speed is off, fix that !!
+
+* the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed !!
+
+* rework of menu active and keybindings, activemenu and active better differenciation, update part and draw part if active, the var active in toplevelpanel. !!
 * inputscript in scripts.py should be playerinputscript, also scripts needed for chatconsole and for menu, this makes it posible to have keys for inflight and for menu command on the same key.
-* player should go into univese and not into game ?
 * make a script that will install the requirements, like pygame, etc
 
-* implement the new font
-* names of ship selection should come from ship it self, if posible, intro menu [done]
+* implement the new font !!!
+
 * some buttons should not be rebindable ingame, like quit, menu and console
-* center the text in the input box
+* center the text in the input box !!!
 
 * make a startmenu with: start, options
 * make a options menu with, sound
 * make a sound menu with music volume and fx volume
 * comments in code and keeping the standards
-* merging the allto2dvector into master, or even replace master [ok done, aat]
+
 * making the universe class to hold starsystems [WIP]
 * making the rest of screen changeable ?, posibility to chage window with and or height ?
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
 * more collision handeling refactor [still need more refactoring]
 * more to vec2d vector work. [can alwais use some work]
-* zoom in out option for radar [medium mode ?] [doneish]
+
 * weapon heat generation [easy mode]
 * engines that are good for space travel but bad for landing and visaversa
 * other sound for bullet impact on shield and plating and on planet
 * palaxing background, the image
-* make bullets that dont impact just disapear
-* instead of restart directly, wait for keypress and see your lifeless ship float into the distance.
+* make bullets that dont impact just disapear !!!
+* instead of restart directly, wait for keypress and see your lifeless ship float into the distance. !!
 * make the camera so that it can smoothly transition from one place to another
-* make the game run from the beginning, so if choosing ship and color the game is already running
+* make the game run from the beginning, so if choosing ship and color the game is already running !!
 * make camera translatable instead of direct snap
 * the portal stargate warp dent could use some drag inside it, for temp usability
 * cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fitt parts on your ship when on planet or structure, when container gets destroyed or dissconnected from ship you lose parts untill you are at capacity.
@@ -96,15 +96,14 @@ side dish
 * in camera splitout functionality make a layer class for the layers that will not do the drawing but perhaps the updating, anyhow updates doesnt belong in camera ?
 
 * ai could use some more bains and variation
-* also add the chat console and menu to the camera
 
-* parts that disconnect/scatter have a change they will be destroyed
-* adding info from weapon used on part to part, like plasma burns, impact damage etc.
+
+* adding info from weapon used on part to part, like plasma burns, impact damage etc. [a list of 3 things that happend last]
 * deciding what gui graphics to update:
-- part menu background
-- some way to texture menu borders and buttons in a dynamic way
+- part menu background !!!
+- tryout a 45 angle on a menu corner !!
 * put certain things into threads like : update cycle and draw cycle, also the drawing of mini info panel.
-* the planet's and structure's and same kind of problem, when landed one can fly into a planet and gravity can pull you from a structure, need something for that
+* the planet's and structure's and same kind of problem, when landed one can fly into a planet and gravity can pull you from a structure, need something for that [can fix that by making planets ignore floters that are landed unless landed on self]
 * compile a list of games like this one to 'loan' elements from
 - naev
 - hardwar
@@ -114,10 +113,9 @@ side dish
 
 bugs
 =====
-* the slider part is still not slidable
-* when a part of your ship is, are destroyed parts realy removed ?
+* the slider part is still not slidable !!!
 * pure black should not be a color to choose ship from  [done]
-* particle emitters dont have the exact right position in gase of part
+* particle emitters dont have the exact right position in case of part [done]
 * putting engines on cockpit and perhaps other parts off shipp will prefent the engine of firering.
 * trust of engine has the direction of ship not of slot of part
 * if part targeted and picked up it still exists on target screen  [done]
@@ -224,6 +222,20 @@ so you can get out of the way in time. [done, aat]
 * a slider button for the ui [done]
 * move drawing of arc from parts to ui [done]
 * implement backspace and cursor back front in input field [done]
+* radar and gui are one thing should be two seperate things. [done]
+* a selection box for tageted floaters on radar and on main screen [done]
+* need a file with all the theme's colors to use [done]
+* put laser one one color, perhaps same as the plasma cannon colors [done lasers are green now]
+* a arrow on radar when targeting a known planet that is out of radar reach. [done]
+* the radar range circle doesnt yet scale [done]
+* when opening part the radar will be reset to the ockpit radar [done]
+* make some formula to convert the pix into m, km  something like that [done 1000 px is 100 km now from floater rim to floater rim, all the rimming all the time]
+* make sure a ship cant spawn in planet, count for player [done]
+* now that more keys can rebound/binded ? with the goal to bind all the keys that way, there should be the option to restrict some key rebinding or unsetting, or there is the posibility to rebind the quit key or something like that, or to rebind the menu key in the menu itself [done, you cant rebind menu keys ingame only shipping keys]
+* names of ship selection should come from ship it self, if posible, intro menu [done]
+* merging the allto2dvector into master, or even replace master [ok done, aat]
+* zoom in out option for radar [medium mode ?] [done]
+* parts that disconnect/scatter have a change they will be destroyed [done]
 
 [Duality]
 
