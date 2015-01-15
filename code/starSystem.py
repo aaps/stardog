@@ -71,7 +71,7 @@ class StarSystem(object):
 		self.specialOperations = []
 
 		for planet in self.planets:
-			if not planet.ships.sprites():
+			if not planet.ships.sprites() and not isinstance(planet, Star):
 				if planet.respawn > 0:#countdown the timer
 					planet.respawn -= 1. / self.game.fps
 					continue
@@ -270,56 +270,6 @@ class SolarA1(StarSystem):
 		self.add(Gateway(self, Vec2d(20000,20000), 200) )
 
 
-# class SolarB2(StarSystem):
-# 	tinyFighters = []
-# 	maxFighters = 15
-# 	respawnTime = 30
-# 	fightersPerMinute = 2
-# 	def __init__(self, universe, numPlanets = 3, numStructures = 1):
-# 		StarSystem.__init__(self, universe)
-# 		self.star = (Star( self, Vec2d(0,0), radius = 2000, image = None)) # the star
-# 		#place player:
-# 		angle = randint(0,360)
-# 		distanceFromStar = randint(8000, 18000)
-# 		if self.player:
-# 			self.player.pos = self.star.pos.rotatedd(angle, distanceFromStar)
-# 		self.add(self.star)
-# 		self.name = "Oglaf"
-		
-# 		#add planets:
-# 		d = 5000
-# 		for i in range(numPlanets):
-# 			angle = randint(0,360)
-# 			distanceFromStar = randint(d, d + 1200)
-# 			color = randint(40,200),randint(40,200),randint(40,200)
-# 			radius = randint(300,700)
-# 			mass = randnorm(radius * 10, 800)
-# 			self.planets.append(Planet(self, Vec2d(distanceFromStar * cos(angle), \
-# 				distanceFromStar * sin(angle)), radius = radius, mass = mass, \
-# 				color = color))
-# 			self.add(self.planets[i])
-# 			d+= 1200
-
-# 		for i in range(numStructures):
-# 			angle = randint(0,360)
-# 			distanceFromStar = randint(d, d + 2500)
-# 			color = randint(0,100),randint(0,100),randint(0,100)
-# 			radius = randint(100,200)
-# 			self.structures.append(Structure( self, Vec2d(distanceFromStar * cos(angle), \
-# 				distanceFromStar * sin(angle)), color, radius))
-
-				
-# 		for planet in self.planets:
-# 			planet.numShips = 0
-# 			planet.ships = pygame.sprite.Group()
-# 			planet.respawn = 30
-# 			self.add(planet)
-
-# 		for structure in self.structures:
-# 			self.add(structure)
-
-# 		self.fighterTimer = 60
-			
 
 		
 	

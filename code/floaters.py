@@ -43,7 +43,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	system."""
 	hp = 1
 	baseImage = None
-	color = (200, 200, 0)
+	color = FLOATER
 	mass = 1
 	tangible = True
 	lastDamageFrom = None
@@ -63,13 +63,13 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 			image = DEFAULT_IMAGE
 		#rotate() takes a counter-clockwise angle. 
 		self.image = pygame.transform.rotate(image, -self.dir).convert()
-		#self.image.set_colorkey((0,0,0))
+		#self.image.set_colorkey(BLACK)
 		self.rect = self.image.get_rect()
 
 	def update(self):
 		"""updates this floater based on its variables"""
 		self.pos += self.delta / self.game.fps
-		self.rect.center = (int(self.pos.x), int(self.pos.y))
+		self.rect.center = self.pos.inttup()
 
 	def takeDamage(self, damage, other):
 		
@@ -142,7 +142,7 @@ class Bullet(Floater):
 		Floater.kill(self)
 
 	def softkill(self):
-		self.detonate()
+		# self.detonate()
 		Floater.kill(self)
 
 
@@ -242,7 +242,7 @@ class Explosion(Floater):
 	def __init__(self, game, pos, delta, radius = 10,\
 				time = 1, damage = 0, force = 6000):
 		image = pygame.Surface((radius * 2, radius * 2), flags = hardwareFlag).convert()
-		image.set_colorkey((0,0,0))
+		image.set_colorkey(BLACK)
 		Floater.__init__(self, game, pos, delta, radius = 0,\
 				image = image)
 		self.maxRadius = int(radius)
@@ -295,7 +295,7 @@ class Impact(Floater):
 	def __init__(self, game, pos, delta, radius = 5,\
 				time = 1):
 		image = pygame.Surface((radius * 2, radius * 2), flags = hardwareFlag).convert()
-		image.set_colorkey((0,0,0))
+		image.set_colorkey(BLACK)
 		Floater.__init__(self, game, pos, delta, radius = 0,\
 				image = image)
 		self.maxRadius = int(radius)
@@ -312,7 +312,7 @@ class Impact(Floater):
 		else:
 			self.radius = int(self.maxRadius * (self.time * 4 / 3 \
 						- self.life * 4 / 3) / self.time)
-		Floater.update(self)
+		# Floater.update(self)
 
 	def draw(self, surface, offset = (0,0)):
 		self.image.fill((0, 0, 0, 0))
@@ -342,7 +342,7 @@ class LaserBeam(Floater):
 	hp = 0
 	tangible = False
 	baseImage = loadImage("res/laser.bmp").convert()
-	baseImage.set_colorkey((0,0,0))
+	baseImage.set_colorkey(BLACK)
 	
 	def __init__(self, game, laser, damage, range):
 		dir = laser.dir + laser.ship.dir

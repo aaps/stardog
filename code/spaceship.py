@@ -106,7 +106,7 @@ def makeInterceptor(game, pos, delta, dir = 270, color = (255, 255, 255),name=("
     ship.energy = ship.maxEnergy * .8
     return ship
 
-def makeJuggernaut(game, pos, delta, dir=27, color = (255,255,255), name=("Shippy","mcShipperson"), player=False):
+def makeJuggernaut(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcShipperson"), player=False):
     if player:
         ship = Player(game, pos, delta, dir=dir, color = color, name=name)
     else:
@@ -148,7 +148,7 @@ def makeJuggernaut(game, pos, delta, dir=27, color = (255,255,255), name=("Shipp
     ship.energy = ship.maxEnergy * .8
     return ship
 
-def makeScout(game, pos, delta, dir=27, color = (255,255,255), name=("Shippy","mcShipperson"), player=False):
+def makeScout(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcShipperson"), player=False):
     if player:
         ship = Player(game, pos, delta, dir = dir, color = color,name=name)
     else:
@@ -173,7 +173,7 @@ def makeScout(game, pos, delta, dir=27, color = (255,255,255), name=("Shippy","m
     ship.energy = ship.maxEnergy * .8
     return ship
 
-def makeFreighter(game, pos, delta, dir=27, color = (255,255,255), name=("Shippy","mcShipperson"), player=False):
+def makeFreighter(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcShipperson"), player=False):
     pass
 
 def playerShip(game, pos, delta, dir = 270, \
@@ -206,7 +206,7 @@ def playerShip(game, pos, delta, dir = 270, \
 
 class Ship(Floater):
     """Ship(x, y, dx = 0, dy = 0, dir = 270,
-    script = None, color = (255,255,255)) 
+    script = None, color = SUPER_WHITE) 
     script should have an update method that 
     returns (moveDir, target, action)."""
     mass = 0
@@ -278,7 +278,7 @@ class Ship(Floater):
         #     self.script = script
         # else: self.script = Script(game)
         self.baseImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
-        self.baseImage.set_colorkey((0,0,0))
+        self.baseImage.set_colorkey(BLACK)
         self.functions = [self.forward, self.reverse, self.left, self.right, \
                 self.turnLeft, self.turnRight, self.shoot, self.launchMissiles, self.launchMines, self.toggleGatewayFocus, self.toggleRadar]
         self.functionDescriptions = []
@@ -301,7 +301,7 @@ class Ship(Floater):
         part.offset = Vec2d(0, 0)
         part.ship = self
         part.image = colorShift(part.baseImage, self.color).convert()
-        part.image.set_colorkey((0,0,0))
+        part.image.set_colorkey(BLACK)
         self.ports[0].part = part
         self.reset()
 
@@ -371,7 +371,7 @@ class Ship(Floater):
             size = int(self.radius * 2)
         self.baseImage = pygame.Surface((size, size), \
                     hardwareFlag | SRCALPHA).convert_alpha()
-        self.baseImage.set_colorkey((0,0,0))
+        self.baseImage.set_colorkey(BLACK)
         if self.ports[0].part:
             self.ports[0].part.draw(self.baseImage)
 
@@ -458,25 +458,32 @@ class Ship(Floater):
             mine.shoot()
 
     def toggleRadar(self):
-        self.radars[0].toggle()
+        for radar in self.radars:
+            radar.toggle()
 
     def targetNextShip(self):
-        self.radars[0].targetNextShip()
+        for radar in self.radars:
+            radar.targetNextShip()
 
     def targetPrefShip(self):
-        self.radars[0].targetPrefShip()
+        for radar in self.radars:
+            radar.targetPrefShip()
 
     def targetNextPlanet(self):
-        self.radars[0].targetNextPlanet()
+        for radar in self.radars:
+            radar.targetNextPlanet()
 
     def targetPrefPlanet(self):
-        self.radars[0].targetPrefPlanet()
+        for radar in self.radars:
+            radar.targetPrefPlanet()
 
     def targetNextPart(self):
-        self.radars[0].targetNextPart()
+        for radar in self.radars:
+            radar.targetNextPart()
 
     def targetPrefPart(self):
-        self.radars[0].targetPrefPart()
+        for radar in self.radars:
+            radar.targetPrefPart()
 
     def toggleGatewayFocus(self):
         for gwfocus in self.gwfocusus:
@@ -528,10 +535,10 @@ class Ship(Floater):
         #note: transform is counter-clockwise, opposite of everything else.
         buffer = pygame.Surface((self.radius * 2, self.radius * 2), \
                 flags = hardwareFlag | SRCALPHA).convert_alpha()
-        buffer.set_colorkey((0,0,0))
+        buffer.set_colorkey(BLACK)
         self.image = pygame.transform.rotate(self.baseImage, \
                                     -self.dir).convert_alpha()
-        self.image.set_colorkey((0,0,0))
+        self.image.set_colorkey(BLACK)
         
         #imageOffset compensates for the extra padding from the rotation.
         imageOffset = [- self.image.get_width() / 2,\
@@ -617,7 +624,7 @@ class Ship(Floater):
         if part.pickuptimeout <= 0:
             part.dir = 0
             part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert()
-            part.image.set_colorkey((0,0,0))
+            part.image.set_colorkey(BLACK)
             self.inventory.append(part)
             part.kill()
             if self.game.player == self:
@@ -660,7 +667,8 @@ class Player(Ship):
         return 1.1 ** self.level * 10
 
     def kill(self):
-        self.parts = []
+        for part in self.parts:
+            part.enabled = False
         Ship.kill(self)
 
 

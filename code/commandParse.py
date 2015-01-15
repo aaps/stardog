@@ -10,9 +10,9 @@ class bcolors:
     ENDC = '\033[0m'
     WHITE = '\033'
 
-RED = (255,0,0)
-GREEN = (0,255,0)
-BLUE = (0,0,255)
+# RED = (255,0,0)
+# GREEN = (0,255,0)
+# BLUE = (0,0,255)
 
 class AttributeFilter(object):
     def __init__(self):
@@ -158,6 +158,6 @@ class CommandParse(object):
                     else:
                         self.printout("Invalid input.")
                 else:
-                    self.printout("me: "+text)
+                    self.printout(self.player.firstname + " " + self.player.secondname +": "+text)
             except AttributeError, e:
                 self.printout(e)

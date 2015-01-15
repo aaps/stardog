@@ -14,10 +14,6 @@ from universe import *
 import plot
 from vec2d import Vec2d
 import datetime
-try:
-    from swampy.Lumpy import Lumpy
-except ImportError:
-    print "no way to build a class diagram now!! "
 #command parsing
 import commandParse
 from pympler import muppy
@@ -37,6 +33,9 @@ class Game(object):
         self.player = None
         self.starttime = 1899463445
         self.fps = FPS
+        self.fpscounter = 0
+        self.fpses = range(0,30)
+        self.averagefps = 0
         self.screen = screen
         self.top_left = 0, 0
         self.universe = Universe(self)
@@ -63,10 +62,16 @@ class Game(object):
         #pygame setup:
         self.clock = pygame.time.Clock()
         self.hud = HUD(self)
+        self.tageting = TargetingRect(self)
+        self.radarfield = RadarField(self)
+        
         self.camera.layerAdd(self.hud,4)
-        self.camera.layerAdd(SpaceView(self),3)
+        self.camera.layerAdd(self.radarfield,4)
+        self.camera.layerAdd(self.tageting,4)
+        self.spaceview = SpaceView(self)
+        self.camera.layerAdd(self.spaceview,3)
         #create a chatconsole for text input capabilities
-        self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-50, self.width - int(self.width/ 8) , 50))
+        self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-40, self.width - int(self.width/ 8) , 40))
         
     def run(self):
         """Runs the game."""
@@ -139,6 +144,9 @@ class Game(object):
                         self.keys[event.key % 322] = 1
                         if event.key == pygame.K_m:
                             all_objects = muppy.get_objects()
+                        if event.key == pygame.K_BACKSLASH:
+
+                            pygame.image.save(self.screen, "screenshot.jpeg")
                     elif event.type == pygame.KEYUP:
                         self.keys[event.key % 322] = 0
 
@@ -191,10 +199,14 @@ class Game(object):
                 
                 #frame maintainance:
                 pygame.display.flip()
+                if self.fpscounter >= 30:
+                    self.fpscounter = 0
+                self.fpses[self.fpscounter] = self.fps
+                self.fpscounter+=1
+                self.averagefps = reduce(lambda x, y: x+y, self.fpses)/30
+
                 self.clock.tick(FPS)#aim for FPS but adjust vars for self.fps.
                 self.fps = max(1, int(self.clock.get_fps()))
                 self.timer += 1. / self.fps
             #end round loop (until gameover)
         #end game loop
-
-# lumpy.class_diagram()

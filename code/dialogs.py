@@ -13,12 +13,12 @@ class Messenger(Drawable):
     messageDelay = 9 #seconds after each message
     maxChars = 200 #line width
     font = FONT
-    topleft = 2,2
+    topleft = 0,0
     maxMessages = 100
     def __init__(self, universe, font = FONT, dir = 1):
         Drawable.__init__(self, universe.game)
         self.dir = dir# -1 means the messages stack upward.
-        self.image = pygame.Surface((universe.game.width - 202, self.font.get_linesize()))
+        self.image = pygame.Surface((universe.game.width - 204, self.font.get_linesize()))
         self.image.set_alpha(200)
         self.universe = universe
         self.game = universe.game
@@ -29,7 +29,7 @@ class Messenger(Drawable):
         for i in xrange(0, len(the_list), length):
             yield the_list[i:i+length]
     
-    def message(self, text, color = (250,250,250)):
+    def message(self, text, color = SUPER_WHITE):
         """message(text,color) -> add a message to the Messenger."""
         text = '   ' + text
         if len(text) > self.maxChars: #line length limit
