@@ -363,7 +363,8 @@ class InputField(Panel):
             return text
 
     def setText(self, text):
-        self.preftext = text
+        pass
+        #self.preftext = text
 
     def handleEvent(self, event):
         allowedkeys = list(range(97,122)) + list(range(32,71))
