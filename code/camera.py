@@ -134,6 +134,7 @@ class SpaceView(object):
 			and (r + floater.pos.y > self.offset.y 	and floater.pos.y - r < self.offset.y + self.camera.height):
 					self.onScreen.append(floater)
 
+
 	def sortFloaterHeight(self, onscreen):
 		if isinstance(onscreen, Planet):
 			return 4

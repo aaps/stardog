@@ -3,6 +3,7 @@ import math
 from pygame.locals import *
 import pygame
 from vec2d import *
+# import numpy as np
 
 hardwareFlag = pygame.HWSURFACE
 
@@ -237,3 +238,8 @@ def makeKMdistance(floaterx, floatery):
 
 def makeKMs(floater):
 	return str(round(floater.delta.get_length()/10,1))
+
+def find_nearest(array, value):
+    n = [abs(i-value) for i in array]
+    idx = n.index(min(n))
+    return array[idx]

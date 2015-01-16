@@ -259,10 +259,10 @@ class Slider(Panel):
                     
     def click(self, button, pos):
         if self.hori:
-            self.dragable.rect[0] = pos[0]
+            self.dragable.rect[0] = pos[0] - int(self.dragable.rect[2]/2)
             self.function((self.rect[2] - (pos[0] - self.rect[0]) + 0.001) / self.rect[2])
         else:
-            self.dragable.rect[1] = pos[1]
+            self.dragable.rect[1] = pos[1] - int(self.dragable.rect[3]/2)
             self.function((self.rect[3] - (pos[1] - self.rect[1]) + 0.001) / self.rect[3])
 
 

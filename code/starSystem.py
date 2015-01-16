@@ -13,10 +13,14 @@ from nameMaker import *
 
 class StarSystem(object):
 	"""A StarSystem holds ships and other floaters."""
-	boundrad = 30000
+	
 	drawEdgeWarning = False
-	def __init__(self, universe, position=Vec2d(0,0)):
+	def __init__(self, universe, position=Vec2d(0,0), boundrad = 30000, edgerad = 60000):
 		self.game = universe.game
+		self.boundrad = boundrad
+		self.position = position
+		self.edgerad = edgerad
+		self.neighbors = []
 		self.universe = universe
 		self.floaters = pygame.sprite.Group()
 		self.player = None
@@ -28,7 +32,19 @@ class StarSystem(object):
 		pygame.mixer.music.set_volume(.15)
 		self.planets = []
 		self.name = ""
-		
+	
+	def addNeighbor(self, starsystem):
+		self.neighbors.append(starsystem)
+
+	def getNeighbors(self):
+		return self.neighbors
+
+	def getNeighborposdiff(self):
+		posdiffs = []
+		for starsystem in self.neighbors:
+			posdiff = (starsystem.position + self.position)
+			posdiffs.append((starsystem,posdiff))
+		return posdiffs
 		
 	def update(self):
 		"""Runs the game."""
@@ -41,21 +57,14 @@ class StarSystem(object):
 		for i in range(len(floaters)):
 			for j in range(i + 1, len(floaters)):
 				self.collide(floaters[i], floaters[j])
-				#see collide() at bottom of this module.
-				
-		#keep ships in system for now:
-		if self.drawEdgeWarning:
-			self.drawEdgeWarning -= 1. / self.game.fps
-			if self.drawEdgeWarning <=0:
-				self.drawEdgeWarning = False
+			
+
 				
 		for floater in self.floaters:
 			if floater.pos.get_distance(Vec2d(0,0)) > self.boundrad:
 
 				if isinstance(floater, Ship):
-					floater.dx = 0
-					if floater == self.game.player:
-						self.drawEdgeWarning = 1
+					floater.overedge = True
 				else:
 					try:
 						floater.kill()
@@ -218,22 +227,22 @@ class SolarA1(StarSystem):
 	respawnTime = 30
 	fightersPerMinute = 2
 	g=5000
-	def __init__(self, universe, name, numPlanets = 10, numStructures = 2):
-		StarSystem.__init__(self, universe)
+	def __init__(self, universe, name, location ,numPlanets = 10, numStructures = 2, boundrad = 30000, edgerad= 60000):
+		StarSystem.__init__(self, universe, location,boundrad, edgerad)
 		self.star = (Star( self, Vec2d(0,0), radius = 4000, image = None)) # the star
 		#place player:
 		angle = randint(0,360)
-
+		self.location = location
 		self.planets.append(self.star)
 		self.star.numShips = 0
 		self.add(self.star)
 		self.name = name
 		
 		#add planets:
-		d = 10000
+
 		for i in range(numPlanets):
 			angle = randint(0,360)
-			distanceFromStar = randint(d, d + 1200)
+			distanceFromStar = randint(self.star.radius + 5000, self.boundrad-5000)
 			color = randint(40,200),randint(40,200),randint(40,200)
 			radius = randint(500,900)
 			mass = randnorm(radius * 10, 800)
@@ -249,11 +258,11 @@ class SolarA1(StarSystem):
 				self.planets.append(planet)
 			else:
 				i-=1
-			d+= 1200
+			# d+= 1200
 
 		for i in range(numStructures):
 			angle = randint(0,360)
-			distanceFromStar = randint(d, d + 2500)
+			distanceFromStar = randint(self.boundrad-5000, self.boundrad)
 			color = randint(0,100),randint(0,100),randint(0,100)
 			radius = randint(100,200)
 			self.add(Structure( self, Vec2d(distanceFromStar * cos(angle), distanceFromStar * sin(angle)), color, radius))
@@ -266,8 +275,8 @@ class SolarA1(StarSystem):
 			planet.respawn = 30
 			self.add(planet)
 
-
-		self.add(Gateway(self, Vec2d(20000,20000), 200) )
+		radius = randint(100,200)
+		self.add(Gateway(self, Vec2d(self.boundrad-2000,self.boundrad), radius) )
 
 
 

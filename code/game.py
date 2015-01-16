@@ -48,8 +48,15 @@ class Game(object):
         self.camera = Camera(self)
         #messenger, with controls as first message:
         self.messenger = Messenger(self.universe)
-        self.universe.addStarSystem(SolarA1(self.universe, "theone"))
-        self.universe.addStarSystem(SolarA1(self.universe, "thesecond"))
+        theone = SolarA1(self.universe, "theone", Vec2d(1,100))
+        thesecond = SolarA1(self.universe, "thesecond", Vec2d(1,-100),2,1)
+        thethird = SolarA1(self.universe, "thethird", Vec2d(1,200),2,1)
+        theone.addNeighbor(thesecond)
+        theone.addNeighbor(thethird)
+        thesecond.addNeighbor(theone)
+
+        self.universe.addStarSystem(theone)
+        self.universe.addStarSystem(thesecond)
         
         self.camera.layerAdd(self.messenger,7)
         self.camera.layerAdd(MiniInfo(self),6)
@@ -125,6 +132,7 @@ class Game(object):
             #create a parser that parses chatconsole input for command and such.
             self.commandParse = commandParse.CommandParse(self, self.chatconsole, self.messenger)
             #The in-round loop (while player is alive):
+            
             while self.running and self.universe.curSystem.ships.has(self.player):
                 #event polling:
                 pygame.event.pump()

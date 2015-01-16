@@ -295,12 +295,10 @@ class MiniInfo(Drawable):
 			elif isinstance(self.targ, Planet):
 				name = self.targ.firstname
 				scale = self.game.radarfield.radarRadius * self.game.radarfield.zoomModifier
-				print (self.targ.radius / scale), self.width
 				if (self.targ.radius / scale) < self.width/2:
 					r = int(self.targ.radius / scale)
 				else:
 					r = self.width / 2
-				print r
 				pygame.draw.circle(self.image, self.targ.color, ((self.width/2,self.height/2)), r)
 			elif isinstance(self.targ, Part):
 				name = self.targ.name

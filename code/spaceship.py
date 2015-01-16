@@ -183,7 +183,7 @@ def playerShip(game, pos, delta, dir = 270, \
     name = name.split(" ")
     
     if len(name) == 1:
-         name.append("LOL")
+         name.append("Unknown")
     name = (name[0],name[1])
 
     if type == 'destroyer':
@@ -213,6 +213,7 @@ class Ship(Floater):
     moment = 0
     parts = []
     script = None
+    overedge = False
     atgateway = False
     attention = 0
     forwardEngines = []
@@ -503,8 +504,6 @@ class Ship(Floater):
         resultList = []
         for radar in self.radars:
             resultList= list(set(radar.detected)|set(resultList))
-        # if not self.curtarget in resultList:
-        #     self.curtarget = None
         if self.attention > 0:
             self.attention -= 0.1 / self.game.fps
         # actual updating:
@@ -523,6 +522,33 @@ class Ship(Floater):
             self.atgateway = False
         if self.landed and dist2(self, self.landed) > (self.landed.radius * 1.1) ** 2:
             self.landed = False
+
+        if self.pos.get_distance(Vec2d(0,0)) > self.game.universe.curSystem.boundrad:
+            self.overedge = True
+        else:
+            self.overedge = False
+
+        if self.pos.get_distance(Vec2d(0,0)) > self.game.universe.curSystem.edgerad:
+            posdifflist = self.game.universe.curSystem.getNeighborposdiff()
+            posdiff = (self.pos - self.game.universe.curSystem.star.pos)
+            nearest =  sorted(posdifflist, key=lambda diff: diff[1].get_distance(posdiff))[-1]
+            print nearest[0].name, nearest[1].get_angle()
+
+            # print Vec2d(0,0).rotatedd(-nearest[1].get_angle(), nearest[0].edgerad-50)
+            print Vec2d(0,0).rotatedd(self.delta.get_angle(), nearest[0].edgerad-50)
+            
+            
+            self.overedge = False
+
+            # for system in self.game.universe.curSystem.neighbors:
+            #     system.player = self
+            #     self.game.universe.curSystem.player = None
+            #     self.game.universe.curSystem.ships.remove(self)
+            #     self.game.universe.curSystem.floaters.remove(self)
+            #     system.ships.add(self)
+            #     system.floaters.add(self)
+            #     self.game.universe.curSystem = system
+
 
 
     def draw(self, surface, offset = None, pos = (0, 0)):

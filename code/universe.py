@@ -24,20 +24,25 @@ class Universe(object):
 	def addStarSystem(self, system):
 		self.starSystems.append(system)
 	
-	def getAllNeighbors(self, name)		:
-		portals = []
-		systems = []
-		for system in self.starSystems:
-			if system.name == name:
-				portals = system.getAllPortals()
 
-		if portals:
-			for portal in portals:
 
-				systems.append(portal.getSister())
+	# def getAllNeighbors(self, name):
+	# 	portals = []
+	# 	systems = []
+	# 	for system in self.starSystems:
+	# 		if system.name == name:
+	# 			portals = system.getAllPortals()
 
-		return systems
+	# 	if portals:
+	# 		for portal in portals:
 
+	# 			systems.append(portal.getSister())
+
+	# 	return systems
+	
+	def neighborsTo(self, starsystem):
+		pass
+	
 
 	def removeStarSystem(self, name):
 		for system in self.starSystems:

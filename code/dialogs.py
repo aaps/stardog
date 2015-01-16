@@ -63,7 +63,7 @@ class Trigger(object):
         self.repeat = repeat
         if type(conditions) != type([]):
             conditions = [conditions]
-        self. conditions = conditions
+        self.conditions = conditions
         if type(actions) != type([]):
             actions = [actions]
         self.actions = actions
@@ -108,9 +108,13 @@ def seeShipCondition(universe):
                 if isinstance(floater,Ship):
                     return True
         return False
+
     return see
 
-    
+def farAwayCondition(universe):
+    return lambda: universe.curSystem.player.overedge
+
+
 def messageAction(universe, text, color = (200,200,100)):
     return lambda: universe.game.messenger.message(text, color)
 

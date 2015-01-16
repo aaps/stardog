@@ -28,6 +28,9 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ==========
+* make it to that gravity doesnt count when distance from star greater than boundrad
+* does a ship has a reference to the current starsystem if no does it need one
+* find out what action could go into dialogs conditions and actions
 the console , input chatconsole panel hyrargy is a bit much
 * realy a better way to reset stuff on death, like radar error thing, enging trust should be off menus all inactive
 * alle set variables moeten in de init van een class anders zijn ze global
