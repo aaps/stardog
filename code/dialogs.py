@@ -114,13 +114,6 @@ def seeShipCondition(universe):
 def farAwayCondition(universe):
     return lambda: universe.curSystem.player.overedge
 
-def targetedCondition(universe):
-    def targeted():
-        for enemy in universe.curSystem.ships:
-            if enemy.curtarget and enemy.curtarget == universe.player:
-                return True
-    return targeted
-
 
 
 def messageAction(universe, text, color = (200,200,100)):

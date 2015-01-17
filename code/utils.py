@@ -239,6 +239,34 @@ def ddiamond(surface, color, pos, size):
 	pygame.draw.polygon(surface, color,[(0+pos[0],0+pos[1]-(size*2)),(2*size+pos[0],2*size+pos[1]-(size*2)),(0+pos[0],4*size+pos[1]-(size*2)), (-2+pos[0],2*size+pos[1]-(size*2))])
 
 
+def diamondRect(surface, color, rect, corners=[]):
+    relrect = (0,0,rect[2],rect[3])
+    image = pygame.Surface((rect[2],rect[3])).convert()
+    image.fill((0, 0, 0))
+    pygame.draw.rect(image, color, relrect, 1)
+    if len(corners) == 4:
+        for idx, corner in enumerate(corners):
+            if corner > 0:
+                if idx == 0:
+                    points = [(relrect[0],relrect[1]),(relrect[0]+corner,relrect[1]),(relrect[0],relrect[1]+corner)]
+                    pygame.draw.polygon(image, BLACK, points)
+                    pygame.draw.lines(image, color, False, points[1:]) 
+                elif idx == 1:
+                    points = [(relrect[2]+relrect[0]-1,relrect[1]),(relrect[2]+relrect[0]-corner-1,relrect[1]),(relrect[2]+relrect[0]-1,relrect[1]+corner)]
+                    pygame.draw.polygon(image, BLACK, points)
+                    pygame.draw.lines(image, color, False, points[1:]) 
+                elif idx == 2:
+                    points = [(relrect[2]+relrect[0]-1,relrect[3]+relrect[1]-1),(relrect[2]+relrect[0]-corner-1,relrect[3]+relrect[1]-1),(relrect[2]+relrect[0]-1,relrect[3]+relrect[1]-corner-1)]
+                    pygame.draw.polygon(image, BLACK, points)
+                    pygame.draw.lines(image, color, False, points[1:]) 
+                else:
+                    points = [(relrect[0],relrect[1]+relrect[3]-1),(relrect[0],relrect[1]+relrect[3]-corner-1),(relrect[0]+corner,relrect[1]+relrect[3]-1)]
+                    pygame.draw.polygon(image, BLACK, points)
+                    pygame.draw.lines(image, color, False, points[1:])
+    image.set_colorkey(BLACK)
+    surface.blit(image, (rect[0], rect[1]))
+
+
 def makeKMdistance(floaterx, floatery):
 	return str(max(round((floaterx.pos.get_distance(floatery.pos)-floaterx.radius-floatery.radius)/10,1),0))
 

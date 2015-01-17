@@ -13,9 +13,10 @@ class Panel(object):
     image = None
     drawBorder = True
     bgColor = None
-    def __init__(self, rect):
+    def __init__(self, rect, corners = []):
         self.rect = rect
         self.panels = []
+        self.corners = corners
     
     def update(self):
         """updates this panel and its children"""
@@ -101,13 +102,14 @@ class Panel(object):
             rect = self.rect
         if self.bgColor:
             pygame.draw.rect(surface, self.bgColor, rect, 0)
-        if self.drawBorder:
-            pygame.draw.rect(surface, self.color, rect, 1)
+        
         if self.image:
-            surface.blit(self.image, (rect.left, rect.top), \
-                    (0, 0, rect.width, rect.height))
+            surface.blit(self.image, (rect.left, rect.top), (0, 0, rect.width, rect.height))
+       
         for panel in self.panels:
             panel.draw(surface, rect)
+        if self.drawBorder:
+            diamondRect(surface, self.color, rect, self.corners)   
 
     def handleEvent(self, keys):
         for panel in self.panels:
@@ -122,8 +124,8 @@ class TopLevelPanel(Panel):
     dragged = None
     dragSource = None
     internalPos = None
-    def __init__(self, rect):
-        Panel.__init__(self, rect)
+    def __init__(self, rect, corners = []):
+        Panel.__init__(self, rect, corners)
         self.image = pygame.Surface(rect.size, \
                             flags = (hardwareFlag)).convert()
         self.image.set_alpha(200)
@@ -287,8 +289,8 @@ class Button(Panel):
     activeColor = BUTTON_ACTIVE
     inactiveColor = BS1
     
-    def __init__(self, rect, function, text, font = FONT):
-        Panel.__init__(self, rect)
+    def __init__(self, rect, function, text, font = FONT, corners = [5,0,5,0]):
+        Panel.__init__(self, rect, corners)
         self.function = function
         self.text = text
         self.color = self.inactiveColor
@@ -352,7 +354,7 @@ class InputField(Panel):
         if not fontModule:
             return
         self.font = font
-        Panel.__init__(self, rect)
+        Panel.__init__(self, rect, corners = [5,0,5,0])
 
     def getText(self):
         # thou shalt not erase the text history
@@ -822,8 +824,8 @@ class Label(Panel):
     """Label(self,  rect, text, color = INPUTFIELD, font = FONT) ->
     A panel with a single line of text."""
     drawBorder = False
-    def __init__(self, rect, text, font = FONT, color =INPUTFIELD):
-        Panel.__init__(self, rect)
+    def __init__(self, rect, text, font = FONT, color =INPUTFIELD,corners = [5,0,5,0]):
+        Panel.__init__(self, rect,corners)
         self.text = text
         self.color = color
         if fontModule:
@@ -835,7 +837,7 @@ class Label(Panel):
 class FunctionLabel(Panel):
     """A label that updates its text by calling a string function."""
     drawBorder = False
-    def __init__(self, rect, textFunction, font = FONT):
+    def __init__(self, rect, textFunction, font = FONT, corners=[5,0,5,0]):
         Panel.__init__(self, rect)
         self.textFunction = textFunction
         self.font = font
@@ -852,7 +854,7 @@ class TextBlock(Panel):
 
     drawBorder = False
     image = None
-    def __init__(self, rect, textFunction, font = FONT, color = BLACK, width = 200):
+    def __init__(self, rect, textFunction, font = FONT, color = BLACK, width = 200, corners=[5,0,5,0]):
         self.textFunction = textFunction
         self.color = color
         self.lineHeight = font.get_height()
@@ -860,7 +862,8 @@ class TextBlock(Panel):
         if not fontModule:
             return
         self.font = font
-        Panel.__init__(self, rect)
+        Panel.__init__(self, rect,corners)
+
     def update(self):
         if isinstance(self.textFunction, basestring):
             self.image = pygame.Surface((self.temprect.width, self.lineHeight * len(self.textFunction.split("\n"))),

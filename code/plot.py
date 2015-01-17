@@ -23,8 +23,6 @@ def newGameTriggers(universe):
 			messageAction(universe, player.firstname + " " + player.secondname + ": I have arived at the " + universe.curSystem.name + " system at last, the question is . . . How ?") ),
 		Trigger(universe, farAwayCondition(universe), 
 			messageAction(universe, player.firstname + " " + player.secondname + ": I have traveled quite far from the center of " + universe.curSystem.name + " I wonder where this leads to ?!")),
-		Trigger(universe, targetedCondition(universe), 
-			messageAction(universe, player.firstname + " " + player.secondname + ": I have been targeted !!!")),
 		]
 
 

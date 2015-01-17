@@ -210,6 +210,7 @@ class Ship(Floater):
     overedge = False
     atgateway = False
     attention = 0
+    detectionscore = 0
     forwardEngines = []
     maxhp = 0
     hp = 0
@@ -330,6 +331,7 @@ class Ship(Floater):
             minY = min(part.offset[1] - part.radius, minY)
             maxX = max(part.offset[0] + part.radius, maxX)
             maxY = max(part.offset[1] + part.radius, maxY)
+            self.detectionscore += part.hp
         self.radius = max(maxX - minX, maxY - minY) / 2
         #recenter:
         # xCorrection = (maxX + minX) / 2

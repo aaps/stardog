@@ -29,6 +29,10 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ==========
+* remove image draw from menu panels ?
+* does ship still need hp is not all hp contained in the parts ?
+* remove the shield indication arc and put it on gui.
+* a sentence construction kitt for the ai so it can taunt you for example
 * a list in a ship of who is targeting you.
 targeting target should not go into player or enemy but in ship
 * there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.
@@ -41,8 +45,8 @@ the console , input chatconsole panel hyrargy is a bit much
 * http://cyrille.rossant.net/create-a-standalone-windows-installer-for-your-python-application/
 * the targeting reticule of a selected part of ship should go over planet etc in radar. [done]
 * the ai should abide by its own radar range [done, it is still as stupid as can be]
-* ai can talk to player, when targeting player for example and disengaging !!
-* make sure all the hud elements have a way to be easily re/positioned !!
+* ai can talk to player, when targeting player for example and disengaging [after fsm and better brains ai]
+* make sure all the hud elements have a way to be easily re/positioned [yes all drawables have a setrect method, done]
 
 * remove fps measurment and make an average fps for in game, can be read with console [done]
 * place energy and xp bars in seperate rectfrom rest og gui [done]]
@@ -56,8 +60,7 @@ the console , input chatconsole panel hyrargy is a bit much
 * make factorys for planets starsystems and ships, the design pattern
 
 
-* make a detection score for a ship, based on the parts, that also need a detection score. [remove totalhp from shipdamage indicatiors and put it in ship, this will be detection score] !!
-
+* make a detection score for a ship, based on the parts, that also need a detection score. [remove totalhp from shipdamage indicatiors and put it in ship, this will be detection score] [done]
 * a random seed for xtra fun
 
 * mini game explotion push stuff, space socker ?
@@ -66,8 +69,7 @@ the console , input chatconsole panel hyrargy is a bit much
 * plitout parts and cargo , different files, is part cargo or cargo part ?
 * see if it is posible to get part and dummy collition in parts panel [done]
 ]* a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
-* the intro menu doesnt calculate with fps, and that is why the curor speed is off, fix that !!
-
+* the intro menu doesnt calculate with fps, and that is why the curor speed is off, fix that [] done, ugly but done
 * the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed !
 
 * rework of menu active and keybindings, activemenu and active, better differentiation, update part and draw part if active, the var active in toplevelpanel. !

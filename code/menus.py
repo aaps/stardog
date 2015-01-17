@@ -14,8 +14,8 @@ squareSpacing = squareWidth + 10
 
 class IntroMenu(TopLevelPanel):
     color = CONSOLE_BLUE
-    def __init__(self, game, rect):
-        TopLevelPanel.__init__(self, rect)
+    def __init__(self, game, rect, corners = [10,0,10,0]):
+        TopLevelPanel.__init__(self, rect, corners)
         self.game = game
         self.running = True
         self.game.playerColor = [255,255,255]
@@ -260,11 +260,11 @@ class PartsPanel(Panel):
         self.player = game.universe.player
         # inventoryColor = (20,50,35)
         # shipColor = (50,20,70)
-        flip = Button(Rect(115, 300, 75, 16), self.flip, " FLIP")
-        remove = Button(Rect(195, 300, 75, 16), self.remove, " REMOVE")
-        add = Button(Rect(335, 570, 75, 16), self.attach, " ATTACH")
-        paint = Button(Rect(415, 570, 75, 16), self.paint, " PAINT")
-        eject = Button(Rect(495, 570, 75, 16), self.eject, " EJECT")
+        flip = Button(Rect(100, 300, 60, 16), self.flip, " FLIP")
+        remove = Button(Rect(180, 300, 100, 16), self.remove, " REMOVE")
+        add = Button(Rect(320, 570, 80, 16), self.attach, " ATTACH")
+        paint = Button(Rect(420, 570, 80, 16), self.paint, " PAINT")
+        eject = Button(Rect(520, 570, 80, 16), self.eject, " EJECT")
         self.inventoryPanel = InventoryPanel(Rect(500, 30, 130, 570), self, self.player.inventory)
         self.tradePanel = None
         self.shipPanel = ShipPanel(Rect(100, 0, 401, 300), self, self.player)
@@ -875,10 +875,10 @@ class SkillTreeSelector(Selecter):
 
 class NavigationTile(Panel):
     
-    def __init__(self, rect, parent, game):
+    def __init__(self, rect, parent, game, corners=[5,0,5,0]):
         self.parent = parent 
         self.game  = game
-        Panel.__init__(self, rect)
+        Panel.__init__(self, rect, corners)
         rect1 = Rect(rect.x + 5, rect.y + 5, 200, rect.width - 10)
         rect2 =  Rect(rect.x + 5, rect.y + 30, 100, 100)
         self.addPanel(FunctionLabel(rect1, self.systemname))
@@ -903,10 +903,10 @@ class NavigationTile(Panel):
 
 class TimeTile(Panel):
 
-    def __init__(self, rect, parent, game):
+    def __init__(self, rect, parent, game, corners=[5,0,5,0]):
         self.parent = parent 
         self.game  = game
-        Panel.__init__(self, rect)
+        Panel.__init__(self, rect, corners)
         rect1 = Rect(rect.x + 5, rect.y + 5, 200, rect.width - 10)
         self.addPanel(TextBlock(rect1, self.gametime, SMALL_FONT, SHIP_PANEL_BLUE))
 

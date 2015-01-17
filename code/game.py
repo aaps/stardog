@@ -103,6 +103,9 @@ class Game(object):
                 self.screen.fill((0, 0, 0, 0))
                 intro.draw(self.screen)
                 pygame.display.flip()
+                self.clock.tick(FPS)#aim for FPS but adjust vars for self.fps.
+                self.fps = max(1, int(self.clock.get_fps()))
+                self.timer += 1. / self.fps
             #setup initial state:
             self.playerScript = InputScript(self)
             self.player = playerShip(self, Vec2d(0,0),Vec2d(0,0),
