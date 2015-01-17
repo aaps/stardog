@@ -1,4 +1,6 @@
 from types import *
+from spaceship import playerShip
+from vec2d import Vec2d
 import sys
 
 class bcolors:
@@ -45,9 +47,16 @@ class CommandParse(object):
         if not args:
             return
         self.textColor = eval(args[0])
+    def setShipColor(self, args):
+        if not args:
+            return
+        raise Exception("Exception: not implemented yet")
+    def convertShip(self, args):
+        shipType = args[0]
+        self.game.player = playerShip(self, Vec2d(0,0),Vec2d(0,0),
+                            color = self.game.playerColor, name = self.game.PlayerName, type = self.game.playerType)
     def handleInput(self, event):
         pass
-    
     def printout(self, text):
         text = str(text)
         if '\n' in text:
@@ -159,11 +168,16 @@ class CommandParse(object):
                         pass
                     elif command == "setTextColor":
                         self.setColor(args)
+                    elif command == "setShipColor":
+                        self.setShipColor(args)
+                    elif command == "convertShip":
+                        self.convertShip(args)
                     elif command == 'printdbg':
                         self.printout("input: %s \ncommand: %s \narguments: %s"%(text, command, args))
                     else:
                         self.printout("Invalid input.")
                 else:
                     self.printout(self.player.firstname + " " + self.player.secondname +": "+text)
-            except AttributeError, e:
+            except Exception, e:
                 self.printout(e)
+                print e

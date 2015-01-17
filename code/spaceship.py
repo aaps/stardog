@@ -278,8 +278,10 @@ class Ship(Floater):
         # if script: 
         #     self.script = script
         # else: self.script = Script(game)
+
         self.baseImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
         self.baseImage.set_colorkey(BLACK)
+
         self.functions = [self.forward, self.reverse, self.left, self.right, \
                 self.turnLeft, self.turnRight, self.shoot, self.launchMissiles, self.launchMines, self.toggleGatewayFocus, self.toggleRadar]
         self.functionDescriptions = []

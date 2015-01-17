@@ -200,6 +200,7 @@ class Game(object):
                 #and does actions based upon that.
                 self.commandParse.update()
                 #reloading logic, couldn't make it work from inside the commandParse class
+                #reloads the module so it imports new code.
                 if self.commandParse.reload:
                     self.commandParse.reload = False
                     reload(commandParse)
