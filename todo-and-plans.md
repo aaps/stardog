@@ -6,7 +6,8 @@ main dish
 
 * quad trees (hardmode, after vector and view splitout, wil replace current collision check mess)
 
-* wormholes/star gates to other systems. (medium mode ?, after Gravless class) [might be soon done] [more work than anticipated] !!!
+* wormholes/star gates to other systems. (medium mode ?, after Gravless class) [can travel to other starsystems via direct travel now, star gates next] !!
+
 
 * make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump]
 
@@ -28,6 +29,9 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ==========
+* a list in a ship of who is targeting you.
+targeting target should not go into player or enemy but in ship
+* there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.
 * make it to that gravity doesnt count when distance from star greater than boundrad
 * does a ship has a reference to the current starsystem if no does it need one
 * find out what action could go into dialogs conditions and actions
@@ -64,9 +68,9 @@ the console , input chatconsole panel hyrargy is a bit much
 ]* a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
 * the intro menu doesnt calculate with fps, and that is why the curor speed is off, fix that !!
 
-* the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed !!
+* the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed !
 
-* rework of menu active and keybindings, activemenu and active better differenciation, update part and draw part if active, the var active in toplevelpanel. !!
+* rework of menu active and keybindings, activemenu and active, better differentiation, update part and draw part if active, the var active in toplevelpanel. !
 * inputscript in scripts.py should be playerinputscript, also scripts needed for chatconsole and for menu, this makes it posible to have keys for inflight and for menu command on the same key.
 * make a script that will install the requirements, like pygame, etc
 
@@ -90,9 +94,9 @@ the console , input chatconsole panel hyrargy is a bit much
 * other sound for bullet impact on shield and plating and on planet
 * palaxing background, the image
 * make bullets that dont impact just disapear [done]
-* instead of restart directly, wait for keypress and see your lifeless ship float into the distance. !!
+* instead of restart directly, wait for keypress and see your lifeless ship float into the distance. !
 * make the camera so that it can smoothly transition from one place to another
-* make the game run from the beginning, so if choosing ship and color the game is already running !!
+* make the game run from the beginning, so if choosing ship and color the game is already running !
 * make camera translatable instead of direct snap
 * the portal stargate warp dent could use some drag inside it, for temp usability
 * cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fitt parts on your ship when on planet or structure, when container gets destroyed or dissconnected from ship you lose parts untill you are at capacity.
@@ -118,7 +122,7 @@ the console , input chatconsole panel hyrargy is a bit much
 bugs
 =====
 * somewhere in console there is a max, textfield length that is reached to soon [done]
-* the slider part is still not slidable !!!
+* the slider part is still not slidable [done]
 * pure black should not be a color to choose ship from  [done]
 * particle emitters dont have the exact right position in case of part [done]
 * putting engines on cockpit and perhaps other parts off shipp will prefent the engine of firering.

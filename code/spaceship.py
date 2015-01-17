@@ -179,13 +179,10 @@ def makeFreighter(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy",
 def playerShip(game, pos, delta, dir = 270, \
                 color = (255, 255, 255), name = ("Shippy","mcShipperson"), type = 'fighter'):
     """starterShip(x,y) -> default starting ship at x,y."""
-
     name = name.split(" ")
-    
     if len(name) == 1:
          name.append("Unknown")
     name = (name[0],name[1])
-
     if type == 'destroyer':
         ship = makeDestroyer(game, pos, delta, dir, color, name, player=True)
     elif type == 'interceptor':
@@ -197,10 +194,7 @@ def playerShip(game, pos, delta, dir = 270, \
     else:
         ship = makeFighter(game, pos, delta, dir, color, name, player=True)
 
-    
     return ship
-
-
 
 
 
@@ -270,10 +264,8 @@ class Ship(Floater):
         self.maxEnergy = 0
         self.color = color
         self.part = None
-        if hasattr(self, 'knownplanets'):
-            self.knownplanets[:] = []
-        else:
-            self.knownplanets = []
+
+        self.knownsystems = dict()
         self.__dict__.update(self.baseBonuses)
         # if script: 
         #     self.script = script
@@ -530,24 +522,32 @@ class Ship(Floater):
 
         if self.pos.get_distance(Vec2d(0,0)) > self.game.universe.curSystem.edgerad:
             posdifflist = self.game.universe.curSystem.getNeighborposdiff()
+            
             posdiff = (self.pos - self.game.universe.curSystem.star.pos)
-            nearest =  sorted(posdifflist, key=lambda diff: diff[1].get_distance(posdiff))[-1]
-            print nearest[0].name, nearest[1].get_angle()
+            nearest = sorted(posdifflist, key=lambda diff: diff[1].get_distance(posdiff))[-1]
 
-            # print Vec2d(0,0).rotatedd(-nearest[1].get_angle(), nearest[0].edgerad-50)
-            print Vec2d(0,0).rotatedd(self.delta.get_angle(), nearest[0].edgerad-50)
+
+            if len(posdifflist) == 1 and (nearest[1].normalized()*10 + self.delta.normalized()*10).get_length() > 10:
+                self.dir = -nearest[1].get_angle()-90
+                self.delta = -self.delta.rotated(nearest[1].get_angle()+90)
+
             
+            newpos =  Vec2d(0,0).rotatedd(self.delta.get_angle()+180, nearest[0].edgerad-50)
+
             
+            nearest[0].player = self
+            nearest[0].floaters.add(self)
+            nearest[0].ships.add(self)
+            self.game.universe.curSystem.player = None
+            self.game.universe.curSystem.ships.remove(self)
+            self.game.universe.curSystem.floaters.remove(self)
+            self.game.universe.curSystem = nearest[0]
+            self.pos = newpos
+            self.game.camera.setPos(self.pos)
+
+
+ 
             self.overedge = False
-
-            # for system in self.game.universe.curSystem.neighbors:
-            #     system.player = self
-            #     self.game.universe.curSystem.player = None
-            #     self.game.universe.curSystem.ships.remove(self)
-            #     self.game.universe.curSystem.floaters.remove(self)
-            #     system.ships.add(self)
-            #     system.floaters.add(self)
-            #     self.game.universe.curSystem = system
 
 
 

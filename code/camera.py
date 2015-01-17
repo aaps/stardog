@@ -21,6 +21,7 @@ class Camera(object):
 		self.height = game.height
 
 	def update(self):
+
 		for layer in self.layers:
 			if layer.enabled:
 				layer.update()
@@ -128,11 +129,15 @@ class SpaceView(object):
 		self.onScreen = []
 		self.offset = Vec2d(self.camera.pos.x - self.camera.width / 2, 
 				self.camera.pos.y - self.camera.height / 2)
+
+
 		for floater in self.game.universe.curSystem.floaters:
 			r = floater.radius
 			if (r + floater.pos.x > self.offset.x and floater.pos.x - r < self.offset.x + self.camera.width)\
 			and (r + floater.pos.y > self.offset.y 	and floater.pos.y - r < self.offset.y + self.camera.height):
-					self.onScreen.append(floater)
+				self.onScreen.append(floater)
+
+
 
 
 	def sortFloaterHeight(self, onscreen):

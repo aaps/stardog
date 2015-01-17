@@ -35,6 +35,7 @@ class StarSystem(object):
 	
 	def addNeighbor(self, starsystem):
 		self.neighbors.append(starsystem)
+		starsystem.neighbors.append(self)
 
 	def getNeighbors(self):
 		return self.neighbors
@@ -42,7 +43,7 @@ class StarSystem(object):
 	def getNeighborposdiff(self):
 		posdiffs = []
 		for starsystem in self.neighbors:
-			posdiff = (starsystem.position + self.position)
+			posdiff = -(starsystem.position - self.position)
 			posdiffs.append((starsystem,posdiff))
 		return posdiffs
 		
@@ -229,7 +230,7 @@ class SolarA1(StarSystem):
 	g=5000
 	def __init__(self, universe, name, location ,numPlanets = 10, numStructures = 2, boundrad = 30000, edgerad= 60000):
 		StarSystem.__init__(self, universe, location,boundrad, edgerad)
-		self.star = (Star( self, Vec2d(0,0), radius = 4000, image = None)) # the star
+		self.star = (Star( self, Vec2d(0,0), radius = randint(2000,5000), image = None)) # the star
 		#place player:
 		angle = randint(0,360)
 		self.location = location
@@ -267,6 +268,9 @@ class SolarA1(StarSystem):
 			radius = randint(100,200)
 			self.add(Structure( self, Vec2d(distanceFromStar * cos(angle), distanceFromStar * sin(angle)), color, radius))
 
+		radius = randint(100,200)
+		gateway = Gateway(self, Vec2d(self.boundrad-2000,self.boundrad), radius)
+		self.add(gateway)
 
 				
 		for planet in self.planets:
@@ -275,9 +279,8 @@ class SolarA1(StarSystem):
 			planet.respawn = 30
 			self.add(planet)
 
-		radius = randint(100,200)
-		self.add(Gateway(self, Vec2d(self.boundrad-2000,self.boundrad), radius) )
 
+		
 
 
 		

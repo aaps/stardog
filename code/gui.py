@@ -97,14 +97,14 @@ class RadarField(Drawable):
 		
 		scale = self.radarRadius * self.zoomModifier
 
+
 		pygame.draw.circle(self.image,(0, 0, 60), self.center, self.radarRadius )
 		#draw floating part dots:
 		if self.game.player.radars[-1].disk and self.game.player.radars[-1].enabled and int(self.game.player.radars[-1].disk.radius / scale + 2) < 100:
 			pygame.draw.circle(self.image, RADAR3, center, int(self.game.player.radars[-1].disk.radius / scale + 2), 1)
 
-
-		for planet in self.game.player.knownplanets:
-			
+		if 	self.game.universe.curSystem in self.game.player.knownsystems:
+			for planet in self.game.player.knownsystems[self.game.universe.curSystem]:
 				result = planet.pos - self.game.player.pos
 				dotPos = int(center[0] + limit(-radius,	result.x / scale, self.radarRadius)), int(center[1] + limit(-self.radarRadius, result.y / scale, self.radarRadius))
 				r = int(planet.radius / scale + 2)
@@ -126,6 +126,7 @@ class RadarField(Drawable):
 					pos.append((normalised * 100).rotated(2)  + center)
 					pos.append((normalised * 100).rotated(-2) + center)
 					pygame.draw.polygon(self.image, color, pos)
+		
 
 
 			
@@ -164,10 +165,15 @@ class RadarField(Drawable):
 				pos.append((normalised * 100).rotated(-2) + center)
 				pygame.draw.polygon(self.image, color, pos)
 
-
-
+		startstop = []
+		posdiffs = self.game.universe.curSystem.getNeighborposdiff()
 		
-
+		for diff in posdiffs:
+			angle = diff[1].get_angle()-180
+			ddiamond(self.image, (255,255,255), Vec2d(center).rotatedd(angle, 97), 1)
+			
+			
+			
 
 		pygame.draw.line(self.image, SUPER_WHITE, (0,self.radarRadius), (self.radarRadius*2,self.radarRadius),1)
 		pygame.draw.line(self.image, SUPER_WHITE, (self.radarRadius,0), (self.radarRadius,self.radarRadius*2),1)

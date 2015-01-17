@@ -14,7 +14,7 @@ class Strafebat(Ship):
 	
 	def __init__(self, universe, pos, color, name):
 		roll = rand()
-		self.target = universe.curSystem.player
+		self.target = None
 		self.universe = universe
 		self.circling = False
 		Ship.__init__(self, universe.game, pos, Vec2d(0,0), color = color, name=name)
@@ -79,18 +79,18 @@ class StrafebatScript(AIScript):
 		if not ship.radars[-1].enabled:
 			ship.radars[-1].toggle()
 		ships = ship.radars[-1].detected
-		target = self.closestShip(ship, ships)
+		ship.curtarget = self.closestShip(ship, ships)
 		
-		if not target:# no target
+		if not ship.curtarget:# no target
 			self.intercept(ship, ship.planet, self.returnSpeed)
 			return
 		
-		if target.pos.get_distance(ship.pos) < self.shootingRange * 2 \
+		if ship.curtarget.pos.get_distance(ship.pos) < self.shootingRange * 2 \
 		and ship.guns: # within range.
-			self.interceptShot(ship, target)
+			self.interceptShot(ship, ship.curtarget)
 			return
 			
-		self.intercept(ship, target, self.interceptSpeed)
+		self.intercept(ship, ship.curtarget, self.interceptSpeed)
 			
 	def closestShip(self, ship, ships):
 		"""finds the closest ship not-friendly to this one."""
