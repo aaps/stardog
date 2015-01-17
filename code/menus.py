@@ -461,6 +461,11 @@ class PartDescriptionPanel(Panel):
     def reset(self):
         self.setPart(self.part)
         Panel.reset(self)
+
+class HoverPartDescriPanel(PartDescriptionPanel):
+    drawborder = False
+    def __init__(self, rect, selecter = None):
+        pass
     
 class ShipPartPanel(DragableSelectable):
     drawBorder = False
@@ -946,6 +951,11 @@ class SkillTile(Button):
             self.levelLabel = Label(rect, 'level ' + str(self.skill.level),\
                         color = SHIP_PANEL_BLUE)
             self.addPanel(self.levelLabel)
+
+class HoverTile(HoverPanel):
+    def __init__(self):
+        pass
+
 
 class Store(Panel):
     

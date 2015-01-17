@@ -108,8 +108,9 @@ class Game(object):
             self.player = playerShip(self, Vec2d(0,0),Vec2d(0,0),
                             color = self.playerColor, name = self.PlayerName, type = self.playerType)
             
-            self.camera.layerAdd(shipDamage(self),5)
-            self.camera.layerAdd(StarField(self),2)
+            self.camera.layerAdd(shipDamage(self), 5)
+            self.camera.layerAdd(StarField(self),  2)
+            self.camera.layerAdd(HoverPanel(self), 5)
             self.universe.setCurrentStarSystem("theone")
             self.camera.layerAdd(self.universe.curSystem.bg,1)
             
