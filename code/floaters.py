@@ -119,7 +119,7 @@ class Bullet(Floater):
 		self.life = 0.
 		self.ship = gun.ship
 		if 'target' in gun.ship.__dict__:
-			self.target = gun.ship.target
+			self.curtarget = gun.ship.curtarget
 
 	def update(self):
 		self.life += 1. / self.game.fps
@@ -376,7 +376,7 @@ class LaserBeam(Floater):
 					colorShift(self.baseImage, (bulletColor(self.damage))),
 					(int(length), 5)), -dir)
 		if 'target' in laser.ship.__dict__:
-			self.target = laser.ship.target
+			self.curtarget = laser.ship.curtarget
 		self.game.universe.curSystem.specialOperations.append(self.collision)
 
 		

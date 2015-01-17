@@ -53,10 +53,11 @@ class Game(object):
         thethird = SolarA1(self.universe, "thethird", Vec2d(1,200),2,1)
         theone.addNeighbor(thesecond)
         theone.addNeighbor(thethird)
-        thesecond.addNeighbor(theone)
+        
 
         self.universe.addStarSystem(theone)
         self.universe.addStarSystem(thesecond)
+        self.universe.addStarSystem(thethird)
         
         self.camera.layerAdd(self.messenger,7)
         self.camera.layerAdd(MiniInfo(self),6)

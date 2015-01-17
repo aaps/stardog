@@ -230,11 +230,18 @@ def targetRect(surface, color, mincolor, pos, radius, spacing):
 	
 	pygame.draw.rect(surface, mincolor, (pos[0]-radius-spacing,pos[1]-int(radius/2)-int(spacing/2),(radius*2)+(spacing*2),radius+spacing), 1)
 	pygame.draw.rect(surface, mincolor, (pos[0]-int(radius/2)-int(spacing/2),pos[1]-radius-spacing,radius+spacing,(radius*2)+(spacing*2)), 1)
-	
+
+def diamond(surface, color, pos, size):
+	pygame.draw.polygon(surface, color,[(0+pos[0],0+pos[1]-(size*2)-2),(4*size+pos[0],4*size+pos[1]-(size*2)-2),(0+pos[0],8*size+pos[1]-(size*2)-2), (-4+pos[0],4*size+pos[1]-(size*2)-2)],1)
+
+def ddiamond(surface, color, pos, size):
+	pygame.draw.polygon(surface, color,[(0+pos[0],0+pos[1]-(size*2)-2),(4*size+pos[0],4*size+pos[1]-(size*2)-2),(0+pos[0],8*size+pos[1]-(size*2)-2), (-4+pos[0],4*size+pos[1]-(size*2)-2)],1)
+	pygame.draw.polygon(surface, color,[(0+pos[0],0+pos[1]-(size*2)),(2*size+pos[0],2*size+pos[1]-(size*2)),(0+pos[0],4*size+pos[1]-(size*2)), (-2+pos[0],2*size+pos[1]-(size*2))])
+
+
 def makeKMdistance(floaterx, floatery):
 	return str(max(round((floaterx.pos.get_distance(floatery.pos)-floaterx.radius-floatery.radius)/10,1),0))
 
-	# self.game.player.pos.get_distance(self.targ.pos)
 
 def makeKMs(floater):
 	return str(round(floater.delta.get_length()/10,1))
@@ -243,3 +250,4 @@ def find_nearest(array, value):
     n = [abs(i-value) for i in array]
     idx = n.index(min(n))
     return array[idx]
+

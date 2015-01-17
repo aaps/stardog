@@ -890,10 +890,10 @@ class NavigationTile(Panel):
 
     def planetnames(self):
         planetnames = ""
-        cursystemknown = list(set(self.game.player.knownplanets) & set(self.game.universe.curSystem.planets))
-        for planet in self.game.player.knownplanets:
-            if isinstance(planet, Planet):
-                planetnames += planet.firstname + "\n"
+        if self.game.universe.curSystem in self.game.player.knownsystems:
+            for planet in self.game.player.knownsystems[self.game.universe.curSystem]:
+                if isinstance(planet, Planet):
+                    planetnames += planet.firstname + "\n"
         return planetnames
 
     def systemname(self):

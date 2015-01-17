@@ -684,7 +684,7 @@ class Radar(Part):
      
     def update(self):
         from planet import Planet
-        if self == self.ship.radars[-1]:
+        if self.ship and self == self.ship.radars[-1]:
             if self.enabled and self.ship and self.ship.energy > self.energyCost:
                 self.radartime -= 1.0 / self.game.fps
                 if self.radartime <= 0:
@@ -696,8 +696,12 @@ class Radar(Part):
                         for floater in self.game.universe.curSystem.floaters:
                             if collisionTest(self.disk, floater) and floater != self.ship:
                                 self.detected.append(floater)
-                                if floater not in self.ship.knownplanets and isinstance (floater,Planet):
-                                    self.ship.knownplanets.append(floater)
+
+                                if self.game.universe.curSystem in self.ship.knownsystems:
+                                    if floater not in self.ship.knownsystems[self.game.universe.curSystem] and isinstance (floater, Planet):
+                                        self.ship.knownsystems[self.game.universe.curSystem].append(floater)
+                                else:
+                                    self.ship.knownsystems.update({self.game.universe.curSystem:[]})
                         if not self.ship.curtarget in self.detected and not isinstance (self.ship.curtarget,Planet):
                             self.ship.curtarget = None
                 self.ship.energy -= self.energyCost / self.game.fps
@@ -707,6 +711,7 @@ class Radar(Part):
         Part.update(self)
 
     def targetNextShip(self):
+        pass
         from spaceship import Ship
         if self == self.ship.radars[-1]:
             resultList = []
@@ -723,6 +728,7 @@ class Radar(Part):
                 self.ship.curtarget = None
 
     def targetPrefShip(self):
+        pass
         from spaceship import Ship
         if self == self.ship.radars[-1]:
             resultList = []
@@ -741,15 +747,16 @@ class Radar(Part):
     def targetNextPlanet(self):
         from planet import Planet
         if self == self.ship.radars[-1]:
-            self.ship.knownplanets = sorted(self.ship.knownplanets, key = self.radarDistance)
-            if self.ship.curtarget in self.ship.knownplanets:
-                index = self.ship.knownplanets.index(self.ship.curtarget)
-                if index+1 < len(self.ship.knownplanets):
-                    self.ship.curtarget = self.ship.knownplanets[index+1]
+            planets = self.ship.knownsystems[self.game.universe.curSystem]
+            planets = sorted(planets, key = self.radarDistance)
+            if self.ship.curtarget in planets:
+                index = planets.index(self.ship.curtarget)
+                if index+1 < len(planets):
+                    self.ship.curtarget = planets[index+1]
                 else:
-                    self.ship.curtarget = self.ship.knownplanets[0]
-            elif len(self.ship.knownplanets) > 0:
-                self.ship.curtarget = self.ship.knownplanets[0]
+                    self.ship.curtarget = planets[0]
+            elif len(planets) > 0:
+                self.ship.curtarget = planets[0]
             else:
                 self.ship.curtarget = None
 
@@ -758,15 +765,16 @@ class Radar(Part):
     def targetPrefPlanet(self):
         from planet import Planet
         if self == self.ship.radars[-1]:
-            self.ship.knownplanets = sorted(self.ship.knownplanets, key = self.radarDistance)
-            if self.ship.curtarget in self.ship.knownplanets:
-                index = self.ship.knownplanets.index(self.ship.curtarget)
+            planets = self.ship.knownsystems[self.game.universe.curSystem]
+            planets = sorted(planets, key = self.radarDistance)
+            if self.ship.curtarget in planets:
+                index = planets.index(self.ship.curtarget)
                 if index > 0:
-                    self.ship.curtarget = self.ship.knownplanets[index-1]
+                    self.ship.curtarget = planets[index-1]
                 else:
-                    self.ship.curtarget = self.ship.knownplanets[len(self.ship.knownplanets)-1]
-            elif len(self.ship.knownplanets) > 0:
-                self.ship.curtarget = self.ship.knownplanets[len(self.ship.knownplanets)-1]
+                    self.ship.curtarget = planets[len(planets)-1]
+            elif len(planets) > 0:
+                self.ship.curtarget = planets[len(planets)-1]
             else:
                 self.ship.curtarget = None
 

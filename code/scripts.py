@@ -109,40 +109,40 @@ class AIScript(Script):
 		if not ship.radars[-1].enabled:
 			ship.radars[-1].toggle()
 		ships = ship.radars[-1].detected
-		target, distance = self.closestShip(ship, ships)
+		curtarget, distance = self.closestShip(ship, ships)
 				
 		if ship.guns:
 			shootingRange = 400 ** 2
 			(ship.guns[0].bulletRange * ship.guns[0].speed) ** 2 / 2
 		else: #without guns kamikaze. 
-			if self.turnTowards(ship, target):
+			if self.turnTowards(ship, curtarget):
 				ship.forward()
 			return
 		if distance < shootingRange:
-			if self.turnTowards(ship, target):
+			if self.turnTowards(ship, curtarget):
 				ship.shoot()
 			return
 
-		if dist(ship.dx, ship.dy, target.dx, target.dy) < self.interceptSpeed\
-			or sign(ship.dx - target.dx) == sign(ship.x - target.x) \
-			or sign(ship.dy - target.dy) == sign(ship.y - target.y):
+		if dist(ship.dx, ship.dy, curtarget.dx, curtarget.dy) < self.interceptSpeed\
+			or sign(ship.dx - curtarget.dx) == sign(ship.x - curtarget.x) \
+			or sign(ship.dy - curtarget.dy) == sign(ship.y - curtarget.y):
 			#speed up:
-			if self.turnTowards(ship, target):
+			if self.turnTowards(ship, curtarget):
 				ship.forward()
 		else:
 			#slow down:
-			if self.turnTowards(ship, target, 180):
+			if self.turnTowards(ship, curtarget, 180):
 				ship.forward()
 				
 	def closestShip(self, ship, ships):
 		"""finds the closest ship to this one."""
-		target = ships[0]
-		distance = dist2(ship, target)
+		curtarget = ships[0]
+		distance = dist2(ship, curtarget)
 		for s in ships:
 			if dist2(s, ship) < distance and s != ship:
 				distance = dist2(s,ship)
-				target = s
-		return target, distance
+				curtarget = s
+		return curtarget, distance
 	
 	def turn(self, ship, angle):
 		angle = angleNorm(angle - ship.dir)
@@ -245,13 +245,12 @@ class AIScript(Script):
 			return 0
 		if speed == 0:
 			return sqrt(distance / 2 / accel) * 2
-		
 	def goto(self, ship, pos, target = None):
 		"""directs the ship to fly to the position. 
 		If target, pos is a position relative to the target."""
 		accel = ship.forwardThrust / ship.mass
 		time = sqrt(dist(ship.pos.x, ship.pos.y, pos[0], pos[1]) / accel)
-		if not target:
+		if not curtarget:
 			dummy = Ballistic(pos[0], pos[1], 0, 0)
 		else:
 			dummy = Ballistic(pos[0] + target.pos.x, pos[1] + target.pos.y,\
