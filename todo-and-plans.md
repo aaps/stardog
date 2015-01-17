@@ -29,10 +29,14 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ==========
+<<<<<<< HEAD
 * remove image draw from menu panels ?
 * does ship still need hp is not all hp contained in the parts ?
 * remove the shield indication arc and put it on gui.
 * a sentence construction kitt for the ai so it can taunt you for example
+=======
+* partcount in menu doesn't show the actuall part limit.
+>>>>>>> 24a1c348f4c17d1f8fb9c48c6bd1f12b7dfa64b6
 * a list in a ship of who is targeting you.
 targeting target should not go into player or enemy but in ship
 * there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.
@@ -252,20 +256,16 @@ so you can get out of the way in time. [done, aat]
 
 Commanline interface
 =====
-* a command line interface for manipulating the world so that testing is faster. [W.I.P]
 * convert all oldstyle classes into new style that is easier to check with type() [done]
+* a command line interface for manipulating the world so that testing is faster. [W.I.P]
+
 * make command interface check against a list of keys that it may ignore for printing or using.
-- a command to add parts to a ship
+- a command to add parts to a ship [Done]
 - a command to change name of ship
-- a command to change name of planet
-- a command to add parts to planets
-- a command to make ships / planets
-- a command to remove ships / planets
-- above also for other floaters/structures ?
-- a command to make a star system and link it to existing system
-- a command to reate a specific part with x stats on planet or ship, integrate with one of above ?
+- a command to add parts to planets [Done but parts appear in ship inventory]
+- a command to spawn enemy ships
+- a command to kill all enemy's
 - a command to manipulate your camera (need work)
-- a command for teleporting ships to other starsystem
 
 
 crew
@@ -276,15 +276,12 @@ crew
 
 bays
 =====
-* a part that is mechanic bay
-* a part that is weapons bay
-* a part that is the armory
-* a part that is a cargo bay
+* a part that is a cargo bay, bigger bay more part that can be carried
 
 Freighter
 =====
-
-from the sides of cockpit interconnects with an engine on the back side of interconnect, and a tail of cargo containers.
+* use destroyer cockpit.
+* from the sides of cockpit interconnects with an engine on the back side of interconnect, and a tail of cargo containers.
 
 ship
 =====
@@ -294,6 +291,7 @@ or only give the destroyer that capability? [implemented by duality the mine lay
 * display ship stats closer to the ship like health energy xp bar can stay where it is? [yes health bars can stay where they are, need to look better tho, aat, enemy health bars can be removed]
 * make a scout ship [done duality] 
 * make a juggernaut ship [Done, also increased parts that can be fixed to the ship by 2 because it was 10/8 parts attached]
+
 parts
 ======
 * blocks with different shapes so that you can better position parts.

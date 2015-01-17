@@ -27,7 +27,7 @@ class Game(object):
     are probably a bad idea."""
     menu = None
     def __init__(self, screen):
-        self.pause = False
+#        self.pause = False
         self.console = False
         self.debug = False
         self.player = None
@@ -204,6 +204,7 @@ class Game(object):
                 #and does actions based upon that.
                 self.commandParse.update()
                 #reloading logic, couldn't make it work from inside the commandParse class
+                #reloads the module so it imports new code.
                 if self.commandParse.reload:
                     self.commandParse.reload = False
                     reload(commandParse)

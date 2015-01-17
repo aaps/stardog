@@ -507,7 +507,6 @@ class MineDropper(Gun):
         statString = ("\n Mine Speed: %s m/s\nMine Accel: %s m/s/s")
         return Gun.stats(self)+statString%stats
 
-
     def shoot(self):
         if self.acted: return
         self.acted = True
