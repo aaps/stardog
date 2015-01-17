@@ -33,6 +33,7 @@ class CommandParse(object):
         self.player = game.player
         self.messenger = messenger
         self.chatconsole = chatconsole
+        self.textColor = (244,244,200)
         #a reference to a function that gets the text from the chatconsole
         self.getText = self.chatconsole.console.inputfield.getText
         #a reference to a function that is able to set that text.
@@ -40,7 +41,10 @@ class CommandParse(object):
         self.setText = self.chatconsole.console.inputfield.setText
         self.text = []
         self.reload = False
-        
+    def setColor(self, args):
+        if not args:
+            return
+        self.textColor = eval(args[0])
     def handleInput(self, event):
         pass
     
@@ -49,9 +53,9 @@ class CommandParse(object):
         if '\n' in text:
             text = text.split('\n')
             for item in text:
-                self.messenger.message(str(item), (244,244,200))
+                self.messenger.message(str(item), self.textColor)
         else:
-            self.messenger.message(str(text), (244,244,200))
+            self.messenger.message(str(text), self.textColor)
         
     def printAttrVal(self, attribute, value):
         self.printout(str(attribute)+" = "+str(value))
@@ -149,10 +153,12 @@ class CommandParse(object):
                     elif command == 'help':
                         for text in self.helpText:
                             self.printout(text)
-                    elif command == "insert_item":
+                    elif command == "insertItem":
                         pass
-                    elif command == "remove_item":
+                    elif command == "removeItem":
                         pass
+                    elif command == "setTextColor":
+                        self.setColor(args)
                     elif command == 'printdbg':
                         self.printout("input: %s \ncommand: %s \narguments: %s"%(text, command, args))
                     else:
