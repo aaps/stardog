@@ -60,12 +60,13 @@ class CommandParse(object):
     def insertPart(self, args):
         if not args:
             return
+        part = None
+        amount = 1
         if len(args) == 1:
             part = args[0]
-            amount = 1
         else:
-            part,amount = args
-        self.player.insertPart(eval(part))
+            part,amount = args[0],int(args[1])
+        self.player.insertPart(eval(part), amount)
 
     def handleInput(self, event):
         pass
