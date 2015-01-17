@@ -322,7 +322,6 @@ class Ship(Floater):
         self.gwfocusus = []
         self.mines = []
         self.gyros = []
-        self.partLimit = Ship.partLimit
         self.__dict__.update(Ship.baseBonuses)
         #recalculate stats:
         self.dps = 0
