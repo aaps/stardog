@@ -12,12 +12,12 @@ from skills import *
 from particles import *
 
 def makeFighter(game, pos, delta, dir = 270, \
-                color = (255, 255, 255),name=("Shippy","mcShipperson"), player = False):
+                color = (255, 255, 255),name=("Shippy","mcShipperson"), player = False, partlim=8):
     """starterShip(x,y) -> default starting ship at x,y."""
     if player:
-        ship = Player(game, pos, delta, dir = dir, color = color,name=name)
+        ship = Player(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     else:
-        ship = Ship(game, pos, delta, dir = dir, color = color,name=name)
+        ship = Ship(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     cockpit = Fighter(game)
     gun = MachineGun(game)
     engine = Engine(game)
@@ -36,13 +36,13 @@ def makeFighter(game, pos, delta, dir = 270, \
     ship.energy = ship.maxEnergy * .8
     return ship
     
-def makeDestroyer(game, pos, delta, dir = 270, color = (255, 255, 255),name=("Shippy","mcShipperson"), player = False):
+def makeDestroyer(game, pos, delta, dir = 270, color = (255, 255, 255),name=("Shippy","mcShipperson"), player = False, partlim=8):
     """starterShip(x,y) -> default starting ship at x,y."""
 
     if player:
-        ship = Player(game, pos, delta, dir = dir, color = color, name=name)
+        ship = Player(game, pos, delta, dir = dir, color = color, name=name, partlimit=partlim)
     else:
-        ship = Ship(game, pos, delta, dir = dir, color = color,name=name)
+        ship = Ship(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     gyro = Gyro(game)
     generator = Generator(game)
     battery = Battery(game)
@@ -70,12 +70,12 @@ def makeDestroyer(game, pos, delta, dir = 270, color = (255, 255, 255),name=("Sh
     ship.energy = ship.maxEnergy * .8
     return ship	
     
-def makeInterceptor(game, pos, delta, dir = 270, color = (255, 255, 255),name=("Shippy","mcShipperson"), player = False):
+def makeInterceptor(game, pos, delta, dir = 270, color = (255, 255, 255),name=("Shippy","mcShipperson"), player = False, partlim=8):
     """starterShip(x,y) -> default starting ship at x,y."""
     if player:
-        ship = Player(game, pos, delta, dir = dir, color = color,name=name)
+        ship = Player(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     else:
-        ship = Ship(game, pos, delta, dir = dir, color = color,name=name)
+        ship = Ship(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     cockpit = Interceptor(game)
     gyro = Gyro(game)
     generator = Generator(game)
@@ -106,11 +106,11 @@ def makeInterceptor(game, pos, delta, dir = 270, color = (255, 255, 255),name=("
     ship.energy = ship.maxEnergy * .8
     return ship
 
-def makeJuggernaut(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcShipperson"), player=False):
+def makeJuggernaut(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcShipperson"), player=False, partlim=8):
     if player:
-        ship = Player(game, pos, delta, dir=dir, color = color, name=name)
+        ship = Player(game, pos, delta, dir=dir, color = color, name=name, partlimit=partlim)
     else:
-        ship = Ship(game, pos, delta, dir=dir, color = color, name=name)
+        ship = Ship(game, pos, delta, dir=dir, color = color, name=name, partlimit=partlim)
     
     cockpit = Interceptor(game)
     gyro = Gyro(game)
@@ -148,11 +148,11 @@ def makeJuggernaut(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy"
     ship.energy = ship.maxEnergy * .8
     return ship
 
-def makeScout(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcShipperson"), player=False):
+def makeScout(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcShipperson"), player=False, partlim=8):
     if player:
-        ship = Player(game, pos, delta, dir = dir, color = color,name=name)
+        ship = Player(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     else:
-        ship = Ship(game, pos, delta, dir = dir, color = color,name=name)
+        ship = Ship(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     cockpit = Fighter(game)
     battery = Battery(game)
     cannon = RightFlakCannon(game)
@@ -173,7 +173,7 @@ def makeScout(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcS
     ship.energy = ship.maxEnergy * .8
     return ship
 
-def makeFreighter(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcShipperson"), player=False):
+def makeFreighter(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcShipperson"), player=False, partlim=8):
     pass
 
 def playerShip(game, pos, delta, dir = 270, \
@@ -183,16 +183,19 @@ def playerShip(game, pos, delta, dir = 270, \
     if len(name) == 1:
          name.append("Unknown")
     name = (name[0],name[1])
+
     if type == 'destroyer':
-        ship = makeDestroyer(game, pos, delta, dir, color, name, player=True)
+        ship = makeDestroyer(game, pos, delta, dir, color, name, player=True, partlim=12)
+    elif type == 'Freighter':
+        pass
     elif type == 'interceptor':
-        ship = makeInterceptor(game, pos, delta, dir, color, name, player=True)
+        ship = makeInterceptor(game, pos, delta, dir, color, name, player=True, partlim=10)
     elif type == 'juggernaut':
-        ship = makeJuggernaut(game, pos, delta, dir, color, name, player=True)
+        ship = makeJuggernaut(game, pos, delta, dir, color, name, player=True, partlim=10)
     elif type == 'scout':
-        ship = makeScout(game, pos, delta, dir, color, name, player=True)
-    else:
-        ship = makeFighter(game, pos, delta, dir, color, name, player=True)
+        ship = makeScout(game, pos, delta, dir, color, name, player=True, partlim=6)
+    elif type == 'Fighter':
+        ship = makeFighter(game, pos, delta, dir, color, name, player=True, partlim=6)
 
     return ship
 
@@ -254,7 +257,7 @@ class Ship(Floater):
     }
 
     def __init__(self, game, pos, delta, dir = 270, \
-                color = (255, 255, 255), name=("shippy","Mcshipperson")):
+                color = (255, 255, 255), name=("shippy","Mcshipperson"), partlim=8):
         Floater.__init__(self, game, pos, delta, dir, 1)
         self.inventory = []
         self.firstname = name[0]
@@ -264,6 +267,7 @@ class Ship(Floater):
         self.maxEnergy = 0
         self.color = color
         self.part = None
+        self.partLimit = partlim
 
         self.knownsystems = dict()
         self.__dict__.update(self.baseBonuses)
@@ -664,8 +668,8 @@ class Player(Ship):
     developmentPoints = 12
     
     
-    def __init__(self, game, pos, delta, dir = 270, color = (255, 255, 255), name = ("Shippy","mcShipperson")):
-        Ship.__init__(self, game, pos, delta, dir, color, name)
+    def __init__(self, game, pos, delta, dir = 270, color = (255, 255, 255), name = ("Shippy","mcShipperson"), partlimit=8):
+        Ship.__init__(self, game, pos, delta, dir, color, name, partlimit)
         self.skills = [Modularity(self), Agility(self), Composure(self)]
 
     def xpQuest(self, xp):
