@@ -2,7 +2,7 @@ from types import *
 from spaceship import *
 from parts import *
 from vec2d import Vec2d
-import sys
+import sys, os
 
 class bcolors:
     HEADER = '\033[95m'
@@ -17,18 +17,22 @@ class bcolors:
 # GREEN = (0,255,0)
 # BLUE = (0,0,255)
 
-class AttributeFilter(object):
+class AttrFilter(object):
     def __init__(self):
-        pass
-    def getFilteredList(self):
-        pass
+        parseFilterInput = "parseFilter.txt"
+        path = os.getcwd()+"/code/"+parseFilterInput
+        self.fconfig = open(path, "r")
+    def getFiltered(self):
+        filtered = []
+        for line in self.fconfig.readlines():
+            #remove \r\n from input.
+            line = ''.join(line.split())
+            filtered.append(line)
+        return filtered
 
 class CommandParse(object):
     helpText = [
     "!print <object...> <attributes> <...>\n"
-    "wil print all the atributes of the object\n"
-    "or atributes specified, and or the elements\n"
-    "in that atributes list\n"
     ]
     
     def __init__(self, game, chatconsole, messenger):
@@ -36,6 +40,7 @@ class CommandParse(object):
         self.player = game.player
         self.messenger = messenger
         self.chatconsole = chatconsole
+
         self.textColor = (244,244,200)
         #a reference to a function that gets the text from the chatconsole
         self.getText = self.chatconsole.console.inputfield.getText
@@ -67,6 +72,7 @@ class CommandParse(object):
         else:
             part,amount = args[0],int(args[1])
         self.player.insertPart(eval(part), amount)
+        self.printout("inserted %d %s's into inventory."%(amount, str(part)))
 
     def handleInput(self, event):
         pass
@@ -78,9 +84,14 @@ class CommandParse(object):
                 self.messenger.message(str(item), self.textColor)
         else:
             self.messenger.message(str(text), self.textColor)
-        
+    #print a single value,
+    #also check if that value is in the filter list.
+    #if so don't print it.
     def printAttrVal(self, attribute, value):
-        self.printout(str(attribute)+" = "+str(value))
+        #attrfilter = AttrFilter()
+        filtered_list = AttrFilter().getFiltered()
+        if str(attribute) not in filtered_list:
+            self.printout(str(attribute)+" = "+str(value))
         
     def printAttributes(self, obj):
         for element in obj.__dict__:
@@ -193,4 +204,6 @@ class CommandParse(object):
                     self.printout(self.player.firstname + " " + self.player.secondname +": "+text)
             except Exception, e:
                 self.printout(e)
-                print e
+                exc_type, exc_obj, exc_tb = sys.exc_info()
+                fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+                print(exc_type, str(fname)+":"+str(exc_tb.tb_lineno))
