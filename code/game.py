@@ -27,7 +27,7 @@ class Game(object):
     are probably a bad idea."""
     menu = None
     def __init__(self, screen):
-        self.pause = False
+#        self.pause = False
         self.console = False
         self.debug = False
         self.player = None

@@ -281,7 +281,7 @@ class Ship(Floater):
             self.functionDescriptions.append(function.__doc__)
         self.baseBonuses = self.baseBonuses.copy()
 
-    def insertInInventory(self, part, amount=1):
+    def insertPart(self, part, amount=1):
         for i in range(amount):
             self.inventory.append(part(self.game))
 
@@ -360,10 +360,10 @@ class Ship(Floater):
         for skill in self.skills:
             skill.shipReset()
         #redraw base image:
-        if self.game.pause:
-            size = int(self.radius * 2 + 60)
-        else: 
-            size = int(self.radius * 2)
+        #if self.game.pause:
+        #    size = int(self.radius * 2 + 60)
+        #else: 
+        size = int(self.radius * 2)
         self.baseImage = pygame.Surface((size, size), \
                     hardwareFlag | SRCALPHA).convert_alpha()
         self.baseImage.set_colorkey(BLACK)
@@ -640,7 +640,7 @@ class Ship(Floater):
         else:
             #landing:
             if self == planet.game.player and not self.landed:
-                planet.game.pause = True
+                #planet.game.pause = True
                 self.landed = planet
                 self.game.menu.parts.reset()
             self.delta.x, self.delta.y = planet.delta.x, planet.delta.y

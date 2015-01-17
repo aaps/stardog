@@ -1,5 +1,6 @@
 from types import *
-from spaceship import playerShip
+from spaceship import *
+from parts import *
 from vec2d import Vec2d
 import sys
 
@@ -53,8 +54,19 @@ class CommandParse(object):
         raise Exception("Exception: not implemented yet")
     def convertShip(self, args):
         shipType = args[0]
-        self.game.player = playerShip(self, Vec2d(0,0),Vec2d(0,0),
-                            color = self.game.playerColor, name = self.game.PlayerName, type = self.game.playerType)
+        if shipType == "Scout":
+            pass
+        raise Exception("Exception: Not fully implemented.")
+    def insertPart(self, args):
+        if not args:
+            return
+        if len(args) == 1:
+            part = args[0]
+            amount = 1
+        else:
+            part,amount = args
+        self.player.insertPart(eval(part))
+
     def handleInput(self, event):
         pass
     def printout(self, text):
@@ -162,8 +174,8 @@ class CommandParse(object):
                     elif command == 'help':
                         for text in self.helpText:
                             self.printout(text)
-                    elif command == "insertItem":
-                        pass
+                    elif command == "insertPart":
+                        self.insertPart(args)
                     elif command == "removeItem":
                         pass
                     elif command == "setTextColor":
