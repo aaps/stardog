@@ -71,6 +71,7 @@ class Part(Floater):
                     self.baseImage.get_width() / 2)
         Floater.__init__(self, game, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = radius)
         self.image = colorShift(self.baseImage.copy(), self.color)
+        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
         self.width = self.image.get_width() - 4
         self.height = self.image.get_height() - 4
         #the length of this list is the number of connections.
@@ -136,7 +137,10 @@ class Part(Floater):
         #rotate takes a ccw angle and color.
         part.image = colorShift(pygame.transform.rotate(part.baseImage, \
                     -part.dir), part.color)
+        part.greyimage = colorShift(pygame.transform.rotate(part.baseImage, \
+                    -part.dir), (100,100,100))
         part.image.set_colorkey(BLACK)
+        part.greyimage.set_colorkey(BLACK)
         if part.animatedBaseImage:
             part.animatedImage = colorShift(part.animatedBaseImage, part.color)
             part.animatedImage.set_colorkey(BLACK)
@@ -255,7 +259,7 @@ class Part(Floater):
             emitter.update()
 
 
-    def draw(self, surface, offset = None, redraw = True):
+    def draw(self, surface, offset = None, redraw = True, grey = False):
         """draws this part onto the surface."""
         if not offset:
             offset = Vec2d((surface.get_width() \
@@ -265,13 +269,15 @@ class Part(Floater):
         
         if self.ship == None:
             Floater.draw(self, surface, offset)
-        else:
+        elif not grey:
             surface.blit(self.image, offset)
+        else:
+        	surface.blit(self.greyimage, offset)
 
         #draw children:
         for port in self.ports:
             if port.part:
-                port.part.draw(surface)
+                port.part.draw(surface, grey = grey)
                 
         if not self.parent and redraw:
             self.redraw(surface, offset)

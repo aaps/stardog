@@ -256,6 +256,7 @@ class MiniInfo(Drawable):
 	mutatedimage = None
 	texts = []
 
+
 	def __init__(self, game,font = SMALL_FONT):
 		Drawable.__init__(self, game)
 		self.bottomleft = 2,  game.height - int(game.height/ 4 ) 
@@ -265,6 +266,7 @@ class MiniInfo(Drawable):
 		self.height = int(game.height/ 4 )
 		self.image = pygame.Surface((self.width,self.height))
 		self.image.set_alpha(200)
+		self.palette = tuple([(i, i, i) for i in range(256)])
 
 	def update(self):
 
@@ -290,11 +292,11 @@ class MiniInfo(Drawable):
 				pygame.draw.circle(self.image, SUPER_WHITE, linedirstart, 10, 1)
 				pygame.draw.line(self.image, SUPER_WHITE, linedirstart, linedirstart.normalized().rotated(self.targ.dir)*10+linedirstart)
 				name = self.targ.firstname + " " + self.targ.secondname
-				if not self.targimage == self.targ.baseImage:
-					self.targimage = self.targ.baseImage
-					self.mutatedimage = self.grayscale(self.targimage)
-					self.mutatedimage = pygame.transform.rotozoom(self.mutatedimage, 90,2)
-					self.mutatedimage.set_colorkey(BLACK)       
+				if not self.targimage == self.targ.greyImage:
+					self.targimage = self.targ.greyImage
+					# we can realy us some way to make this surface in grayscale, but most solutions have serious drawbacks
+					self.mutatedimage = pygame.transform.rotozoom(self.targimage, 90,2)
+					#self.mutatedimage.set_colorkey(BLACK)       
 				offset = ((self.width/2) - (self.mutatedimage.get_width()/2), (self.height/2)-(self.mutatedimage.get_height()/2))
 				self.image.blit(self.mutatedimage, offset)
 				
@@ -310,7 +312,7 @@ class MiniInfo(Drawable):
 				name = self.targ.name
 				if not self.targimage == self.targ.baseImage:
 					self.targimage = self.targ.baseImage
-					self.mutatedimage = self.grayscale(self.targimage)
+					 # we can realy us some way to make this surface in grayscale, but most solutions have serious drawbacks
 					self.mutatedimage = pygame.transform.scale(self.mutatedimage, (self.targimage.get_width()*2,self.targimage.get_height()*2) )
 					self.mutatedimage.set_colorkey(BLACK)     
 				self.image.blit(self.mutatedimage,(self.width/2,self.height/2))
@@ -323,12 +325,7 @@ class MiniInfo(Drawable):
 				self.image.blit(text, (0,self.texts.index(text)*15))
 		surface.blit(self.image, self.bottomleft)
 
-	def grayscale(self, img):
-		arr = pygame.surfarray.array3d(img)
-		#luminosity filter
-		avgs = [[(r*0.298 + g*0.587 + b*0.114) for (r,g,b) in col] for col in arr]
-		arr = numpy.array([[[avg,avg,avg] for avg in col] for col in avgs])
-		return pygame.surfarray.make_surface(arr)
+
 
 class shipDamage(Drawable):
 

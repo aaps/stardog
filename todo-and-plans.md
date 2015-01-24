@@ -28,101 +28,71 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 * ai can use an fsm to flee attack, explore
 
 side dish
-==========
-<<<<<<< HEAD
-* remove image draw from menu panels ?
+============
+
+* make text able to left center right lineout
 * does ship still need hp is not all hp contained in the parts ?
-* remove the shield indication arc and put it on gui.
+* remove the shield indication arc and put it on gui. !!
 * a sentence construction kitt for the ai so it can taunt you for example
-=======
-* partcount in menu doesn't show the actuall part limit.
->>>>>>> 24a1c348f4c17d1f8fb9c48c6bd1f12b7dfa64b6
-* a list in a ship of who is targeting you.
-targeting target should not go into player or enemy but in ship
+* partcount in menu doesn't show the actuall part limit. [done ?]
+* a list in a ship of who is targeting you. targeting target should not go into player or enemy but in ship
 * there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.
-* make it to that gravity doesnt count when distance from star greater than boundrad
-* does a ship has a reference to the current starsystem if no does it need one
+* make it to that gravity doesnt count when distance from star greater than boundrad !!
+* does a ship has a reference to the current starsystem if no does it need one ?
 * find out what action could go into dialogs conditions and actions
-the console , input chatconsole panel hyrargy is a bit much
-* realy a better way to reset stuff on death, like radar error thing, enging trust should be off menus all inactive
-* alle set variables moeten in de init van een class anders zijn ze global
-* http://cyrille.rossant.net/create-a-standalone-windows-installer-for-your-python-application/
-* the targeting reticule of a selected part of ship should go over planet etc in radar. [done]
-* the ai should abide by its own radar range [done, it is still as stupid as can be]
+* the console , input chatconsole panel hyrargy is a bit much ?
+* realy a better way to reset stuff on death, like radar error thing, enging trust should be off menus all inactive !!
+* all variables if posible in class and not a class global !!
 * ai can talk to player, when targeting player for example and disengaging [after fsm and better brains ai]
-* make sure all the hud elements have a way to be easily re/positioned [yes all drawables have a setrect method, done]
-
-* remove fps measurment and make an average fps for in game, can be read with console [done]
-* place energy and xp bars in seperate rectfrom rest og gui [done]]
 * an small addaptation that makes this standout from other stardog. The accounting software  [star/space rats]
-* add some screen shots to the github repo [done]
-* a buton to make screen shots ?
+* a buton to make screen shots ? [done]
+* make it posible to easly make multyple screenshots with variing numbers 
 * a cursor for on mian screen in form of crosshair
-
-
-* place all menu elements in menuelements.py instead of menu for example [ok nothing wrong here menu has all the menu element compositions, and menu elements all the menu elements]
-* make factorys for planets starsystems and ships, the design pattern
-
-
-* make a detection score for a ship, based on the parts, that also need a detection score. [remove totalhp from shipdamage indicatiors and put it in ship, this will be detection score] [done]
+* place all menu elements in menuelements.py instead of menu for example [ok nothing wrong here menu has all the menu element compositions, and menu elements all the menu elements, done]
+* make factorys for planets starsystems and ships, the design pattern !
 * a random seed for xtra fun
-
 * mini game explotion push stuff, space socker ?
-
-* time to consider a differen graph lib like gfxdraw [we did, but we not gonna do it !, ha]
+* time to consider a differen graph lib like gfxdraw [we did, but we not gonna do it !, ha, done]
 * plitout parts and cargo , different files, is part cargo or cargo part ?
-* see if it is posible to get part and dummy collition in parts panel [done]
-]* a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
-* the intro menu doesnt calculate with fps, and that is why the curor speed is off, fix that [] done, ugly but done
-* the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed !
-
-* rework of menu active and keybindings, activemenu and active, better differentiation, update part and draw part if active, the var active in toplevelpanel. !
-* inputscript in scripts.py should be playerinputscript, also scripts needed for chatconsole and for menu, this makes it posible to have keys for inflight and for menu command on the same key.
-* make a script that will install the requirements, like pygame, etc
-
-* implement the new font [done]
+* a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
+* the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed !!
+* rework of menu active and keybindings, activemenu and active, better differentiation, update part and draw part if active, the var active in toplevelpanel. !!
+* inputscript in scripts.py should be playerinputscript, also scripts needed for chatconsole and for menu, this makes it posible to have keys for inflight and for menu command on the same key. !!
 * some buttons should not be rebindable ingame, like quit, menu and console
-* center the text in the input box [done]
-
 * make a startmenu with: start, options
 * make a options menu with, sound
 * make a sound menu with music volume and fx volume
-* comments in code and keeping the standards
-
-* making the universe class to hold starsystems [WIP]
+* comments in code and keeping the standards !!
+* making the universe class to hold starsystems [done]
 * making the rest of screen changeable ?, posibility to chage window with and or height ?
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
 * more collision handeling refactor [still need more refactoring]
 * more to vec2d vector work. [can alwais use some work]
-
 * weapon heat generation [easy mode]
 * engines that are good for space travel but bad for landing and visaversa
 * other sound for bullet impact on shield and plating and on planet
 * palaxing background, the image
-* make bullets that dont impact just disapear [done]
 * instead of restart directly, wait for keypress and see your lifeless ship float into the distance. !
 * make the camera so that it can smoothly transition from one place to another
 * make the game run from the beginning, so if choosing ship and color the game is already running !
 * make camera translatable instead of direct snap
 * the portal stargate warp dent could use some drag inside it, for temp usability
 * cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fitt parts on your ship when on planet or structure, when container gets destroyed or dissconnected from ship you lose parts untill you are at capacity.
-
 * in camera splitout functionality make a layer class for the layers that will not do the drawing but perhaps the updating, anyhow updates doesnt belong in camera ?
-
 * ai could use some more bains and variation
-
-
 * adding info from weapon used on part to part, like plasma burns, impact damage etc. [a list of 3 things that happend last]
 * deciding what gui graphics to update:
-- part menu background [done]
-- tryout a 45 angle on a menu corner !!
 * put certain things into threads like : update cycle and draw cycle, also the drawing of mini info panel.
-* the planet's and structure's and same kind of problem, when landed one can fly into a planet and gravity can pull you from a structure, need something for that [can fix that by making planets ignore floters that are landed unless landed on self]
+* the planet's and structure's and same kind of problem, when landed one can fly into a planet and gravity can pull you from a structure, need something for that [can fix that by making planets ignore floters that are landed unless landed on self] !!
 * compile a list of games like this one to 'loan' elements from
 - naev
 - hardwar
 - Transcendence
 
+* use inno setup to maker this game runnable on windows
+* make a tag on github that the inno setup gets is game from, [after eleminate need for numpy and bughunting.]
+* make inno setup run a python and pygame test after install and return a good or bad install
+* put the inno setup script in the git repo
 
 
 bugs
@@ -159,7 +129,6 @@ parts
 ======
 
 * A radar that will eventualy suport raytracing. [easy for initial radar, perhaps use laser code for raytrace]
-
 * bigger detonation range. for mines
 * a coloniser part
 * a cargo part to hold the cargo
@@ -251,6 +220,20 @@ so you can get out of the way in time. [done, aat]
 * merging the allto2dvector into master, or even replace master [ok done, aat]
 * zoom in out option for radar [medium mode ?] [done]
 * parts that disconnect/scatter have a change they will be destroyed [done]
+* the targeting reticule of a selected part of ship should go over planet etc in radar. [done]
+* the ai should abide by its own radar range [done, it is still as stupid as can be]
+* remove fps measurment and make an average fps for in game, can be read with console [done]
+* place energy and xp bars in seperate rectfrom rest og gui [done]]
+- part menu new background [done]
+- tryout a 45 angle on a menu corner [done]
+* make bullets that dont impact just disapear [done]
+* make sure all the hud elements have a way to be easily re/positioned [yes all drawables have a set_rect method, done]
+* see if it is posible to get part and dummy collition in parts panel [done]
+* center the text in the input box [done]
+* implement the new font [done]
+* add some screen shots to the github repo [done]
+* make a detection score for a ship, based on the parts, that also need a detection score. [remove totalhp from shipdamage indicatiors and put it in ship, this will be detection score] [done]
+* the intro menu doesnt calculate with fps, and that is why the curor speed is off, fix that done, ugly but done
 
 [Duality]
 

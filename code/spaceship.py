@@ -278,6 +278,8 @@ class Ship(Floater):
 
         self.baseImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
         self.baseImage.set_colorkey(BLACK)
+        self.greyImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
+        self.greyImage.set_colorkey(BLACK)
 
         self.functions = [self.forward, self.reverse, self.left, self.right, \
                 self.turnLeft, self.turnRight, self.shoot, self.launchMissiles, self.launchMines, self.toggleGatewayFocus, self.toggleRadar]
@@ -371,9 +373,13 @@ class Ship(Floater):
         size = int(self.radius * 2)
         self.baseImage = pygame.Surface((size, size), \
                     hardwareFlag | SRCALPHA).convert_alpha()
+        self.greyImage = pygame.Surface((size, size), \
+                    hardwareFlag | SRCALPHA).convert_alpha()
         self.baseImage.set_colorkey(BLACK)
         if self.ports[0].part:
             self.ports[0].part.draw(self.baseImage)
+            self.ports[0].part.draw(self.greyImage, grey=True)
+
 
     def partRollCall(self, part):
         """adds parts to self.parts recursively."""

@@ -180,8 +180,6 @@ def colorShift(surface, color, colorkey = BLACK):
 			if oldColor[0] == oldColor[2]: #a shade of magic pink
 				newColor = [0, 0, 0, 0]
 				for k in [0,1,2]:
-					#oldColor[0] = oldColor[2] = main color
-					#oldColor[1] = unsaturation
 					newColor[k] = int(oldColor[0] * color[k] / 255 \
 								+ oldColor[1] * (255 - color[k]) / 255)
 				newColor[3] = oldColor[3]
