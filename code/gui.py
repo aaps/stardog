@@ -51,24 +51,29 @@ class HUD(Drawable):
 		self.image.fill(SHIPDAMAGE)
 
 		# energy:
-		x = 25
+		x = 15
 		y = 20 
 		h = 180
 		pygame.draw.rect(self.image, HUD1, (x, y, \
 			5, h), 1) # empty bar
-
+		self.image.blit(FONT.render("E", False, HUD3), (x, y - 20))
 		pygame.draw.rect(self.image, HUD2, (x, y \
 			+ h - h * self.game.player.energy / self.game.player.maxEnergy, 5, h \
 			* self.game.player.energy / self.game.player.maxEnergy)) # full bar
 		#XP:
-		x += 15
+		x += 20
 		pygame.draw.rect(self.image, HUD3, (x, y, \
 			5, 180), 1) # empty bar
 		pygame.draw.rect(self.image, HUD3, \
 			(x, y + h - h * self.game.player.xp / self.game.player.next(), 5, \
 			h * self.game.player.xp / self.game.player.next())) # full bar
 		if(fontModule) and self.game.player.developmentPoints:
-			self.image.blit(FONT.render(str(self.game.player.developmentPoints), False, HUD3), (x, y - 20))			
+			self.image.blit(FONT.render(str(self.game.player.developmentPoints), False, HUD3), (x-5, y - 20))			
+		x += 20
+		if self.game.player.hp:
+			self.image.blit(FONT.render("S", False, HUD3), (x, y - 20))
+			pygame.draw.rect(self.image, HUD3, (x, y, 5, 180), 1) # empty bar
+			pygame.draw.rect(self.image, HUD2, (x, y + h - h * self.game.player.hp / self.game.player.maxhp, 5, h * self.game.player.hp / self.game.player.maxhp)) # full bar
 
 		#blit the HUD to the screen:
 		surface.blit(self.image, (self.game.width-70, self.game.height-200))

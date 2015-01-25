@@ -32,12 +32,12 @@ side dish
 
 * make text able to left center right lineout
 * does ship still need hp is not all hp contained in the parts ?
-* remove the shield indication arc and put it on gui. !!
+* remove the shield indication arc and put it on gui. [done]
 * a sentence construction kitt for the ai so it can taunt you for example
 * partcount in menu doesn't show the actuall part limit. [done ?]
 * a list in a ship of who is targeting you. targeting target should not go into player or enemy but in ship
 * there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.
-* make it to that gravity doesnt count when distance from star greater than boundrad !!
+* make it to that gravity doesnt count when distance from star greater than boundrad [done]
 * does a ship has a reference to the current starsystem if no does it need one ?
 * find out what action could go into dialogs conditions and actions
 * the console , input chatconsole panel hyrargy is a bit much ?
@@ -83,7 +83,7 @@ side dish
 * adding info from weapon used on part to part, like plasma burns, impact damage etc. [a list of 3 things that happend last]
 * deciding what gui graphics to update:
 * put certain things into threads like : update cycle and draw cycle, also the drawing of mini info panel.
-* the planet's and structure's and same kind of problem, when landed one can fly into a planet and gravity can pull you from a structure, need something for that [can fix that by making planets ignore floters that are landed unless landed on self] !!
+* the planet's and structure's and same kind of problem, when landed one can fly into a planet and gravity can pull you from a structure, need something for that [can fix that by making planets ignore floters that are landed unless landed on self] [done]
 * compile a list of games like this one to 'loan' elements from
 - naev
 - hardwar
@@ -108,7 +108,7 @@ bugs
 * particles also alter delta of part they come from, fix that
 * slider buttons should have the option for min max that also sould be guarded [done]
 * part damage screen hud has names of parts that are too long, fixit [done]
-* radar range wrong radar radius when in and out of menu, chekout ! [done]
+* radar range wrong radar radius when in and out of menu, chekout [done]
 * remove the big radar display, until we have the small display down, then put it in again [done]
 * invalid rect assignment bug somewhere same as explotion
 * when blowing up an enemy error could happen

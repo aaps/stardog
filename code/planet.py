@@ -38,7 +38,12 @@ class Planet(Floater):
 			and not isinstance(other, Structure) \
 			and not isinstance(other, Planet) \
 			and not collisionTest(self, other) \
-			and abs(self.pos.get_distance(other.pos)) < self.maxRadius: # remove planets test for gravity sensitive planets
+			and abs(self.pos.get_distance(other.pos)) < self.maxRadius \
+			and abs(Vec2d(0,0).get_distance(other.pos)) < self.starSystem.boundrad:
+
+				if isinstance(other, Ship) and other.landed:
+					return
+
 				#accelerate that floater towards this planet:
 				accel = self.g * (self.mass) / (dist2(self, other))
 				angle = (self.pos - other.pos).get_angle()
@@ -129,16 +134,7 @@ class Structure(Planet):
 		self.inventory = []
 
 	def update(self):
-		for other in self.starsystem.floaters.sprites():
-			if  not isinstance(other, Planet) \
-			and not isinstance(other, Structure) \
-			and not collisionTest(self, other) \
-			and abs(self.pos.get_distance(other.pos)) < self.maxRadius:
-				#accelerate that floater towards this planet:
-				accel = self.g * 100 / dist2(self, other)
-				angle = (self.pos - other.pos).get_angle()
-				other.delta.x += cos(angle) * accel / self.game.fps
-				other.delta.y += sin(angle) * accel / self.game.fps
+		pass
 
 	def draw(self, surface, offset = Vec2d(0,0)):
 		if self.image:

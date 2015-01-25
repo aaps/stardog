@@ -597,11 +597,8 @@ class Ship(Floater):
             shieldColor = (50,100,200, int(255. / 3 * self.hp / self.maxhp) )
             pygame.draw.circle(buffer, shieldColor, \
                         (r, r), r, 0)
-            pygame.draw.circle(buffer, (50,50,0,50), \
-                        (r, r), r, 5)
-            rect = (0,0, r * 2, r * 2)
-            pygame.draw.arc(buffer, (50,50,200,100), rect, + math.pi/2,\
-                            math.pi * 2 * self.hp / self.maxhp + math.pi/2, 5)
+
+
                             
         #draw to input surface:
         pos[0] += - imageOffset[0] - self.radius
