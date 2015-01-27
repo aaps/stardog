@@ -49,16 +49,17 @@ class Planet(Floater):
 				angle = (self.pos - other.pos).get_angle()
 				other.delta += Vec2d(0,0).rotatedd(angle,accel) / self.game.fps
 
+		for emitter in self.emitters:
+			emitter.update()
+
 		# Floater.update(self) # for gravity sensitive planets update
 	
 	def draw(self, surface, offset = Vec2d(0,0)):
-		if self.image:
-			pos = (int(self.pos.x - self.image.get_width()  / 2 - offset[0]), 
-				  int(self.pos.y - self.image.get_height() / 2 - offset[1]))
-			surface.blit(self.image, pos())
-		else:
+		if not self.image:
 			pos = self.pos - offset
 			pygame.draw.circle(surface, self.color, pos.inttup(), int(self.radius))
+		for emitter in self.emitters:
+			emitter.draw(surface, offset)
 
 	def takeDamage(self, damage, other):
 		pass
@@ -112,7 +113,7 @@ class Star(Planet):
 		color = bulletColor((mass+.1)/250000)
 
 		Planet.__init__(self, starsystem, pos, delta, grav, radius, mass, color, image)
-
+		self.emitters.append(RingEmitter(self.game, self, self.condAlways , radius, radius+50, 10, 20,  (255,255,255,250), (251,0,0,1), 1, 2, 800, 10, 1, True))
 
 
 class Structure(Planet):

@@ -347,17 +347,7 @@ class Part(Floater):
                         self.delta, radius = self.radius * 4,\
                         time = self.maxhp / 5))
 
-    def condHalfDamage(self):
-        return self.hp <= self.maxhp/2
 
-    def condThQuarterDamage(self):
-        return self.hp <= self.maxhp/4
-
-    # def condActive(self):
-    #     return False
-
-    def condAlways(self):
-        return True
 
 
 
@@ -840,8 +830,9 @@ class Engine(Part):
         self.ports = []
         self.functions.append(self.thrust)
         self.functionDescriptions.append('thrust')
-        self.emitters.append(Emitter(self.game, self, self.condActive , 5, 50, 100, PARTICLE5, PARTICLE6, 2, 4, 100, 2, 5, True))
-        
+        #self.emitters.append(Emitter(self.game, self, self.condActive , 5, 50, 100, PARTICLE5, PARTICLE6, 2, 4, 100, 2, 5, True))
+        self.emitters.append(RingCollector(self.game, self, self.condActive , 180, 200, 40, 50, (255,255,255,255), (255,255,255,0), 2, 4, 100, 5, 1, True))
+
     
     def condActive(self):
         return self.animated
@@ -860,10 +851,8 @@ class Engine(Part):
         if self.animatedtime > 0:
             self.animatedtime -= 1. / self.game.fps
             self.animated = True
-            
         else:
-
-            self.animated = False	
+            self.animated = False
 
         Part.update(self)
     

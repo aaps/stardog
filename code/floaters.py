@@ -71,6 +71,9 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 		self.pos += self.delta / self.game.fps
 		self.rect.center = self.pos.inttup()
 
+		for emitter in self.emitters:
+			emitter.update()
+
 	def takeDamage(self, damage, other):
 		
 		self.lastDamageFrom = other
@@ -81,9 +84,11 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	def draw(self, surface, offset = Vec2d(0,0)):
 		"""Blits this floater onto the surface. """
 		
-		poss = self.pos.x - self.image.get_width()  / 2 - offset.x, \
-			  self.pos.y - self.image.get_height() / 2 - offset.y
+		poss = self.pos.x - self.image.get_width()  / 2 - offset.x, self.pos.y - self.image.get_height() / 2 - offset.y
 		surface.blit(self.image, poss)
+
+		for emitter in self.emitters:
+			emitter.draw(surface, offset)
 
 
 	def crash(self, other):
@@ -97,9 +102,19 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	def addEmitter(self, emitter):
 		self.emitters.append(emitter)
 
+	def condHalfDamage(self):
+		return self.hp <= self.maxhp/2
+
+	def condThQuarterDamage(self):
+		return self.hp <= self.maxhp/4
+
+	def condAlways(self):
+		return True
+
 
 
 class Bullet(Floater):
+	
 	def __init__(self, game, gun, damage, speed, range, image = None):
 		dir = gun.dir + gun.ship.dir
 		cost = cos(dir) #cost is short for cos(theta)

@@ -4,18 +4,20 @@ from vec2d import Vec2d
 import random
 import pygame
 from utils import *
+
 import copy
 
 
 class Particle(object):
 	
-	def __init__(self, emitter, delta, startcolor, stopcolor, life, startsize, stopsize, relative):
+	def __init__(self, emitter, pos, delta, startcolor, stopcolor, life, startsize, stopsize, relative):
 		
-		self.image = pygame.Surface((max(startsize, stopsize)*2, max(startsize, stopsize)*2), hardwareFlag | SRCALPHA).convert_alpha()
+		self.image = pygame.Surface((max(startsize, stopsize)*2, max(startsize, stopsize)*2), hardwareFlag | SRCALPHA)
+		
 		self.game = emitter.game
 		self.relative = relative
-		self.relpos = Vec2d(0,0)
-		self.pos = emitter.floater.pos
+		self.relpos = pos
+		
 		self.emitter = emitter 
 
 		self.delta = delta
@@ -31,6 +33,8 @@ class Particle(object):
 		
 
 	def draw(self, surface, offset=Vec2d(0,0)):
+		self.image.fill((0,0,0,0))
+
 		if self.relative:
 			poss = self.emitter.floater.pos + self.relpos
 		else:
@@ -38,12 +42,13 @@ class Particle(object):
 		poss = int(poss[0] - offset.x - int(self.image.get_width()/2)), \
 			  int(poss[1] - offset.y - int(self.image.get_height()/2))
 		pygame.draw.circle(self.image, self.transcolor, (int(self.image.get_width()/2), int(self.image.get_height()/2)), self.size)
+		#self.image.set_colorkey(BLACK)
 		surface.blit(self.image, poss)		
 
 
 	def update(self):
 		color = []
-		self.pos += self.delta / self.game.fps
+		#self.pos += self.delta / self.game.fps
 		self.relpos += self.delta / self.game.fps
 		factor = self.life  / self.beginlife 
 		color.append(tuple(int(x*factor) for x in self.startcolor))
@@ -94,9 +99,96 @@ class Emitter(object):
 
 			delta = -Vec2d(0,0).rotatedd(random.uniform(startdir,stopdir),random.uniform(self.startvelocity,self.stopvelocity))
 			if len(self.particles) < self.maximum:
-				self.particles.append(Particle(self, delta, self.startcolor, self.stopcolor, random.uniform(self.startlife,self.stoplife), self.startsize, self.stopsize, self.relative))
+				self.particles.append(Particle(self, Vec2d(0,0), delta, self.startcolor, self.stopcolor, random.uniform(self.startlife,self.stoplife), self.startsize, self.stopsize, self.relative))
 
 
 		
 
 			
+class CircleEmitter(Emitter):
+
+	def __init__(self, game, floater, condfunc ,radius, startvelocity, stopvelocity, startcolor, stopcolor, startlife, stoplife, maximum, startsize, stopsize, relative):
+		Emitter.__init__(self, game, floater, condfunc ,360, startvelocity, stopvelocity, startcolor, stopcolor, startlife, stoplife, maximum, startsize, stopsize, relative)
+		self.radius = radius
+
+	def update(self):
+		for particle in self.particles:
+			particle.update()
+			if particle.life <= 0:
+				self.particles.remove(particle)
+
+		if self.condfunc():
+			if self.floater.ship:
+				startdir = self.floater.ship.dir + self.floater.dir + self.anglewidth
+				stopdir = self.floater.ship.dir + self.floater.dir - self.anglewidth	
+			else:
+				startdir = self.floater.dir + self.anglewidth
+				stopdir = self.floater.dir - self.anglewidth
+			adir = random.uniform(startdir,stopdir)
+
+			delta = Vec2d(0,0).rotatedd(adir,random.uniform(self.startvelocity,self.stopvelocity))
+			pos = Vec2d(0,0).rotatedd(adir, self.radius)
+			
+			if len(self.particles) < self.maximum:
+				self.particles.append(Particle(self, pos,delta, self.startcolor, self.stopcolor, random.uniform(self.startlife,self.stoplife), self.startsize, self.stopsize, self.relative))
+
+class RingEmitter(Emitter):
+
+	def __init__(self, game, floater, condfunc ,startradius, stopradius, startvelocity, stopvelocity, startcolor, stopcolor, startlife, stoplife, maximum, startsize, stopsize, relative):
+		Emitter.__init__(self, game, floater, condfunc ,360, startvelocity, stopvelocity, startcolor, stopcolor, startlife, stoplife, maximum, startsize, stopsize, relative)
+		self.startradius = startradius
+		self.stopradius = stopradius
+
+	def update(self):
+		from spaceship import Ship
+		for particle in self.particles:
+			particle.update()
+			if particle.life <= 0:
+				self.particles.remove(particle)
+
+		if self.condfunc():
+			if isinstance(self.floater, Ship):
+				startdir = self.floater.ship.dir + self.floater.dir + self.anglewidth
+				stopdir = self.floater.ship.dir + self.floater.dir - self.anglewidth	
+			else:
+				startdir = self.floater.dir + self.anglewidth
+				stopdir = self.floater.dir - self.anglewidth
+			adir = random.uniform(startdir,stopdir)
+
+			delta = Vec2d(0,0).rotatedd(adir,random.uniform(self.startvelocity,self.stopvelocity))
+			pos = Vec2d(0,0).rotatedd(adir, random.uniform(self.startradius,self.stopradius))
+			
+
+			if len(self.particles) < self.maximum:
+				self.particles.append(Particle(self, pos,delta, self.startcolor, self.stopcolor, random.uniform(self.startlife,self.stoplife), self.startsize, self.stopsize, self.relative))
+
+
+class RingCollector(Emitter):
+
+	def __init__(self, game, floater, condfunc ,startradius, stopradius, startvelocity, stopvelocity, startcolor, stopcolor, startlife, stoplife, maximum, startsize, stopsize, relative):
+		Emitter.__init__(self, game, floater, condfunc ,360, startvelocity, stopvelocity, startcolor, stopcolor, startlife, stoplife, maximum, startsize, stopsize, relative)
+		self.startradius = startradius
+		self.stopradius = stopradius
+
+	def update(self):
+		from spaceship import Ship
+		for particle in self.particles:
+			particle.update()
+			if particle.life <= 0:
+				self.particles.remove(particle)
+
+		if self.condfunc():
+			if isinstance(self.floater, Ship):
+				startdir = self.floater.ship.dir + self.floater.dir + self.anglewidth
+				stopdir = self.floater.ship.dir + self.floater.dir - self.anglewidth	
+			else:
+				startdir = self.floater.dir + self.anglewidth
+				stopdir = self.floater.dir - self.anglewidth
+			adir = random.uniform(startdir,stopdir)
+
+			delta = -Vec2d(0,0).rotatedd(adir,random.uniform(self.startvelocity,self.stopvelocity))
+			pos = Vec2d(0,0).rotatedd(adir, random.uniform(self.startradius,self.stopradius))
+			
+
+			if len(self.particles) < self.maximum:
+				self.particles.append(Particle(self, pos,delta, self.startcolor, self.stopcolor, random.uniform(self.startlife,self.stoplife), self.startsize, self.stopsize, self.relative))
