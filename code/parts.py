@@ -32,25 +32,17 @@ class Part(Floater):
     baseImage = loadImage("res/default.gif", SUPER_WHITE)
     image = None
     height, width = 9, 3
-    pickuptimeout = 0
-    volume = 1
-    equipable = True
-    parent = None
-    dir = 270
-    mass = 10
-    ship = None
+    
+    
+    
+    
+    
     # position in relation to the center of the ship
     #and the center of this part:
-    offset = Vec2d(0, 0)
-    shipoffset = Vec2d(0, 0)
+    
     #whether this should be redrawn each frame:
-    color = PART1
-    animated = False
-    animatedBaseImage = None
-    animatedImage = None
-    number = -1
-    name = 'part'
-    level = 1
+    
+    
     buffer = pygame.Surface((30,30), flags = hardwareFlag | SRCALPHA).convert_alpha()
     buffer.set_colorkey(BLACK)
     acted = False
@@ -61,15 +53,32 @@ class Part(Floater):
     attachEffects = []
 
     def __init__(self, game):
+        radius = max(self.baseImage.get_height() / 2, self.baseImage.get_width() / 2)
+        Floater.__init__(self, game, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = radius)
         self.enabled = False
         self.functions = []
         self.functionDescriptions = []
         self.adjectives = []
+        self.parent = None
+        self.offset = Vec2d(0, 0)
+        self.shipoffset = Vec2d(0, 0)
+        self.animatedBaseImage = None
+        self.animatedImage = None
+        self.pickuptimeout = 0
+        self.number = -1
+        self.name = 'part'
+        self.level = 1
+        self.dir = 270
+        self.color = PART1
+        self.animated = False
+        self.ship = None
+        self.volume = 1
+        self.equipable = True
+        self.mass = 10
         self.maxhp = 10
         self.hp = 10
-        radius = max(self.baseImage.get_height() / 2,
-                    self.baseImage.get_width() / 2)
-        Floater.__init__(self, game, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = radius)
+        
+        
         self.image = colorShift(self.baseImage.copy(), self.color)
         self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
         self.width = self.image.get_width() - 4
@@ -354,10 +363,11 @@ class Part(Floater):
 
 class Dummy(Part):
     """A dummy part used by the parts menu."""
-    mass = 0
+    # mass = 0
     def __init__(self, game):
         Part.__init__(self, game)
         self.ports = []
+        self.mass = 0
         
     def update(self):
         if self.parent: 
@@ -369,15 +379,17 @@ class Dummy(Part):
                     self.ship.reset()
 
 class Scrap(Part):
-    name = "Scrap"
+    
     baseImage = loadImage("res/goods/scrap" + ext)
     image = None
-    damage = 1
-    equipable = False
+
 
 
     def __init__(self, game):
         Part.__init__(self, game)
+        self.name = "Scrap"
+        self.damage = 1
+        self.equipable = False
 
     def update(self):
         Part.update(self)
@@ -389,6 +401,7 @@ class Scrap(Part):
         return "It is Scrap"
 
 class FlippablePart(Part):
+    
     def flip(self):
         try:
             self.shootPoint = self.shootPoint[0], -self.shootPoint[1]
@@ -407,21 +420,23 @@ class FlippablePart(Part):
 class Gun(Part):
     baseImage = loadImage("res/default" + ext)
     image = None
-    damage = 2
-    range = 4
-    name = "Gun"
-    shootPoint = -30, 0 
     shootDir = 180
-    reloadTime = .5 #in seconds
-    reload = 0
-    energyCost = 3
-    bulletRadius = 2
+    shootPoint = -30, 0 
     
     def __init__(self, game):
         Part.__init__(self, game)
         self.functions.append(self.shoot)
         self.functionDescriptions.append("shoot")
         self.ports = []
+        self.damage = 2
+        self.range = 4
+        self.name = "Gun"
+        
+        
+        self.reloadTime = .5 #in seconds
+        self.reload = 0
+        self.energyCost = 3
+        self.bulletRadius = 2
     
     def stats(self):
         stats = (self.damage, 60. / self.reloadTime, self.energyCost, \
@@ -483,20 +498,22 @@ class Cannon(Gun):
 class MineDropper(Gun):
     baseImage = loadImage("res/parts/minelayer"+ext)
     mineImage = loadImage("res/mine"+ext)
-    damage = 30
-    speed = 0
-    reloadTime = 2
-    acceleration = 0
-    range = 1
-    turning = 0
-    percision = 0
-    explosionRadius = 120
-    explosionTime = .6
-    force = 6000
-    name = "Mine-Layer"
+
     
     def __init__(self, game):
         Gun.__init__(self, game)
+        self.damage = 30
+        self.speed = 0
+        self.reloadTime = 2
+        self.acceleration = 0
+        self.range = 1
+        self.turning = 0
+        self.percision = 0
+        self.explosionRadius = 120
+        self.explosionTime = .6
+        self.force = 6000
+        self.name = "Mine-Layer"
+        self.mineImage = colorShift(self.mineImage , (100,100,100)) 
 
     def stats(self):
         stats = (self.speed, self.acceleration)
@@ -522,23 +539,23 @@ class MineDropper(Gun):
 class MissileLauncher(Gun):
     baseImage = loadImage("res/parts/missilelauncher" + ext)
     missileImage = None
-    damage = 20
-    speed = 40
-    reloadTime = 5
-    acceleration = 600
-    range = 1
-
-    turning = 0
-    percision = 0
-    explosionRadius = 120
-    explosionTime = .6
-    force = 6000
-    name = 'Missile Launcher'
+    
     
     def __init__(self, game):
         if self.missileImage == None:
             self.missileImage = MISSILE_IMAGE.copy()
         Gun.__init__(self, game)
+        self.damage = 20
+        self.speed = 40
+        self.reloadTime = 5
+        self.acceleration = 600
+        self.range = 1
+        self.turning = 0
+        self.percision = 0
+        self.explosionRadius = 120
+        self.explosionTime = 3
+        self.force = 6000
+        self.name = 'Missile Launcher'
     
     def stats(self):
         stats = (self.speed, self.acceleration)
@@ -563,16 +580,17 @@ class MissileLauncher(Gun):
 
 class Laser(Gun):
     baseImage = loadImage("res/parts/leftlaser" + ext)
-    damage = 10
-    range = 300
-    name = "Laser"
-    reloadTime = .8 #in seconds
-    energyCost = 8
-    beamWidth = 1
-    imageDuration = .08
+
     
     def __init__(self, game):
         Gun.__init__(self, game)
+        self.damage = 10
+        self.range = 300
+        self.name = "Laser"
+        self.reloadTime = .8 #in seconds
+        self.energyCost = 8
+        self.beamWidth = 1
+        self.imageDuration = .08
                 
     def shoot(self):
         """fires a laser"""
@@ -590,19 +608,22 @@ class Laser(Gun):
                     self.range * s.laserRangeBonus))
     
 class FlakCannon(Cannon):
-    spread = 18.75
-    damage = 0.5
-    energyCost = 1
-    reloadTime = 0.2
+    
+   
     burstSize = 8
     reloadBurstTime = 4
-    range = 6
-    speed = 200
+
 
     def __init__(self, game):
         self.burst = self.burstSize
         self.reloadBurst = self.reloadBurstTime
         Cannon.__init__(self, game)
+        self.range = 6
+        self.speed = 200
+        self.spread = 18.75
+        self.damage = 0.5
+        self.reloadTime = 0.2
+        self.energyCost = 1
         
     def stats(self):
         stats = (self.speed, self.burstSize, self.reloadBurstTime, self.spread)
@@ -644,28 +665,27 @@ class FlakCannon(Cannon):
 class Radar(Part):
     baseImage = loadImage("res/parts/radar" + ext)
     image = None
-    disk = None
-    name = "Radar"
-    energyCost = 0.5
-    radarrange = 18000
-    radarspeed = 1
     radartime = 0
+    disk = None
     detected = []
-    enabled = False
+    radarspeed = 1
+    
 
     def __init__(self, game):
-
+        Part.__init__(self, game)
         self.radartime = 0
         self.game = game
         self.detected = []
-        Part.__init__(self, game)
+        self.energyCost = 0.5
+        self.radarrange = 18000
+        self.enabled = False
+        self.name = "Radar"
+        
     
     def toggle(self):
         
         if self.ship.radars[-1] == self:
             self.enabled = not self.enabled
-
-        
 
         
     def shortStats(self):
@@ -812,13 +832,8 @@ class Radar(Part):
 class Engine(Part):
     baseImage = loadImage("res/parts/engine" + ext)
     image = None
-    name = "Engine"
-    animatedtime = 0
-    animatedspeed = 0.5
-    exspeed = 5000
-    exmass = 10
-    thrusting = False
-    energyCost = 1.
+    animatedImage = None
+
     
     def __init__(self, game):
         if Engine.animatedImage == None:
@@ -827,11 +842,17 @@ class Engine(Part):
         self.baseAnimatedImage = Engine.animatedImage
         Part.__init__(self, game)
         self.width -= 6	#move the engines in 6 pixels.
+        self.name = "Engine"
         self.ports = []
         self.functions.append(self.thrust)
         self.functionDescriptions.append('thrust')
-        #self.emitters.append(Emitter(self.game, self, self.condActive , 5, 50, 100, PARTICLE5, PARTICLE6, 2, 4, 100, 2, 5, True))
-        self.emitters.append(RingCollector(self.game, self, self.condActive , 180, 200, 40, 50, (255,255,255,255), (255,255,255,0), 2, 4, 100, 5, 1, True))
+        self.emitters.append(Emitter(self.game, self, self.condActive , 5, 50, 100, PARTICLE5, PARTICLE6, 2, 4, 100, 2, 5, True, True))
+        self.animatedtime = 0
+        self.animatedspeed = 0.5
+        self.exspeed = 5000
+        self.exmass = 10
+        self.thrusting = False
+        self.energyCost = 1.
 
     
     def condActive(self):
@@ -880,9 +901,7 @@ class Engine(Part):
 class Gyro(FlippablePart):
     baseImage = loadImage("res/parts/gyro" + ext)
     image = None
-    name = "Gyro"
-    torque = 180000 #N m degrees== m m kg degrees /s /s
-    energyCost = .8
+
     
     def __init__(self, game):
         Part.__init__(self, game)
@@ -892,6 +911,9 @@ class Gyro(FlippablePart):
         self.functions.extend([self.turnLeft,self.turnRight])
         self.functionDescriptions.extend(\
                 [self.turnLeft.__doc__,self.turnRight.__doc__])
+        self.name = "Gyro"
+        self.torque = 180000 #N m degrees== m m kg degrees /s /s
+        self.energyCost = .8
                 
     def stats(self):
         stats = (self.torque, self.energyCost)
@@ -935,8 +957,12 @@ class Gyro(FlippablePart):
 class Generator(Part):
     baseImage = loadImage("res/parts/generator" + ext)
     image = None
-    name = "Generator"
-    rate = 6.
+
+
+    def __init__(self, game):
+        Part.__init__(self, game)
+        self.name = "Generator"
+        self.rate = 6.
         
     def stats(self):
         stats = (self.rate,)
@@ -958,25 +984,24 @@ class Generator(Part):
 class Interconnect(Part):
     baseImage = loadImage("res/parts/interconnect" + ext)
     image = None
-    name = "Interconnect"
+    
 
     def __init__(self, game):
         Part.__init__(self, game)
         self.ports = [Port(Vec2d(0, self.height / 2 ), 270, self), \
                 Port(Vec2d(-self.width / 2 , 0), 0, self), \
                 Port(Vec2d(0, -self.height / 2 ), 90, self)]
+        self.name = "Interconnect"
 
 class Quarters(Part):
     baseImage = loadImage("res/parts/quarters"+ext)
     image = None
-    name = "Crew Quarters"
-    repair = .2
-    
+
     def __init__(self, game):
         Part.__init__(self, game)
-        # self.detected = []
-        Part.__init__(self, game)
-        # self.ports = [Port(Vec2d(-self.width/2,0), 0, self)]
+
+        self.name = "Crew Quarters"
+        self.repair = .2
 
     def stats(self):
         stats = (self.repair,)
@@ -999,15 +1024,17 @@ class Quarters(Part):
 class GargoHold(Part):
     baseImage = loadImage("res/parts/cargo"+ext)
     image = None
-    name = "GargoHold"
-    energyCost = 10
-    mass = 1
+
     
     def __init__(self, game):
         Part.__init__(self, game)
         self.ports = [  Port(Vec2d(0, self.height / 2 ), 270, self), \
                         Port(Vec2d(-self.width / 2 , 0), 0, self), \
                         Port(Vec2d(0, -self.height / 2 ), 90, self)]
+        self.name = "GargoHold"
+        self.energyCost = 10
+        self.mass = 1
+
     def stats(self):
         stats = (self.energyCost,)
         statString = "\nCosts for carrying cargo per part: %s E/p"
@@ -1027,15 +1054,16 @@ class GargoHold(Part):
 class GatewayFocus(Part):
     baseImage = loadImage("res/parts/gateway_focus"+ext)
     image = None
-    name = "Gateway Focus"
-    neededenergy = 100
-    jumpenergy = 0
-    enabled = False
-    energyCost = 10
+
 
     def __init__(self, game):
         Part.__init__(self, game)
         self.ports = []
+        self.name = "Gateway Focus"
+        self.neededenergy = 100
+        self.jumpenergy = 0
+        self.enabled = False
+        self.energyCost = 10
 
     def stats(self):
         statString = "Will jump to other system"
@@ -1065,8 +1093,12 @@ class GatewayFocus(Part):
 class Battery(Part):
     baseImage = loadImage("res/parts/battery" + ext)
     image = None
-    name = "Battery"
-    capacity = 100
+
+
+    def __init__(self, game):
+        Part.__init__(self, game)
+        self.name = "Battery"
+        self.capacity = 100
     
     def stats(self):
         stats = (self.capacity,)
@@ -1085,13 +1117,15 @@ class Battery(Part):
 class Shield(Part):
     baseImage = loadImage("res/parts/shield" + ext)
     image = None
-    name = "Shield"
-    shieldhp = 10
-    shieldRegen = .30
-    energyCost = 1.5
+
+
     def __init__(self, game): 
         Part.__init__(self, game)
         self.ports = []
+        self.name = "Shield"
+        self.shieldhp = 10
+        self.shieldRegen = .30
+        self.energyCost = 1.5
     
     def stats(self):
         stats = (self.shieldhp, self.shieldRegen, self.energyCost)

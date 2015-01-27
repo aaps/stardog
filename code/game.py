@@ -125,9 +125,7 @@ class Game(object):
             # two rules below should be integrated into their classes
             self.menu.keys.bindings.bindings = self.playerScript.bindings
             self.menu.keys.bindings.reset()
-            # print self.menu.keys.bindings
             self.player.setScript(self.playerScript)
-            
            
             for x in range(10):
                 self.clock.tick()

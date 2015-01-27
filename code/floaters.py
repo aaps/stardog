@@ -5,6 +5,7 @@ from pygame.locals import *
 import stardog
 from vec2d import Vec2d
 import math
+from particles import *
 
 FPS = 200
 MISSILE_RADIUS = 50
@@ -41,12 +42,9 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	string of a file name without an axtension- there should be both a .gif 
 	and	a .bmp, which is used depends on the pygame support on the run
 	system."""
-	hp = 1
+	
 	baseImage = None
-	color = FLOATER
-	mass = 1
-	tangible = True
-	lastDamageFrom = None
+	
 
 
 	def __init__(self, game, pos, delta, dir = 270, radius = 10, \
@@ -57,14 +55,19 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 		self.pos = pos
 		self.delta = delta
 		self.emitters = []
+		self.color = FLOATER
+		self.hp = 1
+		self.mass = 1
+		self.tangible = True
+		self.lastDamageFrom = None
 
 		self.radius = radius
 		if (not image):
 			image = DEFAULT_IMAGE
-		#rotate() takes a counter-clockwise angle. 
 		self.image = pygame.transform.rotate(image, -self.dir).convert()
-		#self.image.set_colorkey(BLACK)
+
 		self.rect = self.image.get_rect()
+
 
 	def update(self):
 		"""updates this floater based on its variables"""
@@ -163,12 +166,7 @@ class Bullet(Floater):
 
 
 class Missile(Bullet):
-	life = 0
-	turning = 0
-	percision = 0
 	hp = 1
-	impacted = None
-	explode = False
 
 	def __init__(self, game, launcher, damage, speed, acceleration, range, 
 				explosionRadius, image = None):
@@ -180,6 +178,13 @@ class Missile(Bullet):
 		self.explosionRadius = explosionRadius
 		self.time = launcher.explosionTime
 		self.force = launcher.force
+		self.life = 0
+		self.turning = 0
+		self.percision = 0
+		self.impacted = None
+		self.explode = False
+
+		self.emitters.append(Emitter(self.game, self, self.condAlways , 5, 100, 200, (255,255,255,255), (255,255,255,0), 2, 4, 100, 2, 5, True))
 		
 	def update(self):
 		
@@ -206,12 +211,9 @@ class Missile(Bullet):
 		Floater.takeDamage(self, damage, other)
 
 class Mine(Bullet):
-	tangible = True
-	turning = 0
-	percision = 0
+
 	hp = 1
-	impacted = None
-	explode = False
+
 	
 	def __init__(self, game, launcher, damage, speed, acceleration, range,
 				explosionRadius, image=None):
@@ -224,6 +226,11 @@ class Mine(Bullet):
 		self.time = launcher.explosionTime
 		self.force = launcher.force
 		self.radius = 15
+		self.impacted = None
+		self.explode = False
+		self.tangible = True
+		self.turning = 0
+		self.percision = 0
 
 	def update(self):
 		self.dir = (self.dir+180)%360 - 180
@@ -255,7 +262,7 @@ class Explosion(Floater):
 	life = 0
 
 	def __init__(self, game, pos, delta, radius = 10,\
-				time = 1, damage = 0, force = 6000):
+				time = 5, damage = 0, force = 6000):
 		image = pygame.Surface((radius * 2, radius * 2), flags = hardwareFlag).convert()
 		image.set_colorkey(BLACK)
 		Floater.__init__(self, game, pos, delta, radius = 0,\
@@ -269,6 +276,7 @@ class Explosion(Floater):
 		self.hp = damage / (self.time * self.game.fps)
 		if damage == 0:
 			self.tangible = False
+		self.emitters.append(RingEmitter(self.game, self, self.condAlways , 0, 50, 20, 50,  (255,200,0,250), (251,0,0,1), 1, 2, 30, 30, 10, 50, True))
 
 	def update(self):
 		self.life += 1. / self.game.fps
@@ -281,20 +289,8 @@ class Explosion(Floater):
 		else:
 			self.radius = int(self.maxRadius * (self.time * 4 / 3 \
 						- self.life * 4 / 3) / self.time)
-		# Floater.update(self)
-		
-	def draw(self, surface, offset = (0,0)):
-		self.image.fill((0, 0, 0, 0))
-		for circle in range(min(self.radius / 4, 80)):
-			color = (randint(100, 155), randint(000, 100), randint(0, 20), \
-					randint(100, 255))
-			radius = randint(self.radius / 4, self.radius / 2)
-			r = randint(0, self.radius - radius)
-			theta = randint(0, 360)
-			poss = (int(cos(theta) * r + self.maxRadius), \
-					  int(sin(theta) * r + self.maxRadius))
-			pygame.draw.circle(self.image, color, poss, radius)
-		Floater.draw(self, surface, offset)
+		Floater.update(self)
+
 
 	def kill(self):
 		pass
@@ -316,31 +312,20 @@ class Impact(Floater):
 		self.maxRadius = int(radius)
 		self.radius = 0
 		self.time = time
+		self.emitters.append(RingEmitter(self.game, self, self.condAlways , 0, 5, 5, 10,  (255,255,255,250), (100,100,255,1), 0.5, 1, 10, 10, 1, 5, True))
 
 	def update(self):
 		self.life += 1. / self.game.fps
 		if self.life > self.time:
 			Floater.kill(self)
-		#grow or shrink: size peaks at time / 2:
 		if self.life < self.time / 4:
 			self.radius = int(self.maxRadius * self.life * 4 / self.time)
 		else:
-			self.radius = int(self.maxRadius * (self.time * 4 / 3 \
-						- self.life * 4 / 3) / self.time)
-		# Floater.update(self)
+			self.radius = int(self.maxRadius * (self.time * 4 / 3 - self.life * 4 / 3) / self.time)
+		Floater.update(self)
 
-	def draw(self, surface, offset = (0,0)):
-		self.image.fill((0, 0, 0, 0))
-		for circle in range(min(self.radius / 4, 80)):
-			color = (randint(100, 200), randint(100, 200), randint(100, 255), \
-					randint(100, 255))
-			radius = randint(self.radius / 4, self.radius / 2)
-			r = randint(0, self.radius - radius)
-			theta = randint(0, 360)
-			poss = (int(cos(theta) * r + self.maxRadius), \
-					  int(sin(theta) * r + self.maxRadius))
-			pygame.draw.circle(self.image, color, poss, radius)
-		Floater.draw(self, surface, offset)
+
+
 
 	def takeDamage(self, damage, other):
 		pass

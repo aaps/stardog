@@ -13,8 +13,7 @@ class Planet(Floater):
 	maxRadius = 1000000 # no gravity felt past this (approximation).
 	PLANET_DAMAGE = .0004
 	LANDING_SPEED = 200 #pixels per second. Under this, no damage.
-	firstname = "Planet"
-	secondname = "Unknown"
+
 	
 	def __init__(self, starsystem, pos, delta = Vec2d(0,0), grav=5000, radius = 100, mass = 10000, \
 					color = (100,200,50), image = None, race = None):
@@ -22,6 +21,8 @@ class Planet(Floater):
 		self.mass = mass #determines gravity.
 		self.color = color
 		self.starSystem = starsystem
+		self.firstname = "Planet"
+		self.secondname = "Unknown"
 		self.g = grav
 		self.damage = {}	
 		#see solarSystem.planet_ship_collision
@@ -105,24 +106,25 @@ class Planet(Floater):
 class Star(Planet):
 	PLANET_DAMAGE = 300
 	LANDING_SPEED = -999
-	firstname = "Star Unknown"
+	
 	
 	def __init__(self, starsystem, pos, delta = Vec2d(0,0), grav=5000, radius = 3000, image = None):
 
 		mass = radius * 100
 		color = bulletColor((mass+.1)/250000)
-
 		Planet.__init__(self, starsystem, pos, delta, grav, radius, mass, color, image)
-		self.emitters.append(RingEmitter(self.game, self, self.condAlways , radius, radius+50, 10, 20,  (255,255,255,250), (251,0,0,1), 1, 2, 800, 10, 1, True))
+		self.firstname = "Star Unknown"
+		self.emitters.append(RingEmitter(self.game, self, self.condAlways , radius, radius+50, 200, 220,  (255,255,255,250), (251,0,0,1), 2, 3, 800, 0, 10, 1, True))
 
 
 class Structure(Planet):
 	LANDING_SPEED = 200 #pixels per second. Under this, no damage.
 	PLANET_DAMAGE = .0004
-	firstname = "Structure Unknown"
+	
 	
 	def __init__(self, starsystem, pos, delta, grav=5000, color = (100,200,50), radius = 100, image = None):
 		Floater.__init__(self, starsystem.game, pos, Vec2d(0,0), 0, image=image)
+		self.firstname = "Structure Unknown"
 		self.color = BLUE
 		self.g = grav
 		self.starsystem = starsystem
@@ -151,19 +153,19 @@ class Structure(Planet):
 		pass
 
 class Gateway(Planet):
-	maxRadius = 50000 # no gravity felt past this (approximation).
-	tangible = True
-	g = 5000 # the gravitational constant.
-	firstname = "Gateway Unknown"
-	rect = None
-	image = None
-	sister = None
 	
-	def __init__(self, starsystem, pos, radius = 100, mass = 10000, \
-					color = (100,200,50), image = None, race = None):
+	
+	def __init__(self, starsystem, pos, radius = 100, mass = 10000, color = (100,200,50), image = None, race = None):
 		image = pygame.Surface((radius * 4, radius * 4), flags = hardwareFlag).convert()
 		image.set_colorkey(BLACK)
 		Floater.__init__(self, starsystem.game, pos, Vec2d(0,0), radius = radius, image = image)
+		maxRadius = 50000 # no gravity felt past this (approximation).
+		self.tangible = True
+		self.g = 5000 # the gravitational constant.
+		self.firstname = "Gateway Unknown"
+		self.rect = None
+		self.image = None
+		self.sister = None
 		self.mass = mass #determines gravity.
 		self.starsystem = starsystem
 		self.color = color

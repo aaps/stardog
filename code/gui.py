@@ -300,8 +300,7 @@ class MiniInfo(Drawable):
 				if not self.targimage == self.targ.greyImage:
 					self.targimage = self.targ.greyImage
 					# we can realy us some way to make this surface in grayscale, but most solutions have serious drawbacks
-					self.mutatedimage = pygame.transform.rotozoom(self.targimage, 90,2)
-					#self.mutatedimage.set_colorkey(BLACK)       
+					self.mutatedimage = pygame.transform.rotozoom(self.targimage, 90,2)      
 				offset = ((self.width/2) - (self.mutatedimage.get_width()/2), (self.height/2)-(self.mutatedimage.get_height()/2))
 				self.image.blit(self.mutatedimage, offset)
 				
@@ -318,10 +317,9 @@ class MiniInfo(Drawable):
 				if not self.targimage == self.targ.baseImage:
 					self.targimage = self.targ.baseImage
 					 # we can realy us some way to make this surface in grayscale, but most solutions have serious drawbacks
-					self.mutatedimage = pygame.transform.scale(self.mutatedimage, (self.targimage.get_width()*2,self.targimage.get_height()*2) )
-					self.mutatedimage.set_colorkey(BLACK)     
+					self.mutatedimage = pygame.transform.scale(self.targimage, (self.targimage.get_width()*2,self.targimage.get_height()*2) )
+					self.mutatedimage = colorShift(self.mutatedimage , (100,100,100)) 
 				self.image.blit(self.mutatedimage,(self.width/2,self.height/2))
-			
 			
 			self.texts.append(self.font.render(name , True, self.color))
 			self.texts.append(self.font.render(distance , True, self.color))
