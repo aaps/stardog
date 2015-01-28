@@ -169,16 +169,12 @@ class ChatConsole(TopLevelPanel):
         self.panels.append(self.console)
     
     def handleEvent(self, event):
-        if event.type == pygame.KEYDOWN:
-            if event.key == K_6:
-                self.toggleActive()
         for panel in self.panels:
             panel.handleEvent( event)
 
         TopLevelPanel.handleEvent(self, event)
 
     def toggleActive(self):
-        self.game.player.script.toggleActive()
         if self.active:
             self.active = False
         else:
@@ -224,26 +220,21 @@ class Menu(TopLevelPanel):
         self.setActiveMenu(self.parts)
 
     def setActiveMenu(self, menu):
+        
         if self.activeMenu:
             self.panels.remove(self.activeMenu)
         self.activeMenu = menu
         self.panels.append(menu)
     
     def update(self):
-        # self.game.player.reset()
         if self.activeMenu:
             self.activeMenu.update()
 
-    def handleEvent(self, event):
-        if event.type == pygame.KEYDOWN:
-            if event.key == K_RETURN:
-                self.toggleActive()
-                
-                # self.reset()
+    def handleEvent(self, event):            
         TopLevelPanel.handleEvent(self, event)
 
     def toggleActive(self):
-        self.game.player.script.toggleActive()
+        
         if self.active:
             self.active = False
         else:

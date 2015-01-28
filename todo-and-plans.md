@@ -14,7 +14,7 @@ main dish
 * multyplayer [hard mode, dependant on code structure]
 
 
-http://pygame.org/project-planes-2392-4051.html get version 0.6
+http://pygame.org/project-planes-2392-405.html get version 0.6
 * A save function ? [a sqllite file for now with sqlalchemy]
 * replace the part - port system with a part - grid system [first implement part collition checking to temp eliminate problem]
 * sounds also need to be in views
@@ -42,7 +42,7 @@ side dish
 * find out what action could go into dialogs conditions and actions
 * the console , input chatconsole panel hyrargy is a bit much ?
 * realy a better way to reset stuff on death, like radar error thing, enging trust should be off menus all inactive !!
-* all variables if posible in class and not a class global !!
+
 * ai can talk to player, when targeting player for example and disengaging [after fsm and better brains ai]
 * an small addaptation that makes this standout from other stardog. The accounting software  [star/space rats]
 * a buton to make screen shots ? [done]
@@ -234,6 +234,7 @@ so you can get out of the way in time. [done, aat]
 * add some screen shots to the github repo [done]
 * make a detection score for a ship, based on the parts, that also need a detection score. [remove totalhp from shipdamage indicatiors and put it in ship, this will be detection score] [done]
 * the intro menu doesnt calculate with fps, and that is why the curor speed is off, fix that done, ugly but done
+* all variables if posible in class and not a class global
 
 [Duality]
 

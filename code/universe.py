@@ -10,7 +10,8 @@ class Universe(object):
 
 	def __init__(self, game):
 		self.game = game
-		player = game.player
+		self.player = game.player
+		self.game = game
 
 	def setPlayer(self, player):
 		self.player = player

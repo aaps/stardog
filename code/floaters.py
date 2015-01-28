@@ -45,8 +45,6 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	
 	baseImage = None
 	
-
-
 	def __init__(self, game, pos, delta, dir = 270, radius = 10, \
 			image = None):
 		pygame.sprite.Sprite.__init__(self)
@@ -211,9 +209,7 @@ class Missile(Bullet):
 		Floater.takeDamage(self, damage, other)
 
 class Mine(Bullet):
-
 	hp = 1
-
 	
 	def __init__(self, game, launcher, damage, speed, acceleration, range,
 				explosionRadius, image=None):
@@ -299,7 +295,7 @@ class Explosion(Floater):
 		pass
 
 class Impact(Floater):
-	life = 10
+	life = 0
 	tangible = False
 	mass = 0
 
@@ -338,9 +334,7 @@ class LaserBeam(Floater):
 	that reach their end point instantly.  A LaserBeam has a different 
 	collision mechanism: they use line/circle collision, and it is checked 
 	during initialization."""
-	life = .5 #seconds
-	hp = 0
-	tangible = False
+
 	baseImage = loadImage("res/laser.bmp").convert()
 	baseImage.set_colorkey(BLACK)
 	
@@ -358,6 +352,10 @@ class LaserBeam(Floater):
 
 		Floater.__init__(self, game, (start + stop) / 2, laser.ship.delta, dir,
 						radius = 0)
+
+		self.life = .5 #seconds
+		self.hp = 0
+		self.tangible = False
 		self.damage = damage
 		self.start = start
 		self.stop = stop

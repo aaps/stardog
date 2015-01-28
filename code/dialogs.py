@@ -9,17 +9,22 @@ from planet import *
 
 class Messenger(Drawable):
     queue = deque() #not capitalized in stand lib
-    speed = 40 #characters per second
-    messageDelay = 9 #seconds after each message
-    maxChars = 200 #line width
+    
+    
+   
     font = FONT
-    topleft = 0,0
-    maxMessages = 100
+    
+    
     def __init__(self, universe, font = FONT, dir = 1):
         Drawable.__init__(self, universe.game)
         self.dir = dir# -1 means the messages stack upward.
         self.image = pygame.Surface((universe.game.width - 204, self.font.get_linesize()))
+        self.speed = 40 #characters per second
         self.image.set_alpha(200)
+        self.topleft = 0,0
+        self.maxMessages = 100
+        self.messageDelay = 9 #seconds after each message
+        self.maxChars = 200 #line width
         self.universe = universe
         self.game = universe.game
    
@@ -59,6 +64,7 @@ class Messenger(Drawable):
         self.queue = deque()
         
 class Trigger(object):
+    
     def __init__(self, universe, conditions, actions, repeat = False):
         self.repeat = repeat
         if type(conditions) != type([]):
