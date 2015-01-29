@@ -1,0 +1,31 @@
+2x scrap -> iron 
+1x iron ore -> iron
+carbon scrap -> nothing
+2x titanium scrap -> titanium
+1x silk scrap -> silk
+1x iron -> 1x iron plate
+2x chems -> 1x explosive
+1x chem + 1x explosive + 1x ? plate = missiles
+1x carbon + 1x chems = carbon fiber or graphene
+1x carbon fiber -> 2x carbon fiber plate
+1x graphene + chems + water = electronics
+plate + electronics + optics = laser
+optics = duraglas + water
+2 x iron or equ + electronics + plate = gyro
+3 plate + 2 electronics + 3 iron + duraglas = cockpit
+aluminium + oxide = duraglas
+2x water + food + chems = alcohol
+hydrogen + oxide = water
+radioisotopes -> reactor fuel
+electronics, plating, minirals = radar
+water + electronics, plating = oxiginator
+crewquarters = plating + exiginator
+electronics, plating + minirals = shield
+phasenium + plate + electronics = jumppart
+chems + plate = battery
+reactor fuel + plate + chems + 3 iron= reactor
+plate + iron = cargo container
+iron -> ammo
+ammo+ chems + plating -> ammo gun
+
+
