@@ -267,6 +267,7 @@ Freighter
 =====
 * use destroyer cockpit.
 * from the sides of cockpit interconnects with an engine on the back side of interconnect, and a tail of cargo containers.
+* [build it now if any needs to be changed will see.]
 
 ship
 =====

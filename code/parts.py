@@ -9,6 +9,7 @@ import stardog
 from vec2d import Vec2d
 import copy
 from particles import *
+import sys
 
 
 
@@ -1000,12 +1001,12 @@ class Interconnect(Part):
 class Quarters(Part):
     baseImage = loadImage("res/parts/quarters"+ext)
     image = None
-
+    crewCap = 2
+    repair = 0
     def __init__(self, game):
         Part.__init__(self, game)
 
         self.name = "Crew Quarters"
-        self.repair = .2
 
     def stats(self):
         stats = (self.repair,)
@@ -1019,10 +1020,25 @@ class Quarters(Part):
 
     def update(self):
         if self.ship:
+            #keep track for the amount of quarts. since repair rate is dependant.
+            #on the amount of crew/quarters there are around.
+            #find out how many quarters there are.
+            quarters = 0
+            for part in self.ship.parts:
+                if part.name == self.name:
+                    quarters += 1
+
+            self.ship.crewsize = quarters*self.crewCap
+            self.repair = self.ship.crewsize/10.
+            #for every part on the ship
+            #the first one that has it's hp < max
+            #gets to be fixed.
+            #only one at a time.
             for part in self.ship.parts:
                 if part.hp < part.maxhp:
                     part.hp = part.hp+self.repair*self.ship.efficiency/self.game.fps
                     break
+
         Part.update(self)
 
 class GargoHold(Part):
