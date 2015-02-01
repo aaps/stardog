@@ -61,10 +61,14 @@ def makeFreighter(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy",
 
     ship.addPart(cockpit)
 
-    chold1 = Interconnect(game)
-    chold2 = Interconnect(game)
-    chold3 = Interconnect(game)
-    chold4 = Interconnect(game)
+    chold1 = GargoHold(game)
+    chold2 = GargoHold(game)
+    chold3 = GargoHold(game)
+    chold4 = GargoHold(game)
+    chold5 = GargoHold(game)
+    chold6 = GargoHold(game)
+    chold7 = GargoHold(game)
+    chold8 = GargoHold(game)
 
     #put a Gyro on either back-sides of the cockpit 
     cockpit.addPart(gyro_left, 3)
@@ -81,6 +85,10 @@ def makeFreighter(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy",
     cockpit.addPart(chold2, 6)
     chold1.addPart(chold3, 1)
     chold2.addPart(chold4, 1)
+    chold3.addPart(chold5, 1)
+    chold4.addPart(chold6, 1)
+    chold5.addPart(chold7, 1)
+    chold6.addPart(chold8, 1)
 
     #put a battery and generator on either front-side of the cockpit.
     cockpit.addPart(battery, 2)
