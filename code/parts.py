@@ -1030,6 +1030,7 @@ class Quarters(Part):
 
             self.ship.crewsize = quarters*self.crewCap
             self.repair = self.ship.crewsize/10.
+            
             #for every part on the ship
             #the first one that has it's hp < max
             #gets to be fixed.
