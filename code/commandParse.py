@@ -32,7 +32,19 @@ class AttrFilter(object):
 
 class CommandParse(object):
     helpText = [
-    "!print <object...> <attributes> <...>\n"
+    "!help [shows this help text]"
+    "!print <object...> <attributes> <...> [for example: !print game.player , or !print game.averagefps ]\n"
+    "!set <object.attr> <value> [sets object attribute to value]\n"
+    "!reload [invokes a reload of the command parse code. so coding is easier and can be tested while in game]\n"
+    "!exit [exits the game]\n"
+    "!insertPart <part> <amount> [inserts a amount of parts into the players inventory]\n"
+    "!parts [lists parts available W.I.P]\n"
+    "!removeItem <part> <amount> [removes a amount of parts from the player inventory W.I.P]\n"
+    "!func <code> [runs python code] \n"
+    "!setTextColor <color> [sets the print out text to color in formate (r,g,b) \n"
+    "!setShipColor <color> [colors your ship to the specified color W.I.P]\n"
+    "!convertShip <ship type> [convert your ship to ship type W.I.P]\n"
+    "!printdbg [toggles debug printing to the ingame console]\n"
     ]
     
     def __init__(self, game, chatconsole, messenger):
@@ -49,6 +61,7 @@ class CommandParse(object):
         self.setText = self.chatconsole.console.inputfield.setText
         self.text = []
         self.reload = False
+        self.debug = False
     def setColor(self, args):
         if not args:
             return
@@ -197,9 +210,11 @@ class CommandParse(object):
                     elif command == "convertShip":
                         self.convertShip(args)
                     elif command == 'printdbg':
-                        self.printout("input: %s \ncommand: %s \narguments: %s"%(text, command, args))
+                        self.debug = not self.debug
                     else:
                         self.printout("Invalid input.")
+                    if self.debug:
+                        self.printout("input: %s \ncommand: %s \narguments: %s"%(text, command, args))
                 else:
                     self.printout(self.player.firstname + " " + self.player.secondname +": "+text)
             except Exception, e:
