@@ -760,6 +760,7 @@ class Radar(Part):
                 self.ship.curtarget = None
 
     def targetNextPlanet(self):
+        return
         from planet import Planet
         if self == self.ship.radars[-1]:
             planets = self.ship.knownsystems[self.game.universe.curSystem]
