@@ -242,7 +242,7 @@ def playerShip(game, pos, delta, dir = 270, \
     if type == 'destroyer':
         ship = makeDestroyer(game, pos, delta, dir, color, name, player=True, partlim=12)
     elif type == 'freighter':
-        ship = makeFreighter(game, pos, delta, dir, color, name, player=True, partlim=20)
+        ship = makeFreighter(game, pos, delta, dir, color, name, player=True, partlim=15)
     elif type == 'interceptor':
         ship = makeInterceptor(game, pos, delta, dir, color, name, player=True, partlim=10)
     elif type == 'juggernaut':
