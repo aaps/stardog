@@ -257,6 +257,7 @@ crew
 * add crew?
 * more crew more efficient ship.
 * maybe if crew then heal x per x seconds.
+* crew quarters gives you crew more quarters faster healing.
 
 bays
 =====

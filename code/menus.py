@@ -69,7 +69,6 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'juggernaut', FONT))
         x += 200
         self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'freighter', FONT))
-        #exit(1)
     
     def chooseColor(self):
         if self.game.playerColor == [0,0,0]:

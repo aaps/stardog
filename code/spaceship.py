@@ -35,7 +35,65 @@ def makeFighter(game, pos, delta, dir = 270, \
     ship.reset()
     ship.energy = ship.maxEnergy * .8
     return ship
-    
+
+def makeFreighter(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcShipperson"), player=False, partlim=8):
+    if player:
+        ship = Player(game, pos, delta, dir=dir, color=color, name=name, partlimit=partlim)
+    else:
+        ship = Ship(game, pas, delta, dir=dir, color=color, name=name, partlimit=partlim)
+
+    cockpit = Destroyer(game)
+
+    battery = Battery(game)
+    generator = Generator(game)
+
+    engine_left = Engine(game)
+    engine_right = Engine(game)
+
+    interc_left = Interconnect(game)
+    interc_right = Interconnect(game)
+
+    gyro_left = Gyro(game)
+    gyro_right = Gyro(game)
+
+    gun_left = LeftFlakCannon(game)
+    gun_right = RightFlakCannon(game)
+
+    ship.addPart(cockpit)
+
+    chold1 = Interconnect(game)
+    chold2 = Interconnect(game)
+    chold3 = Interconnect(game)
+    chold4 = Interconnect(game)
+
+    #put a Gyro on either back-sides of the cockpit 
+    cockpit.addPart(gyro_left, 3)
+    cockpit.addPart(gyro_right, 4)
+    #put a interconnect left and right attached to the gyro
+    gyro_left.addPart(interc_left, 1)
+    gyro_right.addPart(interc_right, 1)
+    #put a engine left and right under the inter connect
+    interc_left.addPart(engine_left, 0)
+    interc_right.addPart(engine_right, 2)
+
+    #build a stack of interconnects (to be replaced by cargoholds) 
+    cockpit.addPart(chold1, 5)
+    cockpit.addPart(chold2, 6)
+    chold1.addPart(chold3, 1)
+    chold2.addPart(chold4, 1)
+
+    #put a battery and generator on either front-side of the cockpit.
+    cockpit.addPart(battery, 2)
+    cockpit.addPart(generator, 1)
+    #put a flak cannon on either side.
+    generator.addPart(gun_left, 0)
+    battery.addPart(gun_right, 0)
+
+    ship.reset()
+    ship.energy = ship.maxEnergy * .8
+
+    return ship
+
 def makeDestroyer(game, pos, delta, dir = 270, color = (255, 255, 255),name=("Shippy","mcShipperson"), player = False, partlim=8):
     """starterShip(x,y) -> default starting ship at x,y."""
 
@@ -173,9 +231,6 @@ def makeScout(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcS
     ship.energy = ship.maxEnergy * .8
     return ship
 
-def makeFreighter(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcShipperson"), player=False, partlim=8):
-    pass
-
 def playerShip(game, pos, delta, dir = 270, \
                 color = (255, 255, 255), name = ("Shippy","mcShipperson"), type = 'fighter'):
     """starterShip(x,y) -> default starting ship at x,y."""
@@ -186,8 +241,8 @@ def playerShip(game, pos, delta, dir = 270, \
 
     if type == 'destroyer':
         ship = makeDestroyer(game, pos, delta, dir, color, name, player=True, partlim=12)
-    elif type == 'Freighter':
-        pass
+    elif type == 'freighter':
+        ship = makeFreighter(game, pos, delta, dir, color, name, player=True, partlim=20)
     elif type == 'interceptor':
         ship = makeInterceptor(game, pos, delta, dir, color, name, player=True, partlim=10)
     elif type == 'juggernaut':

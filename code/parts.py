@@ -993,6 +993,8 @@ class Interconnect(Part):
                 Port(Vec2d(-self.width / 2 , 0), 0, self), \
                 Port(Vec2d(0, -self.height / 2 ), 90, self)]
         self.name = "Interconnect"
+    def update(self):
+        Part.update(self)
 
 class Quarters(Part):
     baseImage = loadImage("res/parts/quarters"+ext)
