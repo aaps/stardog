@@ -257,7 +257,7 @@ def playerShip(game, pos, delta, dir = 270, \
         ship = makeJuggernaut(game, pos, delta, dir, color, name, player=True, partlim=10)
     elif type == 'scout':
         ship = makeScout(game, pos, delta, dir, color, name, player=True, partlim=6)
-    elif type == 'Fighter':
+    elif type == 'fighter':
         ship = makeFighter(game, pos, delta, dir, color, name, player=True, partlim=6)
 
     return ship
