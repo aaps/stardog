@@ -16,8 +16,15 @@ from vec2d import Vec2d
 import datetime
 #command parsing
 import commandParse
+from pympler import summary
 from pympler import muppy
-
+from pympler import tracker
+import types as Types
+all_objects = muppy.get_objects()
+tr = tracker.SummaryTracker()
+import resource
+import gc
+print 'Memory usage: %s (kb)' % resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
 
 FPS = 300
 
@@ -27,7 +34,6 @@ class Game(object):
     are probably a bad idea."""
     menu = None
     def __init__(self, screen):
-#        self.pause = False
         self.console = False
         self.debug = False
         self.player = None
@@ -43,7 +49,6 @@ class Game(object):
         self.height = screen.get_height()
         self.mouseControl = True
         self.timer = 0
-        # self.systems = []
         self.triggers = []
         self.camera = Camera(self)
         #messenger, with controls as first message:
@@ -136,6 +141,7 @@ class Game(object):
             #The in-round loop (while player is alive):
             
             while self.running and self.universe.curSystem.ships.has(self.player):
+                gc.collect()
                 #event polling:
                 pygame.event.pump()
                 for event in pygame.event.get():
@@ -155,11 +161,11 @@ class Game(object):
                         if event.key == pygame.K_m:
                             all_objects = muppy.get_objects()
                         if event.key == pygame.K_BACKSLASH:
-
                             pygame.image.save(self.screen, "screenshot.jpeg")
+                        if event.key == pygame.K_SLASH:
+                            pygame.display.set_caption('Memory usage: %s (kb) FPS: %d' % (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, self.averagefps))
                     elif event.type == pygame.KEYUP:
                         self.keys[event.key % 322] = 0
-
                     if self.menu.active:
                         self.menu.handleEvent(event)
                     if self.chatconsole.active:
@@ -219,5 +225,6 @@ class Game(object):
                 self.clock.tick(FPS)#aim for FPS but adjust vars for self.fps.
                 self.fps = max(1, int(self.clock.get_fps()))
                 self.timer += 1. / self.fps
+                pygame.display.set_caption('Memory usage: %s (kb) FPS: %d' % (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, self.averagefps))
             #end round loop (until gameover)
         #end game loop
