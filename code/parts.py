@@ -1240,9 +1240,10 @@ class Destroyer(Cockpit):#move to config
 class Fighter(Cockpit):#move to config
     mass = 10
     hp = 10
-    energyCost = .2
-    rate = 1.5
-    capacity = 5
+    energyCost = .2 #gyro
+    torque = 60000 #gyro
+    capacity = 30 #battery
+    rate = 10 #generator
     baseImage = loadImage("res/parts/fighter.bmp")
     name = 'Fighter Cockpit'
     
