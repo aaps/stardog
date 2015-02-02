@@ -728,7 +728,6 @@ class Radar(Part):
         Part.update(self)
 
     def targetNextShip(self):
-        pass
         from spaceship import Ship
         if self == self.ship.radars[-1]:
             resultList = []
@@ -745,7 +744,6 @@ class Radar(Part):
                 self.ship.curtarget = None
 
     def targetPrefShip(self):
-        pass
         from spaceship import Ship
         if self == self.ship.radars[-1]:
             resultList = []
@@ -763,7 +761,7 @@ class Radar(Part):
 
     def targetNextPlanet(self):
         from planet import Planet
-        if self == self.ship.radars[-1]:
+        if self == self.ship.radars[-1] and len(self.ship.knownsystems) > 0:
             planets = self.ship.knownsystems[self.game.universe.curSystem]
             planets = sorted(planets, key = self.radarDistance)
             if self.ship.curtarget in planets:
@@ -781,7 +779,7 @@ class Radar(Part):
 
     def targetPrefPlanet(self):
         from planet import Planet
-        if self == self.ship.radars[-1]:
+        if self == self.ship.radars[-1] and len(self.ship.knownsystems) > 0:
             planets = self.ship.knownsystems[self.game.universe.curSystem]
             planets = sorted(planets, key = self.radarDistance)
             if self.ship.curtarget in planets:
