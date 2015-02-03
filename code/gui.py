@@ -228,8 +228,10 @@ class StarField(Drawable):
 				(randint(brightness * 3 / 4, brightness), 
 				 randint(brightness * 3 / 4, brightness), 
 				 randint(brightness * 3 / 4, brightness))))
-		
+	
+	
 	def draw(self, surface):
+		return
 		pa = pygame.PixelArray(surface)
 		"""updates the HUD and draws it."""
 		depth = 1.
@@ -240,6 +242,7 @@ class StarField(Drawable):
 			pa[x+1,y] = star[3]
 			pa[x,y+1] = star[3]
 			pa[x+1,y+1] = star[3]
+		del pa
 
 class BGImage(Drawable):
 	pic = None
