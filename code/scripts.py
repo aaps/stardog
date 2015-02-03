@@ -5,6 +5,27 @@ from pygame.locals import *
 from floaters import *
 import stardog
 
+class Controllable(object):
+	# this will take the place of ship script update
+	
+
+	def __init__(self, active=True):
+		self.active = active
+		self.scripts = []
+
+
+	def addScript(self, script):
+		self.scripts.append(script)
+
+	def setActive(self):
+		self.active = True
+
+	def setInactive(self):
+		self.active = False
+
+	def toggleActive(self):
+		self.active = not self.active
+
 class Script(object):
 	def __init__(self, game):
 		self.game = game

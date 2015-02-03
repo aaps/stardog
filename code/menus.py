@@ -5,6 +5,7 @@ import stardog
 from parts import Dummy, PART_OVERLAP, DEFAULT_IMAGE, FlippablePart
 from spaceship import Ship
 import datetime
+from scripts import Controllable
 
 
 DEFAULT_SELECTED_IMAGE = loadImage("res/defaultselected" + ext)
@@ -140,6 +141,7 @@ class Console(Panel):
 
     def __init__(self,rect, game):
         Panel.__init__(self,rect)
+
         rect = Rect(10,10,self.rect.width,200)
         self.inputfield = InputField( rect, game, width =  200)
         self.addPanel(self.inputfield)
@@ -148,15 +150,15 @@ class Console(Panel):
         for panel in self.panels:
             panel.handleEvent(event)
             
-class ChatConsole(TopLevelPanel):
+class ChatConsole(TopLevelPanel, Controllable):
     drawBorder = True
     activeMenu = None
     color = CONSOLE_BLUE
     game = None
-    active = False
     
     def __init__(self, game, rect):
         TopLevelPanel.__init__(self, rect)
+        Controllable.__init__(self, False)
         subFrameRect = Rect(0, 0, self.rect.width, self.rect.height)
         self.game = game
         
@@ -173,23 +175,18 @@ class ChatConsole(TopLevelPanel):
 
         TopLevelPanel.handleEvent(self, event)
 
-    def toggleActive(self):
-        if self.active:
-            self.active = False
-        else:
-            self.active = True
-            self.reset()
 
 
-class Menu(TopLevelPanel):
+
+class Menu(TopLevelPanel, Controllable):
     """The top level menu object. Menu(mouse, rect) -> new Menu"""
     activeMenu = None
     color = CONSOLE_BLUE
     game = None
-    active = False
     
     def __init__(self, game, rect):
         TopLevelPanel.__init__(self, rect)
+        Controllable.__init__(self, False)
         subFrameRect = Rect(0, 0, self.rect.width, self.rect.height)
         self.game = game
        
@@ -232,13 +229,6 @@ class Menu(TopLevelPanel):
     def handleEvent(self, event):            
         TopLevelPanel.handleEvent(self, event)
 
-    def toggleActive(self):
-        
-        if self.active:
-            self.active = False
-        else:
-            self.active = True
-            self.reset()
 
 class PartsPanel(Panel):
     baseImage = loadImage('res/menus/partsmenubg.bmp')

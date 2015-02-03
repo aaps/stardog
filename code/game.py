@@ -125,8 +125,8 @@ class Game(object):
             # two rules below should be integrated into their classes
             self.menu.keys.bindings.bindings = self.playerScript.bindings
             self.menu.keys.bindings.reset()
-            self.player.setScript(self.playerScript)
-           
+            # self.player.setScript(self.playerScript)
+            self.player.addScript(self.playerScript)
             for x in range(10):
                 self.clock.tick()
             
@@ -190,6 +190,7 @@ class Game(object):
                 self.camera.draw(self.screen)
 
                 # paused:
+
                 if self.menu.active:
                     self.menu.update()
                     self.menu.draw(self.screen)
@@ -197,7 +198,7 @@ class Game(object):
                 if self.chatconsole.active:
                     self.chatconsole.update()
                     self.chatconsole.draw(self.screen)
-                    
+                
                 #update actually parses input.
                 #and does actions based upon that.
                 self.commandParse.update()
