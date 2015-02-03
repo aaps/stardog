@@ -27,7 +27,6 @@ class Controllable(object):
 		self.active = not self.active
 
 	def update(self):
-		print self
 		if len(self.scripts) > 0 and self.active:
 			for script in self.scripts:
 				script.update(self)

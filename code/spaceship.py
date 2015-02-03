@@ -357,9 +357,6 @@ class Ship(Floater, Controllable):
         for i in range(amount):
             self.inventory.append(part(self.game))
 
-    # def setScript(self, script):
-    #     self.script = script
-
     def addPart(self, part, portIndex = 0):
         """ship.addPart(part) -> Sets the main part for this ship.
         Only used for the base part (usually a cockpit), other parts are added to parts."""
@@ -569,10 +566,8 @@ class Ship(Floater, Controllable):
         if not self.parts or self.parts[0].hp <= 0:
             self.kill()
         #run script, get choices.
-        Controllable.update(self)
-        # if len(self.scripts) > 0 and self.active:
-        #     for script in self.scripts:
-        #         script.update(self)
+        
+
         resultList = []
         for radar in self.radars:
             resultList= list(set(radar.detected)|set(resultList))
@@ -580,6 +575,8 @@ class Ship(Floater, Controllable):
             self.attention -= 0.1 / self.game.fps
         # actual updating:
         Floater.update(self)
+        Controllable.update(self)
+        
         #parts updating:
         if self.ports[0].part:
             self.ports[0].part.update()

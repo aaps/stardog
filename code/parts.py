@@ -184,6 +184,7 @@ class Part(Floater):
             if port.part:
                 port.part.detach()
         #set physics to drift away from ship (not collide):
+      
         if self.parent:
             cost = cos(self.ship.dir) #cost is short for cos(theta)
             sint = sin(self.ship.dir)
@@ -205,6 +206,7 @@ class Part(Floater):
             self.ship.reset()
             self.ship = None
             self.parent = None
+
             #otherwise add this to the game as an independent Floater:
             if not root:
                 self.game.universe.curSystem.add(self)
@@ -246,28 +248,29 @@ class Part(Floater):
         
     def update(self):
         """updates this part."""
-        if self.ship:
-            #reset so this part can act again this frame:
-            self.acted = False
-            #if it's attached to a ship, just rotate with the ship:
-            if self.parent:
-                cost = cos(self.ship.dir) #cost is short for cos(theta)
-                sint = sin(self.ship.dir)
-                self.pos = self.ship.pos + self.offset.rotated(self.ship.dir)
-            #if it's floating in space, act like a floater:
-            else:
-                Floater.update(self)
-            #update children:
-            #
-            for port in self.ports:
-                if port.part:
-                    port.part.update()
+        # if self.ship:
+        #reset so this part can act again this frame:
+        self.acted = False
+        #if it's attached to a ship, just rotate with the ship:
+        if self.parent:
+            cost = cos(self.ship.dir) #cost is short for cos(theta)
+            sint = sin(self.ship.dir)
+            self.pos = self.ship.pos + self.offset.rotated(self.ship.dir)
+        #if it's floating in space, act like a floater:
+        else:
 
-            if self.pickuptimeout > 0:
-                self.pickuptimeout -= 1. / self.game.fps
+            Floater.update(self)
+        #update children:
+        #
+        for port in self.ports:
+            if port.part:
+                port.part.update()
 
-            for emitter in self.emitters:
-                emitter.update()
+        if self.pickuptimeout > 0:
+            self.pickuptimeout -= 1. / self.game.fps
+
+        for emitter in self.emitters:
+            emitter.update()
 
 
     def draw(self, surface, offset = None, redraw = True, grey = False):
