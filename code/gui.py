@@ -10,6 +10,7 @@ from parts import *
 import time
 import numpy
 from vec2d import *
+import sys
 
 numStars = 300
 radarRadius = 100
@@ -228,18 +229,34 @@ class StarField(Drawable):
 				(randint(brightness * 3 / 4, brightness), 
 				 randint(brightness * 3 / 4, brightness), 
 				 randint(brightness * 3 / 4, brightness))))
-		
+	
+	"""
+		adjusting the max value (in this case 5000)
+		makes the starlines bigger or smaller
+	"""
 	def draw(self, surface):
-		pa = pygame.PixelArray(surface)
-		"""updates the HUD and draws it."""
-		depth = 1.
+		maxVal = 5000
+		xstarlen = (self.game.player.delta.x*100/(maxVal*2))
+		ystarlen = (self.game.player.delta.y*100/(maxVal*2))
 		for star in self.stars:
 			x = int(star[0] - self.game.player.pos.x / star[2]) % (self.game.width-1)
-			y =	int(star[1] - self.game.player.pos.y / star[2]) % (self.game.height-1)
-			pa[x,y] = star[3]
-			pa[x+1,y] = star[3]
-			pa[x,y+1] = star[3]
-			pa[x+1,y+1] = star[3]
+			y = int(star[1] - self.game.player.pos.y / star[2]) % (self.game.height-1)
+			"""drawing stars with set_at draws points. with draw.line draws lines."""
+			# 	surface.set_at((x,y), star[3])
+			# 	surface.set_at((x+1, y), star[3])
+			# 	surface.set_at((x, y+1), star[3])
+			# 	surface.set_at((x+1,y+1), star[3])
+			pygame.draw.line(surface, star[3], (x,y),(x+xstarlen, y+ystarlen), 1)
+		# pa = pygame.PixelArray(surface)
+		# """updates the HUD and draws it."""
+		# depth = 1.
+		# for star in self.stars:
+		# 	x = int(star[0] - self.game.player.pos.x / star[2]) % (self.game.width-1)
+		# 	y =	int(star[1] - self.game.player.pos.y / star[2]) % (self.game.height-1)
+		# 	pa[x,y] = star[3]
+		# 	pa[x+1,y] = star[3]
+		# 	pa[x,y+1] = star[3]
+		# 	pa[x+1,y+1] = star[3]
 
 class BGImage(Drawable):
 	pic = None

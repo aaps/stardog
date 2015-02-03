@@ -252,18 +252,18 @@ Commanline interface
 - a command to manipulate your camera (need work)
 
 
-crew
+crew [done]
 =====
 * add crew?
 * more crew more efficient ship.
 * maybe if crew then heal x per x seconds.
-* crew quarters gives you crew more quarters faster healing.
+* crew quarters gives you more crew thus faster healing.
 
 bays
 =====
-* a part that is a cargo bay, bigger bay more part that can be carried
+* a part that is a cargo bay, bigger bay more part that can be carried [Done]
 
-Freighter
+Freighter [done]
 =====
 * use destroyer cockpit.
 * from the sides of cockpit interconnects with an engine on the back side of interconnect, and a tail of cargo containers.

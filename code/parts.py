@@ -358,11 +358,6 @@ class Part(Floater):
                         self.delta, radius = self.radius * 4,\
                         time = self.maxhp / 5))
 
-
-
-
-
-
 class Dummy(Part):
     """A dummy part used by the parts menu."""
     # mass = 0
@@ -826,9 +821,6 @@ class Radar(Part):
     def radarDistance(self, floater):
         return floater.pos.get_distance(self.ship.pos)
 
-
-
-
 class Engine(Part):
     baseImage = loadImage("res/parts/engine" + ext)
     image = None
@@ -1039,36 +1031,6 @@ class Quarters(Part):
 
         Part.update(self)
 
-class GargoHold(Part):
-    baseImage = loadImage("res/parts/cargo"+ext)
-    image = None
-
-    
-    def __init__(self, game):
-        Part.__init__(self, game)
-        self.ports = [  Port(Vec2d(0, self.height / 2 ), 270, self), \
-                        Port(Vec2d(-self.width / 2 , 0), 0, self), \
-                        Port(Vec2d(0, -self.height / 2 ), 90, self)]
-        self.name = "GargoHold"
-        self.energyCost = 10
-        self.mass = 1
-
-    def stats(self):
-        stats = (self.energyCost,)
-        statString = "\nCosts for carrying cargo per part: %s E/p"
-        return Part.stats(self)+statString%(stats)
-
-    def shortStats(self):
-        stats = (self.energyCost,)
-        statString = "\n %s E/p"
-        return Part.shortStats(self)+statString%(stats)
-
-    def update(self):
-        if self.ship:
-            numOfParts = len(self.ship.inventory)
-            energyCost = numOfParts
-        Part.update(self)
-
 class GatewayFocus(Part):
     baseImage = loadImage("res/parts/gateway_focus"+ext)
     image = None
@@ -1172,7 +1134,46 @@ class Shield(Part):
                 self.ship.energy -= self.energyCost / self.game.fps
         Part.update(self)
 
-class Cockpit(Radar, Battery, Generator, Gyro):
+class GargoHold(Part):
+    baseImage = loadImage("res/parts/cargo"+ext)
+    image = None
+
+    def __init__(self, game):
+        Part.__init__(self, game)
+        self.ports = [  Port(Vec2d(0, self.height / 2 ), 270, self), \
+                        Port(Vec2d(-self.width / 2 , 0), 0, self), \
+                        Port(Vec2d(0, -self.height / 2 ), 90, self)]
+        self.name = "GargoHold"
+        self.energyCost = 10
+        self.mass = 1
+        self.gargocapacity = 4
+    def stats(self):
+        stats = (self.energyCost,)
+        statString = "\nCosts for carrying cargo per part: %s E/p"
+        return Part.stats(self)+statString%(stats)
+
+    def shortStats(self):
+        stats = (self.energyCost,)
+        statString = "\n %s E/p"
+        return Part.shortStats(self)+statString%(stats)
+
+    def update(self):
+        """check how many gargholds are attached and calculate capacity on that."""
+        if self.ship:
+            gargoholdcount = 0
+            for part in self.ship.parts:
+                if part.name == self.name:
+                    gargoholdcount += 1
+            self.ship.gargoholdsize = (gargoholdcount*self.gargocapacity)
+            
+            if len(self.ship.inventory) > (self.ship.gargoholdsize):
+                part = self.ship.inventory[-1]
+                part.scatter(self.game.player)
+                self.game.player.reset()
+                self.game.player.inventory.remove(part)
+        Part.update(self)
+
+class Cockpit(Radar, Battery, Generator, Gyro, GargoHold):
     baseImage = loadImage("res/parts/cockpit.gif")
     image = None
     energyCost = .2 #gyro
@@ -1181,6 +1182,7 @@ class Cockpit(Radar, Battery, Generator, Gyro):
     radarrange = 5000 #radar
     capacity = 5 #battery
     rate = .5 #generator
+    gargocapacity = 6
     name = "Cockpit"
     
     def __init__(self, game):
@@ -1191,17 +1193,19 @@ class Cockpit(Radar, Battery, Generator, Gyro):
                     Port(Vec2d(0, -self.height / 2 + 2), 90, self)]
 
     def stats(self):
-        stats = (self.torque, self.energyCost, self.capacity, self.rate)
+        stats = (self.torque, self.energyCost, self.capacity, self.rate, self.ship.gargoholdsize)
         statString = ("\nTorque: %s N*m\nCost: %s energy/second of turning" +
                     "\nCapacity: %s energy" +
-                    "\nEnergy Produced: %s/second")
+                    "\nEnergy Produced: %s/second"+
+                    "\nGargo Capacity: %s")
         return Part.stats(self) + statString % stats
 
     def update(self):
         Generator.update(self)
         Battery.update(self)
-        # Gyro.update(self)
+        Gyro.update(self)
         Radar.update(self)
+        GargoHold.update(self)
         
 class Interceptor(Cockpit):#move to config
     mass = 20
@@ -1240,9 +1244,10 @@ class Destroyer(Cockpit):#move to config
 class Fighter(Cockpit):#move to config
     mass = 10
     hp = 10
-    energyCost = .2
-    rate = 1.5
-    capacity = 5
+    energyCost = .2 #gyro
+    torque = 60000 #gyro
+    capacity = 30 #battery
+    rate = 10 #generator
     baseImage = loadImage("res/parts/fighter.bmp")
     name = 'Fighter Cockpit'
     

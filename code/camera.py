@@ -21,7 +21,6 @@ class Camera(object):
 		self.height = game.height
 
 	def update(self):
-
 		for layer in self.layers:
 			if layer.enabled:
 				layer.update()
