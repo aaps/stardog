@@ -26,58 +26,35 @@ class Controllable(object):
 	def toggleActive(self):
 		self.active = not self.active
 
+	def update(self):
+		print self
+		if len(self.scripts) > 0 and self.active:
+			for script in self.scripts:
+				script.update(self)
+
 class Script(object):
 	def __init__(self, game):
 		self.game = game
+		self.bindings = []
+		self.keys = game.keys
 	
 	def update(self, ship):
-		pass
+
+		for binding in self.bindings:
+			if self.keys[binding[0]] == 1:
+
+				if binding[2]:
+					if binding[3]:
+						self.bindings[self.bindings.index(binding)] = (binding[0], binding[1],binding[2], False)
+						binding[1]()
+				else:
+					binding[1]()
+			elif self.keys[binding[0]] == 0:
+				if binding[2]:
+					self.bindings[self.bindings.index(binding)] = (binding[0], binding[1],binding[2], True)
 
 	def agent(self, state):
 		return None
-
-#InputScript is controlled by the keyboard:
-class InputScript(Script):
-	"""A script controlled by the keyboard."""
-	mouseControl = True
-	def __init__(self, game):
-		Script.__init__(self, game)
-		self.active = True
-		self.keys = game.keys
-		self.mouse = game.mouse
-		self.bindings = []
-		self.center =self.game.width / 2, self.game.height / 2
-
-	def update(self, ship):
-		"""decides what to do each frame."""
-		if self.active:
-			for binding in self.bindings:
-				if self.keys[binding[0]] == 1:
-
-					if binding[2]:
-						if binding[3]:
-							self.bindings[self.bindings.index(binding)] = (binding[0], binding[1],binding[2], False)
-							binding[1]()
-					else:
-						binding[1]()
-				elif self.keys[binding[0]] == 0:
-					if binding[2]:
-						self.bindings[self.bindings.index(binding)] = (binding[0], binding[1],binding[2], True)
-							
-
-			if self.game.mouseControl:
-				dir = angleNorm(atan2(self.game.mouse[0][1] - self.center[1], \
-									  self.game.mouse[0][0] - self.center[0])\
-									  -ship.dir)
-				
-				if dir < 0:
-					ship.turnLeft(dir)
-				elif dir > 0:
-					ship.turnRight(dir)
-				if self.game.mouse[3]:
-					ship.forward()
-				if self.game.mouse[1]:
-					ship.shoot()
 
 	def initbind(self, key, function, toggle):
 		"""binds function to key so function will be called if key is pressed.
@@ -112,11 +89,56 @@ class InputScript(Script):
 		for bind in self.bindings:
 			bind = (bind[0], bind[1], False, bind[3])
 
-	def toggleActive(self):
-		if self.active:
-			self.active = False
-		else:
-			self.active = True
+#InputScript is controlled by the keyboard:
+class InputScript(Script):
+	"""A script controlled by the keyboard."""
+	mouseControl = True
+	def __init__(self, game):
+		Script.__init__(self, game)
+		# self.active = True
+		
+		self.mouse = game.mouse
+		
+		self.center =self.game.width / 2, self.game.height / 2
+
+	def update(self, ship):
+		"""decides what to do each frame."""
+		# if self.active:
+		for binding in self.bindings:
+			if self.keys[binding[0]] == 1:
+
+				if binding[2]:
+					if binding[3]:
+						self.bindings[self.bindings.index(binding)] = (binding[0], binding[1],binding[2], False)
+						binding[1]()
+				else:
+					binding[1]()
+			elif self.keys[binding[0]] == 0:
+				if binding[2]:
+					self.bindings[self.bindings.index(binding)] = (binding[0], binding[1],binding[2], True)
+						
+
+		if self.game.mouseControl:
+			dir = angleNorm(atan2(self.game.mouse[0][1] - self.center[1], \
+								  self.game.mouse[0][0] - self.center[0])\
+								  -ship.dir)
+			
+			if dir < 0:
+				ship.turnLeft(dir)
+			elif dir > 0:
+				ship.turnRight(dir)
+			if self.game.mouse[3]:
+				ship.forward()
+			if self.game.mouse[1]:
+				ship.shoot()
+
+
+
+	# def toggleActive(self):
+	# 	if self.active:
+	# 		self.active = False
+	# 	else:
+	# 		self.active = True
 
 
 		
@@ -287,10 +309,21 @@ class AIScript(Script):
 				ship.forward()
 		else:
 			self.intercept(ship, dummy, 500)
+
+def makeConsoleBindings(script, game):
+	script.initbind(K_6, game.player.toggleActive, True)
+	script.initbind(K_6, game.chatconsole.toggleActive, True)
+
+def makeMenuBindings(script, game):
+	script.initbind(K_RETURN, game.player.toggleActive, True)
+	script.initbind(K_RETURN, game.menu.toggleActive, True)
+
 		
 def makeGameBindings(script, game):
 	script.initbind(K_6, game.chatconsole.toggleActive, True)
+	script.initbind(K_6, game.player.toggleActive, True)
 	script.initbind(K_RETURN, game.menu.toggleActive, True)
+	script.initbind(K_RETURN, game.player.toggleActive, True)
 
 	script.initbind(K_MINUS, game.radarfield.zoomInRadar,False)
 	script.initbind(K_EQUALS, game.radarfield.zoomOutRadar,False)

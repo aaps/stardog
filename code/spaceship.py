@@ -569,9 +569,10 @@ class Ship(Floater, Controllable):
         if not self.parts or self.parts[0].hp <= 0:
             self.kill()
         #run script, get choices.
-        if len(self.scripts) > 0 and self.active:
-            for script in self.scripts:
-                script.update(self)
+        Controllable.update(self)
+        # if len(self.scripts) > 0 and self.active:
+        #     for script in self.scripts:
+        #         script.update(self)
         resultList = []
         for radar in self.radars:
             resultList= list(set(radar.detected)|set(resultList))

@@ -113,6 +113,8 @@ class Game(object):
                 self.timer += 1. / self.fps
             #setup initial state:
             self.playerScript = InputScript(self)
+            self.menuScript = Script(self)
+            self.consoleScript = Script(self)
             self.player = playerShip(self, Vec2d(0,0),Vec2d(0,0),
                             color = self.playerColor, name = self.PlayerName, type = self.playerType)
             
@@ -125,12 +127,16 @@ class Game(object):
             self.camera.setPos(self.player.pos)
             makePlayerBindings(self.playerScript, self.player)
 
+
             self.menu = Menu(self, Rect((self.width - 800) / 2,    (self.height - 600) / 2, 800, 600))
+            makeMenuBindings(self.menuScript, self)
             makeGameBindings(self.playerScript , self)
+            makeConsoleBindings(self.consoleScript , self)
             # two rules below should be integrated into their classes
-            self.menu.keys.bindings.bindings = self.playerScript.bindings
+            # self.menu.keys.bindings.bindings = self.playerScript.bindings
             self.menu.keys.bindings.reset()
-            # self.player.setScript(self.playerScript)
+            self.menu.addScript(self.menuScript)
+            self.chatconsole.addScript(self.consoleScript)
             self.player.addScript(self.playerScript)
             for x in range(10):
                 self.clock.tick()

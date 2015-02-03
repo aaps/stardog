@@ -175,6 +175,9 @@ class ChatConsole(TopLevelPanel, Controllable):
 
         TopLevelPanel.handleEvent(self, event)
 
+    def update(self):
+        Controllable.update(self)
+        TopLevelPanel.update(self)
 
 
 
@@ -225,6 +228,8 @@ class Menu(TopLevelPanel, Controllable):
     def update(self):
         if self.activeMenu:
             self.activeMenu.update()
+        
+        Controllable.update(self)
 
     def handleEvent(self, event):            
         TopLevelPanel.handleEvent(self, event)
