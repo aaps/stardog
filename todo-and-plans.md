@@ -6,10 +6,9 @@ main dish
 
 * quad trees (hardmode, after vector and view splitout, wil replace current collision check mess)
 
-* wormholes/star gates to other systems. (medium mode ?, after Gravless class) [can travel to other starsystems via direct travel now, star gates next] !!
+* wormholes/star gates to other systems. (medium mode ?, after Gravless class) [can travel to other starsystems via direct travel now, star gates next] !!!
 
-
-* make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump]
+* make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump] !!
 
 * multyplayer [hard mode, dependant on code structure]
 
@@ -30,69 +29,61 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ============
 
+* make 2 gateways in the start system to test jumping !!
 * make text able to left center right lineout
 * does ship still need hp is not all hp contained in the parts ?
-* remove the shield indication arc and put it on gui. [done]
 * a sentence construction kitt for the ai so it can taunt you for example
 * partcount in menu doesn't show the actuall part limit. [done ?]
 * a list in a ship of who is targeting you. targeting target should not go into player or enemy but in ship
 * there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.
-* make it to that gravity doesnt count when distance from star greater than boundrad [done]
+
 * does a ship has a reference to the current starsystem if no does it need one ?
-* find out what action could go into dialogs conditions and actions
-* the console , input chatconsole panel hyrargy is a bit much ?
+* the console , input chatconsole panel hierarchy is a bit much ?
 * realy a better way to reset stuff on death, like radar error thing, enging trust should be off menus all inactive !!
 
 * ai can talk to player, when targeting player for example and disengaging [after fsm and better brains ai]
+* a fsm for ai
 * an small addaptation that makes this standout from other stardog. The accounting software  [star/space rats]
-* a buton to make screen shots ? [done]
-* make it posible to easly make multyple screenshots with variing numbers 
-* a cursor for on mian screen in form of crosshair
-* place all menu elements in menuelements.py instead of menu for example [ok nothing wrong here menu has all the menu element compositions, and menu elements all the menu elements, done]
-* make factorys for planets starsystems and ships, the design pattern !
+* make the screenshots have a incrementalnumber like : screenshop-1, screenshot-2, etc
+* a cursor for on main screen in form of crosshair
+* make factorys for planets starsystems and ships, the design pattern !!
 * a random seed for xtra fun
-* mini game explotion push stuff, space socker ?
-* time to consider a differen graph lib like gfxdraw [we did, but we not gonna do it !, ha, done]
-* plitout parts and cargo , different files, is part cargo or cargo part ?
+* splitout parts and cargo ,different files, is part cargo or cargo part ?
 * a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
-* the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed !!
-* rework of menu active and keybindings, activemenu and active, better differentiation, update part and draw part if active, the var active in toplevelpanel. !!
-* inputscript in scripts.py should be playerinputscript, also scripts needed for chatconsole and for menu, this makes it posible to have keys for inflight and for menu command on the same key. !!
+* the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed [done]
+* some sessions of bughunting !!!
 * some buttons should not be rebindable ingame, like quit, menu and console
 * make a startmenu with: start, options
 * make a options menu with, sound
 * make a sound menu with music volume and fx volume
 * comments in code and keeping the standards !!
-* making the universe class to hold starsystems [done]
-* making the rest of screen changeable ?, posibility to chage window with and or height ?
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
 * more collision handeling refactor [still need more refactoring]
-* more to vec2d vector work. [can alwais use some work]
-* weapon heat generation [easy mode]
+* more to vec2d vector work. [almost done]
 * engines that are good for space travel but bad for landing and visaversa
 * other sound for bullet impact on shield and plating and on planet
-* palaxing background, the image
+* palaxing background, the image !!
 * instead of restart directly, wait for keypress and see your lifeless ship float into the distance. !
 * make the camera so that it can smoothly transition from one place to another
 * make the game run from the beginning, so if choosing ship and color the game is already running !
-* make camera translatable instead of direct snap
-* the portal stargate warp dent could use some drag inside it, for temp usability
 * cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fitt parts on your ship when on planet or structure, when container gets destroyed or dissconnected from ship you lose parts untill you are at capacity.
 * in camera splitout functionality make a layer class for the layers that will not do the drawing but perhaps the updating, anyhow updates doesnt belong in camera ?
 * ai could use some more bains and variation
 * adding info from weapon used on part to part, like plasma burns, impact damage etc. [a list of 3 things that happend last]
 * deciding what gui graphics to update:
 * put certain things into threads like : update cycle and draw cycle, also the drawing of mini info panel.
-* the planet's and structure's and same kind of problem, when landed one can fly into a planet and gravity can pull you from a structure, need something for that [can fix that by making planets ignore floters that are landed unless landed on self] [done]
+* a globe image for planet that is transparant and go's over planet circle, some scaling needed 5 or so images.
+* a shadow for a planet in the night side
+
 * compile a list of games like this one to 'loan' elements from
 - naev
 - hardwar
 - Transcendence
 
-* use inno setup to maker this game runnable on windows
-* make a tag on github that the inno setup gets is game from, [after eleminate need for numpy and bughunting.]
-* make inno setup run a python and pygame test after install and return a good or bad install
-* put the inno setup script in the git repo
+* use inno setup to maker this game runnable on windows !!
+* make a tag on github that the inno setup gets is game from !!
+* make inno setup run a python and pygame test after install and return a good or bad install !!
+* put the inno setup script in the git repo !!
 
 
 bugs
@@ -117,12 +108,12 @@ bugs
 * on branch viewsinview an explotion will make another one.[so what for now]
 * the laser is broken, ;( [It is fixed, Aat]
 * make binding keys actually works. they bind but don't do anything. and moste of the time. it bugs out the guns so they fire randomly or continously. [it works, done]
-* after menu and chat console prototype independance of game pause the menu will not ??? [gues it is done]
+* after menu and chat console prototype independance of game pause the menu will not ??? [done]
 * engines seem to light up nice, but the purple color of the engines doesnt color to ship color. [will be done with implementation of animated sprites class]
-* known planets is a list of all the known planets not the known planets in the current system
+* known planets is a list of all the known planets not the known planets in the current system [done]
 * In case of open planet part panel and parts 'land' on planet they will not show up at the parts panel right away. only after a menu out/in
 * planets should be targetable when not in radar range, couse they are remembered, still it doesnt work out that way, check it out [done]
-* processing of ship image on mini screen is a slow afair perhaps first: https://github.com/Mekire/pygame-image-outline/blob/master/outline.py and after that a thred that will fill in the ship part by part ?
+* processing of ship image on mini screen is a slow afair perhaps first: https://github.com/Mekire/pygame-image-outline/blob/master/outline.py and after that a thred that will fill in the ship part by part ? [done in another way]
 
 
 parts
@@ -235,6 +226,16 @@ so you can get out of the way in time. [done, aat]
 * make a detection score for a ship, based on the parts, that also need a detection score. [remove totalhp from shipdamage indicatiors and put it in ship, this will be detection score] [done]
 * the intro menu doesnt calculate with fps, and that is why the curor speed is off, fix that done, ugly but done
 * all variables if posible in class and not a class global
+* remove the shield indication arc and put it on gui. [done]
+* make it so that gravity doesnt count when distance from star greater than boundrad [done]
+* a buton to make screen shots [done]
+* place all menu elements in menuelements.py instead of menu for example [ok nothing wrong here menu has all the menu element compositions, and menu elements all the menu elements, done]
+* time to consider a differen graph lib like gfxdraw [we did, but we not gonna do it !, ha, done]
+* rework of menu active and keybindings, activemenu and active, better differentiation, update part and draw part if active, the var active in toplevelpanel. [done]
+* inputscript in scripts.py should be playerinputscript, also scripts needed for chatconsole and for menu, this makes it posible to have keys for inflight and for menu command on the same key. [done it is posible]
+* making the universe class to hold starsystems [done]
+* the planet's and structure's and same kind of problem, when landed one can fly into a planet and gravity can pull you from a structure, need something for that [can fix that by making planets ignore floters that are landed unless landed on self] [done]
+
 
 [Duality]
 
