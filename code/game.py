@@ -141,7 +141,6 @@ class Game(object):
             #The in-round loop (while player is alive):
             
             while self.running and self.universe.curSystem.ships.has(self.player):
-                gc.collect()
                 #event polling:
                 pygame.event.pump()
                 for event in pygame.event.get():

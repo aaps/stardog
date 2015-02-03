@@ -238,8 +238,6 @@ class StarField(Drawable):
 		maxVal = 5000
 		xstarlen = (self.game.player.delta.x*100/(maxVal*2))
 		ystarlen = (self.game.player.delta.y*100/(maxVal*2))
-		#print self.game.player.delta.x, self.game.player.delta.y
-		#print xstarlen, ystarlen
 		for star in self.stars:
 			x = int(star[0] - self.game.player.pos.x / star[2]) % (self.game.width-1)
 			y = int(star[1] - self.game.player.pos.y / star[2]) % (self.game.height-1)
@@ -249,7 +247,6 @@ class StarField(Drawable):
 			# 	surface.set_at((x, y+1), star[3])
 			# 	surface.set_at((x+1,y+1), star[3])
 			pygame.draw.line(surface, star[3], (x,y),(x+xstarlen, y+ystarlen), 1)
-
 		# pa = pygame.PixelArray(surface)
 		# """updates the HUD and draws it."""
 		# depth = 1.

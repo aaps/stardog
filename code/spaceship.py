@@ -303,6 +303,7 @@ class Ship(Floater):
     effects = []
     skillEffects = []
     crewsize = 1
+    gargoholdsize = 5
     
     partLimit = 8
     penalty = .1
