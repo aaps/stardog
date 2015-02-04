@@ -10,6 +10,7 @@ import stardog
 from adjectives import addAdjective
 from skills import *
 from particles import *
+from scripts import Controllable
 
 def makeFighter(game, pos, delta, dir = 270, \
                 color = (255, 255, 255),name=("Shippy","mcShipperson"), player = False, partlim=8):
@@ -266,7 +267,7 @@ def playerShip(game, pos, delta, dir = 270, \
 
 
 
-class Ship(Floater):
+class Ship(Floater, Controllable):
     """Ship(x, y, dx = 0, dy = 0, dir = 270,
     script = None, color = SUPER_WHITE) 
     script should have an update method that 
@@ -327,6 +328,7 @@ class Ship(Floater):
     def __init__(self, game, pos, delta, dir = 270, \
                 color = (255, 255, 255), name=("shippy","Mcshipperson"), partlim=8):
         Floater.__init__(self, game, pos, delta, dir, 1)
+        Controllable.__init__(self)
         self.inventory = []
         self.firstname = name[0]
         self.secondname = name[1]
@@ -339,9 +341,7 @@ class Ship(Floater):
 
         self.knownsystems = dict()
         self.__dict__.update(self.baseBonuses)
-        # if script: 
-        #     self.script = script
-        # else: self.script = Script(game)
+
 
         self.baseImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
         self.baseImage.set_colorkey(BLACK)
@@ -358,9 +358,6 @@ class Ship(Floater):
     def insertPart(self, part, amount=1):
         for i in range(amount):
             self.inventory.append(part(self.game))
-
-    def setScript(self, script):
-        self.script = script
 
     def addPart(self, part, portIndex = 0):
         """ship.addPart(part) -> Sets the main part for this ship.
@@ -571,8 +568,8 @@ class Ship(Floater):
         if not self.parts or self.parts[0].hp <= 0:
             self.kill()
         #run script, get choices.
-        if self.script:
-            self.script.update(self)
+        
+
         resultList = []
         for radar in self.radars:
             resultList= list(set(radar.detected)|set(resultList))
@@ -580,6 +577,8 @@ class Ship(Floater):
             self.attention -= 0.1 / self.game.fps
         # actual updating:
         Floater.update(self)
+        Controllable.update(self)
+        
         #parts updating:
         if self.ports[0].part:
             self.ports[0].part.update()
