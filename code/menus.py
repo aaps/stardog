@@ -6,6 +6,7 @@ from parts import Dummy, PART_OVERLAP, DEFAULT_IMAGE, FlippablePart
 from spaceship import Ship
 import datetime
 from scripts import Controllable
+from collections import defaultdict
 
 
 DEFAULT_SELECTED_IMAGE = loadImage("res/defaultselected" + ext)
@@ -594,28 +595,43 @@ class InventoryPanel(Selecter):
     def reset(self):
         self.setSelected(None)
         
+        parttree = self.makePartTree(self.partList)
+        
+
         self.selectables = []
-        for part in self.partList:
-            self.addSelectable(PartTile(part, Rect(0,0,PartTile.width, PartTile.height), self))
+        for parts in parttree:
+            if len(parttree[parts]) == 1:
+                self.addSelectable(PartTile(parttree[parts][0], Rect(0,0,PartTile.width, PartTile.height), self))
+            else:
+                for morepart in parttree[parts]:
+                    self.addSelectable(PartTile(morepart, Rect(0,0,PartTile.width, PartTile.height), self))
         Selecter.reset(self)
 
     def set_partlist(self, parts):
         self.partList = parts
+        parttree = self.makePartTree(self.partList)
         self.selectables = []
         self.setSelected(None)
-        for part in self.partList:
-            self.addSelectable(PartTile(part, Rect(0,0,PartTile.width, PartTile.height), self))
+        for parts in parttree:
+            if len(parttree[parts]) == 1:
+                self.addSelectable(PartTile(parttree[parts][0], Rect(0,0,PartTile.width, PartTile.height), self))
+            else:
+                for morepart in parttree[parts]:
+                    self.addSelectable(PartTile(morepart, Rect(0,0,PartTile.width, PartTile.height), self))
         
 
     def drop(self, pos, dropped):
         result = Selecter.drop(self, pos, dropped)
         if result: return result
+        
         if isinstance(dropped, PartTile):
+            
             if dropped.part in self.partList: 
                 #from here to here: ignore
                 return
             #add dropped part to partList:
             if not dropped.part in self.partList:
+                # print dropped
                 self.partList.append(dropped.part)
                 self.parent.dirtyParts = True
             #select it:
@@ -629,10 +645,21 @@ class InventoryPanel(Selecter):
     def endDrag(self, dropped, result):
         if result == 1 or result == 3:
             #it went somewhere else.  Remove from here:
+            print dropped
             while dropped.part in self.partList:
                 self.partList.remove(dropped.part)
             self.setSelected(None)
             self.parent.dirtyParts = True
+
+    def makePartTree(self, parts):
+        parttree = defaultdict(int) # values default to 0
+        for part in self.partList:
+            if part.name in parttree:
+                parttree[part.name].append(part)
+            else:
+                parttree[part.name] = []
+                parttree[part.name].append(part)
+        return parttree
 
 class Keys(Panel):
     bindingMessage = pygame.image.load("res/menus/keybind.gif")
