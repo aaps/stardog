@@ -26,7 +26,7 @@ import resource
 import gc
 print 'Memory usage: %s (kb)' % resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
 
-FPS = 300
+FPS = 3e6
 
 class Game(object):
     """Game(resolution = None, fullscreen = False)

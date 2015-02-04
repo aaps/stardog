@@ -1047,6 +1047,23 @@ class GatewayFocus(Part):
         self.jumpenergy = 0
         self.enabled = False
         self.energyCost = 10
+        #game, floater, condfunc ,startradius, stopradius, startvelocity, stopvelocity, startcolor, stopcolor, startlife, stoplife, maximum, startsize, stopsize, relative
+        startradius = 60
+        stopradius = 100
+        startvelocity = 40
+        stopvelocity = 50
+        startcolor = (10,20,30)
+        stopcolor = (255,255,255)
+        startlife = 1
+        stoplife = 0
+        maximum = 10
+        startsize = 10
+        stopsize = 2
+        relative = True
+        self.emitters.append(RingCollector(self.game, self, self.condActive, startradius, stopradius, startvelocity, stopvelocity, startcolor, stopcolor, startlife, stoplife, maximum, startsize, stopsize, relative))
+
+    def condActive(self):
+        return self.enabled
 
     def stats(self):
         statString = "Will jump to other system"
@@ -1064,13 +1081,15 @@ class GatewayFocus(Part):
             self.enabled = True
 
     def update(self):
-        if self.enabled and self.ship.energy > self.energyCost and self.jumpenergy <= self.neededenergy:
-            self.ship.energy -= (self.energyCost / self.ship.efficiency) / self.game.fps
-            self.jumpenergy += (self.ship.efficiency * self.energyCost) / self.game.fps
+        if self.ship:
+            if self.enabled and self.ship.energy > self.energyCost and self.jumpenergy <= self.neededenergy:
+                self.ship.energy -= (self.energyCost / self.ship.efficiency) / self.game.fps
+                self.jumpenergy += (self.ship.efficiency * self.energyCost) / self.game.fps
+        Part.update(self)
 
     def jump(self):
         print "gateway",self.ship.atgateway
-        print "gateway sister",self.ship.atgateway.sister
+        #print "gateway sister",self.ship.atgateway.sister
         print "jump"
 
 class Battery(Part):

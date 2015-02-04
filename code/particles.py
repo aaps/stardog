@@ -5,9 +5,7 @@ import random
 import pygame
 from utils import *
 
-
 import copy
-
 
 class Particle(object):
 	
@@ -52,7 +50,6 @@ class Particle(object):
 		self.transcolor = tuple(map(lambda y: sum(y), zip(*color)))
 		self.size = int((self.startsize *factor) + (self.stopsize * (1-factor)))
 		self.life -= 1.0 / self.game.fps
-		
 
 class Emitter(object):
 	
@@ -97,11 +94,7 @@ class Emitter(object):
 			delta = -Vec2d(0,0).rotatedd(random.uniform(startdir,stopdir),random.uniform(self.startvelocity,self.stopvelocity))
 			if len(self.particles) < self.maximum:
 				self.particles.append(Particle(self, Vec2d(0,0), delta, self.startcolor, self.stopcolor, random.uniform(self.startlife,self.stoplife), self.startsize, self.stopsize, self.relative))
-
-
 		
-
-			
 class CircleEmitter(Emitter):
 
 	def __init__(self, game, floater, condfunc ,radius, startvelocity, stopvelocity, startcolor, stopcolor, startlife, stoplife, maximum, startsize, stopsize, relative):
@@ -161,7 +154,6 @@ class RingEmitter(Emitter):
 			if len(self.particles) < self.maximum and (self.totalmax > self.countpart or self.totalmax == 0):
 				self.countpart += 1
 				self.particles.append(Particle(self, pos,delta, self.startcolor, self.stopcolor, random.uniform(self.startlife,self.stoplife), self.startsize, self.stopsize, self.relative))
-
 
 class RingCollector(Emitter):
 
