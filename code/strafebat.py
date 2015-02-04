@@ -20,7 +20,7 @@ class Strafebat(Ship):
 		Ship.__init__(self, universe.game, pos, Vec2d(0,0), color = color, name=name)
 		self.scripts.append(StrafebatScript(universe.game))
 		self.baseBonuses['damageBonus'] = .5
-		cockpit =StrafebatCockpit(universe.game)
+		cockpit = Cockpit(universe.game)
 		gyro = Gyro(universe.game)
 		gun = StrafebatCannon(universe.game)
 		quarters = Quarters(universe.game)
@@ -102,5 +102,3 @@ class StrafebatScript(AIScript):
 					target = ship2
 		return target
 		
-class StrafebatCockpit(Cockpit):
-	pass

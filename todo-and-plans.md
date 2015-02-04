@@ -16,19 +16,19 @@ main dish
 http://pygame.org/project-planes-2392-405.html get version 0.6
 * A save function ? [a sqllite file for now with sqlalchemy]
 * replace the part - port system with a part - grid system [first implement part collition checking to temp eliminate problem]
-* sounds also need to be in views
-* put the collide logic in the things that collide, planets, floaters, parts etc. [1/2 done]
+* sounds also need to be in views ?
+* put the collide logic in the things that collide, planets, floaters, parts etc. [1/2 done] !!
 * it needs an economy not yust parts for static $$, [ harder ]
 * nebula and atmosphere
 * sometime in future convert the entity views to something like this:
 http://www.pygame.org/project-OpenGL+Library+(glLib*)-877-.html
 http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
-* the posibility for stations and planets to have facilitys, like bars, trading hubs, etc
-* ai can use an fsm to flee attack, explore
+* the posibility for stations and planets to have facilitys, like bars, trading hubs, etc [initial facilitys, shop, refitter, smelter]
+
 
 side dish
 ============
-
+* ai can use an fsm to flee attack, explore !! [using simplefsm] [initial ai states, atack, flee, idle]
 * make 2 gateways in the start system to test jumping !!
 * make text able to left center right lineout
 * does ship still need hp is not all hp contained in the parts ? [In what way is this meant to be interpreted. (Duality)]
@@ -38,11 +38,11 @@ side dish
 * there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.[Why would you want engines on turrets? (Duality)]
 
 * does a ship has a reference to the current starsystem if no does it need one ?
-* the console , input chatconsole panel hierarchy is a bit much ?
+* the console , input chatconsole panel hierarchy is a bit much !!
 * realy a better way to reset stuff on death, like radar error thing, enging trust should be off menus all inactive !!
 
 * ai can talk to player, when targeting player for example and disengaging [after fsm and better brains ai]
-* a fsm for ai
+* a ai that trys to collect parts and deposit them on his planet !!
 * an small addaptation that makes this standout from other stardog. The accounting software  [star/space rats]
 * make the screenshots have a incrementalnumber like : screenshop-1, screenshot-2, etc
 * a cursor for on main screen in form of crosshair
