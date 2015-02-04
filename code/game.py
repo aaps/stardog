@@ -88,7 +88,6 @@ class Game(object):
         
     def run(self):
         """Runs the game."""
-        
         self.running = True
         while self.running:
             # game setup:
@@ -234,3 +233,4 @@ class Game(object):
                 pygame.display.set_caption('Memory usage: %s (kb) FPS: %d' % (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, self.averagefps))
             #end round loop (until gameover)
         #end game loop
+        #self.__init__(self.screen)

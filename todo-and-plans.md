@@ -31,11 +31,11 @@ side dish
 
 * make 2 gateways in the start system to test jumping !!
 * make text able to left center right lineout
-* does ship still need hp is not all hp contained in the parts ?
+* does ship still need hp is not all hp contained in the parts ? [In what way is this meant to be interpreted. (Duality)]
 * a sentence construction kitt for the ai so it can taunt you for example
-* partcount in menu doesn't show the actuall part limit. [done ?]
+* partcount in menu doesn't show the actuall part limit. [Done]
 * a list in a ship of who is targeting you. targeting target should not go into player or enemy but in ship
-* there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.
+* there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.[Why would you want engines on turrets? (Duality)]
 
 * does a ship has a reference to the current starsystem if no does it need one ?
 * the console , input chatconsole panel hierarchy is a bit much ?

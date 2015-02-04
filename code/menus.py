@@ -94,7 +94,6 @@ class IntroMenu(TopLevelPanel):
         self.nameChoose()
 
 class NameInputField(InputField):
-    
     def __init__(self, parent, rect):
         self.parent = parent
         InputField.__init__(self, rect, parent.game, self.choose, BIG_FONT, NAME_INPUT_BLUE)
@@ -102,10 +101,7 @@ class NameInputField(InputField):
     def choose(self):
         self.parent.chooseName(self.text)
 
-
-
 class ColorButton(Button):
-    
     def __init__(self, parent, rect, color):
         self.myColor = color
         self.parent = parent
@@ -119,7 +115,6 @@ class ColorButton(Button):
         self.parent.chooseColor(self.myColor)
         
 class TypeButton(Button):
-    
     def __init__(self, parent, rect, type, font):
         self.image = colorShift(loadImage('res/menus/'+type+'.bmp', None),
                         parent.game.playerColor,None)
@@ -133,7 +128,6 @@ class TypeButton(Button):
         
     def choose(self):
         self.parent.chooseType(self.type)
-
 
 class Console(Panel):
     drawBorder = True
@@ -178,8 +172,6 @@ class ChatConsole(TopLevelPanel, Controllable):
     def update(self):
         Controllable.update(self)
         TopLevelPanel.update(self)
-
-
 
 class Menu(TopLevelPanel, Controllable):
     """The top level menu object. Menu(mouse, rect) -> new Menu"""
@@ -233,7 +225,6 @@ class Menu(TopLevelPanel, Controllable):
 
     def handleEvent(self, event):            
         TopLevelPanel.handleEvent(self, event)
-
 
 class PartsPanel(Panel):
     baseImage = loadImage('res/menus/partsmenubg.bmp')
@@ -723,7 +714,6 @@ class PartFunctionsPanel(ShipPanel):
         Panel.reset(self)
 
 class FunctionSelecter(Selecter):
-    
     def __init__(self, rect, ship):
         Selecter.__init__(self, rect)
         self.partsList = ship.parts
@@ -747,21 +737,18 @@ class FunctionSelecter(Selecter):
         Selecter.reset(self)
 
 class PresetSelectable(Selectable):
-    
     def __init__(self, string, rect):
         self.name = string
         Selectable.__init__(self, rect)
         self.addPanel(Label(rect, string))
             
 class FunctionSelectable(Selectable):
-    
     def __init__(self, function, rect):
         self.function = function
         Selectable.__init__(self, rect)
         self.addPanel(Label(rect, function.__name__))
         
 class PartHeaderSelectable(Selectable):
-    
     def __init__(self, part, rect):
         self.part = part
         Selectable.__init__(self, rect)
@@ -771,14 +758,12 @@ class PartHeaderSelectable(Selectable):
             self.addPanel(Label(rect, part.name, SMALL_FONT))
 
 class FunctionSelectable(Selectable):
-    
     def __init__(self, function, rect):
         self.function = function
         Selectable.__init__(self, rect)
         self.addPanel(Label(rect, " " + function.__name__, SMALL_FONT))
         
 class BindingSelecter(Selecter):
-    
     def __init__(self, rect, ship):
         Selecter.__init__(self, rect)
         self.bindings = []
@@ -803,7 +788,6 @@ class BindingSelecter(Selecter):
         self.reset()
         
 class BindingSelectable(Selectable):
-    
     def __init__(self, binding, rect):
         self.keyNum = binding[0]
         self.function = binding[1]
@@ -820,7 +804,6 @@ class BindingSelectable(Selectable):
                     str(self.function.__name__), SMALL_FONT,  BS3))	
         
 class Skills(Panel):
-    
     def __init__(self, rect, game):
         Panel.__init__(self, rect)
         self.addPanel(Label(Rect(self.rect.width / 2 - 60, 2, 0, 0),\
@@ -836,7 +819,6 @@ class Skills(Panel):
         pass
 
 class Info(Panel):
-    
     def __init__(self, rect, game):
         Panel.__init__(self, rect)
         self.addPanel(Label(Rect(self.rect.width / 2 - 60, 2, 0, 0),\
@@ -859,7 +841,6 @@ class SkillTreeSelector(Selecter):
     pass
 
 class NavigationTile(Panel):
-    
     def __init__(self, rect, parent, game, corners=[5,0,5,0]):
         self.parent = parent 
         self.game  = game
@@ -887,7 +868,6 @@ class NavigationTile(Panel):
         return 'No name'
 
 class TimeTile(Panel):
-
     def __init__(self, rect, parent, game, corners=[5,0,5,0]):
         self.parent = parent 
         self.game  = game
@@ -904,9 +884,7 @@ class TimeTile(Panel):
         timeobj = datetime.datetime.fromtimestamp(time)
         return timeobj.strftime('YEAR:     %Y\nMONTH: %m\nDAY:       %d\nTIME:      %H:%M:%S.%f')[:-5]
 
-
 class SkillTile(Button):
-    
     def __init__(self, rect, parent, skill, ship):
         self.skill = skill
         self.parent = parent 
@@ -933,14 +911,8 @@ class SkillTile(Button):
             self.addPanel(self.levelLabel)
 
 class Store(Panel):
-    
     def __init__(self, rect, player):
         self.player = player
         Panel.__init__(self, rect)
         self.addPanel(Label(Rect(self.rect.width / 2 - 60, 2, 0, 0),\
             "Store", BIG_FONT))
-
-
-
-
-
