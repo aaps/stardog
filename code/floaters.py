@@ -112,8 +112,6 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 	def condAlways(self):
 		return True
 
-
-
 class Bullet(Floater):
 	
 	def __init__(self, game, gun, damage, speed, range, image = None):
@@ -165,7 +163,6 @@ class Bullet(Floater):
 
 class Missile(Bullet):
 	hp = 1
-
 	def __init__(self, game, launcher, damage, speed, acceleration, range, 
 				explosionRadius, image = None):
 		Bullet.__init__(self, game, launcher, self.hp, speed, range, image)

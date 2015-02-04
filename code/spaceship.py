@@ -224,6 +224,7 @@ def makeScout(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcS
     cannon = RightFlakCannon(game)
     radar = Radar(game)
     engine = Engine(game)
+    gatewayfocus = GatewayFocus(game)
     for part in [cockpit, battery, cannon, radar, engine]:
         if rand() > .8:
             addAdjective(part)
@@ -234,6 +235,7 @@ def makeScout(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcS
     cockpit.addPart(battery, 1)
     cockpit.addPart(cannon, 2)
     cockpit.addPart(radar, 3)
+    cockpit.addPart(gatewayfocus, 0)
     radar.addPart(engine, 0)
     ship.reset()
     ship.energy = ship.maxEnergy * .8

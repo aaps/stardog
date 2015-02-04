@@ -53,7 +53,6 @@ class StarSystem(object):
 		
 		
 		#collision:
-		# TODO: sort lists to minimize collision tests.
 		floaters = self.floaters.sprites()
 		for i in range(len(floaters)):
 			for j in range(i + 1, len(floaters)):
