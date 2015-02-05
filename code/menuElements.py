@@ -217,7 +217,6 @@ class Dragable(Panel):
         pass
 
 class Slider(Panel):
-
     def __init__(self,rect, function, parent = None, hori = False):
         self.parent = parent
         self.hori = hori
@@ -818,8 +817,6 @@ class Selecter(ScrollPanel):
             panel.draw(self.image, self.visibleRect)
         ScrollPanel.draw(self, surface, rect)
 
-
-
 class Label(Panel):
     """Label(self,  rect, text, color = INPUTFIELD, font = FONT) ->
     A panel with a single line of text."""
@@ -831,8 +828,6 @@ class Label(Panel):
         if fontModule:
             self.image = font.render(self.text, True, self.color)
             self.rect = Rect(rect.topleft, self.image.get_size())
-
-
             
 class FunctionLabel(Panel):
     """A label that updates its text by calling a string function."""

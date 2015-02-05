@@ -1184,7 +1184,7 @@ class GargoHold(Part):
         if self.ship:
             gargoholdcount = 0
             for part in self.ship.parts:
-                if part.name == self.name:
+                if part.name == self.name or (part.name.find("Cockpit")):
                     gargoholdcount += 1
             self.ship.gargoholdsize = (gargoholdcount*self.gargocapacity)
             
