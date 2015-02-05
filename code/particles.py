@@ -24,7 +24,6 @@ class Particle(object):
 		self.startsize = self.size = startsize
 		self.stopsize = stopsize
 		self.size = 0
-
 		
 
 	def draw(self, surface, offset=Vec2d(0,0)):

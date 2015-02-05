@@ -125,7 +125,7 @@ parts
 * A radar that will eventualy suport raytracing. [easy for initial radar, perhaps use laser code for raytrace]
 * bigger detonation range. for mines
 * a coloniser part
-* a cargo part to hold the cargo
+* a cargo part to hold the cargo [Done]
 * a gravity well part.
 * a dockingport part [can be hardmode]
 * a disable beam part [easymode]
@@ -266,6 +266,7 @@ crew [done]
 bays
 =====
 * a part that is a cargo bay, bigger bay more part that can be carried [Done]
+* mechBay for forging stuff like parts and gun  and like that. 
 
 Freighter [done]
 =====
