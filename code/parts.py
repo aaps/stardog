@@ -74,7 +74,7 @@ class Part(Floater):
         self.animated = False
         self.ship = None
         self.volume = 1
-        self.equipable = True
+        self.resources = False
         self.mass = 10
         self.maxhp = 10
         self.hp = 10
@@ -389,7 +389,7 @@ class Scrap(Part):
         Part.__init__(self, game)
         self.name = "Scrap"
         self.damage = 1
-        self.equipable = False
+        self.resources = True
 
     def update(self):
         Part.update(self)

@@ -316,7 +316,7 @@ class PartsPanel(Panel):
 
     def paint(self):
         """paints the selected part to match this ship."""
-        if self.inventoryPanel.selected:
+        if self.inventoryPanel.selected and not self.inventoryPanel.selected.part.resources:
             part = self.inventoryPanel.selected.part
             part.color = self.player.color
             part.image = colorShift(pygame.transform.rotate(part.baseImage, \
@@ -497,14 +497,14 @@ class ShipPartPanel(DragableSelectable):
                 self), self)
 
     def drop(self, pos, dropped):
-        if isinstance(dropped, PartTile):
+        if isinstance(dropped, PartTile) or isinstance(dropped, MultyPartTile):
             if self.part and self.port.parent == self.part.ship:
                 return #do not allow Cockpits to be swapped!
             if self.part and dropped.part == self.part:
                 return #dropped on self: do nothing.
             if self.part and self.checkParent(self.part,dropped.part):
                 return #trying to drop a part on it's parent.  Do nothing.
-            if dropped.part and not dropped.part.equipable:
+            if dropped.part and dropped.part.resources:
                 return # cant equip this part
             dropped.part.unequip(toInventory = False)
             if not self.port.parent in self.ship.parts:
@@ -532,7 +532,56 @@ class ShipPartPanel(DragableSelectable):
         if thisPart is None or isinstance(thisPart.parent, Ship):
             return False
         return self.checkParent(thisPart.parent, partToMatch)
-    
+
+class MultyPartTile(DragableSelectable):
+    drawBorder = False
+    width = 130
+    height = 50
+    partImageOffset = 0,12
+    drawBorderDragging = False
+    selectedColor = SELECTED_COLOR
+    bgInactive = None
+    bgActive = BGACTIVE
+    bgSelected = BGSELECTED
+
+    def __init__(self, parts, rect, parent):
+        """PartTile(part, rect) -> new PartTile.
+        The menu interface for a part. Display it like a button!"""
+        DragableSelectable.__init__(self, rect, parent)
+        self.parts = parts
+        self.part = parts[0]
+        bigImage = pygame.transform.scale2x(self.part.image)
+        bigImage.set_colorkey(SUPER_WHITE) # idk why this one's white.
+        self.hotSpot = (self.partImageOffset[0] + self.part.width, 
+                        self.partImageOffset[1] + self.part.height)
+        self.image.blit(bigImage, PartTile.partImageOffset)
+        #add text labels:
+        rect = Rect(rect)
+        self.addPanel(Label(rect, self.part.name, font = SMALL_FONT))
+        self.panels[-1].rect.width = self.rect.width
+        string = str(self.part.shortStats())
+        i = string.find('\n')
+        rect = Rect(rect)
+        rect.x += 38; rect.y += 14
+        self.addPanel(Label(rect, string[:i], color = (200,0,0),
+                    font = SMALL_FONT))
+        self.panels[-1].rect.width = self.rect.width
+        rect = Rect(rect)
+        rect.y += 12
+
+        self.addPanel(TextBlock(rect, string[i+1:], color = PDP_GREEN,
+                    font = SMALL_FONT))
+
+        rect.y += 10
+        self.addPanel(Label(rect, str(len(self.parts)), color = (200,0,0),
+                    font = SMALL_FONT))
+
+
+    # def draw(self, surface, rect):
+    #     pygame.draw.rect(surface, (255,0,0), self.rect, 1)
+    #     # self.addPanel(Label(rect, part.name, font = SMALL_FONT))
+    #     Panel.draw(self, surface, rect)
+
 class PartTile(DragableSelectable):
     drawBorder = False
     width = 130
@@ -588,14 +637,12 @@ class InventoryPanel(Selecter):
         
         parttree = self.makePartTree(self.partList)
         
-
         self.selectables = []
         for parts in parttree:
             if len(parttree[parts]) == 1:
                 self.addSelectable(PartTile(parttree[parts][0], Rect(0,0,PartTile.width, PartTile.height), self))
-            else:
-                for morepart in parttree[parts]:
-                    self.addSelectable(PartTile(morepart, Rect(0,0,PartTile.width, PartTile.height), self))
+            elif len(parttree[parts]) > 1:
+                self.addSelectable(MultyPartTile(parttree[parts], Rect(0,0,PartTile.width, PartTile.height), self))
         Selecter.reset(self)
 
     def set_partlist(self, parts):
@@ -606,23 +653,22 @@ class InventoryPanel(Selecter):
         for parts in parttree:
             if len(parttree[parts]) == 1:
                 self.addSelectable(PartTile(parttree[parts][0], Rect(0,0,PartTile.width, PartTile.height), self))
-            else:
-                for morepart in parttree[parts]:
-                    self.addSelectable(PartTile(morepart, Rect(0,0,PartTile.width, PartTile.height), self))
+            elif len(parttree[parts]) > 1:
+                self.addSelectable(MultyPartTile(parttree[parts], Rect(0,0,PartTile.width, PartTile.height), self))
         
 
     def drop(self, pos, dropped):
         result = Selecter.drop(self, pos, dropped)
         if result: return result
         
-        if isinstance(dropped, PartTile):
-            
+        if isinstance(dropped, PartTile) or isinstance(dropped, MultyPartTile):
+
             if dropped.part in self.partList: 
                 #from here to here: ignore
                 return
             #add dropped part to partList:
             if not dropped.part in self.partList:
-                # print dropped
+
                 self.partList.append(dropped.part)
                 self.parent.dirtyParts = True
             #select it:
@@ -636,7 +682,6 @@ class InventoryPanel(Selecter):
     def endDrag(self, dropped, result):
         if result == 1 or result == 3:
             #it went somewhere else.  Remove from here:
-            print dropped
             while dropped.part in self.partList:
                 self.partList.remove(dropped.part)
             self.setSelected(None)
