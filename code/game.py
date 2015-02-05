@@ -24,6 +24,7 @@ all_objects = muppy.get_objects()
 tr = tracker.SummaryTracker()
 import resource
 import gc
+
 print 'Memory usage: %s (kb)' % resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
 
 FPS = 3e6
@@ -166,7 +167,7 @@ class Game(object):
                         if event.key == pygame.K_m:
                             all_objects = muppy.get_objects()
                         if event.key == pygame.K_BACKSLASH:
-                            pygame.image.save(self.screen, "screenshot.jpeg")
+                           saveScreenShot("Screen-shots", self.screen)
                         if event.key == pygame.K_SLASH:
                             pygame.display.set_caption('Memory usage: %s (kb) FPS: %d' % (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, self.averagefps))
                     elif event.type == pygame.KEYUP:

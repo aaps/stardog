@@ -3,7 +3,9 @@ import math
 from pygame.locals import *
 import pygame
 from vec2d import *
-# import numpy as np
+from os import listdir
+from os.path import isfile, join
+import re
 
 hardwareFlag = pygame.HWSURFACE
 
@@ -277,3 +279,15 @@ def find_nearest(array, value):
     idx = n.index(min(n))
     return array[idx]
 
+def saveScreenShot(mypath, screen):
+	number = 0
+	onlyfiles = [ f for f in listdir(mypath) if isfile(join(mypath,f)) ]
+	for filename in onlyfiles:
+		temp = re.findall(r'\d+', filename)
+
+		if len(temp) > 0 and int(temp[-1]) > number:
+			number = int(temp[-1])
+
+	number+=1
+
+	pygame.image.save(screen, "Screen-shots/screenshot" + str(number) + ".jpeg")
