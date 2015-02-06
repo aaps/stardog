@@ -277,13 +277,13 @@ class Ship(Floater, Controllable):
     parts = []
     script = None
     overedge = False
-    atgateway = False
+    atgateway = None
     attention = 0
     detectionscore = 0
     forwardEngines = []
     maxhp = 0
     hp = 0
-    landed = False
+    landed = None
     forwardThrust = 0
     reverseThrust = 0
     leftThrust = 0

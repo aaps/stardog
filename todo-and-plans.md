@@ -36,7 +36,7 @@ side dish
 * partcount in menu doesn't show the actuall part limit. [Done]
 * a list in a ship of who is targeting you. targeting target should not go into player or enemy but in ship
 * there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.[Why would you want engines on turrets? (Duality)]
-
+* make sure that enabled is a property of part not of subparts/classes 
 * does a ship has a reference to the current starsystem if no does it need one ?
 * the console , input chatconsole panel hierarchy is a bit much !!
 * realy a better way to reset stuff on death, like radar error thing, enging trust should be off menus all inactive !!
@@ -81,7 +81,7 @@ side dish
 - Transcendence
 
 * use inno setup to maker this game runnable on windows !!
-* make a tag on github that the inno setup gets is game from !!
+* make a tag on github that the inno setup gets the game from !!
 * make inno setup run a python and pygame test after install and return a good or bad install !!
 * put the inno setup script in the git repo !!
 

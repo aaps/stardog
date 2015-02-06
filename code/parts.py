@@ -678,7 +678,7 @@ class Radar(Part):
         self.detected = []
         self.energyCost = 0.5
         self.radarrange = 18000
-        self.enabled = False
+        # self.enabled = False
         self.name = "Radar"
         
     
@@ -1073,24 +1073,43 @@ class GatewayFocus(Part):
         return "Nothing"
 
     def toggle(self):
-        if self.enabled:
-            self.enabled = False
-            if self.jumpenergy >= self.neededenergy:
+        if self.jumpenergy >= self.neededenergy:
                 self.jump()
+                return
+
+        if self.enabled:
+            self.enabled = False    
         else:
             self.enabled = True
 
     def update(self):
         if self.ship:
-            if self.enabled and self.ship.energy > self.energyCost and self.jumpenergy <= self.neededenergy:
+            if self.enabled and self.ship.energy > self.energyCost:
                 self.ship.energy -= (self.energyCost / self.ship.efficiency) / self.game.fps
                 self.jumpenergy += (self.ship.efficiency * self.energyCost) / self.game.fps
+            if self.jumpenergy >= self.neededenergy:
+                self.enabled = False
         Part.update(self)
 
     def jump(self):
-        print "gateway",self.ship.atgateway
-        #print "gateway sister",self.ship.atgateway.sister
-        print "jump"
+        
+        if self.ship.atgateway:
+            if self.game.universe.curSystem == self.ship.atgateway.sister.starsystem:
+                self.ship.pos = Vec2d(self.ship.atgateway.sister.pos)
+                self.game.camera.setPos(self.ship.pos)
+            else:
+                newsystem = self.ship.atgateway.sister.starsystem
+                newsystem.player = self.ship
+                newsystem.floaters.add(self.ship)
+                newsystem.ships.add(self.ship)
+                self.game.universe.curSystem.player = None
+                self.game.universe.curSystem.ships.remove(self)
+                self.game.universe.curSystem.floaters.remove(self)
+                self.game.universe.curSystem = newsystem
+                self.ship.pos = self.ship.atgateway.sister.pos
+                self.game.camera.setPos(self.ship.pos)
+            self.jumpenergy = 0
+
 
 class Battery(Part):
     baseImage = loadImage("res/parts/battery" + ext)
