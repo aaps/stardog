@@ -9,7 +9,7 @@ from scripts import Controllable
 from collections import defaultdict
 
 
-DEFAULT_SELECTED_IMAGE = loadImage("res/defaultselected" + ext)
+DEFAULT_SELECTED_IMAGE = loadImage("res/parts/defaultselected.png")
 squareWidth = 80
 squareSpacing = squareWidth + 10
 
@@ -320,7 +320,7 @@ class PartsPanel(Panel):
             part = self.inventoryPanel.selected.part
             part.color = self.player.color
             part.image = colorShift(pygame.transform.rotate(part.baseImage, \
-                        -part.dir), part.color).convert()
+                        -part.dir), part.color).convert_alpha()
             part.image.set_colorkey(SUPER_WHITE)
             self.inventoryPanel.reset()
 
@@ -370,7 +370,7 @@ class ShipPanel(Selecter):
                         - sin(dummy.dir) * (dummy.width - PART_OVERLAP) / 2)
                     #rotate takes a ccw angle.
                     dummy.image = colorShift(pygame.transform.rotate(
-                            dummy.baseImage, -dummy.dir), dummy.color).convert()
+                            dummy.baseImage, -dummy.dir), dummy.color).convert_alpha()
                     dummy.image.set_colorkey(BLACK)
                     self.selectables.append(ShipPartPanel(dummy, self))
                     self.selectables[-1].port = port
@@ -459,7 +459,7 @@ class ShipPartPanel(DragableSelectable):
             for port in part.parent.ports:
                 if port.part == part:
                     self.port = port
-        self.image = pygame.transform.scale2x(part.image).convert()
+        self.image = pygame.transform.scale2x(part.image).convert_alpha()
         self.image.set_colorkey(BLACK) 
         
     def select(self):
@@ -467,21 +467,21 @@ class ShipPartPanel(DragableSelectable):
             color = self.part.color
             color = color[0] // 4 + 192, color[1] // 2 + 128, color[2] // 2 + 128
             self.image = colorShift(pygame.transform.scale2x(\
-                    pygame.transform.rotate(self.part.baseImage, -self.part.dir)), color).convert()
+                    pygame.transform.rotate(self.part.baseImage, -self.part.dir)), color).convert_alpha()
             self.image.set_colorkey(BLACK) 
         else:
             dir = self.port.dir + self.port.parent.dir
-            self.image = pygame.transform.scale2x(pygame.transform.rotate(DEFAULT_SELECTED_IMAGE, -dir)).convert()
+            self.image = pygame.transform.scale2x(pygame.transform.rotate(DEFAULT_SELECTED_IMAGE, -dir)).convert_alpha()
             self.image.set_colorkey(BLACK) 
         
     def unselect(self):
         if self.part:
-            self.image = pygame.transform.scale2x(self.part.image).convert()
+            self.image = pygame.transform.scale2x(self.part.image).convert_alpha()
             self.image.set_colorkey(BLACK) 
         else:
             dir = self.port.dir + self.port.parent.dir
             self.image = pygame.transform.scale2x(\
-                        pygame.transform.rotate(DEFAULT_IMAGE, -dir)).convert()
+                        pygame.transform.rotate(DEFAULT_IMAGE, -dir)).convert_alpha()
             self.image.set_colorkey(BLACK) 
         
     def dragOver(self, pos, rel):

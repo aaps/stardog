@@ -89,6 +89,7 @@ side dish
 
 bugs
 =====
+* the impact clouds are killing [todo] !!
 * somewhere in console there is a max, textfield length that is reached to soon [done]
 * the slider part is still not slidable [done]
 * pure black should not be a color to choose ship from  [done]

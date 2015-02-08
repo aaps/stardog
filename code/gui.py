@@ -16,7 +16,7 @@ numStars = 300
 radarRadius = 100
 radarScale = 200.0 # 1 radar pixel = radarScale space pixels
 
-edgeWarning = loadImage('res/edgeofsystem.bmp')
+# edgeWarning = loadImage('res/edgeofsystem.bmp')
 
 class Drawable(object):
 	game = None

@@ -90,7 +90,7 @@ class Planet(Floater):
 		part.kill()
 		if rand() > .8 and not isinstance(part, Scrap):
 			part.dir = 0
-			part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert()
+			part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert_alpha()
 		else:
 			part = Scrap(self.game)
 		self.inventory.append(part)
@@ -165,7 +165,7 @@ class Gateway(Planet):
 		self.tangible = True
 		self.g = 5000 # the gravitational constant.
 		self.firstname = "Gateway Unknown"
-		self.rect = None
+		# self.rect = None
 
 		self.sister = None
 		self.mass = mass #determines gravity.

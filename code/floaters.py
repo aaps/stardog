@@ -22,11 +22,9 @@ def setVolume(channel, floater1, floater2):
 			volume =  math.sqrt((SOUND_RADIUS - distance)**1.8 / (SOUND_RADIUS + 0.001)**1.8)
 		channel.set_volume(volume)
 
-BULLET_IMAGE = loadImage("res/shot.bmp")
-MISSILE_IMAGE = loadImage("res/missile" + ext)
-DEFAULT_IMAGE = loadImage("res/default" + ext)
-
-
+BULLET_IMAGE = loadImage("res/ammo/shot.png")
+MISSILE_IMAGE = loadImage("res/ammo/missile.png")
+DEFAULT_IMAGE = loadImage("res/parts/default.png")
 		
 class Ballistic(object):
 	"""an abstraction of a Floater.  Just has a Vec2d,Vec2d."""
@@ -62,7 +60,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 		self.radius = radius
 		if (not image):
 			image = DEFAULT_IMAGE
-		self.image = pygame.transform.rotate(image, -self.dir).convert()
+		self.image = pygame.transform.rotate(image, -self.dir).convert_alpha()
 
 		self.rect = self.image.get_rect()
 
@@ -332,8 +330,8 @@ class LaserBeam(Floater):
 	collision mechanism: they use line/circle collision, and it is checked 
 	during initialization."""
 
-	baseImage = loadImage("res/laser.bmp").convert()
-	baseImage.set_colorkey(BLACK)
+	baseImage = loadImage("res/ammo/laser.png").convert_alpha()
+	# baseImage.set_colorkey(BLACK)
 	
 	def __init__(self, game, laser, damage, range):
 		dir = laser.dir + laser.ship.dir
@@ -369,7 +367,7 @@ class LaserBeam(Floater):
 		self.image = pygame.transform.rotate(
 					pygame.transform.scale(
 					colorShift(self.baseImage, (bulletColor(self.damage))),
-					(int(length), 5)), -dir)
+					(int(length), 5)), -dir).convert_alpha()
 		if 'target' in laser.ship.__dict__:
 			self.curtarget = laser.ship.curtarget
 		self.game.universe.curSystem.specialOperations.append(self.collision)

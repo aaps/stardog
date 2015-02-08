@@ -14,7 +14,7 @@ from nameMaker import *
 class StarSystem(object):
 	"""A StarSystem holds ships and other floaters."""
 	
-	drawEdgeWarning = False
+	# drawEdgeWarning = False
 	def __init__(self, universe, position=Vec2d(0,0), boundrad = 30000, edgerad = 60000):
 		self.game = universe.game
 		self.boundrad = boundrad
@@ -61,9 +61,7 @@ class StarSystem(object):
 
 				
 		for floater in self.floaters:
-			# print floater
 			if floater.pos.get_distance(Vec2d(0,0)) > self.boundrad:
-
 				if isinstance(floater, Ship):
 					floater.overedge = True
 				else:
