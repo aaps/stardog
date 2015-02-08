@@ -16,6 +16,7 @@ from vec2d import Vec2d
 import datetime
 #command parsing
 import commandParse
+
 from pympler import summary
 from pympler import muppy
 from pympler import tracker
@@ -23,7 +24,7 @@ import types as Types
 all_objects = muppy.get_objects()
 tr = tracker.SummaryTracker()
 import resource
-import gc
+import gc, sys
 
 print 'Memory usage: %s (kb)' % resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
 
@@ -102,7 +103,7 @@ class Game(object):
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         pygame.quit()
-                        return
+                        sys.exit(0)
                     intro.handleEvent(event)
                 intro.update()
                 self.screen.fill((0, 0, 0, 0))
