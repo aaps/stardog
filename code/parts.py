@@ -34,14 +34,7 @@ class Part(Floater):
     image = None
     height, width = 9, 3
     
-    
-    
-    
-    
-    # position in relation to the center of the ship
-    #and the center of this part:
-    
-    #whether this should be redrawn each frame:
+
     
     
     buffer = pygame.Surface((30,30), flags = hardwareFlag | SRCALPHA).convert_alpha()
@@ -462,13 +455,14 @@ class Gun(Part):
         
 class Cannon(Gun):
     bulletImage = None
-    speed = 300
-    name = "Cannon"
+
     
     def __init__(self, game):
         if self.bulletImage == None:
             self.bulletImage = BULLET_IMAGE.copy()
         Gun.__init__(self, game)
+        self.speed = 300
+        self.name = "Cannon"
         
     def stats(self):
         stats = (self.speed,)
@@ -497,7 +491,7 @@ class Cannon(Gun):
 
 class MineDropper(Gun):
     baseImage = loadImage("res/parts/minelayer.png")
-    mineImage = loadImage("res/mine.png")
+    mineImage = loadImage("res/ammo/mine.png")
 
     
     def __init__(self, game):

@@ -162,7 +162,7 @@ def loadImage(filename, colorkey=BLACK):
 	try:
 		image = pygame.image.load(filename).convert_alpha()
 	except pygame.error:
-		image = pygame.image.load("res/default" + ext).convert_alpha()
+		image = pygame.image.load("res/parts/default.png").convert_alpha()
 
 	# s = pygame.Surface(surface.get_size(), pygame.SRCALPHA, 32).convert_alpha()
 	return image
