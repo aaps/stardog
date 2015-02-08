@@ -6,11 +6,11 @@ main dish
 
 * quad trees (hardmode, after vector and view splitout, wil replace current collision check mess)
 
-* wormholes/star gates to other systems. (medium mode ?, after Gravless class) [can travel to other starsystems via direct travel now, star gates next] !!!
+* wormholes/star gates to other systems. (medium mode ?, after Gravless class) [can travel to other starsystems via direct travel now, star gates next] [done]
 
-* make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump] !!
+* make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump]
 
-* multyplayer [hard mode, dependant on code structure]
+* multyplayer [hard mode, dependant on code structure] !!
 
 
 http://pygame.org/project-planes-2392-405.html get version 0.6
@@ -29,24 +29,25 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ============
 * ai can use an fsm to flee attack, explore !! [using simplefsm] [initial ai states, atack, flee, idle]
-* make 2 gateways in the start system to test jumping !!
+* make 2 gateways in the start system to test jumping [done]
 * make text able to left center right lineout
 * does ship still need hp is not all hp contained in the parts ? [In what way is this meant to be interpreted. (Duality)]
 * a sentence construction kitt for the ai so it can taunt you for example
 * partcount in menu doesn't show the actuall part limit. [Done]
 * a list in a ship of who is targeting you. targeting target should not go into player or enemy but in ship
 * there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.[Why would you want engines on turrets? (Duality)]
-
+* make sure that enabled is a property of part not of subparts/classes 
 * does a ship has a reference to the current starsystem if no does it need one ?
 * the console , input chatconsole panel hierarchy is a bit much !!
 * realy a better way to reset stuff on death, like radar error thing, enging trust should be off menus all inactive !!
-
+* a game intro screen
+* make a screen effect class, that will flash the screen white or something, for jump effect
 * ai can talk to player, when targeting player for example and disengaging [after fsm and better brains ai]
 * a ai that trys to collect parts and deposit them on his planet !!
 * an small addaptation that makes this standout from other stardog. The accounting software  [star/space rats]
 * make the screenshots have a incrementalnumber like : screenshop-1, screenshot-2, etc
 * a cursor for on main screen in form of crosshair
-* make factorys for planets starsystems and ships, the design pattern !!
+* make factorys for planets starsystems and ships, the design pattern !!!
 * a random seed for xtra fun
 * splitout parts and cargo ,different files, is part cargo or cargo part ?
 * a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
@@ -56,7 +57,7 @@ side dish
 * make a startmenu with: start, options
 * make a options menu with, sound
 * make a sound menu with music volume and fx volume
-* comments in code and keeping the standards !!
+*commenting code !!!
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
 * more collision handeling refactor [still need more refactoring]
 * more to vec2d vector work. [almost done]
@@ -81,13 +82,14 @@ side dish
 - Transcendence
 
 * use inno setup to maker this game runnable on windows !!
-* make a tag on github that the inno setup gets is game from !!
-* make inno setup run a python and pygame test after install and return a good or bad install !!
-* put the inno setup script in the git repo !!
+* make a tag on github that the inno setup gets the game from !!
+* make inno setup run a python and pygame test after install and return a good or bad install !!!
+* put the inno setup script in the git repo [done]
 
 
 bugs
 =====
+* the impact clouds are killing [todo] !!
 * somewhere in console there is a max, textfield length that is reached to soon [done]
 * the slider part is still not slidable [done]
 * pure black should not be a color to choose ship from  [done]

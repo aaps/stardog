@@ -14,7 +14,7 @@ from nameMaker import *
 class StarSystem(object):
 	"""A StarSystem holds ships and other floaters."""
 	
-	drawEdgeWarning = False
+	# drawEdgeWarning = False
 	def __init__(self, universe, position=Vec2d(0,0), boundrad = 30000, edgerad = 60000):
 		self.game = universe.game
 		self.boundrad = boundrad
@@ -62,7 +62,6 @@ class StarSystem(object):
 				
 		for floater in self.floaters:
 			if floater.pos.get_distance(Vec2d(0,0)) > self.boundrad:
-
 				if isinstance(floater, Ship):
 					floater.overedge = True
 				else:
@@ -80,6 +79,7 @@ class StarSystem(object):
 		self.specialOperations = []
 
 		for planet in self.planets:
+			
 			if not planet.ships.sprites() and not isinstance(planet, Star):
 				if planet.respawn > 0:#countdown the timer
 					planet.respawn -= 1. / self.game.fps
@@ -264,12 +264,18 @@ class SolarA1(StarSystem):
 			angle = randint(0,360)
 			distanceFromStar = randint(self.boundrad-5000, self.boundrad)
 			color = randint(0,100),randint(0,100),randint(0,100)
-			radius = randint(100,200)
+			radius = randint(400,500)
 			self.add(Structure( self, Vec2d(distanceFromStar * cos(angle), distanceFromStar * sin(angle)), color, radius))
 
-		radius = randint(100,200)
-		gateway = Gateway(self, Vec2d(self.boundrad-2000,self.boundrad), radius)
-		self.add(gateway)
+		radius = randint(500,700)
+		gateway1 = Gateway(self, Vec2d(10000,10000), radius)
+		gateway2 = Gateway(self, Vec2d(-10000,-10000), radius)
+
+		gateway1.setSister(gateway2)
+		gateway2.setSister(gateway1)
+
+		self.add(gateway1)
+		self.add(gateway2)
 
 				
 		for planet in self.planets:

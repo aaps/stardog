@@ -2,35 +2,100 @@
 from parts import *
 
 class LeftFlakCannon(FlakCannon, FlippablePart): 
-	baseImage = loadImage("res/parts/leftflak.bmp"); shootPoint = 0, - 20;
-	shootDir = 270; name = "Left Flak Cannon"	
+	def __init__(self, game):
+		self.baseImage = loadImage("res/parts/leftflak.png")
+		FlakCannon.__init__(self, game)
+		FlippablePart.__init__(self, game)
+		self.ports = []
+		self.shootPoint = 0, - 20;
+		self.shootDir = 270
+		self.name = "Left Flak Cannon"	
+
 class MachineGun(Cannon):
-	baseImage = loadImage('res/parts/machine gun.bmp')
-	damage = .25;reloadTime = .1;energyCost = .35;shootDir = 180
-	shootPoint = -14, 0;range = 1;speed = 600;name = 'Machine Gun'	
+	def __init__(self, game):
+		self.baseImage = loadImage('res/parts/machinegun.png')
+		Cannon.__init__(self, game)
+		self.ports = []
+		self.damage = .25
+		self.reloadTime = .1
+		self.energyCost = .35
+		self.shootDir = 180
+		self.shootPoint = -14, 0
+		self.range = 1
+		self.speed = 600
+		self.name = 'Machine Gun'	
+
 class RightFlakCannon(FlakCannon, FlippablePart):
-	baseImage = loadImage("res/parts/rightflak.bmp")
-	shootPoint = 0, 20;	shootDir = 90;	name = "Right Flak Cannon"	
+	def __init__(self, game):
+		self.baseImage = loadImage("res/parts/rightflak.png")
+		FlakCannon.__init__(self, game)
+		FlippablePart.__init__(self, game)
+		self.ports = []
+		self.shootPoint = 0, 20
+		self.shootDir = 90
+		self.name = "Right Flak Cannon"	
+
 class LeftLaser(Laser, FlippablePart):
-	baseImage = loadImage("res/parts/leftlaser" + ext)
-	shootPoint = 0, - 15; shootDir = 270;	name = "Left Laser"	
+	def __init__(self, game):
+		self.baseImage = loadImage("res/parts/leftlaser.png")
+		Laser.__init__(self, game)
+		FlippablePart.__init__(self, game)
+		self.ports = []
+		self.shootPoint = 0, - 15
+		self.shootDir = 270
+		self.name = "Left Laser"	
+
 class RightLaser(Laser, FlippablePart):
-	baseImage = loadImage("res/parts/rightlaser" + ext)
-	shootPoint = 0, 15;	shootDir = 90;	name = "Right Laser"
+	def __init__(self, game):
+		self.baseImage = loadImage("res/parts/rightlaser.png")
+		Laser.__init__(self, game)
+		FlippablePart.__init__(self, game)
+		self.ports = []
+		self.shootPoint = 0, 15
+		self.shootDir = 90
+		self.name = "Right Laser"
+
 class LeftCannon(Cannon, FlippablePart):
-	baseImage = loadImage("res/parts/leftgun" + ext)
-	shootPoint = 0, - 30; shootDir = 270;name = "Left Cannon"
+	def __init__(self, game):
+		self.baseImage = loadImage("res/parts/leftgun.png")
+		Cannon.__init__(self, game)
+		FlippablePart.__init__(self, game)
+		self.ports = []
+		self.shootPoint = 0, - 30
+		self.shootDir = 270
+		self.name = "Left Cannon"
+
 class RightCannon(Cannon, FlippablePart):
-	baseImage = loadImage("res/parts/rightgun" + ext)
-	shootPoint = 0, 30;	shootDir = 90;	name = "Right Cannon"		
+	def __init__(self, game):
+		self.baseImage = loadImage("res/parts/rightgun.png")
+		Cannon.__init__(self, game)
+		FlippablePart.__init__(self, game)
+		self.ports = []
+		self.shootPoint = 0, 30
+		self.shootDir = 90
+		self.name = "Right Cannon"		
+
 class StrafebatCannon(Cannon):
-	baseImage = loadImage("res/parts/strafebatgun" + ext)
-	shootDir = 180;	shootPoint = -20, 0;	damage = .5
-	energyCost = 1;	name = "Fore Gun";	
+	def __init__(self, game):
+		self.baseImage = loadImage("res/parts/strafebatgun.png")
+		Cannon.__init__(self, game)
+		self.ports = []
+		self.shootDir = 180
+		self.shootPoint = -20, 0
+		self.damage = .5
+		self.energyCost = 1
+		self.name = "Fore Gun"	
+
 class FighterShield(Shield):
-	baseImage =  loadImage("res/parts/fighter shield.bmp")
-	mass = 4;	shieldhp = .6;	shieldRegen = .1;	energyCost = .5
-	name = 'Fighter Shield'
+	def __init__(self, game):
+		self.baseImage =  loadImage("res/parts/fightershield.png")
+		Shield.__init__(self, game)
+		self.ports = []
+		self.mass = 4
+		self.shieldhp = .6
+		self.shieldRegen = .1
+		self.energyCost = .5
+		self.name = 'Fighter Shield'
 
 generalSellable = [LeftFlakCannon, MachineGun, LeftLaser, LeftCannon, 
 	StrafebatCannon, FighterShield, MissileLauncher, Engine, Generator,

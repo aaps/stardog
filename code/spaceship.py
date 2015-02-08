@@ -277,13 +277,13 @@ class Ship(Floater, Controllable):
     parts = []
     script = None
     overedge = False
-    atgateway = False
+    atgateway = None
     attention = 0
     detectionscore = 0
     forwardEngines = []
     maxhp = 0
     hp = 0
-    landed = False
+    landed = None
     forwardThrust = 0
     reverseThrust = 0
     leftThrust = 0
@@ -344,9 +344,9 @@ class Ship(Floater, Controllable):
 
 
         self.baseImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
-        self.baseImage.set_colorkey(BLACK)
+        # self.baseImage.set_colorkey(BLACK)
         self.greyImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
-        self.greyImage.set_colorkey(BLACK)
+        # self.greyImage.set_colorkey(BLACK)
 
         self.functions = [self.forward, self.reverse, self.left, self.right, \
                 self.turnLeft, self.turnRight, self.shoot, self.launchMissiles, self.launchMines, self.toggleGatewayFocus, self.toggleRadar]
@@ -366,8 +366,8 @@ class Ship(Floater, Controllable):
         part.dir = 0
         part.offset = Vec2d(0, 0)
         part.ship = self
-        part.image = colorShift(part.baseImage, self.color).convert()
-        part.image.set_colorkey(BLACK)
+        part.image = colorShift(part.baseImage, self.color)
+        # part.image.set_colorkey(BLACK)
         self.ports[0].part = part
         self.reset()
 
@@ -439,7 +439,7 @@ class Ship(Floater, Controllable):
                     hardwareFlag | SRCALPHA).convert_alpha()
         self.greyImage = pygame.Surface((size, size), \
                     hardwareFlag | SRCALPHA).convert_alpha()
-        self.baseImage.set_colorkey(BLACK)
+        # self.baseImage.set_colorkey(BLACK)
         if self.ports[0].part:
             self.ports[0].part.draw(self.baseImage)
             self.ports[0].part.draw(self.greyImage, grey=True)
@@ -640,10 +640,10 @@ class Ship(Floater, Controllable):
         #note: transform is counter-clockwise, opposite of everything else.
         buffer = pygame.Surface((self.radius * 2, self.radius * 2), \
                 flags = hardwareFlag | SRCALPHA).convert_alpha()
-        buffer.set_colorkey(BLACK)
+        # buffer.set_colorkey(BLACK)
         self.image = pygame.transform.rotate(self.baseImage, \
                                     -self.dir).convert_alpha()
-        self.image.set_colorkey(BLACK)
+        # self.image.set_colorkey(BLACK)
         
         #imageOffset compensates for the extra padding from the rotation.
         imageOffset = [- self.image.get_width() / 2,\
@@ -725,8 +725,8 @@ class Ship(Floater, Controllable):
     def freepartCollision(self, part):
         if part.pickuptimeout <= 0:
             part.dir = 0
-            part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert()
-            part.image.set_colorkey(BLACK)
+            part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert_alpha()
+            # part.image.set_colorkey(BLACK)
             self.inventory.append(part)
             part.kill()
             if self.game.player == self:

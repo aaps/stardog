@@ -3,7 +3,9 @@ import math
 from pygame.locals import *
 import pygame
 from vec2d import *
-# import numpy as np
+from os import listdir
+from os.path import isfile, join
+import re
 
 hardwareFlag = pygame.HWSURFACE
 
@@ -158,35 +160,35 @@ else:
 	
 def loadImage(filename, colorkey=BLACK):
 	try:
-		image = pygame.image.load(filename).convert()
-		image.set_colorkey(colorkey)
+		image = pygame.image.load(filename).convert_alpha()
 	except pygame.error:
-		image = pygame.image.load("res/default" + ext).convert()
-		image.set_colorkey(SUPER_WHITE)
+		image = pygame.image.load("res/parts/default.png").convert_alpha()
+
+	# s = pygame.Surface(surface.get_size(), pygame.SRCALPHA, 32).convert_alpha()
 	return image
 	
-def colorShift(surface, color, colorkey = BLACK):
+def colorShift(surface, color, colorkey = (0,0,0)):
 	"""Converts every pixel with equal red and blue values to a shade of 
 	color.  Attempts to maintain value and saturation of surface. 
 	Returns a new Surface."""
-	s = pygame.Surface(surface.get_size(), flags = hardwareFlag).convert()
+
+	s = pygame.Surface(surface.get_size(), pygame.SRCALPHA, 32).convert_alpha()
 	s.set_colorkey(colorkey)
 	s.blit(surface, (0,0))
 	pa = pygame.surfarray.pixels2d(s)#PixelArray(s)
-	alpha = surface.get_alpha()
+
 	for i in range(len(pa)):
 		for j in range(len(pa[i])):
-			oldColor = s.unmap_rgb(pa[i,j])
+			newColor = oldColor = s.get_at((i, j))
+			
 			if oldColor[0] == oldColor[2]: #a shade of magic pink
 				newColor = [0, 0, 0, 0]
 				for k in [0,1,2]:
-					newColor[k] = int(oldColor[0] * color[k] / 255 \
-								+ oldColor[1] * (255 - color[k]) / 255)
-				newColor[3] = oldColor[3]
-				pa[i,j] = s.map_rgb(tuple(newColor))
+					newColor[k] = int(oldColor[0] * color[k] / 255 + oldColor[1] * (255 - color[k]) / 255)
+			newColor[3] = oldColor[3]
+			s.set_at((i, j),newColor)
 	del pa
 	del surface
-	del alpha
 	del oldColor
 	del newColor
 	return s
@@ -216,9 +218,9 @@ def linePointDist(linePoint1, linePoint2, point, infinite = False):
 	
 def bulletColor(damage):
 	if damage >= 0 and damage <= 2:
-		return (255, int(125*damage), int(125*damage))
+		return (255, int(125*damage), int(125*damage), 125)
 	if damage <= 10 and damage >= 2:
-		return (255-(20*damage+50), 255-(20*damage+50), 255)
+		return (255-(20*damage+50), 255-(20*damage+50), 255, 125)
 	else:
 		return (0,255,0, 125)
 
@@ -277,3 +279,15 @@ def find_nearest(array, value):
     idx = n.index(min(n))
     return array[idx]
 
+def saveScreenShot(mypath, screen):
+	number = 0
+	onlyfiles = [ f for f in listdir(mypath) if isfile(join(mypath,f)) ]
+	for filename in onlyfiles:
+		temp = re.findall(r'\d+', filename)
+
+		if len(temp) > 0 and int(temp[-1]) > number:
+			number = int(temp[-1])
+
+	number+=1
+
+	pygame.image.save(screen, "Screen-shots/screenshot" + str(number) + ".jpeg")

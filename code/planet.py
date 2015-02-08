@@ -90,7 +90,7 @@ class Planet(Floater):
 		part.kill()
 		if rand() > .8 and not isinstance(part, Scrap):
 			part.dir = 0
-			part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert()
+			part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert_alpha()
 		else:
 			part = Scrap(self.game)
 		self.inventory.append(part)
@@ -155,30 +155,31 @@ class Structure(Planet):
 class Gateway(Planet):
 	
 	
-	def __init__(self, starsystem, pos, radius = 100, mass = 10000, color = (100,200,50), image = None, race = None):
-		image = pygame.Surface((radius * 4, radius * 4), flags = hardwareFlag).convert()
-		image.set_colorkey(BLACK)
+	def __init__(self, starsystem, pos, radius, mass = 10000, color = (100,200,50), image = None, race = None):
 		Floater.__init__(self, starsystem.game, pos, Vec2d(0,0), radius = radius, image = image)
+		
+		self.image = pygame.Surface((radius*2, radius*2), flags = hardwareFlag).convert()
+		self.image.set_colorkey(BLACK)
+		
 		maxRadius = 50000 # no gravity felt past this (approximation).
 		self.tangible = True
 		self.g = 5000 # the gravitational constant.
 		self.firstname = "Gateway Unknown"
-		self.rect = None
-		self.image = None
+		# self.rect = None
+
 		self.sister = None
 		self.mass = mass #determines gravity.
 		self.starsystem = starsystem
 		self.color = color
-		self.race = None #race that owns this planet
-		if image == None:
-			self.image = None
+		self.race = None 
 		self.inventory = []
 	
 	def setSister(self, gateway):
-		if instance(gateway, Gateway):
+		if isinstance(gateway, Gateway):
 			self.sister = gateway
 
 	def update(self):
+		
 		for other in self.starsystem.floaters.sprites():
 			if  not isinstance(other, Planet) \
 			and not isinstance(other, Structure) \
@@ -188,18 +189,21 @@ class Gateway(Planet):
 				accel = self.g * (self.mass) / dist2(self, other)
 				angle = (self.pos - other.pos).get_angle()
 				other.delta += Vec2d(0,0).rotatedd(angle, accel) / self.game.fps
-				# other.delta.y += sin(angle) * accel / self.game.fps
+				
 
 	def getSister(self):
 		return self.sister
 	
 	def draw(self, surface, offset = Vec2d(0,0)):
-			self.image.fill((0, 0, 0, 0))
+			self.image.fill((0, 0, 0))
 
-			pos = self.pos - offset
-			pygame.draw.circle(self.image, self.color, pos.inttup(), int(self.radius))
-			pygame.draw.circle(self.image, (0,0,0,0), pos.inttup(), int(self.radius)-30)
-			Floater.draw(self, surface, offset)
+			poss = Vec2d(self.image.get_width()/2, self.image.get_height()/2)
+			pos = self.pos - offset - poss
+
+			pygame.draw.circle(self.image, self.color, poss.inttup(), int(self.radius))
+			pygame.draw.circle(self.image, (0,0,0,0), poss.inttup(), int(self.radius)-50)
+			surface.blit(self.image, pos)
+			
 
 	def takeDamage(self, damage, other):
 		pass
