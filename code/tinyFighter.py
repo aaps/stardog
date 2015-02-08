@@ -38,7 +38,6 @@ class TinyFighterScript(AIScript):
 	def update(self, ship):
 		pass
 		# target = ship.target
-		# if self.game.debug: print ship.stage
 		# if ship.stage == 0:
 		# 	dx = target.delta.x - ship.delta.x
 		# 	dy = target.delta.y - ship.delta.y

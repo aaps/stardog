@@ -184,9 +184,7 @@ class Game(object):
 
                 self.debug = False
                 if self.keys[K_BACKSPACE % 322]:
-                    self.debug = True #print debug information
                     self.keys[K_BACKSPACE % 322] = False
-                    print "Debug:"
                 #ctrl+q or alt+F4 quit:
                 if self.keys[K_LALT % 322] and self.keys[K_F4 % 322] \
                 or self.keys[K_RALT % 322] and self.keys[K_F4 % 322] \

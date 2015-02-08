@@ -757,7 +757,6 @@ class Player(Ship):
         self.xp += 2. * target.level / self.level
 
     def update(self):
-        if self.game.debug: print 'xp:',self.xp
         if self.xp >= self.next():
             self.level += 1
             self.developmentPoints += 1
