@@ -18,7 +18,6 @@ DETACH_SPACE = 50
 DETACH_SPEED = 100
 
 class Port(object):
-    
     def __init__(self, offset, dir, parent):
         self.offset = offset
         self.dir = dir
@@ -379,7 +378,6 @@ class Dummy(Part):
                     self.ship.reset()
 
 class Scrap(Part):
-    
     baseImage = loadImage("res/goods/scrap" + ext)
     image = None
 
@@ -401,7 +399,6 @@ class Scrap(Part):
         return "It is Scrap"
 
 class FlippablePart(Part):
-    
     def flip(self):
         try:
             self.shootPoint = self.shootPoint[0], -self.shootPoint[1]
@@ -606,14 +603,10 @@ class Laser(Gun):
                     LaserBeam(self.game, self, \
                     self.damage * s.efficiency * s.damageBonus * s.laserBonus, \
                     self.range * s.laserRangeBonus))
-    
+
 class FlakCannon(Cannon):
-    
-   
     burstSize = 8
     reloadBurstTime = 4
-
-
     def __init__(self, game):
         self.burst = self.burstSize
         self.reloadBurst = self.reloadBurstTime
@@ -1183,10 +1176,15 @@ class GargoHold(Part):
         """check how many gargholds are attached and calculate capacity on that."""
         if self.ship:
             gargoholdcount = 0
+            cockpitGargoSize = 0
             for part in self.ship.parts:
-                if part.name == self.name or (part.name.find("Cockpit")):
+                #cockpit has storage too. 
+                if isinstance(part, Cockpit):
+                    cockpitGargoSize = part.gargocapacity
+                elif part.name == self.name:
                     gargoholdcount += 1
-            self.ship.gargoholdsize = (gargoholdcount*self.gargocapacity)
+            #calculate the gargohole count from the amount of gargoholds * capacity plus cockpit amount.
+            self.ship.gargoholdsize = (gargoholdcount*self.gargocapacity)+cockpitGargoSize
             
             if len(self.ship.inventory) > (self.ship.gargoholdsize):
                 part = self.ship.inventory[-1]
@@ -1403,6 +1401,3 @@ class Drone(Cockpit, Engine, Cannon):
         if self.ship and self.ship.energy >= self.turnCost * self.energyCost:
             self.ship.dir = angleNorm(self.ship.dir + angle)
             self.ship.energy -= self.turnCost / self.game.fps * self.energyCost
-
-
-

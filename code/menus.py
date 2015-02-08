@@ -629,7 +629,8 @@ class InventoryPanel(Selecter):
             for partTile in self.selectables:
                 if partTile.part == dropped.part:
                     self.setSelected(partTile)
-                    break
+                    return
+                    #break
             return 1
         return None
             
