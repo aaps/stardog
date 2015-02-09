@@ -35,6 +35,9 @@ AppAddPath="Add application directory to your environmental path (required)"
 [Files]
 Source: "{tmp}\{#PyToDOwn}"; DestDir: "{app}"; Flags: external deleteafterinstall;
 Source: "{tmp}\{#PyGameToDown}"; DestDir: "{app}"; Flags: external deleteafterinstall;
+Source: "{tmp}\installer.py"; DestDir: "{app}"; Flags: external deleteafterinstall;
+Source: "{tmp}\stardog.zip"; DestDir: "{app}"; Flags: external deleteafterinstall;
+
 
 [Registry]
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};c:\Python27"
@@ -43,12 +46,15 @@ Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environmen
 [Run]
 Filename: "msiexec.exe"; Parameters: "/i""{app}\{#PyToDOwn}"""
 Filename: "msiexec.exe"; Parameters: "/i""{app}\{#PyGameToDown}"" /qb"
+Filename: "python"; Parameters: " installer.py"
 
 [Code]
 procedure InitializeWizard();
 begin
     idpAddFile('https://www.python.org/ftp/python/2.7.9/{#PyToDOwn}', ExpandConstant('{tmp}\{#PyToDOwn}'));
     idpAddFile('http://pygame.org/ftp/{#PyGameToDown}', ExpandConstant('{tmp}\{#PyGameToDown}'));
+    idpAddFile('https://github.com/aaps/stardog/archive/v0.5.zip', ExpandConstant('{tmp}\stardog.zip'));
+    idpAddFile('https://github.com/aaps/stardog/blob/v0.5/utils/installer.py', ExpandConstant('{tmp}\installer.py'));
     idpDownloadAfter(wpReady);
 end;
 
@@ -59,8 +65,10 @@ const
 function ModPathDir(): TArrayOfString;
 begin
     setArrayLength(Result, 1)
-    Result[0] := ExpandConstant('c:\klont');
+    Result[0] := ExpandConstant('c:\Python27');
 end;
+
+
 
 #include "modpath.iss"
 
