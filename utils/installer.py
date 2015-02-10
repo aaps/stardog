@@ -5,7 +5,6 @@ import os, sys, shutil
 import imp
 
 
-
 url = urlopen("https://github.com/aaps/stardog/archive/master.zip")
 zipfile = ZipFile(StringIO(url.read()))
 
@@ -16,9 +15,9 @@ for name in names:
 
 	newname = "/".join(name.split('/')[1:])
 	if newname.endswith('/'):
-		os.makedirs(newname)
+		os.makedirs(os.path.normpath(newname))
 	elif len(newname) > 0:
-		file(newname, 'wb').write(zipfile.read(name))
+		file(os.path.normpath(newname), 'wb').write(zipfile.read(name))
 
 
 

@@ -28,6 +28,7 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
+* check how this game will work with python 3
 * ai can use an fsm to flee attack, explore !! [using simplefsm] [initial ai states, atack, flee, idle]
 * make 2 gateways in the start system to test jumping [done]
 * make text able to left center right lineout
