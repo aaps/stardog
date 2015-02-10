@@ -4,7 +4,7 @@
 #define MyAppName "stardog"
 #define MyAppVersion "2"
 #define PyToDOwn "python-2.7.9.msi"
-#define PyGameToDown  "pygame-1.9.1.win32-py2.7.msi"
+#define PyGameToDown  "pygame-1.9.2a0.win32-py2.7.msi"
 #define MyTitleName "MyApp" 
 
 
