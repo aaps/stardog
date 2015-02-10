@@ -20,9 +20,6 @@ DefaultGroupName={#MyAppName}
 OutputBaseFilename=setup3
 #include <idp.iss>
 ChangesEnvironment=yes
-SetupLogging=yes
-
-
 
 [CustomMessages]
 AppAddPath=Add application directory to your environmental path (required)
@@ -31,30 +28,27 @@ AppAddPath=Add application directory to your environmental path (required)
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked;
 Name: modifypath; Description:{cm:AppAddPath}; 
 
-
 [CustomMessages]
 AppAddPath="Add application directory to your environmental path (required)"
 
 [Files]
-;Source: "{tmp}\{#PyToDOwn}"; DestDir: "{app}"; Flags: external deleteafterinstall;
-;Source: "{tmp}\{#PyGameToDown}"; DestDir: "{app}"; Flags: external deleteafterinstall; 
-Source: "{tmp}\installer.py"; DestDir: "{app}"; Flags: external;
-
-
+Source: "{tmp}\{#PyToDOwn}"; DestDir: "{app}"; Flags: external deleteafterinstall;
+Source: "{tmp}\{#PyGameToDown}"; DestDir: "{app}"; Flags: external deleteafterinstall;
+Source: "{tmp}\installer.py"; DestDir: "{app}"; Flags: external deleteafterinstall;
 
 [Registry]
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};c:\Python27"
 
-
 [Run]
-;Filename: "msiexec.exe"; Parameters: "/i""{app}\{#PyToDOwn}"""
-;Filename: "msiexec.exe"; Parameters: "/i""{app}\{#PyGameToDown}"" /qb"
+Filename: "msiexec.exe"; Parameters: "/i""{app}\{#PyToDOwn}"""
+Filename: "msiexec.exe"; Parameters: "/i""{app}\{#PyGameToDown}"" /qb"
 Filename: "c:\Python27\python.exe"; Parameters: """{app}\installer.py"""
 
 [Code]
 procedure InitializeWizard();
 begin
-
+ idpAddFile('https://www.python.org/ftp/python/2.7.9/{#PyToDOwn}', ExpandConstant('{tmp}\{#PyToDOwn}'));
+    idpAddFile('http://pygame.org/ftp/{#PyGameToDown}', ExpandConstant('{tmp}\{#PyGameToDown}'));
     idpAddFile('https://raw.githubusercontent.com/aaps/stardog/master/utils/installer.py', ExpandConstant('{tmp}\installer.py'));
     idpDownloadAfter(wpReady);
 end;
@@ -69,9 +63,4 @@ begin
     Result[0] := ExpandConstant('C:\Python27');
 end;
 
-
-
 #include "modpath.iss"
-
-
-
