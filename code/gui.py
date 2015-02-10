@@ -8,7 +8,6 @@ from spaceship import Ship
 from planet import Planet
 from parts import *
 import time
-import numpy
 from vec2d import *
 import sys
 
