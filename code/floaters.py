@@ -177,7 +177,7 @@ class Missile(Bullet):
 		self.impacted = None
 		self.explode = False
 
-		self.emitters.append(Emitter(self.game, self, self.condAlways , 5, 100, 200, (255,255,255,255), (255,255,255,0), 2, 4, 100, 2, 5, True))
+		self.emitters.append(Emitter( self, self.condAlways , 5, 100, 200, (255,255,255,255), (255,255,255,0), 2, 4, 100, 2, 5, True))
 		
 	def update(self):
 		
@@ -267,7 +267,7 @@ class Explosion(Floater):
 		self.hp = damage / (self.time * self.game.fps)
 		if damage == 0:
 			self.tangible = False
-		self.emitters.append(RingEmitter(self.game, self, self.condAlways , 0, 50, 20, 50,  (255,200,0,250), (251,0,0,1), 1, 2, 30, 30, 10, 50, True))
+		self.emitters.append(RingEmitter( self, self.condAlways , 0, 50, 20, 50,  (255,200,0,250), (251,0,0,1), 1, 2, 30, 30, 10, 50, True))
 
 	def update(self):
 		self.life += 1. / self.game.fps
@@ -303,7 +303,7 @@ class Impact(Floater):
 		self.maxRadius = int(radius)
 		self.radius = 0
 		self.time = time
-		self.emitters.append(RingEmitter(self.game, self, self.condAlways , 0, 5, 5, 10,  (255,255,255,250), (100,100,255,1), 0.5, 1, 10, 10, 1, 5, True))
+		self.emitters.append(RingEmitter( self, self.condAlways , 0, 5, 5, 10,  (255,255,255,250), (100,100,255,1), 0.5, 1, 10, 10, 1, 5, True))
 
 	def update(self):
 		self.life += 1. / self.game.fps

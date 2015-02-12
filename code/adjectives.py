@@ -9,7 +9,7 @@ def randItem(game, level = 1):
 	roll = randint(0, len(PARTS) -1)
 	if roll == rand() * level / 2 < .8:
 		return None
-	part = PARTS[roll](game)
+	part = PARTS[roll](game.universe)
 	return addAdjective(part, level)
 	
 def addAdjective(part, level = 1):

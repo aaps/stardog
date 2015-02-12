@@ -19,10 +19,10 @@ def makeFighter(game, pos, delta, dir = 270, \
         ship = Player(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     else:
         ship = Ship(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
-    cockpit = Fighter(game)
-    gun = MachineGun(game)
-    engine = Engine(game)
-    shield = FighterShield(game)
+    cockpit = Fighter(game.universe)
+    gun = MachineGun(game.universe)
+    engine = Engine(game.universe)
+    shield = FighterShield(game.universe)
     for part in [cockpit, gun, engine, shield]:
         if rand() > .8:
             addAdjective(part)
@@ -43,33 +43,33 @@ def makeFreighter(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy",
     else:
         ship = Ship(game, pas, delta, dir=dir, color=color, name=name, partlimit=partlim)
 
-    cockpit = Destroyer(game)
+    cockpit = Destroyer(game.universe)
 
-    battery = Battery(game)
-    generator = Generator(game)
+    battery = Battery(game.universe)
+    generator = Generator(game.universe)
 
-    engine_left = Engine(game)
-    engine_right = Engine(game)
+    engine_left = Engine(game.universe)
+    engine_right = Engine(game.universe)
 
-    interc_left = Interconnect(game)
-    interc_right = Interconnect(game)
+    interc_left = Interconnect(game.universe)
+    interc_right = Interconnect(game.universe)
 
-    gyro_left = Gyro(game)
-    gyro_right = Gyro(game)
+    gyro_left = Gyro(game.universe)
+    gyro_right = Gyro(game.universe)
 
-    gun_left = LeftFlakCannon(game)
-    gun_right = RightFlakCannon(game)
+    gun_left = LeftFlakCannon(game.universe)
+    gun_right = RightFlakCannon(game.universe)
 
     ship.addPart(cockpit)
 
-    chold1 = GargoHold(game)
-    chold2 = GargoHold(game)
-    chold3 = GargoHold(game)
-    chold4 = GargoHold(game)
-    chold5 = GargoHold(game)
-    chold6 = GargoHold(game)
-    chold7 = GargoHold(game)
-    chold8 = GargoHold(game)
+    chold1 = GargoHold(game.universe)
+    chold2 = GargoHold(self.game.universe)
+    chold3 = GargoHold(self.game.universe)
+    chold4 = GargoHold(self.game.universe)
+    chold5 = GargoHold(self.game.universe)
+    chold6 = GargoHold(self.game.universe)
+    chold7 = GargoHold(self.game.universe)
+    chold8 = GargoHold(self.game.universe)
 
     #put a Gyro on either back-sides of the cockpit 
     cockpit.addPart(gyro_left, 3)
@@ -110,13 +110,13 @@ def makeDestroyer(game, pos, delta, dir = 270, color = (255, 255, 255),name=("Sh
         ship = Player(game, pos, delta, dir = dir, color = color, name=name, partlimit=partlim)
     else:
         ship = Ship(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
-    gyro = Gyro(game)
-    generator = Generator(game)
-    battery = Battery(game)
-    cockpit = Destroyer(game)
-    gun = RightLaser(game)
-    engine = Engine(game)
-    shield = Shield(game)
+    gyro = Gyro(self.game.universe)
+    generator = Generator(self.game.universe)
+    battery = Battery(self.game.universe)
+    cockpit = Destroyer(self.game.universe)
+    gun = RightLaser(self.game.universe)
+    engine = Engine(self.game.universe)
+    shield = Shield(self.game.universe)
     for part in [gyro, generator, battery, cockpit, gun, engine, shield]:
         if rand() > .8:
             addAdjective(part)
@@ -143,15 +143,15 @@ def makeInterceptor(game, pos, delta, dir = 270, color = (255, 255, 255),name=("
         ship = Player(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     else:
         ship = Ship(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
-    cockpit = Interceptor(game)
-    gyro = Gyro(game)
-    generator = Generator(game)
-    battery = Battery(game)
-    gun = LeftFlakCannon(game)
-    gun2 = RightFlakCannon(game)
-    missile = MissileLauncher(game)
-    engine = Engine(game)
-    engine2 = Engine(game)
+    cockpit = Interceptor(self.game.universe)
+    gyro = Gyro(self.game.universe)
+    generator = Generator(self.game.universe)
+    battery = Battery(self.game.universe)
+    gun = LeftFlakCannon(self.game.universe)
+    gun2 = RightFlakCannon(self.game.universe)
+    missile = MissileLauncher(self.game.universe)
+    engine = Engine(self.game.universe)
+    engine2 = Engine(self.game.universe)
     for part in [gyro, generator, battery, cockpit, gun, gun2, engine, engine2,
                 missile]:
         if rand() > .8:
@@ -179,16 +179,16 @@ def makeJuggernaut(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy"
     else:
         ship = Ship(game, pos, delta, dir=dir, color = color, name=name, partlimit=partlim)
     
-    cockpit = Interceptor(game)
-    gyro = Gyro(game)
-    generator = Generator(game)
-    battery = Battery(game)
-    gun = LeftFlakCannon(game)
-    gun2 = RightFlakCannon(game)
-    engine = Engine(game)
-    engine2 = Engine(game)
-    quarter = Quarters(game)
-    shield = Shield(game)
+    cockpit = Interceptor(self.game.universe)
+    gyro = Gyro(self.game.universe)
+    generator = Generator(self.game.universe)
+    battery = Battery(self.game.universe)
+    gun = LeftFlakCannon(self.game.universe)
+    gun2 = RightFlakCannon(self.game.universe)
+    engine = Engine(self.game.universe)
+    engine2 = Engine(self.game.universe)
+    quarter = Quarters(self.game.universe)
+    shield = Shield(self.game.universe)
     
     for part in [gyro, generator, battery, cockpit, gun, gun2, engine, engine2, quarter, shield]:
         if rand() > .8:
@@ -220,12 +220,12 @@ def makeScout(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcS
         ship = Player(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     else:
         ship = Ship(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
-    cockpit = Fighter(game)
-    battery = Battery(game)
-    cannon = RightFlakCannon(game)
-    radar = Radar(game)
-    engine = Engine(game)
-    gatewayfocus = GatewayFocus(game)
+    cockpit = Fighter(game.universe)
+    battery = Battery(game.universe)
+    cannon = RightFlakCannon(game.universe)
+    radar = Radar(game.universe)
+    engine = Engine(game.universe)
+    gatewayfocus = GatewayFocus(game.universe)
     for part in [cockpit, battery, cannon, radar, engine]:
         if rand() > .8:
             addAdjective(part)
@@ -581,6 +581,7 @@ class Ship(Floater, Controllable):
         
         #parts updating:
         if self.ports[0].part:
+            self.ports[0].part.setFPS(self.game.fps)
             self.ports[0].part.update()
         
         #active effects:

@@ -47,6 +47,7 @@ class Game(object):
         self.screen = screen
         self.top_left = 0, 0
         self.universe = Universe(self)
+        
         self.width = screen.get_width()
         self.height = screen.get_height()
         self.mouseControl = True
@@ -55,9 +56,9 @@ class Game(object):
         self.camera = Camera(self)
         #messenger, with controls as first message:
         self.messenger = Messenger(self.universe)
-        theone = SolarA1(self.universe, "theone", Vec2d(1,100))
-        thesecond = SolarA1(self.universe, "thesecond", Vec2d(1,-100),2,1)
-        thethird = SolarA1(self.universe, "thethird", Vec2d(1,200),2,1)
+        theone = SolarA1(self, "theone", Vec2d(1,100))
+        thesecond = SolarA1(self, "thesecond", Vec2d(1,-100),2,1)
+        thethird = SolarA1(self, "thethird", Vec2d(1,200),2,1)
         theone.addNeighbor(thesecond)
         theone.addNeighbor(thethird)
         

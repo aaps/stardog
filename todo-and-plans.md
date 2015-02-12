@@ -10,14 +10,21 @@ main dish
 
 * make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump]
 
+* make everyting looser coupled, it seemse everyting is dependant on game for some reason, this should be avoided and refactored, lets begin with the following classes. !!!
+# particles (done) 
+# parts (as good as done)
+# planets
+# Races
+# Gui
+# Menus
+
+
 * multyplayer [hard mode, dependant on code structure] !!
-
-
 http://pygame.org/project-planes-2392-405.html get version 0.6
 * A save function ? [a sqllite file for now with sqlalchemy]
 * replace the part - port system with a part - grid system [first implement part collition checking to temp eliminate problem]
 * sounds also need to be in views ?
-* put the collide logic in the things that collide, planets, floaters, parts etc. [1/2 done] !!
+* put the collide logic in the things that collide, planets, floaters, parts etc. [1/2 done]
 * it needs an economy not yust parts for static $$, [ harder ]
 * nebula and atmosphere
 * sometime in future convert the entity views to something like this:
@@ -28,8 +35,7 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
-* check how this game will work with python 3
-* ai can use an fsm to flee attack, explore !! [using simplefsm] [initial ai states, atack, flee, idle]
+* ai can use an fsm to flee attack, explore [using simplefsm] [initial ai states, atack, flee, idle]
 * make 2 gateways in the start system to test jumping [done]
 * make text able to left center right lineout
 * does ship still need hp is not all hp contained in the parts ? [In what way is this meant to be interpreted. (Duality)]
@@ -40,7 +46,7 @@ side dish
 * make sure that enabled is a property of part not of subparts/classes 
 * does a ship has a reference to the current starsystem if no does it need one ?
 * the console , input chatconsole panel hierarchy is a bit much !!
-* realy a better way to reset stuff on death, like radar error thing, enging trust should be off menus all inactive !!
+* realy a better way to reset stuff on death, like radar error thing, enging trust should be off menus all inactive
 * a game intro screen
 * make a screen effect class, that will flash the screen white or something, for jump effect
 * ai can talk to player, when targeting player for example and disengaging [after fsm and better brains ai]
@@ -53,7 +59,7 @@ side dish
 * splitout parts and cargo ,different files, is part cargo or cargo part ?
 * a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
 * the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed [done]
-* some sessions of bughunting !!!
+* some sessions of bughunting
 * some buttons should not be rebindable ingame, like quit, menu and console
 * make a startmenu with: start, options
 * make a options menu with, sound
@@ -64,7 +70,7 @@ side dish
 * more to vec2d vector work. [almost done]
 * engines that are good for space travel but bad for landing and visaversa
 * other sound for bullet impact on shield and plating and on planet
-* palaxing background, the image !!
+* palaxing background, the image
 * instead of restart directly, wait for keypress and see your lifeless ship float into the distance. !
 * make the camera so that it can smoothly transition from one place to another
 * make the game run from the beginning, so if choosing ship and color the game is already running !

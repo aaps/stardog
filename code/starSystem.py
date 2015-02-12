@@ -15,13 +15,13 @@ class StarSystem(object):
 	"""A StarSystem holds ships and other floaters."""
 	
 	# drawEdgeWarning = False
-	def __init__(self, universe, position=Vec2d(0,0), boundrad = 30000, edgerad = 60000):
-		self.game = universe.game
+	def __init__(self, game, position=Vec2d(0,0), boundrad = 30000, edgerad = 60000):
+		self.game = game
 		self.boundrad = boundrad
 		self.position = position
 		self.edgerad = edgerad
 		self.neighbors = []
-		self.universe = universe
+		self.universe = game.universe
 		self.floaters = pygame.sprite.Group()
 		self.player = None
 		self.ships = pygame.sprite.Group()

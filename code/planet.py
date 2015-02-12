@@ -92,7 +92,7 @@ class Planet(Floater):
 			part.dir = 0
 			part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert_alpha()
 		else:
-			part = Scrap(self.game)
+			part = Scrap(self.game.universe)
 		self.inventory.append(part)
 
 	def planetCollision(self, planet):
@@ -114,7 +114,7 @@ class Star(Planet):
 		color = bulletColor((mass+.1)/250000)
 		Planet.__init__(self, starsystem, pos, delta, grav, radius, mass, color, image)
 		self.firstname = "Star Unknown"
-		self.emitters.append(RingEmitter(self.game, self, self.condAlways , radius, radius+50, 200, 220,  (255,255,255,250), (251,0,0,1), 2, 3, 800, 0, 10, 1, True))
+		self.emitters.append(RingEmitter( self, self.condAlways , radius, radius+50, 200, 220,  (255,255,255,250), (251,0,0,1), 2, 3, 800, 0, 10, 1, True))
 
 
 class Structure(Planet):
