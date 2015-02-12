@@ -4,7 +4,6 @@ from utils import *
 from floaters import *
 from spaceship import *
 from strafebat import *
-from tinyFighter import *
 from planet import *
 from gui import *
 import stardog
