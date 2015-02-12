@@ -245,6 +245,12 @@ so you can get out of the way in time. [done, aat]
 
 [Duality]
 
+Part making system (code)
+=====
+* thinking of a way to make a better part system, where you just make parts in parts.py
+* and it automaticly adds it to the addjectives and such. 
+* it´s now just make part add to adjectives array and that one class with attributes thing.
+
 Commanline interface
 =====
 * convert all oldstyle classes into new style that is easier to check with type() [done]

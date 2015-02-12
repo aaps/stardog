@@ -175,7 +175,7 @@ def colorShift(surface, color, colorkey = (0,0,0)):
 	s = pygame.Surface(surface.get_size(), pygame.SRCALPHA, 32).convert_alpha()
 	s.set_colorkey(colorkey)
 	s.blit(surface, (0,0))
-	# pa = pygame.surfarray.pixels2d(s)#PixelArray(s)
+	pa = pygame.surfarray.pixels2d(s)#PixelArray(s)
 
 	for i in range(len(pa)):
 		for j in range(len(pa[i])):
