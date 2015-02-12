@@ -175,7 +175,8 @@ def colorShift(surface, color, colorkey = (0,0,0)):
 	s = pygame.Surface(surface.get_size(), pygame.SRCALPHA, 32).convert_alpha()
 	s.set_colorkey(colorkey)
 	s.blit(surface, (0,0))
-	# pa = pygame.surfarray.pixels2d(s)#PixelArray(s)
+
+	pa = pygame.PixelArray(s)
 
 	for i in range(len(pa)):
 		for j in range(len(pa[i])):
@@ -187,7 +188,7 @@ def colorShift(surface, color, colorkey = (0,0,0)):
 					newColor[k] = int(oldColor[0] * color[k] / 255 + oldColor[1] * (255 - color[k]) / 255)
 			newColor[3] = oldColor[3]
 			s.set_at((i, j),newColor)
-	# del pa
+	del pa
 	del surface
 	del oldColor
 	del newColor
