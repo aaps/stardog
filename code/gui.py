@@ -212,7 +212,7 @@ class TargetingRect(Drawable):
 
 	def draw(self, surface):
 		
-		if self.player and self.player.curtarget and not isinstance(self.player.curtarget, Planet) and self.player.curtarget in self.game.spaceview.onScreen:
+		if self.player and self.player.curtarget and not isinstance(self.player.curtarget, Planet) and self.player.curtarget in self.universe.game.spaceview.onScreen:
 			if self.image.get_width() != self.player.curtarget.radius:
 				self.image = pygame.Surface((self.player.curtarget.radius*2+4, self.player.curtarget.radius*2+4))
 				targetRect(self.image, RADAR12, BLACK , (self.image.get_width()/2, self.image.get_height()/2), self.player.curtarget.radius, 2)
