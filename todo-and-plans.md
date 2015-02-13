@@ -16,7 +16,7 @@ main dish
 # floaters
 # planets , next floaters go in starsystem not in universe ?
 # starsystem starsystem in universe, universe in game
-
+# camera should be part of universe ?
 
 
 * multyplayer [hard mode, dependant on code structure] !!
