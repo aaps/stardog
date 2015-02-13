@@ -50,8 +50,8 @@ class StarSystem(object):
 		"""Runs the game."""
 		# self.floaters.update()
 		for floater in self.floaters:
-			if isinstance(floater, Planet):
-				floater.setFPS(self.game.fps)
+
+			floater.setFPS(self.game.fps)
 			floater.update()
 
 		
@@ -206,7 +206,7 @@ class StarSystem(object):
 				not0(dist2(explosion, floater)) * explosion.radius ** 2)
 		dir = floater.pos.get_angle_between(explosion.pos)
 		accel = force / not0(floater.mass)
-		floater.delta += Vec2d(0,0).rotatedd(dir, accel) / explosion.game.fps
+		floater.delta += Vec2d(0,0).rotatedd(dir, accel) / explosion.fps
 		
 	def crash(self, a, b):
 		if soundModule:

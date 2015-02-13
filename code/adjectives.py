@@ -5,11 +5,11 @@ PARTS = [LeftCannon, RightCannon, Engine, Gyro, Generator, Battery, Shield,
 		LeftLaser, RightLaser, MissileLauncher, MachineGun, FighterShield, 
 		LeftFlakCannon, RightFlakCannon, Interconnect, Quarters,GatewayFocus, MineDropper, Radar, GargoHold]
 		
-def randItem(game, level = 1):
+def randItem(universe, level = 1):
 	roll = randint(0, len(PARTS) -1)
 	if roll == rand() * level / 2 < .8:
 		return None
-	part = PARTS[roll](game.universe)
+	part = PARTS[roll](universe)
 	return addAdjective(part, level)
 	
 def addAdjective(part, level = 1):

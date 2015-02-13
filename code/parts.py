@@ -44,7 +44,7 @@ class Part(Floater):
 
     def __init__(self, universe):
         radius = max(self.baseImage.get_height() / 2, self.baseImage.get_width() / 2)
-        Floater.__init__(self, universe.game, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = radius)
+        Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = radius)
         self.enabled = False
         self.functions = []
         self.functionDescriptions = []
@@ -356,7 +356,7 @@ class Part(Floater):
 
             
             #if dead, make an explosion here.
-            self.universe.curSystem.add(Explosion(self.universe.game, self.pos, \
+            self.universe.curSystem.add(Explosion(self.universe, self.pos, \
                         self.delta, radius = self.radius * 4,\
                         time = self.maxhp / 5))
 
@@ -645,7 +645,7 @@ class FlakCannon(Cannon):
             baseDir = self.shootDir
             self.shootDir = baseDir + rand() * self.spread - self.spread / 2
             self.universe.curSystem.add( 
-                Bullet(self.universe.game, self, 
+                Bullet(self.universe, self, 
                 self.damage * s.efficiency * s.damageBonus * s.cannonBonus, 
                 self.speed * s.cannonSpeedBonus,
                 self.range * s.cannonRangeBonus, image = self.bulletImage))
@@ -696,7 +696,7 @@ class Radar(Part):
                     self.ship.radars = sorted(self.ship.radars, key=lambda radar: radar.radarrange)
                     if self == self.ship.radars[-1]:
                         self.detected = []
-                        self.disk = RadarDisk(self.universe.game, self.ship.pos, self.ship.delta, self.dir, self.radarrange)
+                        self.disk = RadarDisk(self.universe, self.ship.pos, self.ship.delta, self.dir, self.radarrange)
                         self.radartime = self.radarspeed
                         for floater in self.universe.curSystem.floaters:
                             if collisionTest(self.disk, floater) and floater != self.ship:

@@ -18,7 +18,7 @@ def makeFighter(game, pos, delta, dir = 270, \
     if player:
         ship = Player(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     else:
-        ship = Ship(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
+        ship = Ship(game.universe, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     cockpit = Fighter(game.universe)
     gun = MachineGun(game.universe)
     engine = Engine(game.universe)
@@ -41,7 +41,7 @@ def makeFreighter(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy",
     if player:
         ship = Player(game, pos, delta, dir=dir, color=color, name=name, partlimit=partlim)
     else:
-        ship = Ship(game, pas, delta, dir=dir, color=color, name=name, partlimit=partlim)
+        ship = Ship(game.universe, pas, delta, dir=dir, color=color, name=name, partlimit=partlim)
 
     cockpit = Destroyer(game.universe)
 
@@ -63,13 +63,13 @@ def makeFreighter(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy",
     ship.addPart(cockpit)
 
     chold1 = GargoHold(game.universe)
-    chold2 = GargoHold(self.game.universe)
-    chold3 = GargoHold(self.game.universe)
-    chold4 = GargoHold(self.game.universe)
-    chold5 = GargoHold(self.game.universe)
-    chold6 = GargoHold(self.game.universe)
-    chold7 = GargoHold(self.game.universe)
-    chold8 = GargoHold(self.game.universe)
+    chold2 = GargoHold(game.universe)
+    chold3 = GargoHold(game.universe)
+    chold4 = GargoHold(game.universe)
+    chold5 = GargoHold(game.universe)
+    chold6 = GargoHold(game.universe)
+    chold7 = GargoHold(game.universe)
+    chold8 = GargoHold(game.universe)
 
     #put a Gyro on either back-sides of the cockpit 
     cockpit.addPart(gyro_left, 3)
@@ -109,14 +109,14 @@ def makeDestroyer(game, pos, delta, dir = 270, color = (255, 255, 255),name=("Sh
     if player:
         ship = Player(game, pos, delta, dir = dir, color = color, name=name, partlimit=partlim)
     else:
-        ship = Ship(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
-    gyro = Gyro(self.game.universe)
-    generator = Generator(self.game.universe)
-    battery = Battery(self.game.universe)
-    cockpit = Destroyer(self.game.universe)
-    gun = RightLaser(self.game.universe)
-    engine = Engine(self.game.universe)
-    shield = Shield(self.game.universe)
+        ship = Ship(game.universe, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
+    gyro = Gyro(game.universe)
+    generator = Generator(game.universe)
+    battery = Battery(game.universe)
+    cockpit = Destroyer(game.universe)
+    gun = RightLaser(game.universe)
+    engine = Engine(game.universe)
+    shield = Shield(game.universe)
     for part in [gyro, generator, battery, cockpit, gun, engine, shield]:
         if rand() > .8:
             addAdjective(part)
@@ -142,16 +142,16 @@ def makeInterceptor(game, pos, delta, dir = 270, color = (255, 255, 255),name=("
     if player:
         ship = Player(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     else:
-        ship = Ship(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
-    cockpit = Interceptor(self.game.universe)
-    gyro = Gyro(self.game.universe)
-    generator = Generator(self.game.universe)
-    battery = Battery(self.game.universe)
-    gun = LeftFlakCannon(self.game.universe)
-    gun2 = RightFlakCannon(self.game.universe)
-    missile = MissileLauncher(self.game.universe)
-    engine = Engine(self.game.universe)
-    engine2 = Engine(self.game.universe)
+        ship = Ship(game.universe, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
+    cockpit = Interceptor(game.universe)
+    gyro = Gyro(game.universe)
+    generator = Generator(game.universe)
+    battery = Battery(game.universe)
+    gun = LeftFlakCannon(game.universe)
+    gun2 = RightFlakCannon(game.universe)
+    missile = MissileLauncher(game.universe)
+    engine = Engine(game.universe)
+    engine2 = Engine(game.universe)
     for part in [gyro, generator, battery, cockpit, gun, gun2, engine, engine2,
                 missile]:
         if rand() > .8:
@@ -177,18 +177,18 @@ def makeJuggernaut(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy"
     if player:
         ship = Player(game, pos, delta, dir=dir, color = color, name=name, partlimit=partlim)
     else:
-        ship = Ship(game, pos, delta, dir=dir, color = color, name=name, partlimit=partlim)
+        ship = Ship(game.universe, pos, delta, dir=dir, color = color, name=name, partlimit=partlim)
     
-    cockpit = Interceptor(self.game.universe)
-    gyro = Gyro(self.game.universe)
-    generator = Generator(self.game.universe)
-    battery = Battery(self.game.universe)
-    gun = LeftFlakCannon(self.game.universe)
-    gun2 = RightFlakCannon(self.game.universe)
-    engine = Engine(self.game.universe)
-    engine2 = Engine(self.game.universe)
-    quarter = Quarters(self.game.universe)
-    shield = Shield(self.game.universe)
+    cockpit = Interceptor(game.universe)
+    gyro = Gyro(game.universe)
+    generator = Generator(game.universe)
+    battery = Battery(game.universe)
+    gun = LeftFlakCannon(game.universe)
+    gun2 = RightFlakCannon(game.universe)
+    engine = Engine(game.universe)
+    engine2 = Engine(game.universe)
+    quarter = Quarters(game.universe)
+    shield = Shield(game.universe)
     
     for part in [gyro, generator, battery, cockpit, gun, gun2, engine, engine2, quarter, shield]:
         if rand() > .8:
@@ -219,7 +219,7 @@ def makeScout(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcS
     if player:
         ship = Player(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     else:
-        ship = Ship(game, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
+        ship = Ship(game.universe, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     cockpit = Fighter(game.universe)
     battery = Battery(game.universe)
     cannon = RightFlakCannon(game.universe)
@@ -327,7 +327,7 @@ class Ship(Floater, Controllable):
 
     def __init__(self, game, pos, delta, dir = 270, \
                 color = (255, 255, 255), name=("shippy","Mcshipperson"), partlim=8):
-        Floater.__init__(self, game, pos, delta, dir, 1)
+        Floater.__init__(self, game.universe, pos, delta, dir, 1)
         Controllable.__init__(self)
         self.inventory = []
         self.firstname = name[0]
@@ -357,7 +357,7 @@ class Ship(Floater, Controllable):
 
     def insertPart(self, part, amount=1):
         for i in range(amount):
-            self.inventory.append(part(self.game))
+            self.inventory.append(part(self.game.universe))
 
     def addPart(self, part, portIndex = 0):
         """ship.addPart(part) -> Sets the main part for this ship.
@@ -574,14 +574,14 @@ class Ship(Floater, Controllable):
         for radar in self.radars:
             resultList= list(set(radar.detected)|set(resultList))
         if self.attention > 0:
-            self.attention -= 0.1 / self.game.fps
+            self.attention -= 0.1 / self.universe.game.fps
         # actual updating:
         Floater.update(self)
         Controllable.update(self)
         
         #parts updating:
         if self.ports[0].part:
-            self.ports[0].part.setFPS(self.game.fps)
+            self.ports[0].part.setFPS(self.universe.game.fps)
             self.ports[0].part.update()
         
         #active effects:
@@ -595,15 +595,15 @@ class Ship(Floater, Controllable):
         if self.landed and dist2(self, self.landed) > (self.landed.radius * 1.1) ** 2:
             self.landed = False
 
-        if self.pos.get_distance(Vec2d(0,0)) > self.game.universe.curSystem.boundrad:
+        if self.pos.get_distance(Vec2d(0,0)) > self.universe.curSystem.boundrad:
             self.overedge = True
         else:
             self.overedge = False
 
-        if self.pos.get_distance(Vec2d(0,0)) > self.game.universe.curSystem.edgerad:
-            posdifflist = self.game.universe.curSystem.getNeighborposdiff()
+        if self.pos.get_distance(Vec2d(0,0)) > self.universe.curSystem.edgerad:
+            posdifflist = self.universe.curSystem.getNeighborposdiff()
             
-            posdiff = (self.pos - self.game.universe.curSystem.star.pos)
+            posdiff = (self.pos - self.universe.curSystem.star.pos)
             nearest = sorted(posdifflist, key=lambda diff: diff[1].get_distance(posdiff))[-1]
 
 
@@ -675,13 +675,13 @@ class Ship(Floater, Controllable):
     def takeDamage(self, damage, other):
         self.attention += 5
         self.hp = max(self.hp - damage, 0)
-        if isinstance(other, Bullet) and other.ship == self.game.player:
-            self.game.player.xpDamage(self, damage)
+        if isinstance(other, Bullet) and other.ship == self.universe.player:
+            self.universe.player.xpDamage(self, damage)
 
     def kill(self):
         """play explosion effect than call Floater.kill(self)"""
         if soundModule:
-            setVolume(explodeSound.play(), self, self.game.player)
+            setVolume(explodeSound.play(), self, self.universe.player)
         for part in self.inventory:
             part.scatter(self)
         Floater.kill(self)
@@ -696,7 +696,7 @@ class Ship(Floater, Controllable):
                 damage = planet.damage[self]
             else:
                 if soundModule:
-                    setVolume(hitSound.play(), planet, planet.game.player)
+                    setVolume(hitSound.play(), planet, planet.starSystem.game.player)
                 #set damage based on incoming speed and mass.
                 damage = speed * self.mass * planet.PLANET_DAMAGE
             for part in self.parts:
@@ -714,10 +714,10 @@ class Ship(Floater, Controllable):
                 planet.damage[self] = damage
         else:
             #landing:
-            if self == planet.game.player and not self.landed:
+            if self == planet.starSystem.game.player and not self.landed:
                 #planet.game.pause = True
                 self.landed = planet
-                self.game.menu.parts.reset()
+                self.universe.game.menu.parts.reset()
             self.delta.x, self.delta.y = planet.delta.x, planet.delta.y
 
     def gatewayCollision(self, gateway):
@@ -730,8 +730,8 @@ class Ship(Floater, Controllable):
             # part.image.set_colorkey(BLACK)
             self.inventory.append(part)
             part.kill()
-            if self.game.player == self:
-                self.game.menu.parts.inventoryPanel.reset() #TODO: make not suck
+            if self.universe.game.player == self:
+                self.universe.game.menu.parts.inventoryPanel.reset() #TODO: make not suck
 
 
 class Player(Ship):

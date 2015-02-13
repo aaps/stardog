@@ -11,12 +11,12 @@ main dish
 * make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump]
 
 * make everyting looser coupled, it seemse everyting is dependant on game for some reason, this should be avoided and refactored, lets begin with the following classes. !!!
-# particles (done) 
-# parts (as good as done)
-# planets
-# Races
-# Gui
-# Menus
+# particles (done)
+# parts 
+# floaters
+# planets , next floaters go in starsystem not in universe ?
+# starsystem starsystem in universe, universe in game
+
 
 
 * multyplayer [hard mode, dependant on code structure] !!

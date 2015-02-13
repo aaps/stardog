@@ -17,7 +17,7 @@ class Planet(Floater):
 	
 	def __init__(self, starsystem, pos, delta = Vec2d(0,0), grav=5000, radius = 100, mass = 10000, \
 					color = (100,200,50), image = None, race = None):
-		Floater.__init__(self, starsystem.game, pos, delta, radius = radius, image = image)
+		Floater.__init__(self, starsystem.universe, pos, delta, radius = radius, image = image)
 		self.mass = mass #determines gravity.
 		self.color = color
 		self.starSystem = starsystem
@@ -32,7 +32,7 @@ class Planet(Floater):
 			self.image = None
 		self.inventory = []
 		for x in range(randint(1,8)):
-			self.inventory.append(randItem(self.game, 1))
+			self.inventory.append(randItem(self.starSystem.universe, 1))
 
 	def setFPS(self, fps):
 		self.fps = fps
@@ -96,7 +96,7 @@ class Planet(Floater):
 			part.dir = 0
 			part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert_alpha()
 		else:
-			part = Scrap(self.game.universe)
+			part = Scrap(self.starSystem.universe)
 		self.inventory.append(part)
 
 	def planetCollision(self, planet):
@@ -127,7 +127,7 @@ class Structure(Planet):
 	
 	
 	def __init__(self, starsystem, pos, delta, grav=5000, color = (100,200,50), radius = 100, image = None):
-		Floater.__init__(self, starsystem.game, pos, Vec2d(0,0), 0, image=image)
+		Floater.__init__(self, starsystem.universe, pos, Vec2d(0,0), 0, image=image)
 		self.firstname = "Structure Unknown"
 		self.color = BLUE
 		self.g = grav
@@ -160,7 +160,7 @@ class Gateway(Planet):
 	
 	
 	def __init__(self, starsystem, pos, radius, mass = 10000, color = (100,200,50), image = None, race = None):
-		Floater.__init__(self, starsystem.game, pos, Vec2d(0,0), radius = radius, image = image)
+		Floater.__init__(self, starsystem.universe, pos, Vec2d(0,0), radius = radius, image = image)
 		
 		self.image = pygame.Surface((radius*2, radius*2), flags = hardwareFlag).convert()
 		self.image.set_colorkey(BLACK)
