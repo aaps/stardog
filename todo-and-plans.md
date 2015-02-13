@@ -35,6 +35,7 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
+* make a function in game or stardog that will check the version of game of stardog in the github repo, if repo is newer give intructions how to update via installer.
 * the ui margins and locations should be dependant on camera size and location
 * ai can use an fsm to flee attack, explore [using simplefsm] [initial ai states, atack, flee, idle]
 * make 2 gateways in the start system to test jumping [done]

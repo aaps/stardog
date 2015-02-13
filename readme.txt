@@ -34,6 +34,23 @@ This source is given only under the GPL General Public License.  If you are inte
 
 
 CHANGES:
+since 0.2014.11.25
+fixed memmory leaks
+added particle engine
+added ships
+better part handeling
+multyple star systems
+working portals
+better radar and radar gui
+more parts, radar, cargo container, crew quarters, gateway focus, minelayer, 
+better cargo handeling
+a command prompt
+better color chooser
+more enemy ship types
+refactoring the code
+targeting system
+and lots of smaller stuff.
+
 since 0.2011.01.18:
 Adds stores to planets.  When landed on a planet, you can trade with it.  Each planet starts with a few random parts, and keeps any parts that fall into it from space.  Currently, there is no money, so "trading" is more like giving and taking.
 Fixes several PartsMenu errors.
