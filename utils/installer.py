@@ -10,7 +10,7 @@ zipfile = ZipFile(StringIO(url.read()))
 names = zipfile.namelist()
 	
 for name in names:
-
+	print name
 	newname = "/".join(name.split('/')[1:])
 	if newname.beginswith('.'):
 		if newname.endswith('/'):
