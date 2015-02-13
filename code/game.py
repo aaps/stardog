@@ -17,16 +17,18 @@ import datetime
 #command parsing
 import commandParse
 
-from pympler import summary
-from pympler import muppy
-from pympler import tracker
-import types as Types
-all_objects = muppy.get_objects()
-tr = tracker.SummaryTracker()
-import resource
-import gc, sys
-
-print 'Memory usage: %s (kb)' % resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+try:
+    from pympler import summary
+    from pympler import muppy
+    from pympler import tracker
+    import types as Types
+    all_objects = muppy.get_objects()
+    tr = tracker.SummaryTracker()
+    import resource
+    import gc, sys
+    print 'Memory usage: %s (kb)' % resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+except Exception, e:
+    print e
 
 FPS = 3e6
 
@@ -171,8 +173,6 @@ class Game(object):
                             all_objects = muppy.get_objects()
                         if event.key == pygame.K_BACKSLASH:
                            saveScreenShot("Screen-shots", self.screen)
-                        if event.key == pygame.K_SLASH:
-                            pygame.display.set_caption('Memory usage: %s (kb) FPS: %d' % (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, self.averagefps))
                     elif event.type == pygame.KEYUP:
                         self.keys[event.key % 322] = 0
                     if self.menu.active:
@@ -236,7 +236,11 @@ class Game(object):
                 self.clock.tick(FPS)#aim for FPS but adjust vars for self.fps.
                 self.fps = max(1, int(self.clock.get_fps()))
                 self.timer += 1. / self.fps
-                pygame.display.set_caption('Memory usage: %s (kb) FPS: %d' % (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, self.averagefps))
+                #try and print debuging caption
+                try:
+                    pygame.display.set_caption('Memory usage: %s (kb) FPS: %d' % (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, self.averagefps))
+                except Exception, e:
+                    print e
             #end round loop (until gameover)
         #end game loop
         #self.__init__(self.screen)
