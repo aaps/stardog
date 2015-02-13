@@ -69,7 +69,7 @@ class Game(object):
         self.universe.addStarSystem(thethird)
         
         self.camera.layerAdd(self.messenger,7)
-        self.camera.layerAdd(MiniInfo(self),6)
+        self.camera.layerAdd(MiniInfo(self.universe),6)
         
         #key polling:
         self.keys = [False]*322
@@ -78,9 +78,9 @@ class Game(object):
         self.mouse = [(0, 0), 0, 0, 0, 0, 0, 0]
         #pygame setup:
         self.clock = pygame.time.Clock()
-        self.hud = HUD(self)
-        self.tageting = TargetingRect(self)
-        self.radarfield = RadarField(self)
+        self.hud = HUD(self.universe)
+        self.tageting = TargetingRect(self.universe)
+        self.radarfield = RadarField(self.universe)
         
         self.camera.layerAdd(self.hud,4)
         self.camera.layerAdd(self.radarfield,4)
@@ -89,6 +89,7 @@ class Game(object):
         self.camera.layerAdd(self.spaceview,3)
         #create a chatconsole for text input capabilities
         self.chatconsole = ChatConsole(self, Rect(int(self.width/ 8), self.height-40, self.width - int(self.width/ 8) , 40))
+        
         
     def run(self):
         """Runs the game."""
@@ -120,9 +121,9 @@ class Game(object):
             self.consoleScript = Script(self)
             self.player = playerShip(self, Vec2d(0,0),Vec2d(0,0),
                             color = self.playerColor, name = self.PlayerName, type = self.playerType)
-            
-            self.camera.layerAdd(shipDamage(self),5)
-            self.camera.layerAdd(StarField(self),2)
+            self.camera.setLayersPlayer(self.player)
+            self.camera.layerAdd(shipDamage(self.universe),5)
+            self.camera.layerAdd(StarField(self.universe),2)
             self.universe.setCurrentStarSystem("theone")
             self.camera.layerAdd(self.universe.curSystem.bg,1)
             

@@ -696,7 +696,7 @@ class Ship(Floater, Controllable):
                 damage = planet.damage[self]
             else:
                 if soundModule:
-                    setVolume(hitSound.play(), planet, planet.starSystem.game.player)
+                    setVolume(hitSound.play(), planet, planet.starSystem.universe.player)
                 #set damage based on incoming speed and mass.
                 damage = speed * self.mass * planet.PLANET_DAMAGE
             for part in self.parts:
@@ -714,7 +714,7 @@ class Ship(Floater, Controllable):
                 planet.damage[self] = damage
         else:
             #landing:
-            if self == planet.starSystem.game.player and not self.landed:
+            if self == planet.starSystem.universe.player and not self.landed:
                 #planet.game.pause = True
                 self.landed = planet
                 self.universe.game.menu.parts.reset()
@@ -730,7 +730,7 @@ class Ship(Floater, Controllable):
             # part.image.set_colorkey(BLACK)
             self.inventory.append(part)
             part.kill()
-            if self.universe.game.player == self:
+            if self.universe.player == self:
                 self.universe.game.menu.parts.inventoryPanel.reset() #TODO: make not suck
 
 

@@ -13,9 +13,7 @@ from nameMaker import *
 class StarSystem(object):
 	"""A StarSystem holds ships and other floaters."""
 	
-	# drawEdgeWarning = False
 	def __init__(self, universe, position=Vec2d(0,0), boundrad = 30000, edgerad = 60000):
-		# self.game = game
 		self.boundrad = boundrad
 		self.position = position
 		self.edgerad = edgerad
@@ -25,7 +23,7 @@ class StarSystem(object):
 		self.player = None
 		self.ships = pygame.sprite.Group()
 		self.specialOperations = []
-		self.bg = BGImage(self.universe.game) # the background layer
+		self.bg = BGImage(self.universe) # the background layer
 		pygame.mixer.music.load("res/sound/space music.ogg")
 		pygame.mixer.music.play(-1)
 		pygame.mixer.music.set_volume(.15)

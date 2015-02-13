@@ -52,12 +52,16 @@ class Camera(object):
 		self.transitioning = True
 
 	def layerAdd(self, drawable, zindex):
-
 		layer = Layer(drawable, zindex, self)
-
 		self.layers.append(layer)
-
 		self.layers = sorted(self.layers, key=lambda layy: layy.zindex)
+
+	def setLayersPlayer(self, player):
+		for layer in self.layers:
+			
+			if not isinstance(layer.drawable, SpaceView):
+				
+				layer.drawable.setPlayer(player)
 	
 	def getLayer(self, zindex=0):
 		for layer in self.layers:
