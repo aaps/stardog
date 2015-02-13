@@ -121,12 +121,12 @@ class Game(object):
             self.consoleScript = Script(self)
             self.player = playerShip(self, Vec2d(0,0),Vec2d(0,0),
                             color = self.playerColor, name = self.PlayerName, type = self.playerType)
-            self.camera.setLayersPlayer(self.player)
+            
             self.camera.layerAdd(shipDamage(self.universe),5)
             self.camera.layerAdd(StarField(self.universe),2)
             self.universe.setCurrentStarSystem("theone")
             self.camera.layerAdd(self.universe.curSystem.bg,1)
-            
+            self.camera.setLayersPlayer(self.player)
             self.universe.setPlayer(self.player)
             self.camera.setPos(self.player.pos)
             makePlayerBindings(self.playerScript, self.player)

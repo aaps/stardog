@@ -219,7 +219,7 @@ class TargetingRect(Drawable):
 				self.image.set_colorkey(BLACK)
 
 			result = (self.player.curtarget.pos - self.player.pos).inttup()
-			result = result[0] + self.universe.game.width / 2 - self.image.get_width() / 2,  result[1] + self.game.height / 2 - self.image.get_height() / 2,
+			result = result[0] + self.universe.game.width / 2 - self.image.get_width() / 2,  result[1] + self.universe.game.height / 2 - self.image.get_height() / 2,
 			surface.blit(self.image,result)
 
 
@@ -246,7 +246,6 @@ class StarField(Drawable):
 	def draw(self, surface):
 		maxVal = 5000
 		if self.player:
-			print self.player
 			xstarlen = (self.player.delta.x*100/(maxVal*2))
 			ystarlen = (self.player.delta.y*100/(maxVal*2))
 			for star in self.stars:
