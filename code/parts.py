@@ -1084,7 +1084,10 @@ class GatewayFocus(Part):
         if self.ship.atgateway:
             if self.universe.curSystem == self.ship.atgateway.sister.starsystem:
                 self.ship.pos = Vec2d(self.ship.atgateway.sister.pos)
-                self.universe.camera.setPos(self.ship.pos)
+                for camera in self.universe.cameras:
+                    camera.setPos(self.ship.pos)
+
+                # self.universe.camera.setPos(self.ship.pos)
             else:
                 newsystem = self.ship.atgateway.sister.starsystem
                 newsystem.player = self.ship
@@ -1095,7 +1098,9 @@ class GatewayFocus(Part):
                 self.universe.curSystem.floaters.remove(self)
                 self.universe.curSystem = newsystem
                 self.ship.pos = self.ship.atgateway.sister.pos
-                self.camera.setPos(self.ship.pos)
+                for camera in self.universe.cameras:
+                    camera.setPos(self.ship.pos)
+                # self.camera.setPos(self.ship.pos)
             self.jumpenergy = 0
 
 
