@@ -4,7 +4,7 @@ from planet import *
 from floaters import *
 
 class Camera(object):
-	game = None
+	universe = None
 	width = 100
 	height = 100
 	transcurve = None
@@ -14,11 +14,11 @@ class Camera(object):
 	layers = []
 	target = None
 
-	def __init__(self, game, pos=Vec2d(0,0)):
-		self.game = game
+	def __init__(self, universe, pos=Vec2d(0,0)):
+		self.universe = universe
 		self.pos = pos
-		self.width = game.width
-		self.height = game.height
+		self.width = universe.game.width
+		self.height = universe.game.height
 
 	def update(self):
 		for layer in self.layers:

@@ -14,8 +14,8 @@ main dish
 # particles (done)
 # parts 
 # floaters
-# planets , next floaters go in starsystem not in universe ?
-# starsystem starsystem in universe, universe in game
+# planets 
+# starsystem (done)
 # camera should be part of universe ?
 
 
@@ -35,6 +35,7 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
+* the ui margins and locations should be dependant on camera size and location
 * ai can use an fsm to flee attack, explore [using simplefsm] [initial ai states, atack, flee, idle]
 * make 2 gateways in the start system to test jumping [done]
 * make text able to left center right lineout

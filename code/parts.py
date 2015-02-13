@@ -34,7 +34,6 @@ class Part(Floater):
     
 
     buffer = pygame.Surface((30,30), flags = hardwareFlag | SRCALPHA).convert_alpha()
-    # buffer.set_colorkey(BLACK)
     acted = False
     
     #a list of functions that are called on the ship during ship.update:
@@ -1085,7 +1084,7 @@ class GatewayFocus(Part):
         if self.ship.atgateway:
             if self.universe.curSystem == self.ship.atgateway.sister.starsystem:
                 self.ship.pos = Vec2d(self.ship.atgateway.sister.pos)
-                self.universe.game.camera.setPos(self.ship.pos)
+                self.universe.camera.setPos(self.ship.pos)
             else:
                 newsystem = self.ship.atgateway.sister.starsystem
                 newsystem.player = self.ship

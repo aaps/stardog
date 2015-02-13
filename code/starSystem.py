@@ -14,18 +14,18 @@ class StarSystem(object):
 	"""A StarSystem holds ships and other floaters."""
 	
 	# drawEdgeWarning = False
-	def __init__(self, game, position=Vec2d(0,0), boundrad = 30000, edgerad = 60000):
-		self.game = game
+	def __init__(self, universe, position=Vec2d(0,0), boundrad = 30000, edgerad = 60000):
+		# self.game = game
 		self.boundrad = boundrad
 		self.position = position
 		self.edgerad = edgerad
-		self.neighbors = []
-		self.universe = game.universe
+		self.neighbors = []		
+		self.universe = universe
 		self.floaters = pygame.sprite.Group()
 		self.player = None
 		self.ships = pygame.sprite.Group()
 		self.specialOperations = []
-		self.bg = BGImage(self.game) # the background layer
+		self.bg = BGImage(self.universe.game) # the background layer
 		pygame.mixer.music.load("res/sound/space music.ogg")
 		pygame.mixer.music.play(-1)
 		pygame.mixer.music.set_volume(.15)
@@ -51,7 +51,7 @@ class StarSystem(object):
 		# self.floaters.update()
 		for floater in self.floaters:
 
-			floater.setFPS(self.game.fps)
+			floater.setFPS(self.universe.game.fps)
 			floater.update()
 
 		
@@ -85,7 +85,7 @@ class StarSystem(object):
 			
 			if not planet.ships.sprites() and not isinstance(planet, Star):
 				if planet.respawn > 0:#countdown the timer
-					planet.respawn -= 1. / self.game.fps
+					planet.respawn -= 1. / self.universe.game.fps
 					continue
 				else:
 					#respawn now!

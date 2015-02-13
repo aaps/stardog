@@ -11,7 +11,7 @@ class Universe(object):
 	def __init__(self, game):
 		self.game = game
 		self.player = game.player
-		self.game = game
+		self.cameras = []
 
 	def setPlayer(self, player):
 		self.player = player
@@ -24,6 +24,17 @@ class Universe(object):
 
 	def addStarSystem(self, system):
 		self.starSystems.append(system)
+
+	def addCamera(self, camera):
+		self.cameras.append(camera)
+
+	def update(self):
+		for camera in self.cameras:
+			camera.update()
+
+	def draw(self, surface):
+		for camera in self.cameras:
+			camera.draw(surface)
 	
 
 

@@ -53,12 +53,13 @@ class Game(object):
         self.mouseControl = True
         self.timer = 0
         self.triggers = []
-        self.camera = Camera(self)
+        self.camera = Camera(self.universe)
+        self.universe.addCamera(self.camera)
         #messenger, with controls as first message:
         self.messenger = Messenger(self.universe)
-        theone = SolarA1(self, "theone", Vec2d(1,100))
-        thesecond = SolarA1(self, "thesecond", Vec2d(1,-100),2,1)
-        thethird = SolarA1(self, "thethird", Vec2d(1,200),2,1)
+        theone = SolarA1(self.universe, "theone", Vec2d(1,100))
+        thesecond = SolarA1(self.universe, "thesecond", Vec2d(1,-100),2,1)
+        thethird = SolarA1(self.universe, "thethird", Vec2d(1,200),2,1)
         theone.addNeighbor(thesecond)
         theone.addNeighbor(thethird)
         
@@ -197,8 +198,11 @@ class Game(object):
                 for trigger in self.triggers:
                     trigger.update()
 
-                self.camera.update()
-                self.camera.draw(self.screen)
+                self.universe.update()
+                self.universe.draw(self.screen)
+
+                # self.camera.update()
+                # self.camera.draw(self.screen)
 
                 # paused:
 
