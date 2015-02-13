@@ -21,6 +21,9 @@ OutputBaseFilename=setup3
 #include <idp.iss>
 ChangesEnvironment=yes
 
+[UninstallDelete]
+Type: files; Name: "{app}\*.*"
+
 [CustomMessages]
 AppAddPath=Add application directory to your environmental path (required)
 
