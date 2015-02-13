@@ -22,7 +22,7 @@ OutputBaseFilename=setup3
 ChangesEnvironment=yes
 
 [UninstallDelete]
-Type: files; Name: "{app}\*.*"
+Type: filesandordirs; Name: "{app}\*.*"
 
 [CustomMessages]
 AppAddPath=Add application directory to your environmental path (required)
