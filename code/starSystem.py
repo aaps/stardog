@@ -48,8 +48,12 @@ class StarSystem(object):
 		
 	def update(self):
 		"""Runs the game."""
-		self.floaters.update()
-		
+		# self.floaters.update()
+		for floater in self.floaters:
+			if isinstance(floater, Planet):
+				floater.setFPS(self.game.fps)
+			floater.update()
+
 		
 		#collision:
 		floaters = self.floaters.sprites()

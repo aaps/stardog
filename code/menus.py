@@ -357,7 +357,7 @@ class ShipPanel(Selecter):
             self.selectables.append(ShipPartPanel(part, self))
             for port in part.ports:
                 if port.part is None:
-                    dummy = Dummy(part.game.universe)
+                    dummy = Dummy(part.universe)
                     #calculate dummy offsets:
                     dummy.dir = port.dir + part.dir
                     cost = cos(part.dir) #cost is short for cos(theta)

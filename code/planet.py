@@ -27,11 +27,15 @@ class Planet(Floater):
 		self.damage = {}	
 		#see solarSystem.planet_ship_collision
 		self.race = None #race that owns this planet
+		self.fps = 10
 		if image == None:
 			self.image = None
 		self.inventory = []
 		for x in range(randint(1,8)):
 			self.inventory.append(randItem(self.game, 1))
+
+	def setFPS(self, fps):
+		self.fps = fps
 	
 	def update(self):
 		for other in self.starSystem.floaters.sprites():
@@ -48,7 +52,7 @@ class Planet(Floater):
 				#accelerate that floater towards this planet:
 				accel = self.g * (self.mass) / (dist2(self, other))
 				angle = (self.pos - other.pos).get_angle()
-				other.delta += Vec2d(0,0).rotatedd(angle,accel) / self.game.fps
+				other.delta += Vec2d(0,0).rotatedd(angle,accel) / self.fps
 
 		for emitter in self.emitters:
 			emitter.update()
@@ -188,7 +192,7 @@ class Gateway(Planet):
 				#accelerate that floater towards this planet:
 				accel = self.g * (self.mass) / dist2(self, other)
 				angle = (self.pos - other.pos).get_angle()
-				other.delta += Vec2d(0,0).rotatedd(angle, accel) / self.game.fps
+				other.delta += Vec2d(0,0).rotatedd(angle, accel) / self.fps
 				
 
 	def getSister(self):

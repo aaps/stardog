@@ -44,7 +44,7 @@ class Part(Floater):
 
     def __init__(self, universe):
         radius = max(self.baseImage.get_height() / 2, self.baseImage.get_width() / 2)
-        Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = radius)
+        Floater.__init__(self, universe.game, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = radius)
         self.enabled = False
         self.functions = []
         self.functionDescriptions = []
@@ -69,8 +69,7 @@ class Part(Floater):
         self.hp = 10
         self.fps = 10
         self.universe = universe
-        self.game = universe.game
-        
+ 
         
         self.image = colorShift(self.baseImage.copy(), self.color)
         self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
