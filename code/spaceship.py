@@ -734,6 +734,7 @@ class Ship(Floater, Controllable):
             self.inventory.append(part)
             part.kill()
             if self.universe.player == self:
+                #use a state machine ?
                 self.universe.game.menu.parts.inventoryPanel.reset() #TODO: make not suck
 
 
