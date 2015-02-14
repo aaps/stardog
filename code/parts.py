@@ -1199,7 +1199,7 @@ class GargoHold(Part):
         stats = (self.energyCost,)
         statString = "\n %s E/p"
         return Part.shortStats(self)+statString%(stats)
-
+        
     def update(self):
         """check how many gargholds are attached and calculate capacity on that."""
         if self.ship:
