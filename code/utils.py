@@ -156,8 +156,8 @@ try:
         sound = pygame.mixer.Sound(travelMusicDir+str(musicfile))
         travelMusic.append(sound)
 
-    #for now choose a random music number to play
-    randIndex = random.randint(0,len(travelMusic)-1)
+    # for now choose a random music number to play
+    randIndex = random.randint(0, len(travelMusic)-1)
     print os.listdir(travelMusicDir)[randIndex]
     travelMusic[randIndex].play(-1)
     travelMusic[randIndex].set_volume(0.15)
@@ -166,16 +166,15 @@ try:
 except (ImportError, NotImplementedError):
     soundModule = False
     print "Sound module not found. Sounds disabled."
-    
-#setup images
- #if there is extended image support, load .gifs, otherwise load .bmps.
- #.bmps do not support transparency, so there might be black clipping.
- 
+# setup images
+# if there is extended image support, load .gifs, otherwise load .bmps.
+# .bmps do not support transparency, so there might be black clipping.
 if pygame.image.get_extended():
     ext = ".gif"
 else:
     ext = ".bmp"
-    
+
+
 def loadImage(filename, colorkey=BLACK):
     try:
         image = pygame.image.load(filename).convert_alpha()
