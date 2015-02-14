@@ -621,12 +621,14 @@ class Ship(Floater, Controllable):
             nearest[0].player = self
             nearest[0].floaters.add(self)
             nearest[0].ships.add(self)
-            self.game.universe.curSystem.player = None
-            self.game.universe.curSystem.ships.remove(self)
-            self.game.universe.curSystem.floaters.remove(self)
-            self.game.universe.curSystem = nearest[0]
+            self.universe.curSystem.player = None
+            self.universe.curSystem.ships.remove(self)
+            self.universe.curSystem.floaters.remove(self)
+            self.universe.curSystem = nearest[0]
             self.pos = newpos
-            self.game.camera.setPos(self.pos)
+            for camera in self.universe.cameras:
+
+                camera.setPos(self.pos)
 
 
  
@@ -765,7 +767,6 @@ class Player(Ship):
             self.level += 1
             self.developmentPoints += 1
             self.xp = 0
-
         Ship.update(self)
     
     def next(self):
