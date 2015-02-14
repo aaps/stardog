@@ -5,6 +5,7 @@ import pygame
 from vec2d import *
 from os import listdir
 from os.path import isfile, join
+import os
 import re
 
 hardwareFlag = pygame.HWSURFACE
@@ -139,11 +140,20 @@ except:
 #setup sounds	
 try:
 	pygame.mixer.init(44100)
+
 	shootSound = pygame.mixer.Sound("res/sound/lazer.ogg")
 	hitSound = pygame.mixer.Sound("res/se_sdest.wav")
 	explodeSound = pygame.mixer.Sound("res/se_explode03.wav")
 	missileSound =  pygame.mixer.Sound("res/se_explode02.wav")
 	messageSound =  pygame.mixer.Sound("res/sound/message pip.ogg")
+
+	travelMusicDir = "res/sound/ambientSound/"
+	travelMusic = []
+	print os.listdir(travelMusicDir)
+	for musicfile in os.listdir(travelMusicDir):
+		sound = pygame.mixer.Sound(travelMusicDir+str(musicfile))
+		travelMusic.append(sound)
+	travelMusic[6].play()
 	soundModule = True
 except (ImportError, NotImplementedError):
 	soundModule = False
