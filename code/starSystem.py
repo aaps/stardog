@@ -24,9 +24,10 @@ class StarSystem(object):
 		self.ships = pygame.sprite.Group()
 		self.specialOperations = []
 		self.bg = BGImage(self.universe) # the background layer
-		pygame.mixer.music.load("res/sound/space music.ogg")
-		pygame.mixer.music.play(-1)
-		pygame.mixer.music.set_volume(.15)
+		#why must this be here ?
+		# pygame.mixer.music.load("res/sound/space music.ogg")
+		# pygame.mixer.music.play(-1)
+		# pygame.mixer.music.set_volume(.15)
 		self.planets = []
 		self.name = ""
 	

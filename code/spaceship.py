@@ -329,6 +329,9 @@ class Ship(Floater, Controllable):
                 color = (255, 255, 255), name=("shippy","Mcshipperson"), partlim=8):
         Floater.__init__(self, game.universe, pos, delta, dir, 1)
         Controllable.__init__(self)
+
+        self.universe = game.universe
+
         self.inventory = []
         self.firstname = name[0]
         self.secondname = name[1]
@@ -357,7 +360,7 @@ class Ship(Floater, Controllable):
 
     def insertPart(self, part, amount=1):
         for i in range(amount):
-            self.inventory.append(part(self.game.universe))
+            self.inventory.append(part(self.universe))
 
     def addPart(self, part, portIndex = 0):
         """ship.addPart(part) -> Sets the main part for this ship.
@@ -722,7 +725,6 @@ class Ship(Floater, Controllable):
 
     def gatewayCollision(self, gateway):
         self.atgateway = gateway
-
     def freepartCollision(self, part):
         if part.pickuptimeout <= 0:
             part.dir = 0
@@ -731,6 +733,7 @@ class Ship(Floater, Controllable):
             self.inventory.append(part)
             part.kill()
             if self.universe.player == self:
+                #use a state machine ?
                 self.universe.game.menu.parts.inventoryPanel.reset() #TODO: make not suck
 
 

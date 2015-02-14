@@ -240,7 +240,7 @@ class Game(object):
                 try:
                     pygame.display.set_caption('Memory usage: %s (kb) FPS: %d' % (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, self.averagefps))
                 except Exception, e:
-                    print e
+                    pygame.display.set_caption('FPS: %d'%(self.averagefps))
             #end round loop (until gameover)
         #end game loop
         #self.__init__(self.screen)
