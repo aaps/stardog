@@ -74,7 +74,7 @@ class CommandParse(object):
         shipType = args[0]
         if shipType == "Scout":
             pass
-        raise Exception("Exception: Not fully implemented.")
+        raise Exception("Exception: Not implemented.")
     def insertPart(self, args):
         if not args:
             return
@@ -218,7 +218,8 @@ class CommandParse(object):
                 else:
                     self.printout(self.player.firstname + " " + self.player.secondname +": "+text)
             except Exception, e:
-                self.printout(e)
+                #self.printout(e)
                 exc_type, exc_obj, exc_tb = sys.exc_info()
                 fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+                print e
                 print(exc_type, str(fname)+":"+str(exc_tb.tb_lineno))

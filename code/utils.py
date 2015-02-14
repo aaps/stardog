@@ -153,7 +153,7 @@ try:
 	for musicfile in os.listdir(travelMusicDir):
 		sound = pygame.mixer.Sound(travelMusicDir+str(musicfile))
 		travelMusic.append(sound)
-	travelMusic[6].play()
+	travelMusic[0].play()
 	soundModule = True
 except (ImportError, NotImplementedError):
 	soundModule = False
