@@ -244,29 +244,29 @@ class Part(Floater):
         
     def update(self):
         """updates this part."""
-        # if self.ship:
-        #reset so this part can act again this frame:
-        self.acted = False
-        #if it's attached to a ship, just rotate with the ship:
-        if self.parent:
-            cost = cos(self.ship.dir) #cost is short for cos(theta)
-            sint = sin(self.ship.dir)
-            self.pos = self.ship.pos + self.offset.rotated(self.ship.dir)
-        #if it's floating in space, act like a floater:
-        else:
-            Floater.update(self)
-        #update children:
-        #
-        for port in self.ports:
-            if port.part:
-                port.part.update()
+        if self.ship:
+            #reset so this part can act again this frame:
+            self.acted = False
+            #if it's attached to a ship, just rotate with the ship:
+            if self.parent:
+                cost = cos(self.ship.dir) #cost is short for cos(theta)
+                sint = sin(self.ship.dir)
+                self.pos = self.ship.pos + self.offset.rotated(self.ship.dir)
+            #if it's floating in space, act like a floater:
+            else:
+                Floater.update(self)
+            #update children:
+            #
+            for port in self.ports:
+                if port.part:
+                    port.part.update()
 
-        if self.pickuptimeout > 0:
-            self.pickuptimeout -= 1. / self.fps
+            if self.pickuptimeout > 0:
+                self.pickuptimeout -= 1. / self.fps
 
-        for emitter in self.emitters:
-            emitter.setFPS(self.fps)
-            emitter.update()
+            for emitter in self.emitters:
+                emitter.setFPS(self.fps)
+                emitter.update()
 
 
     def draw(self, surface, offset = None, redraw = True, grey = False):
