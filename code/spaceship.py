@@ -358,6 +358,7 @@ class Ship(Floater, Controllable):
             self.functionDescriptions.append(function.__doc__)
         self.baseBonuses = self.baseBonuses.copy()
 
+
     def insertPart(self, part, amount=1):
         for i in range(amount):
             self.inventory.append(part(self.universe))

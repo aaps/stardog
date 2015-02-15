@@ -12,7 +12,7 @@ class Controllable(object):
 	def __init__(self, active=True):
 		self.active = active
 		self.scripts = []
-
+		self.timeout = 0
 
 	def addScript(self, script):
 		self.scripts.append(script)
@@ -24,10 +24,14 @@ class Controllable(object):
 		self.active = False
 
 	def toggleActive(self):
+		self.timeout = 3
 		self.active = not self.active
 
 	def update(self):
-		if len(self.scripts) > 0 and self.active:
+		if self.timeout > 0:
+			self.timeout -= 1
+
+		if len(self.scripts) > 0 and self.active and self.timeout == 0:
 			for script in self.scripts:
 				script.update(self)
 
@@ -52,8 +56,8 @@ class Script(object):
 				if binding[2]:
 					self.bindings[self.bindings.index(binding)] = (binding[0], binding[1],binding[2], True)
 
-	def agent(self, state):
-		return None
+	# def agent(self, state):
+	# 	return None
 
 	def initbind(self, key, function, toggle):
 		"""binds function to key so function will be called if key is pressed.
@@ -80,13 +84,6 @@ class Script(object):
 		"""removes all bindings with the given key."""
 		self.bindings = [x for x in self.bindings if x[0] != key]
 
-	def setAllUnpressed(self):
-
-		for key in self.keys:
-			self.keys[key] = False
-
-		for bind in self.bindings:
-			bind = (bind[0], bind[1], False, bind[3])
 
 #InputScript is controlled by the keyboard:
 class InputScript(Script):
@@ -94,7 +91,6 @@ class InputScript(Script):
 	mouseControl = True
 	def __init__(self, game):
 		Script.__init__(self, game)
-		# self.active = True
 		
 		self.mouse = game.mouse
 		
@@ -102,7 +98,6 @@ class InputScript(Script):
 
 	def update(self, ship):
 		"""decides what to do each frame."""
-		# if self.active:
 		for binding in self.bindings:
 			if self.keys[binding[0]] == 1:
 
@@ -130,14 +125,6 @@ class InputScript(Script):
 				ship.forward()
 			if self.game.mouse[1]:
 				ship.shoot()
-
-
-
-	# def toggleActive(self):
-	# 	if self.active:
-	# 		self.active = False
-	# 	else:
-	# 		self.active = True
 
 
 		
