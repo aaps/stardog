@@ -7,6 +7,7 @@ from spaceship import Ship
 import datetime
 from scripts import Controllable
 from collections import defaultdict
+from SoundSystem import *
 
 
 DEFAULT_SELECTED_IMAGE = loadImage("res/parts/defaultselected.png")
@@ -26,10 +27,13 @@ class IntroMenu(TopLevelPanel):
     
     def colorChoose(self):
         self.panels = []
+        # ship color controle
         self.addPanel(Label(Rect(100,30,200,20), "Choose a color:", color = SUPER_WHITE, font = BIG_FONT))
         self.addPanel(Label(Rect(120,50,200,20), "Red:", color = SUPER_WHITE, font = BIG_FONT))
         self.addPanel(Label(Rect(220,50,200,20), "Green:", color = SUPER_WHITE, font = BIG_FONT))
         self.addPanel(Label(Rect(320,50,200,20), "Blue:", color = SUPER_WHITE, font = BIG_FONT))
+
+        self.addPanel(Label(Rect(420, 50, 200, 20), "Music Volume:", color=SUPER_WHITE, font=BIG_FONT))
 
         self.addPanel(Button( Rect(120, 280, 100, 20), self.chooseColor, "Confirm"))
         
@@ -38,6 +42,7 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(Slider( Rect(120,80,20,175),self.chooseRed,self))
         self.addPanel(Slider( Rect(220,80,20,175),self.chooseGreen,self))
         self.addPanel(Slider( Rect(320,80,20,175),self.chooseBlue,self))
+        self.addPanel(Slider( Rect(420, 80, 20, 175), self.setMusicVolume))
 
     def nameChoose(self):
         self.panels = []
@@ -72,6 +77,8 @@ class IntroMenu(TopLevelPanel):
         x += 200
         self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'freighter', FONT))
     
+    def setMusicVolume(self, value):
+        setMusicVolume(value)
     def chooseColor(self):
         if self.game.playerColor == [0,0,0]:
             self.game.playerColor = (10,10,10)

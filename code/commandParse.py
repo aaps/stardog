@@ -2,6 +2,7 @@ from types import *
 from spaceship import *
 from parts import *
 from vec2d import Vec2d
+from SoundSystem import *
 import sys
 import os
 
@@ -50,6 +51,8 @@ class CommandParse(object):
                 "!setShipColor <color> [colors your ship to the specified color W.I.P]\n"
                 "!convertShip <ship type> [convert your ship to ship type W.I.P]\n"
                 "!printdbg [toggles debug printing to the ingame console]\n"
+                "!setSfxVolume <0-100> [set all sfx sound volume e.g. bullets]"
+                "!setMusicVolume <0-100> [set music volume ]"
     ]
 
     def __init__(self, game, chatconsole, messenger):
@@ -67,6 +70,20 @@ class CommandParse(object):
         self.text = []
         self.reload = False
         self.debug = False
+
+    def setSfxVolume(self, args):
+        if not args:
+            return
+        volume = eval(args[0])
+        setSFXVolume(volume)
+        print("sfx vol:"+str(SFX_VOLUME))
+
+    def setMusicVolume(self, args):
+        if not args:
+            return
+        volume = eval(args[0])
+        setMusicVolume(volume)
+        print("music vol:"+str(MUSIC_VOLUME))
 
     def setColor(self, args):
         if not args:
@@ -216,6 +233,10 @@ class CommandParse(object):
                             self.printout(text)
                     elif command == "insertPart":
                         self.insertPart(args)
+                    elif command == "setSfxVolume":
+                        self.setSfxVolume(args)
+                    elif command == "setMusicVolume":
+                        self.setMusicVolume(args)
                     elif command == "removeItem":
                         pass
                     elif command == "setTextColor":

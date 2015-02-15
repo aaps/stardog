@@ -6,14 +6,33 @@ import math
 MISSILE_RADIUS = 50
 SOUND_RADIUS = 3000
 # 20%
-SFX_VOLUME = 0#(20./100)
+SFX_VOLUME = 0 #(20./100)
 # 60%
-MUSIC_VOLUME = 0#(5./100)
+MUSIC_VOLUME = 0 #(5./100)
 
 
 class SoundSystem(object):
     def __init__(self):
         pass
+
+
+def setMusicVolume(volume):
+    global MUSIC_VOLUME
+    if not volume:
+        MUSIC_VOLUME = float(volume)
+        pygame.mixer.music.set_volume(volume)
+    else:
+        MUSIC_VOLUME = 1./(volume/100.)
+        pygame.mixer.music.set_volume(volume)
+
+
+def setSFXVolume(volume):
+    global SFX_VOLUME
+    if not volume:
+        SFX_VOLUME = float(volume)
+    else:
+        SFX_VOLUME = 1./(volume/100.)
+
 
 # setup sounds
 try:
@@ -37,9 +56,10 @@ try:
     # for now choose a random music number to play
     randIndex = random.randint(0, len(travelMusicFiles)-1)
     location = str(travelMusicDir) + str(travelMusicFiles[randIndex])
-    print location
+    print("music: "+location)
     pygame.mixer.music.load(location)
     pygame.mixer.music.play(-1)
+    pygame.mixer.music.set_volume(MUSIC_VOLUME)
     # print(os.listdir(travelMusicDir)[randIndex])
     # travelMusic[randIndex].play(-1)
     # travelMusic[randIndex].set_volume(MUSIC_VOLUME)
