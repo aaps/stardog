@@ -19,6 +19,9 @@ class StarSystem(object):
 		self.edgerad = edgerad
 		self.neighbors = []		
 		self.universe = universe
+		self.spawnScore = 0
+		self.spawnMax = 50
+		self.toSpawn = []
 		self.floaters = pygame.sprite.Group()
 		self.player = None
 		# self.ships = pygame.sprite.Group()
@@ -46,7 +49,17 @@ class StarSystem(object):
 		
 	def update(self):
 		"""Runs the game."""
-		# self.floaters.update()
+		print self.spawnScore
+		
+		for spawn in self.toSpawn:
+			if (self.spawnScore + spawn.spawncost) < self.spawnMax:
+				self.spawnScore += spawn.spawncost
+				self.floaters.add(spawn)
+				self.toSpawn.remove(spawn)
+
+		if self.spawnScore > 0:
+			self.spawnScore -= 1
+
 		for floater in self.floaters:
 
 			floater.setFPS(self.universe.game.fps)
@@ -88,27 +101,28 @@ class StarSystem(object):
 				else:
 					#respawn now!
 					planet.respawn = self.respawnTime #reset respawn timer
-					planet.numShips += 1
-					for i in range(planet.numShips):
 					
+
+					if planet.numShips < 1:
+						planet.numShips += 1
 						angle = randint(0, 360)
 						pos = planet.pos.rotatedd(angle, planet.radius + 300)
 						name = nameMaker().getUniqePilotName(self.floaters)
 						
 						ship = Strafebat(self.universe, pos,  planet.color, name)
 						
-						# planet.ships.add(ship)
+						planet.ships.append(ship)
 						self.add(ship)
 						ship.planet = planet
 		
 		
 	def add(self, floater):
 		"""adds a floater to this game."""
-		self.floaters.add(floater)
-		# if isinstance(floater, Ship):
-		# 	self.ships.add(floater)
+		# self.floaters.add(floater)
+		
+
 		if isinstance(floater, Player):
-			
+			self.floaters.add(floater)
 			
 			if self.universe.curSystem == self:
 				init = False
@@ -118,9 +132,10 @@ class StarSystem(object):
 					distanceFromStar = randint(8000, 18000)
 					self.universe.player.pos = self.star.pos.rotatedd(angle, distanceFromStar)
 			self.player = floater
+		else:
+			self.toSpawn.append(floater)
 		
 	def empty(self):
-		# self.ships.empty()
 		self.floaters.empty()
 
 
@@ -223,10 +238,8 @@ class StarSystem(object):
 		return mindist
 
 class SolarA1(StarSystem):
-	tinyFighters = []
-	maxFighters = 15
+
 	respawnTime = 30
-	fightersPerMinute = 2
 	g=5000
 	def __init__(self, universe, name, location ,numPlanets = 10, numStructures = 2, boundrad = 30000, edgerad= 60000):
 		StarSystem.__init__(self, universe, location,boundrad, edgerad)

@@ -53,6 +53,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 		self.emitters = []
 		self.color = FLOATER
 		self.hp = 1
+		self.spawncost = 1
 		self.mass = 1
 		self.tangible = True
 		self.lastDamageFrom = None

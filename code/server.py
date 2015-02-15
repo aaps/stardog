@@ -30,6 +30,10 @@ class GameServer(object):
 		msg = messages.ShipUpdate()
 		return msg
 
+	def getShipUpdateFullMessage(self, entity):
+		msg = messages.ShipUpdateFull()
+		return msg
+
 	def getShipSpawnMessage(self, entity):
 		msg = messages.ShipSpawn()
 		return msg
@@ -38,12 +42,21 @@ class GameServer(object):
 		msg = messages.FloaterUpdate()
 		return msg
 
+		def getFloaterUpdateFullMessage(self, entity):
+		msg = messages.FloaterUpdateFull()
+		return msg
+
 	def getFloaterSpawnMessage(self, entity):
 		msg = messages.FloaterSpawn()
 		return msg
 
 	def getPartUpdateMessage(self, entity):
 		msg = messages.PartUpdate()
+		return msg
+
+
+	def getPartUpdateFullMessage(self, entity):
+		msg = messages.PartUpdateFull()
 		return msg
 
 	def getPartSpawnMessage(self, entity):
@@ -59,7 +72,8 @@ class GameServer(object):
 		return msg
 
 	def send_player_message(self, server):
-		pass
+		msg = messages.PlayerMessage()
+		return msg
 
 
 	def send_entity_spawn(self, server):

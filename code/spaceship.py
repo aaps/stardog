@@ -333,6 +333,7 @@ class Ship(Floater, Controllable):
         self.firstname = name[0]
         self.secondname = name[1]
         self.ports = [Port((0,0), 0, self)]
+        self.spawncost = 20
         self.energy = 0
         self.maxEnergy = 0
         self.color = color

@@ -41,52 +41,72 @@ class ShipUpdate(legume.messages.BaseMessage):
         'name' : 'string 32'
 	}
 
-class ShipSpawn(legume.messages.BaseMessage):
+class ShipUpdateFull(legume.messages.BaseMessage):
     MessageTypeID = MSGID+4
+    MessageValues = {
+        'player_id' : 'int',
+        'player_color' : 'int',
+        'name' : 'string 32'
+    }
+
+class ShipSpawn(legume.messages.BaseMessage):
+    MessageTypeID = MSGID+5
     MessageValues = {
     	'system_id' : 'int',
     	'name' : 'string 32',
 	}
 
 class FloaterUpdate(legume.messages.BaseMessage):
-    MessageTypeID = MSGID+5
-    MessageValues = {
-        'frame_number' : 'int',
-    }
-
-class FloaterSpawn(legume.messages.BaseMessage):
     MessageTypeID = MSGID+6
     MessageValues = {
         'frame_number' : 'int',
     }
 
-class PartUpdate(legume.messages.BaseMessage):
+class FloaterUpdateFull(legume.messages.BaseMessage):
     MessageTypeID = MSGID+7
     MessageValues = {
         'frame_number' : 'int',
     }
 
-class PartSpawn(legume.messages.BaseMessage):
+class FloaterSpawn(legume.messages.BaseMessage):
     MessageTypeID = MSGID+8
+    MessageValues = {
+        'frame_number' : 'int',
+    }
+
+class PartUpdate(legume.messages.BaseMessage):
+    MessageTypeID = MSGID+9
+    MessageValues = {
+        'frame_number' : 'int',
+    }
+
+class PartUpdateFull(legume.messages.BaseMessage):
+    MessageTypeID = MSGID+10
+    MessageValues = {
+        'frame_number' : 'int',
+    }
+
+class PartSpawn(legume.messages.BaseMessage):
+    MessageTypeID = MSGID+11
     MessageValues = {
         'frame_number' : 'int',
     }
 
 
 class SystemUpdate(legume.messages.BaseMessage):
-    MessageTypeID = MSGID+9
+    MessageTypeID = MSGID+12
     MessageValues = {
         'frame_number' : 'int',
 	}
 
 class SystemSpawn(legume.messages.BaseMessage):
-    MessageTypeID = MSGID+10
+    MessageTypeID = MSGID+13
     MessageValues = {
         'frame_number' : 'int',
     }
 
 class PlayerMessage(legume.messages.BaseMessage):
-    MessageTypeID = MSGID+11
+    MessageTypeID = MSGID+14
     MessageValues = {
         'frame_number' : 'int',
     }
@@ -97,10 +117,13 @@ class PlayerMessage(legume.messages.BaseMessage):
 legume.messages.message_factory.add(PlanetUpdate)
 legume.messages.message_factory.add(PlanetSpawn)
 legume.messages.message_factory.add(ShipUpdate)
+legume.messages.message_factory.add(ShipUpdateFull)
 legume.messages.message_factory.add(ShipSpawn)
 legume.messages.message_factory.add(FloaterUpdate)
+legume.messages.message_factory.add(FloaterUpdateFull)
 legume.messages.message_factory.add(FloaterSpawn)
 legume.messages.message_factory.add(PartUpdate)
+legume.messages.message_factory.add(PartUpdateFull)
 legume.messages.message_factory.add(PartSpawn)
 legume.messages.message_factory.add(SystemUpdate)
 legume.messages.message_factory.add(SystemSpawn)

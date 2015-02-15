@@ -20,12 +20,13 @@ class Planet(Floater):
 		Floater.__init__(self, starsystem.universe, pos, delta, radius = radius, image = image)
 		self.mass = mass #determines gravity.
 		self.color = color
+		self.spawncost = 5
 		self.starSystem = starsystem
 		self.firstname = "Planet"
 		self.secondname = "Unknown"
 		self.g = grav
 		self.damage = {}	
-		#see solarSystem.planet_ship_collision
+		self.ships = []
 		self.race = None #race that owns this planet
 		self.fps = 10
 		if image == None:
