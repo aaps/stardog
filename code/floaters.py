@@ -6,24 +6,9 @@ import stardog
 from vec2d import Vec2d
 import math
 from particles import *
+from SoundSystem import *
 
 FPS = 200
-MISSILE_RADIUS = 50
-SOUND_RADIUS = 3000
-
-
-def setVolume(channel, floater1, floater2):
-    from spaceship import Player
-    """sets volume for a channel based on the distance between
-     the player and floater."""
-    distance = floater2.pos.get_distance(floater1.pos)
-    if channel and floater1 and floater2:
-        volume = 0.0
-        if distance < SOUND_RADIUS and (isinstance(floater1, Player) or
-           isinstance(floater2, Player)):
-            volume = math.sqrt((SOUND_RADIUS - distance)**1.8 /
-                               (SOUND_RADIUS + .001)**1.8)
-        channel.set_volume(volume)
 
 BULLET_IMAGE = loadImage("res/ammo/shot.png")
 MISSILE_IMAGE = loadImage("res/ammo/missile.png")

@@ -113,16 +113,18 @@ def not0(num):
     return .000001
 
 sqrt = math.sqrt
-#random generators:
+# random generators:
 r = random.Random()
 rand = r.random
 randint = r.randint
 randnorm = r.normalvariate
+
+
 def randColor(min, max):
     return (randint(min[0],max[0]), randint(min[1],max[1]), \
             randint(min[2],max[2]))
 
-#setup fonts
+# setup fonts
 try:
     pygame.font.init()  
     SMALL_FONT = pygame.font.Font("res/hardfont.ttf", 14)    
@@ -137,35 +139,35 @@ except:
     fontModule = False
     print "Font module not found. Text will not be printed."
 
-#setup sounds   
-try:
-    pygame.mixer.init(44100)
+# # setup sounds
+# try:
+#     pygame.mixer.init(44100)
 
-    shootSound = pygame.mixer.Sound("res/sound/lazer.ogg")
-    hitSound = pygame.mixer.Sound("res/se_sdest.wav")
-    explodeSound = pygame.mixer.Sound("res/se_explode03.wav")
-    missileSound =  pygame.mixer.Sound("res/se_explode02.wav")
-    messageSound =  pygame.mixer.Sound("res/sound/message pip.ogg")
+#     shootSound = pygame.mixer.Sound("res/sound/lazer.ogg")
+#     hitSound = pygame.mixer.Sound("res/se_sdest.wav")
+#     explodeSound = pygame.mixer.Sound("res/se_explode03.wav")
+#     missileSound = pygame.mixer.Sound("res/se_explode02.wav")
+#     messageSound = pygame.mixer.Sound("res/sound/message pip.ogg")
 
-    #load al ambient music (for now just travel music)
-    #might also load fighting music this way. 
-    #and question music and other kinds of music.
-    travelMusicDir = "res/sound/ambientSound/"
-    travelMusic = []
-    for musicfile in os.listdir(travelMusicDir):
-        sound = pygame.mixer.Sound(travelMusicDir+str(musicfile))
-        travelMusic.append(sound)
+#     # load al ambient music (for now just travel music)
+#     # might also load fighting music this way. 
+#     # and question music and other kinds of music.
+#     travelMusicDir = "res/sound/ambientSound/"
+#     travelMusic = []
+#     for musicfile in os.listdir(travelMusicDir):
+#         sound = pygame.mixer.Sound(travelMusicDir+str(musicfile))
+#         travelMusic.append(sound)
 
-    # for now choose a random music number to play
-    randIndex = random.randint(0, len(travelMusic)-1)
-    print os.listdir(travelMusicDir)[randIndex]
-    travelMusic[randIndex].play(-1)
-    travelMusic[randIndex].set_volume(0.15)
+#     # for now choose a random music number to play
+#     randIndex = random.randint(0, len(travelMusic)-1)
+#     print os.listdir(travelMusicDir)[randIndex]
+#     travelMusic[randIndex].play(-1)
+#     travelMusic[randIndex].set_volume(1.00)
 
-    soundModule = True
-except (ImportError, NotImplementedError):
-    soundModule = False
-    print "Sound module not found. Sounds disabled."
+#     soundModule = True
+# except (ImportError, NotImplementedError):
+#     soundModule = False
+#     print "Sound module not found. Sounds disabled."
 # setup images
 # if there is extended image support, load .gifs, otherwise load .bmps.
 # .bmps do not support transparency, so there might be black clipping.
@@ -212,8 +214,6 @@ def colorShift(surface, color, colorkey = (0,0,0)):
 def collisionTest(a, b):
     """test spatial collision of Floaters a and b"""
     return a != b and a.pos.get_distance(b.pos) < (a.radius + b.radius)
-
-
 
 
 def linePointDist(linePoint1, linePoint2, point, infinite = False):
