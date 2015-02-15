@@ -163,6 +163,7 @@ class ChatConsole(TopLevelPanel, Controllable):
         w = 80
         self.console = Console(subFrameRect, game)
         self.panels.append(self.console)
+
     
     def handleEvent(self, event):
         for panel in self.panels:
@@ -212,7 +213,6 @@ class Menu(TopLevelPanel, Controllable):
         self.setActiveMenu(self.parts)
 
     def setActiveMenu(self, menu):
-        
         if self.activeMenu:
             self.panels.remove(self.activeMenu)
         self.activeMenu = menu
