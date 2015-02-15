@@ -316,41 +316,43 @@ class Impact(Floater):
         self.maxRadius = int(radius)
         self.radius = 0
         self.time = time
-        self.emitters.append(RingEmitter( self, self.condAlways , 0, 5, 5, 10,  (255,255,255,250), (100,100,255,1), 0.5, 1, 10, 10, 1, 5, True))
+        self.emitters.append(RingEmitter(self, self.condAlways, 0, 5, 5, 10,
+                             (255, 255, 255, 250), (100, 100, 255, 1), 0.5,
+                             1, 10, 10, 1, 5, True))
 
     def update(self):
         self.life += 1. / self.fps
         if self.life > self.time:
             Floater.kill(self)
         if self.life < self.time / 4:
-            self.radius = int(self.maxRadius * self.life * 4 / self.time)
+            self.radius = int(self.maxRadius*self.life*4/self.time)
         else:
-            self.radius = int(self.maxRadius * (self.time * 4 / 3 - self.life * 4 / 3) / self.time)
+            self.radius = int((self.maxRadius*(self.time*4/3-self.life*4/3) /
+                               self.time))
         Floater.update(self)
-
-
-
 
     def takeDamage(self, damage, other):
         pass
 
-    
+
 class LaserBeam(Floater):
     """LaserBeam(game, laser, damage, range) -> new LaserBeam
 
     A LaserBeam is the projectile of a Laser.  They are line segments
-    that reach their end point instantly.  A LaserBeam has a different 
-    collision mechanism: they use line/circle collision, and it is checked 
+    that reach their end point instantly.  A LaserBeam has a different
+    collision mechanism: they use line/circle collision, and it is checked
     during initialization."""
 
     baseImage = loadImage("res/ammo/laser.png").convert_alpha()
     # baseImage.set_colorkey(BLACK)
-    
+
     def __init__(self, universe, laser, damage, range):
         dir = laser.dir + laser.ship.dir
-        cost = cos(dir) #cost is short for cos(theta)
-        sint = sin(dir)
-        pos = laser.pos + Vec2d(laser.shootPoint).rotated(dir) + laser.ship.delta / universe.game.fps
+        # cost is short for cos(theta)
+        # cost = cos(dir)
+        # sint = sin(dir)
+        pos = (laser.pos + Vec2d(laser.shootPoint).rotated(dir) +
+               laser.ship.delta / universe.game.fps)
 
         start = pos
         dir = laser.dir + laser.ship.dir + laser.shootDir
@@ -358,10 +360,10 @@ class LaserBeam(Floater):
 
         stop = pos.rotatedd(dir, range)
 
-        Floater.__init__(self, universe, (start + stop) / 2, laser.ship.delta, dir,
-                        radius = 0)
-
-        self.life = .5 #seconds
+        Floater.__init__(self, universe, (start + stop) / 2, laser.ship.delta,
+                         dir, radius=0)
+        # seconds
+        self.life = .5
         self.hp = 0
         self.tangible = False
         self.damage = damage
@@ -377,10 +379,15 @@ class LaserBeam(Floater):
         self.life = laser.imageDuration
         self.ship = laser.ship
         self.width = laser.beamWidth
-        self.image = pygame.transform.rotate(
-                    pygame.transform.scale(
-                    colorShift(self.baseImage, (bulletColor(self.damage))),
-                    (int(length), 5)), -dir).convert_alpha()
+
+        self.image = colorShift(self.baseImage, (bulletColor(self.damage)))
+        self.image = pygame.transform.scale(self.image, (int(length), 5))
+        self.image = pygame.transform.rotate(self.image, -dir).convert_alpha()
+
+        # self.image = pygame.transform.rotate(
+        #             pygame.transform.scale(
+        #             colorShift(self.baseImage, (bulletColor(self.damage))),
+        #             (int(length), 5)), -dir).convert_alpha()
         if 'target' in laser.ship.__dict__:
             self.curtarget = laser.ship.curtarget
         self.universe.curSystem.specialOperations.append(self.collision)
