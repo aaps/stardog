@@ -16,8 +16,9 @@ def setVolume(channel, floater1, floater2):
     from spaceship import Player
     """sets volume for a channel based on the distance between
      the player and floater."""
-    distance = floater2.pos.get_distance(floater1.pos)
+    
     if channel and floater1 and floater2:
+        distance = floater2.pos.get_distance(floater1.pos)
         volume = 0.0
         if distance < SOUND_RADIUS and (isinstance(floater1, Player) or
            isinstance(floater2, Player)):

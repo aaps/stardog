@@ -129,7 +129,21 @@ class SpaceView(object):
         self.height = 100
 
     def update(self):
-        self.game.universe.curSystem.update()
+        pass
+        # self.game.universe.curSystem.update()
+        
+
+    def sortFloaterHeight(self, onscreen):
+        if isinstance(onscreen, Planet):
+            return 4
+        elif isinstance(onscreen, Impact):
+            return 5
+        elif isinstance(onscreen, Explosion):
+            return 3
+        else:
+            return 1
+
+    def draw(self, surface, pos):
         self.onScreen = []
         self.offset = Vec2d(self.camera.pos.x - self.camera.width / 2,
                             self.camera.pos.y - self.camera.height / 2)
@@ -143,17 +157,6 @@ class SpaceView(object):
             if leftRight and upDown:
                 self.onScreen.append(floater)
 
-    def sortFloaterHeight(self, onscreen):
-        if isinstance(onscreen, Planet):
-            return 4
-        elif isinstance(onscreen, Impact):
-            return 5
-        elif isinstance(onscreen, Explosion):
-            return 3
-        else:
-            return 1
-
-    def draw(self, surface, pos):
         self.onScreen = sorted(self.onScreen, key=lambda onscreen: self.sortFloaterHeight(onscreen))
         for floater in self.onScreen:
             floater.draw(surface, self.offset)

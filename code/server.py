@@ -42,7 +42,7 @@ class GameServer(object):
 		msg = messages.FloaterUpdate()
 		return msg
 
-		def getFloaterUpdateFullMessage(self, entity):
+	def getFloaterUpdateFullMessage(self, entity):
 		msg = messages.FloaterUpdateFull()
 		return msg
 

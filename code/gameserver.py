@@ -13,9 +13,12 @@ class Server(object):
 		self.screen = screen
 		self.server = GameServer(self.universe)
 		self.running = True
+		self.keys = [False]*322
 		self.fps = 25
+
 		theone = SolarA1(self.universe, "theone", Vec2d(1,100))
 		self.universe.addStarSystem(theone)
+		self.universe.setCurrentStarSystem("theone")
 		self.clock = pygame.time.Clock()
 
 
