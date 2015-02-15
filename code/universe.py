@@ -37,7 +37,7 @@ class Universe(object):
 			camera.draw(surface)
 	
 
-
+	# wened this dont remove
 	# def getAllNeighbors(self, name):
 	# 	portals = []
 	# 	systems = []

@@ -21,7 +21,7 @@ class StarSystem(object):
 		self.universe = universe
 		self.floaters = pygame.sprite.Group()
 		self.player = None
-		self.ships = pygame.sprite.Group()
+		# self.ships = pygame.sprite.Group()
 		self.specialOperations = []
 		self.bg = BGImage(self.universe) # the background layer
 		pygame.mixer.music.load("res/sound/space music.ogg")
@@ -81,7 +81,7 @@ class StarSystem(object):
 
 		for planet in self.planets:
 			
-			if not planet.ships.sprites() and not isinstance(planet, Star):
+			if not isinstance(planet, Star) :
 				if planet.respawn > 0:#countdown the timer
 					planet.respawn -= 1. / self.universe.game.fps
 					continue
@@ -93,11 +93,11 @@ class StarSystem(object):
 					
 						angle = randint(0, 360)
 						pos = planet.pos.rotatedd(angle, planet.radius + 300)
-						name = nameMaker().getUniqePilotName(self.ships)
+						name = nameMaker().getUniqePilotName(self.floaters)
 						
 						ship = Strafebat(self.universe, pos,  planet.color, name)
 						
-						planet.ships.add(ship)
+						# planet.ships.add(ship)
 						self.add(ship)
 						ship.planet = planet
 		
@@ -105,8 +105,8 @@ class StarSystem(object):
 	def add(self, floater):
 		"""adds a floater to this game."""
 		self.floaters.add(floater)
-		if isinstance(floater, Ship):
-			self.ships.add(floater)
+		# if isinstance(floater, Ship):
+		# 	self.ships.add(floater)
 		if isinstance(floater, Player):
 			
 			
@@ -120,7 +120,7 @@ class StarSystem(object):
 			self.player = floater
 		
 	def empty(self):
-		self.ships.empty()
+		# self.ships.empty()
 		self.floaters.empty()
 
 
@@ -281,7 +281,7 @@ class SolarA1(StarSystem):
 				
 		for planet in self.planets:
 			planet.numShips = 0
-			planet.ships = pygame.sprite.Group()
+			# planet.ships = pygame.sprite.Group()
 			planet.respawn = 30
 			self.add(planet)
 

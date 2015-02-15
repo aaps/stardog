@@ -15,18 +15,30 @@ hardwareFlag = pygame.HWSURFACE|pygame.DOUBLEBUF
 
 if __name__=="__main__":
     #command line resolution selection:
+    run = 'client'
     if len(sys.argv) > 1:
+        print sys.argv
         try:
-            if sys.argv[1] == 'f' or sys.argv[1] == 'full':
-                FULL = True
-                RESOLUTION = None
-            else:
-                FULL = False
-            if len(sys.argv) == 4 \
-            and 300 <= int(sys.argv[2]) < 4000 \
-            and 300 <= int(sys.argv[3]) < 4000:
-                RESOLUTION = int(sys.argv[2]), int(sys.argv[3])
-        except:
+            if sys.argv[1] == 'client':
+              
+              if sys.argv[2] == 'f' or sys.argv[2] == 'full':
+                  FULL = True
+                  RESOLUTION = None
+              else:
+                  FULL = False
+              if len(sys.argv) == 4 \
+              and 300 <= int(sys.argv[2]) < 4000 \
+              and 300 <= int(sys.argv[3]) < 4000:
+                  RESOLUTION = int(sys.argv[2]), int(sys.argv[3])
+
+            elif sys.argv[1] == 'server':
+                run = 'server'
+                RESOLUTION = (100,100)
+
+         
+
+        except Exception, err:
+            print err
             print("bad command line arguments.")
     #set up the disply:
     pygame.init()
@@ -60,8 +72,16 @@ if __name__=="__main__":
     datatuple, masktuple = pygame.cursors.compile( thickarrow_strings,
                                       black='X', white='.', xor='o' )
     pygame.mouse.set_cursor( (16,16), (0,0), datatuple, masktuple )
-import code.game
+
+
+
+
 if __name__ == '__main__':
-    game = code.game.Game(screen)
-    
-    game.run()
+    if run is 'client':
+      import code.game
+      game = code.game.Game(screen)
+      game.run()
+    else:
+      import code.gameserver
+      game = code.gameserver.Server(screen)
+      game.run()

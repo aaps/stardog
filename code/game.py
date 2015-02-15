@@ -16,6 +16,7 @@ from vec2d import Vec2d
 import datetime
 #command parsing
 import commandParse
+from client import *
 
 try:
     from pympler import summary
@@ -49,6 +50,7 @@ class Game(object):
         self.screen = screen
         self.top_left = 0, 0
         self.universe = Universe(self)
+        self.client = GameClient(self.universe)
         
         self.width = screen.get_width()
         self.height = screen.get_height()
@@ -95,6 +97,7 @@ class Game(object):
         
     def run(self):
         """Runs the game."""
+        self.client.connect()
         self.running = True
         while self.running:
             # game setup:
@@ -152,7 +155,7 @@ class Game(object):
             self.commandParse = commandParse.CommandParse(self, self.chatconsole, self.messenger)
             #The in-round loop (while player is alive):
             
-            while self.running and self.universe.curSystem.ships.has(self.player):
+            while self.running and self.universe.curSystem.floaters.has(self.player):
                 #event polling:
                 pygame.event.pump()
                 for event in pygame.event.get():
@@ -201,6 +204,7 @@ class Game(object):
 
                 self.universe.update()
                 self.universe.draw(self.screen)
+                self.client.update()
 
                 # self.camera.update()
                 # self.camera.draw(self.screen)

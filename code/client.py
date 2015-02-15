@@ -2,8 +2,6 @@ import legume
 import messages
 import time
 
-
-
 class GameClient(object):
 	def __init__(self, universe):
 		self.universe = universe
@@ -18,18 +16,20 @@ class GameClient(object):
 			self._client.connect((host, messages.PORT))
 
 	def on_message(self, sender, msg):
-	    if legume.messages.message_factory.is_a(msg, 'EntityUpdate'): 
-	    	self.message_player(msg)
-	    elif legume.messages.message_factory.is_a(msg, 'EntityCreate'):
-	    	print msg
-	    else:
-	        raise KeyError() #add message typr!
-	        print('Message: %s' % args)
+		# pass
+		if legume.messages.message_factory.is_a(msg, 'EntityUpdate'): 
+			pass
+			# put the updates for the planets, floaters and ships here
+		elif legume.messages.message_factory.is_a(msg, 'EntityCreate'):
+			pass
+			#put create planet, floaters, and ships here
+
+
+		else:
+			raise KeyError() #add message typr!
+			print('Message: %s' % args)
 
 	def update(self):
-
-		                    
-
 
 		for system in self.universe.starSystems:
 			for floater in system.floaters:
@@ -37,11 +37,13 @@ class GameClient(object):
 		self._client.update()
 
 	def showEntity(self, endpoint, entity):
-		msg = messages.EntityUpdate()
-		msg.frame_number.value = 5
-		msg.x.value = entity.pos.x
-		msg.y.value = entity.pos.y
-		msg.dx.value = entity.delta.x
-		msg.dy.value = entity.delta.y
-		try: endpoint.send_message(msg) #fix: check connectivity
-		except: pass 
+		pass
+		#dont send annything to the server yet, only after we get the ghost of the server in the clients
+		# msg = messages.EntityUpdate()
+		# msg.frame_number.value = 5
+		# msg.x.value = entity.pos.x
+		# msg.y.value = entity.pos.y
+		# msg.dx.value = entity.delta.x
+		# msg.dy.value = entity.delta.y
+		# try: endpoint.send_message(msg) #fix: check connectivity
+		# except: pass 

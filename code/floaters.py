@@ -2,7 +2,7 @@
 
 from utils import *
 from pygame.locals import *
-import stardog
+# import stardog
 from vec2d import Vec2d
 import math
 from particles import *

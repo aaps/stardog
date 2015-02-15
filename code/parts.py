@@ -1094,7 +1094,7 @@ class GatewayFocus(Part):
                 newsystem.floaters.add(self.ship)
                 newsystem.ships.add(self.ship)
                 self.universe.curSystem.player = None
-                self.universe.curSystem.ships.remove(self)
+                # self.universe.curSystem.ships.remove(self)
                 self.universe.curSystem.floaters.remove(self)
                 self.universe.curSystem = newsystem
                 self.ship.pos = self.ship.atgateway.sister.pos

@@ -1,0 +1,5 @@
+* put all floaters in a system, planets, bullets, players, ships, parts, etc info the floater list, not seperate list for planets, floaters, ships etc
+
+* make two lists one spawn list and one life list, there can only be so manny items from spawn list that can go into life list per second, to keep fps constant or more constant.
+
+* also the spawn list is used to get the network messages for spawning accros.
