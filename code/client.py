@@ -17,7 +17,7 @@ class GameClient(object):
 
 	def on_message(self, sender, msg):
 		# pass
-		if legume.messages.message_factory.is_a(msg, 'EntityUpdate'): 
+		if legume.messages.message_factory.is_a(msg, 'FloaterUpdate'): 
 			pass
 			# put the updates for the planets, floaters and ships here
 		elif legume.messages.message_factory.is_a(msg, 'EntityCreate'):
@@ -39,7 +39,7 @@ class GameClient(object):
 	def showEntity(self, endpoint, entity):
 		pass
 		#dont send annything to the server yet, only after we get the ghost of the server in the clients
-		# msg = messages.EntityUpdate()
+		# msg = messages.FloaterUpdate()
 		# msg.frame_number.value = 5
 		# msg.x.value = entity.pos.x
 		# msg.y.value = entity.pos.y
