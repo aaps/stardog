@@ -259,40 +259,44 @@ class StarField(Drawable):
             for star in self.stars:
                 x = int(star[0] - self.player.pos.x / star[2]) % (self.universe.game.width-1)
                 y = int(star[1] - self.player.pos.y / star[2]) % (self.universe.game.height-1)
-                """drawing stars with set_at draws points. with draw.line draws lines."""
+                """ drawing stars with set_at draws points. with draw.
+                    line draws lines."""
                 pygame.draw.line(surface, star[3], (x, y),
                                  (x+xstarlen, y+ystarlen), 1)
 
 
 class BGImage(Drawable):
     pic = None
-    
+
     def __init__(self, universe):
         Drawable.__init__(self, universe)
-        self.pic = pygame.transform.scale(loadImage('res/Tarantula Nebula.jpg', None), 
-                    (self.universe.game.width,self.universe.game.height))
+        rect = (self.universe.game.width, self.universe.game.height)
+        directory = 'res/Tarantula Nebula.jpg'
+        self.pic = pygame.transform.scale(loadImage(directory, None), rect)
 
     def draw(self, surface):
-        surface.blit(self.pic, (0,0))
-            
+        surface.blit(self.pic, (0, 0))
+
+
 class MiniInfo(Drawable):
     color = (100, 100, 255)
     font = SMALL_FONT
-    maxChars = 50 #line width
-    bottomleft = 0,0
+    # line width
+    maxChars = 50
+    bottomleft = 0, 0
     targimage = None
     mutatedimage = None
     texts = []
 
-
-    def __init__(self, universe,font = SMALL_FONT):
+    def __init__(self, universe, font=SMALL_FONT):
         Drawable.__init__(self, universe)
-        self.bottomleft = 2,  self.universe.game.height - int(self.universe.game.height/ 4 ) 
+        self.bottomleft = (2, self.universe.game.height -
+                           int(self.universe.game.height / 4))
         # self.game = game
         self.targ = None
         self.width = int(self.universe.game.width / 8)
-        self.height = int(self.universe.game.height/ 4 )
-        self.image = pygame.Surface((self.width,self.height))
+        self.height = int(self.universe.game.height / 4)
+        self.image = pygame.Surface((self.width, self.height))
         self.image.set_alpha(200)
         self.palette = tuple([(i, i, i) for i in range(256)])
 
@@ -300,24 +304,26 @@ class MiniInfo(Drawable):
         if self.player:
             self.targ = self.player.curtarget
 
-
     def draw(self, surface):
         self.image.fill((0, 0, 80))
         if self.targ:
             self.texts = []
             # speed = makeMs(self.targ)
             name = ""
-            linedeltastart = Vec2d(10,180)
-            linedirstart = Vec2d(40,180)
+            linedeltastart = Vec2d(10, 180)
+            linedirstart = Vec2d(40, 180)
             pygame.draw.circle(self.image, MINI2, linedeltastart, 10, 1)
-            pygame.draw.line(self.image, MINI2, linedeltastart, self.targ.delta.normalized()*10+linedeltastart)
-            distance = "Distance Km:" + makeKMdistance(self.player,self.targ)
+            pygame.draw.line(self.image, MINI2, linedeltastart,
+                             self.targ.delta.normalized()*10+linedeltastart)
+            distance = "Distance Km:" + makeKMdistance(self.player, self.targ)
             pygame.draw.circle(self.image, MINI2, linedirstart, 10, 1)
-            pygame.draw.line(self.image, MINI2, linedirstart, (self.targ.pos-self.player.pos).normalized()*10+linedirstart)
+            pygame.draw.line(self.image, MINI2, linedirstart,
+                             (self.targ.pos-self.player.pos).normalized()*10+linedirstart)
 
             if isinstance(self.targ, Ship):
-                linedirstart = Vec2d(100,180)
-                pygame.draw.circle(self.image, SUPER_WHITE, linedirstart, 10, 1)
+                linedirstart = Vec2d(100, 180)
+                pygame.draw.circle(self.image, SUPER_WHITE,
+                                   linedirstart, 10, 1)
                 pygame.draw.line(self.image, SUPER_WHITE, linedirstart, linedirstart.normalized().rotated(self.targ.dir)*10+linedirstart)
                 name = self.targ.firstname + " " + self.targ.secondname
                 if not self.targimage == self.targ.greyImage:
@@ -326,7 +332,6 @@ class MiniInfo(Drawable):
                     self.mutatedimage = pygame.transform.rotozoom(self.targimage, 90,2)      
                 offset = ((self.width/2) - (self.mutatedimage.get_width()/2), (self.height/2)-(self.mutatedimage.get_height()/2))
                 self.image.blit(self.mutatedimage, offset)
-                
             elif isinstance(self.targ, Planet):
                 name = self.targ.firstname
                 scale = self.universe.game.radarfield.radarRadius * self.universe.game.radarfield.zoomModifier
