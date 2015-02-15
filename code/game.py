@@ -190,7 +190,7 @@ class Game(object):
                         if event.key == pygame.K_m:
                             all_objects = muppy.get_objects()
                         if event.key == pygame.K_BACKSLASH:
-                           saveScreenShot("Screen-shots", self.screen)
+                            saveScreenShot("Screen-shots", self.screen)
                     elif event.type == pygame.KEYUP:
                         self.keys[event.key % 322] = 0
                     if self.menu.active:
@@ -198,20 +198,24 @@ class Game(object):
                     if self.chatconsole.active:
                         self.chatconsole.handleEvent(event)
                 # game-level key input:
-                # somehow delete key will destroy ship and when back out of menu will again destroy ship
-                # when this schript part is in scripts thats why it is still here.
+                # somehow delete key will destroy ship and when back out of
+                # menu will again destroy ship
+                # when this schript part is in scripts thats
+                # why it is still here.
                 if self.keys[K_DELETE % 322]:
                     self.keys[K_DELETE % 322] = False
-                    self.player.kill() #suicide
+                    # suicide
+                    self.player.kill()
 
                 self.debug = False
                 if self.keys[K_BACKSPACE % 322]:
                     self.keys[K_BACKSPACE % 322] = False
-                #ctrl+q or alt+F4 quit:
-                if self.keys[K_LALT % 322] and self.keys[K_F4 % 322] \
-                or self.keys[K_RALT % 322] and self.keys[K_F4 % 322] \
-                or self.keys[K_LCTRL % 322] and self.keys[K_q % 322] \
-                or self.keys[K_RCTRL % 322] and self.keys[K_q % 322]:
+                # ctrl+q or alt+F4 quit:
+                L_ALT_F4 = (self.keys[K_LALT % 322] and self.keys[K_F4 % 322])
+                R_ALT_F4 = (self.keys[K_RALT % 322] and self.keys[K_F4 % 322])
+                L_CTRL_Q = (self.keys[K_LCTRL % 322] and self.keys[K_q % 322])
+                R_CTRL_Q = (self.keys[K_RCTRL % 322] and self.keys[K_q % 322])
+                if (L_ALT_F4 or R_ALT_F4 or L_CTRL_Q or R_CTRL_Q):
                     self.running = False
 
                 for trigger in self.triggers:
@@ -232,33 +236,39 @@ class Game(object):
                 if self.chatconsole.active:
                     self.chatconsole.update()
                     self.chatconsole.draw(self.screen)
-                
-                #update actually parses input.
-                #and does actions based upon that.
+
+                # update actually parses input.
+                # and does actions based upon that.
                 self.commandParse.update()
-                #reloading logic, couldn't make it work from inside the commandParse class
-                #reloads the module so it imports new code.
+                # reloading logic, couldn't make it work
+                # from inside the commandParse class
+                # reloads the module so it imports new code.
                 if self.commandParse.reload:
                     self.commandParse.reload = False
                     reload(commandParse)
-                    self.commandParse = commandParse.CommandParse(self, self.chatconsole, self.messenger)
-                
-                #frame maintainance:
+                    self.commandParse = CommandParse(self, self.chatconsole,
+                                                     self.messenger)
+
+                # frame maintainance:
                 pygame.display.flip()
                 if self.fpscounter >= 30:
                     self.fpscounter = 0
                 self.fpses[self.fpscounter] = self.fps
-                self.fpscounter+=1
+                self.fpscounter += 1
                 self.averagefps = reduce(lambda x, y: x+y, self.fpses)/30
 
-                self.clock.tick(FPS)#aim for FPS but adjust vars for self.fps.
+                # aim for FPS but adjust vars for self.fps.
+                self.clock.tick(FPS)
                 self.fps = max(1, int(self.clock.get_fps()))
                 self.timer += 1. / self.fps
-                #try and print debuging caption
+                # try and print debuging caption
                 try:
-                    pygame.display.set_caption('Memory usage: %s (kb) FPS: %d' % (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, self.averagefps))
-                except Exception, e:
-                    pygame.display.set_caption('FPS: %d'%(self.averagefps))
-            #end round loop (until gameover)
-        #end game loop
-        #self.__init__(self.screen)
+                    disp_str = 'Memory usage: %s (kb) FPS: %d'
+                    memUse = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+                    fps = self.averagefps
+                    pygame.display.set_caption(disp_str % (memUse, fps))
+                except Exception:
+                    pygame.display.set_caption('FPS: %d' % (self.averagefps))
+            # end round loop (until gameover)
+        # end game loop
+        # self.__init__(self.screen)
