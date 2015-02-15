@@ -392,16 +392,16 @@ class LaserBeam(Floater):
             self.curtarget = laser.ship.curtarget
         self.universe.curSystem.specialOperations.append(self.collision)
 
-        
-    def intersect(self, floater, skipRect = False):
-        #check rect collide:
-        if floater != self and (skipRect or self.rect.colliderect(floater.rect)):
-            #check line-circle collide:
-            dist = linePointDist(self.start, self.stop, (floater.pos.x, floater.pos.y))
+    def intersect(self, floater, skipRect=False):
+        # check rect collide:
+        if (floater != self and
+           (skipRect or self.rect.colliderect(floater.rect))):
+            # check line-circle collide:
+            dist = linePointDist(self.start, self.stop,
+                                 (floater.pos.x, floater.pos.y))
             if dist < floater.radius:
                 return dist
 
-                
     def collision(self):
         from spaceship import Ship
         colliders = []
@@ -409,51 +409,49 @@ class LaserBeam(Floater):
             if floater.tangible and self.intersect(floater):
                 colliders.append(floater)
         if colliders:
-            #recurse for parts in a ship:
+            # recurse for parts in a ship:
             for floater in colliders:
                 if isinstance(floater, Ship):
                     for part in floater.parts:
                         if self.intersect(part, True):
                             colliders.append(part)
-            #sort so that the nearest gets hit first:
-            dir = sign(self.stop.y + self.stop.x * self.slope - 
-                    self.start.y + self.start.x * self.slope)
-            colliders.sort(key = lambda f: 
-                    (f.pos.y + f.pos.x * self.slope) * dir - f.radius)
-            #hit until damage is used up
+            # sort so that the nearest gets hit first:
+            dir = sign(self.stop.y + self.stop.x * self.slope -
+                       self.start.y + self.start.x * self.slope)
+            colliders.sort(key=lambda f: (f.pos.y+f.pos.x*self.slope) *
+                           dir-f.radius)
+            # hit until damage is used up
             for floater in colliders:
                 tmp = floater.hp
                 floater.takeDamage(self.damage, self)
                 self.damage -= tmp
-                if self.damage < 1: #fudge it for effect: 1 not 0
-                    #adjust stop based on last hit target:
-                    self.stop = (floater.pos.x, (floater.pos.x - self.start.x) 
-                                            * self.slope + self.start.y)
-                    
+                # fudge it for effect: 1 not 0
+                if self.damage < 1:
+                    # adjust stop based on last hit target:
+                    self.stop = (floater.pos.x, (floater.pos.x-self.start.x) *
+                                 self.slope+self.start.y)
                     self.length = self.start.get_distance(self.stop)
                     break
-                
-                    
+
     def update(self):
         self.life -= 1. / self.fps
         Floater.update(self)
         self.start = self.start + self.delta / self.fps
-        self.stop = self.stop  + self.delta / self.fps
+        self.stop = self.stop + self.delta / self.fps
         if self.life < 0:
             self.kill()
-    
-        
+
     def takeDamage(self, damage, other):
         pass
-    
-        
+
+
 class RadarDisk(Floater):
     baseImage = None
     color = (0, 0, 0)
     mass = 0
     tangible = False
 
-    def __init__(self, universe, pos, delta, dir = 0, radius = 10, image = None):
+    def __init__(self, universe, pos, delta, dir=0, radius=10, image=None):
         # self.game = game
         self.dir = dir
         self.pos = pos
