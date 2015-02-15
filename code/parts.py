@@ -10,8 +10,6 @@ import copy
 from particles import *
 import sys
 
-
-
 PART_OVERLAP = 0
 DETACH_SPACE = 50
 DETACH_SPEED = 100
@@ -1168,6 +1166,17 @@ class Shield(Part):
                 self.ship.energy -= self.energyCost / self.fps
         Part.update(self)
 
+class Chip(Part):
+    def __init__(self, universe):
+        Part.__init__(self, universe)
+        self.name = "Chip"
+    def stats(self):
+        pass
+    def shortstats(self):
+        pass
+    def update(self):
+        Part.update(self)
+
 class GargoHold(Part):
     baseImage = loadImage("res/parts/cargo.png")
     image = None
@@ -1190,7 +1199,7 @@ class GargoHold(Part):
         stats = (self.energyCost,)
         statString = "\n %s E/p"
         return Part.shortStats(self)+statString%(stats)
-
+        
     def update(self):
         """check how many gargholds are attached and calculate capacity on that."""
         if self.ship:

@@ -24,12 +24,12 @@ class StarSystem(object):
 		self.toSpawn = []
 		self.floaters = pygame.sprite.Group()
 		self.player = None
-		# self.ships = pygame.sprite.Group()
 		self.specialOperations = []
 		self.bg = BGImage(self.universe) # the background layer
-		pygame.mixer.music.load("res/sound/space music.ogg")
-		pygame.mixer.music.play(-1)
-		pygame.mixer.music.set_volume(.15)
+		#why must this be here ?
+		# pygame.mixer.music.load("res/sound/space music.ogg")
+		# pygame.mixer.music.play(-1)
+		# pygame.mixer.music.set_volume(.15)
 		self.planets = []
 		self.name = ""
 	
@@ -49,7 +49,6 @@ class StarSystem(object):
 		
 	def update(self):
 		"""Runs the game."""
-		print self.spawnScore
 		
 		for spawn in self.toSpawn:
 			if (self.spawnScore + spawn.spawncost) < self.spawnMax:
@@ -118,9 +117,6 @@ class StarSystem(object):
 		
 	def add(self, floater):
 		"""adds a floater to this game."""
-		# self.floaters.add(floater)
-		
-
 		if isinstance(floater, Player):
 			self.floaters.add(floater)
 			
@@ -134,6 +130,8 @@ class StarSystem(object):
 			self.player = floater
 		else:
 			self.toSpawn.append(floater)
+			self.toSpawn = sorted(self.toSpawn, key=lambda spawn: spawn.spawncost)
+
 		
 	def empty(self):
 		self.floaters.empty()
@@ -294,7 +292,6 @@ class SolarA1(StarSystem):
 				
 		for planet in self.planets:
 			planet.numShips = 0
-			# planet.ships = pygame.sprite.Group()
 			planet.respawn = 30
 			self.add(planet)
 

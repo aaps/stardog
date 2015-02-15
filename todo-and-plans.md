@@ -35,6 +35,7 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
+* what to do with the mouse hover branch ?
 * make a function in game or stardog that will check the version of game of stardog in the github repo, if repo is newer give intructions how to update via installer.
 * the ui margins and locations should be dependant on camera size and location
 * ai can use an fsm to flee attack, explore [using simplefsm] [initial ai states, atack, flee, idle]
@@ -258,6 +259,18 @@ Part making system (code)
 * thinking of a way to make a better part system, where you just make parts in parts.py
 * and it automaticly adds it to the addjectives and such. 
 * it´s now just make part add to adjectives array and that one class with attributes thing.
+
+So currently reflecting on the parts code. specificly adjectives.py
+and i am wondering a few things that might be better.
+At say for example line 29 (ENERGY_USING is list of parts)
+shouldn´t a part know of it´s self if energy using.
+like atribute of part energy_using = True or someting.
+and besides that don´t all parts use energy, what parts don´t?
+plasma bullets do, rockets don´t ? 
+
+and besides that, on line 33 you have types = [] list of parts.
+shouldn´t a part know of it´s self what part type it is?
+would make things easier ? if part new if it could have a adjective?
 
 Commanline interface
 =====
