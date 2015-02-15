@@ -131,7 +131,7 @@ class Structure(Planet):
 		self.firstname = "Structure Unknown"
 		self.color = BLUE
 		self.g = grav
-		self.starsystem = starsystem
+		self.starSystem = starsystem
 		self.damage = {}	
 		self.radius = radius
 		#see solarSystem.planet_ship_collision
@@ -164,7 +164,7 @@ class Gateway(Planet):
 		
 		self.image = pygame.Surface((radius*2, radius*2), flags = hardwareFlag).convert()
 		self.image.set_colorkey(BLACK)
-		
+		self.starSystem = starsystem
 		maxRadius = 50000 # no gravity felt past this (approximation).
 		self.tangible = True
 		self.g = 5000 # the gravitational constant.
