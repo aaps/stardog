@@ -26,30 +26,32 @@ class IntroMenu(TopLevelPanel):
     
     def rootChoose(self):
         self.panels = []
-        self.addPanel(Label(Rect(120,50,200,20), "STARDOG !", color=SUPER_WHITE, font=BIG_FONT))
-        self.addPanel(Label(Rect(120,80,200,20), "The future is annoying !", color=SUPER_WHITE, font=FONT))
-        self.addPanel(Button( Rect(120, 200, 100, 25), self.colorChoose, "Start", font=BIG_FONT))
-        self.addPanel(Button( Rect(120, 240, 100, 25), self.volumeChoose, "Sound", font=BIG_FONT))
-        self.addPanel(Button( Rect(120, 280, 100, 25), self.creditsChoose, "Credits", font=BIG_FONT))
-        self.addPanel(Button( Rect(120, 320, 100, 25), self.quitChoose, "Quit", font=BIG_FONT))
+        self.addPanel(Label(Rect(120, 50, 200, 20), "STARDOG !", color=SUPER_WHITE, font=BIG_FONT))
+        self.addPanel(Label(Rect(120, 80, 200, 20), "The future is annoying !", color=SUPER_WHITE, font=FONT))
+        self.addPanel(Button(Rect(120, 200, 100, 25), self.colorChoose, "Start", font=BIG_FONT))
+        self.addPanel(Button(Rect(120, 240, 100, 25), self.volumeChoose, "Sound", font=BIG_FONT))
+        self.addPanel(Button(Rect(120, 280, 100, 25), self.creditsChoose, "Credits", font=BIG_FONT))
+        self.addPanel(Button(Rect(120, 320, 100, 25), self.quitChoose, "Quit", font=BIG_FONT))
 
 
     def volumeChoose(self):
         self.panels = []
-        self.addPanel(Label(Rect(120,50,200,20), "Music Volume:", color=SUPER_WHITE, font=BIG_FONT))
-        self.addPanel(Label(Rect(320,50,200,20), "SFX Volume:", color = SUPER_WHITE, font = BIG_FONT))
-        self.addPanel(Button( Rect(120, 280, 100, 20), self.cooseVolume, "Confirm"))
+        self.addPanel(Label(Rect(120, 50, 200, 20), "Music Volume:", color=SUPER_WHITE, font=BIG_FONT))
+        self.addPanel(Label(Rect(320, 50, 200, 20), "SFX Volume:", color = SUPER_WHITE, font = BIG_FONT))
+        self.addPanel(Button(Rect(120, 280, 100, 20), self.cooseVolume, "Confirm"))
 
-        self.addPanel(Slider( Rect(120,80,20,175), self.setMusicVolume))
-        self.addPanel(Slider( Rect(320,80,20,175), self.setSFXVolume))
+        self.addPanel(Slider(Rect(120, 80, 20, 175),
+                             self.setMusicVolume, MUSIC_VOLUME))
+        self.addPanel(Slider(Rect(320, 80, 20, 175),
+                             self.setSFXVolume, SFX_VOLUME))
 
     def colorChoose(self):
         self.panels = []
         # ship color controle
-        self.addPanel(Label(Rect(100,30,200,20), "Choose a color:", color = SUPER_WHITE, font = BIG_FONT))
-        self.addPanel(Label(Rect(120,50,200,20), "Red:", color = SUPER_WHITE, font = BIG_FONT))
-        self.addPanel(Label(Rect(220,50,200,20), "Green:", color = SUPER_WHITE, font = BIG_FONT))
-        self.addPanel(Label(Rect(320,50,200,20), "Blue:", color = SUPER_WHITE, font = BIG_FONT))
+        self.addPanel(Label(Rect(100, 30, 200, 20), "Choose a color:", color = SUPER_WHITE, font = BIG_FONT))
+        self.addPanel(Label(Rect(120, 50, 200, 20), "Red:", color = SUPER_WHITE, font = BIG_FONT))
+        self.addPanel(Label(Rect(220, 50, 200, 20), "Green:", color = SUPER_WHITE, font = BIG_FONT))
+        self.addPanel(Label(Rect(320, 50, 200, 20), "Blue:", color = SUPER_WHITE, font = BIG_FONT))
 
 
         self.addPanel(Button( Rect(120, 280, 100, 20), self.chooseColor, "Confirm"))
@@ -103,7 +105,7 @@ class IntroMenu(TopLevelPanel):
         setMusicVolume(value)
 
     def setSFXVolume(self, value):
-        pass
+        setSFXVolume(value)
 
     def cooseVolume(self):
         self.rootChoose()
