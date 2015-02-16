@@ -299,6 +299,11 @@ crew [done]
 bays
 =====
 * a part that is a cargo bay, bigger bay more part that can be carried [Done]
+- make the gargohold hold parts, instead of that it just increases the size of parts that can be kept in the ship.
+- for example you find a abandoned gargohold and it has nice goodies in it :)
+* gargholds are verry wel suited for plot twists, you'll never know what is inside till you pick it up.
+* and enemy could be inside, or poisonus things. or radio active things. or other things. you get the point.
+
 * mechBay for forging stuff like parts and gun  and like that. 
 
 Freighter [done]
