@@ -112,7 +112,7 @@ class RadarField(Drawable):
                            self.center, self.radarRadius)
         self.maskimage.set_colorkey(BLACK)
         self.targimage = pygame.Surface((8, 8))
-        targetRect(self.targimage, RADAR4, BLACK, (4, 4), 2, 2)
+        targetRect(self.targimage, MINI2, BLACK, (4, 4), 2, 2)
         self.targimage.set_colorkey(BLACK)
 
     def draw(self, surface):
@@ -125,7 +125,7 @@ class RadarField(Drawable):
         # draw floating part dots:
         if self.player:
             if (self.player.radars[-1].disk and self.player.radars[-1].enabled and int(self.player.radars[-1].disk.radius / scale + 2) < 100):
-                pygame.draw.circle(self.image, RADAR3, center, int(self.player.radars[-1].disk.radius / scale + 2), 1)
+                pygame.draw.circle(self.image, HUD1, center, int(self.player.radars[-1].disk.radius / scale + 2), 1)
             if self.universe.curSystem in self.player.knownsystems:
                 for planet in self.player.knownsystems[self.universe.game.universe.curSystem]:
                     result = planet.pos - self.player.pos
@@ -134,7 +134,7 @@ class RadarField(Drawable):
                     if collisionTest(Floater(self.universe.game, Vec2d(dotPos), Vec2d(0, 0), 0, 0), Floater(self.universe.game, Vec2d(center), Vec2d(0, 0), 0, 100)):
                         color = planet.color
                         if self.player.curtarget == planet:
-                            targetRect(self.image, RADAR4, RADAR2, dotPos, r, 2)
+                            targetRect(self.image, MINI2, SHIPDAMAGE, dotPos, r, 2)
                         pygame.draw.circle(self.image, color, dotPos, r)
                     else:
                         color = (255, 250, 0)
@@ -225,7 +225,7 @@ class TargetingRect(Drawable):
         if self.player and self.player.curtarget and not isinstance(self.player.curtarget, Planet) and self.player.curtarget in self.universe.game.spaceview.onScreen:
             if self.image.get_width() != self.player.curtarget.radius:
                 self.image = pygame.Surface((self.player.curtarget.radius*2+4, self.player.curtarget.radius*2+4))
-                targetRect(self.image, RADAR12, BLACK , (self.image.get_width()/2, self.image.get_height()/2), self.player.curtarget.radius, 2)
+                targetRect(self.image, MINI2, BLACK , (self.image.get_width()/2, self.image.get_height()/2), self.player.curtarget.radius, 2)
                 self.image.set_colorkey(BLACK)
 
             result = (self.player.curtarget.pos - self.player.pos).inttup()

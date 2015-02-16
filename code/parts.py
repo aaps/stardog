@@ -75,8 +75,8 @@ class Part(Floater):
          #each element is the part there, (x,y,dir) position of the connection.
          #the example is at the bottom of the part, pointed down.
         self.ports = [Port(Vec2d(-self.width / 2, 0), 0, self)]
-        self.emitters.append(Emitter( self, self.condHalfDamage , 180, 10, 20, PARTICLE2, PARTICLE1, 4, 5, 5, 3, 5, True))
-        self.emitters.append(Emitter( self, self.condThQuarterDamage , 180, 40, 50, PARTICLE3, PARTICLE4, 0, 1, 1, 1, 2.5, True))
+        self.emitters.append(Emitter( self, self.condHalfDamage , 180, 10, 20, BLACK, PARTICLE1, 4, 5, 5, 3, 5, True))
+        self.emitters.append(Emitter( self, self.condThQuarterDamage , 180, 40, 50, PARTICLE3, RED, 0, 1, 1, 1, 2.5, True))
         
     def setFPS(self, fps):
         for port in self.ports:

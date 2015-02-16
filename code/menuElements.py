@@ -9,7 +9,7 @@ from pygame.locals import *
 class Panel(object):
     """Panel(mouse, rect) -> new Panel. 
     The basic building block of the menu system. """
-    color = INPUTFIELD
+    color = BS1
     image = None
     drawBorder = True
     bgColor = None
@@ -229,7 +229,7 @@ class Slider(Panel):
             newrect = Rect(rect[0] + (rect[2]/2)-10,rect[3]+rect[1]-10, rect[2], 10)
         self.dragable = Dragable(newrect,self)
         self.dragable.color = DRAGGABLE
-        self.dragable.bgColor = DRAGGABLE2
+        self.dragable.bgColor = BS1
         self.addPanel(self.dragable)
         
 
@@ -337,7 +337,7 @@ class InputField(Panel):
     drawBorder = False
     image = None
     
-    def __init__(self, rect, game, function = None, font = BIG_FONT, color = INPUTFIELD, width = 20):
+    def __init__(self, rect, game, function = None, font = BIG_FONT, color = BS1, width = 20):
         self.text = ""
         self.game = game
         self.function = function
@@ -818,10 +818,10 @@ class Selecter(ScrollPanel):
         ScrollPanel.draw(self, surface, rect)
 
 class Label(Panel):
-    """Label(self,  rect, text, color = INPUTFIELD, font = FONT) ->
+    """Label(self,  rect, text, color = BS1, font = FONT) ->
     A panel with a single line of text."""
     drawBorder = False
-    def __init__(self, rect, text, font = FONT, color =INPUTFIELD,corners = [5,0,5,0]):
+    def __init__(self, rect, text, font = FONT, color = BS1,corners = [5,0,5,0]):
         Panel.__init__(self, rect,corners)
         self.text = text
         self.color = color

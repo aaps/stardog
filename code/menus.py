@@ -22,9 +22,27 @@ class IntroMenu(TopLevelPanel):
         self.game = game
         self.running = True
         self.game.playerColor = [255,255,255]
-        self.colorChoose()
-        
+        self.rootChoose()
     
+    def rootChoose(self):
+        self.panels = []
+        self.addPanel(Label(Rect(120,50,200,20), "STARDOG !", color=SUPER_WHITE, font=BIG_FONT))
+        self.addPanel(Label(Rect(120,80,200,20), "The future is annoying !", color=SUPER_WHITE, font=FONT))
+        self.addPanel(Button( Rect(120, 200, 100, 25), self.colorChoose, "Start", font=BIG_FONT))
+        self.addPanel(Button( Rect(120, 240, 100, 25), self.volumeChoose, "Sound", font=BIG_FONT))
+        self.addPanel(Button( Rect(120, 280, 100, 25), self.creditsChoose, "Credits", font=BIG_FONT))
+        self.addPanel(Button( Rect(120, 320, 100, 25), self.quitChoose, "Quit", font=BIG_FONT))
+
+
+    def volumeChoose(self):
+        self.panels = []
+        self.addPanel(Label(Rect(120,50,200,20), "Music Volume:", color=SUPER_WHITE, font=BIG_FONT))
+        self.addPanel(Label(Rect(320,50,200,20), "SFX Volume:", color = SUPER_WHITE, font = BIG_FONT))
+        self.addPanel(Button( Rect(120, 280, 100, 20), self.cooseVolume, "Confirm"))
+
+        self.addPanel(Slider( Rect(120,80,20,175), self.setMusicVolume))
+        self.addPanel(Slider( Rect(320,80,20,175), self.setSFXVolume))
+
     def colorChoose(self):
         self.panels = []
         # ship color controle
@@ -33,7 +51,6 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(Label(Rect(220,50,200,20), "Green:", color = SUPER_WHITE, font = BIG_FONT))
         self.addPanel(Label(Rect(320,50,200,20), "Blue:", color = SUPER_WHITE, font = BIG_FONT))
 
-        self.addPanel(Label(Rect(420, 50, 200, 20), "Music Volume:", color=SUPER_WHITE, font=BIG_FONT))
 
         self.addPanel(Button( Rect(120, 280, 100, 20), self.chooseColor, "Confirm"))
         
@@ -42,7 +59,12 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(Slider( Rect(120,80,20,175),self.chooseRed,self))
         self.addPanel(Slider( Rect(220,80,20,175),self.chooseGreen,self))
         self.addPanel(Slider( Rect(320,80,20,175),self.chooseBlue,self))
-        self.addPanel(Slider( Rect(420, 80, 20, 175), self.setMusicVolume))
+
+    def creditsChoose(self):
+        pass
+
+    def quitChoose(self):
+        quit()
 
     def nameChoose(self):
         self.panels = []
@@ -79,6 +101,13 @@ class IntroMenu(TopLevelPanel):
     
     def setMusicVolume(self, value):
         setMusicVolume(value)
+
+    def setSFXVolume(self, value):
+        pass
+
+    def cooseVolume(self):
+        self.rootChoose()
+
     def chooseColor(self):
         if self.game.playerColor == [0,0,0]:
             self.game.playerColor = (10,10,10)
@@ -104,7 +133,7 @@ class IntroMenu(TopLevelPanel):
 class NameInputField(InputField):
     def __init__(self, parent, rect):
         self.parent = parent
-        InputField.__init__(self, rect, parent.game, self.choose, BIG_FONT, NAME_INPUT_BLUE)
+        InputField.__init__(self, rect, parent.game, self.choose, BIG_FONT, BS1)
 
     def choose(self):
         self.parent.chooseName(self.text)
@@ -129,7 +158,7 @@ class TypeButton(Button):
         self.parent = parent
         self.type = type
         if fontModule:
-            toblit = font.render(self.type.title(), True, TYPE_BUTTON_GREEN)
+            toblit = font.render(self.type.title(), True, BS1)
 
             self.image.blit(toblit,(5,rect[3] - toblit.get_height() - 10))
         Button.__init__(self, rect, self.choose, None)
@@ -428,8 +457,8 @@ class PartDescriptionPanel(Panel):
             string += "\n  %s: %s"%(str(adj.__class__).split('.')[-1],adj.__doc__)
         x, y = self.rect.left, self.rect.top
         w, h = self.rect.width, self.rect.height
-        self.name = Label(Rect(x + 4, y + 14, w, 20), part.name, FONT, PDP2_GREEN)
-        self.text = TextBlock(Rect(x + 4, y + 34, w, h), string, SMALL_FONT, PDP_GREEN)
+        self.name = Label(Rect(x + 4, y + 14, w, 20), part.name, FONT, SHIP_PANEL_BLUE)
+        self.text = TextBlock(Rect(x + 4, y + 34, w, h), string, SMALL_FONT, HUD3)
         self.addPanel(self.name)
         self.addPanel(self.text)
     
@@ -576,7 +605,7 @@ class MultyPartTile(DragableSelectable):
         rect = Rect(rect)
         rect.y += 12
 
-        self.addPanel(TextBlock(rect, string[i+1:], color = PDP_GREEN,
+        self.addPanel(TextBlock(rect, string[i+1:], color = HUD3,
                     font = SMALL_FONT))
 
         rect.y += 10
@@ -624,7 +653,7 @@ class PartTile(DragableSelectable):
         rect = Rect(rect)
         rect.y += 12
 
-        self.addPanel(TextBlock(rect, string[i+1:], color = PDP_GREEN,
+        self.addPanel(TextBlock(rect, string[i+1:], color = HUD3,
                     font = SMALL_FONT))
 
 class InventoryPanel(Selecter):
@@ -878,7 +907,7 @@ class BindingSelectable(Selectable):
                     " " + self.name + " - ", SMALL_FONT,  BS1))
         self.addPanel(Label( \
                     Rect(self.panels[-1].rect.right, self.rect.top,0,0), \
-                    str(self.partNum) + ": ", SMALL_FONT,  SOME))
+                    str(self.partNum) + ": ", SMALL_FONT,  ST))
         self.addPanel(Label( \
                     Rect(self.panels[-1].rect.right, self.rect.top,0,0), \
                     str(self.function.__name__), SMALL_FONT,  BS3))	

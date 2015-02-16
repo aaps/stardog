@@ -35,6 +35,8 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
+* a text scroll panel that will show text scrolling down (if that is a thing) perhaps with some effect of fade in and out.
+* a function that could get called on a panel move in of out of panel, like a help on moveover element there is a official name for such an element but i be damned if i know.
 * what to do with the mouse hover branch ?
 * make a function in game or stardog that will check the version of game of stardog in the github repo, if repo is newer give intructions how to update via installer.
 * the ui margins and locations should be dependant on camera size and location
