@@ -5,7 +5,7 @@ import os, sys, shutil
 
 filterfiles = ['.gitignore','utils','.git','todo','ingredients']
 
-url = urlopen("https://github.com/aaps/stardog/archive/v0.6.zip")
+url = urlopen("https://github.com/aaps/stardog/archive/v0.6.1.zip")
 zipfile = ZipFile(StringIO(url.read()))
 names = zipfile.namelist()
 	
