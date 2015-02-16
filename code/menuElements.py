@@ -6,6 +6,7 @@ import random
 from gui import *
 from pygame.locals import *
 
+
 class Panel(object):
     """Panel(mouse, rect) -> new Panel. 
     The basic building block of the menu system. """
@@ -114,7 +115,8 @@ class Panel(object):
     def handleEvent(self, keys):
         for panel in self.panels:
             panel.handleKeys(keys)
-            
+
+
 class TopLevelPanel(Panel):
     """ TopLevelPanel(rect) -> TopLevelPanel.
     Like a panel, but has a handleEvent() method and draws subpanels to a 
@@ -180,97 +182,130 @@ class TopLevelPanel(Panel):
         if self.dragged and self.dragged != 1:
             self.dragged.draggingDraw(self)
         surface.blit(self.image, self.rect)
-            
+
+
 class Dragable(Panel):
-    hotSpot = 0,0 # move this point under the mouse hotspot.
+    # move this point under the mouse hotspot.
+    hotSpot = 0, 0
     drawBorderDragging = True
+
     def __init__(self, rect, parent):
         Panel.__init__(self, rect)
         self.parent = parent
         self.image = pygame.Surface(rect.size).convert()
         self.image.set_colorkey(BLACK)
-            
+
     def drag(self, start):
         drag = Panel.drag(self, start)
-        if drag: return drag
+        if drag:
+            return drag
         return self, self.parent
-            
+
     def draggingDraw(self, topLevelPanel):
         surface = topLevelPanel.image
-        pos = topLevelPanel.internalPos[0] - self.hotSpot[0], \
-                topLevelPanel.internalPos[1] - self.hotSpot[1]
-        #draw self (floating):
+        pos = (topLevelPanel.internalPos[0] - self.hotSpot[0],
+               topLevelPanel.internalPos[1] - self.hotSpot[1])
+        # draw self (floating):
         surface.blit(self.image, pos)
         if self.drawBorderDragging:
             rect = Rect(self.rect)
             rect.topleft = pos
             pygame.draw.rect(surface, self.color, rect, 1)
-        #draw subpanels:
+        # draw subpanels:
         for panel in self.panels:
             tmp = panel.rect.topleft
             panel.rect.left += pos[0] - self.rect.left
             panel.rect.top += pos[1] - self.rect.top
-            panel.draw(surface, rect = None)
+            panel.draw(surface, rect=None)
             panel.rect.topleft = tmp
 
     def handleKeys(self, keys):
         pass
 
+
 class Slider(Panel):
-    def __init__(self,rect, function, parent = None, hori = False):
-        self.parent = parent
-        self.hori = hori
-        self.function = function
+    """
+        a slider panel,
+        takes a rect (for it's size)
+        takes a handler function that is called upon change.
+        a value of 0 through 1 is passed down to thing handler function.
+
+        optional position. that is a value between 0 and 1.
+        0 being set to the start of the slider,
+        1 being set to the end of the slider.
+        and any value inbetween 0 and 1, sets the slider
+        to the relative position.
+
+        optional hori value for setting the slider horizontal
+        and vertical otherwise.
+    """
+    def __init__(self, rect, function, pos=0, hori=False):
         Panel.__init__(self, rect)
+        # hori is for if the slider is horizontal
+        # or not (if false then vertical)
+        self.hori = hori
+        # reference to handler function.
+        self.function = function
+        # get the relative position.
+        x, y, width, height = self.rect
+        self.pos = height*pos
+        # create a initial rect for the dragable
         if self.hori:
-            newrect = Rect(rect[0]+rect[2]-10 ,rect[1]+ (rect[3]/2)-10, 10, rect[3])
+            newrect = Rect(rect[0]+rect[2]-10+self.pos, rect[1]+(rect[3]/2)-10,
+                           10, rect[3])
         else:
-            
-            newrect = Rect(rect[0] + (rect[2]/2)-10,rect[3]+rect[1]-10, rect[2], 10)
-        self.dragable = Dragable(newrect,self)
+            newrect = Rect(rect[0]+(rect[2]/2)-10, rect[3]+rect[1]-10-self.pos,
+                           rect[2], 10)
+        self.dragable = Dragable(newrect, self)
         self.dragable.color = DRAGGABLE
         self.dragable.bgColor = BS1
-        self.addPanel(self.dragable)
-        
 
-        self.function(0)
+        self.addPanel(self.dragable)
+        self.function(pos)
+
+    # def setPos(self, value):
+    #     # create a initial rect for the dragable
+    #     if self.hori:
+    #         rect = Rect(rect[0]+rect[2]-10+self.pos, rect[1]+(rect[3]/2)-10,
+    #                     10, rect[3])
+    #     else:
+    #         rect = Rect(rect[0]+(rect[2]/2)-10, rect[3]+rect[1]-10-self.pos,
+    #                     rect[2], 10)
+    #     self.dragable.rect = rect
+
+    # def getPos(self):
+    #     return self.pos
 
     def drop(self, pos, dropped):
         pass
-        
-
 
     def dragOver(self, pos, rel):
         """called when the mouse moves to or from this panel."""
-        
-        oldpos = pos[0] - rel[0] , pos[1] - rel[1]
+        oldpos = pos[0] - rel[0], pos[1] - rel[1]
         for panel in self.panels:
-
             if not panel.rect.collidepoint(oldpos) and not panel.rect.collidepoint(pos):
                 if self.hori:
                     panel.rect[0] = oldpos[0] - panel.rect[2]
                     if self.rect[2] > (pos[0] - self.rect[0]) and self.rect[0] < pos[0]:
                         self.function((self.rect[2] - (pos[0] - self.rect[0]) + 0.001) / self.rect[2])
-
                 else:
                     panel.rect[1] = oldpos[1] - panel.rect[3]
                     if self.rect[1] < pos[1] and self.rect[3] > (pos[1] - self.rect[1]):
                         self.function((self.rect[3] - (pos[1] - self.rect[1]) + 0.001) / self.rect[3])
 
-                    
     def click(self, button, pos):
         if self.hori:
             self.dragable.rect[0] = pos[0] - int(self.dragable.rect[2]/2)
-            self.function((self.rect[2] - (pos[0] - self.rect[0]) + 0.001) / self.rect[2])
+            self.pos = ((self.rect[2] - (pos[0] - self.rect[0]) + 0.001) / self.rect[2])
+            self.function(self.pos)
         else:
             self.dragable.rect[1] = pos[1] - int(self.dragable.rect[3]/2)
-            self.function((self.rect[3] - (pos[1] - self.rect[1]) + 0.001) / self.rect[3])
-
-
-
+            self.pos = ((self.rect[3] - (pos[1] - self.rect[1]) + 0.001) / self.rect[3])
+            self.function(self.pos)
 
     def handleKeys(self, keys):
         pass
+
 
 class ColorPanel(Panel):
     def __init__(self, parent, rect, color):
@@ -281,7 +316,8 @@ class ColorPanel(Panel):
     def draw(self, surface, rect):
         pygame.draw.rect(surface, self.myColor, self.rect) 
         Panel.draw(self, surface, rect)
-            
+
+
 class Button(Panel):
     """Button(rect, function, text) -> a button that says text and does
     function when clicked. """
@@ -310,7 +346,8 @@ class Button(Panel):
         else:
             self.color = self.inactiveColor
         Panel.move(self, pos, rel)
-        
+
+
 class ShapeButton(Button):
     """ShapeButton(rect, function, points) -> a button that looks like
     the line through points, is at rect, and does function when clicked.
@@ -332,6 +369,7 @@ class ShapeButton(Button):
             if not rect.collidepoint(point):
                 return
         pygame.draw.lines(surface, self.color, True, self.points, self.weight)
+
 
 class InputField(Panel):
     drawBorder = False
@@ -437,6 +475,7 @@ class InputField(Panel):
     def cursoroffset(self):
         length = len(self.text) - self.cursorloc
         return self.font.size(self.text[length:])[0]
+
 
 class ScrollPanel(Panel):
     """A panel with a scrollbar."""
@@ -566,7 +605,8 @@ class ScrollPanel(Panel):
         for panel in self.panels:
             if panel.rect.collidepoint(oldpos) or panel.rect.collidepoint(pos):
                 panel.dragOver(pos, rel)
-    
+
+
 class Selectable(Panel):
     activeColor = BUTTON_ACTIVE
     inactiveColor = BS1
@@ -599,7 +639,8 @@ class Selectable(Panel):
         self.selected = False
         self.color = self.inactiveColor
         self.bgColor = self.bgInactive
-        
+
+
 class DragableSelectable(Dragable):
     activeColor = BUTTON_ACTIVE
     inactiveColor = BS1
@@ -638,9 +679,7 @@ class DragableSelectable(Dragable):
             self.removePanel(dragged)
             self.removeSelectable(dragged)
 
-    def click(self, button, pos):
-        pass
-        
+
 class Selecter(ScrollPanel):
     selected = None
     selectables = []
@@ -821,6 +860,7 @@ class Selecter(ScrollPanel):
             panel.draw(self.image, self.visibleRect)
         ScrollPanel.draw(self, surface, rect)
 
+
 class Label(Panel):
     """Label(self,  rect, text, color = BS1, font = FONT) ->
     A panel with a single line of text."""
@@ -832,7 +872,8 @@ class Label(Panel):
         if fontModule:
             self.image = font.render(self.text, True, self.color)
             self.rect = Rect(rect.topleft, self.image.get_size())
-            
+
+
 class FunctionLabel(Panel):
     """A label that updates its text by calling a string function."""
     drawBorder = False
@@ -845,7 +886,8 @@ class FunctionLabel(Panel):
     def update(self):
         if fontModule:
             self.image = self.font.render(self.textFunction(), True, self.color)
-        
+
+
 class TextBlock(Panel):
     """TextBlock(self,  rect, text, font = FONT) 
     A panel with multi-line text. rect height is reset based on font and 

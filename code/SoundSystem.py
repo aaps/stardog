@@ -5,10 +5,10 @@ import math
 
 MISSILE_RADIUS = 50
 SOUND_RADIUS = 3000
+# 5%
+SFX_VOLUME = (5./100)
 # 20%
-SFX_VOLUME = 0 #(20./100)
-# 60%
-MUSIC_VOLUME = 0 #(5./100)
+MUSIC_VOLUME = (20./100)
 
 
 class SoundSystem(object):
