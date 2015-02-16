@@ -257,6 +257,10 @@ so you can get out of the way in time. [done, aat]
 
 [Duality]
 
+Creative mode
+=====
+* implement a creative mode, so testing is easier.
+
 Part making system (code)
 =====
 * thinking of a way to make a better part system, where you just make parts in parts.py
