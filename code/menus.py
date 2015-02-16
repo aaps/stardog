@@ -597,6 +597,7 @@ class MultyPartTile(DragableSelectable):
         self.parts = parts
         self.part = parts[0]
         self.rect = Rect(rect)
+        self.partindex = 1
         self.reset()
        
     
@@ -605,29 +606,38 @@ class MultyPartTile(DragableSelectable):
         bigImage.set_colorkey(SUPER_WHITE) # idk why this one's white.
         self.hotSpot = (self.partImageOffset[0] + self.part.width, 
                         self.partImageOffset[1] + self.part.height)
+        # self.image.fill((0,0,0,0))
         self.image.blit(bigImage, PartTile.partImageOffset)
         #add text labels:
         
         self.addPanel(Label(self.rect, self.part.name, font = SMALL_FONT))
-        self.panels[-1].rect.width = self.rect.width
+        # self.panels[-1].rect.width = self.rect.width
         string = str(self.part.shortStats())
         
         i = string.find('\n')
-        self.rect.x += 38; self.rect.y += 14
-        self.addPanel(Label(self.rect, string[:i], color = (200,0,0),
-                    font = SMALL_FONT))
-        self.panels[-1].rect.width = self.rect.width
-        # rect = Rect(rect)
-        self.rect.y += 12
+        # self.rect.y += 14
+        newrect = Rect(self.rect)
+        newrect.y += 14
+        newrect.x += 38
+        self.addPanel(Label(newrect, string[:i], color = (200,0,0),font = SMALL_FONT))
 
-        self.addPanel(TextBlock(self.rect, string[i+1:], color = HUD3, font = SMALL_FONT))
+        newerrect = Rect(self.rect)
+        newerrect.y += 30
 
-        self.rect.y += 10
-        self.addPanel(Label(self.rect, str(self.parts.index(self.part)+1) + " / " +  str(len(self.parts)) , color = (200,0,0), font = SMALL_FONT))
+        self.addPanel(Label(newerrect, str(self.partindex) + " / " +  str(len(self.parts)) , color = (200,0,0), font = SMALL_FONT))
 
     def click(self, button, pos):
-        self.parts.append(self.parts.pop)
-        self.part = self.parts[0]
+        if button != 1:
+            if self.partindex < len(self.parts):
+                self.partindex += 1
+            else:
+                self.partindex = 1
+            self.panels = []
+            self.parts.insert(0, self.parts.pop())
+            self.part = self.parts[0]
+            self.reset()
+
+
 
 
 
