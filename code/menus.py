@@ -58,9 +58,13 @@ class IntroMenu(TopLevelPanel):
         
         self.addPanel(ColorPanel(self, Rect(120, 320, 100, 100), self.game.playerColor))
 
-        self.addPanel(Slider( Rect(120,80,20,175),self.chooseRed,self))
-        self.addPanel(Slider( Rect(220,80,20,175),self.chooseGreen,self))
-        self.addPanel(Slider( Rect(320,80,20,175),self.chooseBlue,self))
+        r = random.randint(0, 100)/100.
+        g = random.randint(0, 100)/100.
+        # will sometimes make the slider disappear, this -10 to keep it atleast in screen.
+        b = random.randint(0, 90)/100.
+        self.addPanel(Slider( Rect(120,80,20,175), self.chooseRed, r))
+        self.addPanel(Slider( Rect(220,80,20,175), self.chooseGreen, g))
+        self.addPanel(Slider( Rect(320,80,20,175), self.chooseBlue, b)) 
 
     def creditsChoose(self):
         pass
