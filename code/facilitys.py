@@ -1,7 +1,26 @@
+class Company(object):
+    def __init__(self,planet):
+        self.planet = planet
+        self.facilitys = []
+
+    def addFacility(self, facility):
+        self.facilitys.append(facility)
+
+    def update(self):
+        for facility in self.facilitys:
+            facility.update()
+
+
 
 class Facility(object):
-    def __init__(self, planet):
-        self.planet = planet
+    def __init__(self):
+        self.name = "dummy facility"
+        self.suply = []
+        self.needs = {}
+        self.cash = 1000
+
+        self.prices = {'Scrap':1, 'lol':2}
+
 
     def update(self):
         pass
@@ -60,7 +79,7 @@ class TradeTerminal(Facility):
         Facility.__init__(self, planet)
     # get all the sell/buy prices in the facinity of this trade terminal
     # player reserve a good on the list you want to buy sell
-    # (you are on the mission)
+
 
 
 class Repair(Facility):

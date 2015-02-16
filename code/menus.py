@@ -271,8 +271,6 @@ class PartsPanel(Panel):
     def __init__(self, rect, game):
         Panel.__init__(self, rect)
         self.player = game.universe.player
-        # inventoryColor = (20,50,35)
-        # shipColor = (50,20,70)
         flip = Button(Rect(100, 300, 60, 16), self.flip, " FLIP")
         remove = Button(Rect(180, 300, 100, 16), self.remove, " REMOVE")
         add = Button(Rect(320, 570, 80, 16), self.attach, " ATTACH")
@@ -432,6 +430,7 @@ class PartDescriptionPanel(Panel):
         self.part = None
         self.text = None
         self.name = None
+        
         self.selecter = selecter
         
     def setPart(self, part):
@@ -444,21 +443,26 @@ class PartDescriptionPanel(Panel):
             return
         self.image = pygame.Surface((self.rect.width, self.rect.height), hardwareFlag).convert()
         self.image.set_colorkey(BLACK)
-        # bigImage = pygame.transform.scale2x(self.part.image)
-        # bigImage.set_colorkey(SUPER_WHITE) # idk why this one's white.
-        # self.image.blit(bigImage, (self.rect.width / 2 - bigImage.get_width() / 2, 5))
+
         string = part.stats()
         string += '\nFunctions: '
         for function in part.functions:
             string += function.__name__+' '
         if not part.functions: string += 'None'
         string += '\n'
+        fpartname = ""
         for adj in part.adjectives:
+            fpartname += adj.__class__.__name__ + ", "
             string += "\n  %s: %s"%(str(adj.__class__).split('.')[-1],adj.__doc__)
+        fpartname = fpartname + " " + part.name
         x, y = self.rect.left, self.rect.top
         w, h = self.rect.width, self.rect.height
-        self.name = Label(Rect(x + 4, y + 14, w, 20), part.name, FONT, SHIP_PANEL_BLUE)
+        
+
+        self.name = Label(Rect(x + 4, y + 14, w, 20), fpartname, FONT, SHIP_PANEL_BLUE)
         self.text = TextBlock(Rect(x + 4, y + 34, w, h), string, SMALL_FONT, HUD3)
+
+
         self.addPanel(self.name)
         self.addPanel(self.text)
     
@@ -586,37 +590,40 @@ class MultyPartTile(DragableSelectable):
         DragableSelectable.__init__(self, rect, parent)
         self.parts = parts
         self.part = parts[0]
+        self.rect = Rect(rect)
+        self.reset()
+       
+    
+    def reset(self):
         bigImage = pygame.transform.scale2x(self.part.image)
         bigImage.set_colorkey(SUPER_WHITE) # idk why this one's white.
         self.hotSpot = (self.partImageOffset[0] + self.part.width, 
                         self.partImageOffset[1] + self.part.height)
         self.image.blit(bigImage, PartTile.partImageOffset)
         #add text labels:
-        rect = Rect(rect)
-        self.addPanel(Label(rect, self.part.name, font = SMALL_FONT))
+        
+        self.addPanel(Label(self.rect, self.part.name, font = SMALL_FONT))
         self.panels[-1].rect.width = self.rect.width
         string = str(self.part.shortStats())
+        
         i = string.find('\n')
-        rect = Rect(rect)
-        rect.x += 38; rect.y += 14
-        self.addPanel(Label(rect, string[:i], color = (200,0,0),
+        self.rect.x += 38; self.rect.y += 14
+        self.addPanel(Label(self.rect, string[:i], color = (200,0,0),
                     font = SMALL_FONT))
         self.panels[-1].rect.width = self.rect.width
-        rect = Rect(rect)
-        rect.y += 12
+        # rect = Rect(rect)
+        self.rect.y += 12
 
-        self.addPanel(TextBlock(rect, string[i+1:], color = HUD3,
-                    font = SMALL_FONT))
+        self.addPanel(TextBlock(self.rect, string[i+1:], color = HUD3, font = SMALL_FONT))
 
-        rect.y += 10
-        self.addPanel(Label(rect, str(len(self.parts)), color = (200,0,0),
-                    font = SMALL_FONT))
+        self.rect.y += 10
+        self.addPanel(Label(self.rect, str(self.parts.index(self.part)+1) + " / " +  str(len(self.parts)) , color = (200,0,0), font = SMALL_FONT))
+
+    def click(self, button, pos):
+        self.parts.append(self.parts.pop)
+        self.part = self.parts[0]
 
 
-    # def draw(self, surface, rect):
-    #     pygame.draw.rect(surface, (255,0,0), self.rect, 1)
-    #     # self.addPanel(Label(rect, part.name, font = SMALL_FONT))
-    #     Panel.draw(self, surface, rect)
 
 class PartTile(DragableSelectable):
     drawBorder = False
@@ -655,6 +662,8 @@ class PartTile(DragableSelectable):
 
         self.addPanel(TextBlock(rect, string[i+1:], color = HUD3,
                     font = SMALL_FONT))
+
+
 
 class InventoryPanel(Selecter):
     drawBorder = False
