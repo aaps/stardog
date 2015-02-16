@@ -243,6 +243,9 @@ class Part(Floater):
         
     def update(self):
         """updates this part."""
+        # print self.adjectives.__name__
+        # for adjective in self.adjectives:
+        #     print adjective.__class__.__name__
         # if self.ship:
         #reset so this part can act again this frame:
         self.acted = False

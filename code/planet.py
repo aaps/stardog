@@ -7,6 +7,7 @@ from parts import *
 from spaceship import *
 import stardog
 from vec2d import Vec2d
+from facilitys import *
 
 
 class Planet(Floater):
@@ -18,6 +19,7 @@ class Planet(Floater):
 	def __init__(self, starsystem, pos, delta = Vec2d(0,0), grav=5000, radius = 100, mass = 10000, \
 					color = (100,200,50), image = None, race = None):
 		Floater.__init__(self, starsystem.universe, pos, delta, radius = radius, image = image)
+		self.companys = []
 		self.mass = mass #determines gravity.
 		self.color = color
 		self.starSystem = starsystem
@@ -56,6 +58,9 @@ class Planet(Floater):
 
 		for emitter in self.emitters:
 			emitter.update()
+
+		for company in self.companys:
+			company.update()
 
 		# Floater.update(self) # for gravity sensitive planets update
 	
@@ -104,6 +109,9 @@ class Planet(Floater):
 			planet.kill()
 		else:
 			self.kill()
+
+	def addCompany(self, company):
+		self.companys.append(company)
 
 
 

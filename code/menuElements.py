@@ -737,6 +737,7 @@ class Selecter(ScrollPanel):
                 pos[1] - self.rect.top + self.visibleRect.top
         new = False
         for selectable in self.selectables:
+            selectable.click(button, pos)
             if selectable.rect.collidepoint(posNew) and button == 1:
                 self.setSelected(selectable)
                 new = True

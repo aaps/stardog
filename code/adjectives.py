@@ -25,7 +25,7 @@ def addAdjective(part, level=1):
             if isinstance(part, type):
                 adj = choice()
                 adj.effect(part)
-                part.name = choice.__name__ + ' ' + part.name
+                # part.name = choice.__name__ + ' ' + part.name
                 part.adjectives.append(adj)
                 return part
     # TODO: make a better data structure for these.
