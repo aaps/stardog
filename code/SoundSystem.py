@@ -56,7 +56,7 @@ try:
     # for now choose a random music number to play
     randIndex = random.randint(0, len(travelMusicFiles)-1)
     location = str(travelMusicDir) + str(travelMusicFiles[randIndex])
-    print("music: "+location)
+
     pygame.mixer.music.load(location)
     pygame.mixer.music.play(-1)
     pygame.mixer.music.set_volume(MUSIC_VOLUME)

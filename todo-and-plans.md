@@ -101,6 +101,7 @@ side dish
 
 bugs
 =====
+* parts that get targeted will not showup in the mini info
 * parts that can stack after flip dont stack or dont go from ship in inventory, stage stuff, test it
 * the impact clouds are killing [todo] !!
 * somewhere in console there is a max, textfield length that is reached to soon [done]

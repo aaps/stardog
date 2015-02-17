@@ -465,6 +465,9 @@ class PartDescriptionPanel(Panel):
         for adj in part.adjectives:
             fpartname += adj.__class__.__name__ + ", "
             string += "\n  %s: %s"%(str(adj.__class__).split('.')[-1],adj.__doc__)
+
+
+
         fpartname = fpartname + " " + part.name
         x, y = self.rect.left, self.rect.top
         w, h = self.rect.width, self.rect.height
@@ -619,10 +622,10 @@ class MultyPartTile(DragableSelectable):
         
         self.addPanel(Label(self.rect, self.part.name, font = SMALL_FONT))
         # self.panels[-1].rect.width = self.rect.width
+        i=0
         string = str(self.part.shortStats())
-        
-        i = string.find('\n')
-        # self.rect.y += 14
+        if isinstance(self.part, Part):
+            i = string.find('\n')
         newrect = Rect(self.rect)
         newrect.y += 14
         newrect.x += 38
@@ -674,8 +677,12 @@ class PartTile(DragableSelectable):
         rect = Rect(rect)
         self.addPanel(Label(rect, part.name, font = SMALL_FONT))
         self.panels[-1].rect.width = self.rect.width
+        i=0
         string = str(part.shortStats())
-        i = string.find('\n')
+        if isinstance(part, Part):
+            i = string.find('\n')
+
+
         rect = Rect(rect)
         rect.x += 38; rect.y += 14
         self.addPanel(Label(rect, string[:i], color = (200,0,0),
