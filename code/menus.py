@@ -997,23 +997,7 @@ class NavigationTile(Panel):
 
     def planetnames(self):
         pass
-    #     planetnames = ""
-    #     if self.game.universe.curSystem in self.game.player.knownsystems:
-    #         for planet in self.game.player.knownsystems[self.game.universe.curSystem]:
-    #             if isinstance(planet, Planet):
-    #                 planetnames += planet.firstname + "\n"
-    #     return planetnames
-
-    # def planetButtons(self, rect):
-    #     # beginrect = Rect(120, 200, 100, 25)
-     
-    #     if self.game.universe.curSystem in self.game.player.knownsystems:
-
-    #         for planet in self.game.player.knownsystems[self.game.universe.curSystem]:
-                
-    #             if isinstance(planet, Planet):
-    #                 self.addPanel(Button(rect, self.colorChoose, planet.firstname , font=BIG_FONT))
-    #                 rect.y += 20
+ 
 
     def systemname(self):
         if self.game.universe.curSystem:
@@ -1026,6 +1010,8 @@ class PlanetButtons(Panel):
         self.drawBorder = False
         self.parent = parent 
         self.game  = game
+        #implement some event system for the cursor over button effect for this
+        #give the button a function that is linked to the planet company menu interface ?
 
     def update(self):
         

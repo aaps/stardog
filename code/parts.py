@@ -376,14 +376,29 @@ class Dummy(Part):
                     self.kill()
                     self.ship.reset()
 
-class Scrap(Part):
+
+
+class Cargo(Floater):
+    def __init__(self, universe):
+        baseImage = loadImage("res/goods/scrap.png")
+        radius = max(self.baseImage.get_height() / 2, self.baseImage.get_width() / 2)
+        Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = radius)
+        self.resources = True
+        # height, width = 9, 3
+        self.width = self.image.get_width() - 4
+        self.height = self.image.get_height() - 4
+        self.color = PART1
+        self.image = colorShift(self.baseImage.copy(), self.color)
+        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+
+class Scrap(Cargo):
     baseImage = loadImage("res/goods/scrap.png")
     image = None
     def __init__(self, universe):
-        Part.__init__(self, universe)
+        Cargo.__init__(self, universe)
         self.name = "Scrap"
         self.damage = 1
-        self.resources = True
+        
 
     def update(self):
         Part.update(self)
