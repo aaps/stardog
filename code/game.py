@@ -175,7 +175,8 @@ class Game(object):
                 pygame.event.pump()
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
-                        self.running = 0
+                        pygame.quit()
+                        sys.exit(0)
                     # if not self.pause and not self.console:
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         self.mouse[event.button] = 1
@@ -188,7 +189,10 @@ class Game(object):
                     elif event.type == pygame.KEYDOWN:
                         self.keys[event.key % 322] = 1
                         if event.key == pygame.K_m:
-                            all_objects = muppy.get_objects()
+                            try:
+                                all_objects = muppy.get_objects()
+                            except:
+                                pass
                         if event.key == pygame.K_BACKSLASH:
                             saveScreenShot("Screen-shots", self.screen)
                     elif event.type == pygame.KEYUP:
