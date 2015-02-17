@@ -1,4 +1,4 @@
-#parts.py
+# parts.py
 from utils import *
 from scripts import *
 from pygame.locals import *
@@ -377,7 +377,6 @@ class Dummy(Part):
                     self.ship.reset()
 
 
-
 class Cargo(Floater):
     def __init__(self, universe):
         baseImage = loadImage("res/goods/scrap.png")
@@ -408,6 +407,7 @@ class Scrap(Cargo):
 
     def stats(self):
         return "It is Scrap"
+
 
 class FlippablePart(Part):
     def flip(self):
@@ -1237,6 +1237,25 @@ class GargoHold(Part):
                 self.universe.player.reset()
                 self.universe.player.inventory.remove(part)
         Part.update(self)
+
+
+class Scrap(Part):
+    baseImage = loadImage("res/goods/scrap.png")
+    image = None
+
+    def __init__(self, universe):
+        Part.__init__(self, universe)
+        self.name = "Scrap"
+        self.resources = True
+
+    def update(self):
+        Part.update(self)
+
+    def shortStats(self):
+        return "Scrap"
+
+    def stats(self):
+        return "It is Scrap"
 
 class Cockpit(Radar, Battery, Generator, Gyro, GargoHold):
     baseImage = loadImage("res/parts/cockpit.png")

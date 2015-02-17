@@ -1,5 +1,6 @@
 # adjectives.py
 from parts import *
+from Resources import *
 from partCatalog import *
 
 CARGO = [Scrap]
