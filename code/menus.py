@@ -40,6 +40,7 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(Label(Rect(320, 50, 200, 20), "SFX Volume:", color = SUPER_WHITE, font = BIG_FONT))
         self.addPanel(Button(Rect(120, 280, 100, 20), self.cooseVolume, "Confirm"))
 
+
         self.addPanel(Slider(Rect(120, 80, 20, 175),
                              self.setMusicVolume, MUSIC_VOLUME))
         self.addPanel(Slider(Rect(320, 80, 20, 175),
@@ -54,9 +55,10 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(Label(Rect(320, 50, 200, 20), "Blue:", color = SUPER_WHITE, font = BIG_FONT))
 
 
-        self.addPanel(Button( Rect(120, 280, 100, 20), self.chooseColor, "Confirm"))
+        self.addPanel(Button( Rect(240, 280, 100, 20), self.chooseColor, "Confirm"))
+        self.addPanel(Button( Rect(120, 280, 100, 20), self.rootChoose, "Back"))
         
-        self.addPanel(ColorPanel(self, Rect(120, 320, 100, 100), self.game.playerColor))
+        self.addPanel(ColorPanel(self, Rect(350, 150, 50, 50), self.game.playerColor))
 
         r = random.randint(0, 100)/100.
         g = random.randint(0, 100)/100.
@@ -78,6 +80,8 @@ class IntroMenu(TopLevelPanel):
         self.inputfield = NameInputField(self, Rect(100,60,500,30))
         self.inputfield.drawBorder = True
         self.addPanel(self.inputfield)
+        self.addPanel(Button( Rect(240, 350, 100, 20), self.inputfield.choose , "Confirm"))
+        self.addPanel(Button( Rect(100, 350, 100, 20), self.typeChoose, "Back"))
 
     def handleEvent(self, event):
         for panel in self.panels:
@@ -90,21 +94,22 @@ class IntroMenu(TopLevelPanel):
         image_width = 100
         image_height = 120
         x,y,width,height = self.rect
-        x = (width/5)
-        y = (height/4)
+        x = 50
+        y = 50
         self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'fighter', FONT))
-        x += 200
+        x += 150
         self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'interceptor', FONT))
-        x += 200
+        x += 150
         self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'destroyer', FONT))
-        x = (width/5)
-        y += 200
+        x = 50
+        y += 150
         self.addPanel(TypeButton(self, Rect(x, y, image_width, image_height), 'scout', FONT))
-        x += 200
+        x += 150
         self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'juggernaut', FONT))
-        x += 200
+        x += 150
         self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'freighter', FONT))
-    
+        self.addPanel(Button( Rect(50, 350, 100, 20), self.colorChoose, "Back"))
+
     def setMusicVolume(self, value):
         setMusicVolume(value)
 
