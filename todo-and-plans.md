@@ -257,6 +257,21 @@ so you can get out of the way in time. [done, aat]
 
 [Duality]
 
+Trading drones
+=====
+* drones that fly between ships and or planets that are able to trade things.
+* see a teleporter would be no fun. this way you got vulnerable drones/shutles.
+* if they are destroyed you lose trading capabilities.
+
+Progress Download Source
+=====
+* make a implementation of the installer.py where it show the progress.
+* inspiration: http://stackoverflow.com/questions/2028517/python-urllib2-progress-hook
+
+Creative mode
+=====
+* implement a creative mode, so testing is easier.
+
 Part making system (code)
 =====
 * thinking of a way to make a better part system, where you just make parts in parts.py
@@ -299,6 +314,11 @@ crew [done]
 bays
 =====
 * a part that is a cargo bay, bigger bay more part that can be carried [Done]
+- make the gargohold hold parts, instead of that it just increases the size of parts that can be kept in the ship.
+- for example you find a abandoned gargohold and it has nice goodies in it :)
+* gargholds are verry wel suited for plot twists, you'll never know what is inside till you pick it up.
+* and enemy could be inside, or poisonus things. or radio active things. or other things. you get the point.
+
 * mechBay for forging stuff like parts and gun  and like that. 
 
 Freighter [done]
