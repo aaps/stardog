@@ -257,6 +257,12 @@ so you can get out of the way in time. [done, aat]
 
 [Duality]
 
+Trading drones
+=====
+* drones that fly between ships and or planets that are able to trade things.
+* see a teleporter would be no fun. this way you got vulnerable drones/shutles.
+* if they are destroyed you lose trading capabilities.
+
 Progress Download Source
 =====
 * make a implementation of the installer.py where it show the progress.
