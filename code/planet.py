@@ -2,7 +2,7 @@
 
 from utils import *
 from floaters import Floater
-from adjectives import randItem
+from adjectives import randItem, randCargo
 from parts import *
 from Resources import *
 from spaceship import *

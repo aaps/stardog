@@ -269,6 +269,10 @@ class SolarA1(StarSystem):
 			radius = randint(400,500)
 			self.add(Structure( self, Vec2d(distanceFromStar * cos(angle), distanceFromStar * sin(angle)), color, radius))
 
+		company = Company(self)
+		company.addFacility(Fitter())
+		self.planets[1].addCompany(Company(self))
+
 		radius = randint(500,700)
 		gateway1 = Gateway(self, Vec2d(10000,10000), radius)
 		gateway2 = Gateway(self, Vec2d(-10000,-10000), radius)

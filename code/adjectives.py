@@ -2,12 +2,18 @@
 from parts import *
 from partCatalog import *
 
+CARGO = [Scrap]
+
 PARTS = [LeftCannon, RightCannon, Engine, Gyro, Generator, Battery, Shield,
          LeftLaser, RightLaser, MissileLauncher, MachineGun, FighterShield,
          LeftFlakCannon, RightFlakCannon, Interconnect, Quarters, GatewayFocus,
          MineDropper, Radar, GargoHold]
 
 ENERGY_USING = [Gun, Engine, Gyro, Shield]
+
+def randCargo(universe):
+    roll = randint(0, len(CARGO)-1)
+    return CARGO[roll](universe)
 
 
 def randItem(universe, level=1):
