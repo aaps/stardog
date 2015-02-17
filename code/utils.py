@@ -117,7 +117,7 @@ except:
     BIG_FONT = None
     SMALL_FONT = None
     fontModule = False
-    print "Font module not found. Text will not be printed."
+    print("Font module not found. Text will not be printed.")
 
 # # setup sounds
 # try:
@@ -130,7 +130,7 @@ except:
 #     messageSound = pygame.mixer.Sound("res/sound/message pip.ogg")
 
 #     # load al ambient music (for now just travel music)
-#     # might also load fighting music this way. 
+#     # might also load fighting music this way.
 #     # and question music and other kinds of music.
 #     travelMusicDir = "res/sound/ambientSound/"
 #     travelMusic = []
@@ -151,6 +151,7 @@ except:
 # setup images
 # if there is extended image support, load .gifs, otherwise load .bmps.
 # .bmps do not support transparency, so there might be black clipping.
+
 if pygame.image.get_extended():
     ext = ".gif"
 else:
