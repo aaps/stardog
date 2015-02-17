@@ -257,6 +257,11 @@ so you can get out of the way in time. [done, aat]
 
 [Duality]
 
+Progress Download Source
+=====
+* make a implementation of the installer.py where it show the progress.
+* inspiration: http://stackoverflow.com/questions/2028517/python-urllib2-progress-hook
+
 Creative mode
 =====
 * implement a creative mode, so testing is easier.
