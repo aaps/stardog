@@ -345,7 +345,7 @@ class Part(Floater):
                     self.universe.player.xpKill(self.ship)
             if self.parent:
                 self.detach()
-            if rand() < 0.3 and not isinstance(self, Scrap):
+            if rand() < 0.3 and not isinstance(self, Cargo):
                 scrap = Scrap(self.universe)
                 scrap.pos = self.pos
                 scrap.delta = self.delta
@@ -389,6 +389,32 @@ class Cargo(Floater):
         self.color = PART1
         self.image = colorShift(self.baseImage.copy(), self.color)
         self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.functions = [] # thisshould go eventualy
+        self.adjectives = [] #this should go eventualy
+
+    def update(self):
+        Floater.update(self)
+
+    def shortStats(self):
+        return self.name
+
+    def stats(self):
+        return "It is " + self.name
+
+    def scatter(self, ship):
+        """Like detach, but for parts that are in an inventory when a 
+        ship is destroyed."""
+        self.pickuptimeout = 5
+        angle = randint(0,360)
+        offset = Vec2d(cos(angle) * DETACH_SPACE, sin(angle) * DETACH_SPACE)
+        #set physics to drift away from ship (not collide):
+        self.image = colorShift(pygame.transform.rotate(self.baseImage, angle), self.color).convert_alpha()
+        # self.image.set_colorkey(BLACK)
+        self.pos = ship.pos + offset
+        self.delta.x = ship.delta.x + (rand()  * DETACH_SPEED)
+
+        # self.ship = None
+        self.universe.curSystem.add(self)
 
 class Scrap(Cargo):
     baseImage = loadImage("res/goods/scrap.png")
@@ -397,16 +423,27 @@ class Scrap(Cargo):
         Cargo.__init__(self, universe)
         self.name = "Scrap"
         self.damage = 1
+
+class Iron(Cargo):
+    baseImage = loadImage("res/goods/scrap.png")
+    image = None
+    def __init__(self, universe):
+        Cargo.__init__(self, universe)
+        self.name = "Iron"
+        self.damage = 1
+
+class IronOre(Cargo):
+    baseImage = loadImage("res/goods/scrap.png")
+    image = None
+    def __init__(self, universe):
+        Cargo.__init__(self, universe)
+        self.name = "IronOre"
+        self.damage = 1
         
 
-    def update(self):
-        Part.update(self)
 
-    def shortStats(self):
-        return "Scrap"
 
-    def stats(self):
-        return "It is Scrap"
+
 
 
 class FlippablePart(Part):

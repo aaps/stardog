@@ -37,6 +37,10 @@ class Planet(Floater):
         for x in range(randint(1,8)):
             self.inventory.append(randItem(self.starSystem.universe, 1))
 
+        self.inventory.append(randCargo(self.starSystem.universe))
+
+
+
     def setFPS(self, fps):
         self.fps = fps
     
@@ -98,7 +102,7 @@ class Planet(Floater):
 
     def freepartCollision(self, part):
         part.kill()
-        if rand() > .8 and not isinstance(part, Scrap):
+        if rand() > .8 and not isinstance(part, Cargo):
             part.dir = 0
             part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert_alpha()
         else:
