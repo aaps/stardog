@@ -117,6 +117,8 @@ class Panel(object):
             panel.handleKeys(keys)
 
 
+
+
 class TopLevelPanel(Panel):
     """ TopLevelPanel(rect) -> TopLevelPanel.
     Like a panel, but has a handleEvent() method and draws subpanels to a 
@@ -737,10 +739,12 @@ class Selecter(ScrollPanel):
                 pos[1] - self.rect.top + self.visibleRect.top
         new = False
         for selectable in self.selectables:
-            selectable.click(button, pos)
+            
             if selectable.rect.collidepoint(posNew) and button == 1:
                 self.setSelected(selectable)
                 new = True
+            else:
+                selectable.click(button, posNew)
         return new
         
     def addSelectable(self, selectable):

@@ -307,13 +307,14 @@ class PartsPanel(Panel):
             self.reset()
             
     def reset(self):
-        if self.player.landed and self.tradePanel:
-            self.tradePanel.set_partlist(self.player.landed.inventory)
-        elif self.player.landed and not self.tradePanel:
-            self.image = self.tradeImage
-            self.tradePanel = InventoryPanel(Rect(660, 30, 130, 570), self, self.player.landed.inventory)
-            self.addPanel(self.tradePanel)
-        elif not self.player.landed:
+        if self.player.landed:
+            if self.tradePanel:
+                self.tradePanel.set_partlist(self.player.landed.inventory)
+            elif not self.tradePanel:
+                self.image = self.tradeImage
+                self.tradePanel = InventoryPanel(Rect(660, 30, 130, 570), self, self.player.landed.inventory)
+                self.addPanel(self.tradePanel)
+        else:
             self.image = self.baseImage
             self.removePanel(self.tradePanel)
             self.tradePanel = None
@@ -333,8 +334,7 @@ class PartsPanel(Panel):
     def remove(self):
         """removes the selected part from the ship and updates menus"""
         selected = self.shipPanel.selected
-        if selected and selected.part \
-        and selected.part.parent != selected.part.ship: #not cockpit
+        if selected and selected.part  and selected.part.parent != selected.part.ship: #not cockpit
             self.descriptionInventory.setPart(self.shipPanel.selected.part)
             self.descriptionShip.setPart(None)
             self.shipPanel.selected.part.unequip()
@@ -544,6 +544,8 @@ class ShipPartPanel(DragableSelectable):
 
     def drop(self, pos, dropped):
         if isinstance(dropped, PartTile) or isinstance(dropped, MultyPartTile):
+            if not self.ship.landed:
+                return
             if self.part and self.port.parent == self.part.ship:
                 return #do not allow Cockpits to be swapped!
             if self.part and dropped.part == self.part:
@@ -626,16 +628,17 @@ class MultyPartTile(DragableSelectable):
 
         self.addPanel(Label(newerrect, str(self.partindex) + " / " +  str(len(self.parts)) , color = (200,0,0), font = SMALL_FONT))
 
+
     def click(self, button, pos):
-        if button != 1:
-            if self.partindex < len(self.parts):
-                self.partindex += 1
-            else:
-                self.partindex = 1
-            self.panels = []
-            self.parts.insert(0, self.parts.pop())
-            self.part = self.parts[0]
-            self.reset()
+
+        if self.partindex < len(self.parts):
+            self.partindex += 1
+        else:
+            self.partindex = 1
+        self.panels = []
+        self.parts.insert(0, self.parts.pop())
+        self.part = self.parts[0]
+        self.reset()
 
 
 
@@ -691,6 +694,7 @@ class InventoryPanel(Selecter):
         Selecter.__init__(self, rect, vertical = True)
         self.partList = partList
         self.parent = parent
+        self.ship = parent.player
         self.parent.dirtyParts = True
 
     def reset(self):
@@ -724,7 +728,7 @@ class InventoryPanel(Selecter):
         
         if isinstance(dropped, PartTile) or isinstance(dropped, MultyPartTile):
 
-            if dropped.part in self.partList: 
+            if dropped.part in self.partList or not self.ship.landed: 
                 #from here to here: ignore
                 return
             #add dropped part to partList:
@@ -959,10 +963,11 @@ class Info(Panel):
             "Info", BIG_FONT))
         rect = Rect(100,105,200,300)
         rect2 = Rect(350,105,200,100)
-        # rect = Rect(rect)
-        # rect.y += 105
+        rect3 = Rect(350,230,200,175)
+
         self.addPanel(NavigationTile(rect, self, game))
         self.addPanel(TimeTile(rect2, self, game))
+        self.addPanel(PlanetTile(rect3, self, game))
         
     
     def skill(self, skillName):
@@ -976,30 +981,71 @@ class SkillTreeSelector(Selecter):
 
 class NavigationTile(Panel):
     def __init__(self, rect, parent, game, corners=[5,0,5,0]):
+        Panel.__init__(self, rect, corners)
         self.parent = parent 
         self.game  = game
-        Panel.__init__(self, rect, corners)
+        
         rect1 = Rect(rect.x + 5, rect.y + 5, 200, rect.width - 10)
-        rect2 =  Rect(rect.x + 5, rect.y + 30, 100, 100)
+        rect2 =  Rect(rect.x + 5, rect.y + 30, rect.width - 10, rect.height)
         self.addPanel(FunctionLabel(rect1, self.systemname))
-        self.addPanel(TextBlock(rect2, self.planetnames, SMALL_FONT, SHIP_PANEL_BLUE))
+        self.addPanel(PlanetButtons(rect2, self, game))
+        # self.planetButtons(rect2)
     
     def update(self):
         for panel in self.panels:
             panel.update()
 
     def planetnames(self):
-        planetnames = ""
-        if self.game.universe.curSystem in self.game.player.knownsystems:
-            for planet in self.game.player.knownsystems[self.game.universe.curSystem]:
-                if isinstance(planet, Planet):
-                    planetnames += planet.firstname + "\n"
-        return planetnames
+        pass
+    #     planetnames = ""
+    #     if self.game.universe.curSystem in self.game.player.knownsystems:
+    #         for planet in self.game.player.knownsystems[self.game.universe.curSystem]:
+    #             if isinstance(planet, Planet):
+    #                 planetnames += planet.firstname + "\n"
+    #     return planetnames
+
+    # def planetButtons(self, rect):
+    #     # beginrect = Rect(120, 200, 100, 25)
+     
+    #     if self.game.universe.curSystem in self.game.player.knownsystems:
+
+    #         for planet in self.game.player.knownsystems[self.game.universe.curSystem]:
+                
+    #             if isinstance(planet, Planet):
+    #                 self.addPanel(Button(rect, self.colorChoose, planet.firstname , font=BIG_FONT))
+    #                 rect.y += 20
 
     def systemname(self):
         if self.game.universe.curSystem:
             return self.game.universe.curSystem.name
         return 'No name'
+
+class PlanetButtons(Panel):
+    def __init__(self, rect, parent, game):
+        Panel.__init__(self, rect)
+        self.drawBorder = False
+        self.parent = parent 
+        self.game  = game
+
+    def update(self):
+        
+        if self.game.universe.curSystem in self.game.player.knownsystems:
+            self.panels = []
+            adder = 0
+            for planet in self.game.player.knownsystems[self.game.universe.curSystem]:
+                
+                if isinstance(planet, Planet):
+                    
+                    self.addPanel(Button(Rect(self.rect.x, self.rect.y + adder, self.rect.w-5, 20), self.dummpy, planet.firstname , font=FONT))
+                    adder += 25
+
+        for panel in self.panels:
+            panel.update()
+
+    def dummpy(self):
+        pass
+        
+
 
 class TimeTile(Panel):
     def __init__(self, rect, parent, game, corners=[5,0,5,0]):
@@ -1017,6 +1063,16 @@ class TimeTile(Panel):
         time = round(self.game.timer + self.game.starttime,1)
         timeobj = datetime.datetime.fromtimestamp(time)
         return timeobj.strftime('YEAR:     %Y\nMONTH: %m\nDAY:       %d\nTIME:      %H:%M:%S.%f')[:-5]
+
+class PlanetTile(Panel):
+
+    def __init__(self, rect, parent, game, corners=[5,0,5,0]):
+        self.parent = parent 
+        self.game  = game
+        Panel.__init__(self, rect, corners)
+        rect1 = Rect(rect.x + 5, rect.y + 5, 200, rect.width - 10)
+        self.addPanel(TextBlock(rect1, "self.planetnames", SMALL_FONT, SHIP_PANEL_BLUE))
+
 
 class SkillTile(Button):
     def __init__(self, rect, parent, skill, ship):

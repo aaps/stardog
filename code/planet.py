@@ -2,7 +2,7 @@
 
 from utils import *
 from floaters import Floater
-from adjectives import randItem
+from adjectives import randItem, randCargo
 from parts import *
 from spaceship import *
 import stardog
@@ -35,6 +35,7 @@ class Planet(Floater):
 		self.inventory = []
 		for x in range(randint(1,8)):
 			self.inventory.append(randItem(self.starSystem.universe, 1))
+		self.inventory.append(randCargo(self.starSystem.universe))
 
 	def setFPS(self, fps):
 		self.fps = fps
