@@ -8,6 +8,7 @@ from vec2d import Vec2d
 import copy
 from particles import *
 import sys
+from Resources import *
 
 PART_OVERLAP = 0
 DETACH_SPACE = 50
@@ -375,24 +376,6 @@ class Dummy(Part):
                     port.part = None
                     self.kill()
                     self.ship.reset()
-
-class Scrap(Part):
-    baseImage = loadImage("res/goods/scrap.png")
-    image = None
-    def __init__(self, universe):
-        Part.__init__(self, universe)
-        self.name = "Scrap"
-        self.damage = 1
-        self.resources = True
-
-    def update(self):
-        Part.update(self)
-
-    def shortStats(self):
-        return "Scrap"
-
-    def stats(self):
-        return "It is Scrap"
 
 class FlippablePart(Part):
     def flip(self):
