@@ -101,15 +101,16 @@ randnorm = r.normalvariate
 
 
 def randColor(min, max):
-    return (randint(min[0],max[0]), randint(min[1],max[1]), \
-            randint(min[2],max[2]))
+    return (randint(min[0], max[0]), randint(min[1], max[1]),
+            randint(min[2], max[2]))
 
 # setup fonts
 try:
-    pygame.font.init()  
-    SMALL_FONT = pygame.font.Font("res/fonts/hardfont.ttf", 14)    
-    FONT = pygame.font.Font("res/fonts/hardfont.ttf", 18)
-    BIG_FONT = pygame.font.Font("res/fonts/hardfont.ttf", 24)
+    pygame.font.init()
+    font_name = "hardfont.ttf"
+    SMALL_FONT = pygame.font.Font("res/fonts/"+str(font_name), 14)
+    FONT = pygame.font.Font("res/fonts/"+str(font_name), 18)
+    BIG_FONT = pygame.font.Font("res/fonts/"+str(font_name), 24)
     fontModule = True
 
 except:
