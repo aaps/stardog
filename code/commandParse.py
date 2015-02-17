@@ -38,7 +38,7 @@ class AttrFilter(object):
 
 class CommandParse(object):
     helpText = [
-                "!help [shows this help text]"
+                "!help [shows this help text]\n"
                 "!print <object...> <attributes> <...> [for example: !print game.player , or !print game.averagefps ]\n"
                 "!set <object.attr> <value> [sets object attribute to value]\n"
                 "!reload [invokes a reload of the command parse code. so coding is easier and can be tested while in game]\n"
@@ -51,8 +51,8 @@ class CommandParse(object):
                 "!setShipColor <color> [colors your ship to the specified color W.I.P]\n"
                 "!convertShip <ship type> [convert your ship to ship type W.I.P]\n"
                 "!printdbg [toggles debug printing to the ingame console]\n"
-                "!setSfxVolume <0-100> [set all sfx sound volume e.g. bullets]"
-                "!setMusicVolume <0-100> [set music volume ]"
+                "!setSfxVolume <0-100> [set all sfx sound volume e.g. bullets]\n"
+                "!setMusicVolume <0-100> [set music volume ]\n"
     ]
 
     def __init__(self, game, chatconsole, messenger):
