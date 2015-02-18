@@ -39,6 +39,8 @@ try:
     pygame.mixer.init(44100)
 
     shootSound = pygame.mixer.Sound("res/sound/lazer.ogg")
+    # shootSound = pygame.mixer.Sound("res/sound/lazer-duality-edit.ogg")
+    laserShootSound = pygame.mixer.Sound("res/sound/lazer-duality-edit.ogg")
     hitSound = pygame.mixer.Sound("res/se_sdest.wav")
     explodeSound = pygame.mixer.Sound("res/se_explode03.wav")
     missileSound = pygame.mixer.Sound("res/se_explode02.wav")
