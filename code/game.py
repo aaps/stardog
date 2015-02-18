@@ -18,20 +18,10 @@ import sys
 # that supports multiple commands, and functions.
 from commandParse import CommandParse
 
-# try and import tools for memory usage reporting.
-# so these will not be imported if not installed and will not mess up the
-# system.
+# import librarie for showing mem usage in caption
 try:
-    from pympler import summary
-    from pympler import muppy
-    from pympler import tracker
-    import types as Types
-    all_objects = muppy.get_objects()
-    tr = tracker.SummaryTracker()
     import resource
     import gc
-    print('Memory usage: %s (kb)' %
-          resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
 except Exception as e:
     print(e)
 
@@ -188,11 +178,6 @@ class Game(object):
                         self.mouse[0] = event.pos
                     elif event.type == pygame.KEYDOWN:
                         self.keys[event.key % 322] = 1
-                        if event.key == pygame.K_m:
-                            try:
-                                all_objects = muppy.get_objects()
-                            except:
-                                pass
                         if event.key == pygame.K_BACKSLASH:
                             saveScreenShot("Screen-shots", self.screen)
                     elif event.type == pygame.KEYUP:
