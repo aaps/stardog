@@ -38,8 +38,8 @@ def setSFXVolume(volume):
 try:
     pygame.mixer.init(44100)
 
+    gunShootSound = pygame.mixer.Sound("res/sound/gunShot-Duality-edit.ogg")
     shootSound = pygame.mixer.Sound("res/sound/lazer.ogg")
-    # shootSound = pygame.mixer.Sound("res/sound/lazer-duality-edit.ogg")
     laserShootSound = pygame.mixer.Sound("res/sound/lazer-duality-edit.ogg")
     hitSound = pygame.mixer.Sound("res/se_sdest.wav")
     explodeSound = pygame.mixer.Sound("res/se_explode03.wav")

@@ -550,7 +550,7 @@ class Cannon(Gun):
             self.reload = self.reloadTime / s.efficiency * s.cannonRateBonus
             s.energy -= self.energyCost
             if soundModule:
-                setVolume(shootSound.play(), self, self.universe.player)
+                setVolume(gunShootSound.play(), self, self.universe.player)
             self.universe.curSystem.add( 
                     Bullet(self.universe, self, 
                     self.damage * s.efficiency * s.damageBonus * s.cannonBonus, 
