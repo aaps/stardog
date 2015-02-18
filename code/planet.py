@@ -31,11 +31,10 @@ class Planet(Floater):
         #see solarSystem.planet_ship_collision
         self.race = None #race that owns this planet
         self.fps = 10
-        # if image == None:
-        #     self.image = None
-
-        self.image = pygame.transform.scale(self.image, (radius*2+10,radius*2+10))
-        # self.mask = pygame.maskFromSurface(self.image)
+        self.image = None
+        if not image == None:
+            self.image = pygame.transform.scale(image, (radius*2+10,radius*2+10))
+       
         self.inventory = []
         for x in range(randint(1,8)):
             self.inventory.append(randItem(self.starSystem.universe, 1))
@@ -76,7 +75,8 @@ class Planet(Floater):
         
         pos = self.pos - offset
         pygame.draw.circle(surface, self.color, pos.inttup(), int(self.radius))
-        Floater.draw(self, surface, offset)
+        if not self.image == None:
+            Floater.draw(self, surface, offset)
         for emitter in self.emitters:
             emitter.draw(surface, offset)
 
