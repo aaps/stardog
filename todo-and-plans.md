@@ -93,6 +93,7 @@ side dish
 - naev
 - hardwar
 - Transcendence
+- void infinity
 
 * use inno setup to maker this game runnable on windows !!
 * make a tag on github that the inno setup gets the game from !!
@@ -258,6 +259,11 @@ so you can get out of the way in time. [done, aat]
 
 
 [Duality]
+
+Energy Rerouting.
+=====
+* like when the laser drains your energy, and then goes on to drain your shields.
+* and that you have the ability to reroute power to certain places.
 
 Trading drones
 =====
