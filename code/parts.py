@@ -25,7 +25,7 @@ class Port(object):
 
 class Part(Floater):
     """A part of a ship."""
-    baseImage = loadImage("res/part/default.png", SUPER_WHITE)
+    baseImage = loadImage("res/part/default.png")
     image = None
     height, width = 9, 3
     

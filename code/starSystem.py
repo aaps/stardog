@@ -253,7 +253,10 @@ class SolarA1(StarSystem):
 			accel = ((self.g * mass) / distanceFromStar) / 10
 			# startdelta = Vec2d(0,0).rotatedd(startdir, accel) # preps for gravity sensitive planets
 			startdelta = Vec2d(0,0)
-			planet = Planet(self, startpos, startdelta ,self.g,radius = radius, mass = mass, color = color)
+			imagename = randImageInDir("res/planets")
+
+			planetimage = loadImage(imagename)
+			planet = Planet(self, startpos, startdelta ,self.g,radius = radius, mass = mass, color = color, image = planetimage)
 			
 			mindistance = self.minDistFromOthers(planet)
 			if mindistance > (radius * 6):

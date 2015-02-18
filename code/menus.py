@@ -164,7 +164,7 @@ class ColorButton(Button):
         
 class TypeButton(Button):
     def __init__(self, parent, rect, type, font):
-        self.image = colorShift(loadImage('res/menus/'+type+'.bmp', None),
+        self.image = colorShift(loadImage('res/menus/'+type+'.bmp'),
                         parent.game.playerColor,None)
         self.parent = parent
         self.type = type

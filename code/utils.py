@@ -158,14 +158,22 @@ if pygame.image.get_extended():
 else:
     ext = ".bmp"
 
+def randImageInDir(directory):
+    
+    f = []
+    for (dirpath, dirnames, filenames) in os.walk(directory):
+        
+        f.extend(filenames)
+        break
+    return directory + "/" + random.choice(f)
 
-def loadImage(filename, colorkey=BLACK):
+
+def loadImage(filename):
     try:
         image = pygame.image.load(filename).convert_alpha()
     except pygame.error:
         image = pygame.image.load("res/parts/default.png").convert_alpha()
 
-    # s = pygame.Surface(surface.get_size(), pygame.SRCALPHA, 32).convert_alpha()
     return image
     
 def colorShift(surface, color, colorkey = (0,0,0)):

@@ -272,7 +272,7 @@ class BGImage(Drawable):
         Drawable.__init__(self, universe)
         rect = (self.universe.game.width, self.universe.game.height)
         directory = 'res/Tarantula Nebula.jpg'
-        self.pic = pygame.transform.scale(loadImage(directory, None), rect)
+        self.pic = pygame.transform.scale(loadImage(directory), rect)
 
     def draw(self, surface):
         surface.blit(self.pic, (0, 0))
