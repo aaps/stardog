@@ -609,8 +609,9 @@ class Laser(Gun):
         if self.reload <= 0 and self.ship.energy > self.energyCost:
             self.reload = self.reloadTime / s.efficiency * s.cannonRateBonus
             self.ship.energy -= self.energyCost
-            if soundModule:
-                setVolume(shootSound.play(), self, self.universe.player)
+            # if soundModule:
+            laserShootSound.play()
+            # setVolume(laserShootSound.play(), self, self.universe.player)
             self.universe.curSystem.add( \
                     LaserBeam(self.universe, self, \
                     self.damage * s.efficiency * s.damageBonus * s.laserBonus, \
