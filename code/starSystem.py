@@ -11,6 +11,7 @@ from vec2d import Vec2d
 from nameMaker import *
 
 class StarSystem(object):
+
     """A StarSystem holds ships and other floaters."""
     
     def __init__(self, universe, position=Vec2d(0,0), boundrad = 30000, edgerad = 60000):
@@ -66,7 +67,7 @@ class StarSystem(object):
             if floater.pos.get_distance(Vec2d(0,0)) > self.boundrad:
                 if isinstance(floater, Ship):
                     floater.overedge = True
-                else:
+                elif floater.pos.get_distance(Vec2d(0,0)) > self.edgerad:   
                     try:
                         floater.kill()
                     except TypeError:
@@ -123,6 +124,7 @@ class StarSystem(object):
     def empty(self):
         self.ships.empty()
         self.floaters.empty()
+>>>>>>> a1f2fb8d925941304a9aa88ee6da334247798b18
 
 
 # refactor this and put all functionality in corresponding classes, be carefull can quickly spinn into mess.
