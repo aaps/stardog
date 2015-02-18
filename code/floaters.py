@@ -277,7 +277,8 @@ class Explosion(Floater):
         else:
             self.radius = int(self.maxRadius * (self.time * 4 / 3 -
                               self.life * 4 / 3) / self.time)
-        Floater.update(self)
+        for emitter in self.emitters:
+            emitter.update()
 
     def kill(self):
         pass
@@ -288,7 +289,6 @@ class Explosion(Floater):
 
 class Impact(Floater):
     life = 0
-    tangible = False
     mass = 0
 
     def __init__(self, universe, pos, delta, radius=5,
@@ -300,6 +300,7 @@ class Impact(Floater):
                          image=image)
         self.maxRadius = int(radius)
         self.radius = 0
+        self.tangible = False
         self.time = time
         self.emitters.append(RingEmitter(self, self.condAlways, 0, 5, 5, 10,
                              (255, 255, 255, 250), (100, 100, 255, 1), 0.5,

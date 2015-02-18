@@ -94,17 +94,18 @@ side dish
 - hardwar
 - Transcendence
 
-* use inno setup to maker this game runnable on windows !!
-* make a tag on github that the inno setup gets the game from !!
+* use inno setup to maker this game runnable on windows [done]
+* make a tag on github that the inno setup gets the game from [done]
 * make inno setup run a python and pygame test after install and return a good or bad install !!!
 * put the inno setup script in the git repo [done]
 
 
 bugs
 =====
+* explotions and impact clouds are subject to gravity, should not be.
 * parts that get targeted will not showup in the mini info
 * parts that can stack after flip dont stack or dont go from ship in inventory, stage stuff, test it
-* the impact clouds are killing [todo] !!
+* the impact clouds are killing [done]
 * somewhere in console there is a max, textfield length that is reached to soon [done]
 * the slider part is still not slidable [done]
 * pure black should not be a color to choose ship from  [done]

@@ -32,9 +32,13 @@ class Planet(Floater):
         self.race = None #race that owns this planet
         self.fps = 10
         self.image = None
-        if not image == None:
-            self.image = pygame.transform.scale(image, (radius*2+10,radius*2+10))
-       
+        if image:
+            self.image = pygame.Surface((radius*2, radius*2), flags = hardwareFlag)
+            pygame.draw.circle(self.image, self.color, (self.radius, self.radius), int(self.radius))
+            tempimg = pygame.transform.scale(image, (radius*2+10,radius*2+10))
+            self.image.blit(tempimg, (-5,-5))
+            self.image.set_colorkey((0,0,0))
+        
         self.inventory = []
         for x in range(randint(1,8)):
             self.inventory.append(randItem(self.starSystem.universe, 1))
@@ -74,9 +78,11 @@ class Planet(Floater):
     def draw(self, surface, offset = Vec2d(0,0)):
         
         pos = self.pos - offset
-        pygame.draw.circle(surface, self.color, pos.inttup(), int(self.radius))
-        if not self.image == None:
+        
+        if self.image:
             Floater.draw(self, surface, offset)
+        else:
+            pygame.draw.circle(surface, self.color, pos.inttup(), int(self.radius))
         for emitter in self.emitters:
             emitter.draw(surface, offset)
 

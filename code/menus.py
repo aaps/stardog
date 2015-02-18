@@ -633,20 +633,22 @@ class MultyPartTile(DragableSelectable):
 
         newerrect = Rect(self.rect)
         newerrect.y += 30
+        newerrect.x += 38
 
         self.addPanel(Label(newerrect, str(self.partindex) + " / " +  str(len(self.parts)) , color = (200,0,0), font = SMALL_FONT))
 
 
     def click(self, button, pos):
-
-        if self.partindex < len(self.parts):
-            self.partindex += 1
-        else:
-            self.partindex = 1
-        self.panels = []
-        self.parts.insert(0, self.parts.pop())
-        self.part = self.parts[0]
-        self.reset()
+        
+        if self.rect.collidepoint(pos):
+            if self.partindex < len(self.parts):
+                self.partindex += 1
+            else:
+                self.partindex = 1
+            self.panels = []
+            self.parts.insert(0, self.parts.pop())
+            self.part = self.parts[0]
+            self.reset()
 
 
 

@@ -1,4 +1,4 @@
-#!/usr/bin/python -B
+#!/usr/bin/python
 
 import pygame
 
