@@ -6,6 +6,18 @@ from SoundSystem import *
 import sys
 import os
 
+# try and import tools for memory usage reporting.
+# so these will not be imported if not installed and will not mess up the
+# system.
+try:
+    from pympler import summary
+    from pympler import muppy
+    from pympler import tracker
+    import types as Types
+    all_objects = muppy.get_objects()
+    tr = tracker.SummaryTracker()
+except Exception as e:
+    print(e)
 
 class bcolors:
     HEADER = '\033[95m'
@@ -40,6 +52,7 @@ class CommandParse(object):
     helpText = [
                 "!help [shows this help text]\n"
                 "!print <object...> <attributes> <...> [for example: !print game.player , or !print game.averagefps ]\n"
+                "!printPymplerStats [prints listings and sizes for objects] \n"
                 "!set <object.attr> <value> [sets object attribute to value]\n"
                 "!reload [invokes a reload of the command parse code. so coding is easier and can be tested while in game]\n"
                 "!exit [exits the game]\n"
@@ -84,6 +97,16 @@ class CommandParse(object):
         volume = eval(args[0])
         setMusicVolume(volume)
         print("music vol:"+str(MUSIC_VOLUME))
+
+    # prints pympler stats.
+    def printListingUsage(self, args):
+        all_objects = muppy.get_objects()
+        sum1 = summary.summarize(all_objects)
+        summary.print_(sum1)
+        print(" ")
+        print("Summary: ")
+        tr = tracker.SummaryTracker()
+        tr.print_diff()
 
     def setColor(self, args):
         if not args:
@@ -217,8 +240,12 @@ class CommandParse(object):
                         args = text[1:]
                     else:
                         args = None
+
                     if command == 'print':
                         self.printFunc(args)
+                    elif command == 'printPymplerStats':
+                        print "this"
+                        self.printListingUsage(args)
                     elif command == 'set':
                         self.setFunc(args)
                     elif command == 'func':
@@ -249,9 +276,11 @@ class CommandParse(object):
                         self.debug = not self.debug
                     else:
                         self.printout("Invalid input.")
+
                     if self.debug:
                         self.printout("input: %s \ncommand: %s \narguments: %s"
                                       % (text, command, args))
+
                 else:
                     self.printout(self.player.firstname + " " +
                                   self.player.secondname + ": "+text)
