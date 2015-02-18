@@ -124,9 +124,6 @@ class StarSystem(object):
     def empty(self):
         self.ships.empty()
         self.floaters.empty()
->>>>>>> a1f2fb8d925941304a9aa88ee6da334247798b18
-
-
 # refactor this and put all functionality in corresponding classes, be carefull can quickly spinn into mess.
 # piecetime refactor 
 # perhaps this method can be brokenup in a collision method for planet, ship and part

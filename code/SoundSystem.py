@@ -12,8 +12,16 @@ MUSIC_VOLUME = (20./100)
 
 
 class SoundSystem(object):
-    def __init__(self):
-        pass
+    def __init__(self, universe, quality=44100):
+        self.universe = universe
+        self.sounds = {}
+        try:
+            pygame.mixer.init(quality)
+        except Exception as e:
+            print(e)
+
+    def register(self, sound):
+        self.sounds[sound] = pygame.mixer.Sound(sound)
 
 
 def setMusicVolume(volume):

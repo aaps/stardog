@@ -649,8 +649,8 @@ class Laser(Gun):
         self.damage = 10
         self.range = 300
         self.name = "Laser"
-        self.reloadTime = .8 #in seconds
-        self.energyCost = 8
+        self.reloadTime = 2. #in seconds
+        self.energyCost = 35
         self.beamWidth = 1
         self.imageDuration = .08
                 
@@ -1314,7 +1314,6 @@ class Cockpit(Radar, Battery, Generator, Gyro, GargoHold):
     image = None
     energyCost = .2 #gyro
     torque = 35000 #gyro
-    energyCost = 0.01 #radar
     radarrange = 5000 #radar
     capacity = 5 #battery
     rate = .5 #generator
