@@ -230,12 +230,12 @@ class Mine(Bullet):
         explosion = Explosion(self.universe, self.pos, delta,
                               self.explosionRadius, self.time, self.damage,
                               self.force)
-        self.game.universe.curSystem.add(explosion)
+        self.universe.curSystem.add(explosion)
 
     def kill(self):
         self.detonate()
         if soundModule:
-            setVolume(missileSound.play(), self, self.game.player)
+            setVolume(missileSound.play(), self, self.universe.player)
         Floater.kill(self)
 
     def takeDamage(self, damage, other):
