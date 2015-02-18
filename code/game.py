@@ -188,9 +188,11 @@ class Game(object):
                         self.mouse[0] = event.pos
                     elif event.type == pygame.KEYDOWN:
                         self.keys[event.key % 322] = 1
-                        if event.key == pygame.K_m:
+                        if event.key == pygame.K_p:
                             try:
                                 all_objects = muppy.get_objects()
+                                sum1 = summary.summarize(all_objects)
+                                summary.print_(sum1)
                             except:
                                 pass
                         if event.key == pygame.K_BACKSLASH:
