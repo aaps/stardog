@@ -35,6 +35,7 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
+* make sure part inherit from cargo, todo
 * a text scroll panel that will show text scrolling down (if that is a thing) perhaps with some effect of fade in and out.
 * a function that could get called on a panel move in of out of panel, like a help on moveover element there is a official name for such an element but i be damned if i know.
 * what to do with the mouse hover branch ?
@@ -101,6 +102,7 @@ side dish
 
 bugs
 =====
+* parts that get targeted will not showup in the mini info
 * parts that can stack after flip dont stack or dont go from ship in inventory, stage stuff, test it
 * the impact clouds are killing [todo] !!
 * somewhere in console there is a max, textfield length that is reached to soon [done]

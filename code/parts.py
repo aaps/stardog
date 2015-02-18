@@ -25,7 +25,7 @@ class Port(object):
 
 class Part(Floater):
     """A part of a ship."""
-    baseImage = loadImage("res/part/default.png", SUPER_WHITE)
+    baseImage = loadImage("res/part/default.png")
     image = None
     height, width = 9, 3
     
@@ -243,10 +243,7 @@ class Part(Floater):
         
     def update(self):
         """updates this part."""
-        # print self.adjectives.__name__
-        # for adjective in self.adjectives:
-        #     print adjective.__class__.__name__
-        # if self.ship:
+
         #reset so this part can act again this frame:
         self.acted = False
         #if it's attached to a ship, just rotate with the ship:
@@ -345,7 +342,7 @@ class Part(Floater):
                     self.universe.player.xpKill(self.ship)
             if self.parent:
                 self.detach()
-            if rand() < 0.3 and not isinstance(self, Scrap):
+            if rand() < 0.3 and not isinstance(self, Cargo):
                 scrap = Scrap(self.universe)
                 scrap.pos = self.pos
                 scrap.delta = self.delta
@@ -384,11 +381,44 @@ class Cargo(Floater):
         Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = radius)
         self.resources = True
         # height, width = 9, 3
+        self.pickuptimeout = 0
         self.width = self.image.get_width() - 4
         self.height = self.image.get_height() - 4
+        self.parent = None
         self.color = PART1
         self.image = colorShift(self.baseImage.copy(), self.color)
         self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.functions = [] # thisshould go eventualy
+        self.adjectives = [] #this should go eventualy
+
+    def update(self):
+        if self.pickuptimeout > 0:
+            self.pickuptimeout -= 1. / self.fps
+        Floater.update(self)
+
+    def shortStats(self):
+        return self.name
+
+    def shortStats(self):
+        return  self.name
+
+    def stats(self):
+        return "It is " + self.name
+
+    def scatter(self, ship):
+        """Like detach, but for parts that are in an inventory when a 
+        ship is destroyed."""
+        self.pickuptimeout = 5
+        angle = randint(0,360)
+        offset = Vec2d(cos(angle) * DETACH_SPACE, sin(angle) * DETACH_SPACE)
+        #set physics to drift away from ship (not collide):
+        self.image = colorShift(pygame.transform.rotate(self.baseImage, angle), self.color).convert_alpha()
+        # self.image.set_colorkey(BLACK)
+        self.pos = ship.pos + offset
+        self.delta.x = ship.delta.x + (rand()  * DETACH_SPEED)
+
+        # self.ship = None
+        self.universe.curSystem.add(self)
 
 class Scrap(Cargo):
     baseImage = loadImage("res/goods/scrap.png")
@@ -397,16 +427,45 @@ class Scrap(Cargo):
         Cargo.__init__(self, universe)
         self.name = "Scrap"
         self.damage = 1
-        
-
-    def update(self):
-        Part.update(self)
 
     def shortStats(self):
-        return "Scrap"
+        return self.name
 
     def stats(self):
-        return "It is Scrap"
+        return self.name
+
+class Iron(Cargo):
+    baseImage = loadImage("res/goods/iron.png")
+    image = None
+    def __init__(self, universe):
+        Cargo.__init__(self, universe)
+        self.name = "Iron"
+        self.damage = 1
+
+    def shortStats(self):
+        return self.name
+
+    def stats(self):
+        return self.name
+
+class IronOre(Cargo):
+    baseImage = loadImage("res/goods/ironore.png")
+    image = None
+    def __init__(self, universe):
+        Cargo.__init__(self, universe)
+        self.name = "IronOre"
+        self.damage = 1
+
+    def shortStats(self):
+        return self.name
+
+    def stats(self):
+        return self.name
+        
+
+
+
+
 
 
 class FlippablePart(Part):
@@ -692,9 +751,7 @@ class Radar(Part):
         if self.ship.radars[-1] == self:
             self.enabled = not self.enabled
 
-        
-    def shortStats(self):
-        return "nothing"
+
 
     def shortStats(self):
         return "nothing yet"
@@ -801,7 +858,7 @@ class Radar(Part):
             resultList = []
             for radar in self.ship.radars:
                 resultList= list(set(radar.detected)|set(resultList))
-            resultList =  filter(lambda f: isinstance(f, Part), resultList)
+            resultList =  filter(lambda f: isinstance(f, Part) or isinstance(f, Cargo), resultList)
             resultList = sorted(resultList, key = self.radarDistance)
             length = len(resultList)
             if self.ship.curtarget and self.ship.curtarget in resultList  and length-1 > resultList.index(self.ship.curtarget):
@@ -816,7 +873,7 @@ class Radar(Part):
             resultList = []
             for radar in self.ship.radars: 
                 resultList= list(set(radar.detected)|set(resultList))
-            resultList =  filter(lambda f: isinstance(f, Part), resultList)
+            resultList =  filter(lambda f: isinstance(f, Part) or isinstance(f, Cargo), resultList)
             resultList = sorted(resultList, key = self.radarDistance)
             length = len(resultList)
             if self.ship.curtarget and self.ship.curtarget in resultList  and resultList.index(self.ship.curtarget) > 0:
@@ -1074,7 +1131,7 @@ class GatewayFocus(Part):
         return statString
 
     def shortStats(self):
-        return "Nothing"
+        return "Nothing\n"
 
     def toggle(self):
         if self.jumpenergy >= self.neededenergy:
@@ -1240,23 +1297,23 @@ class GargoHold(Part):
         Part.update(self)
 
 
-class Scrap(Part):
-    baseImage = loadImage("res/goods/scrap.png")
-    image = None
+# class Scrap(Part):
+#     baseImage = loadImage("res/goods/scrap.png")
+#     image = None
 
-    def __init__(self, universe):
-        Part.__init__(self, universe)
-        self.name = "Scrap"
-        self.resources = True
+#     def __init__(self, universe):
+#         Part.__init__(self, universe)
+#         self.name = "Scrap"
+#         self.resources = True
 
-    def update(self):
-        Part.update(self)
+#     def update(self):
+#         Part.update(self)
 
-    def shortStats(self):
-        return "Scrap"
+#     def shortStats(self):
+#         return "Scrap"
 
-    def stats(self):
-        return "It is Scrap"
+#     def stats(self):
+#         return "It is Scrap"
 
 class Cockpit(Radar, Battery, Generator, Gyro, GargoHold):
     baseImage = loadImage("res/parts/cockpit.png")

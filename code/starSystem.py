@@ -151,7 +151,7 @@ class StarSystem(object):
 			if isinstance(b, Ship) : a,b = b,a
 			if isinstance(a, Ship):
 				
-				if isinstance(b, Part) and b.parent == None:
+				if isinstance(b, Part) or isinstance(b, Cargo) and b.parent == None:
 					a.freepartCollision(b)
 					return True
 
@@ -253,7 +253,10 @@ class SolarA1(StarSystem):
 			accel = ((self.g * mass) / distanceFromStar) / 10
 			# startdelta = Vec2d(0,0).rotatedd(startdir, accel) # preps for gravity sensitive planets
 			startdelta = Vec2d(0,0)
-			planet = Planet(self, startpos, startdelta ,self.g,radius = radius, mass = mass, color = color)
+			imagename = randImageInDir("res/planets")
+
+			planetimage = loadImage(imagename)
+			planet = Planet(self, startpos, startdelta ,self.g,radius = radius, mass = mass, color = color, image = planetimage)
 			
 			mindistance = self.minDistFromOthers(planet)
 			if mindistance > (radius * 6):

@@ -31,11 +31,18 @@ class Planet(Floater):
         #see solarSystem.planet_ship_collision
         self.race = None #race that owns this planet
         self.fps = 10
-        if image == None:
-            self.image = None
+        # if image == None:
+        #     self.image = None
+
+        self.image = pygame.transform.scale(self.image, (radius*2+10,radius*2+10))
+        # self.mask = pygame.maskFromSurface(self.image)
         self.inventory = []
         for x in range(randint(1,8)):
             self.inventory.append(randItem(self.starSystem.universe, 1))
+
+        self.inventory.append(randCargo(self.starSystem.universe))
+
+
 
     def setFPS(self, fps):
         self.fps = fps
@@ -66,11 +73,13 @@ class Planet(Floater):
         # Floater.update(self) # for gravity sensitive planets update
     
     def draw(self, surface, offset = Vec2d(0,0)):
-        if not self.image:
-            pos = self.pos - offset
-            pygame.draw.circle(surface, self.color, pos.inttup(), int(self.radius))
+        
+        pos = self.pos - offset
+        pygame.draw.circle(surface, self.color, pos.inttup(), int(self.radius))
+        Floater.draw(self, surface, offset)
         for emitter in self.emitters:
             emitter.draw(surface, offset)
+
 
     def takeDamage(self, damage, other):
         pass
@@ -81,7 +90,7 @@ class Planet(Floater):
                 return False
         # planet/ship
         #planet/part
-        elif isinstance(other, Part) and other.parent == None:
+        elif isinstance(other, Part) or isinstance(other, Cargo) and other.parent == None:
             self.freepartCollision(other)
             return True
         elif isinstance(other, Ship):
@@ -98,7 +107,9 @@ class Planet(Floater):
 
     def freepartCollision(self, part):
         part.kill()
-        if rand() > .8 and not isinstance(part, Scrap):
+
+        if rand() > .8 and not isinstance(part, Cargo):
+
             part.dir = 0
             part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert_alpha()
         else:

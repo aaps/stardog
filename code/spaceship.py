@@ -728,6 +728,7 @@ class Ship(Floater, Controllable):
 
     def gatewayCollision(self, gateway):
         self.atgateway = gateway
+        
     def freepartCollision(self, part):
         if part.pickuptimeout <= 0:
             part.dir = 0

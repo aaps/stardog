@@ -170,7 +170,7 @@ class RadarField(Drawable):
                         if isinstance(floater, Bullet):
                             pygame.draw.rect(self.image, (150, 40, 0),
                                              (dotPos[0]-1, dotPos[1]-1, 2, 2))
-                        elif isinstance(floater, Part):
+                        elif isinstance(floater, Part) or isinstance(floater, Cargo):
                             pygame.draw.rect(self.image, (200, 200, 0),
                                              (dotPos[0]-1, dotPos[1]-1, 2, 2))
                 elif not isinstance(floater, Planet):
@@ -272,7 +272,7 @@ class BGImage(Drawable):
         Drawable.__init__(self, universe)
         rect = (self.universe.game.width, self.universe.game.height)
         directory = 'res/Tarantula Nebula.jpg'
-        self.pic = pygame.transform.scale(loadImage(directory, None), rect)
+        self.pic = pygame.transform.scale(loadImage(directory), rect)
 
     def draw(self, surface):
         surface.blit(self.pic, (0, 0))
@@ -340,7 +340,7 @@ class MiniInfo(Drawable):
                 else:
                     r = self.width / 2
                 pygame.draw.circle(self.image, self.targ.color, ((self.width/2,self.height/2)), r)
-            elif isinstance(self.targ, Part):
+            elif isinstance(self.targ, Part) and isinstance(self.targ, Cargo):
                 name = self.targ.name
                 if not self.targimage == self.targ.baseImage:
                     self.targimage = self.targ.baseImage
