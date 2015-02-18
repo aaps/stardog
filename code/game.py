@@ -267,10 +267,14 @@ class Game(object):
                 self.timer += 1. / self.fps
                 # try and print debuging caption
                 try:
-                    disp_str = 'Memory usage: %s (kb) FPS: %d'
-                    memUse = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+                    disp_str = 'Memory usage: %d(KB) %d(MB) %d(GB) FPS: %d'
+                    memUse = int(resource.getrusage(
+                                 resource.RUSAGE_SELF).ru_maxrss)
+                    memUseMB = memUse/1024
+                    memUseGB = memUseMB/1024
                     fps = self.averagefps
-                    pygame.display.set_caption(disp_str % (memUse, fps))
+                    pygame.display.set_caption(disp_str % (memUse, memUseMB,
+                                               memUseGB, fps))
                 except Exception:
                     pygame.display.set_caption('FPS: %d' % (self.averagefps))
             # end round loop (until gameover)

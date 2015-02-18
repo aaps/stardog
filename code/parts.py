@@ -461,12 +461,6 @@ class IronOre(Cargo):
 
     def stats(self):
         return self.name
-        
-
-
-
-
-
 
 class FlippablePart(Part):
     def flip(self):
