@@ -66,7 +66,8 @@ class StarSystem(object):
 			if floater.pos.get_distance(Vec2d(0,0)) > self.boundrad:
 				if isinstance(floater, Ship):
 					floater.overedge = True
-				else:
+
+				elif floater.pos.get_distance(Vec2d(0,0)) > self.edgerad:	
 					try:
 						floater.kill()
 					except TypeError:

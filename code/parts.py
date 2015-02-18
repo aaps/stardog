@@ -247,7 +247,7 @@ class Part(Floater):
         #reset so this part can act again this frame:
         self.acted = False
         #if it's attached to a ship, just rotate with the ship:
-        if self.parent:
+        if self.ship:
             cost = cos(self.ship.dir) #cost is short for cos(theta)
             sint = sin(self.ship.dir)
             self.pos = self.ship.pos + self.offset.rotated(self.ship.dir)
