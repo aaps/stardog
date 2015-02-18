@@ -200,7 +200,7 @@ class ChatConsole(TopLevelPanel, Controllable):
     
     def __init__(self, game, rect):
         TopLevelPanel.__init__(self, rect)
-        Controllable.__init__(self, False)
+        Controllable.__init__(self, game, False)
         subFrameRect = Rect(0, 0, self.rect.width, self.rect.height)
         self.game = game
         
@@ -230,7 +230,7 @@ class Menu(TopLevelPanel, Controllable):
     
     def __init__(self, game, rect):
         TopLevelPanel.__init__(self, rect)
-        Controllable.__init__(self, False)
+        Controllable.__init__(self, game, False)
         subFrameRect = Rect(0, 0, self.rect.width, self.rect.height)
         self.game = game
        

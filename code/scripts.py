@@ -8,7 +8,8 @@ import stardog
 class Controllable(object):
     # this will take the place of ship script update
     
-    def __init__(self, active=True):
+    def __init__(self, game, active=True):
+        self.game = game
         self.active = active
         self.scripts = []
         self.timeout = 0
@@ -23,14 +24,14 @@ class Controllable(object):
         self.active = False
 
     def toggleActive(self):
-        self.timeout = 3
+        self.timeout = 0
         self.active = not self.active
 
     def update(self):
-        if self.timeout > 0:
-            self.timeout -= 1
+        if self.timeout < 0.2:
+            self.timeout += 1.01 / self.game.fps
 
-        if len(self.scripts) > 0 and self.active and self.timeout == 0:
+        if len(self.scripts) > 0 and self.active and self.timeout >= 0.2:
             for script in self.scripts:
                 script.update(self)
 

@@ -328,7 +328,7 @@ class Ship(Floater, Controllable):
     def __init__(self, game, pos, delta, dir = 270, \
                 color = (255, 255, 255), name=("shippy","Mcshipperson"), partlim=8):
         Floater.__init__(self, game.universe, pos, delta, dir, 1)
-        Controllable.__init__(self)
+        Controllable.__init__(self, game)
 
         self.universe = game.universe
 
