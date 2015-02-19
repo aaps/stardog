@@ -62,7 +62,7 @@ if __name__ == "__main__":
     # files that are to be ignored.
     filterfiles = ['.gitignore', 'utils', '.git', 'todo-and-plans.md',
                    'ingredients_and_materials.txt', 'economic-simulation.txt']
-
+    print("Get zip link and downloading.")
     # open a request for the data on this url
     tag_url = "https://api.github.com/repos/aaps/stardog/tags"
     tags = urllib2.urlopen(tag_url)
@@ -76,6 +76,8 @@ if __name__ == "__main__":
     log(str(tags_json[u'name']), logfile)
 
     url = urllib2.urlopen(ziplink)
+    print("Done")
+    print("Unzipping and copying files.")
     zf = ZipFile(StringIO(url.read()))
     names = zf.namelist()
 
@@ -90,3 +92,4 @@ if __name__ == "__main__":
                     pass
             elif len(newname) > 0:
                 file(os.path.normpath(newname), 'wb').write(zf.read(name))
+    print("Done")
