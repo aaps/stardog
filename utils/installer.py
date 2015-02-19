@@ -42,16 +42,14 @@ zf = ZipFile(StringIO(url.read()))
 names = zf.namelist()
 
 for name in names:
-    for item in filterfiles:
-        # print item, name
-        if not item in name:
-            newname = "/".join(name.split('/')[1:])
-            if newname.endswith('/'):
-                # try for if folder already exists
-                try:
-                    os.makedirs(os.path.normpath(newname))
-                except:
-                    pass
-            elif len(newname) > 0:
-                file(os.path.normpath(newname),
-                     'wb').write(zf.read(name))
+    if name.split("/")[-1] not in filterfiles:
+        newname = "/".join(name.split('/')[1:])
+        if newname.endswith('/'):
+            # try for if folder already exists
+            try:
+                os.makedirs(os.path.normpath(newname))
+            except:
+                pass
+        elif len(newname) > 0:
+            file(os.path.normpath(newname),
+                 'wb').write(zf.read(name))
