@@ -1377,7 +1377,7 @@ class Interceptor(Cockpit):#move to config
                     Port(Vec2d(-6, 12), 0, self),
                     Port(Vec2d(-6, -12), 0, self)]
                     
-class Destroyer(Cockpit):#move to config
+class Destroyer(Cockpit):# move to config
     mass = 60
     hp = 30
     energyCost = .6

@@ -35,8 +35,13 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
+<<<<<<< HEAD
+* jump portals different colors to show in what system you have transported to (the wormhole thingy)
+* make the color shifter abele to shift from other color than magic pink
+=======
 * part attach blocker doesnt give feedback, should say something like parts overlap so no place
 * make the color shifter able to shift from other color than magic pink [done]
+>>>>>>> bea4148e3f88021b8dd9406e194bf76078b5dd14
 * make the planet textures into more maghic colors and shift them from planet primairy color and secondary color
 * if floater reaches edgerad also make it go from one system to another so split camera and player specific functionality from only floater functionality
 * make sure part inherit from cargo, [todo]
@@ -88,10 +93,10 @@ side dish
 
 * adding info from weapon used on part to part, like plasma burns, impact damage etc. [a list of 3 things that happend last, future plans]
 * deciding what gui graphics to update:
-* put certain things into threads like : update cycle and draw cycle, also the drawing of mini info panel. [maybe]
-* a globe image for planet that is transparant and go's over planet circle, some scaling needed 5 or so images.[done]
-* a shadow for a planet in the night side. !!!
-
+* put certain things into threads like : update cycle and draw cycle, also the drawing of mini info panel.
+* a globe image for planet that is transparant and go's over planet circle, some scaling needed 5 or so images.
+* a shadow for a planet in the night side
+* change font for things that need be read like chat. or part details.
 * compile a list of games like this one to 'loan' elements from
 - naev
 - hardwar
@@ -141,6 +146,7 @@ bugs
 * cockpits are named part
 * damage calculation for health bars is bad now
 * ai doesnt update annymore
+* massive memmory leak (is fixed)
 
 
 parts
