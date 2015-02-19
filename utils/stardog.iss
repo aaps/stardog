@@ -2,10 +2,10 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 #pragma include __INCLUDE__ + ";" + "c:\Program Files\Inno Download Plugin/idp.iss"
 #define MyAppName "stardog"
-#define MyAppVersion "2"
+#define MyAppVersion "3"
 #define PyToDOwn "python-2.7.9.msi"
 #define PyGameToDown  "pygame-1.9.2a0.win32-py2.7.msi"
-#define MyTitleName "MyApp" 
+#define MyTitleName "StarDog" 
 
 
 [Setup]
@@ -23,6 +23,7 @@ ChangesEnvironment=yes
 
 [Icons]
 Name: "{group}\StarDog"; Filename: "c:\Python27\python.exe"; WorkingDir: "{app}"; Parameters: """{app}\stardog.py"""
+Name: "{group}\Updater"; Filename: "c:\Python27\python.exe"; WorkingDir: "{app}"; Parameters: """{app}\updater.py"""
 
 
 [UninstallDelete]
@@ -41,7 +42,7 @@ AppAddPath="Add application directory to your environmental path (required)"
 [Files]
 Source: "{tmp}\{#PyToDOwn}"; DestDir: "{app}"; Flags: external deleteafterinstall;
 Source: "{tmp}\{#PyGameToDown}"; DestDir: "{app}"; Flags: external deleteafterinstall;
-Source: "{tmp}\installer.py"; DestDir: "{app}";  Flags: external;
+Source: "{tmp}\updater.py"; DestDir: "{app}";  Flags: external;
 
 [Registry]
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};c:\Python27"
@@ -49,14 +50,14 @@ Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environmen
 [Run]
 Filename: "msiexec.exe"; Parameters: "/i""{app}\{#PyToDOwn}"""
 Filename: "msiexec.exe"; Parameters: "/i""{app}\{#PyGameToDown}"" /qb"
-Filename: "c:\Python27\python.exe"; WorkingDir: "{app}"; Parameters: """{app}\installer.py"""
+Filename: "c:\Python27\python.exe"; WorkingDir: "{app}"; Parameters: """{app}\updater.py"""
 
 [Code]
 procedure InitializeWizard();
 begin
  idpAddFile('https://www.python.org/ftp/python/2.7.9/{#PyToDOwn}', ExpandConstant('{tmp}\{#PyToDOwn}'));
     idpAddFile('http://pygame.org/ftp/{#PyGameToDown}', ExpandConstant('{tmp}\{#PyGameToDown}'));
-    idpAddFile('https://raw.githubusercontent.com/aaps/stardog/master/utils/installer.py', ExpandConstant('{tmp}\installer.py'));
+    idpAddFile('https://raw.githubusercontent.com/aaps/stardog/master/utils/updater.py', ExpandConstant('{tmp}\updater.py'));
     idpDownloadAfter(wpReady);
 end;
 

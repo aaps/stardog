@@ -4,7 +4,7 @@ import pygame
 
 from pygame.locals import *
 import sys
-from installer import *
+from updater import *
 
 
 

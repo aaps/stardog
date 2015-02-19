@@ -23,7 +23,7 @@ class IntroMenu(TopLevelPanel):
         self.game = game
         self.running = True
         self.game.playerColor = [255,255,255]
-        self.gameversion = self.game.GLV("./utils/installer_log.txt")
+        self.gameversion = self.game.GLV("./installer_log.txt")
         self.remoteversion = ""
         # self.checkCurVer()
         self.rootChoose()
