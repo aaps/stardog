@@ -84,14 +84,12 @@ if __name__ == "__main__":
 
     for name in names:
         thename = name.split("/")
+        useit = True
         for aname in filterfiles:
             if fnmatch.fnmatch(name, '*' + aname + '*'):
-                break
-
-
+                useit = False
+        if useit:
             newname = "/".join(thename[1:])
-
-
             if newname.endswith('/'):
                 # try for if folder already exists
                 try:
@@ -99,5 +97,6 @@ if __name__ == "__main__":
                 except:
                     pass
             elif len(newname) > 0:
+                print newname
                 file(os.path.normpath(newname), 'wb').write(zf.read(name))
-    print("Done")
+print("Done")
