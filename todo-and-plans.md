@@ -31,10 +31,12 @@ http://pygame.org/project-planes-2392-405.html get version 0.6
 http://www.pygame.org/project-OpenGL+Library+(glLib*)-877-.html
 http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 * the posibility for stations and planets to have facilitys, like bars, trading hubs, etc [initial facilitys, shop, refitter, smelter]
-
+* power management system for propulsion, weapons, shields and sensors
 
 side dish
 ============
+* make the color shifter abele to shift from other color than magic pink
+* make the planet textures into more maghic colors and shift them from planet primairy color and secondary color
 * if flaoter reaches edgerad also make it go from one system to another so split camera and player specific functionality from only floater functionality
 * make sure part inherit from cargo, todo
 * a text scroll panel that will show text scrolling down (if that is a thing) perhaps with some effect of fade in and out.

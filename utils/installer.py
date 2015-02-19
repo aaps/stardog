@@ -21,7 +21,7 @@ def log(logline, logfile):
         logfile.write("%s>> %s\n" % (timestr, logline))
 
 # files that are to be ignored.
-filterfiles = ['.gitignore', 'utils', '.git', 'todo', 'ingredients']
+filterfiles = ['.gitignore', 'utils', '.git', 'todo-and-plans.md', 'ingredients_and_materials.txt', 'economic-simulation.txt']
 
 # open a request for the data on this url
 tag_url = "https://api.github.com/repos/aaps/stardog/tags"
