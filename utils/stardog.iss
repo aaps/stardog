@@ -17,9 +17,13 @@ AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
-OutputBaseFilename=setup3
+OutputBaseFilename=setup
 #include <idp.iss>
 ChangesEnvironment=yes
+
+[Icons]
+Name: "{group}\StarDog"; Filename: "c:\Python27\python.exe"; WorkingDir: "{app}"; Parameters: """{app}\stardog.py"""
+
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\*.*"
@@ -37,7 +41,7 @@ AppAddPath="Add application directory to your environmental path (required)"
 [Files]
 Source: "{tmp}\{#PyToDOwn}"; DestDir: "{app}"; Flags: external deleteafterinstall;
 Source: "{tmp}\{#PyGameToDown}"; DestDir: "{app}"; Flags: external deleteafterinstall;
-Source: "{tmp}\installer.py"; DestDir: "{app}";  Flags: external deleteafterinstall;
+Source: "{tmp}\installer.py"; DestDir: "{app}";  Flags: external;
 
 [Registry]
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};c:\Python27"
