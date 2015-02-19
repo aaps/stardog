@@ -6,6 +6,7 @@ import urllib2
 import json
 import os
 from time import localtime
+import fnmatch
 
 logfile = "installer_log.txt"
 
@@ -80,8 +81,15 @@ if __name__ == "__main__":
     names = zf.namelist()
 
     for name in names:
-        if name.split("/")[-1] not in filterfiles:
-            newname = "/".join(name.split('/')[1:])
+        thename = name.split("/")
+        for aname in filterfiles:
+            if fnmatch.fnmatch(name, '*' + aname + '*'):
+                break
+
+
+            newname = "/".join(thename[1:])
+
+
             if newname.endswith('/'):
                 # try for if folder already exists
                 try:

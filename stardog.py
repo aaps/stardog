@@ -4,8 +4,10 @@ import pygame
 
 from pygame.locals import *
 import sys
-from updater import *
-
+try:
+  from updater import *
+except:
+  from utils.updater import *
 
 
 FULL = False; RESOLUTION = 1024, 768 #test

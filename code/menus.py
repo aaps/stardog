@@ -68,7 +68,7 @@ class IntroMenu(TopLevelPanel):
 
     def versionMessage(self):
         if len(self.remoteversion) > 0 and len(self.remoteversion) > 0:
-            if self.game.CV:
+            if self.game.CV():
                 return "You are on the Current Version !"
             else:
                 return "There is a newer version, time to update !"
