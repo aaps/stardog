@@ -397,7 +397,6 @@ class shipDamage(Drawable):
                     color = (int((1-partfactor) * 255) , int(partfactor * 255), 50)
                     
                     pygame.draw.rect(self.image, color, self.startrect)
-                    print part.name
                     text = self.font.render(part.name + " " + str(round(part.hp,1)) + "/" + str(part.maxhp), False, HUD3)
                     self.image.blit(text, (10, self.startrect[1]-15))
             
