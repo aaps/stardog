@@ -264,6 +264,11 @@ so you can get out of the way in time. [done, aat]
 
 [Duality]
 
+Progress Bar
+=====
+* in updater.py show a progress bar, opening a request is fast, downloading with url.read() takes a long time.
+* thus place a progress bar there. the placing of files and folders is also done in under a second.
+
 Energy Rerouting.
 =====
 * like when the laser drains your energy, and then goes on to drain your shields.
