@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from StringIO import StringIO
 from zipfile import ZipFile
 import urllib2
@@ -18,7 +20,7 @@ def log(logline, logfile):
     timestr = ("%d-%d-%d-%d" % (lt().tm_year, lt().tm_mon,
                                 lt().tm_mday, lt().tm_hour))
     with open(logfile, 'a') as logfile:
-        logfile.write("%s>> %s\n" % (timestr, logline))
+        logfile.write("%s >> %s\n" % (timestr, logline))
 
 # files that are to be ignored.
 filterfiles = ['.gitignore', 'utils', '.git', 'todo-and-plans.md', 'ingredients_and_materials.txt', 'economic-simulation.txt']
@@ -41,7 +43,8 @@ names = zf.namelist()
 
 for name in names:
     for item in filterfiles:
-        if item != name:
+        # print item, name
+        if not item in name:
             newname = "/".join(name.split('/')[1:])
             if newname.endswith('/'):
                 # try for if folder already exists
