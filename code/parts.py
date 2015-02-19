@@ -871,7 +871,7 @@ class Radar(Part):
             resultList = []
             for radar in self.ship.radars:
                 resultList= list(set(radar.detected)|set(resultList))
-            resultList =  filter(lambda f: isinstance(f, Part), resultList)
+            resultList =  filter(lambda f: isinstance(f, Part) or isinstance(f, Cargo), resultList)
             resultList = sorted(resultList, key = self.radarDistance)
             length = len(resultList)
             if self.ship.curtarget and self.ship.curtarget in resultList  and length-1 > resultList.index(self.ship.curtarget):
@@ -886,7 +886,7 @@ class Radar(Part):
             resultList = []
             for radar in self.ship.radars: 
                 resultList= list(set(radar.detected)|set(resultList))
-            resultList =  filter(lambda f: isinstance(f, Part), resultList)
+            resultList =  filter(lambda f: isinstance(f, Part) or isinstance(f, Cargo), resultList)
             resultList = sorted(resultList, key = self.radarDistance)
             length = len(resultList)
             if self.ship.curtarget and self.ship.curtarget in resultList  and resultList.index(self.ship.curtarget) > 0:

@@ -438,7 +438,6 @@ class RadarDisk(Floater):
     tangible = False
 
     def __init__(self, universe, pos, delta, dir=0, radius=10, image=None):
-        # self.game = game
         self.dir = dir
         self.pos = pos
         self.delta = delta

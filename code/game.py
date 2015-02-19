@@ -213,9 +213,6 @@ class Game(object):
                 self.universe.update()
                 self.universe.draw(self.screen)
 
-                # self.camera.update()
-                # self.camera.draw(self.screen)
-
                 # paused:
 
                 if self.menu.active:

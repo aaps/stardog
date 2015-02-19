@@ -8,15 +8,15 @@ main dish
 
 * wormholes/star gates to other systems. (medium mode ?, after Gravless class) [can travel to other starsystems via direct travel now, star gates next] [done]
 
-* make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [functional part done apart from the actual jump]
+* make jump part(takes energy to load), bind to j, time out and some effect like explotion after timeout addplayer to other system. [done]
 
-* make everyting looser coupled, it seemse everyting is dependant on game for some reason, this should be avoided and refactored, lets begin with the following classes. !!!
+* make everyting looser coupled, it seemse everyting is dependant on game for some reason, this should be avoided and refactored, lets begin with the following classes.
 # particles (done)
-# parts 
-# floaters
-# planets 
+# parts (done)
+# floaters (done)
+# planets (done)
 # starsystem (done)
-# camera should be part of universe ?
+# camera should be part of universe [done]
 
 
 * multyplayer [hard mode, dependant on code structure] !!
@@ -35,87 +35,89 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
-* make the color shifter abele to shift from other color than magic pink
+* part attach blocker doesnt give feedback, should say something like parts overlap so no place
+* make the color shifter able to shift from other color than magic pink [done]
 * make the planet textures into more maghic colors and shift them from planet primairy color and secondary color
-* if flaoter reaches edgerad also make it go from one system to another so split camera and player specific functionality from only floater functionality
-* make sure part inherit from cargo, todo
+* if floater reaches edgerad also make it go from one system to another so split camera and player specific functionality from only floater functionality
+* make sure part inherit from cargo, [todo]
 * a text scroll panel that will show text scrolling down (if that is a thing) perhaps with some effect of fade in and out.
 * a function that could get called on a panel move in of out of panel, like a help on moveover element there is a official name for such an element but i be damned if i know.
-* what to do with the mouse hover branch ?
-* make a function in game or stardog that will check the version of game of stardog in the github repo, if repo is newer give intructions how to update via installer.
-* the ui margins and locations should be dependant on camera size and location
+* what to do with the mouse hover branch [delete it]
+* make a function in game or stardog that will check the version of game of stardog in the github repo, if repo is newer give intructions how to update via installer. [done]
+* the ui margins and locations should be dependant on camera size and location ?
 * ai can use an fsm to flee attack, explore [using simplefsm] [initial ai states, atack, flee, idle]
 * make 2 gateways in the start system to test jumping [done]
-* make text able to left center right lineout
-* does ship still need hp is not all hp contained in the parts ? [In what way is this meant to be interpreted. (Duality)]
+* make text able to left center right lineout !!!
+* does ship still need hp is not all hp contained in the parts ? parts have hp cockpit has hp, so do we ned ship hp.
 * a sentence construction kitt for the ai so it can taunt you for example
+* plog triggers wont retrigger of dont have the option to. !!!
 * partcount in menu doesn't show the actuall part limit. [Done]
-* a list in a ship of who is targeting you. targeting target should not go into player or enemy but in ship
-* there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.[Why would you want engines on turrets? (Duality)]
-* make sure that enabled is a property of part not of subparts/classes 
-* does a ship has a reference to the current starsystem if no does it need one ?
-* the console , input chatconsole panel hierarchy is a bit much !!
-* realy a better way to reset stuff on death, like radar error thing, enging trust should be off menus all inactive
-* a game intro screen
+* a list in a ship of who is targeting you. targeting target should not go into player or enemy but in ship !!!
+* there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.[after chip ai stuff implementation]
+* make sure that enabled is a property of part not of subparts/classes !!! 
+* does a ship has a reference to the current starsystem if no does it need one [no done]
+* the console , input chatconsole panel hierarchy is a bit much !!!
+* realy a better way to reset stuff on death, like radar error thing, enging trust should be off menus all inactive !!!
+* a game intro screen [done]
 * make a screen effect class, that will flash the screen white or something, for jump effect
-* ai can talk to player, when targeting player for example and disengaging [after fsm and better brains ai]
-* a ai that trys to collect parts and deposit them on his planet !!
-* an small addaptation that makes this standout from other stardog. The accounting software  [star/space rats]
-* make the screenshots have a incrementalnumber like : screenshop-1, screenshot-2, etc
-* a cursor for on main screen in form of crosshair
-* make factorys for planets starsystems and ships, the design pattern !!!
-* a random seed for xtra fun
-* splitout parts and cargo ,different files, is part cargo or cargo part ?
+* ai can talk to player, when targeting player for example and disengaging [after fsm and better brains ai, and sentence construction kitt]
+* a ai that trys to collect parts and deposit them on his planet [after smarter ai]
+* an small addaptation that makes this standout from other stardog. The accounting software  [NovaBlasters it is for now]
+* make the screenshots have a incrementalnumber like : screenshop-1, screenshot-2, etc [done]
+* make factorys for planets starsystems and ships, the design pattern [after multyplayer]
+* a random seed for xtra fun !!!
+* splitout parts and cargo ,different files, part inherits from cargo !!!
 * a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
 * the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed [done]
-* some sessions of bughunting
+* some sessions of bughunting !!!
 * some buttons should not be rebindable ingame, like quit, menu and console
-* make a startmenu with: start, options
-* make a options menu with, sound
-* make a sound menu with music volume and fx volume
-*commenting code !!!
+* make a startmenu with: start, options [done]
+* make a options menu with, sound [done]
+* make a sound menu with music volume and fx volume [done]
+* commenting code !!!
 * instead of flippable part chage shoot direction, and mirror image, and make flipable a property of class
-* more collision handeling refactor [still need more refactoring]
+
 * more to vec2d vector work. [almost done]
 * engines that are good for space travel but bad for landing and visaversa
-* other sound for bullet impact on shield and plating and on planet
-* palaxing background, the image
-* instead of restart directly, wait for keypress and see your lifeless ship float into the distance. !
+* other sound for bullet impact on shield and plating and on planet !!!
+* instead of restart directly, wait for keypress and see your lifeless ship float into the distance. !!!
 * make the camera so that it can smoothly transition from one place to another
-* make the game run from the beginning, so if choosing ship and color the game is already running !
-* cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fitt parts on your ship when on planet or structure, when container gets destroyed or dissconnected from ship you lose parts untill you are at capacity.
-* in camera splitout functionality make a layer class for the layers that will not do the drawing but perhaps the updating, anyhow updates doesnt belong in camera ?
-* ai could use some more bains and variation
-* adding info from weapon used on part to part, like plasma burns, impact damage etc. [a list of 3 things that happend last]
+* make the game run from the beginning, so if choosing ship and color the game is already running !!!
+* cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fitt parts on your ship when on planet or structure, when container gets destroyed or dissconnected from ship you lose parts untill you are at capacity. [done]
+* in camera splitout functionality make a layer class for the layers that will not do the drawing but perhaps the updating, anyhow updates doesnt belong in camera ? [take from multiplayer branch and put in master branch] !!!
+
+* adding info from weapon used on part to part, like plasma burns, impact damage etc. [a list of 3 things that happend last, future plans]
 * deciding what gui graphics to update:
-* put certain things into threads like : update cycle and draw cycle, also the drawing of mini info panel.
-* a globe image for planet that is transparant and go's over planet circle, some scaling needed 5 or so images.
-* a shadow for a planet in the night side
+* put certain things into threads like : update cycle and draw cycle, also the drawing of mini info panel. [maybe]
+* a globe image for planet that is transparant and go's over planet circle, some scaling needed 5 or so images.[done]
+* a shadow for a planet in the night side. !!!
 
 * compile a list of games like this one to 'loan' elements from
 - naev
 - hardwar
 - Transcendence
 - void infinity
+- independance war II
 
 * use inno setup to maker this game runnable on windows [done]
 * make a tag on github that the inno setup gets the game from [done]
 * make inno setup run a python and pygame test after install and return a good or bad install !!!
 * put the inno setup script in the git repo [done]
+* FunctionLabel need to have a color option !!!
 
 
 bugs
 =====
-* explotions and impact clouds are subject to gravity, should not be.
-* parts that get targeted will not showup in the mini info
-* parts that can stack after flip dont stack or dont go from ship in inventory, stage stuff, test it
+* explotions and impact clouds are subject to gravity, should not be. [done]
+* parts that get targeted will not showup in the mini info [done]
+* parts that can stack after flip dont stack or dont go from ship in inventory, strange stuff, test it
 * the impact clouds are killing [done]
 * somewhere in console there is a max, textfield length that is reached to soon [done]
 * the slider part is still not slidable [done]
 * pure black should not be a color to choose ship from  [done]
 * particle emitters dont have the exact right position in case of part [done]
 * putting engines on cockpit and perhaps other parts off shipp will prefent the engine of firering.
-* trust of engine has the direction of ship not of slot of part
+* trust of engine has the direction of ship not of slot of part [todo !!!]
 * if part targeted and picked up it still exists on target screen  [done]
 * still cant rebind keys
 * particles also alter delta of part they come from, fix that
