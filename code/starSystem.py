@@ -155,6 +155,10 @@ class StarSystem(object):
                     a.freepartCollision(b)
                     return True
 
+                if isinstance(b, Cargo):
+                    a.freepartCollision(b)
+                    return True
+
                 hit = False
                 if a.hp > 0:
                     
@@ -186,8 +190,8 @@ class StarSystem(object):
                     return hit
                 
             #free part/free part
-            if isinstance(b, Part) and b.parent == None \
-            and isinstance(a, Part) and a.parent == None:
+            if isinstance(b, Part) or isinstance(b, Cargo) and b.parent == None \
+            and isinstance(a, Part) or isinstance(b, Cargo)and a.parent == None:
                 return False #pass through each other, no crash.
 
             #floater/floater (no ship, planet)

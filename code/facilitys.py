@@ -1,4 +1,4 @@
-from adjectives import PARTS
+from adjectives import PARTS, CARGO
 
 class Company(object):
     def __init__(self,planet):
