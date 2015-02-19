@@ -3,7 +3,7 @@ from parts import *
 from Resources import *
 from partCatalog import *
 
-CARGO = [Scrap, Iron, IronOre]
+# CARGO = [Scrap, Iron, IronOre]
 
 PARTS = [LeftCannon, RightCannon, Engine, Gyro, Generator, Battery, Shield,
          LeftLaser, RightLaser, MissileLauncher, MachineGun, FighterShield,

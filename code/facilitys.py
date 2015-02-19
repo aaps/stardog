@@ -1,4 +1,4 @@
-from adjectives import PARTS, CARGO
+from adjectives import PARTS
 
 class Company(object):
     def __init__(self,planet):
@@ -6,7 +6,7 @@ class Company(object):
         self.facilitys = []
         self.name = "dummy Company"
         self.cash = 1000
-        self.prices = {PARTS[0]:1, PARTS[1]:2}.items() + {CARGO[0]:3}.items()
+        # self.prices = {PARTS[0]:1, PARTS[1]:2}.items() + {CARGO[0]:3}.items()
 
     def addFacility(self, facility):
         facility.company = self

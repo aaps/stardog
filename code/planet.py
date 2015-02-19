@@ -43,7 +43,7 @@ class Planet(Floater):
         for x in range(randint(1,8)):
             self.inventory.append(randItem(self.starSystem.universe, 1))
 
-        self.inventory.append(randCargo(self.starSystem.universe))
+        # self.inventory.append(randCargo(self.starSystem.universe))
 
 
 
@@ -96,7 +96,7 @@ class Planet(Floater):
                 return False
         # planet/ship
         #planet/part
-        elif isinstance(other, Part) or isinstance(other, Cargo) and other.parent == None:
+        elif isinstance(other, Part)  and other.parent == None:
             self.freepartCollision(other)
             return True
         elif isinstance(other, Ship):
@@ -114,7 +114,7 @@ class Planet(Floater):
     def freepartCollision(self, part):
         part.kill()
 
-        if rand() > .8 and not isinstance(part, Cargo):
+        if rand() > .8 and not isinstance(part, Scrap):
 
             part.dir = 0
             part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert_alpha()

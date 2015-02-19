@@ -152,7 +152,7 @@ class StarSystem(object):
             if isinstance(b, Ship) : a,b = b,a
             if isinstance(a, Ship):
                 
-                if isinstance(b, Part) or isinstance(b, Cargo) and b.parent == None:
+                if isinstance(b, Part) and b.parent == None:
                     a.freepartCollision(b)
                     return True
 
