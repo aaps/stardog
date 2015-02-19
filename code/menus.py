@@ -10,6 +10,7 @@ from collections import defaultdict
 from SoundSystem import *
 
 
+
 DEFAULT_SELECTED_IMAGE = loadImage("res/parts/defaultselected.png")
 squareWidth = 80
 squareSpacing = squareWidth + 10
@@ -22,6 +23,8 @@ class IntroMenu(TopLevelPanel):
         self.game = game
         self.running = True
         self.game.playerColor = [255,255,255]
+        self.gameversion = 0
+        self.checkCurVer()
         self.rootChoose()
     
     def rootChoose(self):
@@ -30,8 +33,9 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(Label(Rect(120, 80, 200, 20), "The future is annoying !", color=SUPER_WHITE, font=FONT))
         self.addPanel(Button(Rect(120, 200, 100, 25), self.colorChoose, "Start", font=BIG_FONT))
         self.addPanel(Button(Rect(120, 240, 100, 25), self.volumeChoose, "Sound", font=BIG_FONT))
-        self.addPanel(Button(Rect(120, 280, 100, 25), self.creditsChoose, "Credits", font=BIG_FONT))
-        self.addPanel(Button(Rect(120, 320, 100, 25), self.quitChoose, "Quit", font=BIG_FONT))
+        self.addPanel(Button(Rect(120, 280, 100, 25), self.versionChoose, "Version", font=BIG_FONT))
+        self.addPanel(Button(Rect(120, 320, 100, 25), self.creditsChoose, "Credits", font=BIG_FONT))
+        self.addPanel(Button(Rect(120, 360, 100, 25), self.quitChoose, "Quit", font=BIG_FONT))
 
 
     def volumeChoose(self):
@@ -45,6 +49,21 @@ class IntroMenu(TopLevelPanel):
                              self.setMusicVolume, MUSIC_VOLUME))
         self.addPanel(Slider(Rect(320, 80, 20, 175),
                              self.setSFXVolume, SFX_VOLUME))
+
+    def versionChoose(self):
+        self.panels = []
+        self.addPanel(Label(Rect(120, 100, 200, 20), "Current Version:", color = SUPER_WHITE, font = BIG_FONT))
+        self.addPanel(Label(Rect(120, 140, 200, 20), "Version Avalable:", color = SUPER_WHITE, font = BIG_FONT))
+        
+        self.addPanel(FunctionLabel(Rect(320, 100, 200, 20), self.standintext,  font = BIG_FONT))
+        self.addPanel(FunctionLabel(Rect(320, 140, 200, 20), self.standintext,  font = BIG_FONT))
+       
+        # SHIP_PANEL_BLUE
+        self.addPanel(Button( Rect(120, 280, 100, 20), self.rootChoose, "Check !"))
+        self.addPanel(Button(Rect(320, 280, 100, 20), self.rootChoose, "Back"))
+
+    def standintext(self):
+        return "text test"
 
     def colorChoose(self):
         self.panels = []
@@ -140,6 +159,10 @@ class IntroMenu(TopLevelPanel):
     def chooseType(self, type):
         self.game.playerType = type
         self.nameChoose()
+
+    def checkCurVer(self):
+        self.gameversion = 0
+
 
 class NameInputField(InputField):
     def __init__(self, parent, rect):
