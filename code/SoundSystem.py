@@ -12,8 +12,16 @@ MUSIC_VOLUME = (20./100)
 
 
 class SoundSystem(object):
-    def __init__(self):
-        pass
+    def __init__(self, universe, quality=44100):
+        self.universe = universe
+        self.sounds = {}
+        try:
+            pygame.mixer.init(quality)
+        except Exception as e:
+            print(e)
+
+    def register(self, sound):
+        self.sounds[sound] = pygame.mixer.Sound(sound)
 
 
 def setMusicVolume(volume):
@@ -38,8 +46,8 @@ def setSFXVolume(volume):
 try:
     pygame.mixer.init(44100)
 
+    gunShootSound = pygame.mixer.Sound("res/sound/gunShot-Duality-edit.ogg")
     shootSound = pygame.mixer.Sound("res/sound/lazer.ogg")
-    # shootSound = pygame.mixer.Sound("res/sound/lazer-duality-edit.ogg")
     laserShootSound = pygame.mixer.Sound("res/sound/lazer-duality-edit.ogg")
     hitSound = pygame.mixer.Sound("res/se_sdest.wav")
     explodeSound = pygame.mixer.Sound("res/se_explode03.wav")
