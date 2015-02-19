@@ -14,6 +14,7 @@ FULL = False; RESOLUTION = 1024, 768 #test
 hardwareFlag = pygame.HWSURFACE|pygame.DOUBLEBUF
 
 
+
 if __name__=="__main__":
     #command line resolution selection:
     if len(sys.argv) > 1:
@@ -64,5 +65,7 @@ if __name__=="__main__":
 import code.game
 if __name__ == '__main__':
     game = code.game.Game(screen)
-    
+    game.GGV = getGitVersion
+    game.GLV = getLogVersion
+    game.CV = checkVersion
     game.run()

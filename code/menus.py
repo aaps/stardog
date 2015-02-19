@@ -23,11 +23,13 @@ class IntroMenu(TopLevelPanel):
         self.game = game
         self.running = True
         self.game.playerColor = [255,255,255]
-        self.gameversion = 0
-        self.checkCurVer()
+        self.gameversion = self.game.GLV("./utils/installer_log.txt")
+        self.remoteversion = ""
+        # self.checkCurVer()
         self.rootChoose()
     
     def rootChoose(self):
+        # print "GIT:"+ self.game.GGV(), "LOG:" + self.game.GLV("./utils/installer_log.txt")
         self.panels = []
         self.addPanel(Label(Rect(120, 50, 200, 20), "STARDOG !", color=SUPER_WHITE, font=BIG_FONT))
         self.addPanel(Label(Rect(120, 80, 200, 20), "The future is annoying !", color=SUPER_WHITE, font=FONT))
@@ -55,15 +57,33 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(Label(Rect(120, 100, 200, 20), "Current Version:", color = SUPER_WHITE, font = BIG_FONT))
         self.addPanel(Label(Rect(120, 140, 200, 20), "Version Avalable:", color = SUPER_WHITE, font = BIG_FONT))
         
-        self.addPanel(FunctionLabel(Rect(320, 100, 200, 20), self.standintext,  font = BIG_FONT))
-        self.addPanel(FunctionLabel(Rect(320, 140, 200, 20), self.standintext,  font = BIG_FONT))
-       
+        self.addPanel(FunctionLabel(Rect(320, 100, 200, 20), self.getGameVersion,  font = BIG_FONT))
+        self.addPanel(FunctionLabel(Rect(320, 140, 200, 20), self.getRemoteVersion,  font = BIG_FONT))
+        self.addPanel(TextBlock(Rect(120,200,400,100), self.versionMessage, color = SHIP_PANEL_BLUE, font = SMALL_FONT))
+
         # SHIP_PANEL_BLUE
-        self.addPanel(Button( Rect(120, 280, 100, 20), self.rootChoose, "Check !"))
+        self.addPanel(Button( Rect(120, 280, 100, 20), self.checkRemoveVersion, "Check !"))
         self.addPanel(Button(Rect(320, 280, 100, 20), self.rootChoose, "Back"))
 
-    def standintext(self):
-        return "text test"
+
+    def versionMessage(self):
+        if len(self.remoteversion) > 0 and len(self.remoteversion) > 0:
+            if self.game.CV:
+                return "You are on the Current Version !"
+            else:
+                return "There is a newer version, time to update !"
+
+        return "Do you need to update !?"
+
+
+    def getGameVersion(self):
+        return self.gameversion
+
+    def getRemoteVersion(self):
+        return self.remoteversion
+
+    def checkRemoveVersion(self):
+        self.remoteversion = self.game.GGV()
 
     def colorChoose(self):
         self.panels = []
@@ -450,8 +470,7 @@ class ShipPanel(Selecter):
         values = (s.numParts, s.partLimit, s.efficiency, s.mass,
                 s.forwardThrust/1000, s.moment, s.torque/1000, 
                 s.dps, s.energy, s.maxEnergy, s.hp, s.maxhp)
-        self.text = (TextBlock(Rect(20,30,400,100), text%values, 
-                    color = SHIP_PANEL_BLUE, font = SMALL_FONT))
+        self.text = (TextBlock(Rect(20,30,400,100), text%values, color = SHIP_PANEL_BLUE, font = SMALL_FONT))
         self.addPanel(self.text)
         Panel.reset(self) 
         
