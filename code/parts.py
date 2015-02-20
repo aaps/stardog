@@ -744,7 +744,7 @@ class FlakCannon(Cannon):
 
 class Radar(Part):
     
-    image = None
+    # image = None
     radartime = 0
     disk = None
     detected = []

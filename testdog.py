@@ -47,7 +47,7 @@ class TestMenuElements(unittest.TestCase):
 
     def testInputField(self):
         
-        self.inputfield = InputField(Rect(0,0,20,20), self)
+        self.inputfield = InputField(Rect(0,0,20,20), self, self.dummyCallback,  FONT)
         self.assertTrue(self.inputfield.cursortimeout > 0)
         self.inputfield.update()
         self.assertTrue(self.inputfield.cursortimeout == 0)
