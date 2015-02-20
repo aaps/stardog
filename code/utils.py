@@ -110,9 +110,11 @@ def randColor(min, max):
 try:
     pygame.font.init()
     font_name = "hardfont.ttf"
-    SMALL_FONT = pygame.font.Font("res/fonts/"+str(font_name), 14)
-    FONT = pygame.font.Font("res/fonts/"+str(font_name), 18)
-    BIG_FONT = pygame.font.Font("res/fonts/"+str(font_name), 24)
+    font_dir = "res/fonts/"
+    font_path = font_dir+font_name
+    SMALL_FONT = pygame.font.Font((font_path), 14)
+    FONT = pygame.font.Font((font_path), 18)
+    BIG_FONT = pygame.font.Font((font_path), 24)
     fontModule = True
 
 except:
