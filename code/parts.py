@@ -33,9 +33,9 @@ class Part(Floater):
     # buffer = pygame.Surface((30,30), flags = hardwareFlag | SRCALPHA).convert_alpha()
     acted = False
     
-    #a list of functions that are called on the ship during ship.update:
+    # a list of functions that are called on the ship during ship.update:
     shipEffects = []
-    #a list of functions that are called on this part at attach time:
+    # a list of functions that are called on this part at attach time:
     attachEffects = []
 
     def __init__(self, universe):
@@ -68,15 +68,16 @@ class Part(Floater):
         self.hp = 10
         self.fps = 10
         self.universe = universe
- 
+        # every part needs to know where to register sounds.
+        self.soundsys = self.universe.game.soundSystem
         
         self.image = colorShift(self.baseImage.copy(), self.color)
         self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
         self.width = self.image.get_width() - 4
         self.height = self.image.get_height() - 4
-        #the length of this list is the number of connections.
-         #each element is the part there, (x,y,dir) position of the connection.
-         #the example is at the bottom of the part, pointed down.
+        # the length of this list is the number of connections.
+        # each element is the part there, (x,y,dir) position of the connection.
+        # the example is at the bottom of the part, pointed down.
         self.ports = [Port(Vec2d(-self.width / 2, 0), 0, self)]
         self.emitters.append(Emitter( self, self.condHalfDamage , 180, 10, 20, BLACK, PARTICLE1, 4, 5, 5, 3, 5, True))
         self.emitters.append(Emitter( self, self.condThQuarterDamage , 180, 40, 50, PARTICLE3, RED, 0, 1, 1, 1, 2.5, True))
@@ -426,25 +427,6 @@ class Cargo(Floater):
         # self.ship = None
         self.universe.curSystem.add(self)
 
-# class Scrap(Part):
-#     baseImage = loadImage("res/goods/scrap.png")
-#     image = None
-
-#     def __init__(self, universe):
-#         Part.__init__(self, universe)
-#         self.name = "Scrap"
-#         self.resources = True
-
-#     def update(self):
-#         Part.update(self)
-
-#     def shortStats(self):
-#         return "Scrap"
-
-#     def stats(self):
-#         return "It is Scrap"
-
-
 class Scrap(Cargo):
     
     image = None
@@ -529,6 +511,10 @@ class Gun(Part):
         self.reload = 0
         self.energyCost = 3
         self.bulletRadius = 2
+
+        # register our self with the sound system.
+        self.gunShotSound = 'gunShot-Duality-edit.ogg'
+        self.soundsys.register(self.gunShotSound)
     
     def stats(self):
         stats = (self.damage, 60. / self.reloadTime, self.energyCost, \
@@ -580,8 +566,7 @@ class Cannon(Gun):
         if self.reload <= 0 and s.energy > self.energyCost:
             self.reload = self.reloadTime / s.efficiency * s.cannonRateBonus
             s.energy -= self.energyCost
-            if soundModule:
-                setVolume(gunShootSound.play(), self, self.universe.player)
+            self.soundsys.play(self.gunShotSound)
             self.universe.curSystem.add( 
                     Bullet(self.universe, self, 
                     self.damage * s.efficiency * s.damageBonus * s.cannonBonus, 
@@ -620,8 +605,7 @@ class MineDropper(Gun):
         if self.reload <= 0 and s.energy > self.energyCost:
             self.reload = self.reloadTime
             s.energy -= self.energyCost
-            if soundModule:
-                setVolume(shootSound.play(), self, self.universe.player)
+            self.soundsys.play(self.gunShotSound)
             self.universe.curSystem.add(Mine(self.universe, self,
                     self.damage*s.efficiency*s.damageBonus,
                     self.speed,
@@ -651,7 +635,9 @@ class MissileLauncher(Gun):
         self.explosionTime = 3
         self.force = 6000
         self.name = 'Missile Launcher'
-    
+        self.missileLaunchSound = 'lazer.ogg'
+        self.soundsys.register(self.missileLaunchSound)
+
     def stats(self):
         stats = (self.speed, self.acceleration)
         statString = ("\nMissile Speed: %s m/s\nMissile Acceleration: %s m/s/s")
@@ -664,8 +650,7 @@ class MissileLauncher(Gun):
         if self.reload <= 0 and s.energy > self.energyCost:
             self.reload = self.reloadTime
             s.energy -= self.energyCost
-            if soundModule:
-                setVolume(shootSound.play(), self, self.universe.player)
+            self.soundsys.play(self.missileLaunchSound)
             self.universe.curSystem.add( Missile(self.universe, self, 
                     self.damage * s.efficiency * s.damageBonus * s.missileBonus,
                     self.speed * s.missileSpeedBonus,
@@ -688,6 +673,9 @@ class Laser(Gun):
         self.energyCost = 35
         self.beamWidth = 1
         self.imageDuration = .08
+        # register the lasersound with the game soundsystem
+        self.laserSound = 'lazer-duality-edit.ogg'
+        self.soundsys.register(self.laserSound)
                 
     def shoot(self):
         """fires a laser"""
@@ -697,9 +685,8 @@ class Laser(Gun):
         if self.reload <= 0 and self.ship.energy > self.energyCost:
             self.reload = self.reloadTime / s.efficiency * s.cannonRateBonus
             self.ship.energy -= self.energyCost
-            # if soundModule:
-            laserShootSound.play()
-            # setVolume(laserShootSound.play(), self, self.universe.player)
+            # play the laser sound
+            self.soundsys.play(self.laserSound)
             self.universe.curSystem.add( \
                     LaserBeam(self.universe, self, \
                     self.damage * s.efficiency * s.damageBonus * s.laserBonus, \
@@ -742,8 +729,7 @@ class FlakCannon(Cannon):
             self.reload = self.reloadTime / s.efficiency * s.cannonRateBonus
             s.energy -= self.energyCost
             self.burst -= 1
-            if soundModule:
-                setVolume(shootSound.play(), self, self.universe.player)
+            self.soundsys.play(self.gunShotSound)
             #shoot several bullets, changing shootDir for each:
             baseDir = self.shootDir
             self.shootDir = baseDir + rand() * self.spread - self.spread / 2

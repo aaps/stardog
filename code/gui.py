@@ -193,7 +193,7 @@ class RadarField(Drawable):
                     result = planet.pos - self.player.pos
                     dotPos = int(center[0] + limit(-radius, result.x / scale, self.radarRadius)), int(center[1] + limit(-self.radarRadius, result.y / scale, self.radarRadius))
                     r = int(planet.radius / scale + 2)
-                    if collisionTest(Floater(self.universe.game, Vec2d(dotPos), Vec2d(0, 0), 0, 0), Floater(self.universe.game, Vec2d(center), Vec2d(0, 0), 0, 100)):
+                    if collisionTest(Floater(self.universe, Vec2d(dotPos), Vec2d(0, 0), 0, 0), Floater(self.universe, Vec2d(center), Vec2d(0, 0), 0, 100)):
                         color = planet.color
                         if self.player.curtarget == planet:
                             targetRect(self.image, MINI2, SHIPDAMAGE, dotPos, r, 2)
@@ -215,7 +215,7 @@ class RadarField(Drawable):
                 result = floater.pos - self.player.pos
                 dotPos = int(center[0] + limit(-self.radarRadius,   result.x / scale, self.radarRadius)), \
                         int(center[1] + limit(-self.radarRadius, result.y / scale, self.radarRadius))
-                if collisionTest(Floater(self.universe.game, Vec2d(dotPos), Vec2d(0, 0), 0, 0), Floater(self.universe.game, Vec2d(center), Vec2d(0,0), 0, 100)):
+                if collisionTest(Floater(self.universe, Vec2d(dotPos), Vec2d(0, 0), 0, 0), Floater(self.universe, Vec2d(center), Vec2d(0,0), 0, 100)):
                     if isinstance(floater, Ship):
                         if self.player.curtarget == floater:
                             self.image.blit(self.targimage,

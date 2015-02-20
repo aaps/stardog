@@ -20,16 +20,19 @@ squareSpacing = squareWidth + 10
 
 class IntroMenu(TopLevelPanel):
     color = CONSOLE_BLUE
-    def __init__(self, game, rect, corners = [10,0,10,0]):
+
+    def __init__(self, game, rect, corners=[10, 0, 10, 0]):
         TopLevelPanel.__init__(self, rect, corners)
         self.game = game
+        self.musicSys = game.musicSystem
+        self.soundSys = game.soundSystem
         self.running = True
-        self.game.playerColor = [255,255,255]
+        self.game.playerColor = [255, 255, 255]
         self.gameversion = self.game.GLV("./installer_log.txt")
         self.remoteversion = ""
         # self.checkCurVer()
         self.rootChoose()
-    
+
     def rootChoose(self):
         
         self.panels = []
@@ -41,9 +44,9 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(Button(Rect(120, 320, 100, 25), self.creditsChoose, "Credits", font=BIG_FONT))
         self.addPanel(Button(Rect(120, 360, 100, 25), self.quitChoose, "Quit", font=BIG_FONT))
 
-
     def volumeChoose(self):
         self.panels = []
+
         self.addPanel(Label(Rect(120, 50, 200, 20), "Music Volume:", color=SUPER_WHITE, font=BIG_FONT))
         self.addPanel(Label(Rect(320, 50, 200, 20), "SFX Volume:", color = SUPER_WHITE, font = BIG_FONT))
         self.addPanel(Button(Rect(120, 280, 100, 20), self.cooseVolume, "Confirm", FONT))
@@ -51,6 +54,7 @@ class IntroMenu(TopLevelPanel):
 
         self.addPanel(Slider(Rect(120, 80, 20, 175), self.setMusicVolume, MUSIC_VOLUME))
         self.addPanel(Slider(Rect(320, 80, 20, 175), self.setSFXVolume, SFX_VOLUME))
+
 
     def versionChoose(self):
         self.panels = []
@@ -150,10 +154,10 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(Button( Rect(50, 350, 100, 20), self.colorChoose, "Back", FONT))
 
     def setMusicVolume(self, value):
-        setMusicVolume(value)
+        self.musicSys.setVolume(value)
 
-    def setSFXVolume(self, value):
-        setSFXVolume(value)
+    def setSfxVolume(self, value):
+        self.soundSys.setVolume(value)
 
     def cooseVolume(self):
         self.rootChoose()

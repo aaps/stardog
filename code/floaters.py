@@ -51,6 +51,9 @@ class Floater(pygame.sprite.Sprite, Ballistic):
             image = loadImage("res/parts/default.png")
         self.image = pygame.transform.rotate(image, -self.dir).convert_alpha()
         self.rect = self.image.get_rect()
+        self.soundsys = self.universe.game.soundSystem
+        self.crashSound = 'se_sdest.wav'
+        self.soundsys.register(self.crashSound)
 
     def update(self):
         """updates this floater based on its variables"""
@@ -75,8 +78,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
             emitter.draw(surface, offset)
 
     def crash(self, other):
-        if soundModule:
-            setVolume(hitSound.play(), self, other)
+        self.soundsys.play(self.crashSound)
         hpA = self.hp
         hpB = other.hp
         if hpB > 0:
@@ -124,6 +126,11 @@ class Bullet(Floater):
         if 'target' in gun.ship.__dict__:
             self.curtarget = gun.ship.curtarget
 
+        # register the bullet sound
+        self.soundsys = self.universe.game.soundSystem
+        self.bulletSound = 'se_explode02.wav'
+        self.soundsys.register(self.bulletSound)
+
     def update(self):
         self.life += 1. / self.fps
         Floater.update(self)
@@ -135,12 +142,11 @@ class Bullet(Floater):
             delta = (self.lastDamageFrom.delta + self.delta) / 2
         else:
             delta = self.delta
-        impact = Impact(self.universe.game, self.pos, delta, 20, 14)
+        impact = Impact(self.universe, self.pos, delta, 20, 14)
         self.universe.curSystem.add(impact)
 
     def kill(self):
-        if soundModule:
-            setVolume(missileSound.play(), self, self.universe.player)
+        self.soundsys.play(self.bulletSound)
         self.detonate()
         Floater.kill(self)
 
@@ -170,6 +176,8 @@ class Missile(Bullet):
         self.emitters.append(Emitter(self, self.condAlways, 5, 100, 200,
                              (255, 255, 255, 255), (255, 255, 255, 0), 2,
                              4, 100, 2, 5, True))
+        self.missileSound = 'se_explode02.wav'
+        self.soundsys.register(self.missileSound)
 
     def update(self):
         self.life += 1. / self.fps
@@ -189,8 +197,7 @@ class Missile(Bullet):
 
     def kill(self):
         self.detonate()
-        if soundModule:
-            setVolume(missileSound.play(), self, self.universe.player)
+        self.soundsys.play(self.missileSound)
         Floater.kill(self)
 
     def takeDamage(self, damage, other):
