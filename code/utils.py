@@ -201,6 +201,15 @@ def colorShift(surface, color, first = 0, second = 2):
     del newColor
     return s
 
+def totalColorVal(surface):
+    pa = pygame.PixelArray(surface)
+    colscore = 0
+    for i in range(len(pa)):
+        for j in range(len(pa[i])):
+            col = surface.get_at((i, j))
+            colscore += col[0] + col[1] + col[2]
+    return colscore
+
 def collisionTest(a, b):
     """test spatial collision of Floaters a and b"""
     return a != b and a.pos.get_distance(b.pos) < (a.radius + b.radius)

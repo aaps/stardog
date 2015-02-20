@@ -2,9 +2,10 @@
 from utils import *
 from menuElements import *
 import stardog
-from parts import Dummy, PART_OVERLAP, DEFAULT_IMAGE, FlippablePart
+from parts import Dummy, PART_OVERLAP, FlippablePart
 from spaceship import Ship
 import datetime
+from parts import *
 from scripts import Controllable
 from collections import defaultdict
 from SoundSystem import *
@@ -577,7 +578,7 @@ class ShipPartPanel(DragableSelectable):
         else:
             dir = self.port.dir + self.port.parent.dir
             self.image = pygame.transform.scale2x(\
-                        pygame.transform.rotate(DEFAULT_IMAGE, -dir)).convert_alpha()
+                        pygame.transform.rotate(loadImage("res/parts/default.png"), -dir)).convert_alpha()
             self.image.set_colorkey(BLACK) 
         
     def dragOver(self, pos, rel):

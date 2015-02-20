@@ -35,10 +35,11 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
-<<<<<<< HEAD
+
+* InputField had drawing dtuff in update put it in draw
 * jump portals different colors to show in what system you have transported to (the wormhole thingy)
 * make the color shifter abele to shift from other color than magic pink
-=======
+
 * part attach blocker doesnt give feedback, should say something like parts overlap so no place
 * make the color shifter able to shift from other color than magic pink [done]
 >>>>>>> bea4148e3f88021b8dd9406e194bf76078b5dd14

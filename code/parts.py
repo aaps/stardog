@@ -546,7 +546,7 @@ class Cannon(Gun):
     
     def __init__(self, universe):
         if self.bulletImage == None:
-            self.bulletImage = BULLET_IMAGE.copy()
+            self.bulletImage = loadImage("res/ammo/shot.png").copy()
         Gun.__init__(self, universe)
         self.speed = 300
         self.name = "Cannon"
@@ -557,7 +557,7 @@ class Cannon(Gun):
         return Gun.stats(self) + statString % stats
                 
     def attach(self):
-        self.bulletImage = colorShift(BULLET_IMAGE, bulletColor(self.damage))
+        self.bulletImage = colorShift(loadImage("res/ammo/shot.png"), bulletColor(self.damage))
         Part.attach(self)
             
     def shoot(self):
@@ -624,7 +624,7 @@ class MissileLauncher(Gun):
     
     def __init__(self, universe):
         if self.missileImage == None:
-            self.missileImage = MISSILE_IMAGE.copy()
+            self.missileImage = loadImage("res/ammo/missile.png").copy()
         Gun.__init__(self, universe)
         self.damage = 20
         self.speed = 40
@@ -657,7 +657,7 @@ class MissileLauncher(Gun):
                     self.speed * s.missileSpeedBonus,
                     self.acceleration * s.missileSpeedBonus,
                     self.range * s.missileRangeBonus, self.explosionRadius,
-                    image = MISSILE_IMAGE))
+                    image = loadImage("res/ammo/missile.png")))
 
 class Laser(Gun):
     baseImage = loadImage("res/parts/leftlaser.png")
