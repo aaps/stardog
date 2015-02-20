@@ -1146,8 +1146,8 @@ class SkillTile(Button):
             self.ship.developmentPoints -= self.skill.cost()
             self.removePanel(self.levelLabel)
             rect = self.levelLabel.rect
-            self.levelLabel = Label(rect, 'level ' + str(self.skill.level),\
-                        color = SHIP_PANEL_BLUE)
+            self.levelLabel = Label(rect, 'level '+str(self.skill.level),
+                                    color=SHIP_PANEL_BLUE, font=FONT)
             self.addPanel(self.levelLabel)
 
 class Store(Panel):
