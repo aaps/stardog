@@ -5,7 +5,7 @@ import pygame
 from code.utils import *
 from code.menuElements import *
 from code.floaters import *
-# from code.parts import *
+from code.parts import *
 
 class TestMenuElements(unittest.TestCase):
 

@@ -6,6 +6,7 @@ class LeftFlakCannon(FlakCannon, FlippablePart):
         self.baseImage = loadImage("res/parts/leftflak.png")
         FlakCannon.__init__(self, universe)
         FlippablePart.__init__(self, universe)
+        
         self.ports = []
         self.shootPoint = 0, - 20;
         self.shootDir = 270
@@ -15,6 +16,7 @@ class MachineGun(Cannon):
     def __init__(self, universe):
         self.baseImage = loadImage('res/parts/machinegun.png')
         Cannon.__init__(self, universe)
+        
         self.ports = []
         self.damage = .25
         self.reloadTime = 0.7
@@ -30,6 +32,7 @@ class RightFlakCannon(FlakCannon, FlippablePart):
         self.baseImage = loadImage("res/parts/rightflak.png")
         FlakCannon.__init__(self, universe)
         FlippablePart.__init__(self, universe)
+        
         self.ports = []
         self.shootPoint = 0, 20
         self.shootDir = 90
@@ -40,6 +43,7 @@ class LeftLaser(Laser, FlippablePart):
         self.baseImage = loadImage("res/parts/leftlaser.png")
         Laser.__init__(self, universe)
         FlippablePart.__init__(self, universe)
+        
         self.ports = []
         self.shootPoint = 0, - 15
         self.shootDir = 270
@@ -50,6 +54,7 @@ class RightLaser(Laser, FlippablePart):
         self.baseImage = loadImage("res/parts/rightlaser.png")
         Laser.__init__(self, universe)
         FlippablePart.__init__(self, universe)
+        
         self.ports = []
         self.shootPoint = 0, 15
         self.shootDir = 90
@@ -60,6 +65,7 @@ class LeftCannon(Cannon, FlippablePart):
         self.baseImage = loadImage("res/parts/leftgun.png")
         Cannon.__init__(self, universe)
         FlippablePart.__init__(self, universe)
+        
         self.ports = []
         self.shootPoint = 0, - 30
         self.shootDir = 270
@@ -70,6 +76,7 @@ class RightCannon(Cannon, FlippablePart):
         self.baseImage = loadImage("res/parts/rightgun.png")
         Cannon.__init__(self, universe)
         FlippablePart.__init__(self, universe)
+        
         self.ports = []
         self.shootPoint = 0, 30
         self.shootDir = 90
@@ -79,6 +86,7 @@ class StrafebatCannon(Cannon):
     def __init__(self, universe):
         self.baseImage = loadImage("res/parts/strafebatgun.png")
         Cannon.__init__(self, universe)
+        
         self.ports = []
         self.shootDir = 180
         self.shootPoint = -20, 0
@@ -90,6 +98,7 @@ class FighterShield(Shield):
     def __init__(self, universe):
         self.baseImage =  loadImage("res/parts/fightershield.png")
         Shield.__init__(self, universe)
+        
         self.ports = []
         self.mass = 4
         self.shieldhp = .6

@@ -1,4 +1,4 @@
-from utils import *
+
 from menus import *
 from scripts import *
 from starSystem import *
@@ -13,6 +13,7 @@ from vec2d import Vec2d
 import plot
 import datetime
 import sys
+from utils import *
 
 # command parsing (a command line interface for the game)
 # that supports multiple commands, and functions.
@@ -62,7 +63,7 @@ class Game(object):
         self.universe.addCamera(self.camera)
 
         # messenger, with controls as first message:
-        self.messenger = Messenger(self.universe)
+        self.messenger = Messenger(self.universe, FONT)
         theone = SolarA1(self.universe, "theone", Vec2d(1, 100))
         thesecond = SolarA1(self.universe, "thesecond", Vec2d(1, -100), 2, 1)
         thethird = SolarA1(self.universe, "thethird", Vec2d(1, 200), 2, 1)
@@ -74,7 +75,7 @@ class Game(object):
         self.universe.addStarSystem(thethird)
 
         self.camera.layerAdd(self.messenger, 7)
-        self.camera.layerAdd(MiniInfo(self.universe), 6)
+        self.camera.layerAdd(MiniInfo(self.universe, FONT), 6)
 
         # key polling:
         self.keys = [False]*322
@@ -132,7 +133,7 @@ class Game(object):
                                      name=self.PlayerName,
                                      type=self.playerType)
 
-            self.camera.layerAdd(shipDamage(self.universe), 5)
+            self.camera.layerAdd(shipDamage(self.universe, FONT), 5)
             self.camera.layerAdd(StarField(self.universe), 2)
             self.universe.setCurrentStarSystem("theone")
             self.camera.layerAdd(self.universe.curSystem.bg, 1)

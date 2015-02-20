@@ -3,7 +3,7 @@
 from utils import *
 from pygame.locals import *
 from floaters import *
-import stardog
+# import stardog
 
 class Controllable(object):
     # this will take the place of ship script update

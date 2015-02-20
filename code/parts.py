@@ -3,7 +3,7 @@ from utils import *
 from scripts import *
 from pygame.locals import *
 from floaters import *
-import stardog
+# import stardog
 from vec2d import Vec2d
 import copy
 from particles import *
@@ -25,12 +25,12 @@ class Port(object):
 
 class Part(Floater):
     """A part of a ship."""
-    baseImage = loadImage("res/part/default.png")
+   
     image = None
     height, width = 9, 3
     
 
-    buffer = pygame.Surface((30,30), flags = hardwareFlag | SRCALPHA).convert_alpha()
+    # buffer = pygame.Surface((30,30), flags = hardwareFlag | SRCALPHA).convert_alpha()
     acted = False
     
     # a list of functions that are called on the ship during ship.update:
@@ -39,6 +39,9 @@ class Part(Floater):
     attachEffects = []
 
     def __init__(self, universe):
+        self.buffer = pygame.Surface((30,30), flags = hardwareFlag | SRCALPHA).convert_alpha()
+        if not self.baseImage:
+            self.baseImage = loadImage("res/part/default.png")
         radius = max(self.baseImage.get_height() / 2, self.baseImage.get_width() / 2)
         Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = radius)
         self.enabled = False
@@ -376,10 +379,13 @@ class Dummy(Part):
 
 
 class Cargo(Floater):
+    
     def __init__(self, universe):
-        baseImage = loadImage("res/goods/scrap.png")
-        radius = max(self.baseImage.get_height() / 2, self.baseImage.get_width() / 2)
-        Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = radius)
+        
+        Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = 10)
+        self.baseImage = loadImage("res/goods/scrap.png")
+        # Part.__init__(self, universe)
+        self.radius = max(self.baseImage.get_height() / 2, self.baseImage.get_width() / 2)
         self.resources = True
         # height, width = 9, 3
         self.pickuptimeout = 0
@@ -422,10 +428,11 @@ class Cargo(Floater):
         self.universe.curSystem.add(self)
 
 class Scrap(Cargo):
-    baseImage = loadImage("res/goods/scrap.png")
+    
     image = None
     def __init__(self, universe):
         Cargo.__init__(self, universe)
+        self.baseImage = loadImage("res/goods/scrap.png")
         self.name = "Scrap"
         self.damage = 1
 
@@ -436,10 +443,11 @@ class Scrap(Cargo):
         return self.name
 
 class Iron(Cargo):
-    baseImage = loadImage("res/goods/iron.png")
+    
     image = None
     def __init__(self, universe):
         Cargo.__init__(self, universe)
+        self.baseImage = loadImage("res/goods/iron.png")
         self.name = "Iron"
         self.damage = 1
 
@@ -450,10 +458,12 @@ class Iron(Cargo):
         return self.name
 
 class IronOre(Cargo):
-    baseImage = loadImage("res/goods/ironore.png")
+    
     image = None
     def __init__(self, universe):
+        self.baseImage = loadImage("res/goods/ironore.png")
         Cargo.__init__(self, universe)
+        
         self.name = "IronOre"
         self.damage = 1
 
@@ -480,13 +490,15 @@ class FlippablePart(Part):
             self.name = self.name[:i] + 'Right' + self.name[i+4:]
                     
 class Gun(Part):
-    baseImage = loadImage("res/default" + ext)
+    
     image = None
     shootDir = 180
     shootPoint = -30, 0 
     
     def __init__(self, universe):
+        # self.baseImage = loadImage("res/default" + ext)
         Part.__init__(self, universe)
+        
         self.functions.append(self.shoot)
         self.functionDescriptions.append("shoot")
         self.ports = []
@@ -531,9 +543,9 @@ class Cannon(Gun):
 
     
     def __init__(self, universe):
+        Gun.__init__(self, universe)
         if self.bulletImage == None:
             self.bulletImage = loadImage("res/ammo/shot.png").copy()
-        Gun.__init__(self, universe)
         self.speed = 300
         self.name = "Cannon"
         
@@ -562,12 +574,12 @@ class Cannon(Gun):
                     self.range * s.cannonRangeBonus, image = self.bulletImage))
 
 class MineDropper(Gun):
-    baseImage = loadImage("res/parts/minelayer.png")
-    mineImage = loadImage("res/ammo/mine.png")
-
     
     def __init__(self, universe):
+        self.baseImage = loadImage("res/parts/minelayer.png")
         Gun.__init__(self, universe)
+        
+        self.mineImage = loadImage("res/ammo/mine.png")
         self.damage = 30
         self.speed = 0
         self.reloadTime = 2
@@ -602,14 +614,16 @@ class MineDropper(Gun):
                     image = self.mineImage))
 
 class MissileLauncher(Gun):
-    baseImage = loadImage("res/parts/misilelauncher.png")
+    
     missileImage = None
     
     
     def __init__(self, universe):
         if self.missileImage == None:
             self.missileImage = loadImage("res/ammo/missile.png").copy()
+        self.baseImage = loadImage("res/parts/misilelauncher.png")
         Gun.__init__(self, universe)
+        
         self.damage = 20
         self.speed = 40
         self.reloadTime = 5
@@ -645,11 +659,13 @@ class MissileLauncher(Gun):
                     image = loadImage("res/ammo/missile.png")))
 
 class Laser(Gun):
-    baseImage = loadImage("res/parts/leftlaser.png")
+    
 
     
     def __init__(self, universe):
+        # self.baseImage = loadImage("res/parts/leftlaser.png")
         Gun.__init__(self, universe)
+        
         self.damage = 10
         self.range = 300
         self.name = "Laser"
@@ -727,7 +743,7 @@ class FlakCannon(Cannon):
                 self.reloadBurst = self.reloadBurstTime
 
 class Radar(Part):
-    baseImage = loadImage("res/parts/radar.png")
+    
     image = None
     radartime = 0
     disk = None
@@ -736,7 +752,9 @@ class Radar(Part):
     
 
     def __init__(self, universe):
+        self.baseImage = loadImage("res/parts/radar.png")
         Part.__init__(self, universe)
+        
         self.radartime = 0
         self.detected = []
         self.energyCost = 0.5
@@ -886,17 +904,14 @@ class Radar(Part):
         return floater.pos.get_distance(self.ship.pos)
 
 class Engine(Part):
-    baseImage = loadImage("res/parts/engine.png")
+    
     image = None
-    animatedImage = None
 
     
     def __init__(self, universe):
-        # if Engine.animatedImage == None:
-        #     Engine.animatedImage = loadImage(\
-        #             "res/parts/engine thrusting" + ext)
-        # self.baseAnimatedImage = Engine.animatedImage
+        self.baseImage = loadImage("res/parts/engine.png")
         Part.__init__(self, universe)
+        
         self.width -= 6	#move the engines in 6 pixels.
         self.name = "Engine"
         self.ports = []
@@ -954,13 +969,15 @@ class Engine(Part):
             self.ship.energy -= self.energyCost / self.fps
             self.animatedtime = self.animatedspeed
 
-class Gyro(FlippablePart):
-    baseImage = loadImage("res/parts/gyro.png")
+class Gyro(Part):
+    
     image = None
 
     
     def __init__(self, universe):
+        self.baseImage = loadImage("res/parts/gyro.png")
         Part.__init__(self, universe)
+        
         self.ports = [Port(Vec2d(0, self.height / 2 ), 270, self), \
                 Port(Vec2d(-self.width / 2 , 0), 0, self), \
                 Port(Vec2d(0, -self.height / 2 ), 90, self)]
@@ -1011,12 +1028,14 @@ class Gyro(FlippablePart):
             self.ship.energy -= self.energyCost / self.fps
     
 class Generator(Part):
-    baseImage = loadImage("res/parts/generator.png")
+    
     image = None
 
 
     def __init__(self, universe):
+        self.baseImage = loadImage("res/parts/generator.png")
         Part.__init__(self, universe)
+        
         self.name = "Generator"
         self.rate = 6.
         
@@ -1038,12 +1057,14 @@ class Generator(Part):
         Part.update(self)
 
 class Interconnect(Part):
-    baseImage = loadImage("res/parts/interconnect.png")
+    
     image = None
     
 
     def __init__(self, universe):
+        self.baseImage = loadImage("res/parts/interconnect.png")
         Part.__init__(self, universe)
+        
         self.ports = [Port(Vec2d(0, self.height / 2 ), 270, self), \
                 Port(Vec2d(-self.width / 2 , 0), 0, self), \
                 Port(Vec2d(0, -self.height / 2 ), 90, self)]
@@ -1052,13 +1073,14 @@ class Interconnect(Part):
         Part.update(self)
 
 class Quarters(Part):
-    baseImage = loadImage("res/parts/quarters.png")
+    
     # image = None
     crewCap = 2
     repair = 0
     def __init__(self, universe):
+        self.baseImage = loadImage("res/parts/quarters.png")
         Part.__init__(self, universe)
-
+    
         self.name = "Crew Quarters"
 
     def stats(self):
@@ -1096,12 +1118,14 @@ class Quarters(Part):
         Part.update(self)
 
 class GatewayFocus(Part):
-    baseImage = loadImage("res/parts/gateway_focus.png")
+    
     image = None
 
 
     def __init__(self, universe):
+        self.baseImage = loadImage("res/parts/gateway_focus.png")
         Part.__init__(self, universe)
+        
         self.ports = []
         self.name = "Gateway Focus"
         self.neededenergy = 100
@@ -1177,12 +1201,14 @@ class GatewayFocus(Part):
 
 
 class Battery(Part):
-    baseImage = loadImage("res/parts/battery.png")
+    
     image = None
 
 
     def __init__(self, universe):
+        self.baseImage = loadImage("res/parts/battery.png")
         Part.__init__(self, universe)
+        
         self.name = "Battery"
         self.capacity = 100
     
@@ -1201,12 +1227,14 @@ class Battery(Part):
         Part.attach(self)
 
 class Shield(Part):
-    baseImage = loadImage("res/parts/shield.png")
+    
     image = None
 
 
     def __init__(self, universe): 
+        self.baseImage = loadImage("res/parts/shield.png")
         Part.__init__(self, universe)
+        
         self.ports = []
         self.name = "Shield"
         self.shieldhp = 10
@@ -1252,10 +1280,11 @@ class Chip(Part):
         Part.update(self)
 
 class GargoHold(Part):
-    baseImage = loadImage("res/parts/cargo.png")
+    
     image = None
 
     def __init__(self, universe):
+        self.baseImage = loadImage("res/parts/cargo.png")
         Part.__init__(self, universe)
         self.ports = [  Port(Vec2d(0, self.height / 2 ), 270, self), \
                         Port(Vec2d(-self.width / 2 , 0), 0, self), \
@@ -1298,7 +1327,7 @@ class GargoHold(Part):
 
 
 class Cockpit(Radar, Battery, Generator, Gyro, GargoHold):
-    baseImage = loadImage("res/parts/cockpit.png")
+    
     image = None
     energyCost = .2 #gyro
     torque = 35000 #gyro
@@ -1308,7 +1337,9 @@ class Cockpit(Radar, Battery, Generator, Gyro, GargoHold):
     gargocapacity = 6
     
     def __init__(self, universe):
+        # self.baseImage = loadImage("res/parts/cockpit.png")
         Part.__init__(self, universe)
+        
         self.ports = [Port(Vec2d(self.width / 2 - 2, 0), 180, self), \
                     Port(Vec2d(0, self.height / 2 - 2), 270, self), \
                     Port(Vec2d(-self.width / 2 + 2, 0), 0, self), \
@@ -1333,10 +1364,12 @@ class Cockpit(Radar, Battery, Generator, Gyro, GargoHold):
 class Interceptor(Cockpit):#move to config
     mass = 20
     hp = 15
-    baseImage = loadImage("res/parts/interceptor.png")
+    
     
     def __init__(self, universe):
+        self.baseImage = loadImage("res/parts/interceptor.png")
         Cockpit.__init__(self, universe)
+        
         self.ports = [Port(Vec2d(4, 10), 180, self),
                       Port(Vec2d(4, -10), 180, self),
                       Port(Vec2d(-3, -17), 90, self),
@@ -1350,10 +1383,12 @@ class Destroyer(Cockpit):# move to config
     mass = 60
     hp = 30
     energyCost = .6
-    baseImage = loadImage("res/parts/destroyer.png")
+    
     
     def __init__(self, universe):
+        self.baseImage = loadImage("res/parts/destroyer.png")
         Cockpit.__init__(self, universe)
+        
         self.ports = [
                     Port(Vec2d(25, 0), 180, self),
                     Port(Vec2d(8, -8), 90, self),
@@ -1371,10 +1406,12 @@ class Fighter(Cockpit):#move to config
     torque = 60000 #gyro
     capacity = 30 #battery
     rate = 10 #generator
-    baseImage = loadImage("res/parts/fighter.png")
+    
     
     def __init__(self, universe):
+        self.baseImage = loadImage("res/parts/fighter.png")
         Cockpit.__init__(self, universe)
+        
         self.ports = [
                     Port(Vec2d(9, 0), 180, self),
                     Port(Vec2d(-5, -7), 90, self),

@@ -3,6 +3,7 @@ from utils import *
 from menuElements import *
 from spaceship import Ship
 from planet import *
+from gui import *
 
 
 class Messenger(Drawable):
