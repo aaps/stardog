@@ -90,5 +90,4 @@ class SoundSystem(object):
         return self.sfxvolume
 
     def play(self, sound, loops=0):
-        print(sound)
         self.sounds[sound].play(loops)
