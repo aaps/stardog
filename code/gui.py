@@ -64,7 +64,7 @@ class Messenger(Drawable):
         self.maxChars = 200
         self.universe = universe
         self.game = universe.game
-        self.soundsys = self.univers.game.soundSystem
+        self.soundsys = self.universe.game.soundSystem
         self.popupsound = 'message pip'
         self.soundsys.register(self.popupsound)
 
