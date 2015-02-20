@@ -45,14 +45,14 @@ class Drawable(object):
 class Messenger(Drawable):
     # not capitalized in stand lib
     queue = deque()
-    font = FONT
+    # font = FONT
 
-    def __init__(self, universe, font=FONT, dir=1):
+    def __init__(self, universe, font, dir=1):
         Drawable.__init__(self, universe)
         # -1 means the messages stack upward.
+        self.font = FONT
         self.dir = dir
-        self.image = pygame.Surface((universe.game.width-204,
-                                    self.font.get_linesize()))
+        self.image = pygame.Surface((universe.game.width-204,self.font.get_linesize()))
         # characters per second
         self.speed = 40
         self.image.set_alpha(200)
@@ -342,7 +342,7 @@ class BGImage(Drawable):
 
 class MiniInfo(Drawable):
     color = (100, 100, 255)
-    font = SMALL_FONT
+    # font = SMALL_FONT
     # line width
     maxChars = 50
     bottomleft = 0, 0
@@ -350,11 +350,11 @@ class MiniInfo(Drawable):
     mutatedimage = None
     texts = []
 
-    def __init__(self, universe, font=SMALL_FONT):
+    def __init__(self, universe, font):
         Drawable.__init__(self, universe)
         self.bottomleft = (2, self.universe.game.height -
                            int(self.universe.game.height / 4))
-        # self.game = game
+        self.font = font
         self.targ = None
         self.width = int(self.universe.game.width / 8)
         self.height = int(self.universe.game.height / 4)
@@ -422,7 +422,7 @@ class MiniInfo(Drawable):
 
 class shipDamage(Drawable):
 
-    def __init__(self, universe, font=SMALL_FONT):
+    def __init__(self, universe, font):
         Drawable.__init__(self, universe)
         # self.game = game
         self.player = self.universe.game.player

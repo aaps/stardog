@@ -8,8 +8,6 @@ from os.path import isfile, join
 import os
 import re
 
-hardwareFlag = pygame.HWSURFACE
-
 BLACK = (0,0,0)
 MIN_BLACK = (10,10,10)
 SHIPDAMAGE = (0,0,50,200)
@@ -42,6 +40,10 @@ PARTICLE3 = (250,250,0,250)
 PARTICLE5 = (75,100,250,250)
 PARTICLE6 = (250,100,100,0)
 SUPER_WHITE = (255,255,255)
+
+
+
+hardwareFlag = pygame.HWSURFACE
 
 
 #TODO: write fast sloppy trig functions. 

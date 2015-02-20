@@ -9,11 +9,13 @@ from pygame.locals import *
 class Panel(object):
     """Panel(mouse, rect) -> new Panel. 
     The basic building block of the menu system. """
-    color = BS1
+    # color = BS1
     image = None
     drawBorder = True
     bgColor = None
     def __init__(self, rect, corners = []):
+        self.color = BS1
+
         self.rect = rect
         self.panels = []
         self.corners = corners
@@ -322,11 +324,13 @@ class ColorPanel(Panel):
 class Button(Panel):
     """Button(rect, function, text) -> a button that says text and does
     function when clicked. """
-    activeColor = BUTTON_ACTIVE
-    inactiveColor = BS1
     
-    def __init__(self, rect, function, text, font = FONT, corners = [5,0,5,0]):
+    
+    
+    def __init__(self, rect, function, text, font, corners = [5,0,5,0]):
         Panel.__init__(self, rect, corners)
+        self.inactiveColor = BS1
+        self.activeColor = BUTTON_ACTIVE
         self.function = function
         self.text = text
         self.color = self.inactiveColor
@@ -376,7 +380,7 @@ class InputField(Panel):
     drawBorder = False
     image = None
     
-    def __init__(self, rect, game, function = None, font = BIG_FONT, color = BS1, width = 20):
+    def __init__(self, rect, game, function, font, color = BS1, width = 20):
         self.text = ""
         self.game = game
         self.function = function
@@ -868,7 +872,7 @@ class Label(Panel):
     """Label(self,  rect, text, color = BS1, font = FONT) ->
     A panel with a single line of text."""
     drawBorder = False
-    def __init__(self, rect, text, font = FONT, color = BS1,corners = [5,0,5,0]):
+    def __init__(self, rect, text, font, color = BS1,corners = [5,0,5,0]):
         Panel.__init__(self, rect,corners)
         self.text = text
         self.color = color
@@ -880,7 +884,7 @@ class Label(Panel):
 class FunctionLabel(Panel):
     """A label that updates its text by calling a string function."""
     drawBorder = False
-    def __init__(self, rect, textFunction, font = FONT, color = BS1, corners=[5,0,5,0]):
+    def __init__(self, rect, textFunction, font, color = BS1, corners=[5,0,5,0]):
         Panel.__init__(self, rect, corners)
         self.color = color
         self.textFunction = textFunction
@@ -899,7 +903,7 @@ class TextBlock(Panel):
 
     drawBorder = False
     image = None
-    def __init__(self, rect, textFunction, font = FONT, color = BLACK, width = 200, corners=[5,0,5,0]):
+    def __init__(self, rect, textFunction, font, color = BLACK, width = 200, corners=[5,0,5,0]):
         self.textFunction = textFunction
         self.color = color
         self.lineHeight = font.get_height()
@@ -932,7 +936,7 @@ class ScrollTextBlock(TextBlock):
     drawBorder = False
     image = None
 
-    def __init__(self, rect, textFunction, font = FONT, color = BLACK, scrolldirection=4, width = 200, corners=[5,0,5,0]):
+    def __init__(self, rect, textFunction, font , color = BLACK, scrolldirection=4, width = 200, corners=[5,0,5,0]):
 
         TextBlock.__init__(self, rect, textFunction, font = font, color = color, width = width, corners=corners)
         longest = sorted(self.textFunction.split("\n"), key=lambda onestring: len(onestring), reverse=True)
