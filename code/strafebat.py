@@ -27,7 +27,7 @@ class Strafebat(Ship):
 		engine = Engine(universe)
 		generator = Generator(universe)
 		battery = Battery(universe)
-		shield = Shield(universe)
+		shield = BigShield(universe)
 		rCannon = RightCannon(universe)
 		lCannon = LeftCannon(universe)
 		interconnect = Interconnect(universe)

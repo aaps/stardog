@@ -1235,7 +1235,7 @@ class Shield(Part):
 
 
     def __init__(self, universe): 
-        self.baseImage = loadImage("res/parts/shield.png")
+        
         Part.__init__(self, universe)
         
         self.ports = []
@@ -1270,6 +1270,12 @@ class Shield(Part):
                         * self.ship.shieldRegenBonus/ self.fps)
                 self.ship.energy -= self.energyCost / self.fps
         Part.update(self)
+
+class BigShield(Shield):
+    def __init__(self, universe): 
+        self.baseImage = loadImage("res/parts/shield.png")
+        Part.__init__(self, universe)
+    
 
 class Chip(Part):
     def __init__(self, universe):

@@ -188,7 +188,7 @@ def makeJuggernaut(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy"
     engine = Engine(game.universe)
     engine2 = Engine(game.universe)
     quarter = Quarters(game.universe)
-    shield = Shield(game.universe)
+    shield = BigShield(game.universe)
     
     for part in [gyro, generator, battery, cockpit, gun, gun2, engine, engine2, quarter, shield]:
         if rand() > .8:
