@@ -881,8 +881,9 @@ class Label(Panel):
 class FunctionLabel(Panel):
     """A label that updates its text by calling a string function."""
     drawBorder = False
-    def __init__(self, rect, textFunction, font = FONT, corners=[5,0,5,0]):
-        Panel.__init__(self, rect)
+    def __init__(self, rect, textFunction, font = FONT, color = BS1, corners=[5,0,5,0]):
+        Panel.__init__(self, rect, corners)
+        self.color = color
         self.textFunction = textFunction
         self.font = font
         self.update()
@@ -924,5 +925,63 @@ class TextBlock(Panel):
             y = 0
             for line in self.textFunction().split("\n"):
                 self.image.blit(self.font.render(line, True, self.color), (0, y))
+                y += self.lineHeight
+            self.rect = Rect(self.temprect.topleft, self.image.get_size())
+
+class ScrollTextBlock(TextBlock):
+
+    drawBorder = False
+    image = None
+
+    def __init__(self, rect, textFunction, font = FONT, color = BLACK, scrolldirection=4, width = 200, corners=[5,0,5,0]):
+
+        TextBlock.__init__(self, rect, textFunction, font = font, color = color, width = width, corners=corners)
+        longest = sorted(self.textFunction.split("\n"), key=lambda onestring: len(onestring), reverse=True)
+     
+
+        self.lineDim = font.size(longest[0])
+        self.lineDim = (self.lineDim[0],self.lineDim[1]*len(self.textFunction.split("\n")))
+        self.scrollspeed = 1
+        self.posy = self.posx = 0
+        self.scrolldirection = scrolldirection
+
+    def update(self):
+        
+        if self.scrolldirection == 1:
+            if self.posy < self.rect.height+self.lineDim[1]:
+                self.posy += self.scrollspeed
+            else:
+                self.posy = -self.lineDim[1]
+        elif self.scrolldirection == 2:
+            if self.posx < self.rect.width+self.lineDim[0]:
+                self.posx += self.scrollspeed
+            else:
+                self.posx = -self.lineDim[0]
+        elif self.scrolldirection == 3:
+            if self.posy > -self.lineDim[1]:
+                self.posy -= self.scrollspeed
+            else:
+                self.posy = self.rect.height+self.lineDim[1]
+        elif self.scrolldirection == 4:
+            if self.posx > -self.lineDim[0]:
+                self.posx -= self.scrollspeed
+            else:
+                self.posx = self.rect.width+self.lineDim[0]
+        
+        y = 0
+        if isinstance(self.textFunction, basestring):
+            self.image = pygame.Surface((self.temprect.width, self.lineHeight * len(self.textFunction.split("\n"))),
+            hardwareFlag | SRCALPHA).convert_alpha()
+           
+            for line in self.textFunction.split("\n"):
+                self.image.blit(self.font.render(line, True, self.color), (self.posx, y+self.posy))
+                y += self.lineHeight
+            self.rect = Rect(self.temprect.topleft, self.image.get_size())
+        else:
+            self.image = pygame.Surface((self.temprect.width, self.lineHeight * len(self.textFunction().split("\n"))),
+            hardwareFlag | SRCALPHA).convert_alpha()
+            
+            for line in self.textFunction().split("\n"):
+                self.image.blit(self.font.render(line, True, self.color), (self.posx, y+self.posy))
                 y += self.lineHeight
             self.rect = Rect(self.temprect.topleft, self.image.get_size())

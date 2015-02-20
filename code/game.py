@@ -178,8 +178,7 @@ class Game(object):
                         self.mouse[0] = event.pos
                     elif event.type == pygame.KEYDOWN:
                         self.keys[event.key % 322] = 1
-                        if event.key == pygame.K_BACKSLASH:
-                            saveScreenShot("Screen-shots", self.screen)
+
                     elif event.type == pygame.KEYUP:
                         self.keys[event.key % 322] = 0
                     if self.menu.active:
@@ -196,9 +195,12 @@ class Game(object):
                     # suicide
                     self.player.kill()
 
+                if self.keys[K_BACKSLASH % 322]:
+                    saveScreenShot("Screen-shots", self.screen)
+
                 self.debug = False
-                if self.keys[K_BACKSPACE % 322]:
-                    self.keys[K_BACKSPACE % 322] = False
+                # if self.keys[K_BACKSPACE % 322]:
+                #     self.keys[K_BACKSPACE % 322] = False
                 # ctrl+q or alt+F4 quit:
                 L_ALT_F4 = (self.keys[K_LALT % 322] and self.keys[K_F4 % 322])
                 R_ALT_F4 = (self.keys[K_RALT % 322] and self.keys[K_F4 % 322])
@@ -206,6 +208,7 @@ class Game(object):
                 R_CTRL_Q = (self.keys[K_RCTRL % 322] and self.keys[K_q % 322])
                 if (L_ALT_F4 or R_ALT_F4 or L_CTRL_Q or R_CTRL_Q):
                     self.running = False
+
 
                 for trigger in self.triggers:
                     trigger.update()

@@ -59,7 +59,7 @@ class IntroMenu(TopLevelPanel):
         
         self.addPanel(FunctionLabel(Rect(320, 100, 200, 20), self.getGameVersion,  font = BIG_FONT))
         self.addPanel(FunctionLabel(Rect(320, 140, 200, 20), self.getRemoteVersion,  font = BIG_FONT))
-        self.addPanel(TextBlock(Rect(120,200,400,100), self.versionMessage, color = SHIP_PANEL_BLUE, font = SMALL_FONT))
+        self.addPanel(TextBlock(Rect(120,200,400,100), self.versionMessage, color = SUPER_WHITE, font = SMALL_FONT))
 
         # SHIP_PANEL_BLUE
         self.addPanel(Button( Rect(120, 280, 100, 20), self.checkRemoveVersion, "Check !"))
