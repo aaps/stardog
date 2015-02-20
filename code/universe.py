@@ -1,6 +1,6 @@
-#universe.py
-
+# universe.py
 from starSystem import *
+
 
 class Universe(object):
     starSystems = []
@@ -35,8 +35,6 @@ class Universe(object):
     def draw(self, surface):
         for camera in self.cameras:
             camera.draw(surface)
-    
-
 
     # def getAllNeighbors(self, name):
     #   portals = []
@@ -44,17 +42,13 @@ class Universe(object):
     #   for system in self.starSystems:
     #       if system.name == name:
     #           portals = system.getAllPortals()
-
     #   if portals:
     #       for portal in portals:
-
     #           systems.append(portal.getSister())
-
     #   return systems
-    
+
     def neighborsTo(self, starsystem):
         pass
-    
 
     def removeStarSystem(self, name):
         for system in self.starSystems:
