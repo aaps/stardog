@@ -110,9 +110,11 @@ def randColor(min, max):
 try:
     pygame.font.init()
     font_name = "hardfont.ttf"
-    SMALL_FONT = pygame.font.Font("res/fonts/"+str(font_name), 14)
-    FONT = pygame.font.Font("res/fonts/"+str(font_name), 18)
-    BIG_FONT = pygame.font.Font("res/fonts/"+str(font_name), 24)
+    font_dir = "res/fonts/"
+    font_path = font_dir+font_name
+    SMALL_FONT = pygame.font.Font((font_path), 14)
+    FONT = pygame.font.Font((font_path), 18)
+    BIG_FONT = pygame.font.Font((font_path), 24)
     fontModule = True
 
 except:
@@ -121,39 +123,6 @@ except:
     SMALL_FONT = None
     fontModule = False
     print("Font module not found. Text will not be printed.")
-
-# # setup sounds
-# try:
-#     pygame.mixer.init(44100)
-
-#     shootSound = pygame.mixer.Sound("res/sound/lazer.ogg")
-#     hitSound = pygame.mixer.Sound("res/se_sdest.wav")
-#     explodeSound = pygame.mixer.Sound("res/se_explode03.wav")
-#     missileSound = pygame.mixer.Sound("res/se_explode02.wav")
-#     messageSound = pygame.mixer.Sound("res/sound/message pip.ogg")
-
-#     # load al ambient music (for now just travel music)
-#     # might also load fighting music this way.
-#     # and question music and other kinds of music.
-#     travelMusicDir = "res/sound/ambientSound/"
-#     travelMusic = []
-#     for musicfile in os.listdir(travelMusicDir):
-#         sound = pygame.mixer.Sound(travelMusicDir+str(musicfile))
-#         travelMusic.append(sound)
-
-#     # for now choose a random music number to play
-#     randIndex = random.randint(0, len(travelMusic)-1)
-#     print os.listdir(travelMusicDir)[randIndex]
-#     travelMusic[randIndex].play(-1)
-#     travelMusic[randIndex].set_volume(1.00)
-
-#     soundModule = True
-# except (ImportError, NotImplementedError):
-#     soundModule = False
-#     print "Sound module not found. Sounds disabled."
-# setup images
-# if there is extended image support, load .gifs, otherwise load .bmps.
-# .bmps do not support transparency, so there might be black clipping.
 
 if pygame.image.get_extended():
     ext = ".gif"
