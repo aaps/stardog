@@ -383,7 +383,8 @@ class Cargo(Floater):
     def __init__(self, universe):
         
         Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = 10)
-        self.baseImage = loadImage("res/goods/scrap.png")
+        if not self.baseImage:
+            self.baseImage = loadImage("res/part/default.png")
         # Part.__init__(self, universe)
         self.radius = max(self.baseImage.get_height() / 2, self.baseImage.get_width() / 2)
         self.resources = True
@@ -431,8 +432,9 @@ class Scrap(Cargo):
     
     image = None
     def __init__(self, universe):
-        Cargo.__init__(self, universe)
         self.baseImage = loadImage("res/goods/scrap.png")
+        Cargo.__init__(self, universe)
+        
         self.name = "Scrap"
         self.damage = 1
 
@@ -446,8 +448,9 @@ class Iron(Cargo):
     
     image = None
     def __init__(self, universe):
-        Cargo.__init__(self, universe)
         self.baseImage = loadImage("res/goods/iron.png")
+        Cargo.__init__(self, universe)
+        
         self.name = "Iron"
         self.damage = 1
 
@@ -1360,6 +1363,12 @@ class Cockpit(Radar, Battery, Generator, Gyro, GargoHold):
         Gyro.update(self)
         Radar.update(self)
         GargoHold.update(self)
+
+class StrafebatCockpit(Cockpit):
+
+    def __init__(self, universe): 
+        self.baseImage = loadImage("res/parts/cockpit.png")
+        Cockpit.__init__(self, universe)
         
 class Interceptor(Cockpit):#move to config
     mass = 20
