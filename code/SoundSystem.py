@@ -12,7 +12,7 @@ class DummyMusicSystem(object):
         pass
 
     def getMusicFiles(self):
-        pass
+        return(['Dummy.ogg', 'Dummy2.ogg'])
 
     def play(self, music, amount=1):
         pass
@@ -21,9 +21,29 @@ class DummyMusicSystem(object):
         pass
 
     def getVolume(self, volume):
-        pass
+        return(1.0)
 
     def getRandomMusic(self):
+        return('Dummy.ogg')
+
+
+class DummySoundSystem(object):
+    def __init__(self, sounddir, quality=44100):
+        pass
+
+    def register(self, sound):
+        pass
+
+    def getSound(self):
+        return('Dummy.ogg')
+
+    def setVolume(self, volume):
+        pass
+
+    def getVolume(self):
+        return(1.0)
+
+    def play(self, sound, loops):
         pass
 
 
