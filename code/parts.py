@@ -532,7 +532,7 @@ class Cannon(Gun):
     
     def __init__(self, universe):
         if self.bulletImage == None:
-            self.bulletImage = BULLET_IMAGE.copy()
+            self.bulletImage = loadImage("res/ammo/shot.png").copy()
         Gun.__init__(self, universe)
         self.speed = 300
         self.name = "Cannon"
@@ -543,7 +543,7 @@ class Cannon(Gun):
         return Gun.stats(self) + statString % stats
                 
     def attach(self):
-        self.bulletImage = colorShift(BULLET_IMAGE, bulletColor(self.damage))
+        self.bulletImage = colorShift(loadImage("res/ammo/shot.png"), bulletColor(self.damage))
         Part.attach(self)
             
     def shoot(self):
@@ -608,7 +608,7 @@ class MissileLauncher(Gun):
     
     def __init__(self, universe):
         if self.missileImage == None:
-            self.missileImage = MISSILE_IMAGE.copy()
+            self.missileImage = loadImage("res/ammo/missile.png").copy()
         Gun.__init__(self, universe)
         self.damage = 20
         self.speed = 40
@@ -642,7 +642,7 @@ class MissileLauncher(Gun):
                     self.speed * s.missileSpeedBonus,
                     self.acceleration * s.missileSpeedBonus,
                     self.range * s.missileRangeBonus, self.explosionRadius,
-                    image = MISSILE_IMAGE))
+                    image = loadImage("res/ammo/missile.png")))
 
 class Laser(Gun):
     baseImage = loadImage("res/parts/leftlaser.png")
@@ -1053,7 +1053,7 @@ class Interconnect(Part):
 
 class Quarters(Part):
     baseImage = loadImage("res/parts/quarters.png")
-    image = None
+    # image = None
     crewCap = 2
     repair = 0
     def __init__(self, universe):
@@ -1296,23 +1296,6 @@ class GargoHold(Part):
         Part.update(self)
 
 
-# class Scrap(Part):
-#     baseImage = loadImage("res/goods/scrap.png")
-#     image = None
-
-#     def __init__(self, universe):
-#         Part.__init__(self, universe)
-#         self.name = "Scrap"
-#         self.resources = True
-
-#     def update(self):
-#         Part.update(self)
-
-#     def shortStats(self):
-#         return "Scrap"
-
-#     def stats(self):
-#         return "It is Scrap"
 
 class Cockpit(Radar, Battery, Generator, Gyro, GargoHold):
     baseImage = loadImage("res/parts/cockpit.png")
@@ -1398,126 +1381,3 @@ class Fighter(Cockpit):#move to config
                     Port(Vec2d(-5, 7), -90, self),
                     Port(Vec2d(-9, 0), 0, self)]
         self.name = 'Fighter Cockpit'
-                    
-class Drone(Cockpit, Engine, Cannon):
-    baseImage = loadImage("res/ship" + ext)
-    mass = 10
-    image = None
-    energyCost = 1 #this is used as a coefficient everywhere.
-    #gun:
-    shootDir = 0
-    shootPoint = 20, 0
-    damage = .2
-    reloadTime = .1
-    burstSize = 3
-    reloadBurstTime = 2
-    shotCost = .3
-    shot = False
-    #engine:
-    force = 10000
-    thrustCost = .1
-    thrusted = False
-    #gyro:
-    torque = 600
-    turnCost = .1
-    turned = False
-    #generator:
-    rate = 30
-    #battery:
-    capacity = 40
-    
-    def __init__(self,  universe):
-        if Drone.animatedImage == None:
-            Drone.animatedImage = loadImage("res/shipThrusting" + ext)
-        self.baseAnimatedImage = Drone.animatedImage
-        self.animated = True
-        Part.__init__(self, universe)
-        self.reload = 0
-        self.reloadBurst = 0
-        self.burst = self.burstSize
-        self.functions = [self.shoot, self.turnLeft, self.turnRight, \
-        self.thrust]
-        self.functionDescriptions = ['shoot', 'turn left', 'turn right', 'thrust']
-        self.name = "Tiny Fighter Chassis"
-    
-    def update(self):
-        pass
-        # self.animated = self.thrusted
-        # self.shot = False
-        # self.thrusted = False
-        # self.turned = False
-        # self.reload -= 1. / self.fps
-        # self.reloadBurst -= 1. / self.fps
-        # if self.reloadBurst <= 0 :
-        # 	self.burst = self.burstSize
-        # 	self.reloadBurst = self.reloadBurstTime
-        # #generator:
-        # if self.ship and self.ship.energy < self.ship.maxEnergy:
-        # 	self.ship.energy = min(self.ship.maxEnergy, \
-        # 						self.ship.energy + self.rate / self.fps)
-        # Part.update(self)
-        
-    def attach(self):
-        #battery:
-        self.ship.maxEnergy += self.capacity
-        Part.attach(self)
-        
-    def shoot(self):
-        """fires a bullet."""
-        if self.shot: return
-        self.shot = True
-        if self.reload <= 0 \
-        and self.ship.energy > self.shotCost * self.energyCost\
-        and self.burst > 0:
-            self.reload = self.reloadTime
-            self.burst -= 1
-            s = self.ship
-            s.energy -= self.shotCost * self.energyCost
-            if soundModule:
-                self.universe.curSystem.floaters.add( 
-                    Bullet(self.universe, self, 
-                    self.damage * s.efficiency * s.damageBonus * s.cannonBonus,
-                    self.speed * s.cannonSpeedBonus,
-                    self.range * s.cannonRangeBonus, image = self.bulletImage))
-            if self.burst <= 0:
-                self.reloadBurst = self.reloadBurstTime
-                
-    def thrust(self):
-        """thrust: pushes the ship from the direction this engine points."""
-        if self.thrusted: return
-        self.thrusted = True
-        if self.ship and self.ship.energy >= self.thrustCost * self.energyCost:
-            dir = self.ship.dir
-            
-            self.ship.delta = self.ship.delta.rotatedd(dir, self.force / self.ship.mass / self.fps)
-
-            self.ship.energy -= self.thrustCost / self.fps * self.energyCost
-            self.thrusting = True
-            
-    def turnLeft(self, angle = None):
-        """rotates the ship counter-clockwise."""
-        if self.turned: return
-        self.turned = True
-        if angle:
-            angle = max(- self.torque / self.ship.moment / self.fps \
-                    * self.ship.efficiency * self.ship.torqueBonus, -abs(angle) )
-        else:
-            angle = - self.torque / self.ship.moment / self.fps \
-                    * self.ship.efficiency * self.ship.torqueBonus
-        if self.ship and self.ship.energy >= self.turnCost * self.energyCost:
-            self.ship.dir = angleNorm(self.ship.dir + angle)
-            self.ship.energy -= self.turnCost / self.fps * self.energyCost
-        
-    def turnRight(self, angle = None):
-        """rotates the ship clockwise."""
-        if self.turned: return
-        self.turned = True
-        if angle:
-            angle = min(self.torque / self.ship.moment / self.fps \
-                    * self.ship.efficiency * self.ship.torqueBonus, abs(angle) )
-        else:
-            angle = self.torque / self.ship.moment / self.fps \
-                    * self.ship.efficiency * self.ship.torqueBonus
-        if self.ship and self.ship.energy >= self.turnCost * self.energyCost:
-            self.ship.dir = angleNorm(self.ship.dir + angle)
-            self.ship.energy -= self.turnCost / self.fps * self.energyCost

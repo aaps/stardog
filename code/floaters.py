@@ -2,7 +2,7 @@
 
 from utils import *
 from pygame.locals import *
-import stardog
+# import stardog
 from vec2d import Vec2d
 import math
 from particles import *
@@ -10,9 +10,9 @@ from SoundSystem import *
 
 FPS = 200
 
-BULLET_IMAGE = loadImage("res/ammo/shot.png")
-MISSILE_IMAGE = loadImage("res/ammo/missile.png")
-DEFAULT_IMAGE = loadImage("res/parts/default.png")
+# BULLET_IMAGE = loadImage("res/ammo/shot.png")
+# MISSILE_IMAGE = loadImage("res/ammo/missile.png")
+# DEFAULT_IMAGE = loadImage("res/parts/default.png")
 
 
 class Ballistic(object):
@@ -48,7 +48,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
         self.fps = 10
         self.radius = radius
         if (not image):
-            image = DEFAULT_IMAGE
+            image = loadImage("res/parts/default.png")
         self.image = pygame.transform.rotate(image, -self.dir).convert_alpha()
         self.rect = self.image.get_rect()
         self.soundsys = self.universe.game.soundSystem
@@ -115,7 +115,7 @@ class Bullet(Floater):
         self.speed = speed
         delta = gun.ship.delta.rotatedd(dir, self.speed)
         if image is None:
-            image = BULLET_IMAGE
+            image = loadImage("res/ammo/shot.png")
         Floater.__init__(self, universe, pos, delta,
                          dir=dir, radius=gun.bulletRadius,
                          image=image)
@@ -336,14 +336,11 @@ class LaserBeam(Floater):
     collision mechanism: they use line/circle collision, and it is checked
     during initialization."""
 
-    baseImage = loadImage("res/ammo/laser.png").convert_alpha()
-    # baseImage.set_colorkey(BLACK)
+    
 
     def __init__(self, universe, laser, damage, range):
         dir = laser.dir + laser.ship.dir
-        # cost is short for cos(theta)
-        # cost = cos(dir)
-        # sint = sin(dir)
+        self.baseImage = loadImage("res/ammo/laser.png").convert_alpha()
         pos = (laser.pos + Vec2d(laser.shootPoint).rotated(dir) +
                laser.ship.delta / universe.game.fps)
 

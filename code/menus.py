@@ -2,9 +2,10 @@
 from utils import *
 from menuElements import *
 import stardog
-from parts import Dummy, PART_OVERLAP, DEFAULT_IMAGE, FlippablePart
+from parts import Dummy, PART_OVERLAP, FlippablePart
 from spaceship import Ship
 import datetime
+from parts import *
 from scripts import Controllable
 from collections import defaultdict
 from SoundSystem import *
@@ -62,7 +63,7 @@ class IntroMenu(TopLevelPanel):
         
         self.addPanel(FunctionLabel(Rect(320, 100, 200, 20), self.getGameVersion,  font = BIG_FONT))
         self.addPanel(FunctionLabel(Rect(320, 140, 200, 20), self.getRemoteVersion,  font = BIG_FONT))
-        self.addPanel(TextBlock(Rect(120,200,400,100), self.versionMessage, color = SHIP_PANEL_BLUE, font = SMALL_FONT))
+        self.addPanel(TextBlock(Rect(120,200,400,100), self.versionMessage, color = SUPER_WHITE, font = SMALL_FONT))
 
         # SHIP_PANEL_BLUE
         self.addPanel(Button( Rect(120, 280, 100, 20), self.checkRemoveVersion, "Check !"))
@@ -580,7 +581,7 @@ class ShipPartPanel(DragableSelectable):
         else:
             dir = self.port.dir + self.port.parent.dir
             self.image = pygame.transform.scale2x(\
-                        pygame.transform.rotate(DEFAULT_IMAGE, -dir)).convert_alpha()
+                        pygame.transform.rotate(loadImage("res/parts/default.png"), -dir)).convert_alpha()
             self.image.set_colorkey(BLACK) 
         
     def dragOver(self, pos, rel):

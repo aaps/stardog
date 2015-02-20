@@ -1,6 +1,4 @@
 # dialogs.py
-from collections import deque
-
 from utils import *
 from menuElements import *
 from spaceship import Ship
@@ -56,23 +54,6 @@ class Messenger(Drawable):
         queueItem = (self.font.render(text, True, color), linger)
         self.queue.append(queueItem)
         self.soundSys.play(self.popupSound)
-        # messageSound.play()
-
-    def update(self):
-        if self.queue and self.game.timer > self.queue[0][1] \
-           or len(self.queue) > self.maxMessages:
-            self.queue.popleft()
-
-    def draw(self, surface):
-        y = self.topleft[1]
-        for message in self.queue:
-            self.image.fill((0, 0, 80))
-            self.image.blit(message[0], (0, 0))
-            surface.blit(self.image, (self.topleft[0], y))
-            y += self.font.get_linesize() * self.dir
-
-    def empty(self):
-        self.queue = deque()
 
 
 class Trigger(object):
