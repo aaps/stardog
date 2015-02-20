@@ -57,7 +57,7 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(Slider(Rect(120, 80, 20, 175),
                       self.setMusicVolume, self.musicSys.getVolume()))
         self.addPanel(Slider(Rect(320, 80, 20, 175),
-                      self.setSFXVolume, self.soundSys.getVolume()))
+                      self.setSfxVolume, self.soundSys.getVolume()))
 
 
     def versionChoose(self):
