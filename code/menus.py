@@ -47,13 +47,17 @@ class IntroMenu(TopLevelPanel):
     def volumeChoose(self):
         self.panels = []
 
-        self.addPanel(Label(Rect(120, 50, 200, 20), "Music Volume:", color=SUPER_WHITE, font=BIG_FONT))
-        self.addPanel(Label(Rect(320, 50, 200, 20), "SFX Volume:", color = SUPER_WHITE, font = BIG_FONT))
-        self.addPanel(Button(Rect(120, 280, 100, 20), self.cooseVolume, "Confirm", FONT))
+        self.addPanel(Label(Rect(120, 50, 200, 20),
+                      "Music Volume:", color=SUPER_WHITE, font=BIG_FONT))
+        self.addPanel(Label(Rect(320, 50, 200, 20),
+                      "SFX Volume:", color=SUPER_WHITE, font=BIG_FONT))
+        self.addPanel(Button(Rect(120, 280, 100, 20),
+                      self.cooseVolume, "Confirm", FONT))
 
-
-        self.addPanel(Slider(Rect(120, 80, 20, 175), self.setMusicVolume, MUSIC_VOLUME))
-        self.addPanel(Slider(Rect(320, 80, 20, 175), self.setSFXVolume, SFX_VOLUME))
+        self.addPanel(Slider(Rect(120, 80, 20, 175),
+                      self.setMusicVolume, self.musicSys.getVolume()))
+        self.addPanel(Slider(Rect(320, 80, 20, 175),
+                      self.setSFXVolume, self.soundSys.getVolume()))
 
 
     def versionChoose(self):
