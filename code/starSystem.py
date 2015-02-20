@@ -25,10 +25,9 @@ class StarSystem(object):
         self.ships = pygame.sprite.Group()
         self.specialOperations = []
         self.bg = BGImage(self.universe) # the background layer
-        #why must this be here ?
-        # pygame.mixer.music.load("res/sound/space music.ogg")
-        # pygame.mixer.music.play(-1)
-        # pygame.mixer.music.set_volume(.15)
+        self.soundsys = self.universe.game.soundSystem
+        self.hitsound = 'se_sdest.wav'
+        self.soundsys.register(self.hitsound)
         self.planets = []
         self.name = ""
     
@@ -213,8 +212,7 @@ class StarSystem(object):
         floater.delta += Vec2d(0,0).rotatedd(dir, accel) / explosion.fps
         
     def crash(self, a, b):
-        if soundModule:
-            setVolume(hitSound.play(), a, b)
+        self.soundsys.play(self.hitsound)
         hpA = a.hp
         hpB = b.hp
         if hpB > 0: a.takeDamage(hpB, b)

@@ -45,12 +45,19 @@ class Game(object):
         self.averagefps = 0
         self.screen = screen
         self.top_left = 0, 0
-        self.universe = Universe(self)
-        self.width = screen.get_width()
-        self.height = screen.get_height()
         self.mouseControl = True
         self.timer = 0
         self.triggers = []
+
+        self.universe = Universe(self)
+        self.width = screen.get_width()
+        self.height = screen.get_height()
+        # initialize the the music system.
+        self.musicSystem = MusicSystem('res/sound/ambientMusic/')
+        self.musicSystem.play(self.musicSystem.getRandomMusic())
+        # initialize the sound system.
+        # every part has to register with this system.
+        self.soundSystem = SoundSystem('res/sound/sfxSounds/')
         self.camera = Camera(self.universe)
         self.universe.addCamera(self.camera)
 
@@ -68,10 +75,6 @@ class Game(object):
 
         self.camera.layerAdd(self.messenger, 7)
         self.camera.layerAdd(MiniInfo(self.universe), 6)
-
-        # initialize the sound system and the music system.
-        self.musicSystem = MusicSystem(self.universe, 'res/sound/ambientMusic')
-        self.soundSystem = SoundSystem(self.universe)
 
         # key polling:
         self.keys = [False]*322

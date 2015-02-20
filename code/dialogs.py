@@ -30,6 +30,10 @@ class Messenger(Drawable):
         self.universe = universe
         self.game = universe.game
 
+        self.soundSys = self.universe.game.soundSystem
+        self.popupSound = 'message pip.ogg'
+        self.soundSys.register(self.popupSound)
+
     def chunks(self, the_list, length):
         """ Yield successive n-size chucks from the_list.
         """
@@ -51,8 +55,8 @@ class Messenger(Drawable):
                   + self.messageDelay)
         queueItem = (self.font.render(text, True, color), linger)
         self.queue.append(queueItem)
-        if soundModule:
-            messageSound.play()
+        self.soundSys.play(self.popupSound)
+        # messageSound.play()
 
     def update(self):
         if self.queue and self.game.timer > self.queue[0][1] \

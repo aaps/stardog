@@ -357,6 +357,10 @@ class Ship(Floater, Controllable):
         for function in self.functions:
             self.functionDescriptions.append(function.__doc__)
         self.baseBonuses = self.baseBonuses.copy()
+        # register our explosion sound
+        self.soundsys = self.universe.game.soundSystem
+        self.explosionSound = 'se_explode03.wav'
+        self.soundsys.register(self.explosionSound)
 
 
     def insertPart(self, part, amount=1):
@@ -686,8 +690,8 @@ class Ship(Floater, Controllable):
 
     def kill(self):
         """play explosion effect than call Floater.kill(self)"""
-        if soundModule:
-            setVolume(explodeSound.play(), self, self.universe.player)
+        self.soundsys.play(self.explosionSound)
+        # setVolume(explodeSound.play(), self, self.universe.player)
         for part in self.inventory:
             part.scatter(self)
         Floater.kill(self)
@@ -701,8 +705,7 @@ class Ship(Floater, Controllable):
             if planet.damage.has_key(self):
                 damage = planet.damage[self]
             else:
-                if soundModule:
-                    setVolume(hitSound.play(), planet, planet.starSystem.universe.player)
+                self.soundsys.play(self.crashSound)
                 #set damage based on incoming speed and mass.
                 damage = speed * self.mass * planet.PLANET_DAMAGE
             for part in self.parts:
