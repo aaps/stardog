@@ -65,7 +65,7 @@ class Messenger(Drawable):
         self.universe = universe
         self.game = universe.game
         self.soundsys = self.universe.game.soundSystem
-        self.popupsound = 'message pip'
+        self.popupsound = 'message pip.ogg'
         self.soundsys.register(self.popupsound)
 
     def chunks(self, the_list, length):
