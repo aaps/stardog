@@ -19,7 +19,7 @@ squareSpacing = squareWidth + 10
 
 
 class IntroMenu(TopLevelPanel):
-    color = CONSOLE_BLUE
+    # color = CONSOLE_BLUE
 
     def __init__(self, game, rect, corners=[10, 0, 10, 0]):
         TopLevelPanel.__init__(self, rect, corners)
