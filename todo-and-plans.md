@@ -144,10 +144,10 @@ bugs
 * In case of open planet part panel and parts 'land' on planet they will not show up at the parts panel right away. only after a menu out/in
 * planets should be targetable when not in radar range, couse they are remembered, still it doesnt work out that way, check it out [done]
 * processing of ship image on mini screen is a slow afair perhaps first: https://github.com/Mekire/pygame-image-outline/blob/master/outline.py and after that a thred that will fill in the ship part by part ? [done in another way]
-* cockpits are named part
+* cockpits are named part [so? thier name' s do show up now so Done ? ]
 * damage calculation for health bars is bad now
-* ai doesnt update annymore
-* massive memmory leak (is fixed)
+* ai doesnt update annymore (in what way? Duality)
+* massive memmory leak (is fixed) [Done]
 
 
 parts

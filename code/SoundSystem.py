@@ -11,17 +11,57 @@ SFX_VOLUME = (5./100)
 MUSIC_VOLUME = (20./100)
 
 
-class SoundSystem(object):
-    def __init__(self, universe, quality=44100):
-        self.universe = universe
-        self.sounds = {}
+class MusicSystem(object):
+    def __init__(self, universe, musicdir, quality=44100):
+        # 20% volume
+        self.musicvolume = (20./100)
+        # get the music files in musicdir
+        self.musicdir = musicdir
+        self.musicfiles = os.listdir(musicdir)
         try:
             pygame.mixer.init(quality)
         except Exception as e:
             print(e)
 
+    def playMusic(self, volume):
+        pass
+
+    def setMusicVolume(self, volume):
+        self.musicvolume = volume
+
+    def getMusicVolume(self):
+        return self.musicvolume
+
+
+class SoundSystem(object):
+    def __init__(self, universe, quality=44100):
+        self.universe = universe
+        # 5% volume
+        self.sfxvolume = (5./100)
+        self.sounds = {}
+
+        try:
+            pygame.mixer.init(quality)
+        except Exception as e:
+            print(e)
+
+        # pygame.mixer.
+
     def register(self, sound):
         self.sounds[sound] = pygame.mixer.Sound(sound)
+
+    def setSFXVolume(self, volume):
+        self.setSFXVolume = volume
+        for sound in self.sounds:
+            self.sounds[sound].set_volume(self.sfxvolume)
+
+    def getSFXVolume(self):
+        return self.sfxvolume
+
+    def play(self, sound, amount=1):
+        # self.sounds[sound].set_volume(self.sfxvolume)
+        self.sounds[sound].play(amount)
+        # self.sounds[sound].
 
 
 def setMusicVolume(volume):
@@ -38,8 +78,10 @@ def setSFXVolume(volume):
     global SFX_VOLUME
     if not volume:
         SFX_VOLUME = float(volume)
+        pygame.mixer.Sound.set_volume(volume)
     else:
         SFX_VOLUME = 1./(volume/100.)
+        pygame.mixer.Sound.set_volume(volume)
 
 
 # setup sounds
@@ -57,7 +99,7 @@ try:
     # load al ambient music (for now just travel music)
     # might also load fighting music this way.
     # and question music and other kinds of music.
-    travelMusicDir = "res/sound/ambientSound/"
+    travelMusicDir = "res/sound/ambientMusic/"
     travelMusicFiles = os.listdir(travelMusicDir)
     travelMusic = []
     # for musicfile in os.listdir(travelMusicDir):

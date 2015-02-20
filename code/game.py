@@ -69,6 +69,10 @@ class Game(object):
         self.camera.layerAdd(self.messenger, 7)
         self.camera.layerAdd(MiniInfo(self.universe), 6)
 
+        # initialize the sound system and the music system.
+        self.musicSystem = MusicSystem(self.universe, 'res/sound/ambientMusic')
+        self.soundSystem = SoundSystem(self.universe)
+
         # key polling:
         self.keys = [False]*322
         # mouse is [pos, button1, button2, button3,..., button6].
