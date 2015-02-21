@@ -53,7 +53,7 @@ side dish
 * the ui margins and locations should be dependant on camera size and location ?
 * ai can use an fsm to flee attack, explore [using simplefsm] [initial ai states, atack, flee, idle]
 * make 2 gateways in the start system to test jumping [done]
-* make text able to left center right lineout !!!
+* make text able to left center right lineout [done]
 * does ship still need hp is not all hp contained in the parts ? parts have hp cockpit has hp, so do we ned ship hp.
 * a sentence construction kitt for the ai so it can taunt you for example
 * plot triggers wont retrigger of dont have the option to. !!

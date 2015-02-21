@@ -12,6 +12,7 @@ PARTS = [LeftCannon, RightCannon, Engine, Gyro, Generator, Battery, Shield,
 
 ENERGY_USING = [Gun, Engine, Gyro, Shield]
 
+
 def randCargo(universe):
     roll = randint(0, len(CARGO)-1)
     return CARGO[roll](universe)
