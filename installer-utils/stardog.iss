@@ -57,7 +57,7 @@ procedure InitializeWizard();
 begin
  idpAddFile('https://www.python.org/ftp/python/2.7.9/{#PyToDOwn}', ExpandConstant('{tmp}\{#PyToDOwn}'));
     idpAddFile('http://pygame.org/ftp/{#PyGameToDown}', ExpandConstant('{tmp}\{#PyGameToDown}'));
-    idpAddFile('https://raw.githubusercontent.com/aaps/stardog/master/utils/updater.py', ExpandConstant('{tmp}\updater.py'));
+    idpAddFile('https://raw.githubusercontent.com/aaps/stardog/master/updater.py', ExpandConstant('{tmp}\updater.py'));
     idpDownloadAfter(wpReady);
 end;
 
