@@ -4,7 +4,7 @@ from spaceship import Ship
 from planet import Planet
 from parts import *
 from vec2d import *
-
+from collections import deque
 import pygame
 
 numStars = 300
@@ -42,6 +42,70 @@ class Drawable(object):
     def draw(self):
         pass
 
+class Messenger(Drawable):
+    # not capitalized in stand lib
+    queue = deque()
+    # font = FONT
+
+    def __init__(self, universe, font, dir=1):
+        Drawable.__init__(self, universe)
+        # -1 means the messages stack upward.
+        self.font = FONT
+        self.dir = dir
+        self.image = pygame.Surface((universe.game.width-204,self.font.get_linesize()))
+        # characters per second
+        self.speed = 40
+        self.image.set_alpha(200)
+        self.topleft = 0, 0
+        self.maxMessages = 100
+        # seconds after each message
+        self.messageDelay = 9
+        # line width
+        self.maxChars = 200
+        self.universe = universe
+        self.game = universe.game
+        self.soundsys = self.universe.game.soundSystem
+        self.popupsound = 'message pip.ogg'
+        self.soundsys.register(self.popupsound)
+
+    def chunks(self, the_list, length):
+        """ Yield successive n-size chucks from the_list.
+        """
+        for i in xrange(0, len(the_list), length):
+            yield the_list[i:i+length]
+
+    def message(self, text, color=SUPER_WHITE):
+        """message(text,color) -> add a message to the Messenger."""
+        text = '   ' + text
+        # line length limit
+        if len(text) > self.maxChars:
+            for sentence in self.chunks(text, self.maxChars):
+                linger = (self.game.timer+1.*len(sentence)/self.speed
+                          + self.messageDelay)
+                queueItem = (self.font.render(sentence, True, color), linger)
+                self.queue.append(queueItem)
+            return
+        linger = (self.game.timer + 1. * len(text) / self.speed
+                  + self.messageDelay)
+        queueItem = (self.font.render(text, True, color), linger)
+        self.queue.append(queueItem)
+        self.soundsys.play(self.popupsound)
+
+    def update(self):
+        if self.queue and self.game.timer > self.queue[0][1] \
+           or len(self.queue) > self.maxMessages:
+            self.queue.popleft()
+
+    def draw(self, surface):
+        y = self.topleft[1]
+        for message in self.queue:
+            self.image.fill((0, 0, 80))
+            self.image.blit(message[0], (0, 0))
+            surface.blit(self.image, (self.topleft[0], y))
+            y += self.font.get_linesize() * self.dir
+
+    def empty(self):
+        self.queue = deque()
 
 class HUD(Drawable):
     def __init__(self, universe):
@@ -112,7 +176,7 @@ class RadarField(Drawable):
                            self.center, self.radarRadius)
         self.maskimage.set_colorkey(BLACK)
         self.targimage = pygame.Surface((8, 8))
-        targetRect(self.targimage, RADAR4, BLACK, (4, 4), 2, 2)
+        targetRect(self.targimage, MINI2, BLACK, (4, 4), 2, 2)
         self.targimage.set_colorkey(BLACK)
 
     def draw(self, surface):
@@ -125,16 +189,16 @@ class RadarField(Drawable):
         # draw floating part dots:
         if self.player:
             if (self.player.radars[-1].disk and self.player.radars[-1].enabled and int(self.player.radars[-1].disk.radius / scale + 2) < 100):
-                pygame.draw.circle(self.image, RADAR3, center, int(self.player.radars[-1].disk.radius / scale + 2), 1)
+                pygame.draw.circle(self.image, HUD1, center, int(self.player.radars[-1].disk.radius / scale + 2), 1)
             if self.universe.curSystem in self.player.knownsystems:
                 for planet in self.player.knownsystems[self.universe.game.universe.curSystem]:
                     result = planet.pos - self.player.pos
                     dotPos = int(center[0] + limit(-radius, result.x / scale, self.radarRadius)), int(center[1] + limit(-self.radarRadius, result.y / scale, self.radarRadius))
                     r = int(planet.radius / scale + 2)
-                    if collisionTest(Floater(self.universe.game, Vec2d(dotPos), Vec2d(0, 0), 0, 0), Floater(self.universe.game, Vec2d(center), Vec2d(0, 0), 0, 100)):
+                    if collisionTest(Floater(self.universe, Vec2d(dotPos), Vec2d(0, 0), 0, 0), Floater(self.universe, Vec2d(center), Vec2d(0, 0), 0, 100)):
                         color = planet.color
                         if self.player.curtarget == planet:
-                            targetRect(self.image, RADAR4, RADAR2, dotPos, r, 2)
+                            targetRect(self.image, MINI2, SHIPDAMAGE, dotPos, r, 2)
                         pygame.draw.circle(self.image, color, dotPos, r)
                     else:
                         color = (255, 250, 0)
@@ -153,7 +217,7 @@ class RadarField(Drawable):
                 result = floater.pos - self.player.pos
                 dotPos = int(center[0] + limit(-self.radarRadius,   result.x / scale, self.radarRadius)), \
                         int(center[1] + limit(-self.radarRadius, result.y / scale, self.radarRadius))
-                if collisionTest(Floater(self.universe.game, Vec2d(dotPos), Vec2d(0, 0), 0, 0), Floater(self.universe.game, Vec2d(center), Vec2d(0,0), 0, 100)):
+                if collisionTest(Floater(self.universe, Vec2d(dotPos), Vec2d(0, 0), 0, 0), Floater(self.universe, Vec2d(center), Vec2d(0,0), 0, 100)):
                     if isinstance(floater, Ship):
                         if self.player.curtarget == floater:
                             self.image.blit(self.targimage,
@@ -170,7 +234,7 @@ class RadarField(Drawable):
                         if isinstance(floater, Bullet):
                             pygame.draw.rect(self.image, (150, 40, 0),
                                              (dotPos[0]-1, dotPos[1]-1, 2, 2))
-                        elif isinstance(floater, Part):
+                        elif isinstance(floater, Part) or isinstance(floater, Cargo):
                             pygame.draw.rect(self.image, (200, 200, 0),
                                              (dotPos[0]-1, dotPos[1]-1, 2, 2))
                 elif not isinstance(floater, Planet):
@@ -225,7 +289,7 @@ class TargetingRect(Drawable):
         if self.player and self.player.curtarget and not isinstance(self.player.curtarget, Planet) and self.player.curtarget in self.universe.game.spaceview.onScreen:
             if self.image.get_width() != self.player.curtarget.radius:
                 self.image = pygame.Surface((self.player.curtarget.radius*2+4, self.player.curtarget.radius*2+4))
-                targetRect(self.image, RADAR12, BLACK , (self.image.get_width()/2, self.image.get_height()/2), self.player.curtarget.radius, 2)
+                targetRect(self.image, MINI2, BLACK , (self.image.get_width()/2, self.image.get_height()/2), self.player.curtarget.radius, 2)
                 self.image.set_colorkey(BLACK)
 
             result = (self.player.curtarget.pos - self.player.pos).inttup()
@@ -259,40 +323,44 @@ class StarField(Drawable):
             for star in self.stars:
                 x = int(star[0] - self.player.pos.x / star[2]) % (self.universe.game.width-1)
                 y = int(star[1] - self.player.pos.y / star[2]) % (self.universe.game.height-1)
-                """drawing stars with set_at draws points. with draw.line draws lines."""
+                """ drawing stars with set_at draws points. with draw.
+                    line draws lines."""
                 pygame.draw.line(surface, star[3], (x, y),
                                  (x+xstarlen, y+ystarlen), 1)
 
 
 class BGImage(Drawable):
     pic = None
-    
+
     def __init__(self, universe):
         Drawable.__init__(self, universe)
-        self.pic = pygame.transform.scale(loadImage('res/Tarantula Nebula.jpg', None), 
-                    (self.universe.game.width,self.universe.game.height))
+        rect = (self.universe.game.width, self.universe.game.height)
+        directory = 'res/Tarantula Nebula.jpg'
+        self.pic = pygame.transform.scale(loadImage(directory), rect)
 
     def draw(self, surface):
-        surface.blit(self.pic, (0,0))
-            
+        surface.blit(self.pic, (0, 0))
+
+
 class MiniInfo(Drawable):
     color = (100, 100, 255)
-    font = SMALL_FONT
-    maxChars = 50 #line width
-    bottomleft = 0,0
+    # font = SMALL_FONT
+    # line width
+    maxChars = 50
+    bottomleft = 0, 0
     targimage = None
     mutatedimage = None
     texts = []
 
-
-    def __init__(self, universe,font = SMALL_FONT):
+    def __init__(self, universe, font):
         Drawable.__init__(self, universe)
-        self.bottomleft = 2,  self.universe.game.height - int(self.universe.game.height/ 4 ) 
-        # self.game = game
+        self.bottomleft = (2, self.universe.game.height -
+                           int(self.universe.game.height / 4))
+        self.font = font
         self.targ = None
         self.width = int(self.universe.game.width / 8)
-        self.height = int(self.universe.game.height/ 4 )
-        self.image = pygame.Surface((self.width,self.height))
+        self.height = int(self.universe.game.height / 4)
+        self.image = pygame.Surface((self.width, self.height))
         self.image.set_alpha(200)
         self.palette = tuple([(i, i, i) for i in range(256)])
 
@@ -300,24 +368,26 @@ class MiniInfo(Drawable):
         if self.player:
             self.targ = self.player.curtarget
 
-
     def draw(self, surface):
         self.image.fill((0, 0, 80))
         if self.targ:
             self.texts = []
             # speed = makeMs(self.targ)
             name = ""
-            linedeltastart = Vec2d(10,180)
-            linedirstart = Vec2d(40,180)
+            linedeltastart = Vec2d(10, 180)
+            linedirstart = Vec2d(40, 180)
             pygame.draw.circle(self.image, MINI2, linedeltastart, 10, 1)
-            pygame.draw.line(self.image, MINI2, linedeltastart, self.targ.delta.normalized()*10+linedeltastart)
-            distance = "Distance Km:" + makeKMdistance(self.player,self.targ)
+            pygame.draw.line(self.image, MINI2, linedeltastart,
+                             self.targ.delta.normalized()*10+linedeltastart)
+            distance = "Distance Km:" + makeKMdistance(self.player, self.targ)
             pygame.draw.circle(self.image, MINI2, linedirstart, 10, 1)
-            pygame.draw.line(self.image, MINI2, linedirstart, (self.targ.pos-self.player.pos).normalized()*10+linedirstart)
+            pygame.draw.line(self.image, MINI2, linedirstart,
+                             (self.targ.pos-self.player.pos).normalized()*10+linedirstart)
 
             if isinstance(self.targ, Ship):
-                linedirstart = Vec2d(100,180)
-                pygame.draw.circle(self.image, SUPER_WHITE, linedirstart, 10, 1)
+                linedirstart = Vec2d(100, 180)
+                pygame.draw.circle(self.image, SUPER_WHITE,
+                                   linedirstart, 10, 1)
                 pygame.draw.line(self.image, SUPER_WHITE, linedirstart, linedirstart.normalized().rotated(self.targ.dir)*10+linedirstart)
                 name = self.targ.firstname + " " + self.targ.secondname
                 if not self.targimage == self.targ.greyImage:
@@ -326,7 +396,6 @@ class MiniInfo(Drawable):
                     self.mutatedimage = pygame.transform.rotozoom(self.targimage, 90,2)      
                 offset = ((self.width/2) - (self.mutatedimage.get_width()/2), (self.height/2)-(self.mutatedimage.get_height()/2))
                 self.image.blit(self.mutatedimage, offset)
-                
             elif isinstance(self.targ, Planet):
                 name = self.targ.firstname
                 scale = self.universe.game.radarfield.radarRadius * self.universe.game.radarfield.zoomModifier
@@ -335,7 +404,7 @@ class MiniInfo(Drawable):
                 else:
                     r = self.width / 2
                 pygame.draw.circle(self.image, self.targ.color, ((self.width/2,self.height/2)), r)
-            elif isinstance(self.targ, Part):
+            elif isinstance(self.targ, Part) or isinstance(self.targ, Cargo):
                 name = self.targ.name
                 if not self.targimage == self.targ.baseImage:
                     self.targimage = self.targ.baseImage
@@ -355,7 +424,7 @@ class MiniInfo(Drawable):
 
 class shipDamage(Drawable):
 
-    def __init__(self, universe, font=SMALL_FONT):
+    def __init__(self, universe, font):
         Drawable.__init__(self, universe)
         # self.game = game
         self.player = self.universe.game.player

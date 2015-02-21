@@ -2,14 +2,17 @@
 
 from utils import *
 from floaters import Floater
-from adjectives import randItem
+from adjectives import randItem, randCargo
 from parts import *
+from Resources import *
 from spaceship import *
 import stardog
 from vec2d import Vec2d
+from facilitys import *
 
 
 class Planet(Floater):
+
 	maxRadius = 1000000 # no gravity felt past this (approximation).
 	PLANET_DAMAGE = .0004
 	LANDING_SPEED = 200 #pixels per second. Under this, no damage.
@@ -18,6 +21,7 @@ class Planet(Floater):
 	def __init__(self, starsystem, pos, delta = Vec2d(0,0), grav=5000, radius = 100, mass = 10000, \
 					color = (100,200,50), image = None, race = None):
 		Floater.__init__(self, starsystem.universe, pos, delta, radius = radius, image = image)
+		self.companys = []
 		self.mass = mass #determines gravity.
 		self.color = color
 		self.spawncost = 5
@@ -29,15 +33,21 @@ class Planet(Floater):
 		self.ships = []
 		self.race = None #race that owns this planet
 		self.fps = 10
-		if image == None:
-			self.image = None
+		if image:
+			self.image = pygame.Surface((radius*2, radius*2), flags = hardwareFlag)
+			pygame.draw.circle(self.image, self.color, (self.radius, self.radius), int(self.radius))
+			tempimg = pygame.transform.scale(image, (radius*2+10,radius*2+10))
+			self.image.blit(tempimg, (-5,-5))
+			self.image.set_colorkey((0,0,0))
 		self.inventory = []
 		for x in range(randint(1,8)):
 			self.inventory.append(randItem(self.starSystem.universe, 1))
 
+		self.inventory.append(randCargo(self.starSystem.universe))
+
 	def setFPS(self, fps):
 		self.fps = fps
-	
+	   
 	def update(self):
 		for other in self.starSystem.floaters.sprites():
 			if other != self \
@@ -58,7 +68,10 @@ class Planet(Floater):
 		for emitter in self.emitters:
 			emitter.update()
 
-		# Floater.update(self) # for gravity sensitive planets update
+		for company in self.companys:
+			company.update()
+
+		# Floater.update(self) # for gravity sensitive planets update 
 	
 	def draw(self, surface, offset = Vec2d(0,0)):
 		if not self.image:
@@ -67,8 +80,10 @@ class Planet(Floater):
 		for emitter in self.emitters:
 			emitter.draw(surface, offset)
 
+
 	def takeDamage(self, damage, other):
 		pass
+
 
 	def collision(self, other):
 		if  sign(other.pos.x - self.pos.x) == sign(other.delta.x - self.delta.x) \
@@ -76,13 +91,13 @@ class Planet(Floater):
 				return False
 		# planet/ship
 		#planet/part
-		elif isinstance(other, Part) and other.parent == None:
+		elif isinstance(other, Part) or isinstance(other, Cargo) and other.parent == None:
 			self.freepartCollision(other)
 			return True
 		elif isinstance(other, Ship):
 			if isinstance(self, Gateway):
 				other.gatewayCollision(self)
-			else:	
+			else:   
 				other.planetCollision(self)
 		#planet/planet
 		elif isinstance(other, Planet):
@@ -105,6 +120,7 @@ class Planet(Floater):
 			planet.kill()
 		else:
 			self.kill()
+
 
 
 
@@ -132,8 +148,8 @@ class Structure(Planet):
 		self.firstname = "Structure Unknown"
 		self.color = BLUE
 		self.g = grav
-		self.starsystem = starsystem
-		self.damage = {}	
+		self.starSystem = starsystem
+		self.damage = {}    
 		self.radius = radius
 		#see solarSystem.planet_ship_collision
 		self.race = None #race that owns this planet
@@ -165,7 +181,7 @@ class Gateway(Planet):
 		
 		self.image = pygame.Surface((radius*2, radius*2), flags = hardwareFlag).convert()
 		self.image.set_colorkey(BLACK)
-		
+		self.starSystem = starsystem
 		maxRadius = 50000 # no gravity felt past this (approximation).
 		self.tangible = True
 		self.g = 5000 # the gravitational constant.

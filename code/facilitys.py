@@ -1,15 +1,38 @@
+from adjectives import PARTS, CARGO
+
+class Company(object):
+    def __init__(self,planet):
+        self.planet = planet
+        self.facilitys = []
+        self.name = "dummy Company"
+        self.cash = 1000
+        # self.prices = {PARTS[0]:1, PARTS[1]:2}.items() + {CARGO[0]:3}.items()
+
+    def addFacility(self, facility):
+        facility.company = self
+        self.facilitys.append(facility)
+
+    def update(self):
+        for facility in self.facilitys:
+            facility.update()
+
+
 
 class Facility(object):
-    def __init__(self, planet):
-        self.planet = planet
+    def __init__(self):
+        self.name = "dummy Facility"
+        self.suply = []
+        self.needs = {}
+        self.company = None
+        
 
     def update(self):
         pass
 
 
 class Shop(Facility):
-    def __init__(self, planet):
-        Facility.__init__(self, planet)
+    def __init__(self,):
+        Facility.__init__(self)
     # getClosesedsystem(Facility)
     # getClosesedUniverse(Facility)
     # getaveragesystem(item)
@@ -29,19 +52,19 @@ class Fitter(Facility):
     # a list of parts and the fitting efficiency that makes
     # up the price of fitting something
     # * the weight / fitters in the neighborhood
-    def __init__(self, planet):
-        Facility.__init__(self, planet)
+    def __init__(self):
+        Facility.__init__(self)
 
 
 class ShopAndFitt(Shop, Fitter):
-    def __init__(self, planet):
-        Shop.__init__(self, planet)
-        Fitter.__init__(self, planet)
+    def __init__(self, company):
+        Shop.__init__(self)
+        Fitter.__init__(self)
 
 
 class Smelter(Facility):
-    def __init__(self, planet):
-        Facility.__init__(self, planet)
+    def __init__(self):
+        Facility.__init__(self)
     # update
     # look if there is ore of scrap on planet or in a
     # shop on planet and get / buy it, if the price is right
@@ -56,16 +79,16 @@ class Smelter(Facility):
 
 
 class TradeTerminal(Facility):
-    def __init__(self, planet):
-        Facility.__init__(self, planet)
+    def __init__(self):
+        Facility.__init__(self)
     # get all the sell/buy prices in the facinity of this trade terminal
     # player reserve a good on the list you want to buy sell
-    # (you are on the mission)
+
 
 
 class Repair(Facility):
-    def __init__(self, planet):
-        Facility.__init__(self, planet)
+    def __init__(self):
+        Facility.__init__(self)
     # update
     # find materials to repair with
     # repair

@@ -1,0 +1,26 @@
+facility is agent
+enemy ships are agents
+
+agent will do:
+
+Ships
+
+check trade terminal
+make a list of sellers and buyers of certain good
+sort that list based on:
+distance of seller and buyer and current position
+amount of $ to be made based on amount ship can hold, nr of goods needed and nr of goods soled and the worth of each good.
+
+if in meantime the goods are not longer needed the ship will make a new list at trade terminal.
+A list of others that need the cargo.
+sort this list based on those that are close and that will give a high price
+
+Facilitys
+
+check if that what is needed is in suply if not set accept on that good on True or higher the reward price. by 1 times the amount of that good that are needed.
+The initial price is the same price a neighbor gives for that good if nobody asks for that good the price comes from a file with default values.
+
+check is that what is soled is bought check every period if the last nr of items to sell is still there - the amount produced (or something) is there is nothing selled lower the price with the amount to sell.
+perhaps a check to make sure the price doesnt get lower than the production price
+
+

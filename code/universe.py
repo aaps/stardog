@@ -1,5 +1,4 @@
-#universe.py
-
+# universe.py
 from starSystem import *
 
 class Universe(object):
@@ -68,3 +67,4 @@ class Universe(object):
 
 	def getCurrentStarSystem(self):
 		return self.curSystem
+

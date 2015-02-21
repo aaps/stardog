@@ -1,4 +1,4 @@
-from utils import *
+
 from menus import *
 from scripts import *
 from starSystem import *
@@ -15,26 +15,15 @@ import datetime
 
 from client import *
 import sys
+from utils import *
 
 # command parsing (a command line interface for the game)
 # that supports multiple commands, and functions.
 from commandParse import CommandParse
 
-
-# try and import tools for memory usage reporting.
-# so these will not be imported if not installed and will not mess up the
-# system.
 try:
-    from pympler import summary
-    from pympler import muppy
-    from pympler import tracker
-    import types as Types
-    all_objects = muppy.get_objects()
-    tr = tracker.SummaryTracker()
     import resource
     import gc
-    print('Memory usage: %s (kb)' %
-          resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
 except Exception as e:
     print(e)
 
@@ -63,14 +52,25 @@ class Game(object):
         
         self.width = screen.get_width()
         self.height = screen.get_height()
+
         self.mouseControl = True
         self.timer = 0
         self.triggers = []
+
+        self.universe = Universe(self)
+        self.width = screen.get_width()
+        self.height = screen.get_height()
+        # initialize the the music system.
+        self.musicSystem = MusicSystem('res/sound/ambientMusic/')
+        self.musicSystem.play(self.musicSystem.getRandomMusic())
+        # initialize the sound system.
+        # every part has to register with this system.
+        self.soundSystem = SoundSystem('res/sound/sfxSounds/')
         self.camera = Camera(self.universe)
         self.universe.addCamera(self.camera)
 
         # messenger, with controls as first message:
-        self.messenger = Messenger(self.universe)
+        self.messenger = Messenger(self.universe, FONT)
         theone = SolarA1(self.universe, "theone", Vec2d(1, 100))
         thesecond = SolarA1(self.universe, "thesecond", Vec2d(1, -100), 2, 1)
         thethird = SolarA1(self.universe, "thethird", Vec2d(1, 200), 2, 1)
@@ -82,7 +82,7 @@ class Game(object):
         self.universe.addStarSystem(thethird)
 
         self.camera.layerAdd(self.messenger, 7)
-        self.camera.layerAdd(MiniInfo(self.universe), 6)
+        self.camera.layerAdd(MiniInfo(self.universe, FONT), 6)
 
         # key polling:
         self.keys = [False]*322
@@ -141,7 +141,7 @@ class Game(object):
                                      name=self.PlayerName,
                                      type=self.playerType)
 
-            self.camera.layerAdd(shipDamage(self.universe), 5)
+            self.camera.layerAdd(shipDamage(self.universe, FONT), 5)
             self.camera.layerAdd(StarField(self.universe), 2)
             self.universe.setCurrentStarSystem("theone")
             self.camera.layerAdd(self.universe.curSystem.bg, 1)
@@ -183,7 +183,8 @@ class Game(object):
                 pygame.event.pump()
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
-                        self.running = 0
+                        pygame.quit()
+                        sys.exit(0)
                     # if not self.pause and not self.console:
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         self.mouse[event.button] = 1
@@ -195,10 +196,7 @@ class Game(object):
                         self.mouse[0] = event.pos
                     elif event.type == pygame.KEYDOWN:
                         self.keys[event.key % 322] = 1
-                        if event.key == pygame.K_m:
-                            all_objects = muppy.get_objects()
-                        if event.key == pygame.K_BACKSLASH:
-                            saveScreenShot("Screen-shots", self.screen)
+
                     elif event.type == pygame.KEYUP:
                         self.keys[event.key % 322] = 0
                     if self.menu.active:
@@ -215,9 +213,12 @@ class Game(object):
                     # suicide
                     self.player.kill()
 
+                if self.keys[K_BACKSLASH % 322]:
+                    saveScreenShot("Screen-shots", self.screen)
+
                 self.debug = False
-                if self.keys[K_BACKSPACE % 322]:
-                    self.keys[K_BACKSPACE % 322] = False
+                # if self.keys[K_BACKSPACE % 322]:
+                #     self.keys[K_BACKSPACE % 322] = False
                 # ctrl+q or alt+F4 quit:
                 L_ALT_F4 = (self.keys[K_LALT % 322] and self.keys[K_F4 % 322])
                 R_ALT_F4 = (self.keys[K_RALT % 322] and self.keys[K_F4 % 322])
@@ -226,15 +227,13 @@ class Game(object):
                 if (L_ALT_F4 or R_ALT_F4 or L_CTRL_Q or R_CTRL_Q):
                     self.running = False
 
+
                 for trigger in self.triggers:
                     trigger.update()
 
                 self.universe.update()
                 self.universe.draw(self.screen)
                 self.client.update()
-
-                # self.camera.update()
-                # self.camera.draw(self.screen)
 
                 # paused:
 
@@ -272,10 +271,14 @@ class Game(object):
                 self.timer += 1. / self.fps
                 # try and print debuging caption
                 try:
-                    disp_str = 'Memory usage: %s (kb) FPS: %d'
-                    memUse = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+                    disp_str = 'Memory usage: %d(KB) %d(MB) %d(GB) FPS: %d'
+                    memUse = int(resource.getrusage(
+                                 resource.RUSAGE_SELF).ru_maxrss)
+                    memUseMB = memUse/1024
+                    memUseGB = memUseMB/1024
                     fps = self.averagefps
-                    pygame.display.set_caption(disp_str % (memUse, fps))
+                    pygame.display.set_caption(disp_str % (memUse, memUseMB,
+                                               memUseGB, fps))
                 except Exception:
                     pygame.display.set_caption('FPS: %d' % (self.averagefps))
             # end round loop (until gameover)

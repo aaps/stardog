@@ -8,60 +8,42 @@ from os.path import isfile, join
 import os
 import re
 
-hardwareFlag = pygame.HWSURFACE
-
-SUPER_WHITE = (255,255,255)
-WHITE = (250,250,250)
 BLACK = (0,0,0)
 MIN_BLACK = (10,10,10)
-NAME_INPUT_BLUE = (100, 100, 200)
-TYPE_BUTTON_GREEN = (100,255,100)
-CONSOLE_BLUE = (100, 100, 255, 250)
+SHIPDAMAGE = (0,0,50,200)
+HUD3 = (0,150,50)
+HUD2 = (0,50,250)
+HUD1 = (0,0,150)
+RED = (250,0,0)
+GREEN = (0,250,0)
+BLUE = (0,0,250)
 SHIP_PANEL_BLUE = (100,200,0)
-PDP_GREEN = (0, 150, 0)
-PDP2_GREEN = (100, 200, 0)
-SELECTED_COLOR = (255,200,200)
-BGACTIVE = (110, 110, 75)
-BGSELECTED = (80, 50, 110)
-DS_SELECTED = (255,75,51)
+CONSOLE_BLUE = (100,100,250,250)
+BGSELECTED = (100,50,100)
+DRAGGABLE = (50,150,50)
+BGACTIVE = (110,100,50)
+DS_SELECTED = (250,50,50)
+SELECTED_COLOR = (250,200,200)
+ST = (200,200,250)
+BUTTON_ACTIVE = (200,250,200)
+SBUTTON_ACTIVE = (250,150,0)
 BS1 = (100,200,100)
 BS3 = (200,100,100)
-ST = (200,200,255)
-DRAGGABLE = (50, 150, 50)
-DRAGGABLE2 = (75,175,75)
-BUTTON_ACTIVE = (200,255,200)
-SBUTTON_ACTIVE = (255,140,0)
 SBUTTON_INACTIVE = (200,100,0)
-INPUTFIELD = (100, 200, 100)
-FLOATER = (200, 200, 0)
-HUD1 = (20, 25, 130)
-HUD2 = (0, 50, 230)
-HUD3 = (0, 180, 80)
-HUD6 = (200, 20, 255)
-RADAR2 = (0, 0, 80)
-RADAR3 = (0,0,150)
-RADAR4 = (0, 250, 250)
-RADAR6 = (250, 250, 0)
-RADAR7 = (0, 250, 250)
-RADAR8 = (150,40,0)
-RADAR9 = (200,200,0)
-RADAR10 = (0, 250, 250)
-RADAR11 = (0,0,80)
-RADAR12 = (0, 255, 255)
-MINI1 = (100, 100, 255)
-MINI2 = (0,255,255)
-SHIPDAMAGE = (0, 0, 80, 200)
-RED = (255,0,0)
-GREEN = (0,255,0)
-BLUE = (0,0,255)
+FLOATER = (200,200,0)
+HUD6 = (200,0,250)
+MINI2 = (0,250,250)
 PART1 =  (150,150,150)
-PARTICLE1 =  (150,150,150,50)
-PARTICLE2 = (0,0,0,255)
-PARTICLE3 = (255,255,0,255)
-PARTICLE4 = (255,0,0,255)
-PARTICLE5 = (75,75,255,255)
-PARTICLE6 = (255,100,100,0)
-SOME = (200,200,100)
+PARTICLE1 = (150,150,150,50)
+WHITE = (250,250,250)
+PARTICLE3 = (250,250,0,250)
+PARTICLE5 = (75,100,250,250)
+PARTICLE6 = (250,100,100,0)
+SUPER_WHITE = (255,255,255)
+
+
+
+hardwareFlag = pygame.HWSURFACE
 
 
 #TODO: write fast sloppy trig functions. 
@@ -113,21 +95,26 @@ def not0(num):
     return .000001
 
 sqrt = math.sqrt
-#random generators:
+# random generators:
 r = random.Random()
 rand = r.random
 randint = r.randint
 randnorm = r.normalvariate
-def randColor(min, max):
-    return (randint(min[0],max[0]), randint(min[1],max[1]), \
-            randint(min[2],max[2]))
 
-#setup fonts
+
+def randColor(min, max):
+    return (randint(min[0], max[0]), randint(min[1], max[1]),
+            randint(min[2], max[2]))
+
+# setup fonts
 try:
-    pygame.font.init()  
-    SMALL_FONT = pygame.font.Font("res/hardfont.ttf", 14)    
-    FONT = pygame.font.Font("res/hardfont.ttf", 18)
-    BIG_FONT = pygame.font.Font("res/hardfont.ttf", 24)
+    pygame.font.init()
+    font_name = "hardfont.ttf"
+    font_dir = "res/fonts/"
+    font_path = font_dir+font_name
+    SMALL_FONT = pygame.font.Font((font_path), 14)
+    FONT = pygame.font.Font((font_path), 18)
+    BIG_FONT = pygame.font.Font((font_path), 24)
     fontModule = True
 
 except:
@@ -135,69 +122,45 @@ except:
     BIG_FONT = None
     SMALL_FONT = None
     fontModule = False
-    print "Font module not found. Text will not be printed."
+    print("Font module not found. Text will not be printed.")
 
-#setup sounds   
-try:
-    pygame.mixer.init(44100)
-
-    shootSound = pygame.mixer.Sound("res/sound/lazer.ogg")
-    hitSound = pygame.mixer.Sound("res/se_sdest.wav")
-    explodeSound = pygame.mixer.Sound("res/se_explode03.wav")
-    missileSound =  pygame.mixer.Sound("res/se_explode02.wav")
-    messageSound =  pygame.mixer.Sound("res/sound/message pip.ogg")
-
-    #load al ambient music (for now just travel music)
-    #might also load fighting music this way. 
-    #and question music and other kinds of music.
-    travelMusicDir = "res/sound/ambientSound/"
-    travelMusic = []
-    for musicfile in os.listdir(travelMusicDir):
-        sound = pygame.mixer.Sound(travelMusicDir+str(musicfile))
-        travelMusic.append(sound)
-
-    # for now choose a random music number to play
-    randIndex = random.randint(0, len(travelMusic)-1)
-    print os.listdir(travelMusicDir)[randIndex]
-    travelMusic[randIndex].play(-1)
-    travelMusic[randIndex].set_volume(0.15)
-
-    soundModule = True
-except (ImportError, NotImplementedError):
-    soundModule = False
-    print "Sound module not found. Sounds disabled."
-# setup images
-# if there is extended image support, load .gifs, otherwise load .bmps.
-# .bmps do not support transparency, so there might be black clipping.
 if pygame.image.get_extended():
     ext = ".gif"
 else:
     ext = ".bmp"
 
+def randImageInDir(directory):
+    
+    f = []
+    for (dirpath, dirnames, filenames) in os.walk(directory):
+        
+        f.extend(filenames)
+        break
+    return directory + "/" + random.choice(f)
 
-def loadImage(filename, colorkey=BLACK):
+
+def loadImage(filename):
     try:
         image = pygame.image.load(filename).convert_alpha()
     except pygame.error:
         image = pygame.image.load("res/parts/default.png").convert_alpha()
 
-    # s = pygame.Surface(surface.get_size(), pygame.SRCALPHA, 32).convert_alpha()
     return image
     
-def colorShift(surface, color, colorkey = (0,0,0)):
+def colorShift(surface, color, first = 0, second = 2):
     """Converts every pixel with equal red and blue values to a shade of 
     color.  Attempts to maintain value and saturation of surface. 
     Returns a new Surface."""
 
     s = pygame.Surface(surface.get_size(), pygame.SRCALPHA, 32).convert_alpha()
-    s.set_colorkey(colorkey)
+    # s.set_colorkey(colorkey)
     s.blit(surface, (0,0))
     pa = pygame.PixelArray(s)
     for i in range(len(pa)):
         for j in range(len(pa[i])):
             newColor = oldColor = s.get_at((i, j))
             
-            if oldColor[0] == oldColor[2]: #a shade of magic pink
+            if oldColor[first] == oldColor[second]: #a shade of magic pink
                 newColor = [0, 0, 0, 0]
                 for k in [0,1,2]:
                     newColor[k] = int(oldColor[0] * color[k] / 255 + oldColor[1] * (255 - color[k]) / 255)
@@ -209,11 +172,18 @@ def colorShift(surface, color, colorkey = (0,0,0)):
     del newColor
     return s
 
+def totalColorVal(surface):
+    pa = pygame.PixelArray(surface)
+    colscore = 0
+    for i in range(len(pa)):
+        for j in range(len(pa[i])):
+            col = surface.get_at((i, j))
+            colscore += col[0] + col[1] + col[2]
+    return colscore
+
 def collisionTest(a, b):
     """test spatial collision of Floaters a and b"""
     return a != b and a.pos.get_distance(b.pos) < (a.radius + b.radius)
-
-
 
 
 def linePointDist(linePoint1, linePoint2, point, infinite = False):

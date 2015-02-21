@@ -1,6 +1,9 @@
 # adjectives.py
 from parts import *
+from Resources import *
 from partCatalog import *
+
+CARGO = [Scrap, Iron, IronOre]
 
 PARTS = [LeftCannon, RightCannon, Engine, Gyro, Generator, Battery, Shield,
          LeftLaser, RightLaser, MissileLauncher, MachineGun, FighterShield,
@@ -8,6 +11,10 @@ PARTS = [LeftCannon, RightCannon, Engine, Gyro, Generator, Battery, Shield,
          MineDropper, Radar, GargoHold]
 
 ENERGY_USING = [Gun, Engine, Gyro, Shield]
+
+def randCargo(universe):
+    roll = randint(0, len(CARGO)-1)
+    return CARGO[roll](universe)
 
 
 def randItem(universe, level=1):
@@ -25,7 +32,7 @@ def addAdjective(part, level=1):
             if isinstance(part, type):
                 adj = choice()
                 adj.effect(part)
-                part.name = choice.__name__ + ' ' + part.name
+                # part.name = choice.__name__ + ' ' + part.name
                 part.adjectives.append(adj)
                 return part
     # TODO: make a better data structure for these.

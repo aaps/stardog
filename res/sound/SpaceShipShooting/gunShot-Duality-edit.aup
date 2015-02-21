@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="gunShot-Duality-edit_data" version="1.3.0" audacityversion="2.0.5" sel0="0.0000000000" sel1="0.2138095238" vpos="0" h="0.0000000000" zoom="954.1034216620" rate="22050.0">
+	<tags>
+		<tag name="ENCODER" value="FL Studio"/>
+	</tags>
+	<wavetrack name="TripleShot" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="5.623413" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="9429">
+				<waveblock start="0">
+					<simpleblockfile filename="e000045e.au" len="9429" min="-0.155847" max="0.160038" rms="0.010515"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="TripleShot" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="5.623413" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="9429">
+				<waveblock start="0">
+					<simpleblockfile filename="e00008d5.au" len="9429" min="-0.219402" max="0.179448" rms="0.012171"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>

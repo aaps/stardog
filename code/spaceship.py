@@ -188,7 +188,7 @@ def makeJuggernaut(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy"
     engine = Engine(game.universe)
     engine2 = Engine(game.universe)
     quarter = Quarters(game.universe)
-    shield = Shield(game.universe)
+    shield = BigShield(game.universe)
     
     for part in [gyro, generator, battery, cockpit, gun, gun2, engine, engine2, quarter, shield]:
         if rand() > .8:
@@ -328,7 +328,7 @@ class Ship(Floater, Controllable):
     def __init__(self, game, pos, delta, dir = 270, \
                 color = (255, 255, 255), name=("shippy","Mcshipperson"), partlim=8):
         Floater.__init__(self, game.universe, pos, delta, dir, 1)
-        Controllable.__init__(self)
+        Controllable.__init__(self, game)
 
         self.universe = game.universe
 
@@ -358,6 +358,11 @@ class Ship(Floater, Controllable):
         for function in self.functions:
             self.functionDescriptions.append(function.__doc__)
         self.baseBonuses = self.baseBonuses.copy()
+        # register our explosion sound
+        self.soundsys = self.universe.game.soundSystem
+        self.explosionSound = 'se_explode03.wav'
+        self.soundsys.register(self.explosionSound)
+
 
     def insertPart(self, part, amount=1):
         for i in range(amount):
@@ -687,8 +692,8 @@ class Ship(Floater, Controllable):
 
     def kill(self):
         """play explosion effect than call Floater.kill(self)"""
-        if soundModule:
-            setVolume(explodeSound.play(), self, self.universe.player)
+        self.soundsys.play(self.explosionSound)
+        # setVolume(explodeSound.play(), self, self.universe.player)
         for part in self.inventory:
             part.scatter(self)
         Floater.kill(self)
@@ -702,8 +707,7 @@ class Ship(Floater, Controllable):
             if planet.damage.has_key(self):
                 damage = planet.damage[self]
             else:
-                if soundModule:
-                    setVolume(hitSound.play(), planet, planet.starSystem.universe.player)
+                self.soundsys.play(self.crashSound)
                 #set damage based on incoming speed and mass.
                 damage = speed * self.mass * planet.PLANET_DAMAGE
             for part in self.parts:
@@ -729,6 +733,7 @@ class Ship(Floater, Controllable):
 
     def gatewayCollision(self, gateway):
         self.atgateway = gateway
+        
     def freepartCollision(self, part):
         if part.pickuptimeout <= 0:
             part.dir = 0

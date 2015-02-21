@@ -11,6 +11,7 @@ from vec2d import Vec2d
 from nameMaker import *
 
 class StarSystem(object):
+
 	"""A StarSystem holds ships and other floaters."""
 	
 	def __init__(self, universe, position=Vec2d(0,0), boundrad = 30000, edgerad = 60000):
@@ -26,16 +27,17 @@ class StarSystem(object):
 		self.player = None
 		self.specialOperations = []
 		self.bg = BGImage(self.universe) # the background layer
-		#why must this be here ?
-		# pygame.mixer.music.load("res/sound/space music.ogg")
-		# pygame.mixer.music.play(-1)
-		# pygame.mixer.music.set_volume(.15)
+		self.soundsys.register(self.hitsound)
 		self.planets = []
+		self.hitsound = 'se_sdest.wav'
 		self.name = ""
+	
 	
 	def addNeighbor(self, starsystem):
 		self.neighbors.append(starsystem)
 		starsystem.neighbors.append(self)
+
+
 
 	def getNeighbors(self):
 		return self.neighbors
@@ -137,6 +139,7 @@ class StarSystem(object):
 		self.floaters.empty()
 
 
+
 # refactor this and put all functionality in corresponding classes, be carefull can quickly spinn into mess.
 # piecetime refactor 
 # perhaps this method can be brokenup in a collision method for planet, ship and part
@@ -164,6 +167,10 @@ class StarSystem(object):
 			if isinstance(a, Ship):
 				
 				if isinstance(b, Part) and b.parent == None:
+					a.freepartCollision(b)
+					return True
+
+				if isinstance(b, Cargo):
 					a.freepartCollision(b)
 					return True
 
@@ -198,8 +205,8 @@ class StarSystem(object):
 					return hit
 				
 			#free part/free part
-			if isinstance(b, Part) and b.parent == None \
-			and isinstance(a, Part) and a.parent == None:
+			if (isinstance(b, Part) or isinstance(b, Cargo) )  and b.parent == None \
+			and (isinstance(a, Part) or isinstance(a, Cargo)) and a.parent == None:
 				return False #pass through each other, no crash.
 
 			#floater/floater (no ship, planet)
@@ -208,8 +215,6 @@ class StarSystem(object):
 				return True
 		return False
 
-
-		
 	def explosion_push(self, explosion, floater):
 		"""The push of an explosion.  The rest of the effect is handled by the
 		collision branching, which continues."""
@@ -220,8 +225,7 @@ class StarSystem(object):
 		floater.delta += Vec2d(0,0).rotatedd(dir, accel) / explosion.fps
 		
 	def crash(self, a, b):
-		if soundModule:
-			setVolume(hitSound.play(), a, b)
+		self.soundsys.play(self.hitsound)
 		hpA = a.hp
 		hpB = b.hp
 		if hpB > 0: a.takeDamage(hpB, b)
@@ -237,7 +241,10 @@ class StarSystem(object):
 
 class SolarA1(StarSystem):
 
+	tinyFighters = []
+	maxFighters = 15
 	respawnTime = 30
+	fightersPerMinute = 2
 	g=5000
 	def __init__(self, universe, name, location ,numPlanets = 10, numStructures = 2, boundrad = 30000, edgerad= 60000):
 		StarSystem.__init__(self, universe, location,boundrad, edgerad)
@@ -263,7 +270,10 @@ class SolarA1(StarSystem):
 			accel = ((self.g * mass) / distanceFromStar) / 10
 			# startdelta = Vec2d(0,0).rotatedd(startdir, accel) # preps for gravity sensitive planets
 			startdelta = Vec2d(0,0)
-			planet = Planet(self, startpos, startdelta ,self.g,radius = radius, mass = mass, color = color)
+			imagename = randImageInDir("res/planets")
+
+			planetimage = loadImage(imagename)
+			planet = Planet(self, startpos, startdelta ,self.g,radius = radius, mass = mass, color = color, image = planetimage)
 			
 			mindistance = self.minDistFromOthers(planet)
 			if mindistance > (radius * 6):
@@ -279,6 +289,10 @@ class SolarA1(StarSystem):
 			radius = randint(400,500)
 			self.add(Structure( self, Vec2d(distanceFromStar * cos(angle), distanceFromStar * sin(angle)), color, radius))
 
+		company = Company(self)
+		company.addFacility(Fitter())
+		self.planets[1].addCompany(Company(self))
+
 		radius = randint(500,700)
 		gateway1 = Gateway(self, Vec2d(10000,10000), radius)
 		gateway2 = Gateway(self, Vec2d(-10000,-10000), radius)
@@ -292,14 +306,7 @@ class SolarA1(StarSystem):
 				
 		for planet in self.planets:
 			planet.numShips = 0
+			planet.ships = pygame.sprite.Group()
 			planet.respawn = 30
 			self.add(planet)
 
-
-		
-
-
-		
-	
-
-	

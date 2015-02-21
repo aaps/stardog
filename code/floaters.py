@@ -6,29 +6,14 @@ from pygame.locals import *
 from vec2d import Vec2d
 import math
 from particles import *
+from SoundSystem import *
 
 FPS = 200
-MISSILE_RADIUS = 50
-SOUND_RADIUS = 3000
 
 
-def setVolume(channel, floater1, floater2):
-    from spaceship import Player
-    """sets volume for a channel based on the distance between
-     the player and floater."""
-    
-    if channel and floater1 and floater2:
-        distance = floater2.pos.get_distance(floater1.pos)
-        volume = 0.0
-        if distance < SOUND_RADIUS and (isinstance(floater1, Player) or
-           isinstance(floater2, Player)):
-            volume = math.sqrt((SOUND_RADIUS - distance)**1.8 /
-                               (SOUND_RADIUS + .001)**1.8)
-        channel.set_volume(volume)
-
-BULLET_IMAGE = loadImage("res/ammo/shot.png")
-MISSILE_IMAGE = loadImage("res/ammo/missile.png")
-DEFAULT_IMAGE = loadImage("res/parts/default.png")
+# BULLET_IMAGE = loadImage("res/ammo/shot.png")
+# MISSILE_IMAGE = loadImage("res/ammo/missile.png")
+# DEFAULT_IMAGE = loadImage("res/parts/default.png")
 
 
 class Ballistic(object):
@@ -66,9 +51,12 @@ class Floater(pygame.sprite.Sprite, Ballistic):
         self.fps = 10
         self.radius = radius
         if (not image):
-            image = DEFAULT_IMAGE
+            image = loadImage("res/parts/default.png")
         self.image = pygame.transform.rotate(image, -self.dir).convert_alpha()
         self.rect = self.image.get_rect()
+        self.soundsys = self.universe.game.soundSystem
+        self.crashSound = 'se_sdest.wav'
+        self.soundsys.register(self.crashSound)
 
     def update(self):
         """updates this floater based on its variables"""
@@ -93,8 +81,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
             emitter.draw(surface, offset)
 
     def crash(self, other):
-        if soundModule:
-            setVolume(hitSound.play(), self, other)
+        self.soundsys.play(self.crashSound)
         hpA = self.hp
         hpB = other.hp
         if hpB > 0:
@@ -131,7 +118,7 @@ class Bullet(Floater):
         self.speed = speed
         delta = gun.ship.delta.rotatedd(dir, self.speed)
         if image is None:
-            image = BULLET_IMAGE
+            image = loadImage("res/ammo/shot.png")
         Floater.__init__(self, universe, pos, delta,
                          dir=dir, radius=gun.bulletRadius,
                          image=image)
@@ -141,6 +128,11 @@ class Bullet(Floater):
         self.ship = gun.ship
         if 'target' in gun.ship.__dict__:
             self.curtarget = gun.ship.curtarget
+
+        # register the bullet sound
+        self.soundsys = self.universe.game.soundSystem
+        self.bulletSound = 'se_explode02.wav'
+        self.soundsys.register(self.bulletSound)
 
     def update(self):
         self.life += 1. / self.fps
@@ -153,12 +145,11 @@ class Bullet(Floater):
             delta = (self.lastDamageFrom.delta + self.delta) / 2
         else:
             delta = self.delta
-        impact = Impact(self.universe.game, self.pos, delta, 20, 14)
+        impact = Impact(self.universe, self.pos, delta, 20, 14)
         self.universe.curSystem.add(impact)
 
     def kill(self):
-        if soundModule:
-            setVolume(missileSound.play(), self, self.universe.player)
+        self.soundsys.play(self.bulletSound)
         self.detonate()
         Floater.kill(self)
 
@@ -188,6 +179,8 @@ class Missile(Bullet):
         self.emitters.append(Emitter(self, self.condAlways, 5, 100, 200,
                              (255, 255, 255, 255), (255, 255, 255, 0), 2,
                              4, 100, 2, 5, True))
+        self.missileSound = 'se_explode02.wav'
+        self.soundsys.register(self.missileSound)
 
     def update(self):
         self.life += 1. / self.fps
@@ -207,8 +200,7 @@ class Missile(Bullet):
 
     def kill(self):
         self.detonate()
-        if soundModule:
-            setVolume(missileSound.play(), self, self.universe.player)
+        self.soundsys.play(self.missileSound)
         Floater.kill(self)
 
     def takeDamage(self, damage, other):
@@ -248,12 +240,12 @@ class Mine(Bullet):
         explosion = Explosion(self.universe, self.pos, delta,
                               self.explosionRadius, self.time, self.damage,
                               self.force)
-        self.game.universe.curSystem.add(explosion)
+        self.universe.curSystem.add(explosion)
 
     def kill(self):
         self.detonate()
         if soundModule:
-            setVolume(missileSound.play(), self, self.game.player)
+            setVolume(missileSound.play(), self, self.universe.player)
         Floater.kill(self)
 
     def takeDamage(self, damage, other):
@@ -295,7 +287,8 @@ class Explosion(Floater):
         else:
             self.radius = int(self.maxRadius * (self.time * 4 / 3 -
                               self.life * 4 / 3) / self.time)
-        Floater.update(self)
+        for emitter in self.emitters:
+            emitter.update()
 
     def kill(self):
         pass
@@ -306,7 +299,6 @@ class Explosion(Floater):
 
 class Impact(Floater):
     life = 0
-    tangible = False
     mass = 0
 
     def __init__(self, universe, pos, delta, radius=5,
@@ -318,6 +310,7 @@ class Impact(Floater):
                          image=image)
         self.maxRadius = int(radius)
         self.radius = 0
+        self.tangible = False
         self.time = time
         self.emitters.append(RingEmitter(self, self.condAlways, 0, 5, 5, 10,
                              (255, 255, 255, 250), (100, 100, 255, 1), 0.5,
@@ -346,14 +339,11 @@ class LaserBeam(Floater):
     collision mechanism: they use line/circle collision, and it is checked
     during initialization."""
 
-    baseImage = loadImage("res/ammo/laser.png").convert_alpha()
-    # baseImage.set_colorkey(BLACK)
+    
 
     def __init__(self, universe, laser, damage, range):
         dir = laser.dir + laser.ship.dir
-        # cost is short for cos(theta)
-        # cost = cos(dir)
-        # sint = sin(dir)
+        self.baseImage = loadImage("res/ammo/laser.png").convert_alpha()
         pos = (laser.pos + Vec2d(laser.shootPoint).rotated(dir) +
                laser.ship.delta / universe.game.fps)
 
@@ -387,10 +377,6 @@ class LaserBeam(Floater):
         self.image = pygame.transform.scale(self.image, (int(length), 5))
         self.image = pygame.transform.rotate(self.image, -dir).convert_alpha()
 
-        # self.image = pygame.transform.rotate(
-        #             pygame.transform.scale(
-        #             colorShift(self.baseImage, (bulletColor(self.damage))),
-        #             (int(length), 5)), -dir).convert_alpha()
         if 'target' in laser.ship.__dict__:
             self.curtarget = laser.ship.curtarget
         self.universe.curSystem.specialOperations.append(self.collision)
@@ -455,7 +441,6 @@ class RadarDisk(Floater):
     tangible = False
 
     def __init__(self, universe, pos, delta, dir=0, radius=10, image=None):
-        # self.game = game
         self.dir = dir
         self.pos = pos
         self.delta = delta

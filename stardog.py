@@ -1,16 +1,20 @@
-#!/usr/bin/python -B
+#!/usr/bin/python
 
 import pygame
 
 from pygame.locals import *
 import sys
-
+try:
+  from updater import *
+except:
+  from utils.updater import *
 
 
 FULL = False; RESOLUTION = 1024, 768 #test
 # FULL = True; RESOLUTION = None
 # FULL = True; RESOLUTION = None #play
 hardwareFlag = pygame.HWSURFACE|pygame.DOUBLEBUF
+
 
 
 if __name__=="__main__":
@@ -77,11 +81,17 @@ if __name__=="__main__":
 
 
 if __name__ == '__main__':
+
     if run is 'client':
       import code.game
       game = code.game.Game(screen)
+      game.GGV = getGitVersion
+      game.GLV = getLogVersion
+      game.CV = checkVersion
+      game.CRED = getCredits
       game.run()
     else:
       import code.gameserver
       game = code.gameserver.Server(screen)
       game.run()
+
