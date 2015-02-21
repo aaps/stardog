@@ -36,16 +36,16 @@ class IntroMenu(TopLevelPanel):
     def rootChoose(self):
         
         self.panels = []
-        self.addPanel(Label(Rect(120, 50, 200, 20), "STARDOG !", color=SUPER_WHITE, font=BIG_FONT))
-        self.addPanel(Label(Rect(120, 80, 200, 20), "The future is annoying !", color=SUPER_WHITE, font=FONT))
+        self.addPanel(Label(Rect(120, 50, 400, 20), "STARDOG !", color=SUPER_WHITE, font=BIG_FONT))
+        self.addPanel(Label(Rect(120, 80, 400, 20), "The future is annoying !", color=SUPER_WHITE, font=FONT))
         
 
 
-        self.addPanel(Button(Rect(120, 200, 100, 25), self.colorChoose, "Start", font=BIG_FONT))
-        self.addPanel(Button(Rect(120, 240, 100, 25), self.volumeChoose, "Sound", font=BIG_FONT))
-        self.addPanel(Button(Rect(120, 280, 100, 25), self.versionChoose, "Version", font=BIG_FONT))
-        self.addPanel(Button(Rect(120, 320, 100, 25), self.creditsChoose, "Credits", font=BIG_FONT))
-        self.addPanel(Button(Rect(120, 360, 100, 25), self.quitChoose, "Quit", font=BIG_FONT))
+        self.addPanel(Button(Rect(120, 200, 100, 25), self.colorChoose, "Start", font=BIG_FONT, lineout = 1))
+        self.addPanel(Button(Rect(120, 240, 100, 25), self.volumeChoose, "Sound", font=BIG_FONT, lineout = 1))
+        self.addPanel(Button(Rect(120, 280, 100, 25), self.versionChoose, "Version", font=BIG_FONT, lineout = 1))
+        self.addPanel(Button(Rect(120, 320, 100, 25), self.creditsChoose, "Credits", font=BIG_FONT, lineout = 1))
+        self.addPanel(Button(Rect(120, 360, 100, 25), self.quitChoose, "Quit", font=BIG_FONT, lineout = 1))
 
     def volumeChoose(self):
         self.panels = []
@@ -55,7 +55,7 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(Label(Rect(320, 50, 200, 20),
                       "SFX Volume:", color=SUPER_WHITE, font=BIG_FONT))
         self.addPanel(Button(Rect(120, 280, 100, 20),
-                      self.cooseVolume, "Confirm", FONT))
+                      self.cooseVolume, "Confirm", FONT , lineout = 1))
 
         self.addPanel(Slider(Rect(120, 80, 20, 175),
                       self.setMusicVolume, self.musicSys.getVolume()))
@@ -73,8 +73,8 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(TextBlock(Rect(120,200,400,100), self.versionMessage, color = SUPER_WHITE, font = SMALL_FONT))
 
         # SHIP_PANEL_BLUE
-        self.addPanel(Button( Rect(120, 280, 100, 20), self.checkRemoveVersion, "Check !", FONT))
-        self.addPanel(Button(Rect(320, 280, 100, 20), self.rootChoose, "Back", FONT))
+        self.addPanel(Button( Rect(120, 280, 100, 20), self.checkRemoveVersion, "Check !", FONT, lineout = 1))
+        self.addPanel(Button(Rect(320, 280, 100, 20), self.rootChoose, "Back", FONT, lineout = 1))
 
 
     def versionMessage(self):
@@ -105,8 +105,8 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(Label(Rect(320, 50, 200, 20), "Blue:", color = SUPER_WHITE, font = BIG_FONT))
 
 
-        self.addPanel(Button( Rect(240, 280, 100, 20), self.chooseColor, "Confirm", FONT))
-        self.addPanel(Button( Rect(120, 280, 100, 20), self.rootChoose, "Back", FONT))
+        self.addPanel(Button( Rect(240, 280, 100, 20), self.chooseColor, "Confirm", FONT, lineout = 1))
+        self.addPanel(Button( Rect(120, 280, 100, 20), self.rootChoose, "Back", FONT, lineout = 1))
         
         self.addPanel(ColorPanel(self, Rect(350, 150, 50, 50), self.game.playerColor))
 
@@ -120,10 +120,10 @@ class IntroMenu(TopLevelPanel):
 
     def creditsChoose(self):
         self.panels = []
-        credits = ScrollTextBlock(Rect(200, 20, 500, 300), self.game, self.getCredits(), FONT , color = BLACK, scrolldirection=1)
+        credits = ScrollTextBlock(Rect(200, 20, 500, 300), self.game, self.getCredits(), FONT , color = BLACK, scrolldirection=3)
         credits.drawBorder = True
         self.addPanel(credits)
-        self.addPanel(Button( Rect(20, 500, 100, 20), self.rootChoose, "Back", FONT))
+        self.addPanel(Button( Rect(20, 500, 100, 20), self.rootChoose, "Back", FONT, lineout = 1))
 
     def getCredits(self):
             return self.game.CRED
@@ -137,8 +137,8 @@ class IntroMenu(TopLevelPanel):
         self.inputfield = NameInputField(self, Rect(100,60,500,30))
         self.inputfield.drawBorder = True
         self.addPanel(self.inputfield)
-        self.addPanel(Button( Rect(240, 350, 100, 20), self.inputfield.choose , "Confirm", FONT))
-        self.addPanel(Button( Rect(100, 350, 100, 20), self.typeChoose, "Back", FONT))
+        self.addPanel(Button( Rect(240, 350, 100, 20), self.inputfield.choose , "Confirm", FONT, lineout = 1))
+        self.addPanel(Button( Rect(100, 350, 100, 20), self.typeChoose, "Back", FONT, lineout = 1))
 
     def handleEvent(self, event):
         for panel in self.panels:

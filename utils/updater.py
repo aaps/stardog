@@ -30,19 +30,25 @@ def getGitVersion(tag_url="https://api.github.com/repos/aaps/stardog/tags"):
     import urllib2
     import json
     # open a request for the github repo tags.
-    tags = urllib2.urlopen(tag_url)
+    try:
+        tags = urllib2.urlopen(tag_url, timeout = 5)
+    except:
+        return "timeout"
     # returns a list one element get that element.
     tag_text = tags.readlines()[0]
     # the newest version is always in the first jason structure.
     tag_json = json.loads(tag_text)[0]
     return str(tag_json[u'name'])
 
-def getCredits(tag_url="https://raw.githubusercontent.com/aaps/stardog/master/economic-simulation.txt"):
+def getCredits(tag_url="https://raw.githubusercontent.com/aaps/stardog/master/Credits.txt"):
     """ returns a string that is the latest version reported on git tags."""
     import urllib2
     # import json
     # open a request for the github repo tags.
-    urlobject = urllib2.urlopen(tag_url)
+    try:
+        urlobject = urllib2.urlopen(tag_url, timeout = 5)
+    except:
+        return "timeout"
     contents = urlobject.readlines()
     return str('\n'.join(contents))
 

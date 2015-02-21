@@ -325,17 +325,19 @@ class Button(Panel):
     """Button(rect, function, text) -> a button that says text and does
     function when clicked. """
     
-    
-    
-    def __init__(self, rect, function, text, font, corners = [5,0,5,0]):
+    def __init__(self, rect, function, text, font, corners = [5,0,5,0], lineout = 0):
         Panel.__init__(self, rect, corners)
         self.inactiveColor = BS1
         self.activeColor = BUTTON_ACTIVE
         self.function = function
         self.text = text
         self.color = self.inactiveColor
+        self.lineoutspace = 0
+
         if fontModule and text:
+            
             self.image = font.render(self.text, True, self.color)
+            self.lineoutspace = ((rect.width - font.size(self.text)[0] )/2) * lineout
     
     def click(self, button, pos):
         """called when this panel is clicked on."""
@@ -351,6 +353,14 @@ class Button(Panel):
         else:
             self.color = self.inactiveColor
         Panel.move(self, pos, rel)
+
+    def draw(self, surface, rect):
+        if self.drawBorder:
+            diamondRect(surface, self.color, self.rect, self.corners)
+        surface.blit(self.image, (self.rect.left+self.lineoutspace, self.rect.top), (0, 0, self.rect.width, self.rect.height))
+        
+
+
 
 
 class ShapeButton(Button):
@@ -876,6 +886,9 @@ class Label(Panel):
         Panel.__init__(self, rect,corners)
         self.text = text
         self.color = color
+        # self.lineoutspace = (font.size(self.text)[0] - rect.width) * lineout
+        
+        
         if fontModule:
             self.image = font.render(self.text, True, self.color)
             self.rect = Rect(rect.topleft, self.image.get_size())
