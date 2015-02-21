@@ -76,7 +76,7 @@ def checkVersion():
 
 if __name__ == "__main__":
     # files that are to be ignored.
-    filterfiles = ['.gitignore', 'utils', '.git', 'todo-and-plans.md',
+    filterfiles = ['.gitignore', 'installer-utils', '.git', 'todo-and-plans.md',
                    'ingredients_and_materials.txt', 'economic-simulation.txt']
     print("Get zip link and downloading.")
     # open a request for the data on this url
