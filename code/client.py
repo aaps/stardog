@@ -16,9 +16,8 @@ class GameClient(object):
 			self._client.connect((host, messages.PORT))
 
 	def on_message(self, sender, msg):
-		# pass
 		if legume.messages.message_factory.is_a(msg, 'FloaterUpdate'): 
-			pass
+			print  msg
 			# put the updates for the planets, floaters and ships here
 		elif legume.messages.message_factory.is_a(msg, 'EntityCreate'):
 			pass

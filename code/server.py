@@ -4,7 +4,7 @@ import time
 
 
 
-class GameServer(object):
+class Server(object):
 
 	def __init__(self, universe):
 		self.universe = universe
@@ -14,6 +14,7 @@ class GameServer(object):
 		self._server.OnMessage += self.on_message
 		self.port = messages.PORT
 		self.entity_updates = [ ]
+		self.client_entity_count = 0
 		self.network_timer = time.time()
 		self.network_interval = 0.2 #10 fps
 		self.network_frames_per_second = 1.0 / self.network_interval #partial updates
@@ -43,6 +44,8 @@ class GameServer(object):
 
 	def getFloaterUpdateMessage(self, entity):
 		msg = messages.FloaterUpdate()
+		msg.x = entity.pos.x
+		msg.y = entity.pos.y
 		return msg
 
 	def getFloaterUpdateFullMessage(self, entity):
@@ -51,6 +54,8 @@ class GameServer(object):
 
 	def getFloaterSpawnMessage(self, entity):
 		msg = messages.FloaterSpawn()
+		
+
 		return msg
 
 	def getPartUpdateMessage(self, entity):
@@ -105,6 +110,7 @@ class GameServer(object):
 			except ValueError:
 				print "Oops!  That was no valid number.  Try again..."
 				raise
+
 			self._server.update()
 
 
@@ -118,6 +124,4 @@ class GameServer(object):
 		print args
 
 	def on_message(self, sender, msg):
-		# pass
-		print msg.x.value , msg.y.value , msg.dx.value , msg.dy.value
-		print
+		pass

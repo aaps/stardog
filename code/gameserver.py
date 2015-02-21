@@ -4,7 +4,7 @@ from server import *
 from universe import *
 from SoundSystem import *
 
-class Server(object):
+class GameServer(object):
 
 	def __init__(self, screen):
 		self.width = screen.get_width()
@@ -14,7 +14,7 @@ class Server(object):
 		self.soundSystem = DummySoundSystem('res/sound/sfxSounds/')
 		self.universe = Universe(self)
 		self.screen = screen
-		self.server = GameServer(self.universe)
+		self.server = Server(self.universe)
 		self.running = True
 		self.keys = [False]*322
 		self.fps = 25

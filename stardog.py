@@ -92,6 +92,6 @@ if __name__ == '__main__':
       game.run()
     else:
       import code.gameserver
-      game = code.gameserver.Server(screen)
+      game = code.gameserver.GameServer(screen)
       game.run()
 

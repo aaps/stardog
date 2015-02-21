@@ -7,6 +7,7 @@ from vec2d import Vec2d
 import math
 from particles import *
 from SoundSystem import *
+import random
 
 FPS = 200
 
@@ -38,6 +39,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
                  image=None):
         pygame.sprite.Sprite.__init__(self)
         self.universe = universe
+        self.id = random.randint(1,1000)
         self.dir = dir
         self.pos = pos
         self.delta = delta

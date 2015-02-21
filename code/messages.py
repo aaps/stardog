@@ -59,6 +59,9 @@ class ShipSpawn(legume.messages.BaseMessage):
 class FloaterUpdate(legume.messages.BaseMessage):
     MessageTypeID = MSGID+6
     MessageValues = {
+        'id':'int',
+        'x':'int',
+        'y':'int',
         'frame_number' : 'int',
     }
 

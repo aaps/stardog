@@ -9,6 +9,7 @@ from gui import *
 import stardog
 from vec2d import Vec2d
 from nameMaker import *
+import random
 
 class StarSystem(object):
 
@@ -27,7 +28,6 @@ class StarSystem(object):
 		self.player = None
 		self.specialOperations = []
 		self.bg = BGImage(self.universe) # the background layer
-		print self.universe.game
 		self.soundsys = self.universe.game.soundSystem
 		self.hitsound = 'se_sdest.wav'
 		self.soundsys.register(self.hitsound)
@@ -57,8 +57,13 @@ class StarSystem(object):
 		for spawn in self.toSpawn:
 			if (self.spawnScore + spawn.spawncost) < self.spawnMax:
 				self.spawnScore += spawn.spawncost
-				self.floaters.add(spawn)
-				self.toSpawn.remove(spawn)
+				
+				
+				if not any(x.id == spawn.id for x in self.floaters):
+					self.floaters.add(spawn)
+					self.toSpawn.remove(spawn)
+				else:
+					spawn.id = random.randint(1,1000)
 
 		if self.spawnScore > 0:
 			self.spawnScore -= 1
