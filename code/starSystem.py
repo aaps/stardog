@@ -39,6 +39,8 @@ class StarSystem(object):
 		self.neighbors.append(starsystem)
 		starsystem.neighbors.append(self)
 
+	def getFloater(self, id):
+		return filter(lambda obj: obj.id == id, self.floaters)
 
 
 	def getNeighbors(self):
@@ -54,12 +56,12 @@ class StarSystem(object):
 	def update(self):
 		"""Runs the game."""
 		
+		# print len(self.toSpawn), self.spawnScore, self.spawnMax
 		for spawn in self.toSpawn:
 			if (self.spawnScore + spawn.spawncost) < self.spawnMax:
-				self.spawnScore += spawn.spawncost
-				
-				
-				if not any(x.id == spawn.id for x in self.floaters):
+	
+				if not any(x.id == spawn.id or spawn.id == 0 for x in self.floaters):
+					self.spawnScore += spawn.spawncost
 					self.floaters.add(spawn)
 					self.toSpawn.remove(spawn)
 				else:
@@ -254,6 +256,77 @@ class SolarA1(StarSystem):
 	fightersPerMinute = 2
 	g=5000
 	def __init__(self, universe, name, location ,numPlanets = 10, numStructures = 2, boundrad = 30000, edgerad= 60000):
+		StarSystem.__init__(self, universe, location,boundrad, edgerad)
+		self.star = (Star( self, Vec2d(0,0), radius = randint(2000,5000), image = None)) # the star
+		#place player:
+		angle = randint(0,360)
+		self.location = location
+		self.planets.append(self.star)
+		self.star.numShips = 0
+		self.add(self.star)
+		self.name = name
+		
+		#add planets:
+
+		for i in range(numPlanets):
+			angle = randint(0,360)
+			distanceFromStar = randint(self.star.radius + 5000, self.boundrad-5000)
+			color = randint(40,200),randint(40,200),randint(40,200)
+			radius = randint(500,900)
+			mass = randnorm(radius * 10, 800)
+			startpos = Vec2d(distanceFromStar * cos(angle), distanceFromStar * sin(angle))
+			startdir = startpos.get_angle_between(self.star.pos) - 90
+			accel = ((self.g * mass) / distanceFromStar) / 10
+			# startdelta = Vec2d(0,0).rotatedd(startdir, accel) # preps for gravity sensitive planets
+			startdelta = Vec2d(0,0)
+			imagename = randImageInDir("res/planets")
+
+			planetimage = loadImage(imagename)
+			planet = Planet(self, startpos, startdelta ,self.g,radius = radius, mass = mass, color = color, image = planetimage)
+			
+			mindistance = self.minDistFromOthers(planet)
+			if mindistance > (radius * 6):
+				self.planets.append(planet)
+			else:
+				i-=1
+			# d+= 1200
+
+		for i in range(numStructures):
+			angle = randint(0,360)
+			distanceFromStar = randint(self.boundrad-5000, self.boundrad)
+			color = randint(0,100),randint(0,100),randint(0,100)
+			radius = randint(400,500)
+			self.add(Structure( self, Vec2d(distanceFromStar * cos(angle), distanceFromStar * sin(angle)), color, radius))
+
+		company = Company(self)
+		company.addFacility(Fitter())
+		self.planets[1].addCompany(Company(self))
+
+		radius = randint(500,700)
+		gateway1 = Gateway(self, Vec2d(10000,10000), radius)
+		gateway2 = Gateway(self, Vec2d(-10000,-10000), radius)
+
+		gateway1.setSister(gateway2)
+		gateway2.setSister(gateway1)
+
+		self.add(gateway1)
+		self.add(gateway2)
+
+				
+		for planet in self.planets:
+			planet.numShips = 0
+			# planet.ships = pygame.sprite.Group()
+			planet.respawn = 30
+			self.add(planet)
+
+class SolarEmpty(StarSystem):
+
+	tinyFighters = []
+	maxFighters = 0
+	respawnTime = 600
+	fightersPerMinute = 0
+	g=5000
+	def __init__(self, universe, name, location ,numPlanets = 1, numStructures = 0, boundrad = 30000, edgerad= 60000):
 		StarSystem.__init__(self, universe, location,boundrad, edgerad)
 		self.star = (Star( self, Vec2d(0,0), radius = randint(2000,5000), image = None)) # the star
 		#place player:

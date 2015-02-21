@@ -48,7 +48,7 @@ class Game(object):
         self.screen = screen
         self.top_left = 0, 0
         self.universe = Universe(self)
-        self.client = GameClient(self.universe)
+        
         
         self.width = screen.get_width()
         self.height = screen.get_height()
@@ -71,9 +71,9 @@ class Game(object):
 
         # messenger, with controls as first message:
         self.messenger = Messenger(self.universe, FONT)
-        theone = SolarA1(self.universe, "theone", Vec2d(1, 100))
-        thesecond = SolarA1(self.universe, "thesecond", Vec2d(1, -100), 2, 1)
-        thethird = SolarA1(self.universe, "thethird", Vec2d(1, 200), 2, 1)
+        theone = SolarEmpty(self.universe, "theone", Vec2d(1, 100))
+        thesecond = SolarEmpty(self.universe, "thesecond", Vec2d(1, -100), 2, 1)
+        thethird = SolarEmpty(self.universe, "thethird", Vec2d(1, 200), 2, 1)
         theone.addNeighbor(thesecond)
         theone.addNeighbor(thethird)
 
@@ -83,7 +83,8 @@ class Game(object):
 
         self.camera.layerAdd(self.messenger, 7)
         self.camera.layerAdd(MiniInfo(self.universe, FONT), 6)
-
+        self.universe.setCurrentStarSystem("theone")
+        self.client = GameClient(self.universe)
         # key polling:
         self.keys = [False]*322
         # mouse is [pos, button1, button2, button3,..., button6].
@@ -143,7 +144,7 @@ class Game(object):
 
             self.camera.layerAdd(shipDamage(self.universe, FONT), 5)
             self.camera.layerAdd(StarField(self.universe), 2)
-            self.universe.setCurrentStarSystem("theone")
+            
             self.camera.layerAdd(self.universe.curSystem.bg, 1)
             self.camera.setLayersPlayer(self.player)
             self.universe.setPlayer(self.player)

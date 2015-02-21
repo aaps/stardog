@@ -231,11 +231,14 @@ class RadarField(Drawable):
                         if self.player.curtarget == floater:
                             self.image.blit(self.targimage,
                                             (dotPos[0]-4, dotPos[1]-4))
-                        if isinstance(floater, Bullet):
+                        elif isinstance(floater, Bullet):
                             pygame.draw.rect(self.image, (150, 40, 0),
                                              (dotPos[0]-1, dotPos[1]-1, 2, 2))
                         elif isinstance(floater, Part) or isinstance(floater, Cargo):
                             pygame.draw.rect(self.image, (200, 200, 0),
+                                             (dotPos[0]-1, dotPos[1]-1, 2, 2))
+                        elif isinstance(floater, Part) or isinstance(floater, ServerDisk):
+                            pygame.draw.rect(self.image, (200, 0, 200),
                                              (dotPos[0]-1, dotPos[1]-1, 2, 2))
                 elif not isinstance(floater, Planet):
                     color = (255, 0, 0)

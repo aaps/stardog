@@ -74,8 +74,10 @@ class Planet(Floater):
 		# Floater.update(self) # for gravity sensitive planets update 
 	
 	def draw(self, surface, offset = Vec2d(0,0)):
-		if not self.image:
-			pos = self.pos - offset
+		pos = self.pos - offset
+		if self.image:
+			Floater.draw(self, surface, offset)
+		else:
 			pygame.draw.circle(surface, self.color, pos.inttup(), int(self.radius))
 		for emitter in self.emitters:
 			emitter.draw(surface, offset)

@@ -39,7 +39,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
                  image=None):
         pygame.sprite.Sprite.__init__(self)
         self.universe = universe
-        self.id = random.randint(1,1000)
+        self.id = 0
         self.dir = dir
         self.pos = pos
         self.delta = delta
@@ -105,6 +105,29 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 
     def setFPS(self, fps):
         self.fps = fps
+
+class ServerDisk(Floater):
+    def __init__(self, universe, pos, delta, dir=270, radius=50,image=None):
+        Floater.__init__(self, universe, pos, delta, dir=270, radius=10,image=None)
+        self.image = pygame.Surface((radius * 2, radius * 2), hardwareFlag | SRCALPHA).convert_alpha()
+        # self.image.fill((0,0,0,0))
+        # self.image = pygame.Surface((radius * 2, radius * 2), hardwareFlag | SRCALPHA).convert_alpha()
+        pygame.draw.circle(self.image, (255,0,0,100), (radius, radius), int(radius))
+        self.tangible = False
+        self.timeout = 20
+
+    def update(self):
+        if self.timeout < 0:
+            Floater.kill(self)
+        self.timeout -= 1.0 / self.fps
+    
+    # def draw(self, surface, offset=Vec2d(0, 0)):
+
+    #     poss = (self.pos.x - self.image.get_width() / 2 - offset.x,
+    #     self.pos.y - self.image.get_height() / 2 - offset.y)
+    #     surface.blit(self.image, poss)
+        # Floater.draw(self, surface, offset=Vec2d(0, 0))
+
 
 
 class Bullet(Floater):

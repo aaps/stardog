@@ -62,18 +62,26 @@ class FloaterUpdate(legume.messages.BaseMessage):
         'id':'int',
         'x':'int',
         'y':'int',
-        'frame_number' : 'int',
+        'dx':'int',
+        'dy':'int',
+        'frame_number':'int'
     }
 
 class FloaterUpdateFull(legume.messages.BaseMessage):
     MessageTypeID = MSGID+7
     MessageValues = {
+        'id':'int',
+        'x':'int',
+        'y':'int',
         'frame_number' : 'int',
     }
 
 class FloaterSpawn(legume.messages.BaseMessage):
     MessageTypeID = MSGID+8
     MessageValues = {
+        'id':'int',
+        'x':'int',
+        'y':'int',
         'frame_number' : 'int',
     }
 

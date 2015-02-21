@@ -1,6 +1,8 @@
 import legume
 import messages
 import time
+from vec2d import Vec2d
+from floaters import *
 
 class GameClient(object):
 	def __init__(self, universe):
@@ -16,13 +18,27 @@ class GameClient(object):
 			self._client.connect((host, messages.PORT))
 
 	def on_message(self, sender, msg):
-		if legume.messages.message_factory.is_a(msg, 'FloaterUpdate'): 
-			print  msg
-			# put the updates for the planets, floaters and ships here
-		elif legume.messages.message_factory.is_a(msg, 'EntityCreate'):
-			pass
-			#put create planet, floaters, and ships here
+		
+		if legume.messages.message_factory.is_a(msg, 'FloaterSpawn'): 
+			# print msg
+			pos = Vec2d(msg.x.value, msg.y.value)
+			floater = ServerDisk(self.universe, pos, Vec2d(0,0), radius = 50)
+			floater.id = msg.id.value
+			
+			if self.universe.curSystem and not any(x.id == floater.id for x in self.universe.curSystem.floaters):
+				self.universe.curSystem.floaters.add(floater)
 
+
+			# put the updates for the planets, floaters and ships here
+		elif legume.messages.message_factory.is_a(msg, 'FloaterUpdate'):
+			if self.universe.curSystem:
+				
+				floater = self.universe.curSystem.getFloater(msg.id.value)
+				if len(floater) > 0 and isinstance(floater[0], ServerDisk):
+				    # print msg.x.value,msg.y.value
+					floater[0].pos = Vec2d(msg.x.value,msg.y.value)
+					floater[0].delta = Vec2d(msg.dx.value,msg.dy.value)
+					floater[0].timeout = 20
 
 		else:
 			raise KeyError() #add message typr!
