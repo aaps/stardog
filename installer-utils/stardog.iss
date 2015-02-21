@@ -17,7 +17,7 @@ AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
-OutputBaseFilename=setup2
+OutputBaseFilename=stardog-installer
 #include <idp.iss>
 ChangesEnvironment=yes
 
