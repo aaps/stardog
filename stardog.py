@@ -70,4 +70,5 @@ if __name__ == '__main__':
     game.GGV = getGitVersion
     game.GLV = getLogVersion
     game.CV = checkVersion
+    game.CRED = getCredits
     game.run()

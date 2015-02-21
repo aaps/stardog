@@ -903,7 +903,7 @@ class TextBlock(Panel):
 
     drawBorder = False
     image = None
-    def __init__(self, rect, textFunction, font, color = BLACK, width = 200, corners=[5,0,5,0]):
+    def __init__(self, rect, textFunction, font, color = BLACK, corners=[5,0,5,0]):
         self.textFunction = textFunction
         self.color = color
         self.lineHeight = font.get_height()
@@ -936,17 +936,27 @@ class ScrollTextBlock(TextBlock):
     drawBorder = False
     image = None
 
-    def __init__(self, rect, textFunction, font , color = BLACK, scrolldirection=4, width = 200, corners=[5,0,5,0]):
-
-        TextBlock.__init__(self, rect, textFunction, font = font, color = color, width = width, corners=corners)
-        longest = sorted(self.textFunction.split("\n"), key=lambda onestring: len(onestring), reverse=True)
+    def __init__(self, rect, game, textFunction, font , color = BLACK, scrolldirection=4, scrollspeed = 1, corners=[5,0,5,0]):
+        if not fontModule:
+            return
+        self.lineHeight = font.get_height()
+        # self.rect = rect
+        self.color = color
+        self.textFunction = textFunction
+        longest = sorted(self.textFunction().split("\n"), key=lambda onestring: len(onestring), reverse=True)
      
 
-        self.lineDim = font.size(longest[0])
-        self.lineDim = (self.lineDim[0],self.lineDim[1]*len(self.textFunction.split("\n")))
-        self.scrollspeed = 1
+        self.temprect = rect
+        self.font = font
+
+        self.lineDim = (longest,self.lineHeight*len(self.textFunction().split("\n")))
+        self.scrollspeed = scrollspeed
         self.posy = self.posx = 0
         self.scrolldirection = scrolldirection
+        self.image = pygame.Surface((self.temprect.width, self.lineHeight * len(self.textFunction().split("\n"))),
+            hardwareFlag | SRCALPHA).convert_alpha()
+        Panel.__init__(self, rect,corners)
+
 
     def update(self):
         
@@ -972,19 +982,14 @@ class ScrollTextBlock(TextBlock):
                 self.posx = self.rect.width+self.lineDim[0]
         
         y = 0
+        self.image.fill((0,0,0,0))
         if isinstance(self.textFunction, basestring):
-            self.image = pygame.Surface((self.temprect.width, self.lineHeight * len(self.textFunction.split("\n"))),
-            hardwareFlag | SRCALPHA).convert_alpha()
-           
+            
             for line in self.textFunction.split("\n"):
                 self.image.blit(self.font.render(line, True, self.color), (self.posx, y+self.posy))
                 y += self.lineHeight
-            self.rect = Rect(self.temprect.topleft, self.image.get_size())
         else:
-            self.image = pygame.Surface((self.temprect.width, self.lineHeight * len(self.textFunction().split("\n"))),
-            hardwareFlag | SRCALPHA).convert_alpha()
-            
             for line in self.textFunction().split("\n"):
                 self.image.blit(self.font.render(line, True, self.color), (self.posx, y+self.posy))
                 y += self.lineHeight
-            self.rect = Rect(self.temprect.topleft, self.image.get_size())
+            

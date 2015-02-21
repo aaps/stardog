@@ -30,7 +30,7 @@ class IntroMenu(TopLevelPanel):
         self.game.playerColor = [255, 255, 255]
         self.gameversion = self.game.GLV("./installer_log.txt")
         self.remoteversion = ""
-        # self.checkCurVer()
+
         self.rootChoose()
 
     def rootChoose(self):
@@ -38,6 +38,9 @@ class IntroMenu(TopLevelPanel):
         self.panels = []
         self.addPanel(Label(Rect(120, 50, 200, 20), "STARDOG !", color=SUPER_WHITE, font=BIG_FONT))
         self.addPanel(Label(Rect(120, 80, 200, 20), "The future is annoying !", color=SUPER_WHITE, font=FONT))
+        
+
+
         self.addPanel(Button(Rect(120, 200, 100, 25), self.colorChoose, "Start", font=BIG_FONT))
         self.addPanel(Button(Rect(120, 240, 100, 25), self.volumeChoose, "Sound", font=BIG_FONT))
         self.addPanel(Button(Rect(120, 280, 100, 25), self.versionChoose, "Version", font=BIG_FONT))
@@ -116,7 +119,14 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(Slider( Rect(320,80,20,175), self.chooseBlue, b)) 
 
     def creditsChoose(self):
-        pass
+        self.panels = []
+        credits = ScrollTextBlock(Rect(200, 20, 500, 300), self.game, self.getCredits(), FONT , color = BLACK, scrolldirection=1)
+        credits.drawBorder = True
+        self.addPanel(credits)
+        self.addPanel(Button( Rect(20, 500, 100, 20), self.rootChoose, "Back", FONT))
+
+    def getCredits(self):
+            return self.game.CRED
 
     def quitChoose(self):
         quit()
@@ -188,8 +198,6 @@ class IntroMenu(TopLevelPanel):
         self.game.playerType = type
         self.nameChoose()
 
-    def checkCurVer(self):
-        self.gameversion = 0
 
 
 class NameInputField(InputField):

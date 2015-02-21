@@ -56,13 +56,13 @@ side dish
 * make text able to left center right lineout !!!
 * does ship still need hp is not all hp contained in the parts ? parts have hp cockpit has hp, so do we ned ship hp.
 * a sentence construction kitt for the ai so it can taunt you for example
-* plog triggers wont retrigger of dont have the option to. !!!
+* plot triggers wont retrigger of dont have the option to. !!
 * partcount in menu doesn't show the actuall part limit. [Done]
-* a list in a ship of who is targeting you. targeting target should not go into player or enemy but in ship !!!
+* a list in a ship of who is targeting you. targeting target should not go into player or enemy but in ship !!
 * there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.[after chip ai stuff implementation]
-* make sure that enabled is a property of part not of subparts/classes !!! 
+* make sure that enabled is a property of part not of subparts/classes !!
 * does a ship has a reference to the current starsystem if no does it need one [no done]
-* the console , input chatconsole panel hierarchy is a bit much !!!
+* the console , input chatconsole panel hierarchy is a bit much !!
 * realy a better way to reset stuff on death, like radar error thing, enging trust should be off menus all inactive !!!
 * a game intro screen [done]
 * make a screen effect class, that will flash the screen white or something, for jump effect
@@ -71,11 +71,11 @@ side dish
 * an small addaptation that makes this standout from other stardog. The accounting software  [NovaBlasters it is for now]
 * make the screenshots have a incrementalnumber like : screenshop-1, screenshot-2, etc [done]
 * make factorys for planets starsystems and ships, the design pattern [after multyplayer]
-* a random seed for xtra fun !!!
-* splitout parts and cargo ,different files, part inherits from cargo !!!
+* a random seed for xtra fun !!
+* splitout parts and cargo ,different files, part inherits from cargo !!
 * a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
 * the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed [done]
-* some sessions of bughunting !!!
+* some sessions of bughunting !!
 * some buttons should not be rebindable ingame, like quit, menu and console
 * make a startmenu with: start, options [done]
 * make a options menu with, sound [done]
@@ -86,9 +86,9 @@ side dish
 * more to vec2d vector work. [almost done]
 * engines that are good for space travel but bad for landing and visaversa
 * other sound for bullet impact on shield and plating and on planet !!!
-* instead of restart directly, wait for keypress and see your lifeless ship float into the distance. !!!
+* instead of restart directly, wait for keypress and see your lifeless ship float into the distance. !!
 * make the camera so that it can smoothly transition from one place to another
-* make the game run from the beginning, so if choosing ship and color the game is already running !!!
+* make the game run from the beginning, so if choosing ship and color the game is already running !!
 * cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fitt parts on your ship when on planet or structure, when container gets destroyed or dissconnected from ship you lose parts untill you are at capacity. [done]
 * in camera splitout functionality make a layer class for the layers that will not do the drawing but perhaps the updating, anyhow updates doesnt belong in camera ? [take from multiplayer branch and put in master branch] !!!
 
@@ -107,7 +107,7 @@ side dish
 
 * use inno setup to maker this game runnable on windows [done]
 * make a tag on github that the inno setup gets the game from [done]
-* make inno setup run a python and pygame test after install and return a good or bad install !!!
+* make inno setup run a python and pygame test after install and return a good or bad install !
 * put the inno setup script in the git repo [done]
 * FunctionLabel need to have a color option !!!
 
