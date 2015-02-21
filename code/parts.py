@@ -1274,7 +1274,7 @@ class Shield(Part):
 class BigShield(Shield):
     def __init__(self, universe): 
         self.baseImage = loadImage("res/parts/shield.png")
-        Part.__init__(self, universe)
+        Shield.__init__(self, universe)
     
 
 class Chip(Part):

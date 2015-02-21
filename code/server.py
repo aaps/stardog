@@ -2,12 +2,15 @@ import legume
 import messages
 import time
 
+
+
 class GameServer(object):
 
 	def __init__(self, universe):
 		self.universe = universe
 		self._server = legume.Server()
 		self._server.OnConnectRequest += self.on_connect_request
+
 		self._server.OnMessage += self.on_message
 		self.port = messages.PORT
 		self.entity_updates = [ ]

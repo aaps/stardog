@@ -121,6 +121,9 @@ class Planet(Floater):
 		else:
 			self.kill()
 
+	def addCompany(self, company):
+		self.companys.append(company)
+
 
 
 

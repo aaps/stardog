@@ -8,7 +8,7 @@ SOUND_RADIUS = 3000
 
 
 class DummyMusicSystem(object):
-    def __init__(self, universe, musicdir, quality=44100):
+    def __init__(self, musicdir, quality=44100):
         pass
 
     def getMusicFiles(self):

@@ -2,6 +2,7 @@
 
 from server import *
 from universe import *
+from SoundSystem import *
 
 class Server(object):
 
@@ -9,6 +10,8 @@ class Server(object):
 		self.width = screen.get_width()
 		self.height = screen.get_height()
 		self.player = None
+		self.musicSystem = DummyMusicSystem('res/sound/ambientMusic/')
+		self.soundSystem = DummySoundSystem('res/sound/sfxSounds/')
 		self.universe = Universe(self)
 		self.screen = screen
 		self.server = GameServer(self.universe)

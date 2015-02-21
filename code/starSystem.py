@@ -27,9 +27,11 @@ class StarSystem(object):
 		self.player = None
 		self.specialOperations = []
 		self.bg = BGImage(self.universe) # the background layer
+		print self.universe.game
+		self.soundsys = self.universe.game.soundSystem
+		self.hitsound = 'se_sdest.wav'
 		self.soundsys.register(self.hitsound)
 		self.planets = []
-		self.hitsound = 'se_sdest.wav'
 		self.name = ""
 	
 	
@@ -306,7 +308,7 @@ class SolarA1(StarSystem):
 				
 		for planet in self.planets:
 			planet.numShips = 0
-			planet.ships = pygame.sprite.Group()
+			# planet.ships = pygame.sprite.Group()
 			planet.respawn = 30
 			self.add(planet)
 
