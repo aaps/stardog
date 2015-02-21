@@ -56,12 +56,12 @@ class StarSystem(object):
 	def update(self):
 		"""Runs the game."""
 		
-		# print len(self.toSpawn), self.spawnScore, self.spawnMax
 		for spawn in self.toSpawn:
 			if (self.spawnScore + spawn.spawncost) < self.spawnMax:
 	
 				if not any(x.id == spawn.id or spawn.id == 0 for x in self.floaters):
 					self.spawnScore += spawn.spawncost
+					spawn.starSystem = self
 					self.floaters.add(spawn)
 					self.toSpawn.remove(spawn)
 				else:
@@ -80,8 +80,7 @@ class StarSystem(object):
 		floaters = self.floaters.sprites()
 		for i in range(len(floaters)):
 			for j in range(i + 1, len(floaters)):
-				self.collide(floaters[i], floaters[j])
-			
+				self.collide(floaters[i], floaters[j])	
 
 				
 		for floater in self.floaters:
@@ -159,12 +158,17 @@ class StarSystem(object):
 		#good object-orientation, but when a new subclass is added
 		#code only needs to be added here, instead of in every other
 		#class.
+		
+		# if not a.tangible or not b.tangible:
+		# 	print a, b
+
 		if a.tangible and b.tangible and collisionTest(a, b):
 			#planet/?
 			if isinstance(b, Planet): a,b = b,a
 			if isinstance(a, Planet):
 				return a.collision(b)
 
+			print a, b
 					
 			if isinstance(b, Explosion): a,b = b,a
 			if isinstance(a, Explosion):

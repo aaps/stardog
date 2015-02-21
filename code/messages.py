@@ -23,14 +23,10 @@ class PlanetUpdate(legume.messages.BaseMessage):
 class PlanetSpawn(legume.messages.BaseMessage):
     MessageTypeID = MSGID+2
     MessageValues = {
-        'entity_id' : 'int',
-        'frame_number' : 'int',
-        'name' : 'string 32',
+        'id' : 'int',
+        'radius' : 'int',
         'x' : 'int',
         'y' : 'int',
-        'dx' : 'int',
-        'dy' : 'int',
-        'hp' : 'int',
     }
 
 class ShipUpdate(legume.messages.BaseMessage):
@@ -85,39 +81,46 @@ class FloaterSpawn(legume.messages.BaseMessage):
         'frame_number' : 'int',
     }
 
-class PartUpdate(legume.messages.BaseMessage):
+class FloaterKill(legume.messages.BaseMessage):
     MessageTypeID = MSGID+9
     MessageValues = {
-        'frame_number' : 'int',
+        'id':'int',
+        'frame_number' : 'int'
     }
 
-class PartUpdateFull(legume.messages.BaseMessage):
+class PartUpdate(legume.messages.BaseMessage):
     MessageTypeID = MSGID+10
     MessageValues = {
         'frame_number' : 'int',
     }
 
-class PartSpawn(legume.messages.BaseMessage):
+class PartUpdateFull(legume.messages.BaseMessage):
     MessageTypeID = MSGID+11
+    MessageValues = {
+        'frame_number' : 'int',
+    }
+
+class PartSpawn(legume.messages.BaseMessage):
+    MessageTypeID = MSGID+12
     MessageValues = {
         'frame_number' : 'int',
     }
 
 
 class SystemUpdate(legume.messages.BaseMessage):
-    MessageTypeID = MSGID+12
+    MessageTypeID = MSGID+13
     MessageValues = {
         'frame_number' : 'int',
 	}
 
 class SystemSpawn(legume.messages.BaseMessage):
-    MessageTypeID = MSGID+13
+    MessageTypeID = MSGID+14
     MessageValues = {
         'frame_number' : 'int',
     }
 
 class PlayerMessage(legume.messages.BaseMessage):
-    MessageTypeID = MSGID+14
+    MessageTypeID = MSGID+15
     MessageValues = {
         'frame_number' : 'int',
     }
@@ -133,6 +136,7 @@ legume.messages.message_factory.add(ShipSpawn)
 legume.messages.message_factory.add(FloaterUpdate)
 legume.messages.message_factory.add(FloaterUpdateFull)
 legume.messages.message_factory.add(FloaterSpawn)
+legume.messages.message_factory.add(FloaterKill)
 legume.messages.message_factory.add(PartUpdate)
 legume.messages.message_factory.add(PartUpdateFull)
 legume.messages.message_factory.add(PartSpawn)

@@ -3,7 +3,6 @@ import messages
 import time
 
 
-
 class Server(object):
 
 	def __init__(self, universe):
@@ -28,6 +27,9 @@ class Server(object):
 
 	def getPlanetSpawnMessage(self, entity):
 		msg = messages.PlanetSpawn()
+		msg.x.value = entity.pos.x
+		msg.y.value = entity.pos.y
+		msg.radius.value = entity.pos.radius
 		return msg
 
 	def getShipUpdateMessage(self, entity):
@@ -63,7 +65,11 @@ class Server(object):
 		msg.id.value = entity.id
 		msg.x.value = entity.pos.x
 		msg.y.value = entity.pos.y
+		return msg
 
+	def getFloaterKillMessage(self, entity):
+		msg = messages.FloaterKill()
+		msg.id.value = entity.id
 		return msg
 
 	def getPartUpdateMessage(self, entity):
@@ -97,29 +103,44 @@ class Server(object):
 		# put them in the life list and send the spawn over network
 		pass
 
-
-	def send_entity_spawns(self, server):
-
-		for floater in self.universe.curSystem.toSpawn:
-
-			
+	def send_all_entitys(self, endpoint):
+		
+		for floater in self.universe.curSystem.floaters:
 			try: 
 				message = self.getFloaterSpawnMessage(floater)
-				# print message
-				server.send_message_to_all(message)
+				endpoint.send_reliable_message(message)
+			except:
+				raise
+
+	def send_entity_spawns(self, server):
+		for floater in self.universe.curSystem.toSpawn:
+			try: 
+				message = self.getFloaterSpawnMessage(floater)
+				server.send_reliable_message_to_all(message)
 			except:
 				raise
 				
 	def send_entity_updates(self, server):
-
+		# 
 		for floater in self.universe.curSystem.floaters:
-			# print floater.pos, floater.delta, floater
+			
 			try: 
 				message = self.getFloaterUpdateMessage(floater)
-				# print message
+				
 				server.send_message_to_all(message)
 			except:
 				raise
+
+	def send_entity_kills(self, server):
+		for floater in self.universe.curSystem.floaters:
+			
+			if floater.send < 2 and floater.hp <= 0:
+				try: 
+					message = self.getFloaterKillMessage(floater)
+					server.send_reliable_message_to_all(message)
+				except:
+					raise
+
 
 	def update(self):
 		if time.time() > self.network_timer + self.network_interval:
@@ -127,6 +148,7 @@ class Server(object):
 			try:
 				self.send_entity_updates(self._server)
 				self.send_entity_spawns(self._server)
+				self.send_entity_kills(self._server)
 			except ValueError:
 				print "Oops!  That was no valid number.  Try again..."
 				raise
@@ -141,7 +163,7 @@ class Server(object):
 		self._server.disconnect()
 
 	def on_connect_request(self, sender, args):
-		print args, sender
+		self.send_all_entitys(sender)
 
 	def on_message(self, sender, msg):
 		pass

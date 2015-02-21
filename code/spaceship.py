@@ -221,6 +221,8 @@ def makeScout(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcS
     else:
         ship = Ship(game.universe, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     cockpit = Fighter(game.universe)
+    cockpit.hp = 100
+    ship.hp = 100
     battery = Battery(game.universe)
     cannon = RightFlakCannon(game.universe)
     radar = Radar(game.universe)
@@ -281,8 +283,8 @@ class Ship(Floater, Controllable):
     attention = 0
     detectionscore = 0
     forwardEngines = []
-    maxhp = 0
-    hp = 0
+    maxhp = 20
+    hp = 5
     landed = None
     forwardThrust = 0
     reverseThrust = 0

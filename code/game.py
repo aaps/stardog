@@ -109,7 +109,7 @@ class Game(object):
 
     def run(self):
         """Runs the game."""
-        self.client.connect()
+        
         self.running = True
         while self.running:
             # game setup:
@@ -176,6 +176,7 @@ class Game(object):
             # check once wether the universe still has a player.
             self.hasPlayer = self.universe.curSystem.floaters.has(self.player)
             # The in-round loop (while player is alive):
+            self.client.connect()
             while self.running and self.hasPlayer:
                 # check wether the universe still has a player.
                 self.hasPlayer = self.universe.curSystem.floaters.has(self.player)
