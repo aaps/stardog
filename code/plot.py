@@ -1,5 +1,6 @@
 #plot.py
 from dialogs import *
+
 def newGameTriggers(universe):
 	player = universe.getCurrentStarSystem().player
 

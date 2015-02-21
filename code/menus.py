@@ -223,6 +223,8 @@ class ColorButton(Button):
         
 class TypeButton(Button):
     def __init__(self, parent, rect, type, font):
+        Button.__init__(self, rect, self.choose, None, FONT)
+        self.drawBorder = True
         self.image = colorShift(loadImage('res/menus/'+type+'.bmp'),
                         parent.game.playerColor)
         self.parent = parent
@@ -231,10 +233,15 @@ class TypeButton(Button):
             toblit = font.render(self.type.title(), True, BS1)
 
             self.image.blit(toblit,(5,rect[3] - toblit.get_height() - 10))
-        Button.__init__(self, rect, self.choose, None, FONT)
+        
         
     def choose(self):
         self.parent.chooseType(self.type)
+
+    def draw(self, surface, rect):
+        if self.drawBorder:
+            diamondRect(surface, self.color, self.rect, self.corners)
+        surface.blit(self.image, (self.rect.left+self.lineoutspace, self.rect.top), (0, 0, self.rect.width, self.rect.height))
 
 class Console(Panel):
     drawBorder = True

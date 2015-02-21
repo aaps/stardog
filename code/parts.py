@@ -1337,18 +1337,18 @@ class GargoHold(Part):
 
 class Cockpit(Radar, Battery, Generator, Gyro, GargoHold):
     
-    image = None
-    energyCost = .2 #gyro
-    torque = 35000 #gyro
-    radarrange = 5000 #radar
-    capacity = 5 #battery
-    rate = .5 #generator
-    gargocapacity = 6
+
     
     def __init__(self, universe):
         # self.baseImage = loadImage("res/parts/cockpit.png")
         Part.__init__(self, universe)
-        
+        self.image = None
+        self.energyCost = .2 #gyro
+        self.torque = 35000 #gyro
+        self.radarrange = 5000 #radar
+        self.capacity = 5 #battery
+        self.rate = .5 #generator
+        self.gargocapacity = 6
         self.ports = [Port(Vec2d(self.width / 2 - 2, 0), 180, self), \
                     Port(Vec2d(0, self.height / 2 - 2), 270, self), \
                     Port(Vec2d(-self.width / 2 + 2, 0), 0, self), \
@@ -1377,14 +1377,14 @@ class StrafebatCockpit(Cockpit):
         Cockpit.__init__(self, universe)
         
 class Interceptor(Cockpit):#move to config
-    mass = 20
-    hp = 15
+
     
     
     def __init__(self, universe):
         self.baseImage = loadImage("res/parts/interceptor.png")
         Cockpit.__init__(self, universe)
-        
+        self.mass = 20
+        self.hp = 15
         self.ports = [Port(Vec2d(4, 10), 180, self),
                       Port(Vec2d(4, -10), 180, self),
                       Port(Vec2d(-3, -17), 90, self),
@@ -1395,15 +1395,15 @@ class Interceptor(Cockpit):#move to config
 
 
 class Destroyer(Cockpit):# move to config
-    mass = 60
-    hp = 30
-    energyCost = .6
+    
     
     
     def __init__(self, universe):
         self.baseImage = loadImage("res/parts/destroyer.png")
         Cockpit.__init__(self, universe)
-        
+        self.mass = 60
+        self.hp = 30
+        self.energyCost = .6
         self.ports = [
                     Port(Vec2d(25, 0), 180, self),
                     Port(Vec2d(8, -8), 90, self),
@@ -1415,18 +1415,17 @@ class Destroyer(Cockpit):# move to config
         self.name = 'Destroyer Cockpit'
                     
 class Fighter(Cockpit):#move to config
-    mass = 10
-    hp = 10
-    energyCost = .2 #gyro
-    torque = 60000 #gyro
-    capacity = 30 #battery
-    rate = 10 #generator
-    
-    
+
+
     def __init__(self, universe):
         self.baseImage = loadImage("res/parts/fighter.png")
         Cockpit.__init__(self, universe)
-        
+        self.mass = 10
+        self.hp = 10
+        self.energyCost = .2 #gyro
+        self.torque = 60000 #gyro
+        self.capacity = 30 #battery
+        self.rate = 10 #generator
         self.ports = [
                     Port(Vec2d(9, 0), 180, self),
                     Port(Vec2d(-5, -7), 90, self),

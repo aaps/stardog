@@ -11,7 +11,7 @@ numStars = 300
 radarRadius = 100
 # 1 radar pixel = radarScale space pixels
 radarScale = 200.0
-# edgeWarning = loadImage('res/edgeofsystem.bmp')
+
 # universe and camera
 
 
