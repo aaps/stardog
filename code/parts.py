@@ -1233,11 +1233,9 @@ class Shield(Part):
     
     image = None
 
-
-    def __init__(self, universe): 
-        
+    def __init__(self, universe):
         Part.__init__(self, universe)
-        
+        self.baseImage = loadImage("res/parts/shield.png")
         self.ports = []
         self.name = "Shield"
         self.shieldhp = 10
