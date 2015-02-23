@@ -18,8 +18,6 @@ SOUND_RADIUS = 3000
 #                                (SOUND_RADIUS + .001)**1.8))*SFX_VOLUME
 #         channel.set_volume(volume)
 
-# here is some text.
-
 
 class DummyMusicSystem(object):
     """
