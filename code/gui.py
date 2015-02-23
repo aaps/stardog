@@ -7,8 +7,8 @@ from vec2d import *
 from collections import deque
 import pygame
 
-numStars = 300
-radarRadius = 100
+# numStars = 300
+# radarRadius = 100
 # 1 radar pixel = radarScale space pixels
 radarScale = 200.0
 
@@ -300,8 +300,9 @@ class TargetingRect(Drawable):
 class StarField(Drawable):
     def __init__(self, universe):
         Drawable.__init__(self, universe)
+        self.numStars = 300
         self.stars = []
-        for star in range(numStars):
+        for star in range(self.numStars):
             brightness = int(randint(100, 255))
             # a position, a color, and a depth.
             self.stars.append((

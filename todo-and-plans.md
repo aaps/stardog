@@ -1,3 +1,13 @@
+BEFORE WE CONTINU THIS NEEDS TO BE DONE
+========================================
+1 write documentation for all functions and classes
+2 write tests for parts and floaters
+3 put txt files in a seperate dir
+4 remove all global class vrariables (there is a propper name for this)
+5 make sure code doesnt run on imports
+
+
+
 
 main dish
 ==========

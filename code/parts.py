@@ -9,15 +9,13 @@ import copy
 from particles import *
 import sys
 
-PART_OVERLAP = 0
-DETACH_SPACE = 50
-DETACH_SPEED = 100
 
 class Port(object):
     def __init__(self, offset, dir, parent):
         self.offset = offset
         self.dir = dir
         self.part = None
+
         self.parent = parent
         
     def addPart(self, part):
@@ -26,17 +24,11 @@ class Port(object):
 class Part(Floater):
     """A part of a ship."""
    
-    image = None
-    height, width = 9, 3
+    # height, width = 9, 3
     
-
-    # buffer = pygame.Surface((30,30), flags = hardwareFlag | SRCALPHA).convert_alpha()
     acted = False
     
-    # a list of functions that are called on the ship during ship.update:
-    shipEffects = []
-    # a list of functions that are called on this part at attach time:
-    attachEffects = []
+
 
     def __init__(self, universe):
         self.buffer = pygame.Surface((30,30), flags = hardwareFlag | SRCALPHA).convert_alpha()
@@ -56,6 +48,9 @@ class Part(Floater):
         self.pickuptimeout = 0
         self.number = -1
         self.name = 'part'
+        self.part_overlap = 0
+        self.detach_space = 50
+        self.detach_speed = 100
         self.level = 1
         self.dir = 270
         self.color = PART1
@@ -70,6 +65,10 @@ class Part(Floater):
         self.universe = universe
         # every part needs to know where to register sounds.
         self.soundsys = self.universe.game.soundSystem
+        # a list of functions that are called on the ship during ship.update:
+        self.shipEffects = []
+        # a list of functions that are called on this part at attach time:
+        self.attachEffects = []
         
         self.image = colorShift(self.baseImage.copy(), self.color)
         self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
@@ -118,7 +117,7 @@ class Part(Floater):
         
         part.ship = self.ship
         part.dir = port.dir + self.dir
-        part.offset = self.offset + port.offset.rotated(self.dir) - Vec2d(0,0).rotatedd(part.dir,(part.width - PART_OVERLAP) / 2)
+        part.offset = self.offset + port.offset.rotated(self.dir) - Vec2d(0,0).rotatedd(part.dir,(part.width - part.part_overlap) / 2)
 
         part.parent = self
 
@@ -187,9 +186,9 @@ class Part(Floater):
         if self.parent:
             cost = cos(self.ship.dir) #cost is short for cos(theta)
             sint = sin(self.ship.dir)
-            self.pos = self.ship.pos +  self.offset * DETACH_SPACE
+            self.pos = self.ship.pos +  self.offset * self.detach_space
 
-            self.delta = self.ship.delta + Vec2d(0,0).rotatedd(random.randrange(0,360), DETACH_SPEED)
+            self.delta = self.ship.delta + Vec2d(0,0).rotatedd(random.randrange(0,360), self.detach_speed)
             #if this is the root of the ship, kill the ship:
             root = False
             if self.parent and self.parent == self.ship:
@@ -215,12 +214,12 @@ class Part(Floater):
         ship is destroyed."""
         self.pickuptimeout = 5
         angle = randint(0,360)
-        offset = Vec2d(cos(angle) * DETACH_SPACE, sin(angle) * DETACH_SPACE)
+        offset = Vec2d(cos(angle) * detach_space, sin(angle) * detach_space)
         #set physics to drift away from ship (not collide):
         self.image = colorShift(pygame.transform.rotate(self.baseImage, angle), self.color).convert_alpha()
         # self.image.set_colorkey(BLACK)
         self.pos = ship.pos + self.offset
-        self.delta.x = ship.delta.x + (rand()  * DETACH_SPEED)
+        self.delta.x = ship.delta.x + (rand()  * detach_speed)
 
         self.ship = None
         self.universe.curSystem.add(self)
@@ -367,6 +366,7 @@ class Dummy(Part):
         Part.__init__(self, universe)
         self.ports = []
         self.mass = 0
+        self.part_overlap = 0
         
     def update(self):
         if self.parent: 
@@ -418,12 +418,12 @@ class Cargo(Floater):
         ship is destroyed."""
         self.pickuptimeout = 5
         angle = randint(0,360)
-        offset = Vec2d(cos(angle) * DETACH_SPACE, sin(angle) * DETACH_SPACE)
+        offset = Vec2d(cos(angle) * detach_space, sin(angle) * detach_space)
         #set physics to drift away from ship (not collide):
         self.image = colorShift(pygame.transform.rotate(self.baseImage, angle), self.color).convert_alpha()
         # self.image.set_colorkey(BLACK)
         self.pos = ship.pos + offset
-        self.delta.x = ship.delta.x + (rand()  * DETACH_SPEED)
+        self.delta.x = ship.delta.x + (rand()  * detach_speed)
 
         # self.ship = None
         self.universe.curSystem.add(self)
@@ -494,7 +494,7 @@ class FlippablePart(Part):
                     
 class Gun(Part):
     
-    image = None
+
     shootDir = 180
     shootPoint = -30, 0 
     
@@ -663,8 +663,6 @@ class MissileLauncher(Gun):
 
 class Laser(Gun):
     
-
-    
     def __init__(self, universe):
         # self.baseImage = loadImage("res/parts/leftlaser.png")
         Gun.__init__(self, universe)
@@ -746,25 +744,24 @@ class FlakCannon(Cannon):
                 self.reloadBurst = self.reloadBurstTime
 
 class Radar(Part):
-    
-    # image = None
-    radartime = 0
-    disk = None
-    detected = []
-    radarspeed = 1
-    
+
+    image = None
 
     def __init__(self, universe):
         self.baseImage = loadImage("res/parts/radar.png")
         Part.__init__(self, universe)
-        
-        self.radartime = 0
-        self.detected = []
         self.energyCost = 0.5
         self.radarrange = 18000
-        # self.enabled = False
         self.name = "Radar"
-        
+        self.init_extra()
+
+
+    def init_extra(self):
+        self.radartime = 0
+        self.disk = None
+        self.detected = []
+        self.radarspeed = 1
+
     
     def toggle(self):
         
@@ -975,7 +972,6 @@ class Engine(Part):
 class Gyro(Part):
     
     image = None
-
     
     def __init__(self, universe):
         self.baseImage = loadImage("res/parts/gyro.png")
@@ -1077,13 +1073,13 @@ class Interconnect(Part):
 
 class Quarters(Part):
     
-    # image = None
-    crewCap = 2
-    repair = 0
+    image = None
+
     def __init__(self, universe):
         self.baseImage = loadImage("res/parts/quarters.png")
         Part.__init__(self, universe)
-    
+        self.crewCap = 2
+        self.repair = 0
         self.name = "Crew Quarters"
 
     def stats(self):
@@ -1288,7 +1284,7 @@ class Chip(Part):
     def update(self):
         Part.update(self)
 
-class GargoHold(Part):
+class CargoHold(Part):
     
     image = None
 
@@ -1298,7 +1294,7 @@ class GargoHold(Part):
         self.ports = [  Port(Vec2d(0, self.height / 2 ), 270, self), \
                         Port(Vec2d(-self.width / 2 , 0), 0, self), \
                         Port(Vec2d(0, -self.height / 2 ), 90, self)]
-        self.name = "GargoHold"
+        self.name = "CargoHold"
         self.energyCost = 10
         self.mass = 1
         self.gargocapacity = 4
@@ -1313,7 +1309,7 @@ class GargoHold(Part):
         return Part.shortStats(self)+statString%(stats)
         
     def update(self):
-        """check how many gargholds are attached and calculate capacity on that."""
+        """check how many cargholds are attached and calculate capacity on that."""
         if self.ship:
             gargoholdcount = 0
             cockpitGargoSize = 0
@@ -1335,14 +1331,15 @@ class GargoHold(Part):
 
 
 
-class Cockpit(Radar, Battery, Generator, Gyro, GargoHold):
+class Cockpit(Radar, Battery, Generator, Gyro, CargoHold):
     
 
     
     def __init__(self, universe):
         # self.baseImage = loadImage("res/parts/cockpit.png")
         Part.__init__(self, universe)
-        self.image = None
+        Radar.init_extra(self)
+        # self.image = None
         self.energyCost = .2 #gyro
         self.torque = 35000 #gyro
         self.radarrange = 5000 #radar
@@ -1368,7 +1365,7 @@ class Cockpit(Radar, Battery, Generator, Gyro, GargoHold):
         Battery.update(self)
         Gyro.update(self)
         Radar.update(self)
-        GargoHold.update(self)
+        CargoHold.update(self)
 
 class StrafebatCockpit(Cockpit):
 
@@ -1378,8 +1375,6 @@ class StrafebatCockpit(Cockpit):
         
 class Interceptor(Cockpit):#move to config
 
-    
-    
     def __init__(self, universe):
         self.baseImage = loadImage("res/parts/interceptor.png")
         Cockpit.__init__(self, universe)

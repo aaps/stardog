@@ -8,8 +8,6 @@ from floaters import *
 class Camera(object):
     """A camera class that can keep screen dimentions, and has a location, not much more for now, used to view the game"""
 
-
-
     def __init__(self, universe, pos=Vec2d(0, 0)):
         self.universe = universe
         self.pos = pos
@@ -83,9 +81,6 @@ class Camera(object):
 
 
 class Layer(object):
-
-    
-
 
     def __init__(self, drawable, zindex, camera):
         self.zindex = zindex

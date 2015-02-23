@@ -5,10 +5,10 @@ from partCatalog import *
 
 CARGO = [Scrap, Iron, IronOre]
 
-PARTS = [LeftCannon, RightCannon, Engine, Gyro, Generator, Battery, Shield,
+PARTS = [LeftCannon, RightCannon, Engine, Gyro, Generator, Battery, BigShield,
          LeftLaser, RightLaser, MissileLauncher, MachineGun, FighterShield,
          LeftFlakCannon, RightFlakCannon, Interconnect, Quarters, GatewayFocus,
-         MineDropper, Radar, GargoHold]
+         MineDropper, Radar, CargoHold]
 
 ENERGY_USING = [Gun, Engine, Gyro, Shield]
 
@@ -43,9 +43,9 @@ def addAdjective(part, level=1):
 
 class Adjective(object):
     level = 1
-    types = [Gun, Engine, Gyro, Battery, Generator, Cockpit, Shield,
+    types = [Gun, Engine, Gyro, Battery, Generator, Cockpit, BigShield,
              Interconnect, Quarters, GatewayFocus, MineDropper, Radar,
-             GargoHold]
+             CargoHold]
 
     def effect(self, part):
         pass

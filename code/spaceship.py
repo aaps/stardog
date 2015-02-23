@@ -62,14 +62,14 @@ def makeFreighter(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy",
 
     ship.addPart(cockpit)
 
-    chold1 = GargoHold(game.universe)
-    chold2 = GargoHold(game.universe)
-    chold3 = GargoHold(game.universe)
-    chold4 = GargoHold(game.universe)
-    chold5 = GargoHold(game.universe)
-    chold6 = GargoHold(game.universe)
-    chold7 = GargoHold(game.universe)
-    chold8 = GargoHold(game.universe)
+    chold1 = CargoHold(game.universe)
+    chold2 = CargoHold(game.universe)
+    chold3 = CargoHold(game.universe)
+    chold4 = CargoHold(game.universe)
+    chold5 = CargoHold(game.universe)
+    chold6 = CargoHold(game.universe)
+    chold7 = CargoHold(game.universe)
+    chold8 = CargoHold(game.universe)
 
     #put a Gyro on either back-sides of the cockpit 
     cockpit.addPart(gyro_left, 3)

@@ -9,7 +9,6 @@ from gui import *
 class Messenger(Drawable):
     # not capitalized in stand lib
     queue = deque()
-    font = FONT
 
     def __init__(self, universe, font=FONT, dir=1):
         Drawable.__init__(self, universe)
@@ -34,8 +33,7 @@ class Messenger(Drawable):
         self.soundSys.register(self.popupSound)
 
     def chunks(self, the_list, length):
-        """ Yield successive n-size chucks from the_list.
-        """
+        """ Yield successive n-size chucks from the_list."""
         for i in xrange(0, len(the_list), length):
             yield the_list[i:i+length]
 
