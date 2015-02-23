@@ -3,6 +3,7 @@ import pygame
 from pygame.locals import *
 import sys
 from updater import *
+import code.game
 
 # testint
 FULL, RESOLUTION = False, (1024, 768)
@@ -16,7 +17,7 @@ if __name__=="__main__":
     #command line resolution selection:
     if len(sys.argv) > 1:
         try:
-            if sys.argv[1] == 'f' or sys.argv[1] == 'full':
+            if sys.argv[1].lower() == 'f' or sys.argv[1].lower() == 'full':
                 FULL = True
                 RESOLUTION = None
             else:
@@ -59,7 +60,6 @@ if __name__=="__main__":
     datatuple, masktuple = pygame.cursors.compile( thickarrow_strings,
                                       black='X', white='.', xor='o' )
     pygame.mouse.set_cursor( (16,16), (0,0), datatuple, masktuple )
-import code.game
 if __name__ == '__main__':
     game = code.game.Game(screen)
     game.GGV = getGitVersion
