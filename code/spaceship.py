@@ -116,7 +116,7 @@ def makeDestroyer(game, pos, delta, dir = 270, color = (255, 255, 255),name=("Sh
     cockpit = Destroyer(game.universe)
     gun = RightLaser(game.universe)
     engine = Engine(game.universe)
-    shield = Shield(game.universe)
+    shield = BigShield(game.universe)
     for part in [gyro, generator, battery, cockpit, gun, engine, shield]:
         if rand() > .8:
             addAdjective(part)
