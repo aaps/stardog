@@ -11,10 +11,8 @@ FULL, RESOLUTION = False, (1024, 768)
 # FULL = True; RESOLUTION = None #play
 hardwareFlag = (pygame.HWSURFACE | pygame.DOUBLEBUF)
 
-
-
-if __name__=="__main__":
-    #command line resolution selection:
+if __name__ == "__main__":
+    # command line resolution selection:
     if len(sys.argv) > 1:
         try:
             if sys.argv[1].lower() == 'f' or sys.argv[1].lower() == 'full':
