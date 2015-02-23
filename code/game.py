@@ -99,6 +99,9 @@ class Game(object):
         # does the universe have a player present in it?
         self.hasPlayer = None
 
+    def quit(self):
+        pygame.quit()
+
     def run(self):
         """Runs the game."""
         self.running = True
@@ -113,8 +116,8 @@ class Game(object):
                 pygame.event.pump()
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
-                        pygame.quit()
-                        sys.exit(0)
+                        self.running = False
+                        break
                     intro.handleEvent(event)
                 intro.update()
                 self.screen.fill((0, 0, 0, 0))
@@ -124,6 +127,10 @@ class Game(object):
                 self.clock.tick(FPS)
                 self.fps = max(1, int(self.clock.get_fps()))
                 self.timer += 1. / self.fps
+            # handle if running is false
+            if not self.running:
+                break
+
             # setup initial state:
             self.playerScript = InputScript(self)
             self.menuScript = Script(self)
@@ -173,8 +180,7 @@ class Game(object):
                 pygame.event.pump()
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
-                        pygame.quit()
-                        sys.exit(0)
+                        self.running = False
                     # if not self.pause and not self.console:
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         self.mouse[event.button] = 1
@@ -207,9 +213,6 @@ class Game(object):
                     saveScreenShot("Screen-shots", self.screen)
 
                 self.debug = False
-                # if self.keys[K_BACKSPACE % 322]:
-                #     self.keys[K_BACKSPACE % 322] = False
-                # ctrl+q or alt+F4 quit:
                 L_ALT_F4 = (self.keys[K_LALT % 322] and self.keys[K_F4 % 322])
                 R_ALT_F4 = (self.keys[K_RALT % 322] and self.keys[K_F4 % 322])
                 L_CTRL_Q = (self.keys[K_LCTRL % 322] and self.keys[K_q % 322])

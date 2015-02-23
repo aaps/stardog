@@ -1,19 +1,14 @@
 #!/usr/bin/python
-
 import pygame
-
 from pygame.locals import *
 import sys
-try:
-  from updater import *
-except:
-  from updater import *
+from updater import *
 
-
-FULL = False; RESOLUTION = 1024, 768 #test
+# testint
+FULL, RESOLUTION = False, (1024, 768)
 # FULL = True; RESOLUTION = None
 # FULL = True; RESOLUTION = None #play
-hardwareFlag = pygame.HWSURFACE|pygame.DOUBLEBUF
+hardwareFlag = (pygame.HWSURFACE | pygame.DOUBLEBUF)
 
 
 
@@ -72,3 +67,4 @@ if __name__ == '__main__':
     game.CV = checkVersion
     game.CRED = getCredits
     game.run()
+    game.quit()
