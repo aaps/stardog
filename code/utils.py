@@ -1,3 +1,5 @@
+#utils.py
+
 import random
 import math
 from pygame.locals import *
@@ -44,6 +46,36 @@ SUPER_WHITE = (255,255,255)
 
 
 hardwareFlag = pygame.HWSURFACE
+
+# setup fonts
+try:
+    pygame.font.init()
+    font_name = "hardfont.ttf"
+    font_dir = "res/fonts/"
+    font_path = font_dir+font_name
+    SMALL_FONT = pygame.font.Font((font_path), 14)
+    FONT = pygame.font.Font((font_path), 18)
+    BIG_FONT = pygame.font.Font((font_path), 24)
+    fontModule = True
+
+except:
+    FONT = None
+    BIG_FONT = None
+    SMALL_FONT = None
+    fontModule = False
+    print("Font module not found. Text will not be printed.")
+
+if pygame.image.get_extended():
+    ext = ".gif"
+else:
+    ext = ".bmp"
+
+sqrt = math.sqrt
+# random generators:
+r = random.Random()
+rand = r.random
+randint = r.randint
+randnorm = r.normalvariate
 
 
 #TODO: write fast sloppy trig functions. 
@@ -94,40 +126,14 @@ def not0(num):
         return num
     return .000001
 
-sqrt = math.sqrt
-# random generators:
-r = random.Random()
-rand = r.random
-randint = r.randint
-randnorm = r.normalvariate
+
 
 
 def randColor(min, max):
     return (randint(min[0], max[0]), randint(min[1], max[1]),
             randint(min[2], max[2]))
 
-# setup fonts
-try:
-    pygame.font.init()
-    font_name = "hardfont.ttf"
-    font_dir = "res/fonts/"
-    font_path = font_dir+font_name
-    SMALL_FONT = pygame.font.Font((font_path), 14)
-    FONT = pygame.font.Font((font_path), 18)
-    BIG_FONT = pygame.font.Font((font_path), 24)
-    fontModule = True
 
-except:
-    FONT = None
-    BIG_FONT = None
-    SMALL_FONT = None
-    fontModule = False
-    print("Font module not found. Text will not be printed.")
-
-if pygame.image.get_extended():
-    ext = ".gif"
-else:
-    ext = ".bmp"
 
 def randImageInDir(directory):
     

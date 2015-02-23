@@ -1,7 +1,7 @@
+#menus.py
 
 from utils import *
 from menuElements import *
-# import stardog
 from planet import *
 from parts import Dummy, FlippablePart
 from spaceship import Ship

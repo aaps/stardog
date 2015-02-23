@@ -12,14 +12,15 @@ from facilitys import *
 
 
 class Planet(Floater):
-    maxRadius = 1000000 # no gravity felt past this (approximation).
-    PLANET_DAMAGE = .0004
-    LANDING_SPEED = 200 #pixels per second. Under this, no damage.
-
+    
     
     def __init__(self, starsystem, pos, delta = Vec2d(0,0), grav=5000, radius = 100, mass = 10000, \
                     color = (100,200,50), image = None, race = None):
         Floater.__init__(self, starsystem.universe, pos, delta, radius = radius, image = image)
+        self.maxRadius = 1000000 # no gravity felt past this (approximation).
+        self.planet_damage = .0004
+        self.landing_speed = 200 #pixels per second. Under this, no damage.
+
         self.companys = []
         self.mass = mass #determines gravity.
         self.color = color
@@ -134,8 +135,7 @@ class Planet(Floater):
 
 
 class Star(Planet):
-    PLANET_DAMAGE = 300
-    LANDING_SPEED = -999
+    
     
     
     def __init__(self, starsystem, pos, delta = Vec2d(0,0), grav=5000, radius = 3000, image = None):
@@ -143,18 +143,21 @@ class Star(Planet):
         mass = radius * 100
         color = bulletColor((mass+.1)/250000)
         Planet.__init__(self, starsystem, pos, delta, grav, radius, mass, color, image)
+        self.planet_damage = 300
+        self.landing_speed = -999
         self.firstname = "Star Unknown"
         self.emitters.append(RingEmitter( self, self.condAlways , radius, radius+50, 200, 220,  (255,255,255,250), (251,0,0,1), 2, 3, 800, 0, 10, 1, True))
 
 
 class Structure(Planet):
-    LANDING_SPEED = 200 #pixels per second. Under this, no damage.
-    PLANET_DAMAGE = .0004
+    
     
     
     def __init__(self, starsystem, pos, delta, grav=5000, color = (100,200,50), radius = 100, image = None):
         Floater.__init__(self, starsystem.universe, pos, Vec2d(0,0), 0, image=image)
         self.firstname = "Structure Unknown"
+        self.landing_speed = 200 #pixels per second. Under this, no damage.
+        self.planet_damage = .0004
         self.color = BLUE
         self.g = grav
         self.starSystem = starsystem

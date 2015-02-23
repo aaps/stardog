@@ -7,7 +7,7 @@ import sys
 try:
   from updater import *
 except:
-  from updater import *
+  pass
 
 
 FULL = False; RESOLUTION = 1024, 768 #test

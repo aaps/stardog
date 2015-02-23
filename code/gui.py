@@ -1,3 +1,5 @@
+#gui.py
+#
 from pygame.locals import *
 from utils import *
 from spaceship import Ship
@@ -7,18 +9,8 @@ from vec2d import *
 from collections import deque
 import pygame
 
-# numStars = 300
-# radarRadius = 100
-# 1 radar pixel = radarScale space pixels
-radarScale = 200.0
-
-# universe and camera
-
 
 class Drawable(object):
-    universe = None
-    drawBorder = True
-    rect = None
 
     def __init__(self, universe):
         self.universe = universe
@@ -44,11 +36,12 @@ class Drawable(object):
 
 class Messenger(Drawable):
     # not capitalized in stand lib
-    queue = deque()
+    
     # font = FONT
 
     def __init__(self, universe, font, dir=1):
         Drawable.__init__(self, universe)
+        queue = deque()
         # -1 means the messages stack upward.
         self.font = FONT
         self.dir = dir

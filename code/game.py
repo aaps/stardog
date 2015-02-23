@@ -1,16 +1,17 @@
-
+#game.py
+#
 from menus import *
 from scripts import *
-from starSystem import *
+# from starSystem import *
 from gui import *
-from planet import *
-from spaceship import *
-from strafebat import *
+# from planet import *
+# from spaceship import *
+# from strafebat import *
 from dialogs import *
 from camera import *
 from universe import *
-from vec2d import Vec2d
-import plot
+# from vec2d import Vec2d
+from plot import *
 import datetime
 import sys
 from utils import *
@@ -158,7 +159,8 @@ class Game(object):
             for x in range(10):
                 self.clock.tick()
 
-            self.triggers = plot.newGameTriggers(self.universe)
+            self.triggers = Triggers(self)
+            self.storytriggers = self.triggers.StoryTriggers(self.universe)
             # create a parser that parses chatconsole input
             # for command and such.
             self.commandParse = CommandParse(self, self.chatconsole,
@@ -218,8 +220,8 @@ class Game(object):
                     self.running = False
 
 
-                for trigger in self.triggers:
-                    trigger.update()
+                for strigger in self.storytriggers:
+                    strigger.update()
 
                 self.universe.update()
                 self.universe.draw(self.screen)

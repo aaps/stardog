@@ -1,9 +1,8 @@
 # parts.py
+
 from utils import *
-from scripts import *
 from pygame.locals import *
 from floaters import *
-# import stardog
 from vec2d import Vec2d
 import copy
 from particles import *
@@ -27,7 +26,6 @@ class Part(Floater):
     # height, width = 9, 3
     
     acted = False
-    
 
 
     def __init__(self, universe):
@@ -214,12 +212,12 @@ class Part(Floater):
         ship is destroyed."""
         self.pickuptimeout = 5
         angle = randint(0,360)
-        offset = Vec2d(cos(angle) * detach_space, sin(angle) * detach_space)
+        offset = Vec2d(cos(angle) * self.detach_space, sin(angle) * self.detach_space)
         #set physics to drift away from ship (not collide):
         self.image = colorShift(pygame.transform.rotate(self.baseImage, angle), self.color).convert_alpha()
         # self.image.set_colorkey(BLACK)
         self.pos = ship.pos + self.offset
-        self.delta.x = ship.delta.x + (rand()  * detach_speed)
+        self.delta.x = ship.delta.x + (rand()  * self.detach_speed)
 
         self.ship = None
         self.universe.curSystem.add(self)

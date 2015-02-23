@@ -2,17 +2,10 @@
 
 from utils import *
 from pygame.locals import *
-# import stardog
 from vec2d import Vec2d
 import math
 from particles import *
 from SoundSystem import *
-
-FPS = 200
-
-# BULLET_IMAGE = loadImage("res/ammo/shot.png")
-# MISSILE_IMAGE = loadImage("res/ammo/missile.png")
-# DEFAULT_IMAGE = loadImage("res/parts/default.png")
 
 
 class Ballistic(object):
@@ -105,9 +98,6 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 class Bullet(Floater):
     def __init__(self, universe, gun, damage, speed, range, image=None):
         dir = gun.dir + gun.ship.dir
-        # cost is short for cos(theta)
-        # cost = cos(dir)
-        # sint = sin(dir)
         pos = (gun.pos + Vec2d(gun.shootPoint).rotated(dir) +
                gun.ship.delta / universe.game.fps)
         # not needed for the offset, but needed for the dir.
@@ -295,8 +285,6 @@ class Explosion(Floater):
 
 
 class Impact(Floater):
-    life = 0
-    mass = 0
 
     def __init__(self, universe, pos, delta, radius=5,
                  time=1):
@@ -305,6 +293,8 @@ class Impact(Floater):
         image.set_colorkey(BLACK)
         Floater.__init__(self, universe, pos, delta, radius=0,
                          image=image)
+        self.life = 0
+        self.mass = 0
         self.maxRadius = int(radius)
         self.radius = 0
         self.tangible = False
@@ -374,10 +364,6 @@ class LaserBeam(Floater):
         self.image = pygame.transform.scale(self.image, (int(length), 5))
         self.image = pygame.transform.rotate(self.image, -dir).convert_alpha()
 
-        # self.image = pygame.transform.rotate(
-        #             pygame.transform.scale(
-        #             colorShift(self.baseImage, (bulletColor(self.damage))),
-        #             (int(length), 5)), -dir).convert_alpha()
         if 'target' in laser.ship.__dict__:
             self.curtarget = laser.ship.curtarget
         self.universe.curSystem.specialOperations.append(self.collision)
@@ -436,12 +422,13 @@ class LaserBeam(Floater):
 
 
 class RadarDisk(Floater):
-    baseImage = None
-    color = (0, 0, 0)
-    mass = 0
-    tangible = False
+
 
     def __init__(self, universe, pos, delta, dir=0, radius=10, image=None):
+        self.baseImage = None
+        self.color = (0, 0, 0)
+        self.mass = 0
+        self.tangible = False
         self.dir = dir
         self.pos = pos
         self.delta = delta

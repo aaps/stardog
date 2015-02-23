@@ -56,8 +56,6 @@ class Script(object):
                 if binding[2]:
                     self.bindings[self.bindings.index(binding)] = (binding[0], binding[1],binding[2], True)
 
-    # def agent(self, state):
-    #   return None
 
     def initbind(self, key, function, toggle):
         """binds function to key so function will be called if key is pressed.
@@ -274,6 +272,7 @@ class AIScript(Script):
             return 0
         if speed == 0:
             return sqrt(distance / 2 / accel) * 2
+            
     def goto(self, ship, pos, target = None):
         """directs the ship to fly to the position. 
         If target, pos is a position relative to the target."""

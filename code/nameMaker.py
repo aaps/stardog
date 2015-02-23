@@ -1,12 +1,10 @@
 # nameMaker.py
+
 import random
 from spaceship import *
 from planet import *
 
 class nameMaker(object):
-
-	
-
 
 	def __init__(self):
 		self.firstnames = ["Donnie","Elena","Latoya","Franklin","Geraldine","Bob", "Perl", "Jacob"]

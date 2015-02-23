@@ -1,6 +1,6 @@
 # universe.py
+# 
 from starSystem import *
-
 
 class Universe(object):
     starSystems = []

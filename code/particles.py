@@ -1,16 +1,15 @@
 #particles.py
-#
+
 from vec2d import Vec2d
 import random
 import pygame
-from utils import *
 import copy
 
 class Particle(object):
 	
 	def __init__(self, emitter, pos, delta, startcolor, stopcolor, life, startsize, stopsize, relative):
 		
-		self.image = pygame.Surface((max(startsize, stopsize)*2, max(startsize, stopsize)*2), hardwareFlag | SRCALPHA)
+		self.image = pygame.Surface((max(startsize, stopsize)*2, max(startsize, stopsize)*2), pygame.HWSURFACE | pygame.SRCALPHA)
 		
 		self.relative = relative
 		self.relpos = pos

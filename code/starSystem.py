@@ -59,9 +59,7 @@ class StarSystem(object):
         for i in range(len(floaters)):
             for j in range(i + 1, len(floaters)):
                 self.collide(floaters[i], floaters[j])
-            
-
-                
+             
         for floater in self.floaters:
             if floater.pos.get_distance(Vec2d(0,0)) > self.boundrad:
                 if isinstance(floater, Ship):

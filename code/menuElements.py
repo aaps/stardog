@@ -1,15 +1,16 @@
+#menuElements.py
+
 from utils import *
 import pygame
 import math
 import random
-# from gui import *
 from pygame.locals import *
 
 
 class Panel(object):
     """Panel(mouse, rect) -> new Panel. 
     The basic building block of the menu system. """
-    # color = BS1
+
     image = None
     
     
@@ -195,11 +196,13 @@ class TopLevelPanel(Panel):
 
 class Dragable(Panel):
     # move this point under the mouse hotspot.
-    hotSpot = 0, 0
-    drawBorderDragging = True
+
 
     def __init__(self, rect, parent):
         Panel.__init__(self, rect)
+        self.hotSpot = 0, 0
+        self.drawBorderDragging = True
+
         self.parent = parent
         self.image = pygame.Surface(rect.size).convert()
         self.image.set_colorkey(BLACK)
