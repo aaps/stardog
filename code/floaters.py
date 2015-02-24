@@ -48,6 +48,13 @@ class Floater(pygame.sprite.Sprite, Ballistic):
         self.crashSound = 'se_sdest.wav'
         self.soundsys.register(self.crashSound)
 
+    def distanceVolumeAdjust(floater1, floater2, system):
+        """
+        a handling function that determines the distance and returns
+        a scale based on that.
+        """
+        return(1.0)
+
     def update(self):
         """updates this floater based on its variables"""
         self.pos += self.delta / self.fps

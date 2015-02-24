@@ -20,14 +20,6 @@ SOUND_RADIUS = 3000
 #         channel.set_volume(volume)
 
 
-def distanceVolumeAdjust(floater1, floater2, system):
-    """
-    a handling function that determines the distance and returns
-    a scale based on that.
-    """
-    return(1.0)
-
-
 class DummyMusicSystem(object):
     """
     a dummy class that has all the functions the Music Class uses.
