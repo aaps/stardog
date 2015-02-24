@@ -1,32 +1,32 @@
 # camera.py
+
 from vec2d import Vec2d
 from planet import *
 from floaters import *
 
 
 class Camera(object):
-    universe = None
-    width = 100
-    height = 100
-    transcurve = None
-    transitioning = False
-    transtime = 10
-    pos = None
-    layers = []
-    target = None
+    """A camera class that can keep screen dimentions, and has a location, not much more for now, used to view the game"""
 
     def __init__(self, universe, pos=Vec2d(0, 0)):
         self.universe = universe
         self.pos = pos
         self.width = universe.game.width
         self.height = universe.game.height
+        self.transcurve = None
+        self.transitioning = False
+        self.transtime = 10
+        self.layers = []
+        self.target = None
 
     def update(self):
+        """Update all the layers in this camera"""
         for layer in self.layers:
             if layer.enabled:
                 layer.update()
 
     def draw(self, surface):
+        """draw all the layers in this camera"""
         for layer in self.layers:
             if layer.enabled:
                 layer.draw(surface)
@@ -81,15 +81,12 @@ class Camera(object):
 
 
 class Layer(object):
-    zindex = 0
-    enabled = True
-    drawable = None
-    camera = None
 
     def __init__(self, drawable, zindex, camera):
         self.zindex = zindex
         self.drawable = drawable
         self.camera = camera
+        self.enabled = True
         if isinstance(drawable, SpaceView):
             self.drawable.camera = camera
 
@@ -116,17 +113,14 @@ class Layer(object):
 
 class SpaceView(object):
 
-    onScreen = []
-    game = None
-    width = 100
-    height = 100
-    camera = None
-    offset = Vec2d(0, 0)
-
+    
     def __init__(self, game):
         self.game = game
         self.width = 100
         self.height = 100
+        self.onScreen = []
+        self.camera = None
+        self.offset = Vec2d(0, 0)
 
     def update(self):
         pass

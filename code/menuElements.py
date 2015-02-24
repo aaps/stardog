@@ -1,21 +1,23 @@
+#menuElements.py
+
 from utils import *
 import pygame
 import math
 import random
-# from gui import *
 from pygame.locals import *
 
 
 class Panel(object):
     """Panel(mouse, rect) -> new Panel. 
     The basic building block of the menu system. """
-    # color = BS1
-    image = None
-    drawBorder = True
-    bgColor = None
-    def __init__(self, rect, corners = []):
-        self.color = BS1
 
+    image = None
+    
+    
+    def __init__(self, rect, corners = []):
+        self.drawBorder = True
+        self.bgColor = None
+        self.color = BS1
         self.rect = rect
         self.panels = []
         self.corners = corners
@@ -98,6 +100,7 @@ class Panel(object):
     
     def draw(self, surface, rect):
         """draws this panel on the surface."""
+        
         if rect:
             rect = rect.clip(self.rect)
         else:
@@ -111,6 +114,7 @@ class Panel(object):
         for panel in self.panels:
             panel.draw(surface, rect)
         if self.drawBorder:
+            
             diamondRect(surface, self.color, rect, self.corners)   
 
     def handleEvent(self, keys):
@@ -125,12 +129,15 @@ class TopLevelPanel(Panel):
     Like a panel, but has a handleEvent() method and draws subpanels to a 
     buffer.  Must be the ultimate parent of any panel that responds to events,
     and events should all be passed to .handleEvent(event)."""
-    bgColor = 15,31,78
-    dragged = None
-    dragSource = None
-    internalPos = None
+    
+
     def __init__(self, rect, corners = []):
         Panel.__init__(self, rect, corners)
+        self.dragged = None
+        self.dragSource = None
+        self.internalPos = None
+
+        self.bgColor = 15,31,78
         self.image = pygame.Surface(rect.size, \
                             flags = (hardwareFlag)).convert()
         self.image.set_alpha(200)
@@ -189,11 +196,13 @@ class TopLevelPanel(Panel):
 
 class Dragable(Panel):
     # move this point under the mouse hotspot.
-    hotSpot = 0, 0
-    drawBorderDragging = True
+
 
     def __init__(self, rect, parent):
         Panel.__init__(self, rect)
+        self.hotSpot = 0, 0
+        self.drawBorderDragging = True
+
         self.parent = parent
         self.image = pygame.Surface(rect.size).convert()
         self.image.set_colorkey(BLACK)
@@ -328,14 +337,17 @@ class Button(Panel):
     def __init__(self, rect, function, text, font, corners = [5,0,5,0], lineout = 0):
         Panel.__init__(self, rect, corners)
         self.inactiveColor = BS1
+        self.drawBorder = True
         self.activeColor = BUTTON_ACTIVE
         self.function = function
-        self.text = text
+        self.text = ""
+        if text:
+            self.text = text
+        
         self.color = self.inactiveColor
         self.lineoutspace = 0
 
-        if fontModule and text:
-            
+        if fontModule:
             self.image = font.render(self.text, True, self.color)
             self.lineoutspace = ((rect.width - font.size(self.text)[0] )/2) * lineout
     
@@ -354,14 +366,7 @@ class Button(Panel):
             self.color = self.inactiveColor
         Panel.move(self, pos, rel)
 
-    def draw(self, surface, rect):
-        if self.drawBorder:
-            diamondRect(surface, self.color, self.rect, self.corners)
-        surface.blit(self.image, (self.rect.left+self.lineoutspace, self.rect.top), (0, 0, self.rect.width, self.rect.height))
-        
-
-
-
+   
 
 class ShapeButton(Button):
     """ShapeButton(rect, function, points) -> a button that looks like
@@ -881,9 +886,10 @@ class Selecter(ScrollPanel):
 class Label(Panel):
     """Label(self,  rect, text, color = BS1, font = FONT) ->
     A panel with a single line of text."""
-    drawBorder = False
+    # drawBorder = False
     def __init__(self, rect, text, font, color = BS1,corners = [5,0,5,0]):
         Panel.__init__(self, rect,corners)
+        self.drawBorder = False
         self.text = text
         self.color = color
         # self.lineoutspace = (font.size(self.text)[0] - rect.width) * lineout
@@ -896,9 +902,10 @@ class Label(Panel):
 
 class FunctionLabel(Panel):
     """A label that updates its text by calling a string function."""
-    drawBorder = False
+    
     def __init__(self, rect, textFunction, font, color = BS1, corners=[5,0,5,0]):
         Panel.__init__(self, rect, corners)
+        self.drawBorder = False
         self.color = color
         self.textFunction = textFunction
         self.font = font
@@ -914,9 +921,11 @@ class TextBlock(Panel):
     A panel with multi-line text. rect height is reset based on font and 
     number of lines in text."""
 
-    drawBorder = False
+    
     image = None
     def __init__(self, rect, textFunction, font, color = BLACK, corners=[5,0,5,0]):
+        Panel.__init__(self, rect, corners)
+        self.drawBorder = False
         self.textFunction = textFunction
         self.color = color
         self.lineHeight = font.get_height()
@@ -924,7 +933,7 @@ class TextBlock(Panel):
         if not fontModule:
             return
         self.font = font
-        Panel.__init__(self, rect,corners)
+        
 
     def update(self):
         if isinstance(self.textFunction, basestring):

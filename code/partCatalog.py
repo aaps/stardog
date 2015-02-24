@@ -1,4 +1,5 @@
-#partCatalogue
+#partCatalogue.py
+
 from parts import *
 
 class LeftFlakCannon(FlakCannon, FlippablePart): 
@@ -106,6 +107,6 @@ class FighterShield(Shield):
         self.energyCost = .5
         self.name = 'Fighter Shield'
 
-generalSellable = [LeftFlakCannon, MachineGun, LeftLaser, LeftCannon, 
-    StrafebatCannon, FighterShield, MissileLauncher, Engine, Generator,
-    Gyro, Battery, BigShield]
+# generalSellable = [LeftFlakCannon, MachineGun, LeftLaser, LeftCannon, 
+#     StrafebatCannon, FighterShield, MissileLauncher, Engine, Generator,
+#     Gyro, Battery, BigShield]

@@ -1,18 +1,16 @@
 # nameMaker.py
+
 import random
 from spaceship import *
 from planet import *
 
 class nameMaker(object):
 
-	firstnames = ["Donnie","Elena","Latoya","Franklin","Geraldine","Bob", "Perl", "Jacob"]
-	secondnames = ["Bendson","Carr","Gutierrez","Bradley","Arnold","Knight","Hicks","Harrison"]
-	starnames = ["Apus", "Andromida","Antila","Aquarius","Aquila","Ara","Aries","Auriga","Bootes","Caelum"]
-	planetnames = ["Alpha","Beta","Gamma","Delta","Epsylon","Zeta","Eta","Theta","Iota"]
-
-
 	def __init__(self):
-		pass
+		self.firstnames = ["Donnie","Elena","Latoya","Franklin","Geraldine","Bob", "Perl", "Jacob"]
+		self.secondnames = ["Bendson","Carr","Gutierrez","Bradley","Arnold","Knight","Hicks","Harrison"]
+		self.starnames = ["Apus", "Andromida","Antila","Aquarius","Aquila","Ara","Aries","Auriga","Bootes","Caelum"]
+		self.planetnames = ["Alpha","Beta","Gamma","Delta","Epsylon","Zeta","Eta","Theta","Iota"]
 
 	def getUniqePilotName(self, listoffloaters):
 		while True:

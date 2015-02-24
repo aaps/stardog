@@ -1,9 +1,9 @@
+#menus.py
 
 from utils import *
 from menuElements import *
-# import stardog
 from planet import *
-from parts import Dummy, PART_OVERLAP, FlippablePart
+from parts import Dummy, FlippablePart
 from spaceship import Ship
 import datetime
 from parts import *
@@ -11,11 +11,6 @@ from scripts import Controllable
 from collections import defaultdict
 from SoundSystem import *
 
-
-
-# DEFAULT_SELECTED_IMAGE = 
-squareWidth = 80
-squareSpacing = squareWidth + 10
 
 
 class IntroMenu(TopLevelPanel):
@@ -165,7 +160,7 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'juggernaut', FONT))
         x += 150
         self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'freighter', FONT))
-        self.addPanel(Button( Rect(50, 350, 100, 20), self.colorChoose, "Back", FONT))
+        # self.addPanel(Button( Rect(50, 350, 100, 20), self.colorChoose, "Back", FONT))
 
     def setMusicVolume(self, value):
         self.musicSys.setVolume(value)
@@ -223,6 +218,8 @@ class ColorButton(Button):
         
 class TypeButton(Button):
     def __init__(self, parent, rect, type, font):
+        Button.__init__(self, rect, self.choose, None, FONT)
+        self.drawBorder = True
         self.image = colorShift(loadImage('res/menus/'+type+'.bmp'),
                         parent.game.playerColor)
         self.parent = parent
@@ -231,18 +228,23 @@ class TypeButton(Button):
             toblit = font.render(self.type.title(), True, BS1)
 
             self.image.blit(toblit,(5,rect[3] - toblit.get_height() - 10))
-        Button.__init__(self, rect, self.choose, None, FONT)
         
     def choose(self):
         self.parent.chooseType(self.type)
 
+    # def draw(self, surface, rect):
+    #     if self.drawBorder:
+
+    #         diamondRect(surface, self.color, self.rect, self.corners)
+    #     surface.blit(self.image, (self.rect.left+self.lineoutspace, self.rect.top), (0, 0, self.rect.width, self.rect.height))
+
 class Console(Panel):
-    drawBorder = True
+    
     color = CONSOLE_BLUE
 
     def __init__(self,rect, game):
         Panel.__init__(self,rect)
-
+        self.drawBorder = True
         rect = Rect(10,10,self.rect.width,200)
         self.inputfield = InputField( rect, game, 200, FONT)
         self.addPanel(self.inputfield)
@@ -252,7 +254,7 @@ class Console(Panel):
             panel.handleEvent(event)
             
 class ChatConsole(TopLevelPanel, Controllable):
-    drawBorder = True
+    
     activeMenu = None
     color = CONSOLE_BLUE
     game = None
@@ -260,6 +262,7 @@ class ChatConsole(TopLevelPanel, Controllable):
     def __init__(self, game, rect):
         TopLevelPanel.__init__(self, rect)
         Controllable.__init__(self, game, False)
+        self.drawBorder = True
         subFrameRect = Rect(0, 0, self.rect.width, self.rect.height)
         self.game = game
         
@@ -339,6 +342,7 @@ class PartsPanel(Panel):
     
     def __init__(self, rect, game):
         Panel.__init__(self, rect)
+        self.drawBorder = False
         self.baseImage = loadImage('res/menus/partsmenubg.bmp')
         self.tradeImage = loadImage('res/menus/partstrademenubg.bmp')
         self.player = game.universe.player
@@ -438,12 +442,15 @@ class PartsPanel(Panel):
             self.inventoryPanel.reset()
 
 class ShipPanel(Selecter):
-    selected = None
-    text = None
-    drawBorder = False
+    
+    
+
     
     def __init__(self, rect, parent, player, descriptionPanel = None):
         Selecter.__init__(self, rect)
+        self.text = None
+        self.selected = None
+        self.drawBorder = False
         self.player = player
         self.parent = parent
         self.reset()
@@ -451,7 +458,7 @@ class ShipPanel(Selecter):
     def reset(self):
         s = self.player
         self.setSelected(None)
-        # self.player.reset()
+
         self.panels = []
         self.selectables = []
         if not s.parts:
@@ -469,10 +476,10 @@ class ShipPanel(Selecter):
                     sint = sin(part.dir)
                     dummy.offset = (part.offset[0] + port.offset[0] * cost 
                         - port.offset[1] * sint 
-                        - cos(dummy.dir) * (dummy.width - PART_OVERLAP) / 2, 
+                        - cos(dummy.dir) * (dummy.width - dummy.part_overlap) / 2, 
                         part.offset[1] + port.offset[0] * sint 
                         + port.offset[1] * cost 
-                        - sin(dummy.dir) * (dummy.width - PART_OVERLAP) / 2)
+                        - sin(dummy.dir) * (dummy.width - dummy.part_overlap) / 2)
                     #rotate takes a ccw angle.
                     dummy.image = colorShift(pygame.transform.rotate(
                             dummy.baseImage, -dummy.dir), dummy.color).convert_alpha()
@@ -492,11 +499,12 @@ class ShipPanel(Selecter):
         Panel.reset(self) 
         
 class PartDescriptionPanel(Panel):
-    drawBorder = False
+    
     """displays descriptions of parts."""
     
     def __init__(self, rect, selecter = None):
         Panel.__init__(self, rect)
+        self.drawBorder = False
         self.part = None
         self.text = None
         self.name = None
@@ -553,7 +561,7 @@ class PartDescriptionPanel(Panel):
         Panel.reset(self)
     
 class ShipPartPanel(DragableSelectable):
-    drawBorder = False
+    
     port = None
     part = None
     
@@ -565,6 +573,7 @@ class ShipPartPanel(DragableSelectable):
             part.offset[1] * 2 + parent.rect.height / 2 - height / 2, 
             width, height)
         DragableSelectable.__init__(self, rect, parent)
+        self.drawBorder = False
         self.ship = parent.player
         if not isinstance(part, Dummy):
             self.part = part
@@ -606,7 +615,7 @@ class ShipPartPanel(DragableSelectable):
         if not self.selected:
             self.select()
             self.parent.setSelected(self)
-        return (PartTile(self.part, Rect(0, 0, PartTile.width, PartTile.height),
+        return (PartTile(self.part, Rect(0, 0, 130, 50),
                 self), self)
 
     def drop(self, pos, dropped):
@@ -649,7 +658,7 @@ class ShipPartPanel(DragableSelectable):
         return self.checkParent(thisPart.parent, partToMatch)
 
 class MultyPartTile(DragableSelectable):
-    drawBorder = False
+    # drawBorder = False
     width = 130
     height = 50
     partImageOffset = 0,12
@@ -663,6 +672,7 @@ class MultyPartTile(DragableSelectable):
         """PartTile(part, rect) -> new PartTile.
         The menu interface for a part. Display it like a button!"""
         DragableSelectable.__init__(self, rect, parent)
+        self.drawBorder = False
         self.parts = parts
         self.part = parts[0]
         self.rect = Rect(rect)
@@ -676,7 +686,7 @@ class MultyPartTile(DragableSelectable):
         self.hotSpot = (self.partImageOffset[0] + self.part.width, 
                         self.partImageOffset[1] + self.part.height)
         # self.image.fill((0,0,0,0))
-        self.image.blit(bigImage, PartTile.partImageOffset)
+        self.image.blit(bigImage, self.partImageOffset)
         #add text labels:
         
         self.addPanel(Label(self.rect, self.part.name, font = SMALL_FONT))
@@ -711,29 +721,29 @@ class MultyPartTile(DragableSelectable):
 
 
 
-
-
 class PartTile(DragableSelectable):
-    drawBorder = False
-    width = 130
-    height = 50
-    partImageOffset = 0,12
-    drawBorderDragging = False
-    selectedColor = SELECTED_COLOR
-    bgInactive = None
-    bgActive = BGACTIVE
-    bgSelected = BGSELECTED
+    # drawBorder = False
+
     
     def __init__(self, part, rect, parent):
         """PartTile(part, rect) -> new PartTile.
         The menu interface for a part. Display it like a button!"""
         DragableSelectable.__init__(self, rect, parent)
+
+        self.partImageOffset = 0,12
+        self.drawBorderDragging = False
+        self.selectedColor = SELECTED_COLOR
+        self.bgInactive = None
+        self.bgActive = BGACTIVE
+        self.bgSelected = BGSELECTED
+
         self.part = part
+        self.drawBorder = False
         bigImage = pygame.transform.scale2x(self.part.image)
         bigImage.set_colorkey(SUPER_WHITE) # idk why this one's white.
         self.hotSpot = (self.partImageOffset[0] + self.part.width, 
                         self.partImageOffset[1] + self.part.height)
-        self.image.blit(bigImage, PartTile.partImageOffset)
+        self.image.blit(bigImage, self.partImageOffset)
         #add text labels:
         rect = Rect(rect)
         self.addPanel(Label(rect, part.name, font = SMALL_FONT))
@@ -758,13 +768,13 @@ class PartTile(DragableSelectable):
 
 
 class InventoryPanel(Selecter):
-    drawBorder = False
-    selected = None
-    
+   
     def __init__(self, rect, parent, partList):
         """InventoryPanel(rect, partList) -> a Selecter that resets to the 
         provided list of parts."""
         Selecter.__init__(self, rect, vertical = True)
+        self.selected = None
+        self.drawBorder = False
         self.partList = partList
         self.parent = parent
         self.ship = parent.player
@@ -778,9 +788,10 @@ class InventoryPanel(Selecter):
         self.selectables = []
         for parts in parttree:
             if len(parttree[parts]) == 1:
-                self.addSelectable(PartTile(parttree[parts][0], Rect(0,0,PartTile.width, PartTile.height), self))
+
+                self.addSelectable(PartTile(parttree[parts][0], Rect(0, 0, 130, 50), self))
             elif len(parttree[parts]) > 1:
-                self.addSelectable(MultyPartTile(parttree[parts], Rect(0,0,PartTile.width, PartTile.height), self))
+                self.addSelectable(MultyPartTile(parttree[parts], Rect(0, 0, 130, 50), self))
         Selecter.reset(self)
 
     def set_partlist(self, parts):
@@ -790,9 +801,9 @@ class InventoryPanel(Selecter):
         self.setSelected(None)
         for parts in parttree:
             if len(parttree[parts]) == 1:
-                self.addSelectable(PartTile(parttree[parts][0], Rect(0,0,PartTile.width, PartTile.height), self))
+                self.addSelectable(PartTile(parttree[parts][0], Rect(0, 0, 130, 50), self))
             elif len(parttree[parts]) > 1:
-                self.addSelectable(MultyPartTile(parttree[parts], Rect(0,0,PartTile.width, PartTile.height), self))
+                self.addSelectable(MultyPartTile(parttree[parts], Rect(0, 0, 130, 50), self))
         
 
     def drop(self, pos, dropped):
@@ -1057,7 +1068,6 @@ class NavigationTile(Panel):
         Panel.__init__(self, rect, corners)
         self.parent = parent 
         self.game  = game
-        
         rect1 = Rect(rect.x + 5, rect.y + 5, 200, rect.width - 10)
         rect2 =  Rect(rect.x + 5, rect.y + 30, rect.width - 10, rect.height)
         self.addPanel(FunctionLabel(rect1, self.systemname, FONT))
@@ -1071,7 +1081,6 @@ class NavigationTile(Panel):
     def planetnames(self):
         pass
  
-
     def systemname(self):
         if self.game.universe.curSystem:
             return self.game.universe.curSystem.name
@@ -1087,7 +1096,6 @@ class PlanetButtons(Panel):
         #give the button a function that is linked to the planet company menu interface ?
 
     def update(self):
-        
         if self.game.universe.curSystem in self.game.player.knownsystems:
             self.panels = []
             adder = 0
@@ -1108,9 +1116,10 @@ class PlanetButtons(Panel):
 
 class TimeTile(Panel):
     def __init__(self, rect, parent, game, corners=[5,0,5,0]):
-        self.parent = parent 
-        self.game  = game
         Panel.__init__(self, rect, corners)
+        self.parent = parent 
+        self.drawBorder = True
+        self.game  = game
         rect1 = Rect(rect.x + 5, rect.y + 5, 200, rect.width - 10)
         self.addPanel(TextBlock(rect1, self.gametime, SMALL_FONT, SHIP_PANEL_BLUE))
 
@@ -1135,11 +1144,11 @@ class PlanetTile(Panel):
 
 class SkillTile(Button):
     def __init__(self, rect, parent, skill, ship):
+        function = self.getSkill
+        Button.__init__(self, rect, function, None, FONT)
         self.skill = skill
         self.parent = parent 
         self.ship = ship
-        function = self.getSkill
-        Button.__init__(self, rect, function, None, FONT)
         rect1 = Rect(rect.x + 5, rect.y + 5, 20, rect.width - 10)
         rect2 = Rect(rect.x + 5, rect.y + 25, 20, rect.width - 10)
         rect3 = Rect(rect.x + 5, rect.y + 45, 200, rect.width - 10)

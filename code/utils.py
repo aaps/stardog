@@ -1,3 +1,5 @@
+#utils.py
+
 import random
 import math
 from pygame.locals import *
@@ -44,6 +46,36 @@ SUPER_WHITE = (255,255,255)
 
 
 hardwareFlag = pygame.HWSURFACE
+
+# setup fonts
+try:
+    pygame.font.init()
+    font_name = "hardfont.ttf"
+    font_dir = "res/fonts/"
+    font_path = font_dir+font_name
+    SMALL_FONT = pygame.font.Font((font_path), 14)
+    FONT = pygame.font.Font((font_path), 18)
+    BIG_FONT = pygame.font.Font((font_path), 24)
+    fontModule = True
+
+except:
+    FONT = None
+    BIG_FONT = None
+    SMALL_FONT = None
+    fontModule = False
+    print("Font module not found. Text will not be printed.")
+
+if pygame.image.get_extended():
+    ext = ".gif"
+else:
+    ext = ".bmp"
+
+sqrt = math.sqrt
+# random generators:
+r = random.Random()
+rand = r.random
+randint = r.randint
+randnorm = r.normalvariate
 
 
 #TODO: write fast sloppy trig functions. 
@@ -94,40 +126,14 @@ def not0(num):
         return num
     return .000001
 
-sqrt = math.sqrt
-# random generators:
-r = random.Random()
-rand = r.random
-randint = r.randint
-randnorm = r.normalvariate
+
 
 
 def randColor(min, max):
     return (randint(min[0], max[0]), randint(min[1], max[1]),
             randint(min[2], max[2]))
 
-# setup fonts
-try:
-    pygame.font.init()
-    font_name = "hardfont.ttf"
-    font_dir = "res/fonts/"
-    font_path = font_dir+font_name
-    SMALL_FONT = pygame.font.Font((font_path), 14)
-    FONT = pygame.font.Font((font_path), 18)
-    BIG_FONT = pygame.font.Font((font_path), 24)
-    fontModule = True
 
-except:
-    FONT = None
-    BIG_FONT = None
-    SMALL_FONT = None
-    fontModule = False
-    print("Font module not found. Text will not be printed.")
-
-if pygame.image.get_extended():
-    ext = ".gif"
-else:
-    ext = ".bmp"
 
 def randImageInDir(directory):
     
@@ -202,7 +208,9 @@ def linePointDist(linePoint1, linePoint2, point, infinite = False):
         
     return dist(closest[0], closest[1], point[0], point[1])
     
+
 def bulletColor(damage):
+    """generates a color based on how much energy it needs to express"""
     if damage >= 0 and damage <= 2:
         return (255, int(125*damage), int(125*damage), 125)
     if damage <= 10 and damage >= 2:
@@ -211,21 +219,24 @@ def bulletColor(damage):
         return (0,255,0, 125)
 
 def targetRect(surface, color, mincolor, pos, radius, spacing):
-
+    """A radar targeting rectangle drawing function"""
     pygame.draw.rect(surface, color, (pos[0]-radius-spacing,pos[1]-radius-spacing,radius*2+(spacing*2),radius*2+(spacing*2)), 1)
-    
     pygame.draw.rect(surface, mincolor, (pos[0]-radius-spacing,pos[1]-int(radius/2)-int(spacing/2),(radius*2)+(spacing*2),radius+spacing), 1)
     pygame.draw.rect(surface, mincolor, (pos[0]-int(radius/2)-int(spacing/2),pos[1]-radius-spacing,radius+spacing,(radius*2)+(spacing*2)), 1)
 
 def diamond(surface, color, pos, size):
+    """A function that will draw a diamond for gui radar ussage"""
     pygame.draw.polygon(surface, color,[(0+pos[0],0+pos[1]-(size*2)-2),(4*size+pos[0],4*size+pos[1]-(size*2)-2),(0+pos[0],8*size+pos[1]-(size*2)-2), (-4+pos[0],4*size+pos[1]-(size*2)-2)],1)
 
 def ddiamond(surface, color, pos, size):
+    """ A double diamon drawing function"""
     pygame.draw.polygon(surface, color,[(0+pos[0],0+pos[1]-(size*2)-2),(4*size+pos[0],4*size+pos[1]-(size*2)-2),(0+pos[0],8*size+pos[1]-(size*2)-2), (-4+pos[0],4*size+pos[1]-(size*2)-2)],1)
     pygame.draw.polygon(surface, color,[(0+pos[0],0+pos[1]-(size*2)),(2*size+pos[0],2*size+pos[1]-(size*2)),(0+pos[0],4*size+pos[1]-(size*2)), (-2+pos[0],2*size+pos[1]-(size*2))])
 
 
+
 def diamondRect(surface, color, rect, corners=[]):
+    """A rectangle with shaved off corners drawing function"""
     relrect = (0,0,rect[2],rect[3])
     image = pygame.Surface((rect[2],rect[3])).convert()
     image.fill((0, 0, 0))
@@ -254,18 +265,16 @@ def diamondRect(surface, color, rect, corners=[]):
 
 
 def makeKMdistance(floaterx, floatery):
+    """Convert game pix distance edge to edge into KM's, ships several KM's big, meh"""
     return str(max(round((floaterx.pos.get_distance(floatery.pos)-floaterx.radius-floatery.radius)/10,1),0))
 
 
 def makeKMs(floater):
+    """The soon to be famous pix to km calculator"""
     return str(round(floater.delta.get_length()/10,1))
 
-def find_nearest(array, value):
-    n = [abs(i-value) for i in array]
-    idx = n.index(min(n))
-    return array[idx]
-
 def saveScreenShot(mypath, screen):
+    """It will save a screenshot in a path of choice, also incremental numbers"""
     number = 0
     onlyfiles = [ f for f in listdir(mypath) if isfile(join(mypath,f)) ]
     for filename in onlyfiles:
@@ -273,7 +282,5 @@ def saveScreenShot(mypath, screen):
 
         if len(temp) > 0 and int(temp[-1]) > number:
             number = int(temp[-1])
-
     number+=1
-
     pygame.image.save(screen, "Screen-shots/screenshot" + str(number) + ".jpeg")

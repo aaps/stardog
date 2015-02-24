@@ -2,19 +2,14 @@
 
 from utils import *
 from pygame.locals import *
-# import stardog
 from vec2d import Vec2d
 import math
 from particles import *
 from SoundSystem import *
 import random
 
+
 FPS = 200
-
-
-# BULLET_IMAGE = loadImage("res/ammo/shot.png")
-# MISSILE_IMAGE = loadImage("res/ammo/missile.png")
-# DEFAULT_IMAGE = loadImage("res/parts/default.png")
 
 
 class Ballistic(object):
@@ -42,12 +37,16 @@ class Floater(pygame.sprite.Sprite, Ballistic):
         self.id = 0
         self.dir = dir
         self.pos = pos
-        self.send = 2
+
+        self.surespawn = True
+        self.spawncost = 1
+
         self.delta = delta
         self.emitters = []
         self.color = FLOATER
         self.hp = 1
-        self.spawncost = 1
+
+
         self.mass = 1
         self.tangible = True
         self.lastDamageFrom = None
@@ -60,6 +59,13 @@ class Floater(pygame.sprite.Sprite, Ballistic):
         self.soundsys = self.universe.game.soundSystem
         self.crashSound = 'se_sdest.wav'
         self.soundsys.register(self.crashSound)
+
+    def distanceVolumeAdjust(floater1, floater2, system):
+        """
+        a handling function that determines the distance and returns
+        a scale based on that.
+        """
+        return(1.0)
 
     def update(self):
         """updates this floater based on its variables"""
@@ -134,9 +140,6 @@ class ServerPlanetDisk(Floater):
 class Bullet(Floater):
     def __init__(self, universe, gun, damage, speed, range, image=None):
         dir = gun.dir + gun.ship.dir
-        # cost is short for cos(theta)
-        # cost = cos(dir)
-        # sint = sin(dir)
         pos = (gun.pos + Vec2d(gun.shootPoint).rotated(dir) +
                gun.ship.delta / universe.game.fps)
         # not needed for the offset, but needed for the dir.
@@ -324,8 +327,6 @@ class Explosion(Floater):
 
 
 class Impact(Floater):
-    life = 0
-    mass = 0
 
     def __init__(self, universe, pos, delta, radius=5,
                  time=1):
@@ -334,6 +335,8 @@ class Impact(Floater):
         image.set_colorkey(BLACK)
         Floater.__init__(self, universe, pos, delta, radius=0,
                          image=image)
+        self.life = 0
+        self.mass = 0
         self.maxRadius = int(radius)
         self.radius = 0
         self.tangible = False
@@ -461,12 +464,13 @@ class LaserBeam(Floater):
 
 
 class RadarDisk(Floater):
-    baseImage = None
-    color = (0, 0, 0)
-    mass = 0
-    tangible = False
+
 
     def __init__(self, universe, pos, delta, dir=0, radius=10, image=None):
+        self.baseImage = None
+        self.color = (0, 0, 0)
+        self.mass = 0
+        self.tangible = False
         self.dir = dir
         self.pos = pos
         self.delta = delta

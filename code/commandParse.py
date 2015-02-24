@@ -1,3 +1,5 @@
+# commandParse.py
+
 from types import *
 from spaceship import *
 from parts import *
@@ -27,10 +29,6 @@ class bcolors:
     FAIL = '\033[91m'
     ENDC = '\033[0m'
     WHITE = '\033'
-
-# RED = (255,0,0)
-# GREEN = (0,255,0)
-# BLUE = (0,0,255)
 
 
 class AttrFilter(object):

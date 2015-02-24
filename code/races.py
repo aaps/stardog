@@ -1,6 +1,5 @@
 #races.py
 
-
 class Race(object):
 	planets = []
 	parts = []

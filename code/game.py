@@ -1,16 +1,17 @@
-
+#game.py
+#
 from menus import *
 from scripts import *
-from starSystem import *
+# from starSystem import *
 from gui import *
-from planet import *
-from spaceship import *
-from strafebat import *
+# from planet import *
+# from spaceship import *
+# from strafebat import *
 from dialogs import *
 from camera import *
 from universe import *
-from vec2d import Vec2d
-import plot
+# from vec2d import Vec2d
+from plot import *
 import datetime
 
 from client import *
@@ -107,6 +108,9 @@ class Game(object):
         # does the universe have a player present in it?
         self.hasPlayer = None
 
+    def quit(self):
+        pygame.quit()
+
     def run(self):
         """Runs the game."""
         
@@ -122,8 +126,8 @@ class Game(object):
                 pygame.event.pump()
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
-                        pygame.quit()
-                        sys.exit(0)
+                        self.running = False
+                        break
                     intro.handleEvent(event)
                 intro.update()
                 self.screen.fill((0, 0, 0, 0))
@@ -133,6 +137,10 @@ class Game(object):
                 self.clock.tick(FPS)
                 self.fps = max(1, int(self.clock.get_fps()))
                 self.timer += 1. / self.fps
+            # handle if running is false
+            if not self.running:
+                break
+
             # setup initial state:
             self.playerScript = InputScript(self)
             self.menuScript = Script(self)
@@ -167,7 +175,9 @@ class Game(object):
             for x in range(10):
                 self.clock.tick()
 
-            self.triggers = plot.newGameTriggers(self.universe)
+
+            self.triggers = Triggers(self)
+            self.storytriggers = self.triggers.StoryTriggers(self.universe)
 
             # create a parser that parses chatconsole input
             # for command and such.
@@ -176,7 +186,9 @@ class Game(object):
             # check once wether the universe still has a player.
             self.hasPlayer = self.universe.curSystem.floaters.has(self.player)
             # The in-round loop (while player is alive):
+
             self.client.connect()
+
             while self.running and self.hasPlayer:
                 # check wether the universe still has a player.
                 self.hasPlayer = self.universe.curSystem.floaters.has(self.player)
@@ -185,8 +197,7 @@ class Game(object):
                 pygame.event.pump()
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
-                        pygame.quit()
-                        sys.exit(0)
+                        self.running = False
                     # if not self.pause and not self.console:
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         self.mouse[event.button] = 1
@@ -219,9 +230,6 @@ class Game(object):
                     saveScreenShot("Screen-shots", self.screen)
 
                 self.debug = False
-                # if self.keys[K_BACKSPACE % 322]:
-                #     self.keys[K_BACKSPACE % 322] = False
-                # ctrl+q or alt+F4 quit:
                 L_ALT_F4 = (self.keys[K_LALT % 322] and self.keys[K_F4 % 322])
                 R_ALT_F4 = (self.keys[K_RALT % 322] and self.keys[K_F4 % 322])
                 L_CTRL_Q = (self.keys[K_LCTRL % 322] and self.keys[K_q % 322])
@@ -230,8 +238,8 @@ class Game(object):
                     self.running = False
 
 
-                for trigger in self.triggers:
-                    trigger.update()
+                for strigger in self.storytriggers:
+                    strigger.update()
 
                 self.universe.update()
                 self.universe.draw(self.screen)

@@ -1,25 +1,24 @@
 #!/usr/bin/python
-
 import pygame
-
 from pygame.locals import *
 import sys
-try:
-  from updater import *
-except:
-  from utils.updater import *
+from updater import *
+import code.game
 
 
-FULL = False; RESOLUTION = 1024, 768 #test
+# testint
+FULL, RESOLUTION = False, (1024, 768)
 # FULL = True; RESOLUTION = None
 # FULL = True; RESOLUTION = None #play
-hardwareFlag = pygame.HWSURFACE|pygame.DOUBLEBUF
+hardwareFlag = (pygame.HWSURFACE | pygame.DOUBLEBUF)
+
 
 
 
 if __name__=="__main__":
     #command line resolution selection:
     run = 'client'
+
     if len(sys.argv) > 1:
         print sys.argv
         try:
@@ -43,6 +42,7 @@ if __name__=="__main__":
 
         except Exception, err:
             print err
+
             print("bad command line arguments.")
     #set up the disply:
     pygame.init()
@@ -76,9 +76,6 @@ if __name__=="__main__":
     datatuple, masktuple = pygame.cursors.compile( thickarrow_strings,
                                       black='X', white='.', xor='o' )
     pygame.mouse.set_cursor( (16,16), (0,0), datatuple, masktuple )
-
-
-
 
 if __name__ == '__main__':
 

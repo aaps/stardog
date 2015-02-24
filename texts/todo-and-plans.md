@@ -2,9 +2,9 @@ BEFORE WE CONTINU THIS NEEDS TO BE DONE
 ========================================
 1 write documentation for all functions and classes
 2 write tests for parts and floaters
-3 put txt files in a seperate dir
-4 remove all global class vrariables (there is a propper name for this)
-5 make sure code doesnt run on imports
+3 put txt files in a seperate dir [done]
+4 remove all global class vrariables (there is a propper name for this) [done]
+5 make sure code doesnt run on imports [done, utils can stay the way it is]
 
 
 
@@ -28,8 +28,6 @@ main dish
 # starsystem (done)
 # camera should be part of universe [done]
 
-# make a updater class or something that is able to say how importaint it is to update something,.
-perhaps it can also try and keep the framerate more constant.
 
 * multyplayer [hard mode, dependant on code structure] !!
 http://pygame.org/project-planes-2392-405.html get version 0.6
@@ -51,7 +49,6 @@ side dish
 * InputField had drawing dtuff in update put it in draw
 * jump portals different colors to show in what system you have transported to (the wormhole thingy)
 * make the color shifter abele to shift from other color than magic pink
-
 * part attach blocker doesnt give feedback, should say something like parts overlap so no place
 * make the color shifter able to shift from other color than magic pink [done]
 * make the planet textures into more maghic colors and shift them from planet primairy color and secondary color

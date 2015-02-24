@@ -4,9 +4,7 @@ from utils import *
 from parts import *
 from partCatalog import *
 from floaters import *
-
 from pygame.locals import *
-import stardog
 from adjectives import addAdjective
 from skills import *
 from particles import *
@@ -44,32 +42,26 @@ def makeFreighter(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy",
         ship = Ship(game.universe, pas, delta, dir=dir, color=color, name=name, partlimit=partlim)
 
     cockpit = Destroyer(game.universe)
-
     battery = Battery(game.universe)
     generator = Generator(game.universe)
-
     engine_left = Engine(game.universe)
     engine_right = Engine(game.universe)
-
     interc_left = Interconnect(game.universe)
     interc_right = Interconnect(game.universe)
-
     gyro_left = Gyro(game.universe)
     gyro_right = Gyro(game.universe)
-
     gun_left = LeftFlakCannon(game.universe)
     gun_right = RightFlakCannon(game.universe)
-
     ship.addPart(cockpit)
 
-    chold1 = GargoHold(game.universe)
-    chold2 = GargoHold(game.universe)
-    chold3 = GargoHold(game.universe)
-    chold4 = GargoHold(game.universe)
-    chold5 = GargoHold(game.universe)
-    chold6 = GargoHold(game.universe)
-    chold7 = GargoHold(game.universe)
-    chold8 = GargoHold(game.universe)
+    chold1 = CargoHold(game.universe)
+    chold2 = CargoHold(game.universe)
+    chold3 = CargoHold(game.universe)
+    chold4 = CargoHold(game.universe)
+    chold5 = CargoHold(game.universe)
+    chold6 = CargoHold(game.universe)
+    chold7 = CargoHold(game.universe)
+    chold8 = CargoHold(game.universe)
 
     #put a Gyro on either back-sides of the cockpit 
     cockpit.addPart(gyro_left, 3)
@@ -116,7 +108,7 @@ def makeDestroyer(game, pos, delta, dir = 270, color = (255, 255, 255),name=("Sh
     cockpit = Destroyer(game.universe)
     gun = RightLaser(game.universe)
     engine = Engine(game.universe)
-    shield = Shield(game.universe)
+    shield = BigShield(game.universe)
     for part in [gyro, generator, battery, cockpit, gun, engine, shield]:
         if rand() > .8:
             addAdjective(part)
@@ -204,11 +196,8 @@ def makeJuggernaut(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy"
     cockpit.addPart(generator, 4)
     cockpit.addPart(gyro, 5)
     cockpit.addPart(shield, 0)
-    
     generator.addPart(battery, 0)
-    
     battery.addPart(engine, 0)
-    
     gyro.addPart(engine2, 1)
     
     ship.reset()
@@ -333,7 +322,8 @@ class Ship(Floater, Controllable):
         Controllable.__init__(self, game)
 
         self.universe = game.universe
-
+        self.spawncost = 30
+        self.surespawn = True
         self.inventory = []
         self.firstname = name[0]
         self.secondname = name[1]
@@ -344,11 +334,8 @@ class Ship(Floater, Controllable):
         self.color = color
         self.part = None
         self.partLimit = partlim
-
         self.knownsystems = dict()
         self.__dict__.update(self.baseBonuses)
-
-
         self.baseImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
         # self.baseImage.set_colorkey(BLACK)
         self.greyImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
@@ -705,13 +692,13 @@ class Ship(Floater, Controllable):
         planetangle = (self.pos - planet.pos).get_angle()
 
         speed = (self.delta-planet.delta).get_length()
-        if speed > planet.LANDING_SPEED:
+        if speed > planet.landing_speed:
             if planet.damage.has_key(self):
                 damage = planet.damage[self]
             else:
                 self.soundsys.play(self.crashSound)
                 #set damage based on incoming speed and mass.
-                damage = speed * self.mass * planet.PLANET_DAMAGE
+                damage = speed * self.mass * planet.planet_damage
             for part in self.parts:
                 if collisionTest(planet, part):
                     temp = part.hp
@@ -749,13 +736,12 @@ class Ship(Floater, Controllable):
 
 
 class Player(Ship):
-    xp = 0
-    developmentPoints = 12
-    
-    
+
     def __init__(self, game, pos, delta, dir = 270, color = (255, 255, 255), name = ("Shippy","mcShipperson"), partlimit=8):
         Ship.__init__(self, game, pos, delta, dir, color, name, partlimit)
         self.skills = [Modularity(self), Agility(self), Composure(self)]
+        self.xp = 0
+        self.developmentPoints = 12
 
     def xpQuest(self, xp):
         self.xp += xp
