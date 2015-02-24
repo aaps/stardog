@@ -63,6 +63,7 @@
 # 		"""Blits this floater onto the surface. """
 # 		pos = floater.x - floater.rect.width  / 2 - offset[0], floater.y - floater.rect.height / 2 - offset[1]
 		
+<<<<<<< Updated upstream
 # 		if hasattr(floater, 'parts') and len(floater.parts) > 0:
 # 			for part in floater.parts:
 # 				self.partDraw(part,floater, offset)
@@ -103,4 +104,5 @@
 
 # 	def planetDraw(self):
 # 		pass
+
 
