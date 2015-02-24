@@ -20,7 +20,8 @@ class Planet(Floater):
         self.maxRadius = 1000000 # no gravity felt past this (approximation).
         self.planet_damage = .0004
         self.landing_speed = 200 #pixels per second. Under this, no damage.
-
+        self.spawncost = 5
+        self.surespawn = True
         self.companys = []
         self.mass = mass #determines gravity.
         self.color = color

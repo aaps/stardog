@@ -22,8 +22,8 @@ class StarSystem(object):
         self.universe = universe
         self.floaters = pygame.sprite.Group()
         self.spawnScore = 0
-		self.spawnMax = 50
-		self.toSpawn = []
+        self.spawnMax = 50
+        self.toSpawn = []
         self.player = None
         self.ships = pygame.sprite.Group()
         self.specialOperations = []
@@ -52,24 +52,21 @@ class StarSystem(object):
         """Runs the game."""
 
         for spawn in self.toSpawn:
-			if (self.spawnScore + spawn.spawncost) < self.spawnMax:
-	
-				if not any(x.id == spawn.id or spawn.id == 0 for x in self.floaters):
-					self.spawnScore += spawn.spawncost
-					spawn.starSystem = self
-					self.floaters.add(spawn)
-					self.toSpawn.remove(spawn)
-				else:
-					spawn.id = random.randint(1,1000)
+            # spawn.spawntimeout -= 1.0 / self.universe.game.fps
+            if (self.spawnScore + spawn.spawncost) < self.spawnMax:
+                
+                spawn.id = random.randint(1,1000)
+                if not any(x.id == spawn.id for x in self.floaters):
+                    self.spawnScore += spawn.spawncost
+                    spawn.starSystem = self
+                    self.floaters.add(spawn)
+                    self.toSpawn.remove(spawn)
+            elif not spawn.surespawn:
+                self.toSpawn.remove(spawn)
 
-		if self.spawnScore > 0:
-			self.spawnScore -= 1
-
-		for floater in self.floaters:
-
-			floater.setFPS(self.universe.game.fps)
-			floater.update()
-
+        
+        if self.spawnScore > 0:
+            self.spawnScore -= 1
 
         for floater in self.floaters:
 
@@ -124,22 +121,23 @@ class StarSystem(object):
                         ship.planet = planet
         
         
-	def add(self, floater):
-		"""adds a floater to this game."""
-		if isinstance(floater, Player):
-			self.floaters.add(floater)
-			
-			if self.universe.curSystem == self:
-				init = False
-				while self.minDistFromOthers(floater) < 3000 or init == False:
-					init = True
-					angle = randint(0,360)
-					distanceFromStar = randint(8000, 18000)
-					self.universe.player.pos = self.star.pos.rotatedd(angle, distanceFromStar)
-			self.player = floater
-		else:
-			self.toSpawn.append(floater)
-			self.toSpawn = sorted(self.toSpawn, key=lambda spawn: spawn.spawncost)
+    def add(self, floater):
+        
+        """adds a floater to this game."""
+        if isinstance(floater, Player):
+            self.floaters.add(floater)
+            
+            if self.universe.curSystem == self:
+                init = False
+                while self.minDistFromOthers(floater) < 3000 or init == False:
+                    init = True
+                    angle = randint(0,360)
+                    distanceFromStar = randint(8000, 18000)
+                    self.universe.player.pos = self.star.pos.rotatedd(angle, distanceFromStar)
+            self.player = floater
+        else:
+            self.toSpawn.append(floater)
+            # self.toSpawn = sorted(self.toSpawn, key=lambda spawn: spawn.spawncost)
         
     def empty(self):
         self.ships.empty()

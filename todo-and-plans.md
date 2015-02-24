@@ -28,6 +28,8 @@ main dish
 # starsystem (done)
 # camera should be part of universe [done]
 
+# make a updater class or something that is able to say how importaint it is to update something,.
+perhaps it can also try and keep the framerate more constant.
 
 * multyplayer [hard mode, dependant on code structure] !!
 http://pygame.org/project-planes-2392-405.html get version 0.6

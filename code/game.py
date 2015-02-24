@@ -173,11 +173,13 @@ class Game(object):
             self.commandParse = CommandParse(self, self.chatconsole,
                                              self.messenger)
             # check once wether the universe still has a player.
-            self.hasPlayer = self.universe.curSystem.ships.has(self.player)
+            self.hasPlayer = self.universe.curSystem.floaters.has(self.player)
             # The in-round loop (while player is alive):
+            # print self.hasPlayer, self.running
+
             while self.running and self.hasPlayer:
                 # check wether the universe still has a player.
-                self.hasPlayer = self.universe.curSystem.ships.has(self.player)
+                self.hasPlayer = self.universe.curSystem.floaters.has(self.player)
                 # event polling:
                 pygame.event.pump()
                 for event in pygame.event.get():

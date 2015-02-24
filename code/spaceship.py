@@ -320,7 +320,8 @@ class Ship(Floater, Controllable):
         Controllable.__init__(self, game)
 
         self.universe = game.universe
-
+        self.spawncost = 30
+        self.surespawn = True
         self.inventory = []
         self.firstname = name[0]
         self.secondname = name[1]
@@ -330,11 +331,8 @@ class Ship(Floater, Controllable):
         self.color = color
         self.part = None
         self.partLimit = partlim
-
         self.knownsystems = dict()
         self.__dict__.update(self.baseBonuses)
-
-
         self.baseImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
         # self.baseImage.set_colorkey(BLACK)
         self.greyImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()

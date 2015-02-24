@@ -31,10 +31,14 @@ class Floater(pygame.sprite.Sprite, Ballistic):
         self.universe = universe
         self.dir = dir
         self.pos = pos
+        # self.spawntimeout = 2
+        self.surespawn = True
+        self.spawncost = 1
         self.delta = delta
         self.emitters = []
         self.color = FLOATER
         self.hp = 1
+        self.id = 0
         self.mass = 1
         self.tangible = True
         self.lastDamageFrom = None

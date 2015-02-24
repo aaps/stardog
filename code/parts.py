@@ -416,7 +416,7 @@ class Cargo(Floater):
         ship is destroyed."""
         self.pickuptimeout = 5
         angle = randint(0,360)
-        offset = Vec2d(cos(angle) * detach_space, sin(angle) * detach_space)
+        offset = Vec2d(cos(angle) * self.detach_space, sin(angle) * self.detach_space)
         #set physics to drift away from ship (not collide):
         self.image = colorShift(pygame.transform.rotate(self.baseImage, angle), self.color).convert_alpha()
         # self.image.set_colorkey(BLACK)
