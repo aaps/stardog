@@ -358,8 +358,8 @@ class SolarEmpty(StarSystem):
 			planetimage = loadImage(imagename)
 			planet = Planet(self, startpos, startdelta ,self.g,radius = radius, mass = mass, color = color, image = planetimage)
 			
-			mindistance = self.minDistFromOthers(planet)
-			if mindistance > (radius * 6):
+			# mindistance = self.minDistFromOthers(planet)
+			if 1000 > (radius * 6):
 				self.planets.append(planet)
 			else:
 				i-=1

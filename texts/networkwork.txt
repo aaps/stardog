@@ -1,0 +1,8 @@
+replace all the main games files with the master branch, and only keep the original:
+messages.py
+client.py
+server.py
+gameserver.py
+
+also the lines from game.py  and stardog.py that will generate server cleint argitecture
+perhaps make a seperate map for the server client files ?
