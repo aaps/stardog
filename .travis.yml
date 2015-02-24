@@ -1,7 +1,9 @@
 language: python
+
 python:
-  - "2.6"
   - "2.7"
+
+cache: apt
 
 install: "pip install -r requirements.txt --use-mirrors"
 
@@ -9,7 +11,9 @@ install: "pip install -r requirements.txt --use-mirrors"
 before_install:
   - sudo apt-get update
   - sudo apt-get install python-pygame
+
 script:
   - python testdog.py
+
 virtualenv:
   system_site_packages: true

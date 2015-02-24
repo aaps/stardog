@@ -24,6 +24,10 @@ q/e: strafe
 ctrl: shoot
 space: launch missiles
 Mouse: move to turn, left click to shoot, right click to thrust
+r: Toggle Radar
+t/y: target ships
+g/h: target planets
+b/n: target parts
 
 Keys can be changed in the menu. If you want to use the keyboard, you should probably disable mouse control in the keys menu (otherwise your ship will keep turning towards the mouse).
 
