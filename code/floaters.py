@@ -32,7 +32,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
         self.dir = dir
         self.pos = pos
         # self.spawntimeout = 2
-        self.surespawn = True
+        self.surespawn = False
         self.spawncost = 1
         self.delta = delta
         self.emitters = []

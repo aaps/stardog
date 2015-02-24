@@ -4,6 +4,7 @@ from utils import *
 from floaters import Floater
 from adjectives import randItem, randCargo
 from parts import *
+from cargo import *
 from Resources import *
 from spaceship import *
 import stardog

@@ -92,6 +92,10 @@ def angleNorm(angle):
     """returns an equivilant angle between -180 and 180."""
     return (angle + 180) % 360 - 180
 
+def angleNormPlus(angle):
+    """returns an equivilant angle between -180 and 180."""
+    return ((angle + 180) % 360 - 180) + 180
+
 def rotate(x, y, angle):
     """rotation transformation for a point."""
     cost = cos(angle) #cost is short for cos(theta)

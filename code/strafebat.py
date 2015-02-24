@@ -3,6 +3,7 @@
 from utils import *
 from spaceship import *
 from parts import *
+from cargo import *
 from scripts import *
 import stardog
 from adjectives import *

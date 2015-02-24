@@ -40,7 +40,7 @@ def getGitVersion(tag_url="https://api.github.com/repos/aaps/stardog/tags"):
     tag_json = json.loads(tag_text)[0]
     return str(tag_json[u'name'])
 
-def getCredits(tag_url="https://raw.githubusercontent.com/aaps/stardog/master/Credits.txt"):
+def getCredits(tag_url="https://raw.githubusercontent.com/aaps/stardog/master/texts/Credits.txt"):
     """ returns a string that is the latest version reported on git tags."""
     import urllib2
     # import json
@@ -77,7 +77,7 @@ def checkVersion():
 if __name__ == "__main__":
     # files that are to be ignored.
     filterfiles = ['.gitignore', 'installer-utils', '.git', 'todo-and-plans.md',
-                   'ingredients_and_materials.txt', 'economic-simulation.txt']
+                   'ingredients_and_materials.txt', 'economic-simulation.txt','texts']
     print("Get zip link and downloading.")
     # open a request for the data on this url
     tag_url = "https://api.github.com/repos/aaps/stardog/tags"

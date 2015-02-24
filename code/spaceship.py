@@ -2,6 +2,7 @@
     
 from utils import *
 from parts import *
+from cargo import *
 from partCatalog import *
 from floaters import *
 from pygame.locals import *
@@ -320,7 +321,7 @@ class Ship(Floater, Controllable):
         Controllable.__init__(self, game)
 
         self.universe = game.universe
-        self.spawncost = 30
+        self.spawncost = 40
         self.surespawn = True
         self.inventory = []
         self.firstname = name[0]
@@ -445,16 +446,16 @@ class Ship(Floater, Controllable):
         if part:
             self.parts.append(part)
             if isinstance(part, Engine):
-                if part.dir == 180:
+                if part.dir == 180 or  part.dir == -180:
                     self.reverseEngines.append(part)
                     self.reverseThrust += part.exspeed * part.exmass
                 if part.dir == 0 or part.dir == 360:
                     self.forwardEngines.append(part)
                     self.forwardThrust += part.exspeed * part.exmass
-                if part.dir == 90:
+                if part.dir == 90 or part.dir == -270:
                     self.rightEngines.append(part)
                     self.rightThrust += part.exspeed * part.exmass
-                if part.dir == 270:
+                if part.dir == 270 or part.dir == -90:
                     self.leftEngines.append(part)
                     self.leftThrust += part.exspeed * part.exmass
             if isinstance(part, Gyro):

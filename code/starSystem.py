@@ -52,17 +52,16 @@ class StarSystem(object):
         """Runs the game."""
 
         for spawn in self.toSpawn:
-            # spawn.spawntimeout -= 1.0 / self.universe.game.fps
-            if (self.spawnScore + spawn.spawncost) < self.spawnMax:
+            if (self.spawnScore + spawn.spawncost) < self.spawnMax and spawn.surespawn:  
                 
                 spawn.id = random.randint(1,1000)
                 if not any(x.id == spawn.id for x in self.floaters):
+                    # print spawn, "Ok"
                     self.spawnScore += spawn.spawncost
                     spawn.starSystem = self
                     self.floaters.add(spawn)
+                else:
                     self.toSpawn.remove(spawn)
-            elif not spawn.surespawn:
-                self.toSpawn.remove(spawn)
 
         
         if self.spawnScore > 0:
@@ -137,7 +136,18 @@ class StarSystem(object):
             self.player = floater
         else:
             self.toSpawn.append(floater)
-            # self.toSpawn = sorted(self.toSpawn, key=lambda spawn: spawn.spawncost)
+
+            if (self.spawnScore + floater.spawncost) < self.spawnMax:
+                
+                floater.id = random.randint(1,1000)
+                if not any(x.id == floater.id for x in self.floaters):
+                    self.spawnScore += floater.spawncost
+                    floater.starSystem = self
+                    self.floaters.add(floater)
+                    self.toSpawn.remove(floater)
+            elif not floater.surespawn:
+                self.toSpawn.remove(floater)
+            
         
     def empty(self):
         self.ships.empty()

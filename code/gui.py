@@ -5,6 +5,7 @@ from utils import *
 from spaceship import Ship
 from planet import Planet
 from parts import *
+from cargo import *
 from vec2d import *
 from collections import deque
 import pygame
