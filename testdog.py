@@ -52,11 +52,11 @@ class TestMenuElements(unittest.TestCase):
         self.inputfield.update()
         self.assertTrue(self.inputfield.cursortimeout == 0)
 
-# class TestMenuElements(unittest.TestCase):
+class TestParts(unittest.TestCase):
 
-#     def setUp(self):
-#         cockpit = Interceptor(self)
-#         engine = Engine(self)
+    def setUp(self):
+        cockpit = Interceptor(self)
+        engine = Engine(self)
 
 
 if __name__ == '__main__':

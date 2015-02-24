@@ -7,8 +7,6 @@ BEFORE WE CONTINU THIS NEEDS TO BE DONE
 5 make sure code doesnt run on imports
 
 
-
-
 main dish
 ==========
 
