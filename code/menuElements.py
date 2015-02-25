@@ -110,7 +110,6 @@ class Panel(object):
             pygame.draw.rect(surface, self.bgColor, rect, 0)
         
         if self.image:
-            # surface.blit(self.image, (rect.left, rect.top), (0, 0, rect.width, rect.height))
             surface.blit(self.image, (self.rect.left+self.lineoutspace, self.rect.top), (0, 0, self.rect.width, self.rect.height))
 
         for panel in self.panels:
