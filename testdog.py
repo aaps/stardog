@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import os
 
 import unittest
 import pygame
@@ -6,6 +7,8 @@ from code.utils import *
 from code.menuElements import *
 from code.particles import *
 from code.SoundSystem import *
+
+os.environ["SDL_AUDIODRIVER"] = "dummy"
 
 class TestMenuElements(unittest.TestCase):
 
