@@ -9,7 +9,6 @@ import copy
 from particles import *
 import sys
 
-
 class Port(object):
     def __init__(self, offset, dir, parent):
         self.offset = offset
@@ -27,7 +26,6 @@ class Part(Floater):
     # height, width = 9, 3
     
     acted = False
-
 
     def __init__(self, universe):
         self.buffer = pygame.Surface((30,30), flags = hardwareFlag | SRCALPHA).convert_alpha()
