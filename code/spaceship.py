@@ -742,6 +742,14 @@ class Ship(Floater, Controllable):
                 #use a state machine ?
                 self.universe.game.menu.parts.inventoryPanel.reset() #TODO: make not suck
 
+    # def partsAsJSON(self):
+
+
+    #     for port in self.ports:
+    #         if port.part:
+    #             port.part.update()
+    #     part.getJson()
+
 
 class Player(Ship):
 

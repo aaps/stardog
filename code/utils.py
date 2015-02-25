@@ -288,3 +288,7 @@ def saveScreenShot(mypath, screen):
             number = int(temp[-1])
     number+=1
     pygame.image.save(screen, "Screen-shots/screenshot" + str(number) + ".jpeg")
+
+
+def toHEX(color):
+    return ''.join(map(chr, color)).encode('hex')

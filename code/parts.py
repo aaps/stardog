@@ -364,6 +364,9 @@ class Part(Floater):
         if self.hp <= 0:
             self.sendkill = 1
 
+    def getJson(self):
+        return toHEX(self.color) + self.name
+
 
 
 class Dummy(Part):

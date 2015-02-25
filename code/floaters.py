@@ -170,6 +170,7 @@ class Bullet(Floater):
         self.life += 1. / self.fps
         if self.life > self.range and self.sendkill == 0:
             self.sendkill = 1
+            # self.detonate()
             self.soundsys.play(self.bulletSound)
         Floater.update(self)
         
@@ -180,8 +181,8 @@ class Bullet(Floater):
             delta = (self.lastDamageFrom.delta + self.delta) / 2
         else:
             delta = self.delta
-        # impact = Impact(self.universe, self.pos, delta, 20, 14)
-        # self.universe.curSystem.add(impact)
+        impact = Impact(self.universe, self.pos, delta, 20, 14)
+        self.universe.curSystem.add(impact)
 
     # def kill(self):
         # self.soundsys.play(self.bulletSound)
