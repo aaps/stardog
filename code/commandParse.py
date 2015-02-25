@@ -3,6 +3,7 @@
 from types import *
 from spaceship import *
 from parts import *
+from cargo import *
 from vec2d import Vec2d
 from SoundSystem import *
 import sys

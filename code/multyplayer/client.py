@@ -1,8 +1,8 @@
 import legume
 import messages
 import time
-from vec2d import Vec2d
-from floaters import *
+from code.vec2d import Vec2d
+from code.floaters import *
 
 class GameClient(object):
 	def __init__(self, universe):

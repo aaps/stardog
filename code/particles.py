@@ -24,7 +24,6 @@ class Particle(object):
 		self.size = 0
 		self.fps = 10
 		
-
 	def draw(self, surface, offset=Vec2d(0,0)):
 		self.image.fill((0,0,0,0))
 

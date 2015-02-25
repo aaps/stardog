@@ -7,8 +7,6 @@ BEFORE WE CONTINU THIS NEEDS TO BE DONE
 5 make sure code doesnt run on imports
 
 
-
-
 main dish
 ==========
 
@@ -48,6 +46,8 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ============
 
+* makde the spawn rate better, make sure that a spawn will be regulated bofore a object gets spawned
+put all propertys in a list and spawn it when there is time.
 * InputField had drawing dtuff in update put it in draw
 * jump portals different colors to show in what system you have transported to (the wormhole thingy)
 * make the color shifter abele to shift from other color than magic pink

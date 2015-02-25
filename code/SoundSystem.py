@@ -25,7 +25,7 @@ class DummyMusicSystem(object):
     a dummy class that has all the functions the Music Class uses.
     for example to disable the Music system on a server or such.
     """
-    def __init__(self, universe, musicdir, quality=44100):
+    def __init__(self, musicdir, quality=44100):
         pass
 
     def getMusicFiles(self):
@@ -64,8 +64,7 @@ class DummySoundSystem(object):
     def getVolume(self):
         return(1.0)
 
-
-    def play(self, sound, loops=0):
+    def play(self, sound, scale_f, loops):
         pass
 
 

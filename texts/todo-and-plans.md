@@ -45,7 +45,7 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
-
+* remake the lineout functionality
 * InputField had drawing dtuff in update put it in draw
 * jump portals different colors to show in what system you have transported to (the wormhole thingy)
 * make the color shifter abele to shift from other color than magic pink
@@ -382,6 +382,6 @@ key-handling:
 * some key combinations don't work in menu or other parts of the game.
 * thus make key-handling for quiting (for example) be interupt based.
 
-if part die/are killed damage vehicle/ship
+* if part die/are killed damage vehicle/ship
 
-particle engine for effects.
+* particle engine for effects.

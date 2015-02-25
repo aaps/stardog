@@ -1,11 +1,14 @@
 #!/usr/bin/python
+import os
 
 import unittest
 import pygame
 from code.utils import *
 from code.menuElements import *
-from code.floaters import *
-from code.parts import *
+from code.particles import *
+from code.SoundSystem import *
+
+os.environ["SDL_AUDIODRIVER"] = "dummy"
 
 class TestMenuElements(unittest.TestCase):
 
@@ -52,11 +55,59 @@ class TestMenuElements(unittest.TestCase):
         self.inputfield.update()
         self.assertTrue(self.inputfield.cursortimeout == 0)
 
-# class TestMenuElements(unittest.TestCase):
+class TestParticles(unittest.TestCase):
 
-#     def setUp(self):
-#         cockpit = Interceptor(self)
-#         engine = Engine(self)
+    def setUp(self):
+        self.fps = 10
+        pygame.display.set_mode((400, 400), hardwareFlag | pygame.SRCALPHA)
+        pygame.init()
+        self.pos = Vec2d(0,0)
+        self.dir = 0
+        self.emitter = Emitter( self, self.condAlways , 180, 10, 20, BLACK, PARTICLE1, 4, 5, 5, 3, 5, True)
+
+    def testParticleGeneration(self):
+        self.assertTrue(len(self.emitter.particles) is 0)
+        self.emitter.update()
+        self.emitter.update()
+        self.assertTrue(len(self.emitter.particles) is 2)
+
+    def testParticleDraw(self):
+        surf = pygame.Surface((400, 400))
+        self.emitter.draw(surf)
+        self.assertTrue(totalColorVal(surf) is 0)
+        self.emitter.update()
+        self.emitter.draw(surf)
+        self.assertTrue(totalColorVal(surf) is not 0)
+
+
+    def condAlways(self):
+        return True
+
+class TestSoundSystem(unittest.TestCase):
+
+    def setUp(self):
+        self.asfx = "hullimpact.wav"
+        self.music = MusicSystem("./res/sound/ambientMusic")
+        self.sfx = SoundSystem("./res/sound/sfxSounds")
+
+    def testGetSetVolFX(self):
+        self.assertTrue(self.sfx.getVolume() is not 99)
+        self.sfx.setVolume(99)
+        self.assertTrue(self.sfx.getVolume() is 99)
+
+    def testGetSetVolMU(self):
+        self.assertTrue(self.music.getVolume() is not 99)
+        self.music.setVolume(99)
+        self.assertTrue(self.music.getVolume() is 99)
+
+    def testReg(self):
+        self.assertTrue( len(self.sfx.sounds) is 0)
+        self.sfx.register(self.asfx)
+        self.assertTrue( len(self.sfx.sounds) is 1)
+        
+    def testGetFileNames(self):
+        self.assertTrue( len(self.sfx.getSounds()) > 0)
+        self.assertTrue( len(self.music.getMusicFiles()) > 0)
 
 
 if __name__ == '__main__':

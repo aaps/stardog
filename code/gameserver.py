@@ -1,6 +1,6 @@
 #gameserver.py
 
-from server import *
+from multyplayer.server import *
 from universe import *
 from SoundSystem import *
 

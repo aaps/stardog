@@ -6,10 +6,6 @@ from vec2d import Vec2d
 import math
 from particles import *
 from SoundSystem import *
-import random
-
-
-FPS = 200
 
 
 class Ballistic(object):
@@ -20,7 +16,6 @@ class Ballistic(object):
 
 
 class Floater(pygame.sprite.Sprite, Ballistic):
-
     """creates a floater with position (x,y) in pixels, speed (dx, dy)
     in pixels per second, direction dir
     where 0 is pointing right and 270 is pointing up, radius radius
@@ -34,19 +29,16 @@ class Floater(pygame.sprite.Sprite, Ballistic):
                  image=None):
         pygame.sprite.Sprite.__init__(self)
         self.universe = universe
-        self.id = 0
         self.dir = dir
         self.pos = pos
-
-        self.surespawn = True
+        self.send = 0
+        self.surespawn = False
         self.spawncost = 1
-
         self.delta = delta
         self.emitters = []
         self.color = FLOATER
         self.hp = 1
-
-
+        self.id = 0
         self.mass = 1
         self.tangible = True
         self.lastDamageFrom = None
@@ -69,25 +61,17 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 
     def update(self):
         """updates this floater based on its variables"""
-        # print self.hp, self.send
-        if self.send <= 0:
-            self.kill()
-        if self.hp <= 0:
-           self.send -= 1
-
         self.pos += self.delta / self.fps
         self.rect.center = self.pos.inttup()
         for emitter in self.emitters:
             emitter.update()
 
-
     def takeDamage(self, damage, other):
 
         self.lastDamageFrom = other
         self.hp -= damage
-
-        
-
+        if self.hp <= 0:
+            self.kill()
 
     def draw(self, surface, offset=Vec2d(0, 0)):
         """Blits this floater onto the surface. """
@@ -134,7 +118,6 @@ class ServerPlanetDisk(Floater):
         self.image = pygame.Surface((radius * 2, radius * 2), hardwareFlag | SRCALPHA).convert_alpha()
         pygame.draw.circle(self.image, (255,0,0,100), (radius, radius), int(radius))
         self.tangible = False
-
 
 
 class Bullet(Floater):

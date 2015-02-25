@@ -1,13 +1,13 @@
 # parts.py
 
 from utils import *
+from cargo import *
 from pygame.locals import *
 from floaters import *
 from vec2d import Vec2d
 import copy
 from particles import *
 import sys
-
 
 class Port(object):
     def __init__(self, offset, dir, parent):
@@ -26,7 +26,6 @@ class Part(Floater):
     # height, width = 9, 3
     
     acted = False
-
 
     def __init__(self, universe):
         self.buffer = pygame.Surface((30,30), flags = hardwareFlag | SRCALPHA).convert_alpha()
@@ -376,103 +375,6 @@ class Dummy(Part):
                     self.ship.reset()
 
 
-class Cargo(Floater):
-    
-    def __init__(self, universe):
-        
-        Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = 10)
-        if not self.baseImage:
-            self.baseImage = loadImage("res/part/default.png")
-        # Part.__init__(self, universe)
-        self.radius = max(self.baseImage.get_height() / 2, self.baseImage.get_width() / 2)
-        self.resources = True
-        # height, width = 9, 3
-        self.pickuptimeout = 0
-        self.width = self.image.get_width() - 4
-        self.height = self.image.get_height() - 4
-        self.parent = None
-        self.color = PART1
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
-        self.functions = [] # thisshould go eventualy
-        self.adjectives = [] #this should go eventualy
-
-    def update(self):
-        if self.pickuptimeout > 0:
-            self.pickuptimeout -= 1. / self.fps
-        Floater.update(self)
-
-    def shortStats(self):
-        return self.name
-
-    def shortStats(self):
-        return  self.name
-
-    def stats(self):
-        return "It is " + self.name
-
-    def scatter(self, ship):
-        """Like detach, but for parts that are in an inventory when a 
-        ship is destroyed."""
-        self.pickuptimeout = 5
-        angle = randint(0,360)
-        offset = Vec2d(cos(angle) * self.detach_space, sin(angle) * self.detach_space)
-        #set physics to drift away from ship (not collide):
-        self.image = colorShift(pygame.transform.rotate(self.baseImage, angle), self.color).convert_alpha()
-        # self.image.set_colorkey(BLACK)
-        self.pos = ship.pos + offset
-        self.delta.x = ship.delta.x + (rand()  * detach_speed)
-
-        # self.ship = None
-        self.universe.curSystem.add(self)
-
-class Scrap(Cargo):
-    
-    image = None
-    def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/scrap.png")
-        Cargo.__init__(self, universe)
-        
-        self.name = "Scrap"
-        self.damage = 1
-
-    def shortStats(self):
-        return self.name
-
-    def stats(self):
-        return self.name
-
-class Iron(Cargo):
-    
-    image = None
-    def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/iron.png")
-        Cargo.__init__(self, universe)
-        
-        self.name = "Iron"
-        self.damage = 1
-
-    def shortStats(self):
-        return self.name
-
-    def stats(self):
-        return self.name
-
-class IronOre(Cargo):
-    
-    image = None
-    def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
-        Cargo.__init__(self, universe)
-        
-        self.name = "IronOre"
-        self.damage = 1
-
-    def shortStats(self):
-        return self.name
-
-    def stats(self):
-        return self.name
 
 class FlippablePart(Part):
     def flip(self):
@@ -1187,7 +1089,7 @@ class GatewayFocus(Part):
                 newsystem.floaters.add(self.ship)
                 newsystem.ships.add(self.ship)
                 self.universe.curSystem.player = None
-                # self.universe.curSystem.ships.remove(self)
+                self.universe.curSystem.ships.remove(self)
                 self.universe.curSystem.floaters.remove(self)
                 self.universe.curSystem = newsystem
                 self.ship.pos = self.ship.atgateway.sister.pos
@@ -1267,10 +1169,8 @@ class Shield(Part):
 class BigShield(Shield):
     def __init__(self, universe):
         self.baseImage = loadImage("res/parts/shield.png")
-
         # gives lots of problems if you init Part and not Shield ... yea
         Shield.__init__(self, universe)
-
 
 
 class Chip(Part):

@@ -1,9 +1,13 @@
 # adjectives.py
 from parts import *
+from cargo import *
 from Resources import *
 from partCatalog import *
 
-CARGO = [Scrap, Iron, IronOre]
+CARGO = [Scrap, Iron, IronOre, Chemicals, Food, Gems, ExMetal, SheetMetal, 
+        ConstMat, CompComp, MachParts, Plastics, Explosives, Minerals, AirFilters, 
+        PleasureCubes, Alcohol, Textiles, Alcohol, HuskarCigars, Alcohol, ServantDroids, 
+        CloningDevice, PureWater]
 
 PARTS = [LeftCannon, RightCannon, Engine, Gyro, Generator, Battery, BigShield,
          LeftLaser, RightLaser, MissileLauncher, MachineGun, FighterShield,

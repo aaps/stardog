@@ -13,8 +13,6 @@ FULL, RESOLUTION = False, (1024, 768)
 hardwareFlag = (pygame.HWSURFACE | pygame.DOUBLEBUF)
 
 
-
-
 if __name__=="__main__":
     #command line resolution selection:
     run = 'client'
@@ -22,20 +20,21 @@ if __name__=="__main__":
     if len(sys.argv) > 1:
         print sys.argv
         try:
-            if sys.argv[1] is not 'server':
-              
-              if sys.argv[2] == 'f' or sys.argv[2] == 'full':
-                  FULL = True
-                  RESOLUTION = None
-              else:
-                  FULL = False
-              if len(sys.argv) == 4 \
-              and 300 <= int(sys.argv[2]) < 4000 \
-              and 300 <= int(sys.argv[3]) < 4000:
-                  RESOLUTION = int(sys.argv[2]), int(sys.argv[3])
+
+          if sys.argv[1] != 'server':
+
+            if sys.argv[2] == 'f' or sys.argv[2] == 'full':
+                FULL = True
+                RESOLUTION = None
             else:
-                run = 'server'
-                RESOLUTION = (100,100)
+                FULL = False
+            if len(sys.argv) == 4 \
+            and 300 <= int(sys.argv[2]) < 4000 \
+            and 300 <= int(sys.argv[3]) < 4000:
+                RESOLUTION = int(sys.argv[2]), int(sys.argv[3])
+          else:
+              run = 'server'
+              RESOLUTION = (100,100)
 
          
 

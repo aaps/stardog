@@ -2,19 +2,13 @@
 #
 from menus import *
 from scripts import *
-# from starSystem import *
+from multyplayer.client import *
 from gui import *
-# from planet import *
-# from spaceship import *
-# from strafebat import *
 from dialogs import *
 from camera import *
 from universe import *
-# from vec2d import Vec2d
 from plot import *
 import datetime
-
-from multyplayer.client import *
 import sys
 from utils import *
 
@@ -22,6 +16,7 @@ from utils import *
 # that supports multiple commands, and functions.
 from commandParse import CommandParse
 
+# import librarie for showing mem usage in caption
 try:
     import resource
     import gc
@@ -48,12 +43,6 @@ class Game(object):
         self.averagefps = 0
         self.screen = screen
         self.top_left = 0, 0
-        self.universe = Universe(self)
-        
-        
-        self.width = screen.get_width()
-        self.height = screen.get_height()
-
         self.mouseControl = True
         self.timer = 0
         self.triggers = []
@@ -72,9 +61,9 @@ class Game(object):
 
         # messenger, with controls as first message:
         self.messenger = Messenger(self.universe, FONT)
-        theone = SolarEmpty(self.universe, "theone", Vec2d(1, 100))
-        thesecond = SolarEmpty(self.universe, "thesecond", Vec2d(1, -100), 2, 1)
-        thethird = SolarEmpty(self.universe, "thethird", Vec2d(1, 200), 2, 1)
+        theone = SolarA1(self.universe, "theone", Vec2d(1, 100))
+        thesecond = SolarA1(self.universe, "thesecond", Vec2d(1, -100), 2, 1)
+        thethird = SolarA1(self.universe, "thethird", Vec2d(1, 200), 2, 1)
         theone.addNeighbor(thesecond)
         theone.addNeighbor(thethird)
 
@@ -84,8 +73,7 @@ class Game(object):
 
         self.camera.layerAdd(self.messenger, 7)
         self.camera.layerAdd(MiniInfo(self.universe, FONT), 6)
-        self.universe.setCurrentStarSystem("theone")
-        self.client = GameClient(self.universe)
+
         # key polling:
         self.keys = [False]*322
         # mouse is [pos, button1, button2, button3,..., button6].
@@ -93,6 +81,7 @@ class Game(object):
         self.mouse = [(0, 0), 0, 0, 0, 0, 0, 0]
         # pygame setup:
         self.clock = pygame.time.Clock()
+        self.client = GameClient(self.universe)
         self.hud = HUD(self.universe)
         self.tageting = TargetingRect(self.universe)
         self.radarfield = RadarField(self.universe)
@@ -113,7 +102,6 @@ class Game(object):
 
     def run(self):
         """Runs the game."""
-        
         self.running = True
         while self.running:
             # game setup:
@@ -152,7 +140,7 @@ class Game(object):
 
             self.camera.layerAdd(shipDamage(self.universe, FONT), 5)
             self.camera.layerAdd(StarField(self.universe), 2)
-            
+            self.universe.setCurrentStarSystem("theone")
             self.camera.layerAdd(self.universe.curSystem.bg, 1)
             self.camera.setLayersPlayer(self.player)
             self.universe.setPlayer(self.player)
@@ -175,10 +163,8 @@ class Game(object):
             for x in range(10):
                 self.clock.tick()
 
-
             self.triggers = Triggers(self)
             self.storytriggers = self.triggers.StoryTriggers(self.universe)
-
             # create a parser that parses chatconsole input
             # for command and such.
             self.commandParse = CommandParse(self, self.chatconsole,
@@ -186,6 +172,7 @@ class Game(object):
             # check once wether the universe still has a player.
             self.hasPlayer = self.universe.curSystem.floaters.has(self.player)
             # The in-round loop (while player is alive):
+            # print self.hasPlayer, self.running
 
             self.client.connect()
 
@@ -193,7 +180,6 @@ class Game(object):
                 # check wether the universe still has a player.
                 self.hasPlayer = self.universe.curSystem.floaters.has(self.player)
                 # event polling:
-
                 pygame.event.pump()
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:

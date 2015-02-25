@@ -19,6 +19,7 @@ class Panel(object):
         self.bgColor = None
         self.color = BS1
         self.rect = rect
+        self.lineoutspace = 0
         self.panels = []
         self.corners = corners
     
@@ -109,8 +110,8 @@ class Panel(object):
             pygame.draw.rect(surface, self.bgColor, rect, 0)
         
         if self.image:
-            surface.blit(self.image, (rect.left, rect.top), (0, 0, rect.width, rect.height))
-       
+            surface.blit(self.image, (self.rect.left+self.lineoutspace, self.rect.top), (0, 0, self.rect.width, self.rect.height))
+
         for panel in self.panels:
             panel.draw(surface, rect)
         if self.drawBorder:
@@ -365,6 +366,10 @@ class Button(Panel):
         else:
             self.color = self.inactiveColor
         Panel.move(self, pos, rel)
+
+    # def draw(self, surface, rect):
+    #     surface.blit(self.image, (self.rect.left+self.lineoutspace, self.rect.top), (0, 0, self.rect.width, self.rect.height))
+    #     Panel.draw(self, usrface, rect)
 
    
 
@@ -892,7 +897,7 @@ class Label(Panel):
         self.drawBorder = False
         self.text = text
         self.color = color
-        # self.lineoutspace = (font.size(self.text)[0] - rect.width) * lineout
+       
         
         
         if fontModule:

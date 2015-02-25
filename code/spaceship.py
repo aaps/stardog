@@ -2,6 +2,7 @@
     
 from utils import *
 from parts import *
+from cargo import *
 from partCatalog import *
 from floaters import *
 from pygame.locals import *
@@ -210,8 +211,6 @@ def makeScout(game, pos, delta, dir=27, color = SUPER_WHITE, name=("Shippy","mcS
     else:
         ship = Ship(game.universe, pos, delta, dir = dir, color = color,name=name, partlimit=partlim)
     cockpit = Fighter(game.universe)
-    cockpit.hp = 100
-    ship.hp = 100
     battery = Battery(game.universe)
     cannon = RightFlakCannon(game.universe)
     radar = Radar(game.universe)
@@ -272,8 +271,8 @@ class Ship(Floater, Controllable):
     attention = 0
     detectionscore = 0
     forwardEngines = []
-    maxhp = 20
-    hp = 5
+    maxhp = 0
+    hp = 0
     landed = None
     forwardThrust = 0
     reverseThrust = 0
@@ -322,13 +321,12 @@ class Ship(Floater, Controllable):
         Controllable.__init__(self, game)
 
         self.universe = game.universe
-        self.spawncost = 30
+        self.spawncost = 40
         self.surespawn = True
         self.inventory = []
         self.firstname = name[0]
         self.secondname = name[1]
         self.ports = [Port((0,0), 0, self)]
-        self.spawncost = 30
         self.energy = 0
         self.maxEnergy = 0
         self.color = color
@@ -448,16 +446,16 @@ class Ship(Floater, Controllable):
         if part:
             self.parts.append(part)
             if isinstance(part, Engine):
-                if part.dir == 180:
+                if part.dir == 180 or  part.dir == -180:
                     self.reverseEngines.append(part)
                     self.reverseThrust += part.exspeed * part.exmass
                 if part.dir == 0 or part.dir == 360:
                     self.forwardEngines.append(part)
                     self.forwardThrust += part.exspeed * part.exmass
-                if part.dir == 90:
+                if part.dir == 90 or part.dir == -270:
                     self.rightEngines.append(part)
                     self.rightThrust += part.exspeed * part.exmass
-                if part.dir == 270:
+                if part.dir == 270 or part.dir == -90:
                     self.leftEngines.append(part)
                     self.leftThrust += part.exspeed * part.exmass
             if isinstance(part, Gyro):
@@ -615,12 +613,11 @@ class Ship(Floater, Controllable):
             
             nearest[0].player = self
             nearest[0].floaters.add(self)
-
-            self.game.universe.curSystem.player = None
-            self.game.universe.curSystem.ships.remove(self)
-            self.game.universe.curSystem.floaters.remove(self)
-            self.game.universe.curSystem = nearest[0]
-
+            nearest[0].ships.add(self)
+            self.universe.curSystem.player = None
+            self.universe.curSystem.ships.remove(self)
+            self.universe.curSystem.floaters.remove(self)
+            self.universe.curSystem = nearest[0]
             self.pos = newpos
             for camera in self.universe.cameras:
 
