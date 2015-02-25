@@ -892,7 +892,7 @@ class Label(Panel):
         self.drawBorder = False
         self.text = text
         self.color = color
-        # self.lineoutspace = (font.size(self.text)[0] - rect.width) * lineout
+       
         
         
         if fontModule:
