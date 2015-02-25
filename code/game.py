@@ -14,7 +14,7 @@ from universe import *
 from plot import *
 import datetime
 
-from client import *
+from multyplayer.client import *
 import sys
 from utils import *
 

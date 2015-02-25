@@ -157,8 +157,6 @@ class Server(object):
 
 
 
-
-
 	def __exit__(self, type, value, traceback):
 		self._server.disconnect()
 

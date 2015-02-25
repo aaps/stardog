@@ -22,7 +22,7 @@ if __name__=="__main__":
     if len(sys.argv) > 1:
         print sys.argv
         try:
-            if sys.argv[1] == 'client':
+            if sys.argv[1] is not 'server':
               
               if sys.argv[2] == 'f' or sys.argv[2] == 'full':
                   FULL = True
@@ -33,8 +33,7 @@ if __name__=="__main__":
               and 300 <= int(sys.argv[2]) < 4000 \
               and 300 <= int(sys.argv[3]) < 4000:
                   RESOLUTION = int(sys.argv[2]), int(sys.argv[3])
-
-            elif sys.argv[1] == 'server':
+            else:
                 run = 'server'
                 RESOLUTION = (100,100)
 
