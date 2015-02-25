@@ -133,9 +133,9 @@ class Server(object):
 				raise
 				
 	def send_entity_updates(self, server):
-		
+		# print len(self.universe.curSystem.floaters)
 		for floater in self.universe.curSystem.floaters:
-			
+			# print "floater id:", floater.id, floater
 			try: 
 				message = self.getFloaterUpdateMessage(floater)
 				
@@ -144,14 +144,16 @@ class Server(object):
 				raise
 
 	def send_entity_kills(self, server):
+
 		for floater in self.universe.curSystem.floaters:
-			
-			if floater.send < 2 and floater.hp <= 0:
-				try: 
+			try: 
+				if floater.sendkill is 1:
 					message = self.getFloaterKillMessage(floater)
 					server.send_reliable_message_to_all(message)
-				except:
-					raise
+					floater.sendkill = 2
+
+			except:
+				raise
 
 
 	def update(self):
@@ -173,7 +175,6 @@ class Server(object):
 		self._server.disconnect()
 
 	def on_connect_request(self, sender, args):
-		print  "con req"
 		self.send_all_entitys(sender)
 
 	def on_message(self, sender, msg):

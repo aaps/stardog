@@ -19,6 +19,7 @@ class Cargo(Floater):
         self.height = self.image.get_height() - 4
         self.parent = None
         self.color = PART1
+        self.detach_space = 50
         self.image = colorShift(self.baseImage.copy(), self.color)
         self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
         self.functions = []

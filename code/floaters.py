@@ -31,7 +31,7 @@ class Floater(pygame.sprite.Sprite, Ballistic):
         self.universe = universe
         self.dir = dir
         self.pos = pos
-        self.send = 0
+        self.sendkill = 0
         self.surespawn = False
         self.spawncost = 1
         self.delta = delta
@@ -61,8 +61,10 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 
     def update(self):
         """updates this floater based on its variables"""
+        if self.sendkill is 2:
+            self.kill()
         self.pos += self.delta / self.fps
-        self.rect.center = self.pos.inttup()
+        # self.rect.center = self.pos.inttup()
         for emitter in self.emitters:
             emitter.update()
 
@@ -70,8 +72,9 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 
         self.lastDamageFrom = other
         self.hp -= damage
-        if self.hp <= 0:
-            self.kill()
+
+        if self.hp <= 0 and self.sendkill == 0:
+            self.sendkill = 1
 
     def draw(self, surface, offset=Vec2d(0, 0)):
         """Blits this floater onto the surface. """
@@ -105,12 +108,23 @@ class Floater(pygame.sprite.Sprite, Ballistic):
     def setFPS(self, fps):
         self.fps = fps
 
+    def kill(self):
+        if self in self.universe.curSystem.floaters:
+            self.universe.curSystem.floaters.remove(self)
+
+
 class ServerFloaterDisk(Floater):
     def __init__(self, universe, pos, delta, dir=270, radius=50,image=None):
         Floater.__init__(self, universe, pos, delta, dir=270, radius=10,image=None)
         self.image = pygame.Surface((radius * 2, radius * 2), hardwareFlag | SRCALPHA).convert_alpha()
         pygame.draw.circle(self.image, (255,0,0,100), (radius, radius), int(radius))
         self.tangible = False
+
+    def update(self):
+        
+        if self.hp <= 0:
+            Floater.kill(self)
+        Floater.update(self)
 
 class ServerPlanetDisk(Floater):
     def __init__(self, universe, pos, delta, dir=270, radius=50,image=None):
@@ -125,13 +139,16 @@ class ServerPlanetDisk(Floater):
 
 class Bullet(Floater):
     def __init__(self, universe, gun, damage, speed, range, image=None):
+        
         dir = gun.dir + gun.ship.dir
         pos = (gun.pos + Vec2d(gun.shootPoint).rotated(dir) +
                gun.ship.delta / universe.game.fps)
+
         # not needed for the offset, but needed for the dir.
         dir += gun.shootDir
         self.speed = speed
         delta = gun.ship.delta.rotatedd(dir, self.speed)
+        # Floater.__init__(self, universe, pos, delta, dir=270, radius=radius,image=None)
         if image is None:
             image = loadImage("res/ammo/shot.png")
         Floater.__init__(self, universe, pos, delta,
@@ -151,26 +168,30 @@ class Bullet(Floater):
 
     def update(self):
         self.life += 1. / self.fps
+        if self.life > self.range and self.sendkill == 0:
+            self.sendkill = 1
+            self.soundsys.play(self.bulletSound)
         Floater.update(self)
-        if self.life > self.range:
-            self.softkill()
+        
+
 
     def detonate(self):
         if self.lastDamageFrom:
             delta = (self.lastDamageFrom.delta + self.delta) / 2
         else:
             delta = self.delta
-        impact = Impact(self.universe, self.pos, delta, 20, 14)
-        self.universe.curSystem.add(impact)
+        # impact = Impact(self.universe, self.pos, delta, 20, 14)
+        # self.universe.curSystem.add(impact)
 
-    def kill(self):
-        self.soundsys.play(self.bulletSound)
-        self.detonate()
-        Floater.kill(self)
+    # def kill(self):
+        # self.soundsys.play(self.bulletSound)
+        # # self.detonate()
+        # if self.sendkill == 0:
+        #     self.sendkill = 1
 
-    def softkill(self):
-        # self.detonate()
-        Floater.kill(self)
+    # def softkill(self):
+    #     if self.sendkill == 0:
+    #         self.sendkill = 1
 
 
 class Missile(Bullet):
@@ -202,8 +223,8 @@ class Missile(Bullet):
         self.dir = (self.dir + 180) % 360 - 180
         self.delta += (Vec2d(0, 0).rotatedd(self.dir, self.acceleration)
                        / self.fps)
-        if self.life > self.range:
-            self.kill()
+        if self.life > self.range and self.sendkill == 0:
+            self.sendkill = 1
         Floater.update(self)
 
     def detonate(self):
@@ -216,7 +237,8 @@ class Missile(Bullet):
     def kill(self):
         self.detonate()
         self.soundsys.play(self.missileSound)
-        Floater.kill(self)
+        if self.sendkill == 0:
+            self.sendkill = 1
 
     def takeDamage(self, damage, other):
         self.impacted = other
@@ -247,7 +269,7 @@ class Mine(Bullet):
         self.dir = (self.dir+180) % 360 - 180
         self.delta = self.delta / 1.05
         if self.life > self.range:
-            self.kill()
+            self.sendkill = 1
         Floater.update(self)
 
     def detonate(self):
@@ -261,7 +283,8 @@ class Mine(Bullet):
         self.detonate()
         if soundModule:
             setVolume(missileSound.play(), self, self.universe.player)
-        Floater.kill(self)
+        if self.sendkill == 0:
+            self.sendkill = 1
 
     def takeDamage(self, damage, other):
         self.impacted = other
@@ -293,8 +316,13 @@ class Explosion(Floater):
 
     def update(self):
         self.life += 1. / self.fps
-        if self.life > self.time:
+        if self.sendkill == 2:
             Floater.kill(self)
+        if self.life > self.time and self.sendkill == 0:
+
+            self.sendkill = 1
+
+
         self.hp = self.damage / (self.time * self.fps)
         # grow or shrink: size peaks at time / 2:
         if self.life < self.time / 4:
@@ -305,8 +333,7 @@ class Explosion(Floater):
         for emitter in self.emitters:
             emitter.update()
 
-    def kill(self):
-        pass
+
 
     def takeDamage(self, damage, other):
         pass
@@ -333,14 +360,19 @@ class Impact(Floater):
 
     def update(self):
         self.life += 1. / self.fps
-        if self.life > self.time:
+        if self.sendkill == 2:
             Floater.kill(self)
+        if self.life > self.time and self.sendkill == 0:
+            self.sendkill = 1
+
         if self.life < self.time / 4:
             self.radius = int(self.maxRadius*self.life*4/self.time)
         else:
             self.radius = int((self.maxRadius*(self.time*4/3-self.life*4/3) /
                                self.time))
-        Floater.update(self)
+        for emitter in self.emitters:
+            emitter.update()
+        # Floater.update(self)
 
     def takeDamage(self, damage, other):
         pass
@@ -442,8 +474,8 @@ class LaserBeam(Floater):
         Floater.update(self)
         self.start = self.start + self.delta / self.fps
         self.stop = self.stop + self.delta / self.fps
-        if self.life < 0:
-            self.kill()
+        if self.life < 0 and self.sendkill == 0:
+            self.sendkill = 1
 
     def takeDamage(self, damage, other):
         pass

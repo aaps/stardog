@@ -20,7 +20,7 @@ class StarSystem(object):
         self.edgerad = edgerad
         self.neighbors = []     
         self.universe = universe
-        self.floaters = pygame.sprite.Group()
+        self.floaters = []
         self.spawnScore = 0
         self.spawnMax = 50
         self.toSpawn = []
@@ -55,10 +55,10 @@ class StarSystem(object):
                 
                 spawn.id = random.randint(1,1000)
                 if not any(x.id == spawn.id for x in self.floaters):
-                    # print spawn, "Ok"
                     self.spawnScore += spawn.spawncost
                     spawn.starSystem = self
-                    self.floaters.add(spawn)
+                    self.floaters.append(spawn)
+                    self.toSpawn.remove(spawn)
                 else:
                     self.toSpawn.remove(spawn)
 
@@ -66,17 +66,17 @@ class StarSystem(object):
         if self.spawnScore > 0:
             self.spawnScore -= 1
 
-        for floater in self.floaters:
 
+        for floater in self.floaters:
             floater.setFPS(self.universe.game.fps)
             floater.update()
 
         
         #collision:
-        floaters = self.floaters.sprites()
-        for i in range(len(floaters)):
-            for j in range(i + 1, len(floaters)):
-                self.collide(floaters[i], floaters[j])
+        # floaters = self.floaters.sprites()
+        for i in range(len(self.floaters)):
+            for j in range(i + 1, len(self.floaters)):
+                self.collide(self.floaters[i], self.floaters[j])
              
         for floater in self.floaters:
            
@@ -124,26 +124,30 @@ class StarSystem(object):
         
         """adds a floater to this game."""
         if isinstance(floater, Player):
-            self.floaters.add(floater)
+            self.floaters.append(floater)
             
             if self.universe.curSystem == self:
                 init = False
                 while self.minDistFromOthers(floater) < 3000 or init == False:
                     init = True
                     angle = randint(0,360)
-                    distanceFromStar = randint(8000, 18000)
-                    self.universe.player.pos = self.star.pos.rotatedd(angle, distanceFromStar)
+                    if hasattr(self,'star'):
+                        distanceFromStar = randint(8000, 18000)
+                        self.universe.player.pos = self.star.pos.rotatedd(angle, distanceFromStar)
+                    else:
+                        self.universe.player.pos = Vec2d(0,0)
             self.player = floater
         else:
             self.toSpawn.append(floater)
 
             if (self.spawnScore + floater.spawncost) < self.spawnMax:
-                # print floater
+               
                 floater.id = random.randint(1,1000)
                 if not any(x.id == floater.id for x in self.floaters):
                     self.spawnScore += floater.spawncost
                     floater.starSystem = self
-                    self.floaters.add(floater)
+                    self.floaters.append(floater)
+                    self.floaters = sorted(self.floaters, key=lambda floater: floater.id)
                     self.toSpawn.remove(floater)
             elif not floater.surespawn:
                 self.toSpawn.remove(floater)
@@ -336,15 +340,15 @@ class EmptySys(StarSystem):
     respawnTime = 600
     fightersPerMinute = 0
     g=5000
-    def __init__(self, universe, name, location ,numPlanets = 1, numStructures = 0, boundrad = 30000, edgerad= 60000):
+    def __init__(self, universe, name, location ,numPlanets = 0, numStructures = 0, boundrad = 30000, edgerad= 60000):
         StarSystem.__init__(self, universe, location,boundrad, edgerad)
-        self.star = (Star( self, Vec2d(0,0), radius = randint(2000,5000), image = None)) # the star
+        # self.star = (Star( self, Vec2d(0,0), radius = randint(2000,5000), image = None)) # the star
         #place player:
-        angle = randint(0,360)
+        # angle = randint(0,360)
         self.location = location
-        self.planets.append(self.star)
-        self.star.numShips = 0
-        self.add(self.star)
+        # self.planets.append(self.star)
+        # self.star.numShips = 0
+        # self.add(self.star)
         self.name = name
         
         #add planets:
@@ -405,11 +409,11 @@ class EmptySys(StarSystem):
         
 class FullSys(StarSystem):
     tinyFighters = []
-    maxFighters = 15
+    maxFighters = 1
     respawnTime = 30
     fightersPerMinute = 2
     g=5000
-    def __init__(self, universe, name, location ,numPlanets = 30, numStructures = 0, boundrad = 30000, edgerad= 60000):
+    def __init__(self, universe, name, location ,numPlanets = 1, numStructures = 0, boundrad = 30000, edgerad= 60000):
         StarSystem.__init__(self, universe, location,boundrad, edgerad)
         self.star = (Star( self, Vec2d(0,0), radius = randint(2000,5000), image = None)) # the star
         #place player:

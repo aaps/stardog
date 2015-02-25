@@ -561,8 +561,13 @@ class Ship(Floater, Controllable):
     
     def update(self):
         #check if dead:
-        if not self.parts or self.parts[0].hp <= 0:
+
+        if self.sendkill is 2:
             self.kill()
+
+        if not self.parts or self.parts[0].hp <= 0:
+            self.sendkill = 1
+            # self.kill()
         #run script, get choices.
         
 
@@ -673,6 +678,11 @@ class Ship(Floater, Controllable):
     def takeDamage(self, damage, other):
         self.attention += 5
         self.hp = max(self.hp - damage, 0)
+        
+        if self.hp <= 0:
+            self.sendkill = 1
+            # self.kill()
+
         if isinstance(other, Bullet) and other.ship == self.universe.player:
             self.universe.player.xpDamage(self, damage)
 
@@ -726,7 +736,8 @@ class Ship(Floater, Controllable):
             part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert_alpha()
             # part.image.set_colorkey(BLACK)
             self.inventory.append(part)
-            part.kill()
+            # part.kill()
+            part.sendkill = 1
             if self.universe.player == self:
                 #use a state machine ?
                 self.universe.game.menu.parts.inventoryPanel.reset() #TODO: make not suck

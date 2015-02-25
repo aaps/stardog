@@ -19,7 +19,7 @@ class GameServer(object):
 		self.keys = [False]*322
 		self.fps = 25
 
-		theone = FullSys(self.universe, "theone", Vec2d(1,100), 30)
+		theone = FullSys(self.universe, "theone", Vec2d(1,100), 25)
 		self.universe.addStarSystem(theone)
 		self.universe.setCurrentStarSystem("theone")
 		self.clock = pygame.time.Clock()
@@ -29,7 +29,8 @@ class GameServer(object):
 
 		while self.running:
 			self.clock.tick()
-			self.universe.update()
 			self.server.update()
+			self.universe.update()
+			
 
 

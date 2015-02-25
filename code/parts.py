@@ -44,6 +44,7 @@ class Part(Floater):
         self.animatedImage = None
         self.pickuptimeout = 0
         self.number = -1
+        self.hitByPlayer = False
         self.name = 'part'
         self.part_overlap = 0
         self.detach_space = 50
@@ -189,7 +190,9 @@ class Part(Floater):
             #if this is the root of the ship, kill the ship:
             root = False
             if self.parent and self.parent == self.ship:
-                self.ship.kill()
+                # self.ship.kill()
+                self.ship.sendkill = 1
+
                 root = True
             #cleanup relations:
             if self.parent and self.parent != self.ship:
@@ -244,8 +247,29 @@ class Part(Floater):
     def update(self):
         """updates this part."""
 
+
+
         #reset so this part can act again this frame:
         self.acted = False
+        if self.sendkill is 2:
+            if self.hitByPlayer:
+                self.universe.player.xpDestroy(self)
+                if self.ship:
+                    self.universe.player.xpKill(self.ship)
+            if self.parent:
+                self.detach()
+            if rand() < 0.3 and not isinstance(self, Scrap):
+                scrap = Scrap(self.universe)
+                scrap.pos = self.pos
+                scrap.delta = self.delta
+
+                self.universe.curSystem.add(scrap)
+            self.kill()
+
+            #if dead, make an explosion here.
+            self.universe.curSystem.add(Explosion(self.universe, self.pos, \
+                        self.delta, radius = self.radius * 4,\
+                        time = self.maxhp / 5))
         #if it's attached to a ship, just rotate with the ship:
         if self.ship:
             cost = cos(self.ship.dir) #cost is short for cos(theta)
@@ -324,37 +348,23 @@ class Part(Floater):
     def takeDamage(self, damage, other):
         from spaceship import Player
         
-        hitByPlayer = False
+        self.hitByPlayer = False
         if isinstance(self, Part) and self.parent:
             self.ship.attention += 5
         if isinstance(other, Bullet) and other.ship == self.universe.player:
-            hitByPlayer = True
+            self.hitByPlayer = True
             self.universe.player.xpDamage(self, damage)
         if self.parent and self.parent != self.ship \
         and not isinstance(self.ship, Player)  \
         and rand() <  1. * damage / (self.hp + 1):
             self.detach()
         self.hp -= damage
+
+
         if self.hp <= 0:
-            if hitByPlayer:
-                self.universe.player.xpDestroy(self)
-                if self.ship:
-                    self.universe.player.xpKill(self.ship)
-            if self.parent:
-                self.detach()
-            if rand() < 0.3 and not isinstance(self, Scrap):
-                scrap = Scrap(self.universe)
-                scrap.pos = self.pos
-                scrap.delta = self.delta
+            self.sendkill = 1
 
-                self.universe.curSystem.add(scrap)
-            self.kill()
 
-            
-            #if dead, make an explosion here.
-            self.universe.curSystem.add(Explosion(self.universe, self.pos, \
-                        self.delta, radius = self.radius * 4,\
-                        time = self.maxhp / 5))
 
 class Dummy(Part):
     """A dummy part used by the parts menu."""

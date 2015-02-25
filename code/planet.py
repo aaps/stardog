@@ -54,7 +54,7 @@ class Planet(Floater):
         self.fps = fps
     
     def update(self):
-        for other in self.starSystem.floaters.sprites():
+        for other in self.starSystem.floaters:
             if other != self \
             and not isinstance(other, Structure) \
             and not isinstance(other, Planet) \
@@ -94,6 +94,7 @@ class Planet(Floater):
         pass
 
     def collision(self, other):
+        # print "star col:", other, other.hp, other.sendkill
         if  sign(other.pos.x - self.pos.x) == sign(other.delta.x - self.delta.x) \
             and sign(other.pos.y - self.pos.y) == sign(other.delta.y - self.delta.y):# moving away from planet.
                 return False
@@ -115,7 +116,8 @@ class Planet(Floater):
             other.crash(self)
 
     def freepartCollision(self, part):
-        part.kill()
+        # part.kill()
+        part.sendkill = 1
 
         if rand() > .8 and not isinstance(part, Cargo):
 
