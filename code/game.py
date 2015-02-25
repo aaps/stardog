@@ -61,15 +61,15 @@ class Game(object):
 
         # messenger, with controls as first message:
         self.messenger = Messenger(self.universe, FONT)
-        theone = SolarA1(self.universe, "theone", Vec2d(1, 100))
-        thesecond = SolarA1(self.universe, "thesecond", Vec2d(1, -100), 2, 1)
-        thethird = SolarA1(self.universe, "thethird", Vec2d(1, 200), 2, 1)
-        theone.addNeighbor(thesecond)
-        theone.addNeighbor(thethird)
+        theone = EmptySys(self.universe, "theone", Vec2d(1, 100))
+        # thesecond = SolarA1(self.universe, "thesecond", Vec2d(1, -100), 2, 1)
+        # thethird = SolarA1(self.universe, "thethird", Vec2d(1, 200), 2, 1)
+        # theone.addNeighbor(thesecond)
+        # theone.addNeighbor(thethird)
 
         self.universe.addStarSystem(theone)
-        self.universe.addStarSystem(thesecond)
-        self.universe.addStarSystem(thethird)
+        # self.universe.addStarSystem(thesecond)
+        # self.universe.addStarSystem(thethird)
 
         self.camera.layerAdd(self.messenger, 7)
         self.camera.layerAdd(MiniInfo(self.universe, FONT), 6)

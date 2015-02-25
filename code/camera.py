@@ -123,7 +123,7 @@ class SpaceView(object):
         self.offset = Vec2d(0, 0)
 
     def update(self):
-        self.game.universe.curSystem.update()
+        
         self.onScreen = []
         self.offset = Vec2d(self.camera.pos.x - self.camera.width / 2,
                             self.camera.pos.y - self.camera.height / 2)

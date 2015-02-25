@@ -64,7 +64,7 @@ class DummySoundSystem(object):
     def getVolume(self):
         return(1.0)
 
-    def play(self, sound, scale_f, loops):
+    def play(self, sound, scale_f=None, loops=0):
         pass
 
 

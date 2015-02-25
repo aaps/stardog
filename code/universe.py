@@ -29,6 +29,7 @@ class Universe(object):
         self.cameras.append(camera)
 
     def update(self):
+        self.game.universe.curSystem.update()
         for camera in self.cameras:
             camera.update()
 

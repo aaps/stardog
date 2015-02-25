@@ -1,6 +1,8 @@
 import legume
 import messages
 import time
+from code.spaceship import *
+from code.planet import *
 
 
 class Server(object):
@@ -29,7 +31,8 @@ class Server(object):
 		msg = messages.PlanetSpawn()
 		msg.x.value = entity.pos.x
 		msg.y.value = entity.pos.y
-		msg.radius.value = entity.pos.radius
+		msg.radius.value = entity.radius
+		msg.id.value = entity.id
 		return msg
 
 	def getShipUpdateMessage(self, entity):
@@ -106,22 +109,31 @@ class Server(object):
 	def send_all_entitys(self, endpoint):
 		
 		for floater in self.universe.curSystem.floaters:
-			try: 
-				message = self.getFloaterSpawnMessage(floater)
-				endpoint.send_reliable_message(message)
+
+			try:
+				if isinstance(floater, Planet):
+					message = self.getPlanetSpawnMessage(floater)
+					endpoint.send_reliable_message(message)
+				elif isinstance(floater, Ship):
+					message = self.getFloaterSpawnMessage(floater)
+					endpoint.send_reliable_message(message)
 			except:
 				raise
 
 	def send_entity_spawns(self, server):
 		for floater in self.universe.curSystem.toSpawn:
-			try: 
-				message = self.getFloaterSpawnMessage(floater)
-				server.send_reliable_message_to_all(message)
+			try:
+				if isinstance(floater, Planet):
+					message = self.getPlanetSpawnMessage(floater)
+					server.send_reliable_message_to_all(message)
+				elif isinstance(floater, Ship):
+					message = self.getFloaterSpawnMessage(floater)
+					server.send_reliable_message_to_all(message)
 			except:
 				raise
 				
 	def send_entity_updates(self, server):
-		# 
+		
 		for floater in self.universe.curSystem.floaters:
 			
 			try: 
@@ -161,6 +173,7 @@ class Server(object):
 		self._server.disconnect()
 
 	def on_connect_request(self, sender, args):
+		print  "con req"
 		self.send_all_entitys(sender)
 
 	def on_message(self, sender, msg):

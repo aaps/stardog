@@ -114,10 +114,13 @@ class ServerFloaterDisk(Floater):
 
 class ServerPlanetDisk(Floater):
     def __init__(self, universe, pos, delta, dir=270, radius=50,image=None):
-        Floater.__init__(self, universe, pos, delta, dir=270, radius=10,image=None)
+        Floater.__init__(self, universe, pos, delta, dir=270, radius=radius,image=None)
         self.image = pygame.Surface((radius * 2, radius * 2), hardwareFlag | SRCALPHA).convert_alpha()
-        pygame.draw.circle(self.image, (255,0,0,100), (radius, radius), int(radius))
+        pygame.draw.circle(self.image, (255,0,255,100), (radius, radius), int(radius))
         self.tangible = False
+
+    def update(self):
+        pass
 
 
 class Bullet(Floater):

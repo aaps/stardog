@@ -19,7 +19,20 @@ class GameClient(object):
 
 	def on_message(self, sender, msg):
 		
-		if legume.messages.message_factory.is_a(msg, 'FloaterSpawn'): 
+		if legume.messages.message_factory.is_a(msg, 'PlanetSpawn'):
+			
+			pos = Vec2d(msg.x.value, msg.y.value)
+
+			floater = ServerPlanetDisk(self.universe, pos, Vec2d(0,0),radius= msg.radius.value)
+			floater.id = msg.id.value
+			# print msg.radius.value,floater.id, "planspawn"
+			# print self.universe.curSystem, any(x.id == floater.id for x in self.universe.curSystem.floaters)
+
+			if self.universe.curSystem and not any(x.id == floater.id for x in self.universe.curSystem.floaters):
+				# print "realy"
+				self.universe.curSystem.floaters.add(floater)
+
+		elif legume.messages.message_factory.is_a(msg, 'FloaterSpawn'): 
 			pos = Vec2d(msg.x.value, msg.y.value)
 			floater = ServerFloaterDisk(self.universe, pos, Vec2d(0,0), radius = 50)
 			floater.id = msg.id.value
@@ -36,7 +49,7 @@ class GameClient(object):
 					floater[0].delta = Vec2d(msg.dx.value,msg.dy.value)
 
 		elif legume.messages.message_factory.is_a(msg, 'FloaterKill'):
-			print "receved floter kill", msg
+			# print "receved floter kill", msg
 			if self.universe.curSystem:
 				floater = self.universe.curSystem.getFloater(msg.id.value)
 				if len(floater) > 0:

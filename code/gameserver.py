@@ -19,7 +19,7 @@ class GameServer(object):
 		self.keys = [False]*322
 		self.fps = 25
 
-		theone = SolarA1(self.universe, "theone", Vec2d(1,100), 20)
+		theone = FullSys(self.universe, "theone", Vec2d(1,100), 30)
 		self.universe.addStarSystem(theone)
 		self.universe.setCurrentStarSystem("theone")
 		self.clock = pygame.time.Clock()

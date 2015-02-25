@@ -231,8 +231,11 @@ class RadarField(Drawable):
                         elif isinstance(floater, Part) or isinstance(floater, Cargo):
                             pygame.draw.rect(self.image, (200, 200, 0),
                                              (dotPos[0]-1, dotPos[1]-1, 2, 2))
-                        elif isinstance(floater, Part) or isinstance(floater, ServerFloaterDisk):
+                        elif isinstance(floater, ServerFloaterDisk):
                             pygame.draw.rect(self.image, (200, 0, 200),
+                                             (dotPos[0]-1, dotPos[1]-1, 2, 2))
+                        elif isinstance(floater, ServerPlanetDisk):
+                            pygame.draw.rect(self.image, (200, 200, 0),
                                              (dotPos[0]-1, dotPos[1]-1, 2, 2))
 
                 elif not isinstance(floater, Planet):
@@ -429,6 +432,7 @@ class shipDamage(Drawable):
         self.player = self.universe.game.player
         self.totalhealth = 0
         self.font = font
+        self.active = False
         self.shownparts = []
         self.width = int(self.universe.game.width / 5)
         self.height = int(self.universe.game.height/ 4 )
