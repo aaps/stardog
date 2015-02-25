@@ -6,6 +6,7 @@ from updater import *
 import code.game
 
 
+
 # testint
 FULL, RESOLUTION = False, (1024, 768)
 # FULL = True; RESOLUTION = None
