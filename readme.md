@@ -3,10 +3,10 @@
 
 Credits
 ===
-Stardog, by Shanti Pothapragada
-rgbdreamer@gmail.com
-http://code.google.com/p/stardog
-
+Stardog, by 
+* Shanti Pothapragada: rgbdreamer@gmail.com
+* docs: http://code.google.com/p/stardog
+* Aaps and Duallity for the latest updates: https://github.com/aaps/stardog
 
 Running:
 ===
