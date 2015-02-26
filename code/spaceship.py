@@ -440,6 +440,8 @@ class Ship(Floater, Controllable):
             self.ports[0].part.draw(self.baseImage)
             self.ports[0].part.draw(self.greyImage, grey=True)
 
+        print self.partsAsJSON(self.ports)
+
 
     def partRollCall(self, part):
         """adds parts to self.parts recursively."""
@@ -742,13 +744,20 @@ class Ship(Floater, Controllable):
                 #use a state machine ?
                 self.universe.game.menu.parts.inventoryPanel.reset() #TODO: make not suck
 
-    # def partsAsJSON(self):
+    def partsAsJSON(self, ports):
+        totstring = list
+
+        for port in ports:
 
 
-    #     for port in self.ports:
-    #         if port.part:
-    #             port.part.update()
-    #     part.getJson()
+            
+            if port.part:
+                totstring.append(port.part.getJson())
+                if hasattr(port.part,'ports'):
+                    totstring.append(self.partsAsJSON(port.part.ports))
+
+        return totstring
+
 
 
 class Player(Ship):

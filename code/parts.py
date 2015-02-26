@@ -365,8 +365,8 @@ class Part(Floater):
             self.sendkill = 1
 
     def getJson(self):
-        return toHEX(self.color) + self.name
-
+        # return toHEX(self.color) + ' ' + self.name
+        return  self.name
 
 
 class Dummy(Part):
