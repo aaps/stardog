@@ -1,4 +1,10 @@
 [![Build Status](https://travis-ci.org/aaps/stardog.svg?branch=master)](https://travis-ci.org/aaps/stardog)
+[![Language](https://img.shields.io/badge/language-python-blue.svg?style=flat
+)](https://www.python.org)
+[![Module](https://img.shields.io/badge/module-pygame-brightgreen.svg?style=flat
+)](http://www.pygame.org/news.html)
+[![Release](https://img.shields.io/badge/release-v0.6.3-orange.svg?style=flat
+)](https://github.com/aaps/stardog)
 
 
 Credits
@@ -16,16 +22,14 @@ or
 python stardog.py mode x y
 
 where mode is f for fullscreen, w for windowed, at resolution x,y.  Omit x,y for max resolution. 
-Stardog requires Python 2.6ish and Pygame.  Stardog will run faster if Psyco is installed.
-(This assumes python is in your path variable.)
+Stardog requires Python 2.6ish and Pygame.
 
 Controls:
 ===
 * Enter: menu
-* Tab: radar
 * Del: self-destruct
 * wasd/arrows: thrust and turn
-* q/e: strafe
+* q/e: strafe (if side engines are insalled)
 * ctrl: shoot
 * space: launch missiles
 * Mouse: move to turn, left click to shoot, right click to thrust
@@ -34,7 +38,7 @@ Controls:
 * g/h: target planets
 * b/n: target parts
 
-Keys can be changed in the menu. If you want to use the keyboard, you should probably disable mouse control in the keys menu (otherwise your ship will keep turning towards the mouse).
+Keys can be changed in the menu. If you want to use the keyboard, you should probably disable mouse control in the keys menu (otherwise your ship will keep turning towards the mouse). (still true ?)
 
 This is still pre-alpha code.  I'm releasing it with hopes of attracting critism and contributers.
 If you are interested in contributing to the code, graphics, art, AI, plot, etc., please email me.
