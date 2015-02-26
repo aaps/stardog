@@ -5,6 +5,8 @@
 )](http://www.pygame.org/news.html)
 [![Release](https://img.shields.io/badge/release-v0.6.3-orange.svg?style=flat
 )](https://github.com/aaps/stardog)
+[![Release](https://img.shields.io/badge/licence-gpl-blue.svg?style=flat
+)](http://www.gnu.org/copyleft/gpl.html)
 
 
 Credits

@@ -33,14 +33,12 @@ class IntroMenu(TopLevelPanel):
         self.panels = []
         self.addPanel(Label(Rect(120, 50, 400, 20), "STARDOG !", color=SUPER_WHITE, font=BIG_FONT))
         self.addPanel(Label(Rect(120, 80, 400, 20), "The future is annoying !", color=SUPER_WHITE, font=FONT))
-        
-
-
         self.addPanel(Button(Rect(120, 200, 100, 25), self.colorChoose, "Start", font=BIG_FONT, lineout = 1))
         self.addPanel(Button(Rect(120, 240, 100, 25), self.volumeChoose, "Sound", font=BIG_FONT, lineout = 1))
         self.addPanel(Button(Rect(120, 280, 100, 25), self.versionChoose, "Version", font=BIG_FONT, lineout = 1))
         self.addPanel(Button(Rect(120, 320, 100, 25), self.creditsChoose, "Credits", font=BIG_FONT, lineout = 1))
-        self.addPanel(Button(Rect(120, 360, 100, 25), self.quitChoose, "Quit", font=BIG_FONT, lineout = 1))
+        self.addPanel(Button(Rect(120, 360, 100, 25), self.serverChoose, "Server", font=BIG_FONT, lineout = 1))
+        self.addPanel(Button(Rect(120, 400, 100, 25), self.quitChoose, "Quit", font=BIG_FONT, lineout = 1))
 
     def volumeChoose(self):
         self.panels = []
@@ -62,12 +60,9 @@ class IntroMenu(TopLevelPanel):
         self.panels = []
         self.addPanel(Label(Rect(120, 100, 200, 20), "Current Version:", color = SUPER_WHITE, font = BIG_FONT))
         self.addPanel(Label(Rect(120, 140, 200, 20), "Version Avalable:", color = SUPER_WHITE, font = BIG_FONT))
-        
         self.addPanel(FunctionLabel(Rect(320, 100, 200, 20), self.getGameVersion,  font = BIG_FONT))
         self.addPanel(FunctionLabel(Rect(320, 140, 200, 20), self.getRemoteVersion,  font = BIG_FONT))
         self.addPanel(TextBlock(Rect(120,200,400,100), self.versionMessage, color = SUPER_WHITE, font = SMALL_FONT))
-
-        # SHIP_PANEL_BLUE
         self.addPanel(Button( Rect(120, 280, 100, 20), self.checkRemoveVersion, "Check !", FONT, lineout = 1))
         self.addPanel(Button(Rect(320, 280, 100, 20), self.rootChoose, "Back", FONT, lineout = 1))
 
@@ -90,6 +85,17 @@ class IntroMenu(TopLevelPanel):
 
     def checkRemoveVersion(self):
         self.remoteversion = self.game.GGV()
+
+    def serverChoose(self):
+        self.panels = []   
+        self.addPanel(Label(Rect(120, 50, 400, 20), "Choose server !", color=SUPER_WHITE, font=BIG_FONT))
+        self.inputfield = ServerInputField(self, Rect(120,80,500,30))
+        self.inputfield.drawBorder = True
+        self.addPanel(self.inputfield)
+
+        self.addPanel(Button( Rect(240, 280, 100, 20), self.inputfield.choose, "Confirm", FONT, lineout = 1))
+        self.addPanel(Button( Rect(120, 280, 100, 20), self.rootChoose, "Back", FONT, lineout = 1))
+
 
     def colorChoose(self):
         self.panels = []
@@ -193,6 +199,17 @@ class IntroMenu(TopLevelPanel):
         self.game.playerType = type
         self.nameChoose()
 
+    def chooseServer(self, server):
+        self.game.server = server
+        self.colorChoose()
+
+class ServerInputField(InputField):
+    def __init__(self, parent, rect):
+        self.parent = parent
+        InputField.__init__(self, rect, parent.game, self.choose, BIG_FONT, BS1)
+
+    def choose(self):
+        self.parent.chooseServer(self.text)
 
 
 class NameInputField(InputField):
