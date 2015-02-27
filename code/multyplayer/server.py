@@ -47,10 +47,10 @@ class Server(object):
 	def getShipSpawnMessage(self, entity):
 		msg = messages.ShipSpawn()
 		msg.id.value = entity.id
-		msg.id.parts =  JSONEncoder().encode(entity.parts)
-		
-		# msg.name.value = entity.name
-
+		msg.x.value = entity.pos.x
+		msg.y.value = entity.pos.y
+		msg.parts.value =  entity.partsAsJSON()
+		msg.name.value = entity.firstname + " " + entity.secondname
 		return msg
 
 	def getFloaterUpdateMessage(self, entity):
@@ -122,8 +122,8 @@ class Server(object):
 					endpoint.send_reliable_message(message)
 				elif isinstance(floater, Ship):
 					message = self.getShipSpawnMessage(floater)
-					server.send_reliable_message_to_all(message)
-				elif isinstance(floater, Ship):
+					endpoint.send_reliable_message(message)
+				else:
 					message = self.getFloaterSpawnMessage(floater)
 					endpoint.send_reliable_message(message)
 			except:

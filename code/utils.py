@@ -292,3 +292,6 @@ def saveScreenShot(mypath, screen):
 
 def toHEX(color):
     return ''.join(map(chr, color)).encode('hex')
+
+def toRGB(ahex):
+    return (int(ahex[0:2],16), int(ahex[2:4],16), int(ahex[4:6],16))

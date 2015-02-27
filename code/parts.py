@@ -8,6 +8,7 @@ from vec2d import Vec2d
 import copy
 from particles import *
 import sys
+import json
 
 class Port(object):
     def __init__(self, offset, dir, parent):
@@ -364,9 +365,8 @@ class Part(Floater):
         if self.hp <= 0:
             self.sendkill = 1
 
-    def getJson(self):
-        # return toHEX(self.color) + ' ' + self.name
-        return  self.name
+    def getClientData(self):
+        return [self.__class__.__name__, toHEX(self.color), self.shipoffset.inttup(), self.dir]
 
 
 class Dummy(Part):

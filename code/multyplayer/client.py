@@ -3,6 +3,7 @@ import messages
 import time
 from code.vec2d import Vec2d
 from code.floaters import *
+from code.spaceship import *
 
 class GameClient(object):
 	def __init__(self, universe):
@@ -19,11 +20,18 @@ class GameClient(object):
 
 
 	def on_message(self, sender, msg):
-		print len(self.universe.curSystem.floaters)
-		for floater in self.universe.curSystem.floaters:
-			print "floater id:", floater.id
 
-		if legume.messages.message_factory.is_a(msg, 'PlanetSpawn'):
+		if legume.messages.message_factory.is_a(msg, 'ShipSpawn'):
+			pos = Vec2d(msg.x.value, msg.y.value)
+			
+			floater = ServerShip(self.universe, pos, Vec2d(0,0),radius= 10, parts = msg.parts.value)
+			
+			floater.id = msg.id.value
+			if self.universe.curSystem:
+				self.universe.curSystem.floaters.append(floater)
+				self.universe.curSystem.floaters = sorted(self.universe.curSystem.floaters, key=lambda floater: floater.id)
+
+		elif legume.messages.message_factory.is_a(msg, 'PlanetSpawn'):
 			pos = Vec2d(msg.x.value, msg.y.value)
 			floater = ServerPlanetDisk(self.universe, pos, Vec2d(0,0),radius= msg.radius.value)
 			floater.id = msg.id.value

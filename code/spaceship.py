@@ -7,9 +7,11 @@ from partCatalog import *
 from floaters import *
 from pygame.locals import *
 from adjectives import addAdjective
+# from adjectives import PARTS
 from skills import *
 from particles import *
 from scripts import Controllable
+import json
 
 def makeFighter(game, pos, delta, dir = 270, \
                 color = (255, 255, 255),name=("Shippy","mcShipperson"), player = False, partlim=8):
@@ -440,7 +442,6 @@ class Ship(Floater, Controllable):
             self.ports[0].part.draw(self.baseImage)
             self.ports[0].part.draw(self.greyImage, grey=True)
 
-        print self.partsAsJSON(self.ports)
 
 
     def partRollCall(self, part):
@@ -744,19 +745,14 @@ class Ship(Floater, Controllable):
                 #use a state machine ?
                 self.universe.game.menu.parts.inventoryPanel.reset() #TODO: make not suck
 
-    def partsAsJSON(self, ports):
-        totstring = list
+    def partsAsJSON(self):
+        templist = []
+        for part in self.parts:
+            templist.append(part.getClientData())
+        
+        return json.dumps(templist)
+        # return json.dumps([dict(mpn=pn) for pn in templist])
 
-        for port in ports:
-
-
-            
-            if port.part:
-                totstring.append(port.part.getJson())
-                if hasattr(port.part,'ports'):
-                    totstring.append(self.partsAsJSON(port.part.ports))
-
-        return totstring
 
 
 
@@ -798,3 +794,30 @@ class Player(Ship):
         Ship.kill(self)
 
 
+class ServerShip(Floater):
+    
+    def __init__(self, universe, pos, delta, dir=270, radius=50, parts=""):
+        Floater.__init__(self, universe, pos, delta, dir=270, radius=10,image=None)
+        
+        realparts = []
+        
+        partss = json.loads(parts)
+
+        for apart in partss:
+            if len(apart) > 0:
+                aclass = globals()[apart[0]]
+                realparts.append(aclass(universe))
+
+        print realparts  
+        # print toRGB("AA44FF")
+        self.image = pygame.Surface((radius * 2, radius * 2), hardwareFlag | SRCALPHA).convert_alpha()
+        
+        self.tangible = False
+        #find out what the dims of the image need to be from part radius and shipoffset
+        #blit a part image of that type in the image with the part color
+
+    def update(self):
+        
+        if self.hp <= 0:
+            Floater.kill(self)
+        Floater.update(self)

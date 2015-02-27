@@ -6,6 +6,8 @@ from vec2d import Vec2d
 import math
 from particles import *
 from SoundSystem import *
+import json
+# from adjectives import PARTS
 
 
 class Ballistic(object):
@@ -111,6 +113,8 @@ class Floater(pygame.sprite.Sprite, Ballistic):
     def kill(self):
         if self in self.universe.curSystem.floaters:
             self.universe.curSystem.floaters.remove(self)
+
+
 
 
 class ServerFloaterDisk(Floater):
