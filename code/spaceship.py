@@ -746,12 +746,7 @@ class Ship(Floater, Controllable):
                 self.universe.game.menu.parts.inventoryPanel.reset() #TODO: make not suck
 
     def partsAsJSON(self):
-        templist = []
-        for part in self.parts:
-            templist.append(part.getClientData())
-        
-        return json.dumps(templist)
-        # return json.dumps([dict(mpn=pn) for pn in templist])
+        return json.dumps(self.parts[0].Recurparts())
 
 
 
@@ -796,28 +791,82 @@ class Player(Ship):
 
 class ServerShip(Floater):
     
-    def __init__(self, universe, pos, delta, dir=270, radius=50, parts=""):
+    def __init__(self, universe, pos, delta, dir=270, radius=50, partjson=""):
         Floater.__init__(self, universe, pos, delta, dir=270, radius=10,image=None)
+        minX, minY, maxX, maxY = 0, 0, 0, 0
+        self.parts = []
         
-        realparts = []
+        partss = json.loads(partjson)
         
-        partss = json.loads(parts)
+        self.parttree = self.recurPart(partss)
+        
+        self.parts.append(self.parttree)
+        self.parts += self.listParts(self.parttree)
+       
+    
+        minX, minY, maxX, maxY = 0, 0, 0, 0
+        #TODO: ? make the center of the ship the center of mass instead of the 
+        #center of the radii. 
+        for part in self.parts:
+            if isinstance(part, Dummy): continue
+            minX = min(part.offset[0] - part.radius, minX)
+            minY = min(part.offset[1] - part.radius, minY)
+            maxX = max(part.offset[0] + part.radius, maxX)
+            maxY = max(part.offset[1] + part.radius, maxY)
+            # self.detectionscore += part.hp
+        self.radius = max(maxX - minX, maxY - minY) / 2
+        
+        for part in self.parts:
+            print part, part.offset    
 
-        for apart in partss:
-            if len(apart) > 0:
-                aclass = globals()[apart[0]]
-                realparts.append(aclass(universe))
+        size = int(self.radius * 2)
 
-        print realparts  
-        # print toRGB("AA44FF")
-        self.image = pygame.Surface((radius * 2, radius * 2), hardwareFlag | SRCALPHA).convert_alpha()
-        
-        self.tangible = False
-        #find out what the dims of the image need to be from part radius and shipoffset
-        #blit a part image of that type in the image with the part color
+        self.image = pygame.Surface((size, size))
+        for part in self.parts:
+            self.image.blit(pygame.transform.rotate(part.baseImage, -part.dir), (0,0))
+            # self.image.blit(colorShift(, part.color))
+
+        # self.parttree.draw(self.image)
+
 
     def update(self):
         
         if self.hp <= 0:
             Floater.kill(self)
         Floater.update(self)
+
+
+    def recurPart(self, alist):
+        if isinstance(alist[0], basestring): 
+            aclass = globals()[alist[0]]
+            temppart = aclass(self.universe)
+            temppart.offset = alist[2]
+            temppart.color = toRGB(alist[1])
+            if len(alist[4]) > 0:
+                for morelist in alist[4]:
+                    toadd = self.recurPart(morelist)
+                    if not alist[3]:
+                        alist[3] = 0
+                    temppart.addGhostPart(toadd, morelist[0][3])
+            return temppart
+        else:
+            return self.recurPart(alist[0])
+
+
+    def listParts(self, part):
+        templist = []
+
+        if part.ports:
+
+            for port in part.ports:
+                if port.part:
+                    templist.append(port.part)
+                    templist += self.listParts(port.part)                    
+        return templist
+
+
+
+
+
+
+

@@ -45,6 +45,7 @@ class Part(Floater):
         self.animatedImage = None
         self.pickuptimeout = 0
         self.number = -1
+        self.parentport = None
         self.hitByPlayer = False
         self.name = 'part'
         self.part_overlap = 0
@@ -98,12 +99,53 @@ class Part(Floater):
         stats = (self.hp, self.maxhp)
         statString = """%i/%i"""
         return statString % stats
+
+
+    def addGhostPart(self, part, port):
+        from spaceship import Player
+        from strafebat import Strafebat
+        # print self, part, port
+        tempport = port
+        if port in self.ports:
+            pass
+        else:
+            if len(self.ports) > port:
+                port = self.ports[port]
+
+        
+        part.ship = self.ship
+        part.dir = port.dir + self.dir
+        part.offset = self.offset + port.offset.rotated(self.dir) - Vec2d(0,0).rotatedd(part.dir,(part.width - part.part_overlap) / 2)
+
+        part.parentport = tempport
+        part.parent = self
+
+        if isinstance(self.parent, Player) or isinstance(self.parent, Strafebat) or not self.parent:
+            part.shipoffset = part.offset
+        else:
+            part.shipoffset = part.offset + self.parent.shipoffset
+
+        port.part = part
+        
+        #calculate offsets:
+
+        #rotate takes a ccw angle and color.
+        part.image = colorShift(pygame.transform.rotate(part.baseImage, \
+                    -part.dir), part.color)
+        part.greyimage = colorShift(pygame.transform.rotate(part.baseImage, \
+                    -part.dir), (100,100,100))
+
+        if part.animatedBaseImage:
+            part.animatedImage = colorShift(part.animatedBaseImage, part.color)
+
+
         
     def addPart(self, part, port):
         """addPart(part, port) -> connects part to port of this part.
         port can be a port number or a reference to the port."""
         from spaceship import Player
         from strafebat import Strafebat
+        tempport = port
         if port in self.ports:
             pass
         else:
@@ -118,8 +160,8 @@ class Part(Floater):
         part.dir = port.dir + self.dir
         part.offset = self.offset + port.offset.rotated(self.dir) - Vec2d(0,0).rotatedd(part.dir,(part.width - part.part_overlap) / 2)
 
+        part.parentport = tempport
         part.parent = self
-
 
         if isinstance(self.parent, Player) or isinstance(self.parent, Strafebat):
             part.shipoffset = part.offset
@@ -146,11 +188,10 @@ class Part(Floater):
                     -part.dir), part.color)
         part.greyimage = colorShift(pygame.transform.rotate(part.baseImage, \
                     -part.dir), (100,100,100))
-        # part.image.set_colorkey(BLACK)
-        # part.greyimage.set_colorkey(BLACK)
+
         if part.animatedBaseImage:
             part.animatedImage = colorShift(part.animatedBaseImage, part.color)
-            # part.animatedImage.set_colorkey(BLACK)
+
         #unequip the part if it collides with others, except parent(self).
         
 
@@ -365,8 +406,25 @@ class Part(Floater):
         if self.hp <= 0:
             self.sendkill = 1
 
-    def getClientData(self):
-        return [self.__class__.__name__, toHEX(self.color), self.shipoffset.inttup(), self.dir]
+    # def partRecur(self):
+    #     alist = []
+    #     if isinstance(self.parent, Part):
+    #         if self.parent:
+    #             alist.append(self.parent.partRecur())
+    #     alist.append([self.__class__.__name__, toHEX(self.color), self.offset.inttup(), self.parentport])
+    #     return alist
+
+    def Recurparts(self):
+        alist = []
+        children = []
+        for port in self.ports:
+            if port.part:
+                children.append(port.part.Recurparts())
+        alist.append([self.__class__.__name__, toHEX(self.color), self.offset.inttup(),self.parentport , children])
+        return alist
+
+
+
 
 
 class Dummy(Part):

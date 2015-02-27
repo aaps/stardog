@@ -24,7 +24,7 @@ class GameClient(object):
 		if legume.messages.message_factory.is_a(msg, 'ShipSpawn'):
 			pos = Vec2d(msg.x.value, msg.y.value)
 			
-			floater = ServerShip(self.universe, pos, Vec2d(0,0),radius= 10, parts = msg.parts.value)
+			floater = ServerShip(self.universe, pos, Vec2d(0,0),radius= 10, partjson = msg.parts.value)
 			
 			floater.id = msg.id.value
 			if self.universe.curSystem:

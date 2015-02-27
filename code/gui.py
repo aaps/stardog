@@ -2,7 +2,7 @@
 #
 from pygame.locals import *
 from utils import *
-from spaceship import Ship
+from spaceship import Ship, ServerShip
 from planet import Planet
 from parts import *
 from cargo import *
@@ -237,6 +237,10 @@ class RadarField(Drawable):
                         elif isinstance(floater, ServerPlanetDisk):
                             pygame.draw.rect(self.image, (200, 200, 0),
                                              (dotPos[0]-1, dotPos[1]-1, 2, 2))
+                        elif isinstance(floater, ServerShip):
+                            pygame.draw.rect(self.image, (100, 255, 100),
+                                             (dotPos[0]-1, dotPos[1]-1, 2, 2))
+
 
                 elif not isinstance(floater, Planet):
                     color = (255, 0, 0)
