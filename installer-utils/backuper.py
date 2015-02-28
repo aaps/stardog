@@ -8,8 +8,8 @@ import glob
 
 files = []
 formatstring = "%A-%d-%B-%Y"
-
-timestampmax = datetime.datetime.now() + datetime.timedelta(days=64)
+now = datetime.datetime.now()
+timestampmax = now + datetime.timedelta(days=64)
 
 for filename in os.listdir("."):
 	if filename[-4:] == ".zip":
