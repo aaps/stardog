@@ -9,11 +9,9 @@ from gui import *
 class Trigger(object):
     def __init__(self, universe, conditions, actions, repeat=False):
         self.repeat = repeat
-        # if type(conditions) != type([]):
         if not isinstance(conditions, list):
             conditions = [conditions]
         self.conditions = conditions
-        # if type(actions) != type([]):
         if not isinstance(actions, list):
             actions = [actions]
         self.actions = actions

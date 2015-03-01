@@ -166,7 +166,7 @@ class IntroMenu(TopLevelPanel):
         self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'juggernaut', FONT))
         x += 150
         self.addPanel(TypeButton(self, Rect(x,y,image_width, image_height), 'freighter', FONT))
-        # self.addPanel(Button( Rect(50, 350, 100, 20), self.colorChoose, "Back", FONT))
+       
 
     def setMusicVolume(self, value):
         self.musicSys.setVolume(value)
@@ -249,11 +249,7 @@ class TypeButton(Button):
     def choose(self):
         self.parent.chooseType(self.type)
 
-    # def draw(self, surface, rect):
-    #     if self.drawBorder:
-
-    #         diamondRect(surface, self.color, self.rect, self.corners)
-    #     surface.blit(self.image, (self.rect.left+self.lineoutspace, self.rect.top), (0, 0, self.rect.width, self.rect.height))
+    
 
 class Console(Panel):
     
