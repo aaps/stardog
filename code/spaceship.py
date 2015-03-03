@@ -262,46 +262,10 @@ class Ship(Floater, Controllable):
     script = None, color = SUPER_WHITE) 
     script should have an update method that 
     returns (moveDir, target, action)."""
-    mass = 0
-    moment = 0
-    parts = []
-    script = None
-    overedge = False
-    atgateway = None
-    attention = 0
-    detectionscore = 0
-    forwardEngines = []
-    maxhp = 0
-    hp = 0
-    landed = None
-    forwardThrust = 0
-    reverseThrust = 0
-    leftThrust = 0
-    rightThrust = 0
-    torque = 0
-    reverseEngines = []
-    leftEngines = []
-    rightEngines = []
-    guns = []
-    missiles = []
-    gyros = []
-    number = 0
-    numParts = 0
-    curtarget = None
-    firstname = None
-    secondname = None
-    skills = []
-    level = 1
-    partEffects = []
-    effects = []
-    skillEffects = []
-    crewsize = 1
-    gargoholdsize = 5
     
-    partLimit = 8
-    penalty = .1
-    bonus = .05
-    efficiency = 1.
+
+    
+
     #bonuses:
     baseBonuses = {\
     'thrustBonus' : 1., 'torqueBonus' : 1.,\
@@ -319,7 +283,52 @@ class Ship(Floater, Controllable):
                 color = (255, 255, 255), name=("shippy","Mcshipperson"), partlim=8):
         Floater.__init__(self, game.universe, pos, delta, dir, 1)
         Controllable.__init__(self, game)
-
+        self.partLimit = 8
+        self.penalty = .1
+        self.bonus = .05
+        self.efficiency = 1.
+        self.gyros = []
+        self.number = 0
+        self.numParts = 0
+        self.curtarget = None
+        self.firstname = None
+        self.secondname = None
+        self.skills = []
+        self.level = 1
+        self.partEffects = []
+        self.effects = []
+        self.skillEffects = []
+        self.crewsize = 1
+        self.gargoholdsize = 5
+        self.torque = 0
+        self.reverseEngines = []
+        self.leftEngines = []
+        self.rightEngines = []
+        self.guns = []
+        self.missiles = []
+        self.torque = 0
+        self.reverseEngines = []
+        self.leftEngines = []
+        self.rightEngines = []
+        self.guns = []
+        self.missiles = []
+        self.gyros = []
+        self.forwardEngines = []
+        self.maxhp = 0
+        self.hp = 0
+        self.landed = None
+        self.forwardThrust = 0
+        self.reverseThrust = 0
+        self.leftThrust = 0
+        self.rightThrust = 0
+        self.overedge = False
+        self.atgateway = None
+        self.attention = 0
+        self.detectionscore = 0
+        self.mass = 0
+        self.moment = 0
+        self.parts = []
+        self.script = None
         self.universe = game.universe
         self.spawncost = 40
         self.surespawn = True

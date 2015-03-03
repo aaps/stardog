@@ -3,14 +3,15 @@
 from starSystem import *
 
 class Universe(object):
-    starSystems = []
-    curSystem = None
-    game = None
-    player = None
-
-    def __init__(self, game):
+    
+    def __init__(self, game = None):
+        self.starSystems = []
+        self.curSystem = None
+        self.player = None
         self.game = game
-        self.player = game.player
+
+        if game:
+            self.player = game.player
         self.cameras = []
 
     def setPlayer(self, player):

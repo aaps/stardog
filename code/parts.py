@@ -84,8 +84,6 @@ class Part(Floater):
                 port.part.setFPS(fps)
         self.fps = fps
 
-    # def setUniverse(self, universe):
-    #     self.universe = universe
     
     def stats(self):
         stats = (self.hp, self.maxhp, self.mass, len(self.ports))
