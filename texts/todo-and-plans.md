@@ -10,16 +10,25 @@ BEFORE WE CONTINU THIS NEEDS TO BE DONE
 INTRODUCTION STUFF
 ====
 Things you can do if you want to start devving for stardog, easy stuff.
-find a part that has to be made from this file and make it.(code/parts.py)
+find a simple part that has to be made from this file and make it.(code/parts.py) - perhaps minus functionality
+
 tweak the particles that come from damaged parts.(code/parts.py)
+
 add particles to the gateways.(code/planets.py)
-make a ship to choose in the beginning. (code/spaceship.py, code/menus.py)
+
+make a ship to choose in the beginning. (code/spaceship.py, code/menus.py) + this should be easy
+
 Update this text file, put the this that are done from main dish en side dish in the done part
-make a one or two graphics for the cargo, with the magic pink real below
-make a story trigger (code/dialogs.py) based on your own condition (code/plot.py) perhaps ship damage
+
+make a one or two graphics for the cargo, with the magic pink real below + not to much devving, some graphics
+
+make a story trigger (code/dialogs.py) based on your own condition (code/plot.py) perhaps ship damage - you have quite some freedom here, since we dont yet care about the story, minus it can change.
+stuff about the original story can be found here: https://code.google.com/p/stardog/wiki
+
+
 Bonus: make a second set of color bars in the intro menu and give ship parts a secondary color.
 (code/menu.py, code/spaceship.py)
-Bonus: make tests for plot.py and dialogs.py
+Bonus: make tests for plot.py and dialogs.py - tests everybody hates then but we all need them
 
 
 
