@@ -94,9 +94,7 @@ class Game(object):
         self.spaceview = SpaceView(self)
         self.camera.layerAdd(self.spaceview, 3)
         # create a chatconsole for text input capabilities
-        self.chatconsole = ChatConsole(self, Rect(int(self.width/8),
-                                       self.height-40, self.width -
-                                       int(self.width/8), 40))
+        # self.chatconsole = ChatConsole(self, col12row9(self,1,1,4,8))
         # does the universe have a player present in it?
         self.hasPlayer = None
 
@@ -153,6 +151,8 @@ class Game(object):
             self.menu = Menu(self, Rect((self.width - 800) / 2,
                              (self.height - 600) / 2, 800, 600))
 
+            self.chatconsole = ChatConsole(self, col12row9(self,2,11,10,1)
+)
             makeMenuBindings(self.menuScript, self)
             makeGameBindings(self.playerScript, self)
             makeConsoleBindings(self.consoleScript, self)
@@ -161,6 +161,7 @@ class Game(object):
             # self.menu.keys.bindings.bindings = self.playerScript.bindings
             self.menu.keys.bindings.reset()
             self.menu.addScript(self.menuScript)
+
             self.chatconsole.addScript(self.consoleScript)
             self.player.addScript(self.playerScript)
             for x in range(10):

@@ -104,54 +104,37 @@ class Messenger(Drawable):
 class HUD(Drawable):
     def __init__(self, universe):
         Drawable.__init__(self, universe)
-        # self.keys = game.keys
-        self.image = pygame.Surface((70, 220), flags=(SRCALPHA))
+        self.player = universe.game.player
+        self.arect = col12row9(universe.game, 10, 8, 2, 3)
+        self.image = pygame.Surface((self.arect.width, self.arect.height), flags=(SRCALPHA))
+        
+        self.bar1 = LifeBar( universe, 130, False, 10, (255,0,0))
+        self.bar2 = LifeBar( universe, 130, False, 10, (0,255,0))
+        self.bar3 = LifeBar( universe, 130, False, 10, (0,0,255))
 
     def draw(self, surface):
         """updates the HUD and draws it."""
-        self.image.fill(SHIPDAMAGE)
+       
+        self.image.fill((SHIPDAMAGE))
         if self.player:
-            # energy:
-            x = 15
-            y = 20
-            h = 180
+            self.bar1.updateset(0,self.player.energy, 100)
+            self.bar2.updateset(0, self.player.xp, 100)
+            if self.player.maxhp:
+                self.bar3.updateset(0, self.player.hp, 100)
+
+            self.bar1.draw(self.image,(20, 50))
+            self.bar2.draw(self.image, (50, 50))
+            if self.player.maxhp:
+                self.bar3.draw(self.image, (80, 50))
+
             # empty bar
-            pygame.draw.rect(self.image, HUD1, (x, y,
-                             5, h), 1)
-            self.image.blit(FONT.render("E", False, HUD3), (x, y - 20))
-            # full bar
-            bar_y = y+h-h*self.player.energy/self.player.maxEnergy
-            bar_x = x
-            bar_width = 5
-            bar_height = h*self.player.energy/self.player.maxEnergy
-            bar_rect = (bar_x, bar_y, bar_width, bar_height)
-            pygame.draw.rect(self.image, HUD2, bar_rect)
+            pygame.draw.rect(self.image, HUD1, self.arect, 1)
+            self.image.blit(FONT.render("E", False, (255,0,0)), (20, 10))
+            self.image.blit(FONT.render("XP", False, (0,255,0)), (50, 10))
+            if self.player.maxhp:
+                self.image.blit(FONT.render("S", False, (0,0,255)), (80, 10))
 
-            # XP:
-            x += 20
-            # empty bar
-            pygame.draw.rect(self.image, HUD3, (x, y,
-                             5, 180), 1)
-            # full bar
-            pygame.draw.rect(self.image, HUD3,
-                             (x, y+h-h*self.player.xp/self.player.next(), 5,
-                              h * self.player.xp / self.player.next()))
-
-            if(fontModule) and self.player.developmentPoints:
-                self.image.blit(FONT.render(str(self.player.developmentPoints),
-                                False, HUD3), (x-5, y - 20))
-            x += 20
-            if self.player.hp:
-                self.image.blit(FONT.render("S", False, HUD3), (x, y - 20))
-                # empty bar
-                pygame.draw.rect(self.image, HUD3, (x, y, 5, 180), 1)
-                # full bar
-                bar_rect = (x, y+h-h*self.player.hp/self.player.maxhp,
-                            5, h*self.player.hp/self.player.maxhp)
-                pygame.draw.rect(self.image, HUD2, bar_rect)
-
-            # blit the HUD to the screen:
-            hudpos = self.universe.game.width-70, self.universe.game.height-200
+            hudpos = self.arect.x, self.arect.y
             surface.blit(self.image, (hudpos))
 
 
@@ -165,20 +148,19 @@ class RadarField(Drawable):
         self.zoomModifier = 1
         maskimagesize = (self.radarRadius*2, self.radarRadius*2)
         self.maskimage = pygame.Surface(maskimagesize)
-        self.maskimage.fill((0, 0, 80))
+        self.maskimage.fill(SHIPDAMAGE)
         pygame.draw.circle(self.maskimage, BLACK,
                            self.center, self.radarRadius)
         self.maskimage.set_colorkey(BLACK)
         self.targimage = pygame.Surface((8, 8))
-        targetRect(self.targimage, MINI2, BLACK, (4, 4), 2, 2)
         self.targimage.set_colorkey(BLACK)
 
     def draw(self, surface):
         radius = self.radarRadius
         center = self.center
-        self.image.fill((0, 0, 80))
+        # self.image.fill((255, 0, 0))
         scale = self.radarRadius * self.zoomModifier
-        pygame.draw.circle(self.image, (0, 0, 60),
+        pygame.draw.circle(self.image, SHIPDAMAGE2,
                            self.center, self.radarRadius)
         # draw floating part dots:
         if self.player:
@@ -323,6 +305,43 @@ class StarField(Drawable):
                 pygame.draw.line(surface, star[3], (x, y),
                                  (x+xstarlen, y+ystarlen), 1)
 
+class LifeBar(object):
+
+    def __init__(self, universe, length, hori, beginval, color):
+        self.hori = hori
+        if hori:
+            self.rect = Rect(0, 0, length, 5)
+        else:
+            self.rect = Rect(0, 0, 5, length)
+        self.dynamicrect = Rect(1, 1, self.rect.width-2, self.rect.height-2)
+        self.game = universe.game
+        self.length = length
+        self.color = color
+        self.beginvalue = beginval
+        self.image = pygame.Surface((self.rect.width, self.rect.height))
+
+
+
+    def updateset(self, mini ,value, maxi):
+        
+        realval = (value / (maxi-mini))
+        if self.hori and value < self.rect.width and value > 0:
+            self.dynamicrect.width = realval * self.rect.width
+            self.dynamicrect.x = realval / self.rect.width
+        if not self.hori and value < self.rect.height and value > 0:
+            self.dynamicrect.height = realval * self.rect.height
+            self.dynamicrect.y = realval / self.rect.height
+
+
+    def draw(self, surface, offset):
+        if self.game.player:
+
+            pygame.draw.rect(self.image, HUD2, self.rect, 1)
+            
+            pygame.draw.rect(self.image, self.color, self.dynamicrect) 
+            
+            surface.blit(self.image, offset)
+
 
 class BGImage(Drawable):
     pic = None
@@ -339,23 +358,18 @@ class BGImage(Drawable):
 
 class MiniInfo(Drawable):
     color = (100, 100, 255)
-    # font = SMALL_FONT
     # line width
     maxChars = 50
-    bottomleft = 0, 0
     targimage = None
     mutatedimage = None
     texts = []
 
     def __init__(self, universe, font):
         Drawable.__init__(self, universe)
-        self.bottomleft = (2, self.universe.game.height -
-                           int(self.universe.game.height / 4))
         self.font = font
         self.targ = None
-        self.width = int(self.universe.game.width / 8)
-        self.height = int(self.universe.game.height / 4)
-        self.image = pygame.Surface((self.width, self.height))
+        self.rect = col12row9(self.universe.game,0,9,2,3)
+        self.image = pygame.Surface((self.rect.width, self.rect.height))
         self.image.set_alpha(200)
         self.palette = tuple([(i, i, i) for i in range(256)])
 
@@ -367,7 +381,6 @@ class MiniInfo(Drawable):
         self.image.fill((0, 0, 80))
         if self.targ:
             self.texts = []
-            # speed = makeMs(self.targ)
             name = ""
             linedeltastart = Vec2d(10, 180)
             linedirstart = Vec2d(40, 180)
@@ -389,16 +402,16 @@ class MiniInfo(Drawable):
                     self.targimage = self.targ.greyImage
                     # we can realy us some way to make this surface in grayscale, but most solutions have serious drawbacks
                     self.mutatedimage = pygame.transform.rotozoom(self.targimage, 90,2)      
-                offset = ((self.width/2) - (self.mutatedimage.get_width()/2), (self.height/2)-(self.mutatedimage.get_height()/2))
+                offset = ((self.rect.width/2) - (self.mutatedimage.get_width()/2), (self.rect.height/2)-(self.mutatedimage.get_height()/2))
                 self.image.blit(self.mutatedimage, offset)
             elif isinstance(self.targ, Planet):
                 name = self.targ.firstname
                 scale = self.universe.game.radarfield.radarRadius * self.universe.game.radarfield.zoomModifier
-                if (self.targ.radius / scale) < self.width/2:
+                if (self.targ.radius / scale) < self.rect.width/2:
                     r = int(self.targ.radius / scale)
                 else:
-                    r = self.width / 2
-                pygame.draw.circle(self.image, self.targ.color, ((self.width/2,self.height/2)), r)
+                    r = self.rect.width / 2
+                pygame.draw.circle(self.image, self.targ.color, ((self.rect.width/2,self.rect.height/2)), r)
             elif isinstance(self.targ, Part) or isinstance(self.targ, Cargo):
                 name = self.targ.name
                 if not self.targimage == self.targ.baseImage:
@@ -406,14 +419,14 @@ class MiniInfo(Drawable):
                      # we can realy us some way to make this surface in grayscale, but most solutions have serious drawbacks
                     self.mutatedimage = pygame.transform.scale(self.targimage, (self.targimage.get_width()*2,self.targimage.get_height()*2) )
                     self.mutatedimage = colorShift(self.mutatedimage , (100,100,100)) 
-                self.image.blit(self.mutatedimage,(self.width/2,self.height/2))
+                self.image.blit(self.mutatedimage,(self.rect.width/2,self.height/2))
             
             self.texts.append(self.font.render(name , True, self.color))
             self.texts.append(self.font.render(distance , True, self.color))
             self.texts.append(self.font.render("speed: " + makeKMs(self.targ) + "Km/s" , True, self.color))
             for text in self.texts:
                 self.image.blit(text, (0,self.texts.index(text)*15))
-        surface.blit(self.image, self.bottomleft)
+        surface.blit(self.image, (self.rect.x,self.rect.y))
 
 
 

@@ -1,10 +1,3 @@
-BEFORE WE CONTINU THIS NEEDS TO BE DONE
-========================================
-1 write documentation for all functions and classes
-2 write tests for parts and floaters
-3 put txt files in a separate dir [done]
-4 remove all global class variables (there is a proper name for this) (Ship in code/spaceship.py next)
-5 make sure code doesn't run on imports [done, utils can stay the way it is]
 
 
 INTRODUCTION STUFF
@@ -69,6 +62,10 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
+* something that would be nice for in utils would be a grid relative system of x,y positions and width heights.
+
+
+
 * remake the lineout functionality [done]
 * InputField had drawing stuff in update put it in draw [done]
 * jump portals different colors to show in what system you have transported to (the wormhole thing y)

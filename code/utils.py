@@ -13,6 +13,7 @@ import re
 BLACK = (0,0,0)
 MIN_BLACK = (10,10,10)
 SHIPDAMAGE = (0,0,50,200)
+SHIPDAMAGE2 = (0,0,70,200)
 HUD3 = (0,150,50)
 HUD2 = (0,50,250)
 HUD1 = (0,0,150)
@@ -43,7 +44,15 @@ PARTICLE5 = (75,100,250,250)
 PARTICLE6 = (250,100,100,0)
 SUPER_WHITE = (255,255,255)
 
+def col12row9(game, xcol,yrow, withcol, heightrow):
+    rows = 12
+    cols = 12
+    x = int(game.width / cols) * xcol
+    y = int(game.height / rows) * yrow
+    width = int(game.width / cols) * withcol
+    height = int(game.width / rows) * heightrow
 
+    return Rect(x,y,width,height)
 
 hardwareFlag = pygame.HWSURFACE
 

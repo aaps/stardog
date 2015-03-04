@@ -14,7 +14,6 @@ from SoundSystem import *
 
 
 class IntroMenu(TopLevelPanel):
-    # color = CONSOLE_BLUE
 
     def __init__(self, game, rect, corners=[10, 0, 10, 0]):
         TopLevelPanel.__init__(self, rect, corners)
@@ -257,9 +256,12 @@ class Console(Panel):
 
     def __init__(self,rect, game):
         Panel.__init__(self,rect)
-        self.drawBorder = True
-        rect = Rect(10,10,self.rect.width,200)
-        self.inputfield = InputField( rect, game, 200, FONT)
+        
+        # rect = Rect(10,10,self.rect.width,200)
+        
+        self.inputfield = InputField( rect, game, None, FONT)
+        self.drawBorder = False
+        self.inputfield.drawBorder = False
         self.addPanel(self.inputfield)
     
     def handleEvent(self,event):
@@ -269,21 +271,17 @@ class Console(Panel):
 class ChatConsole(TopLevelPanel, Controllable):
     
     activeMenu = None
-    color = CONSOLE_BLUE
+    color = SHIPDAMAGE
     game = None
     
     def __init__(self, game, rect):
         TopLevelPanel.__init__(self, rect)
         Controllable.__init__(self, game, False)
-        self.drawBorder = True
-        subFrameRect = Rect(0, 0, self.rect.width, self.rect.height)
-        self.game = game
+        self.drawBorder = False
         
-        x = 2
-        y = 2
-        h = 24
-        w = 80
-        self.console = Console(subFrameRect, game)
+        self.game = game
+
+        self.console = Console(Rect(10,10, rect.width, rect.height), game)
         self.panels.append(self.console)
 
     
@@ -456,8 +454,6 @@ class PartsPanel(Panel):
 
 class ShipPanel(Selecter):
     
-    
-
     
     def __init__(self, rect, parent, player, descriptionPanel = None):
         Selecter.__init__(self, rect)
