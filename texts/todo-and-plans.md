@@ -62,64 +62,56 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
-* something that would be nice for in utils would be a grid relative system of x,y positions and width heights.
+* something that would be nice for in utils would be a grid relative system of x,y positions and width heights. [partly done, now to put it into play into gui and menu]
 
 
-
-* remake the lineout functionality [done]
-* InputField had drawing stuff in update put it in draw [done]
 * jump portals different colors to show in what system you have transported to (the wormhole thing y)
-* make the color shifter able to shift from other color than magic pink [done]
-
 * part attach blocker doesn't give feedback, should say something like parts overlap so no place
-* make the color shifter able to shift from other color than magic pink [done]
 * make the planet textures into more magic colors and shift them from planet primary color and secondary color
 * if floater reaches edgerad also make it go from one system to another so split camera and player specific functionality from only floater functionality
 * make sure part inherit from cargo, [todo]
-* a text scroll panel that will show text scrolling down (if that is a thing) perhaps with some effect of fade in and out. [done - fade in out]
+
 * a function that could get called on a panel move in of out of panel, like a help on moveover element there is a official name for such an element but i be damned if i know.
 * what to do with the mouse hover branch [delete it]
-* make a function in game or stardog that will check the version of game of stardog in the github repo, if repo is newer give instructions how to update via installer. [done]
+
 * the ui margins and locations should be dependent on camera size and location ?
 * ai can use an fsm to flee attack, explore [using simplefsm] [initial ai states, atack, flee, idle]
-* make 2 gateways in the start system to test jumping [done]
-* make text able to left center right line-out [done]
+
 * does ship still need hp is not all hp contained in the parts ? parts have hp cockpit has hp, so do we ned ship hp.
 * a sentence construction kit for the ai so it can taunt you for example
 * plot triggers wont retrigger of don't have the option to. !!
-* partcount in menu doesn't show the actual part limit. [Done]
+
 * a list in a ship of who is targeting you. targeting target should not go into player or enemy but in ship !!
 * there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.[after chip ai stuff implementation]
 * make sure that enabled is a property of part not of subparts/classes !!
 * does a ship has a reference to the current star-system if no does it need one [no done]
 * the console , input chat console panel hierarchy is a bit much !!
 * really a better way to reset stuff on death, like radar error thing, engine trust should be off menus all inactive !!!
-* a game intro screen [done]
+* a game intro screen [done, ok it could be made more fancy, for now however it is ok]
 * make a screen effect class, that will flash the screen white or something, for jump effect
 * ai can talk to player, when targeting player for example and disengaging [after FSM and better brains ai, and sentence construction kitt]
 * a ai that trys to collect parts and deposit them on his planet [after smarter ai]
 * an small adaptation that makes this standout from other stardog. The accounting software  [NovaBlasters it is for now]
-* make the screen-shots have a incremental number like : screenshot-1, screenshot-2, etc [done]
+
 * make factory's for planets starsystems and ships, the design pattern [after multi-player]
 * a random seed for extra fun !!
 * split out parts and cargo ,different files, part inherits from cargo !!
 * a Cockpit inherits from some classed to have initial functionality, like gyro, battery, but you cant as of yet have different energy consumptions for different parts
-* the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed [done]
+
 * some sessions of bug hunting !!
 * some buttons should not be rebind-able in game, like quit, menu and console
-* make a start menu with: start, options [done]
-* make a options menu with, sound [done]
-* make a sound menu with music volume and fx volume [done]
+
+
 * commenting code !!!
 * instead of flippable part change shoot direction, and mirror image, and make flippable a property of class
 
-* more to vec2d vector work. [almost done]
+* more to vec2d vector work. [as good as done, needs rounding up]
 * engines that are good for space travel but bad for landing and visa versa
 * other sound for bullet impact on shield and plating and on planet !!!
 * instead of restart directly, wait for key press and see your lifeless ship float into the distance. !!
 * make the camera so that it can smoothly transition from one place to another
 * make the game run from the beginning, so if choosing ship and color the game is already running !!
-* cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fit parts on your ship when on planet or structure, when container gets destroyed or disconnected from ship you lose parts until you are at capacity. [done]
+
 * in camera split out functionality make a layer class for the layers that will not do the drawing but perhaps the updating, anyhow updates doesn't belong in camera ? [take from multi-player branch and put in master branch] !!!
 
 * adding info from weapon used on part to part, like plasma burns, impact damage etc. [a list of 3 things that append last, future plans]
@@ -135,10 +127,9 @@ side dish
 - void infinity
 - independance war II
 
-* use inno setup to maker this game runnable on windows [done]
-* make a tag on github that the inno setup gets the game from [done]
+
 * make inno setup run a python and pygame test after install and return a good or bad install !
-* put the inno setup script in the git repo [done]
+
 * FunctionLabel need to have a color option !!!
 
 
@@ -211,6 +202,22 @@ unknowns
 
 DONE
 ====
+* use inno setup to maker this game runnable on windows [done]
+* make a tag on github that the inno setup gets the game from [done]
+* put the inno setup script in the git repo [done]
+* cargo container and cargo will work as follows: cargo go's in every container on your ship. in future you can only fit parts on your ship when on planet or structure, when container gets destroyed or disconnected from ship you lose parts until you are at capacity. [done]
+* make a start menu with: start, options [done]
+* make a options menu with, sound [done]
+* the menu binding script part is not finished, there are still raw keys in there and a cleanup is needed [done]
+* partcount in menu doesn't show the actual part limit. [Done]
+* make 2 gateways in the start system to test jumping [done]
+* make text able to left center right line-out [done]
+* make a function in game or stardog that will check the version of game of stardog in the github repo, if repo is newer give instructions how to update via installer. [done]
+* a text scroll panel that will show text scrolling down (if that is a thing) perhaps with some effect of fade in and out. [done - fade in out]
+* make the screen-shots have a incremental number like : screenshot-1, screenshot-2, etc [done]
+* make the color shifter able to shift from other color than magic pink [done, magic rg cyan ? , and orange ?]
+* remake the lineout functionality [done]
+* InputField had drawing stuff in update put it in draw [done]
 * test if solar orbit is possible, [solar orbit is possible did it twice (duality)]
 * finite engine trust speed [it is done, can be tweaked, but is done (Aat)]
 * revamp to use vectors [as good as done Aat]
