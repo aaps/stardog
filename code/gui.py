@@ -117,10 +117,10 @@ class HUD(Drawable):
        
         self.image.fill((SHIPDAMAGE))
         if self.player:
-            self.bar1.updateset(0,self.player.energy, 100)
+            self.bar1.updateset(0,self.player.energy, self.player.maxEnergy)
             self.bar2.updateset(0, self.player.xp, 100)
             if self.player.maxhp:
-                self.bar3.updateset(0, self.player.hp, 100)
+                self.bar3.updateset(0, self.player.hp, self.player.maxhp)
 
             self.bar1.draw(self.image,(20, 50))
             self.bar2.draw(self.image, (50, 50))
@@ -324,18 +324,22 @@ class LifeBar(object):
 
     def updateset(self, mini ,value, maxi):
         
-        realval = (value / (maxi-mini))
+        ratio = (value / (maxi-mini))
+        print (ratio * self.rect.height)
+
         if self.hori and value < self.rect.width and value > 0:
-            self.dynamicrect.width = realval * self.rect.width
-            self.dynamicrect.x = realval / self.rect.width
+            self.dynamicrect.width = (ratio * self.rect.width)
+            self.dynamicrect.x = self.rect.width - (ratio * self.rect.width) 
+
         if not self.hori and value < self.rect.height and value > 0:
-            self.dynamicrect.height = realval * self.rect.height
-            self.dynamicrect.y = realval / self.rect.height
+            self.dynamicrect.height = (ratio * self.rect.height)
+            self.dynamicrect.y = self.rect.height - (ratio * self.rect.height) 
 
 
     def draw(self, surface, offset):
         if self.game.player:
-
+            pygame.draw.rect(self.image, (0,0,0), self.rect)
+            
             pygame.draw.rect(self.image, HUD2, self.rect, 1)
             
             pygame.draw.rect(self.image, self.color, self.dynamicrect) 
