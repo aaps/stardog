@@ -189,9 +189,9 @@ class RadarField(Drawable):
                             modi = 10
                         normalised = result.normalized()
                         pos = []
-                        pos.append(normalised * (100 - modi) + center)
-                        pos.append((normalised * 100).rotated(2) + center)
-                        pos.append((normalised * 100).rotated(-2) + center)
+                        pos.append(normalised * (self.radarRadius - modi) + center)
+                        pos.append((normalised * self.radarRadius).rotated(2) + center)
+                        pos.append((normalised * self.radarRadius).rotated(-2) + center)
                         pygame.draw.polygon(self.image, color, pos)
 
             for floater in self.player.radars[-1].detected:

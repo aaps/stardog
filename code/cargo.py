@@ -90,7 +90,7 @@ class Chemicals(Cargo):
     
     image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
+        self.baseImage = loadImage("res/goods/chemicals.png")
         Cargo.__init__(self, universe)
         
         self.name = "Chemicals"
@@ -133,7 +133,7 @@ class SheetMetal(Cargo):
     
     image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
+        self.baseImage = loadImage("res/goods/sheetmetal.png")
         Cargo.__init__(self, universe)
         
         self.name = "Sheet metal"
@@ -300,7 +300,7 @@ class PureWater(Cargo):
     
     image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
+        self.baseImage = loadImage("res/goods/water.png")
         Cargo.__init__(self, universe)
         
         self.name = "Pure water"

@@ -8,6 +8,7 @@ find a simple part that has to be made from this file and make it.(code/parts.py
 tweak the particles that come from damaged parts.(code/parts.py)
 
 add particles to the gateways.(code/planets.py)
+initial make it so that the particlecollector(class) is alwais active, later active when teleport, 0-1 sec particles active, 1 sec teleport, 3 sec deactivate particles.
 
 make a ship to choose in the beginning. (code/spaceship.py, code/menus.py) + this should be easy
 
@@ -22,6 +23,9 @@ stuff about the original story can be found here: https://code.google.com/p/star
 Bonus: make a second set of color bars in the intro menu and give ship parts a secondary color.
 (code/menu.py, code/spaceship.py)
 Bonus: make tests for plot.py and dialogs.py - tests everybody hates then but we all need them
+
+a intro menu option that will show all parts and cargo, that will show off all the parts and cargo, with descriptions, color shifter as well.
+This for kickasery also you can see problems with parts without starting up the whole game.
 
 
 
@@ -69,7 +73,7 @@ side dish
 * part attach blocker doesn't give feedback, should say something like parts overlap so no place
 * make the planet textures into more magic colors and shift them from planet primary color and secondary color
 * if floater reaches edgerad also make it go from one system to another so split camera and player specific functionality from only floater functionality
-* make sure part inherit from cargo, [todo]
+* make sure part inherit from cargo, [todo] !!!
 
 * a function that could get called on a panel move in of out of panel, like a help on moveover element there is a official name for such an element but i be damned if i know.
 * what to do with the mouse hover branch [delete it]
@@ -144,7 +148,7 @@ bugs
 * pure black should not be a color to choose ship from  [done]
 * particle emitters don't have the exact right position in case of part [done]
 * putting engines on cockpit and perhaps other parts off ship will prevent the engine of fingering.
-* trust of engine has the direction of ship not of slot of part [todo !!!]
+* trust of engine has the direction of ship not of slot of part, well the particles i guess [todo !!!]
 * if part targeted and picked up it still exists on target screen  [done]
 * still cant rebind keys
 * particles also alter delta of part they come from, fix that
