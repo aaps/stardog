@@ -64,7 +64,7 @@ class Game(object):
         self.universe.addCamera(self.camera)
 
         # messenger, with controls as first message:
-        self.messenger = Messenger(self.universe, FONT)
+        self.messenger = Messenger(self.universe, BIG_FONT)
         theone = SolarA1(self.universe, "theone", Vec2d(1, 100))
         thesecond = SolarA1(self.universe, "thesecond", Vec2d(1, -100), 2, 1)
         thethird = SolarA1(self.universe, "thethird", Vec2d(1, 200), 2, 1)

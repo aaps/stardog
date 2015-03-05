@@ -46,11 +46,12 @@ class Messenger(Drawable):
         # -1 means the messages stack upward.
         self.font = FONT
         self.dir = dir
-        self.image = pygame.Surface((universe.game.width-204,self.font.get_linesize()))
+        self.rect = col12row9(universe.game, 0, 0, 9, 1)
+        self.image = pygame.Surface((self.rect.width,self.font.get_linesize()))
         # characters per second
         self.speed = 40
         self.image.set_alpha(200)
-        self.topleft = 0, 0
+        # self.topleft = 0, 0
         self.maxMessages = 100
         # seconds after each message
         self.messageDelay = 9
@@ -91,11 +92,11 @@ class Messenger(Drawable):
             self.queue.popleft()
 
     def draw(self, surface):
-        y = self.topleft[1]
+        y = self.rect.y
         for message in self.queue:
             self.image.fill((0, 0, 80))
             self.image.blit(message[0], (0, 0))
-            surface.blit(self.image, (self.topleft[0], y))
+            surface.blit(self.image, (self.rect.x, y))
             y += self.font.get_linesize() * self.dir
 
     def empty(self):
@@ -106,6 +107,8 @@ class HUD(Drawable):
         Drawable.__init__(self, universe)
         self.player = universe.game.player
         self.arect = col12row9(universe.game, 10, 8, 2, 3)
+
+
         self.image = pygame.Surface((self.arect.width, self.arect.height), flags=(SRCALPHA))
         
         self.bar1 = LifeBar( universe, 130, False, 10, (255,0,0))
@@ -141,7 +144,9 @@ class HUD(Drawable):
 class RadarField(Drawable):
     def __init__(self, universe):
         Drawable.__init__(self, universe)
-        self.radarRadius = int(self.universe.game.width / 10)
+        self.rect = col12row9(universe.game, 9, 0, 1, 2)
+        self.rect.width += 43
+        self.radarRadius = self.rect.width
         self.center = (self.radarRadius, self.radarRadius)
         self.image = pygame.Surface((self.radarRadius*2, self.radarRadius*2))
         self.image.set_alpha(200)
@@ -244,7 +249,7 @@ class RadarField(Drawable):
                                self.center, self.radarRadius, 1)
 
             surface.blit(self.image,
-                         (self.universe.game.width-self.image.get_width(), 0))
+                         (self.rect.x, self.rect.y))
 
     def zoomInRadar(self):
         if self.zoomModifier <= 2.4:
@@ -325,8 +330,6 @@ class LifeBar(object):
     def updateset(self, mini ,value, maxi):
         
         ratio = (value / (maxi-mini))
-        print (ratio * self.rect.height)
-
         if self.hori and value < self.rect.width and value > 0:
             self.dynamicrect.width = (ratio * self.rect.width)
             self.dynamicrect.x = self.rect.width - (ratio * self.rect.width) 
@@ -443,9 +446,10 @@ class shipDamage(Drawable):
         self.totalhealth = 0
         self.font = font
         self.shownparts = []
-        self.width = int(self.universe.game.width / 5)
-        self.height = int(self.universe.game.height/ 4 )
-        self.image = pygame.Surface((self.width,self.height))
+        self.rect = col12row9(self.universe.game,9,4,3,3)
+        # self.width = int(self.universe.game.width / 5)
+        # self.height = int(self.universe.game.height/ 4 )
+        self.image = pygame.Surface((self.rect.width,self.rect.height))
         self.image.set_alpha(200)
     
     def update(self):
@@ -478,6 +482,6 @@ class shipDamage(Drawable):
             
             
 
-        surface.blit(self.image, (self.universe.game.width-self.width, 204))
+        surface.blit(self.image, (self.rect.x, self.rect.y))
                 
 
