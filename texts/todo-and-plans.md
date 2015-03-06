@@ -66,7 +66,9 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
-* something that would be nice for in utils would be a grid relative system of x,y positions and width heights. [partly done, now to put it into play into gui and menu]
+
+
+* we could use a class that combines the vec2d and the with and height of a pygame rect, we need to get away from a pure pygame rect for looser coupling to pygame, perhaps we can switch pygame out in the future, on the other hand delta(speed) is dependant on vec2d aswell.
 
 
 * jump portals different colors to show in what system you have transported to (the wormhole thing y)
@@ -206,6 +208,7 @@ unknowns
 
 DONE
 ====
+* something that would be nice for in utils would be a grid relative system of x,y positions and width heights. [done for gui perhaps to be used for menu stuff]
 * use inno setup to maker this game runnable on windows [done]
 * make a tag on github that the inno setup gets the game from [done]
 * put the inno setup script in the git repo [done]

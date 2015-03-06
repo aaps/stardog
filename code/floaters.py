@@ -437,6 +437,7 @@ class RadarDisk(Floater):
 
     def __init__(self, universe, pos, delta, dir=0, radius=10, image=None):
         self.baseImage = None
+        self.rect = Rect(pos.x,pos.y,radius,radius)
         self.color = (0, 0, 0)
         self.mass = 0
         self.tangible = False
@@ -445,8 +446,9 @@ class RadarDisk(Floater):
         self.delta = delta
         self.radius = radius
 
-    def draw(self):
+    def draw(self,offset):
         pass
 
     def update(self):
         pass
+

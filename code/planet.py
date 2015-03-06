@@ -37,6 +37,7 @@ class Planet(Floater):
         self.image = None
         if image:
             self.image = pygame.Surface((radius*2, radius*2), flags = hardwareFlag)
+            self.rect = Rect(0,0,radius*2,radius*2)
             pygame.draw.circle(self.image, self.color, (self.radius, self.radius), int(self.radius))
             tempimg = pygame.transform.scale(image, (radius*2+10,radius*2+10))
             self.image.blit(tempimg, (-5,-5))
@@ -76,12 +77,12 @@ class Planet(Floater):
         for company in self.companys:
             company.update()
 
+        self.rect.center = self.pos.inttup()
+
         # Floater.update(self) # for gravity sensitive planets update
     
     def draw(self, surface, offset = Vec2d(0,0)):
-        
         pos = self.pos - offset
-        
         if self.image:
             Floater.draw(self, surface, offset)
         else:
@@ -138,8 +139,6 @@ class Planet(Floater):
 
 class Star(Planet):
     
-    
-    
     def __init__(self, starsystem, pos, delta = Vec2d(0,0), grav=5000, radius = 3000, image = None):
 
         mass = radius * 100
@@ -148,12 +147,14 @@ class Star(Planet):
         self.planet_damage = 300
         self.landing_speed = -999
         self.firstname = "Star Unknown"
+        self.rect = Rect(0,0,radius*2,radius*2)
         self.emitters.append(RingEmitter( self, self.condAlways , radius, radius+50, 200, 220,  (255,255,255,250), (251,0,0,1), 2, 3, 800, 0, 10, 1, True))
+
+    def update(self):
+        self.rect.center = self.pos.inttup()
 
 
 class Structure(Planet):
-    
-    
     
     def __init__(self, starsystem, pos, delta, grav=5000, color = (100,200,50), radius = 100, image = None):
         Floater.__init__(self, starsystem.universe, pos, Vec2d(0,0), 0, image=image)
@@ -167,12 +168,13 @@ class Structure(Planet):
         self.radius = radius
         #see solarSystem.planet_ship_collision
         self.race = None #race that owns this planet
+        self.rect = Rect(0,0,radius*2,radius*2)
         if image == None:
             self.image = None
         self.inventory = []
 
     def update(self):
-        pass
+        self.rect.center = self.pos.inttup()
 
     def draw(self, surface, offset = Vec2d(0,0)):
         if self.image:
@@ -197,17 +199,17 @@ class Gateway(Planet):
         self.image.set_colorkey(BLACK)
         self.starSystem = starsystem
         maxRadius = 50000 # no gravity felt past this (approximation).
+        self.rect = Rect(0,0,radius*2,radius*2)
         self.tangible = True
         self.g = 5000 # the gravitational constant.
         self.firstname = "Gateway Unknown"
-        # self.rect = None
-
         self.sister = None
         self.mass = mass #determines gravity.
         self.starsystem = starsystem
         self.color = color
         self.race = None 
         self.inventory = []
+
     
     def setSister(self, gateway):
         if isinstance(gateway, Gateway):
@@ -224,6 +226,8 @@ class Gateway(Planet):
                 accel = self.g * (self.mass) / dist2(self, other)
                 angle = (self.pos - other.pos).get_angle()
                 other.delta += Vec2d(0,0).rotatedd(angle, accel) / self.fps
+
+        self.rect.center = self.pos.inttup()
                 
 
     def getSister(self):

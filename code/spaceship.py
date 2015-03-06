@@ -409,9 +409,8 @@ class Ship(Floater, Controllable):
             maxY = max(part.offset[1] + part.radius, maxY)
             self.detectionscore += part.hp
         self.radius = max(maxX - minX, maxY - minY) / 2
-        #recenter:
-        # xCorrection = (maxX + minX) / 2
-        # yCorrection = (maxY + minY) / 2
+        self.rect = Rect(0,0,self.radius*2,self.radius*2)
+
         Correction = Vec2d( (maxX + minX) / 2, (maxY + minY) / 2)
         self.partEffects = []
         self.mass = 1

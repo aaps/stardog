@@ -9,6 +9,7 @@ from gui import *
 import stardog
 from vec2d import Vec2d
 from nameMaker import *
+from Quadtree import *
 
 class StarSystem(object):
 
@@ -18,7 +19,8 @@ class StarSystem(object):
         self.boundrad = boundrad
         self.position = position
         self.edgerad = edgerad
-        self.neighbors = []     
+        self.neighbors = []
+
         self.universe = universe
         self.floaters = pygame.sprite.Group()
         self.spawnScore = 0
@@ -33,6 +35,7 @@ class StarSystem(object):
         self.soundsys.register(self.hitsound)
         self.planets = []
         self.name = ""
+        self.quadtree = None
     
     def addNeighbor(self, starsystem):
         self.neighbors.append(starsystem)
@@ -56,7 +59,6 @@ class StarSystem(object):
                 
                 spawn.id = random.randint(1,1000)
                 if not any(x.id == spawn.id for x in self.floaters):
-                    # print spawn, "Ok"
                     self.spawnScore += spawn.spawncost
                     spawn.starSystem = self
                     self.floaters.add(spawn)
@@ -72,12 +74,13 @@ class StarSystem(object):
             floater.setFPS(self.universe.game.fps)
             floater.update()
 
-        
-        #collision:
-        floaters = self.floaters.sprites()
-        for i in range(len(floaters)):
-            for j in range(i + 1, len(floaters)):
-                self.collide(floaters[i], floaters[j])
+        if self.quadtree:
+            for floater in self.floaters:
+                hitters = self.quadtree.hit(floater.rect)
+                if len(hitters) > 1:
+                    for hitter in hitters:
+                        self.collide(hitter, floater)
+
              
         for floater in self.floaters:
             if floater.pos.get_distance(Vec2d(0,0)) > self.boundrad:
@@ -125,6 +128,7 @@ class StarSystem(object):
         """adds a floater to this game."""
         if isinstance(floater, Player):
             self.floaters.add(floater)
+            self.quadtree = QuadTree(self.floaters)
             
             if self.universe.curSystem == self:
                 init = False
@@ -134,6 +138,7 @@ class StarSystem(object):
                     distanceFromStar = randint(8000, 18000)
                     self.universe.player.pos = self.star.pos.rotatedd(angle, distanceFromStar)
             self.player = floater
+
         else:
             self.toSpawn.append(floater)
 
@@ -145,6 +150,7 @@ class StarSystem(object):
                     floater.starSystem = self
                     self.floaters.add(floater)
                     self.toSpawn.remove(floater)
+                    self.quadtree = QuadTree(self.floaters)
             elif not floater.surespawn:
                 self.toSpawn.remove(floater)
             
