@@ -236,7 +236,7 @@ class TypeButton(Button):
     def __init__(self, parent, rect, type, font):
         Button.__init__(self, rect, self.choose, None, FONT)
         self.drawBorder = True
-        self.image = colorShift(loadImage('res/menus/'+type+'.bmp'),
+        self.image = colorShift(loadImage('res/menus/'+type+'.png'),
                         parent.game.playerColor)
         self.parent = parent
         self.type = type
@@ -354,8 +354,8 @@ class PartsPanel(Panel):
     def __init__(self, rect, game):
         Panel.__init__(self, rect)
         self.drawBorder = False
-        self.baseImage = loadImage('res/menus/partsmenubg.bmp')
-        self.tradeImage = loadImage('res/menus/partstrademenubg.bmp')
+        self.baseImage = loadImage('res/menus/partsmenubg.png')
+        self.tradeImage = loadImage('res/menus/partstrademenubg.png')
         self.player = game.universe.player
         flip = Button(Rect(100, 300, 60, 16), self.flip, " FLIP", FONT)
         remove = Button(Rect(180, 300, 100, 16), self.remove, " REMOVE", FONT)

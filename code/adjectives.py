@@ -7,7 +7,7 @@ from partCatalog import *
 CARGO = [Scrap, Iron, IronOre, Chemicals, Food, Gems, ExMetal, SheetMetal, 
         ConstMat, CompComp, MachParts, Plastics, Explosives, Minerals, AirFilters, 
         PleasureCubes, Alcohol, Textiles, Alcohol, HuskarCigars, Alcohol, ServantDroids, 
-        CloningDevice, PureWater]
+        CloningDevice, PureWater, Aluminium, AluminiumOre, Titanium, TitaniumOre]
 
 PARTS = [LeftCannon, RightCannon, Engine, Gyro, Generator, Battery, BigShield,
          LeftLaser, RightLaser, MissileLauncher, MachineGun, FighterShield,

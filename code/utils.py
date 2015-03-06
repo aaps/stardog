@@ -74,10 +74,10 @@ except:
     fontModule = False
     print("Font module not found. Text will not be printed.")
 
-if pygame.image.get_extended():
-    ext = ".gif"
-else:
-    ext = ".bmp"
+# if pygame.image.get_extended():
+#     ext = ".gif"
+# else:
+#     ext = ".bmp"
 
 sqrt = math.sqrt
 # random generators:

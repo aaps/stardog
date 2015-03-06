@@ -6,10 +6,14 @@ from floaters import *
 class Cargo(Floater):
     
     def __init__(self, universe):
-        
-        Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = 10)
         if not self.baseImage:
             self.baseImage = loadImage("res/part/default.png")
+        if not self.color:
+            self.color = PART1
+        self.image = colorShift(self.baseImage.copy(), self.color)
+        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = 10, image = self.baseImage)
+        
         # Part.__init__(self, universe)
         self.radius = max(self.baseImage.get_height() / 2, self.baseImage.get_width() / 2)
         self.resources = True
@@ -18,9 +22,7 @@ class Cargo(Floater):
         self.width = self.image.get_width() - 4
         self.height = self.image.get_height() - 4
         self.parent = None
-        self.color = PART1
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        
         self.functions = []
         self.adjectives = []
 
@@ -58,6 +60,7 @@ class Scrap(Cargo):
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/scrap.png")
+        self.color = None
         Cargo.__init__(self, universe)
         
         self.name = "Scrap"
@@ -69,6 +72,7 @@ class Iron(Cargo):
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/iron.png")
+        self.color = None
         Cargo.__init__(self, universe)
         
         self.name = "Iron"
@@ -80,9 +84,54 @@ class IronOre(Cargo):
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/ironore.png")
+        self.color = None
         Cargo.__init__(self, universe)
         
         self.name = "IronOre"
+        self.damage = 1
+
+class TitaniumOre(Cargo):
+    
+    image = None
+    def __init__(self, universe):
+        self.baseImage = loadImage("res/goods/ironore.png")
+        self.color = (255,255,255)
+        Cargo.__init__(self, universe)
+        
+        self.name = "titaniumOre"
+        self.damage = 1
+
+class Titanium(Cargo):
+    
+    image = None
+    def __init__(self, universe):
+        self.baseImage = loadImage("res/goods/iron.png")
+        self.color = (255,255,255)
+        Cargo.__init__(self, universe)
+        
+        self.name = "Titanium"
+        self.damage = 1
+
+class AluminiumOre(Cargo):
+    
+    image = None
+    def __init__(self, universe):
+        self.baseImage = loadImage("res/goods/ironore.png")
+        self.color = (255,100,100)
+        Cargo.__init__(self, universe)
+        
+        self.name = "AluminiumOre"
+        self.damage = 1
+
+class Aluminium(Cargo):
+    
+    image = None
+    def __init__(self, universe):
+        self.baseImage = loadImage("res/goods/iron.png")
+        self.color = (200,200,200)
+        Cargo.__init__(self, universe)
+        
+        self.name = "Aluminium"
         self.damage = 1
 
 
@@ -91,6 +140,7 @@ class Chemicals(Cargo):
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/chemicals.png")
+        self.color = (100,250,100)
         Cargo.__init__(self, universe)
         
         self.name = "Chemicals"
@@ -100,7 +150,8 @@ class Food(Cargo):
     
     image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
+        self.baseImage = loadImage("res/goods/food.png")
+        self.color = (250,250,100)
         Cargo.__init__(self, universe)
         
         self.name = "Food"
@@ -112,6 +163,7 @@ class Gems(Cargo):
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/gems.png")
+        self.color = (250,50,50)
         Cargo.__init__(self, universe)
         
         self.name = "Gems"
@@ -123,6 +175,7 @@ class ExMetal(Cargo):
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/ironore.png")
+        self.color = (100,100,100)
         Cargo.__init__(self, universe)
         
         self.name = "Ex metal"
@@ -134,6 +187,7 @@ class SheetMetal(Cargo):
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/sheetmetal.png")
+        self.color = (100,100,100)
         Cargo.__init__(self, universe)
         
         self.name = "Sheet metal"
@@ -145,6 +199,7 @@ class ConstMat(Cargo):
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/ironore.png")
+        self.color = None
         Cargo.__init__(self, universe)
         
         self.name = "ConstMat"
@@ -156,6 +211,7 @@ class CompComp(Cargo):
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/compcomp.png")
+        self.color = (50,200,50)
         Cargo.__init__(self, universe)
         
         self.name = "CompComp"
@@ -167,6 +223,7 @@ class MachParts(Cargo):
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/machparts.png")
+        self.color = (100,150,100)
         Cargo.__init__(self, universe)
         
         self.name = "MachParts"
@@ -177,6 +234,7 @@ class Plastics(Cargo):
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/plastics.png")
+        self.color = (100,200,200)
         Cargo.__init__(self, universe)
         
         self.name = "Plastics"
@@ -187,7 +245,8 @@ class Explosives(Cargo):
     
     image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
+        self.baseImage = loadImage("res/goods/explosives.png")
+        self.color = (100,150,150)
         Cargo.__init__(self, universe)
         
         self.name = "Explosives"
@@ -197,7 +256,8 @@ class Minerals(Cargo):
     
     image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
+        self.color = (50,50,50)
+        self.baseImage = loadImage("res/goods/minerals.png")
         Cargo.__init__(self, universe)
         
         self.name = "Minerals"
@@ -209,6 +269,7 @@ class AirFilters(Cargo):
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/ironore.png")
+        self.color = None
         Cargo.__init__(self, universe)
         
         self.name = "Air filters"
@@ -218,7 +279,8 @@ class PleasureCubes(Cargo):
     
     image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
+        self.baseImage = loadImage("res/goods/pleasurecubes.png")
+        self.color = (200,200,100)
         Cargo.__init__(self, universe)
         
         self.name = "Pleasure cubes"
@@ -230,6 +292,7 @@ class Alcohol(Cargo):
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/ironore.png")
+        self.color = (150,150,100)
         Cargo.__init__(self, universe)
         
         self.name = "Alcohol"
@@ -240,47 +303,32 @@ class Textiles(Cargo):
     
     image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
+        self.baseImage = loadImage("res/goods/textiles.png")
+        self.color = (200,200,200)
         Cargo.__init__(self, universe)
         
         self.name = "Textiles"
         self.damage = 1
 
-class Alcohol(Cargo):
-    
-    image = None
-    def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
-        Cargo.__init__(self, universe)
-        
-        self.name = "Alcohol"
-        self.damage = 1
 
 class HuskarCigars(Cargo):
     
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/ironore.png")
+        self.color = None
         Cargo.__init__(self, universe)
         
         self.name = "Huskar cigars"
         self.damage = 1
 
-class Alcohol(Cargo):
-    
-    image = None
-    def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
-        Cargo.__init__(self, universe)
-        
-        self.name = "Alcohol"
-        self.damage = 1
 
 class ServantDroids(Cargo):
     
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/ironore.png")
+        self.color = None
         Cargo.__init__(self, universe)
         
         self.name = "Servant droids"
@@ -291,6 +339,7 @@ class CloningDevice(Cargo):
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/ironore.png")
+        self.color = None
         Cargo.__init__(self, universe)
         
         self.name = "Cloning device"
@@ -301,6 +350,7 @@ class PureWater(Cargo):
     image = None
     def __init__(self, universe):
         self.baseImage = loadImage("res/goods/water.png")
+        self.color = (0,100,200)
         Cargo.__init__(self, universe)
         
         self.name = "Pure water"

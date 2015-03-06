@@ -26,7 +26,7 @@ xcf, files that are like psd file for photo shop but then for gimp, gimp = free,
 txt, raw text files, without markup
 ogg files, sound music etc
 md files markdown files, a smarter way of still having good looking text files without knowking full html and or css.  http://daringfireball.net/projects/markdown/syntax
-yml, becouse everybody wants their own fileformat
+yml, becouse everybody wants their own fileformat it is xml allright
 
 
 PROGRAMMING FREE INTRODUCTION
@@ -34,12 +34,21 @@ PROGRAMMING FREE INTRODUCTION
 keeping all text files up to date
 better graphics, more graphics, for cargo parts, different planets, structure modules, gateway modules.
 promoting the game, on twitter github and other places ?
+keep the readme.md up to date
+play the game find bugs.
 
 
 
 PROGRAMMING INTRODUCTION STUFF
 ====
-make sure all the images in the code are png, not bmp not gif, PNG, make sure a png with the same name is avalable.
+
+install sublime ide and package installer: http://www.sublimetext.com/  https://www.youtube.com/watch?v=EjDMqr8PC7c
+
+in utils there is a list of colors, sind the same colors of colors close to eachother and replace them everywhere in the code, are there colors in the code that have net jet been added to that list, add them.
+
+a back button for the ship selection called type in menu.py easy
+
+make sure all the images in the code are png, not bmp not gif, PNG, make sure a png with the same name is avalable.(convert it) 
 Things you can do if you want to start devving for stardog, easy stuff.
 find a simple part that has to be made from this file and make it.(code/parts.py) - perhaps minus functionality
 

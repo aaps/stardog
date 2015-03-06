@@ -114,7 +114,7 @@ class Layer(object):
         self.sprites['norm'][location] = loadImage(location)
         self.sprites['scaled'][location] = self.sprites['norm'][location]
         self.sprites['scalecolor'][location] = colorShift(self.sprites['norm'][location], color).convert_alpha()
-        print self.sprites
+
 
     def getsprite(self, sprite):
         return self.sprites[sprite]

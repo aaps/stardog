@@ -1,3 +1,6 @@
+First realization by:
+	Shanti Pothapragada
+
 Programmers:
 	Aat Karelse
 	Duality
