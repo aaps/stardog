@@ -405,21 +405,21 @@ if __name__ == "__main__":
  
         def testAngles(self):
             v = Vec2d(0, 3)
-            self.assertEquals(v.angle, 90)
+            self.assertEqual(v.angle, 90)
             v2 = Vec2d(v)
             v.rotate(-90)
             self.assertEqual(v.get_angle_between(v2), 90)
             v2.angle -= 90
             self.assertEqual(v.length, v2.length)
-            self.assertEquals(v2.angle, 0)
+            self.assertEqual(v2.angle, 0)
             self.assertEqual(v2, [3, 0])
-            self.assert_((v - v2).length > .00001)
+            self.assertTrue(((v - v2).length > .00001)==False)
             self.assertEqual(v.length, v2.length)
             v2.rotate(300)
-            self.assertAlmostEquals(v.get_angle_between(v2), -60)
+            self.assertAlmostEqual(v.get_angle_between(v2), -60)
             v2.rotate(v2.get_angle_between(v))
             angle = v.get_angle_between(v2)
-            self.assertAlmostEquals(v.get_angle_between(v2), 0)
+            self.assertAlmostEqual(v.get_angle_between(v2), 0)
  
         def testHighLevel(self):
             basis0 = Vec2d(5.0, 0)
@@ -455,13 +455,22 @@ if __name__ == "__main__":
             inplace_vec += .5
             inplace_vec /= (3, 6)
             inplace_vec += Vec2d(-1, -1)
-            self.assertEquals(inplace_vec, inplace_ref)
+            self.assertEqual(inplace_vec, inplace_ref)
  
         def testPickle(self):
             testvec = Vec2d(5, .3)
             testvec_str = pickle.dumps(testvec)
             loaded_vec = pickle.loads(testvec_str)
-            self.assertEquals(testvec, loaded_vec)
+            self.assertEqual(testvec, loaded_vec)
+
+        def testInterpolate(self):
+            v1=Vec2d(6,8)
+            v2=Vec2d(14,12)
+            range=0.1
+            v3=v1.interpolate_to(v2,range)
+            self.assert_(v3.x==6.8)
+            self.assert_(v3.y==8.4)
+
  
     ####################################################################
     unittest.main()
