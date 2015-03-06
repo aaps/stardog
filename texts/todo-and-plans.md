@@ -19,7 +19,6 @@ make a one or two graphics for the cargo, with the magic pink real below + not t
 make a story trigger (code/dialogs.py) based on your own condition (code/plot.py) perhaps ship damage - you have quite some freedom here, since we dont yet care about the story, minus it can change.
 stuff about the original story can be found here: https://code.google.com/p/stardog/wiki
 
-
 Bonus: make a second set of color bars in the intro menu and give ship parts a secondary color.
 (code/menu.py, code/spaceship.py)
 Bonus: make tests for plot.py and dialogs.py - tests everybody hates then but we all need them
@@ -35,19 +34,14 @@ main dish
 
 (warning this file could describe things in faul language, cursing and poor grammar !)
 
-* quad trees (hardmode, after vector and view split-out, will replace current collision check mess)
+* quad trees (partly done, still have to do more collition refactoring)
 
 * wormholes/star gates to other systems. (medium mode ?, after Gravless class) [can travel to other star systems via direct travel now, star gates next] [done]
 
-* make jump part(takes energy to load), bind to j, time out and some effect like explosion after timeout addplayer to other system. [done]
 
-* make everything looser coupled, it seems everything is dependent on game for some reason, this should be avoided and factored, lets begin with the following classes.
-# particles (done)
-# parts (done)
-# floaters (done)
-# planets (done)
-# starsystem (done)
-# camera should be part of universe [done]
+
+* make everything looser coupled, vec2d, particles and some others are quite loosly coupled.
+Find one class to make even looser.
 
 
 * multi-player [hard mode, dependent on code structure] !!
@@ -85,11 +79,11 @@ side dish
 
 * does ship still need hp is not all hp contained in the parts ? parts have hp cockpit has hp, so do we ned ship hp.
 * a sentence construction kit for the ai so it can taunt you for example
-* plot triggers wont retrigger of don't have the option to. !!
+* plot triggers wont retrigger of don't have the option to. [todo] !!
 
 * a list in a ship of who is targeting you. targeting target should not go into player or enemy but in ship !!
 * there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.[after chip ai stuff implementation]
-* make sure that enabled is a property of part not of subparts/classes !!
+* make sure that enabled is a property of part not of subparts/classes [todo] !!
 * does a ship has a reference to the current star-system if no does it need one [no done]
 * the console , input chat console panel hierarchy is a bit much !!
 * really a better way to reset stuff on death, like radar error thing, engine trust should be off menus all inactive !!!
@@ -208,6 +202,7 @@ unknowns
 
 DONE
 ====
+* make jump part(takes energy to load), bind to j, time out and some effect like explosion after timeout addplayer to other system. [done]
 * something that would be nice for in utils would be a grid relative system of x,y positions and width heights. [done for gui perhaps to be used for menu stuff]
 * use inno setup to maker this game runnable on windows [done]
 * make a tag on github that the inno setup gets the game from [done]

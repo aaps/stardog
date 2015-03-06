@@ -111,7 +111,7 @@ class Gems(Cargo):
     
     image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
+        self.baseImage = loadImage("res/goods/gems.png")
         Cargo.__init__(self, universe)
         
         self.name = "Gems"
@@ -155,7 +155,7 @@ class CompComp(Cargo):
     
     image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
+        self.baseImage = loadImage("res/goods/compcomp.png")
         Cargo.__init__(self, universe)
         
         self.name = "CompComp"
@@ -166,7 +166,7 @@ class MachParts(Cargo):
     
     image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
+        self.baseImage = loadImage("res/goods/machparts.png")
         Cargo.__init__(self, universe)
         
         self.name = "MachParts"
@@ -176,7 +176,7 @@ class Plastics(Cargo):
     
     image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
+        self.baseImage = loadImage("res/goods/plastics.png")
         Cargo.__init__(self, universe)
         
         self.name = "Plastics"
