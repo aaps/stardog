@@ -92,7 +92,7 @@ class Game(object):
         self.camera.layerAdd(self.radarfield, 4)
         self.camera.layerAdd(self.tageting, 4)
         # self.spaceview = SpaceView(self)
-        self.camera.layerAdd(SpaceView(self), 3)
+        self.camera.layerAdd(SpaceView(self), 3, True)
         # create a chatconsole for text input capabilities
         # self.chatconsole = ChatConsole(self, col12row9(self,1,1,4,8))
         # does the universe have a player present in it?

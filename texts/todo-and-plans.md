@@ -1,7 +1,45 @@
 
+WHAT IS WHERE
+===
+DIR Screen Shots (well should be clear)
+DIR Code (almost all the python code)
+DIR Installer-utls (stuff to install the game, inno setup script, the setup.exe, python updater/installer script, backupper script)
+DIR Res, all the graphics in packed format for gimp xcf and in format for the game png, all the sound files, music and fx in ogg format
+DIR texts, all the documentation, plans, readmes etc.
+.gitignore is a git file hands off unless know what you are docking
+.requirements is a file for travis, dont touch unless you know what you are docking
+installer_log.txt
+readme.md the first file all github visitors see, keep it neat, keep it uptodate
+stardog.py, the actual game
+testdog.py unit tests, this file can be run to see if all the tests are running ok, if this is not the case something is wrong with the game. This file can never contain to much tests, if you hav time, great.
+updater.py a updater file, there is a updater in installer-util, is this old ?, can it be removed ?
 
-INTRODUCTION STUFF
+
+
+
+FORMATS USED
+===
+py, python files
+pyc, python compiled files, cant edit these python uses these for greater speed
+png, bmp, gif, all graphics used in game.
+xcf, files that are like psd file for photo shop but then for gimp, gimp = free, yes you can help.
+txt, raw text files, without markup
+ogg files, sound music etc
+md files markdown files, a smarter way of still having good looking text files without knowking full html and or css.  http://daringfireball.net/projects/markdown/syntax
+yml, becouse everybody wants their own fileformat
+
+
+PROGRAMMING FREE INTRODUCTION
+===
+keeping all text files up to date
+better graphics, more graphics, for cargo parts, different planets, structure modules, gateway modules.
+promoting the game, on twitter github and other places ?
+
+
+
+PROGRAMMING INTRODUCTION STUFF
 ====
+make sure all the images in the code are png, not bmp not gif, PNG, make sure a png with the same name is avalable.
 Things you can do if you want to start devving for stardog, easy stuff.
 find a simple part that has to be made from this file and make it.(code/parts.py) - perhaps minus functionality
 
@@ -32,6 +70,8 @@ This for kickasery also you can see problems with parts without starting up the 
 main dish
 ==========
 
+are we gonna use: http://pymunk.org/ lets try some examples first.
+
 (warning this file could describe things in faul language, cursing and poor grammar !)
 
 * quad trees (partly done, still have to do more collition refactoring)
@@ -60,8 +100,8 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
-
-
+* made the first steps towards main screen zoom in out, after that possible to 4x up the resolution images
+*lets see if drawable and layer are combinable
 * we could use a class that combines the vec2d and the with and height of a pygame rect, we need to get away from a pure pygame rect for looser coupling to pygame, perhaps we can switch pygame out in the future, on the other hand delta(speed) is dependant on vec2d aswell.
 
 

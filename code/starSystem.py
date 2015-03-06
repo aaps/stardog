@@ -148,6 +148,7 @@ class StarSystem(object):
                 if not any(x.id == floater.id for x in self.floaters):
                     self.spawnScore += floater.spawncost
                     floater.starSystem = self
+                    floater
                     self.floaters.add(floater)
                     self.toSpawn.remove(floater)
                     self.quadtree = QuadTree(self.floaters)

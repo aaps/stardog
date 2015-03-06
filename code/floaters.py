@@ -117,15 +117,22 @@ class Bullet(Floater):
         delta = gun.ship.delta.rotatedd(dir, self.speed)
         if image is None:
             image = loadImage("res/ammo/shot.png")
+        
+
         Floater.__init__(self, universe, pos, delta,
                          dir=dir, radius=gun.bulletRadius,
                          image=image)
+
+        self.universe.cameras[0].getLayer(3).register("res/ammo/shot.png",self.color)
+
         self.range = range
         self.hp = damage
         self.life = 0.
         self.ship = gun.ship
         if 'target' in gun.ship.__dict__:
             self.curtarget = gun.ship.curtarget
+
+
 
         # register the bullet sound
         self.soundsys = self.universe.game.soundSystem
