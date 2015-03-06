@@ -19,6 +19,12 @@ class Camera(object):
         self.layers = []
         self.target = None
 
+    def zoomOut(self):
+        pass
+
+    def zoomIn(self):
+        pass
+
     def update(self):
         """Update all the layers in this camera"""
         for layer in self.layers:
@@ -95,6 +101,8 @@ class Layer(object):
 
     def setZindex(self, index):
         self.zindex = index
+
+
 
     def setDrawable(self, drawable):
         self.drawable = drawable

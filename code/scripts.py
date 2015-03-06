@@ -310,6 +310,9 @@ def makeGameBindings(script, game):
     script.initbind(K_i, game.menu.toggleActive, True)
     script.initbind(K_i, game.player.toggleActive, True)
 
+    script.initbind(K_COMMA, game.camera.zoomOut ,False)
+    script.initbind(K_PERIOD, game.camera.zoomIn ,False)
+
     script.initbind(K_MINUS, game.radarfield.zoomInRadar,False)
     script.initbind(K_EQUALS, game.radarfield.zoomOutRadar,False)
     
@@ -320,8 +323,7 @@ def makePlayerBindings(script, ship):
     script.initbind(K_RIGHT, ship.turnRight,False)
     script.initbind(K_LEFT, ship.turnLeft,False)
     script.initbind(K_RCTRL, ship.shoot,False)
-
-    script.initbind(K_s, ship.reverse,False)
+    
     script.initbind(K_r, ship.toggleRadar,True)
     script.initbind(K_t, ship.targetNextShip,True)
     script.initbind(K_y, ship.targetPrefShip,True)
@@ -330,8 +332,9 @@ def makePlayerBindings(script, ship):
     script.initbind(K_b, ship.targetNextPart,True)
     script.initbind(K_n, ship.targetPrefPart,True)
     script.initbind(K_j, ship.toggleGatewayFocus,True)
+    
     script.initbind(K_w, ship.forward,False)
-
+    script.initbind(K_s, ship.reverse,False)
     script.initbind(K_e, ship.left,False)
     script.initbind(K_q, ship.right,False)
     script.initbind(K_d, ship.turnRight,False)
