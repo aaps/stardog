@@ -1,10 +1,13 @@
 First realization by:
 	Shanti Pothapragada
+	Alexis Diomedi
 
 Programmers:
-	Aat Karelse
+	
 	Duality
+	Aleksandar Petrovic
 	Alexis Diomedi
+	Aat Karelse
 
 Music:
 	Corné Matton

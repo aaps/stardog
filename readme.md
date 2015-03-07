@@ -13,8 +13,19 @@ Credits
 ===
 Stardog, by 
 * Shanti Pothapragada: rgbdreamer@gmail.com
+* Alexis Diomedi
 * docs: http://code.google.com/p/stardog
-* Aaps and Duallity for the latest updates: https://github.com/aaps/stardog
+
+Programmers
+===
+* Duallity
+* Aleksandar Petrovic
+* Alexis Diomedi
+* Aat Karelse
+
+Music
+===
+* . . . Soon
 
 Running:
 ===
