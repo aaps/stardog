@@ -1,16 +1,11 @@
 #game.py
-#
+
 from menus import *
 from scripts import *
-# from starSystem import *
 from gui import *
-# from planet import *
-# from spaceship import *
-# from strafebat import *
 from dialogs import *
 from camera import *
 from universe import *
-# from vec2d import Vec2d
 from plot import *
 import datetime
 import sys
