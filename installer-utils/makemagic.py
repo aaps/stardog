@@ -26,4 +26,4 @@ if len(sys.argv) > 2:
             pixeldata[x,y] = tuple(pix)
                 
 
-    img.save(filename[0] + '/magic-' + filename[1])
+    img.save(filename[0] + '/' + filename[1])
