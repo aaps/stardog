@@ -1,3 +1,4 @@
  /code/*.pyc
 *.pyc
 installer_log.txt
+/.idea
