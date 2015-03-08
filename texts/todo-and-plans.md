@@ -109,6 +109,9 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
+* Look at a better implementation of vector2d after tests that Aleksandar Petrovic made perhaps:
+https://code.google.com/p/python-air-traffic-control/source/browse/trunk/release1/vector2d.py?r=4
+
 * made the first steps towards main screen zoom in out, after that possible to 4x up the resolution images
 *lets see if drawable and layer are combinable
 * we could use a class that combines the vec2d and the with and height of a pygame rect, we need to get away from a pure pygame rect for looser coupling to pygame, perhaps we can switch pygame out in the future, on the other hand delta(speed) is dependant on vec2d aswell.
