@@ -10,6 +10,7 @@ from plot import *
 import datetime
 import sys
 from utils import *
+from multysprites import *
 
 # command parsing (a command line interface for the game)
 # that supports multiple commands, and functions.
@@ -55,7 +56,8 @@ class Game(object):
         # initialize the sound system.
         # every part has to register with this system.
         self.soundSystem = SoundSystem('res/sound/sfxSounds/')
-        self.camera = Camera(self.universe)
+        self.spritesystem = spriteSystem()
+        self.camera = Camera(self.universe, self.spritesystem)
         self.universe.addCamera(self.camera)
 
         # messenger, with controls as first message:

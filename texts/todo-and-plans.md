@@ -110,7 +110,7 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 side dish
 ============
 * Look at a better implementation of vector2d after tests that Aleksandar Petrovic made perhaps:
-https://code.google.com/p/python-air-traffic-control/source/browse/trunk/release1/vector2d.py?r=4
+https://code.google.com/p/python-air-traffic-control/source/browse/trunk/release1/vector2d.py?r=4 [good enough]
 
 * made the first steps towards main screen zoom in out, after that possible to 4x up the resolution images
 *lets see if drawable and layer are combinable

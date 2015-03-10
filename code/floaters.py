@@ -6,6 +6,7 @@ from vec2d import Vec2d
 import math
 from particles import *
 from SoundSystem import *
+from multysprites import *
 
 
 class Ballistic(object):
@@ -123,7 +124,6 @@ class Bullet(Floater):
                          dir=dir, radius=gun.bulletRadius,
                          image=image)
 
-        self.universe.cameras[0].getLayer(3).register("res/ammo/shot.png",self.color)
 
         self.range = range
         self.hp = damage
@@ -132,7 +132,8 @@ class Bullet(Floater):
         if 'target' in gun.ship.__dict__:
             self.curtarget = gun.ship.curtarget
 
-
+        # self.multysprite = multysprite("res/ammo/shot.png", (255,255,255), True)
+        # self.universe.game.spritesystem.register(self.multysprite)
 
         # register the bullet sound
         self.soundsys = self.universe.game.soundSystem

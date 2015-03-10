@@ -2,15 +2,15 @@
 
 from vec2d import Vec2d
 from planet import *
-from floaters import *
+from multysprites import *
 
 
 class Camera(object):
     """A camera class that can keep screen dimentions, and has a location, not much more for now, used to view the game"""
 
-    def __init__(self, universe, pos=Vec2d(0, 0)):
+    def __init__(self, universe, spritesystem, pos=Vec2d(0, 0)):
         self.universe = universe
-        # self.curSystem = universe.curSystem
+        self.spritesystem = spritesystem
         self.pos = pos
         self.width = universe.game.width
         self.height = universe.game.height
@@ -19,22 +19,22 @@ class Camera(object):
         self.transtime = 10
         self.layers = []
         self.target = None
+        self.zoom = 3
 
     def zoomOut(self):
         if self.zoom > 1:
             self.zoom -= 1
+        self.spritesystem.zoom(self.zoom)
 
         for layer in self.layers:
-            if layer.zoomable:
-                layer.zoom(self.zoom)
+            layer.zoomTo(self.zoom)
 
     def zoomIn(self):
         if self.zoom < 6:
             self.zoom += 1
-
+        self.spritesystem.zoom(self.zoom)
         for layer in self.layers:
-            if layer.zoomable:
-                layer.zoom(self.zoom)
+            layer.zoomTo(self.zoom)
 
     def update(self):
         """Update all the layers in this camera"""
@@ -105,24 +105,16 @@ class Layer(object):
         self.drawable = drawable
         self.camera = camera
         self.enabled = True
-        self.sprites = {'norm':{}, 'scaled':{}, 'scalecolor': {}}
+        self.zoom = None
+        if zoomable:
+            self.zoom = 3
         if isinstance(drawable, SpaceView):
             self.drawable.camera = camera
 
-    def register(self, sprite, color):
-        location = str(sprite)
-        self.sprites['norm'][location] = loadImage(location)
-        self.sprites['scaled'][location] = self.sprites['norm'][location]
-        self.sprites['scalecolor'][location] = colorShift(self.sprites['norm'][location], color).convert_alpha()
+    def zoomTo(self, zoom):
+        if self.zoomable:
+            self.zoom = zoom
 
-
-    def getsprite(self, sprite):
-        return self.sprites[sprite]
-
-    def zoom(self, zoom):
-        zoom = zoom * self.sprites[sprite]['norm'].get_rect().width
-        self.sprites[sprite]['scaled'] = pygame.transform.smoothscale(self.sprites[sprite]['norm'],(zoom, zoom))
-        
 
     def setEnabled(self, enabled):
         self.enabled = enabled
@@ -146,6 +138,8 @@ class Layer(object):
                 self.drawable.draw(surface, self.camera.pos)
             else:
                 self.drawable.draw(surface)
+
+
 
 
 class SpaceView(object):
