@@ -1,4 +1,4 @@
-################## http://www.pygame.org/wiki/2DVectorClass ##################
+########################################################################
 import operator
 import math
  
@@ -38,14 +38,14 @@ class Vec2d(object):
     # String representaion (for debugging)
     def __repr__(self):
         return 'Vec2d(%s, %s)' % (self.x, self.y)
- 
+    
     # Comparison
     def __eq__(self, other):
         if hasattr(other, "__getitem__") and len(other) == 2:
             return self.x == other[0] and self.y == other[1]
         else:
             return False
- 
+    
     def __ne__(self, other):
         if hasattr(other, "__getitem__") and len(other) == 2:
             return self.x != other[0] or self.y != other[1]
@@ -96,7 +96,7 @@ class Vec2d(object):
         else:
             return Vec2d(self.x + other, self.y + other)
     __radd__ = __add__
- 
+    
     def __iadd__(self, other):
         if isinstance(other, Vec2d):
             self.x += other.x
@@ -145,7 +145,7 @@ class Vec2d(object):
         else:
             return Vec2d(self.x*other, self.y*other)
     __rmul__ = __mul__
- 
+    
     def __imul__(self, other):
         if isinstance(other, Vec2d):
             self.x *= other.x
@@ -232,26 +232,15 @@ class Vec2d(object):
  
     def __invert__(self):
         return Vec2d(-self.x, -self.y)
-
-    def round(self,n=0):
-        return Vec2d(round(self.x,n),round(self.y,n))
-
-    def inttup(self):
-        return int(self.x),int(self.y)
  
     # vectory functions
+
     def get_length_sqrd(self):
         return self.x**2 + self.y**2
  
     def get_length(self):
-        return math.sqrt(self.x**2 + self.y**2)
+        return math.sqrt(self.x**2 + self.y**2)    
 
-    def __setlength(self, value):
-        length = self.get_length()
-        self.x *= value/length
-        self.y *= value/length
-    length = property(get_length, __setlength, None, "gets or sets the magnitude of the vector")
- 
     def rotate(self, angle_degrees):
         radians = math.radians(angle_degrees)
         cos = math.cos(radians)
@@ -260,7 +249,7 @@ class Vec2d(object):
         y = self.x*sin + self.y*cos
         self.x = x
         self.y = y
- 
+
     def rotated(self, angle_degrees):
         radians = math.radians(angle_degrees)
         cos = math.cos(radians)
@@ -269,28 +258,33 @@ class Vec2d(object):
         y = self.x*sin + self.y*cos
         return Vec2d(x, y)
 
-    def rotatedd(self, angle_degrees, range):
-        radians = math.radians(angle_degrees)
-        x = self.x + range * math.cos(radians) 
-        y = self.y + range * math.sin(radians) 
-        return Vec2d(x, y)
- 
+    def __setlength(self, value):
+        length = self.get_length()
+        self.x *= value/length
+        self.y *= value/length
+    length = property(get_length, __setlength, None, "gets or sets the magnitude of the vector")
+       
     def get_angle(self):
         if (self.get_length_sqrd() == 0):
             return 0
         return math.degrees(math.atan2(self.y, self.x))
-        
     def __setangle(self, angle_degrees):
         self.x = self.length
         self.y = 0
         self.rotate(angle_degrees)
     angle = property(get_angle, __setangle, None, "gets or sets the angle of a vector")
- 
+    
+    def rotatedd(self, angle_degrees, range):
+        radians = math.radians(angle_degrees)
+        x = self.x + range * math.cos(radians) 
+        y = self.y + range * math.sin(radians) 
+        return Vec2d(x, y)
+
     def get_angle_between(self, other):
         cross = self.x*other[1] - self.y*other[0]
         dot = self.x*other[0] + self.y*other[1]
         return math.degrees(math.atan2(cross, dot))
- 
+            
     def normalized(self):
         length = self.length
         if length != 0:
@@ -306,41 +300,41 @@ class Vec2d(object):
  
     def perpendicular(self):
         return Vec2d(-self.y, self.x)
- 
+    
     def perpendicular_normal(self):
         length = self.length
         if length != 0:
             return Vec2d(-self.y/length, self.x/length)
         return Vec2d(self)
- 
+        
     def dot(self, other):
         return float(self.x*other[0] + self.y*other[1])
- 
+        
     def get_distance(self, other):
         return math.sqrt((self.x - other[0])**2 + (self.y - other[1])**2)
- 
+        
     def get_dist_sqrd(self, other):
         return (self.x - other[0])**2 + (self.y - other[1])**2
- 
+
+    def convert_to_basis(self, x_vector, y_vector):
+        return Vec2d(self.dot(x_vector)/x_vector.get_length_sqrd(), self.dot(y_vector)/y_vector.get_length_sqrd())
+
     def projection(self, other):
         other_length_sqrd = other[0]*other[0] + other[1]*other[1]
         projected_length_times_other_length = self.dot(other)
         return other*(projected_length_times_other_length/other_length_sqrd)
- 
-    def cross(self, other):
-        return self.x*other[1] - self.y*other[0]
- 
+
     def interpolate_to(self, other, range):
         return Vec2d(self.x + (other[0] - self.x)*range, self.y + (other[1] - self.y)*range)
- 
-    def convert_to_basis(self, x_vector, y_vector):
-        return Vec2d(self.dot(x_vector)/x_vector.get_length_sqrd(), self.dot(y_vector)/y_vector.get_length_sqrd())
- 
+    
+    def inttup(self):
+        return int(self.x),int(self.y)
+
+    def cross(self, other):
+        return self.x*other[1] - self.y*other[0] 
+
     def __getstate__(self):
         return [self.x, self.y]
- 
+
     def __setstate__(self, dict):
         self.x, self.y = dict
-        
-
-
