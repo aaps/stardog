@@ -35,7 +35,7 @@ class StarSystem(object):
         self.soundsys.register(self.hitsound)
         self.planets = []
         self.name = ""
-        self.quadtree = None
+        self.floaterquad = Index(bbox=[-self.edgerad,-self.edgerad,self.edgerad,self.edgerad])
     
     def addNeighbor(self, starsystem):
         self.neighbors.append(starsystem)
@@ -74,10 +74,11 @@ class StarSystem(object):
             floater.setFPS(self.universe.game.fps)
             floater.update()
 
-        if self.quadtree:
-            self.quadtree.reset(self.floaters)
+        if self.floaterquad:
+            # self.floaterquad.reset(self.floaters)
             for floater in self.floaters:
-                hitters = self.quadtree.hit(floater.rect)
+                # hitters = self.quadtree.hit(floater.rect)
+                hitters = self.floaterquad.intersect(floater.rect)
                 if len(hitters) > 1:
                     for hitter in hitters:
                         self.collide(hitter, floater)
@@ -129,7 +130,9 @@ class StarSystem(object):
         """adds a floater to this game."""
         if isinstance(floater, Player):
             self.floaters.add(floater)
-            self.quadtree = QuadTree(self.floaters)
+            self.floaterquad.insert(floater, floater.rect)
+            # self.quadtree = QuadTree(self.floaters)
+
             
             if self.universe.curSystem == self:
                 init = False
@@ -152,7 +155,8 @@ class StarSystem(object):
                     floater
                     self.floaters.add(floater)
                     self.toSpawn.remove(floater)
-                    self.quadtree = QuadTree(self.floaters)
+                    self.floaterquad.insert(floater, floater.rect)
+                    # self.quadtree = QuadTree(self.floaters)
             elif not floater.surespawn:
                 self.toSpawn.remove(floater)
             

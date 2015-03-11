@@ -152,6 +152,7 @@ class Star(Planet):
 
     def update(self):
         self.rect.center = self.pos.inttup()
+        Planet.update(self)
 
 
 class Structure(Planet):
