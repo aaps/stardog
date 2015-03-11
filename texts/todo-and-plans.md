@@ -106,12 +106,14 @@ http://www.pygame.org/project-OpenGL+Library+(glLib*)-877-.html
 http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 * the possibility for stations and planets to have facility's, like bars, trading hubs, etc [initial facility's, shop, refitter, smelter]
 * power management system for propulsion, weapons, shields and sensors
-
+ted by clean classed instead that the new class structure will be dictated by the stardog code.
 side dish
 ============
+* somekind of environment to make the classes and play with then appart from stardog, this way the structure of stardog will be dicta
+* write tests for multysprite
 * slimming down of vec2d also cleaning up
 * integrate sprite functionality into multysprite, make sure id of images can be in form of: imagename, x, y [todo]
-* a better quadtree https://github.com/karimbahgat/PyQuadTree [todo]
+* a better quadtree https://github.com/karimbahgat/PyQuadTree [done]
 * Look at a better implementation of vector2d after tests that Aleksandar Petrovic made perhaps:
 https://code.google.com/p/python-air-traffic-control/source/browse/trunk/release1/vector2d.py?r=4 [done ]
 
@@ -125,7 +127,7 @@ https://code.google.com/p/python-air-traffic-control/source/browse/trunk/release
 * make the planet textures into more magic colors and shift them from planet primary color and secondary color
 * if floater reaches edgerad also make it go from one system to another so split camera and player specific functionality from only floater functionality
 * make sure part inherit from cargo, [todo] !!!
-* get cargo color right [todo]
+* get cargo color right [done]
 
 
 * a function that could get called on a panel move in of out of panel, like a help on moveover element there is a official name for such an element but i be damned if i know.
@@ -140,7 +142,7 @@ https://code.google.com/p/python-air-traffic-control/source/browse/trunk/release
 
 * a list in a ship of who is targeting you. targeting target should not go into player or enemy but in ship !!
 * there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.[after chip ai stuff implementation]
-* make sure that enabled is a property of part not of subparts/classes [todo] !!
+* make sure that enabled is a property of part not of subparts/classes [done] !!
 * does a ship has a reference to the current star-system if no does it need one [no done]
 * the console , input chat console panel hierarchy is a bit much !!
 * really a better way to reset stuff on death, like radar error thing, engine trust should be off menus all inactive !!!
@@ -201,7 +203,7 @@ bugs
 * pure black should not be a color to choose ship from  [done]
 * particle emitters don't have the exact right position in case of part [done]
 * putting engines on cockpit and perhaps other parts off ship will prevent the engine of fingering.
-* trust of engine has the direction of ship not of slot of part, well the particles i guess [todo !!!]
+* trust of engine has the direction of ship not of slot of part, well the particles i guess [done !!!]
 * if part targeted and picked up it still exists on target screen  [done]
 * still cant rebind keys
 * particles also alter delta of part they come from, fix that

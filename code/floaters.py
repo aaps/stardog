@@ -132,8 +132,8 @@ class Bullet(Floater):
         if 'target' in gun.ship.__dict__:
             self.curtarget = gun.ship.curtarget
 
-        # self.multysprite = multysprite("res/ammo/shot.png", (255,255,255), True)
-        # self.universe.game.spritesystem.register(self.multysprite)
+        self.multysprite = multysprite("res/ammo/shot.png", (255,255,255), True)
+        self.universe.game.spritesystem.registerimg(self.multysprite)
 
         # register the bullet sound
         self.soundsys = self.universe.game.soundSystem
