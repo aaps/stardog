@@ -7,7 +7,10 @@
 )](https://github.com/aaps/stardog)
 [![Release](https://img.shields.io/badge/licence-gpl-blue.svg?style=flat
 )](http://www.gnu.org/copyleft/gpl.html)
-![Join the chat at https://gitter.im/aaps/stardog](https://badges.gitter.im/Join%20Chat.svg)
+[![Chat](https://img.shields.io/badge/chat-gitter-blue.svg?style=flat
+)](https://gitter.im/aaps/stardog)
+
+
 
 
 Credits
