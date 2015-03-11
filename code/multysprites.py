@@ -26,8 +26,8 @@ class spriteSystem(object):
         
         self.sprites.append(self.spritesheets)
 
-    def registerimg(self, name, zoomable=False):
-        self.sprites.append(multysprite(name,color,zoomable))
+    def registerimg(self, sprite, zoomable=False):
+        self.sprites.append(sprite)
 
     def getsprite(self, name):
         return filter(lambda x: x.location == name, self.sprites)
@@ -42,11 +42,12 @@ class spriteSystem(object):
                 
 class multysprite(object):
 
-    def __init__(self, filename, color=(255,255,255,255), zoomable = False):
+    def __init__(self, filename, color=(255,255,255), zoomable = False):
         self.color = color
         self.location = str(filename)
         self.norm = loadImage(self.location)
         self.scaled = self.norm.copy()
+       
         self.scalecolor = colorShift(self.norm, self.color)
         self.zoomable = zoomable
 
@@ -56,4 +57,5 @@ class multysprite(object):
         self.scalecolor = colorShift(self.scaled, self.color)
 
     def setColor(self, color):
+        pass
         self.scalecolor = colorShift(self.scaled, self.color)

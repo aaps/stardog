@@ -107,8 +107,10 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 * the possibility for stations and planets to have facility's, like bars, trading hubs, etc [initial facility's, shop, refitter, smelter]
 * power management system for propulsion, weapons, shields and sensors
 ted by clean classed instead that the new class structure will be dictated by the stardog code.
+
 side dish
 ============
+* get rid of the pygame sprite ingeritance, in for eample floater class
 * somekind of environment to make the classes and play with then appart from stardog, this way the structure of stardog will be dicta
 * write tests for multysprite
 * slimming down of vec2d also cleaning up
@@ -117,7 +119,7 @@ side dish
 * Look at a better implementation of vector2d after tests that Aleksandar Petrovic made perhaps:
 https://code.google.com/p/python-air-traffic-control/source/browse/trunk/release1/vector2d.py?r=4 [done ]
 
-* made the first steps towards main screen zoom in out, after that possible to 4x up the resolution images
+* made the first steps towards main screen zoom in out, after that possible to 4x up the resolution images [todo]
 * lets see if drawable and layer are combinable
 * we could use a class that combines the vec2d and the with and height of a pygame rect, we need to get away from a pure pygame rect for looser coupling to pygame, perhaps we can switch pygame out in the future, on the other hand delta(speed) is dependant on vec2d aswell.
 

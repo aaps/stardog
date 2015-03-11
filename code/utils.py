@@ -172,16 +172,15 @@ def colorShift(surface, color, first = 0, second = 2):
     Returns a new Surface."""
 
     s = pygame.Surface(surface.get_size(), pygame.SRCALPHA, 32).convert_alpha()
-    # s.set_colorkey(colorkey)
     s.blit(surface, (0,0))
     pa = pygame.PixelArray(s)
     for i in range(len(pa)):
         for j in range(len(pa[i])):
             newColor = oldColor = s.get_at((i, j))
-            
             if oldColor[first] == oldColor[second]: #a shade of magic pink
                 newColor = [0, 0, 0, 0]
                 for k in [0,1,2]:
+                    # print oldColor, k
                     newColor[k] = int(oldColor[0] * color[k] / 255 + oldColor[1] * (255 - color[k]) / 255)
             newColor[3] = oldColor[3]
             s.set_at((i, j),newColor)
