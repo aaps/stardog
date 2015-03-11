@@ -75,6 +75,7 @@ class StarSystem(object):
             floater.update()
 
         if self.quadtree:
+            self.quadtree.reset(self.floaters)
             for floater in self.floaters:
                 hitters = self.quadtree.hit(floater.rect)
                 if len(hitters) > 1:
