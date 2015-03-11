@@ -34,6 +34,7 @@ class Part(Floater):
         radius = max(self.baseImage.get_height() / 2, self.baseImage.get_width() / 2)
         Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = radius)
         self.enabled = False
+        # self.color = None
         self.functions = []
         self.functionDescriptions = []
         self.adjectives = []

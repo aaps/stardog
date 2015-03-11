@@ -6,13 +6,23 @@ from floaters import *
 class Cargo(Floater):
     
     def __init__(self, universe):
+        pygame.sprite.Sprite.__init__(self)
+        # Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = 10, image = self.baseImage)
         if not self.baseImage:
             self.baseImage = loadImage("res/part/default.png")
+        
         if not self.color:
             self.color = PART1
+
+        self.universe = universe
+        self.detach_space = 50
+        self.detach_speed = 100
+        self.delta = Vec2d(0,0)
+        self.spawncost = 2
+
         self.image = colorShift(self.baseImage.copy(), self.color)
         self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
-        Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = 10, image = self.baseImage)
+        
         
         # Part.__init__(self, universe)
         self.radius = max(self.baseImage.get_height() / 2, self.baseImage.get_width() / 2)
@@ -22,9 +32,13 @@ class Cargo(Floater):
         self.width = self.image.get_width() - 4
         self.height = self.image.get_height() - 4
         self.parent = None
-        
+        self.rect = self.image.get_rect()
         self.functions = []
         self.adjectives = []
+        self.ports = []
+        self.emitters = []
+        self.tangible = True
+        self.surespawn = False
 
     def update(self):
         if self.pickuptimeout > 0:
@@ -48,12 +62,17 @@ class Cargo(Floater):
         offset = Vec2d(cos(angle) * self.detach_space, sin(angle) * self.detach_space)
         #set physics to drift away from ship (not collide):
         self.image = colorShift(pygame.transform.rotate(self.baseImage, angle), self.color).convert_alpha()
-        # self.image.set_colorkey(BLACK)
-        self.pos = ship.pos + offset
-        self.delta.x = ship.delta.x + (rand()  * detach_speed)
 
-        # self.ship = None
+        self.pos = ship.pos + offset
+        self.delta.x = ship.delta.x + (rand()  * self.detach_speed)
+
         self.universe.curSystem.add(self)
+
+    def setFPS(self, fps):
+        for port in self.ports:
+            if port.part:
+                port.part.setFPS(fps)
+        self.fps = fps
 
 class Scrap(Cargo):
     
