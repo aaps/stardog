@@ -109,11 +109,14 @@ http://www.pygame.org/project-glLib+Reloaded-1326-4684.html
 
 side dish
 ============
+* slimming down of vec2d also cleaning up
+* integrate sprite functionality into multysprite, make sure id of images can be in form of: imagename, x, y [todo]
+* a better quadtree https://github.com/karimbahgat/PyQuadTree [todo]
 * Look at a better implementation of vector2d after tests that Aleksandar Petrovic made perhaps:
-https://code.google.com/p/python-air-traffic-control/source/browse/trunk/release1/vector2d.py?r=4 [good enough]
+https://code.google.com/p/python-air-traffic-control/source/browse/trunk/release1/vector2d.py?r=4 [done ]
 
 * made the first steps towards main screen zoom in out, after that possible to 4x up the resolution images
-*lets see if drawable and layer are combinable
+* lets see if drawable and layer are combinable
 * we could use a class that combines the vec2d and the with and height of a pygame rect, we need to get away from a pure pygame rect for looser coupling to pygame, perhaps we can switch pygame out in the future, on the other hand delta(speed) is dependant on vec2d aswell.
 
 
@@ -122,6 +125,8 @@ https://code.google.com/p/python-air-traffic-control/source/browse/trunk/release
 * make the planet textures into more magic colors and shift them from planet primary color and secondary color
 * if floater reaches edgerad also make it go from one system to another so split camera and player specific functionality from only floater functionality
 * make sure part inherit from cargo, [todo] !!!
+* get cargo color right [todo]
+
 
 * a function that could get called on a panel move in of out of panel, like a help on moveover element there is a official name for such an element but i be damned if i know.
 * what to do with the mouse hover branch [delete it]
@@ -131,7 +136,7 @@ https://code.google.com/p/python-air-traffic-control/source/browse/trunk/release
 
 * does ship still need hp is not all hp contained in the parts ? parts have hp cockpit has hp, so do we ned ship hp.
 * a sentence construction kit for the ai so it can taunt you for example
-* plot triggers wont retrigger of don't have the option to. [todo] !!
+* plot triggers wont retrigger of don't have the option to.!
 
 * a list in a ship of who is targeting you. targeting target should not go into player or enemy but in ship !!
 * there are good points to use turrets with modules on it, like weapons on turrets, shields on turrets and engines on it.[after chip ai stuff implementation]
