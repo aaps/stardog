@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/aaps/stardog.svg?branch=master)](https://travis-ci.org/aaps/stardog)
+[![Coverage Status][coveralls-image]][coveralls-url]
 [![Language](https://img.shields.io/badge/language-python-blue.svg?style=flat
 )](https://www.python.org)
 [![Module](https://img.shields.io/badge/module-pygame-brightgreen.svg?style=flat
