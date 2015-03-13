@@ -750,8 +750,8 @@ class PartTile(DragableSelectable):
         self.drawBorder = False
         bigImage = pygame.transform.scale2x(self.part.image)
         bigImage.set_colorkey(SUPER_WHITE) # idk why this one's white.
-        self.hotSpot = (self.partImageOffset[0] + self.part.width, 
-                        self.partImageOffset[1] + self.part.height)
+        self.hotSpot = (self.partImageOffset[0] + self.part.rect.width, 
+                        self.partImageOffset[1] + self.part.rect.height)
         self.image.blit(bigImage, self.partImageOffset)
         #add text labels:
         rect = Rect(rect)

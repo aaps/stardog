@@ -22,12 +22,12 @@ class StarSystem(object):
         self.neighbors = []
 
         self.universe = universe
-        self.floaters = pygame.sprite.Group()
+        self.floaters = []
         self.spawnScore = 0
         self.spawnMax = 50
         self.toSpawn = []
         self.player = None
-        self.ships = pygame.sprite.Group()
+        self.ships = []
         self.specialOperations = []
         self.bg = BGImage(self.universe) # the background layer
         self.soundsys = self.universe.game.soundSystem
@@ -61,7 +61,7 @@ class StarSystem(object):
                 if not any(x.id == spawn.id for x in self.floaters):
                     self.spawnScore += spawn.spawncost
                     spawn.starSystem = self
-                    self.floaters.add(spawn)
+                    self.floaters.append(spawn)
                 else:
                     self.toSpawn.remove(spawn)
 
@@ -104,7 +104,7 @@ class StarSystem(object):
 
         for planet in self.planets:
             
-            if not planet.ships.sprites() and not isinstance(planet, Star):
+            if not planet.ships and not isinstance(planet, Star):
                 if planet.respawn > 0:#countdown the timer
                     planet.respawn -= 1. / self.universe.game.fps
                     continue
@@ -120,7 +120,7 @@ class StarSystem(object):
                         
                         ship = Strafebat(self.universe, pos,  planet.color, name)
                         
-                        planet.ships.add(ship)
+                        planet.ships.append(ship)
                         self.add(ship)
                         ship.planet = planet
         
@@ -129,7 +129,7 @@ class StarSystem(object):
         
         """adds a floater to this game."""
         if isinstance(floater, Player):
-            self.floaters.add(floater)
+            self.floaters.append(floater)
             self.floaterquad.insert(floater, floater.rect)
             # self.quadtree = QuadTree(self.floaters)
 
@@ -153,7 +153,7 @@ class StarSystem(object):
                     self.spawnScore += floater.spawncost
                     floater.starSystem = self
                     floater
-                    self.floaters.add(floater)
+                    self.floaters.append(floater)
                     self.toSpawn.remove(floater)
                     self.floaterquad.insert(floater, floater.rect)
                     # self.quadtree = QuadTree(self.floaters)
@@ -162,8 +162,8 @@ class StarSystem(object):
             
         
     def empty(self):
-        self.ships.empty()
-        self.floaters.empty()
+        self.ships[:] = []
+        self.floaters[:] = []
 
 
 # refactor this and put all functionality in corresponding classes, be carefull can quickly spinn into mess.
@@ -270,7 +270,7 @@ class StarSystem(object):
 class SolarA1(StarSystem):
     tinyFighters = []
     maxFighters = 15
-    respawnTime = 30
+    respawnTime = 300
     fightersPerMinute = 2
     g=5000
     def __init__(self, universe, name, location ,numPlanets = 10, numStructures = 2, boundrad = 30000, edgerad= 60000):
@@ -333,7 +333,7 @@ class SolarA1(StarSystem):
                 
         for planet in self.planets:
             planet.numShips = 0
-            planet.ships = pygame.sprite.Group()
+
             planet.respawn = 30
             self.add(planet)
 

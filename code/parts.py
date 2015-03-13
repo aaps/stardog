@@ -20,7 +20,7 @@ class Port(object):
     def addPart(self, part):
         self.parent.addPart(part, self.parent.ports.index(self))
 
-class Part(Floater):
+class Part(Cargo):
     """A part of a ship."""
    
     # height, width = 9, 3
@@ -32,7 +32,7 @@ class Part(Floater):
         if not self.baseImage:
             self.baseImage = loadImage("res/part/default.png")
         radius = max(self.baseImage.get_height() / 2, self.baseImage.get_width() / 2)
-        Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = radius)
+        Cargo.__init__(self, universe)
         self.enabled = False
 
         self.functions = []
@@ -457,7 +457,6 @@ class Cannon(Gun):
         return Gun.stats(self) + statString % stats
                 
     def attach(self):
-        self.bulletImage = colorShift(loadImage("res/ammo/shot.png"), bulletColor(self.damage))
         Part.attach(self)
             
     def shoot(self):

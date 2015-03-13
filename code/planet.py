@@ -17,13 +17,17 @@ class Planet(Floater):
     
     def __init__(self, starsystem, pos, delta = Vec2d(0,0), grav=5000, radius = 100, mass = 10000, \
                     color = (100,200,50), image = None, race = None):
-        Floater.__init__(self, starsystem.universe, pos, delta, radius = radius, image = image)
+        # print starsystem
+        Floater.__init__(self, starsystem.universe, pos, delta, radius = radius, spritename = None)
         self.maxRadius = 1000000 # no gravity felt past this (approximation).
         self.planet_damage = .0004
         self.landing_speed = 200 #pixels per second. Under this, no damage.
         self.spawncost = 5
         self.surespawn = True
         self.companys = []
+        self.ships = []
+        self.respawn = 30
+        self.numShips = 0
         self.mass = mass #determines gravity.
         self.color = color
         self.starSystem = starsystem
@@ -55,7 +59,7 @@ class Planet(Floater):
         self.fps = fps
     
     def update(self):
-        for other in self.starSystem.floaters.sprites():
+        for other in self.starSystem.floaters:
             if other != self \
             and not isinstance(other, Structure) \
             and not isinstance(other, Planet) \
@@ -140,9 +144,8 @@ class Planet(Floater):
 class Star(Planet):
     
     def __init__(self, starsystem, pos, delta = Vec2d(0,0), grav=5000, radius = 3000, image = None):
-
         mass = radius * 100
-        color = bulletColor((mass+.1)/250000)
+        color = energyColor((mass+.1)/250000)
         Planet.__init__(self, starsystem, pos, delta, grav, radius, mass, color, image)
         self.planet_damage = 300
         self.landing_speed = -999
@@ -158,7 +161,7 @@ class Star(Planet):
 class Structure(Planet):
     
     def __init__(self, starsystem, pos, delta, grav=5000, color = (100,200,50), radius = 100, image = None):
-        Floater.__init__(self, starsystem.universe, pos, Vec2d(0,0), 0, image=image)
+        Floater.__init__(self, starsystem.universe, pos, Vec2d(0,0), 0, spritename=None)
         self.firstname = "Structure Unknown"
         self.landing_speed = 200 #pixels per second. Under this, no damage.
         self.planet_damage = .0004
@@ -194,7 +197,7 @@ class Gateway(Planet):
     
     
     def __init__(self, starsystem, pos, radius, mass = 10000, color = (100,200,50), image = None, race = None):
-        Floater.__init__(self, starsystem.universe, pos, Vec2d(0,0), radius = radius, image = image)
+        Floater.__init__(self, starsystem.universe, pos, Vec2d(0,0), radius = radius, spritename = None)
         
         self.image = pygame.Surface((radius*2, radius*2), flags = hardwareFlag).convert()
         self.image.set_colorkey(BLACK)
@@ -218,7 +221,7 @@ class Gateway(Planet):
 
     def update(self):
         
-        for other in self.starsystem.floaters.sprites():
+        for other in self.starsystem.floaters:
             if  not isinstance(other, Planet) \
             and not isinstance(other, Structure) \
             and not collisionTest(self, other) \

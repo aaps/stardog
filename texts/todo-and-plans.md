@@ -110,6 +110,7 @@ ted by clean classed instead that the new class structure will be dictated by th
 
 side dish
 ============
+* refactor of most of the gui.py draw methods
 * get rid of the pygame sprite ingeritance, in for eample floater class
 * somekind of environment to make the classes and play with then appart from stardog, this way the structure of stardog will be dicta
 * write tests for multysprite
@@ -128,7 +129,7 @@ https://code.google.com/p/python-air-traffic-control/source/browse/trunk/release
 * part attach blocker doesn't give feedback, should say something like parts overlap so no place
 * make the planet textures into more magic colors and shift them from planet primary color and secondary color
 * if floater reaches edgerad also make it go from one system to another so split camera and player specific functionality from only floater functionality
-* make sure part inherit from cargo, [todo] !!!
+* make sure part inherit from cargo, [done] !!!
 * get cargo color right [done]
 
 

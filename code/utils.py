@@ -221,7 +221,7 @@ def linePointDist(linePoint1, linePoint2, point, infinite = False):
     return dist(closest[0], closest[1], point[0], point[1])
     
 
-def bulletColor(damage):
+def energyColor(damage):
     """generates a color based on how much energy it needs to express"""
     if damage >= 0 and damage <= 2:
         return (255, int(125*damage), int(125*damage), 125)

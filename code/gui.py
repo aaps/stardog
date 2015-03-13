@@ -201,8 +201,7 @@ class RadarField(Drawable):
                 if collisionTest(Floater(self.universe, Vec2d(dotPos), Vec2d(0, 0), 0, 0), Floater(self.universe, Vec2d(center), Vec2d(0,0), 0, 100)):
                     if isinstance(floater, Ship):
                         if self.player.curtarget == floater:
-                            self.image.blit(self.targimage,
-                                            (dotPos[0]-4, dotPos[1]-4))
+                            targetRect(self.image, MINI2, (0,0,0,0), dotPos, 2, 2)
                         pygame.draw.circle(self.image, (250, 250, 0), dotPos, 2)
                         color = floater.color
                         r = 1
@@ -215,9 +214,11 @@ class RadarField(Drawable):
                         if isinstance(floater, Bullet):
                             pygame.draw.rect(self.image, (150, 40, 0),
                                              (dotPos[0]-1, dotPos[1]-1, 2, 2))
-                        elif isinstance(floater, Part) or isinstance(floater, Cargo):
+                        elif isinstance(floater, Cargo):
                             pygame.draw.rect(self.image, (200, 200, 0),
                                              (dotPos[0]-1, dotPos[1]-1, 2, 2))
+                
+
                 elif not isinstance(floater, Planet):
                     color = (255, 0, 0)
                     modi = 7
@@ -231,7 +232,7 @@ class RadarField(Drawable):
                     pos.append((normalised * self.radarRadius).rotated(-2) + center)
                     pygame.draw.polygon(self.image, color, pos)
 
-            psdffs = self.universe.game.universe.curSystem.getNeighborposdiff()
+            psdffs = self.universe.curSystem.getNeighborposdiff()
             for diff in psdffs:
                 angle = diff[1].get_angle()-180
                 ddiamond(self.image, (255, 255, 255),
@@ -365,7 +366,6 @@ class BGImage(Drawable):
 
 class MiniInfo(Drawable):
     color = (100, 100, 255)
-    # line width
     maxChars = 50
     targimage = None
     mutatedimage = None
@@ -426,7 +426,7 @@ class MiniInfo(Drawable):
                      # we can realy us some way to make this surface in grayscale, but most solutions have serious drawbacks
                     self.mutatedimage = pygame.transform.scale(self.targimage, (self.targimage.get_width()*2,self.targimage.get_height()*2) )
                     self.mutatedimage = colorShift(self.mutatedimage , (100,100,100)) 
-                self.image.blit(self.mutatedimage,(self.rect.width/2,self.height/2))
+                self.image.blit(self.mutatedimage,(self.rect.width/2,self.rect.height/2))
             
             self.texts.append(self.font.render(name , True, self.color))
             self.texts.append(self.font.render(distance , True, self.color))

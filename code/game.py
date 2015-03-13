@@ -88,8 +88,8 @@ class Game(object):
         self.camera.layerAdd(self.hud, 4)
         self.camera.layerAdd(self.radarfield, 4)
         self.camera.layerAdd(self.tageting, 4)
-        # self.spaceview = SpaceView(self)
-        self.camera.layerAdd(SpaceView(self), 3, True)
+        self.spaceview = SpaceView(self)
+        self.camera.layerAdd(self.spaceview, 3, True)
         # create a chatconsole for text input capabilities
         # self.chatconsole = ChatConsole(self, col12row9(self,1,1,4,8))
         # does the universe have a player present in it?
@@ -171,13 +171,13 @@ class Game(object):
             self.commandParse = CommandParse(self, self.chatconsole,
                                              self.messenger)
             # check once wether the universe still has a player.
-            self.hasPlayer = self.universe.curSystem.floaters.has(self.player)
+            self.hasPlayer = self.player in self.universe.curSystem.floaters
             # The in-round loop (while player is alive):
             # print self.hasPlayer, self.running
 
             while self.running and self.hasPlayer:
                 # check wether the universe still has a player.
-                self.hasPlayer = self.universe.curSystem.floaters.has(self.player)
+                self.hasPlayer = self.player in self.universe.curSystem.floaters
                 # event polling:
                 pygame.event.pump()
                 for event in pygame.event.get():

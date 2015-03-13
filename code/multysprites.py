@@ -30,15 +30,13 @@ class spriteSystem(object):
         self.sprites.append(sprite)
 
     def getsprite(self, name):
-        return filter(lambda x: x.location == name, self.sprites)
+        return filter(lambda x: x.location == name, self.sprites)[0]
 
     def zoom(self, zoom):
         for sprite in self.sprites:
             if sprite.zoomable:
                 sprite.zoom(zoom)
 
-    def draw(self, sprite):
-        pass
                 
 class multysprite(object):
 
@@ -55,7 +53,13 @@ class multysprite(object):
         zoom = zoom * self.sprites['norm'][sprite].get_rect().width
         self.scaled = pygame.transform.smoothscale(self.sprites[sprite]['norm'],(zoom, zoom))
         self.scalecolor = colorShift(self.scaled, self.color)
+        self.scalegrey = colorShift(self.scaled, (100,100,100))
 
     def setColor(self, color):
-        pass
         self.scalecolor = colorShift(self.scaled, self.color)
+    
+    def drawColor(self, surface, poss=Vec2d(0,0)):
+        surface.blit(self.scalecolor, poss)
+
+    def drawGrey(self, surface, poss=Vec2d(0,0)):
+        surface.blit(self.scalegrey, poss)

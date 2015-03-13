@@ -16,7 +16,7 @@ class Ballistic(object):
         self.delta = delta
 
 
-class Floater(pygame.sprite.Sprite, Ballistic):
+class Floater( Ballistic):
     """creates a floater with position (x,y) in pixels, speed (dx, dy)
     in pixels per second, direction dir
     where 0 is pointing right and 270 is pointing up, radius radius
@@ -27,15 +27,13 @@ class Floater(pygame.sprite.Sprite, Ballistic):
     baseImage = None
 
     def __init__(self, universe, pos, delta, dir=270, radius=10,
-                 image=None):
-        pygame.sprite.Sprite.__init__(self)
+                 spritename=None):
+        Ballistic.__init__(self, pos, delta)
         self.universe = universe
+        self.hasimage = True
         self.dir = dir
-        self.pos = pos
-        # self.spawntimeout = 2
         self.surespawn = False
         self.spawncost = 1
-        self.delta = delta
         self.emitters = []
         self.color = FLOATER
         self.hp = 1
@@ -45,9 +43,16 @@ class Floater(pygame.sprite.Sprite, Ballistic):
         self.lastDamageFrom = None
         self.fps = 10
         self.radius = radius
-        if (not image):
-            image = loadImage("res/parts/default.png")
-        self.image = pygame.transform.rotate(image, -self.dir).convert_alpha()
+   
+        
+        self.multysprite = multysprite("res/ammo/default.png", energyColor((255,0,0)), True)
+        self.image = self.multysprite.scalecolor
+
+        if spritename:
+            self.multysprite = multysprite(self.spritename, energyColor(damage), True)
+            self.image = self.multysprite.scalecolor
+            self.rect = self.image.get_rect()
+
         self.rect = self.image.get_rect()
         self.soundsys = self.universe.game.soundSystem
         self.crashSound = 'se_sdest.wav'
@@ -63,7 +68,8 @@ class Floater(pygame.sprite.Sprite, Ballistic):
     def update(self):
         """updates this floater based on its variables"""
         self.pos += self.delta / self.fps
-        self.rect.center = self.pos.inttup()
+        # print self.pos.inttup()
+        # self.rect.center = self.pos.inttup()
         for emitter in self.emitters:
             emitter.update()
 
@@ -76,9 +82,10 @@ class Floater(pygame.sprite.Sprite, Ballistic):
 
     def draw(self, surface, offset=Vec2d(0, 0)):
         """Blits this floater onto the surface. """
-        poss = (self.pos.x - self.image.get_width() / 2 - offset.x,
-                self.pos.y - self.image.get_height() / 2 - offset.y)
-        surface.blit(self.image, poss)
+        if self.hasimage:
+            poss = (self.pos.x - self.image.get_width() / 2 - offset.x,
+                    self.pos.y - self.image.get_height() / 2 - offset.y)
+            surface.blit(self.image, poss)
         for emitter in self.emitters:
             emitter.draw(surface, offset)
 
@@ -106,6 +113,10 @@ class Floater(pygame.sprite.Sprite, Ballistic):
     def setFPS(self, fps):
         self.fps = fps
 
+    def kill(self):
+        if self in self.universe.curSystem.floaters:
+            self.universe.curSystem.floaters.remove(self)
+
 
 class Bullet(Floater):
     def __init__(self, universe, gun, damage, speed, range, image=None):
@@ -116,15 +127,9 @@ class Bullet(Floater):
         dir += gun.shootDir
         self.speed = speed
         delta = gun.ship.delta.rotatedd(dir, self.speed)
-        if image is None:
-            image = loadImage("res/ammo/shot.png")
-        
-
         Floater.__init__(self, universe, pos, delta,
                          dir=dir, radius=gun.bulletRadius,
-                         image=image)
-
-
+                         spritename=None)
         self.range = range
         self.hp = damage
         self.life = 0.
@@ -132,13 +137,16 @@ class Bullet(Floater):
         if 'target' in gun.ship.__dict__:
             self.curtarget = gun.ship.curtarget
 
-        self.multysprite = multysprite("res/ammo/shot.png", (255,255,255), True)
-        self.universe.game.spritesystem.registerimg(self.multysprite)
+        self.spritename = "res/ammo/shot.png"
+        self.multysprite = multysprite(self.spritename, energyColor(damage), True)
+        self.image = self.multysprite.scalecolor
 
         # register the bullet sound
         self.soundsys = self.universe.game.soundSystem
         self.bulletSound = 'se_explode02.wav'
         self.soundsys.register(self.bulletSound)
+
+
 
     def update(self):
         self.life += 1. / self.fps
@@ -161,6 +169,7 @@ class Bullet(Floater):
 
     def softkill(self):
         # self.detonate()
+        # self.universe.curSystem.floaters.remove(self)
         Floater.kill(self)
 
 
@@ -268,9 +277,10 @@ class Explosion(Floater):
                                flags=hardwareFlag).convert()
         image.set_colorkey(BLACK)
         Floater.__init__(self, universe, pos, delta, radius=0,
-                         image=image)
+                         spritename=None)
         self.maxRadius = int(radius)
         self.delta = delta
+        self.hasimage = False
         self.force = force
         self.radius = 0
         self.time = time
@@ -311,9 +321,10 @@ class Impact(Floater):
                                flags=hardwareFlag).convert()
         image.set_colorkey(BLACK)
         Floater.__init__(self, universe, pos, delta, radius=0,
-                         image=image)
+                         spritename=None)
         self.life = 0
         self.mass = 0
+        self.hasimage = False
         self.maxRadius = int(radius)
         self.radius = 0
         self.tangible = False
@@ -379,7 +390,7 @@ class LaserBeam(Floater):
         self.ship = laser.ship
         self.width = laser.beamWidth
 
-        self.image = colorShift(self.baseImage, (bulletColor(self.damage)))
+        self.image = colorShift(self.baseImage, (energyColor(self.damage)))
         self.image = pygame.transform.scale(self.image, (int(length), 5))
         self.image = pygame.transform.rotate(self.image, -dir).convert_alpha()
 
