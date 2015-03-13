@@ -14,10 +14,10 @@ before_install:
 
 script:
   - python testdog.py
-  coverage run testdog.py
+  - coverage run testdog.py
 
 virtualenv:
   system_site_packages: true
 
 after_success:
-  coveralls
+  - coveralls
