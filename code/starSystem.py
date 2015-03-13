@@ -54,31 +54,21 @@ class StarSystem(object):
     def update(self):
         """Runs the game."""
 
-        for spawn in self.toSpawn:
-            if (self.spawnScore + spawn.spawncost) < self.spawnMax and spawn.surespawn:  
-                
-                spawn.id = random.randint(1,1000)
-                if not any(x.id == spawn.id for x in self.floaters):
-                    self.spawnScore += spawn.spawncost
-                    spawn.starSystem = self
-                    self.floaters.append(spawn)
-                else:
-                    self.toSpawn.remove(spawn)
 
-        
+
+
         if self.spawnScore > 0:
             self.spawnScore -= 1
 
         for floater in self.floaters:
-
             floater.setFPS(self.universe.game.fps)
             floater.update()
 
         if self.floaterquad:
-            # self.floaterquad.reset(self.floaters)
             for floater in self.floaters:
                 # hitters = self.quadtree.hit(floater.rect)
                 hitters = self.floaterquad.intersect(floater.rect)
+                
                 if len(hitters) > 1:
                     for hitter in hitters:
                         self.collide(hitter, floater)
@@ -104,7 +94,7 @@ class StarSystem(object):
 
         for planet in self.planets:
             
-            if not planet.ships and not isinstance(planet, Star):
+            if not planet.ships and not isinstance(planet, Star) and self.spawnScore < self.spawnMax:
                 if planet.respawn > 0:#countdown the timer
                     planet.respawn -= 1. / self.universe.game.fps
                     continue
@@ -126,39 +116,21 @@ class StarSystem(object):
         
         
     def add(self, floater):
-        
-        """adds a floater to this game."""
-        if isinstance(floater, Player):
+        if (self.spawnScore + floater.spawncost) < self.spawnMax or floater.surespawn:
+            if isinstance(floater, Player):
+                angle = randint(0,360)
+                distanceFromStar = randint(8000, 18000)
+                floater.pos = self.star.pos.rotatedd(angle, distanceFromStar)
+
+                self.player = floater
+
+            self.spawnScore += floater.spawncost
+            floater.starSystem = self
+                
+
             self.floaters.append(floater)
             self.floaterquad.insert(floater, floater.rect)
-            # self.quadtree = QuadTree(self.floaters)
 
-            
-            if self.universe.curSystem == self:
-                init = False
-                while self.minDistFromOthers(floater) < 3000 or init == False:
-                    init = True
-                    angle = randint(0,360)
-                    distanceFromStar = randint(8000, 18000)
-                    self.universe.player.pos = self.star.pos.rotatedd(angle, distanceFromStar)
-            self.player = floater
-
-        else:
-            self.toSpawn.append(floater)
-
-            if (self.spawnScore + floater.spawncost) < self.spawnMax:
-                
-                floater.id = random.randint(1,1000)
-                if not any(x.id == floater.id for x in self.floaters):
-                    self.spawnScore += floater.spawncost
-                    floater.starSystem = self
-                    floater
-                    self.floaters.append(floater)
-                    self.toSpawn.remove(floater)
-                    self.floaterquad.insert(floater, floater.rect)
-                    # self.quadtree = QuadTree(self.floaters)
-            elif not floater.surespawn:
-                self.toSpawn.remove(floater)
             
         
     def empty(self):

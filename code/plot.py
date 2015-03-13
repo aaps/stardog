@@ -14,13 +14,13 @@ class Triggers(object):
 		player = universe.getCurrentStarSystem().player
 
 		triggers = [
-			Trigger(universe, self.conditions.timerCondition(universe, 5), 
-				self.actions.messageAction(universe,
-				player.firstname + " " + player.secondname + ': I should turn on the RADAR, where is the R button ?')),
 			Trigger(universe, self.conditions.timerCondition(universe, 10), 
 				self.actions.messageAction(universe,
+				player.firstname + " " + player.secondname + ': I should turn on the RADAR, where is the R button ?')),
+			Trigger(universe, self.conditions.timerCondition(universe, 15), 
+				self.actions.messageAction(universe,
 				player.firstname + " " + player.secondname + ': Wow, the stars are beautiful.')),
-			Trigger(universe, self.conditions.timerCondition(universe, 20), 
+			Trigger(universe, self.conditions.timerCondition(universe, 25), 
 				self.actions.messageAction(universe, 
 				player.firstname + " " + player.secondname + ": I'm thinking thoughts! Have I always had thoughts?  I don't know.")),
 			Trigger(universe, [self.conditions.seePlanetCondition(universe), self.conditions.timerCondition(universe, 20)], 

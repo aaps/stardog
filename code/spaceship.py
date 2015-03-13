@@ -330,8 +330,8 @@ class Ship(Floater, Controllable):
         self.parts = []
         self.script = None
         self.universe = game.universe
-        self.spawncost = 40
-        self.surespawn = True
+        self.spawncost = 10
+        self.surespawn = False
         self.inventory = []
         self.firstname = name[0]
         self.secondname = name[1]
@@ -747,6 +747,7 @@ class Player(Ship):
         self.skills = [Modularity(self), Agility(self), Composure(self)]
         self.xp = 0
         self.developmentPoints = 12
+        self.surespawn = True
 
     def xpQuest(self, xp):
         self.xp += xp

@@ -1,36 +1,38 @@
 # camera.py
 from utils import *
+import zlib
 
 class spriteSystem(object):
 
     def __init__(self):
-        self.sprites = []
+        self.sprites = {}
         self.spritesheets = {}
+        self.defname = "res/parts/default.png"
+        self.default = loadImage(self.defname)
 
-    def addspritesheet(self, spritesheet, xnum, ynum):
+    def addspritesheet(self, filename, xnum, ynum):
         image = loadImage(str(filename))
         dims = (xnum, ynum, round(image.get_width()/xnum), round(image.get_height()/ynum))
         self.spritesheets.update({str(filename):{'image':image,'dimentions':dims}})
-
-
-    def registerss(self, name, (x,y) ,zoomable=False):
-        spritesheet = filter(lambda x: x.location == name, self.spritesheets)
-        if len(spritesheet) > 0:
-            spritesheet[0].dimentions
-            rect = Rect(spritesheet[0].dimentions[0]*spritesheet[0].dimentions[2], spritesheet[0].dimentions[1]*spritesheet[0].dimentions[3], spritesheet[0].dimentions[2], spritesheet[0].dimentions[3] )
-            self.spritesheets.subsurface(rect)
-            self.sprites.append(multysprite(name,color,zoomable))
-            return True
-
-        return False
         
-        self.sprites.append(self.spritesheets)
 
-    def registerimg(self, sprite, zoomable=False):
-        self.sprites.append(sprite)
+    def getsprite(self, name, pos=(0,0), color=(255,255,255), direction=0, zoom=1):
+        ahash = zlib.adler32(name + str(pos) +  str(color) + str(direction) + str(zoom))
+        result = self.sprites.get(ahash)
+        if result:
+            return result
+        else:
+            spritesheet = self.spritesheets.get(name)
+            if spritesheet:
+                dimentions = spritesheet.get('dimentions')
+                rect = Rect(pos[0]*dimentions[2], pos[1]*dimentions[3], dimentions[2], dimentions[3] )
+                surface = spritesheet.get('image').subsurface(rect)
+                amultysprite = multysprite(name, surface, pos, color, direction, zoom)
+                self.sprites.update({ahash:amultysprite}) 
+                return amultysprite
 
-    def getsprite(self, name):
-        return filter(lambda x: x.location == name, self.sprites)[0]
+            return multysprite(self.defname,self.default,(0,0))
+
 
     def zoom(self, zoom):
         for sprite in self.sprites:
@@ -40,26 +42,16 @@ class spriteSystem(object):
                 
 class multysprite(object):
 
-    def __init__(self, filename, color=(255,255,255), zoomable = False):
-        self.color = color
-        self.location = str(filename)
-        self.norm = loadImage(self.location)
-        self.scaled = self.norm.copy()
-       
-        self.scalecolor = colorShift(self.norm, self.color)
-        self.zoomable = zoomable
-
-    def zoom(self, zoom):
-        zoom = zoom * self.sprites['norm'][sprite].get_rect().width
-        self.scaled = pygame.transform.smoothscale(self.sprites[sprite]['norm'],(zoom, zoom))
-        self.scalecolor = colorShift(self.scaled, self.color)
-        self.scalegrey = colorShift(self.scaled, (100,100,100))
-
-    def setColor(self, color):
-        self.scalecolor = colorShift(self.scaled, self.color)
-    
-    def drawColor(self, surface, poss=Vec2d(0,0)):
+    def __init__(self, filename, surface, pos=(1,1), color=(255,255,255), direction = 0, zoom = 1):
+        self.image = surface
+        if color:
+            self.image = colorShift(self.image, color)
+        if zoom:
+            dims = self.image.get_rect()
+            self.image = pygame.transform.scale(self.image, (zoom*dims.width, zoom*dims.height))
+        if direction:
+            self.image = pygame.transform.rotate(self.image, -direction)
+        self.image = self.image.convert_alpha()
+            
+    def draw(self, surface, poss=Vec2d(0,0)):
         surface.blit(self.scalecolor, poss)
-
-    def drawGrey(self, surface, poss=Vec2d(0,0)):
-        surface.blit(self.scalegrey, poss)

@@ -43,15 +43,15 @@ class Floater( Ballistic):
         self.lastDamageFrom = None
         self.fps = 10
         self.radius = radius
-   
-        
-        self.multysprite = multysprite("res/ammo/default.png", energyColor((255,0,0)), True)
-        self.image = self.multysprite.scalecolor
+        self.sprite = self.universe.game.spritesystem.getsprite("res/parts/default.png", (0,0))
+        self.image = self.sprite.image
+        # self.multysprite = multysprite("res/ammo/default.png", energyColor((255,0,0)), True)
+        # self.image = self.multysprite.scalecolor
 
-        if spritename:
-            self.multysprite = multysprite(self.spritename, energyColor(damage), True)
-            self.image = self.multysprite.scalecolor
-            self.rect = self.image.get_rect()
+        # if spritename:
+        #     self.multysprite = multysprite(self.spritename, energyColor(damage), True)
+        #     self.image = self.multysprite.scalecolor
+        self.rect = self.image.get_rect()
 
         self.rect = self.image.get_rect()
         self.soundsys = self.universe.game.soundSystem
@@ -68,7 +68,7 @@ class Floater( Ballistic):
     def update(self):
         """updates this floater based on its variables"""
         self.pos += self.delta / self.fps
-        # print self.pos.inttup()
+
         # self.rect.center = self.pos.inttup()
         for emitter in self.emitters:
             emitter.update()
@@ -77,8 +77,8 @@ class Floater( Ballistic):
 
         self.lastDamageFrom = other
         self.hp -= damage
-        if self.hp <= 0:
-            self.kill()
+        # if self.hp <= 0:
+        #     self.kill()
 
     def draw(self, surface, offset=Vec2d(0, 0)):
         """Blits this floater onto the surface. """
@@ -137,9 +137,8 @@ class Bullet(Floater):
         if 'target' in gun.ship.__dict__:
             self.curtarget = gun.ship.curtarget
 
-        self.spritename = "res/ammo/shot.png"
-        self.multysprite = multysprite(self.spritename, energyColor(damage), True)
-        self.image = self.multysprite.scalecolor
+        self.sprite = self.universe.game.spritesystem.getsprite("res/ammo/shot.png", (0,0), energyColor(damage), dir )
+        self.image = self.sprite.image
 
         # register the bullet sound
         self.soundsys = self.universe.game.soundSystem
@@ -168,8 +167,6 @@ class Bullet(Floater):
         Floater.kill(self)
 
     def softkill(self):
-        # self.detonate()
-        # self.universe.curSystem.floaters.remove(self)
         Floater.kill(self)
 
 

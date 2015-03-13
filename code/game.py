@@ -57,6 +57,8 @@ class Game(object):
         # every part has to register with this system.
         self.soundSystem = SoundSystem('res/sound/sfxSounds/')
         self.spritesystem = spriteSystem()
+        self.spritesystem.addspritesheet("res/parts/default.png", 1,1)
+        self.spritesystem.addspritesheet("res/ammo/shot.png", 1,1)
         self.camera = Camera(self.universe, self.spritesystem)
         self.universe.addCamera(self.camera)
 
@@ -135,6 +137,7 @@ class Game(object):
                                      color=self.playerColor,
                                      name=self.PlayerName,
                                      type=self.playerType)
+            self.playerid = id(self.player)
 
             self.camera.layerAdd(shipDamage(self.universe, FONT), 5)
             self.camera.layerAdd(StarField(self.universe), 2)
