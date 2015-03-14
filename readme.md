@@ -11,7 +11,7 @@
 [![Chat](https://img.shields.io/badge/chat-gitter-blue.svg?style=flat
 )](https://gitter.im/aaps/stardog)
 
-
+<img align="right" height="260" src="http://github.com/aaps/stardog/res/stardog-logo.gif">
 
 
 Credits
