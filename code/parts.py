@@ -620,6 +620,7 @@ class FlakCannon(Cannon):
         
     def shoot(self):
         """fires a bullet."""
+
         if self.acted: return
         self.acted = True
         s = self.ship

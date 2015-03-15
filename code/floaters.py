@@ -16,7 +16,7 @@ class Ballistic(object):
         self.delta = delta
 
 
-class Floater( Ballistic):
+class Floater(Ballistic):
     """creates a floater with position (x,y) in pixels, speed (dx, dy)
     in pixels per second, direction dir
     where 0 is pointing right and 270 is pointing up, radius radius
@@ -52,7 +52,6 @@ class Floater( Ballistic):
         #     self.multysprite = multysprite(self.spritename, energyColor(damage), True)
         #     self.image = self.multysprite.scalecolor
         self.rect = self.image.get_rect()
-
         self.rect = self.image.get_rect()
         self.soundsys = self.universe.game.soundSystem
         self.crashSound = 'se_sdest.wav'
@@ -68,6 +67,8 @@ class Floater( Ballistic):
     def update(self):
         """updates this floater based on its variables"""
         self.pos += self.delta / self.fps
+        self.rect.x = self.pos.x
+        self.rect.y = self.pos.y
 
         # self.rect.center = self.pos.inttup()
         for emitter in self.emitters:
@@ -77,8 +78,8 @@ class Floater( Ballistic):
 
         self.lastDamageFrom = other
         self.hp -= damage
-        # if self.hp <= 0:
-        #     self.kill()
+        if self.hp <= 0:
+            self.kill()
 
     def draw(self, surface, offset=Vec2d(0, 0)):
         """Blits this floater onto the surface. """
@@ -121,8 +122,8 @@ class Floater( Ballistic):
 class Bullet(Floater):
     def __init__(self, universe, gun, damage, speed, range, image=None):
         dir = gun.dir + gun.ship.dir
-        pos = (gun.pos + Vec2d(gun.shootPoint).rotated(dir) +
-               gun.ship.delta / universe.game.fps)
+        pos = (gun.pos + Vec2d(gun.shootPoint).rotated(dir)
+               / universe.game.fps)
         # not needed for the offset, but needed for the dir.
         dir += gun.shootDir
         self.speed = speed

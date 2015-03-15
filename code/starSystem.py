@@ -35,7 +35,7 @@ class StarSystem(object):
         self.soundsys.register(self.hitsound)
         self.planets = []
         self.name = ""
-        self.floaterquad = Index(bbox=[-self.edgerad,-self.edgerad,self.edgerad,self.edgerad])
+
     
     def addNeighbor(self, starsystem):
         self.neighbors.append(starsystem)
@@ -55,8 +55,6 @@ class StarSystem(object):
         """Runs the game."""
 
 
-
-
         if self.spawnScore > 0:
             self.spawnScore -= 1
 
@@ -64,15 +62,15 @@ class StarSystem(object):
             floater.setFPS(self.universe.game.fps)
             floater.update()
 
-        if self.floaterquad:
-            for floater in self.floaters:
-                # hitters = self.quadtree.hit(floater.rect)
-                hitters = self.floaterquad.intersect(floater.rect)
-                
-                if len(hitters) > 1:
-                    for hitter in hitters:
-                        self.collide(hitter, floater)
+        # for floater in self.floaters:
+        #     for hitter in self.floaters:
+        #         self.collide(hitter, floater)
 
+        quad = QuadTree(self.floaters, 3, Rect(-self.edgerad, -self.edgerad,self.edgerad,self.edgerad))
+
+        for floater in self.floaters:
+            for hitter in  quad.hit(floater.rect):
+                self.collide(hitter, floater)
              
         for floater in self.floaters:
             if floater.pos.get_distance(Vec2d(0,0)) > self.boundrad:
@@ -126,12 +124,7 @@ class StarSystem(object):
 
             self.spawnScore += floater.spawncost
             floater.starSystem = self
-                
-
             self.floaters.append(floater)
-            self.floaterquad.insert(floater, floater.rect)
-
-            
         
     def empty(self):
         self.ships[:] = []
