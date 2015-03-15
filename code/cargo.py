@@ -7,7 +7,7 @@ class Cargo(Floater):
     
     def __init__(self, universe):
 
-        Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), dir = 270, radius = 10, spritename = None)
+        Floater.__init__(self, universe, Vec2d(0,0), Vec2d(0,0), direction = 270, radius = 10, spritename = None)
 
         self.detach_space = 50
         self.detach_speed = 100

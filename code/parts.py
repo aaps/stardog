@@ -10,9 +10,9 @@ from particles import *
 import sys
 
 class Port(object):
-    def __init__(self, offset, dir, parent):
+    def __init__(self, offset, direction, parent):
         self.offset = offset
-        self.dir = dir
+        self.direction = direction
         self.part = None
 
         self.parent = parent
@@ -50,7 +50,7 @@ class Part(Cargo):
         self.detach_space = 50
         self.detach_speed = 100
         self.level = 1
-        self.dir = 270
+        self.direction = 270
         self.color = PART1
         self.animated = False
         self.ship = None
@@ -112,8 +112,8 @@ class Part(Cargo):
             port.part.unequip()
         
         part.ship = self.ship
-        part.dir = port.dir + self.dir
-        part.offset = self.offset + port.offset.rotated(self.dir) - Vec2d(0,0).rotatedd(part.dir,(part.width - part.part_overlap) / 2)
+        part.direction = port.direction + self.direction
+        part.offset = self.offset + port.offset.rotated(self.direction) - Vec2d(0,0).rotatedd(part.direction,(part.width - part.part_overlap) / 2)
 
         part.parent = self
 
@@ -140,9 +140,9 @@ class Part(Cargo):
 
         #rotate takes a ccw angle and color.
         part.image = colorShift(pygame.transform.rotate(part.baseImage, \
-                    -part.dir), part.color)
+                    -part.direction), part.color)
         part.greyimage = colorShift(pygame.transform.rotate(part.baseImage, \
-                    -part.dir), (100,100,100))
+                    -part.direction), (100,100,100))
         # part.image.set_colorkey(BLACK)
         # part.greyimage.set_colorkey(BLACK)
         if part.animatedBaseImage:
@@ -180,8 +180,8 @@ class Part(Cargo):
         #set physics to drift away from ship (not collide):
       
         if self.parent:
-            cost = cos(self.ship.dir) #cost is short for cos(theta)
-            sint = sin(self.ship.dir)
+            cost = cos(self.ship.direction) #cost is short for cos(theta)
+            sint = sin(self.ship.direction)
             self.pos = self.ship.pos +  self.offset * self.detach_space
 
             self.delta = self.ship.delta + Vec2d(0,0).rotatedd(random.randrange(0,360), self.detach_speed)
@@ -247,9 +247,9 @@ class Part(Cargo):
         self.acted = False
         #if it's attached to a ship, just rotate with the ship:
         if self.ship:
-            cost = cos(self.ship.dir) #cost is short for cos(theta)
-            sint = sin(self.ship.dir)
-            self.pos = self.ship.pos + self.offset.rotated(self.ship.dir)
+            cost = cos(self.ship.direction) #cost is short for cos(theta)
+            sint = sin(self.ship.direction)
+            self.pos = self.ship.pos + self.offset.rotated(self.ship.direction)
         #if it's floating in space, act like a floater:
         else:
             Floater.update(self)
@@ -310,7 +310,7 @@ class Part(Cargo):
         This should circumvent the ship surface and draw directly onto space."""
 
         if self.animated and self.animatedImage and self.ship:
-            image = pygame.transform.rotate(self.animatedImage,- self.dir - self.ship.dir).convert_alpha()
+            image = pygame.transform.rotate(self.animatedImage,- self.direction - self.ship.direction).convert_alpha()
             # image.set_colorkey(BLACK)
             pos = self.pos.x - image.get_width() / 2 - offset[0], \
                   self.pos.y - image.get_height() / 2 - offset[1]
@@ -480,7 +480,7 @@ class MineDropper(Gun):
         self.baseImage = loadImage("res/parts/minelayer.png")
         Gun.__init__(self, universe)
         
-        self.mineImage = loadImage("res/ammo/mine.png")
+        # self.mineImage = loadImage("res/ammo/mine.png")
         self.damage = 30
         self.speed = 0
         self.reloadTime = 2
@@ -492,7 +492,7 @@ class MineDropper(Gun):
         self.explosionTime = .6
         self.force = 6000
         self.name = "Mine-Layer"
-        self.mineImage = colorShift(self.mineImage , (100,100,100)) 
+        # self.mineImage = colorShift(self.mineImage , (100,100,100)) 
 
     def stats(self):
         stats = (self.speed, self.acceleration)
@@ -512,7 +512,7 @@ class MineDropper(Gun):
                     self.speed,
                     self.acceleration,
                     self.range, self.explosionRadius,
-                    image = self.mineImage))
+                    image = None))
 
 class MissileLauncher(Gun):
     
@@ -522,7 +522,11 @@ class MissileLauncher(Gun):
     def __init__(self, universe):
         if self.missileImage == None:
             self.missileImage = loadImage("res/ammo/missile.png").copy()
-        self.baseImage = loadImage("res/parts/misilelauncher.png")
+        # self.baseImage = loadImage("res/parts/misilelauncher.png")
+        
+        self.sprite = universe.game.spritesystem.getsprite(("res/parts/misilelauncher.png", (0,0), (255,255,255),None,None) )
+        self.baseImage = self.sprite.image
+
         Gun.__init__(self, universe)
         
         self.damage = 20
@@ -557,7 +561,7 @@ class MissileLauncher(Gun):
                     self.speed * s.missileSpeedBonus,
                     self.acceleration * s.missileSpeedBonus,
                     self.range * s.missileRangeBonus, self.explosionRadius,
-                    image = loadImage("res/ammo/missile.png")))
+                    image = None))
 
 class Laser(Gun):
     
@@ -684,7 +688,7 @@ class Radar(Part):
                     self.ship.radars = sorted(self.ship.radars, key=lambda radar: radar.radarrange)
                     if self == self.ship.radars[-1]:
                         self.detected = []
-                        self.disk = RadarDisk(self.universe, self.ship.pos, self.ship.delta, self.dir, self.radarrange)
+                        self.disk = RadarDisk(self.universe, self.ship.pos, self.ship.delta, self.direction, self.radarrange)
                         self.radartime = self.radarspeed
                         for floater in self.universe.curSystem.floaters:
                             if collisionTest(self.disk, floater) and floater != self.ship:
@@ -852,15 +856,15 @@ class Engine(Part):
         if self.acted: return
         self.acted = True
         if self.ship and self.ship.energy >= self.energyCost:
-            dir = self.dir + self.ship.dir
+            direction = self.direction + self.ship.direction
             
             effectiveexspeed = Vec2d(0,0)
-            maxi = Vec2d(0,0).rotatedd(dir, self.exspeed).get_length()
+            maxi = Vec2d(0,0).rotatedd(direction, self.exspeed).get_length()
             if maxi > self.ship.delta.get_length():
-                effectiveexspeed =  (Vec2d(0,0).rotatedd(dir, self.exspeed) - self.ship.delta)
+                effectiveexspeed =  (Vec2d(0,0).rotatedd(direction, self.exspeed) - self.ship.delta)
                 accel = self.ship.efficiency * self.ship.thrustBonus \
                     * effectiveexspeed.get_length() * self.exmass / self.ship.mass / self.fps
-                self.ship.delta = self.ship.delta.rotatedd(dir, accel)
+                self.ship.delta = self.ship.delta.rotatedd(direction, accel)
             else:
                 self.ship.delta *= 0.99
                 
@@ -908,7 +912,7 @@ class Gyro(Part):
             angle = -  self.torque / self.ship.moment / self.fps \
                     * self.ship.efficiency * self.ship.torqueBonus
         if self.ship and self.ship.energy >= self.energyCost:
-            self.ship.dir = angleNorm(self.ship.dir + angle)
+            self.ship.direction = angleNorm(self.ship.direction + angle)
             self.ship.energy -= self.energyCost / self.fps
         
     def turnRight(self, angle = None, index=0):
@@ -922,7 +926,7 @@ class Gyro(Part):
             angle = self.torque / self.ship.moment / self.fps \
                     * self.ship.efficiency * self.ship.torqueBonus
         if self.ship and self.ship.energy >= self.energyCost:
-            self.ship.dir = angleNorm(self.ship.dir + angle)
+            self.ship.direction = angleNorm(self.ship.direction + angle)
             self.ship.energy -= self.energyCost / self.fps
     
 class Generator(Part):

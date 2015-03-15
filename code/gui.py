@@ -40,12 +40,12 @@ class Messenger(Drawable):
     
     # font = FONT
 
-    def __init__(self, universe, font, dir=1):
+    def __init__(self, universe, font, direction=1):
         Drawable.__init__(self, universe)
         queue = deque()
         # -1 means the messages stack upward.
         self.font = FONT
-        self.dir = dir
+        self.direction = direction
         self.rect = col12row9(universe.game, 0, 0, 9, 1)
         self.image = pygame.Surface((self.rect.width,self.font.get_linesize()))
         # characters per second
@@ -97,7 +97,7 @@ class Messenger(Drawable):
             self.image.fill((0, 0, 80))
             self.image.blit(message[0], (0, 0))
             surface.blit(self.image, (self.rect.x, y))
-            y += self.font.get_linesize() * self.dir
+            y += self.font.get_linesize() * self.direction
 
     def empty(self):
         self.queue = deque()
@@ -403,7 +403,7 @@ class MiniInfo(Drawable):
                 linedirstart = Vec2d(100, 180)
                 pygame.draw.circle(self.image, SUPER_WHITE,
                                    linedirstart, 10, 1)
-                pygame.draw.line(self.image, SUPER_WHITE, linedirstart, linedirstart.normalized().rotated(self.targ.dir)*10+linedirstart)
+                pygame.draw.line(self.image, SUPER_WHITE, linedirstart, linedirstart.normalized().rotated(self.targ.direction)*10+linedirstart)
                 name = self.targ.firstname + " " + self.targ.secondname
                 if not self.targimage == self.targ.greyImage:
                     self.targimage = self.targ.greyImage

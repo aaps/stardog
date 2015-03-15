@@ -59,6 +59,13 @@ class Game(object):
         self.spritesystem = spriteSystem()
         self.spritesystem.addspritesheet("res/parts/default.png", 1,1)
         self.spritesystem.addspritesheet("res/ammo/shot.png", 1,1)
+        self.spritesystem.addspritesheet("res/parts/misilelauncher.png", 1,1)
+        self.spritesystem.addspritesheet("res/ammo/missile.png", 1,1)
+        self.spritesystem.addspritesheet("res/ammo/mine.png", 1,1)
+
+        
+
+        
         self.camera = Camera(self.universe, self.spritesystem)
         self.universe.addCamera(self.camera)
 
@@ -266,6 +273,10 @@ class Game(object):
                 self.clock.tick(FPS)
                 self.fps = max(1, int(self.clock.get_fps()))
                 self.timer += 1. / self.fps
+
+                self.spritesystem.setFPS(self.fps)
+                self.spritesystem.update()
+
                 # try and print debuging caption
                 try:
                     disp_str = 'Memory usage: %d(KB) %d(MB) %d(GB) FPS: %d'

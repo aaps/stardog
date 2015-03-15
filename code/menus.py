@@ -440,7 +440,7 @@ class PartsPanel(Panel):
             part = self.inventoryPanel.selected.part
             part.color = self.player.color
             part.image = colorShift(pygame.transform.rotate(part.baseImage, \
-                        -part.dir), part.color).convert_alpha()
+                        -part.direction), part.color).convert_alpha()
             part.image.set_colorkey(SUPER_WHITE)
             self.inventoryPanel.reset()
 
@@ -480,18 +480,18 @@ class ShipPanel(Selecter):
                 if port.part is None:
                     dummy = Dummy(part.universe)
                     #calculate dummy offsets:
-                    dummy.dir = port.dir + part.dir
-                    cost = cos(part.dir) #cost is short for cos(theta)
-                    sint = sin(part.dir)
+                    dummy.direction = port.direction + part.direction
+                    cost = cos(part.direction) #cost is short for cos(theta)
+                    sint = sin(part.direction)
                     dummy.offset = (part.offset[0] + port.offset[0] * cost 
                         - port.offset[1] * sint 
-                        - cos(dummy.dir) * (dummy.width - dummy.part_overlap) / 2, 
+                        - cos(dummy.direction) * (dummy.width - dummy.part_overlap) / 2, 
                         part.offset[1] + port.offset[0] * sint 
                         + port.offset[1] * cost 
-                        - sin(dummy.dir) * (dummy.width - dummy.part_overlap) / 2)
+                        - sin(dummy.direction) * (dummy.width - dummy.part_overlap) / 2)
                     #rotate takes a ccw angle.
                     dummy.image = colorShift(pygame.transform.rotate(
-                            dummy.baseImage, -dummy.dir), dummy.color).convert_alpha()
+                            dummy.baseImage, -dummy.direction), dummy.color).convert_alpha()
                     dummy.image.set_colorkey(BLACK)
                     self.selectables.append(ShipPartPanel(dummy, self))
                     self.selectables[-1].port = port
@@ -598,11 +598,11 @@ class ShipPartPanel(DragableSelectable):
             color = self.part.color
             color = color[0] // 4 + 192, color[1] // 2 + 128, color[2] // 2 + 128
             self.image = colorShift(pygame.transform.scale2x(\
-                    pygame.transform.rotate(self.part.baseImage, -self.part.dir)), color).convert_alpha()
+                    pygame.transform.rotate(self.part.baseImage, -self.part.direction)), color).convert_alpha()
             self.image.set_colorkey(BLACK) 
         else:
-            dir = self.port.dir + self.port.parent.dir
-            self.image = pygame.transform.scale2x(pygame.transform.rotate(loadImage("res/parts/defaultselected.png"), -dir)).convert_alpha()
+            direction = self.port.direction + self.port.parent.direction
+            self.image = pygame.transform.scale2x(pygame.transform.rotate(loadImage("res/parts/defaultselected.png"), -direction)).convert_alpha()
             self.image.set_colorkey(BLACK) 
         
     def unselect(self):
@@ -610,9 +610,9 @@ class ShipPartPanel(DragableSelectable):
             self.image = pygame.transform.scale2x(self.part.image).convert_alpha()
             self.image.set_colorkey(BLACK) 
         else:
-            dir = self.port.dir + self.port.parent.dir
+            direction = self.port.direction + self.port.parent.direction
             self.image = pygame.transform.scale2x(\
-                        pygame.transform.rotate(loadImage("res/parts/default.png"), -dir)).convert_alpha()
+                        pygame.transform.rotate(loadImage("res/parts/default.png"), -direction)).convert_alpha()
             self.image.set_colorkey(BLACK) 
         
     def dragOver(self, pos, rel):

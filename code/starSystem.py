@@ -213,9 +213,9 @@ class StarSystem(object):
         collision branching, which continues."""
         force = (explosion.force / 
                 not0(dist2(explosion, floater)) * explosion.radius ** 2)
-        dir = floater.pos.get_angle_between(explosion.pos)
+        direction = floater.pos.get_angle_between(explosion.pos)
         accel = force / not0(floater.mass)
-        floater.delta += Vec2d(0,0).rotatedd(dir, accel) / explosion.fps
+        floater.delta += Vec2d(0,0).rotatedd(direction, accel) / explosion.fps
         
     def crash(self, a, b):
         self.soundsys.play(self.hitsound)

@@ -87,11 +87,11 @@ class Emitter(object):
 
 		if self.condfunc():
 			if self.extraangle and self.floater.ship:
-				startdir = self.floater.ship.dir + self.floater.dir + self.anglewidth
-				stopdir = self.floater.ship.dir + self.floater.dir - self.anglewidth	
+				startdir = self.floater.ship.direction + self.floater.direction + self.anglewidth
+				stopdir = self.floater.ship.direction + self.floater.direction - self.anglewidth	
 			else:
-				startdir = self.floater.dir + self.anglewidth
-				stopdir = self.floater.dir - self.anglewidth
+				startdir = self.floater.direction + self.anglewidth
+				stopdir = self.floater.direction - self.anglewidth
 
 			delta = -Vec2d(0,0).rotatedd(random.uniform(startdir,stopdir),random.uniform(self.startvelocity,self.stopvelocity))
 			if len(self.particles) < self.maximum:
@@ -112,11 +112,11 @@ class CircleEmitter(Emitter):
 
 		if self.condfunc():
 			if self.floater.ship:
-				startdir = self.floater.ship.dir + self.floater.dir + self.anglewidth
-				stopdir = self.floater.ship.dir + self.floater.dir - self.anglewidth	
+				startdir = self.floater.ship.direction + self.floater.direction + self.anglewidth
+				stopdir = self.floater.ship.direction + self.floater.direction - self.anglewidth	
 			else:
-				startdir = self.floater.dir + self.anglewidth
-				stopdir = self.floater.dir - self.anglewidth
+				startdir = self.floater.direction + self.anglewidth
+				stopdir = self.floater.direction - self.anglewidth
 			adir = random.uniform(startdir,stopdir)
 
 			delta = Vec2d(0,0).rotatedd(adir,random.uniform(self.startvelocity,self.stopvelocity))
@@ -144,11 +144,11 @@ class RingEmitter(Emitter):
 
 		if self.condfunc():
 			if isinstance(self.floater, Ship):
-				startdir = self.floater.ship.dir + self.floater.dir + self.anglewidth
-				stopdir = self.floater.ship.dir + self.floater.dir - self.anglewidth	
+				startdir = self.floater.ship.direction + self.floater.direction + self.anglewidth
+				stopdir = self.floater.ship.direction + self.floater.direction - self.anglewidth	
 			else:
-				startdir = self.floater.dir + self.anglewidth
-				stopdir = self.floater.dir - self.anglewidth
+				startdir = self.floater.direction + self.anglewidth
+				stopdir = self.floater.direction - self.anglewidth
 			adir = random.uniform(startdir,stopdir)
 
 			delta = Vec2d(0,0).rotatedd(adir,random.uniform(self.startvelocity,self.stopvelocity))
@@ -176,11 +176,11 @@ class RingCollector(Emitter):
 
 		if self.condfunc():
 			if isinstance(self.floater, Ship):
-				startdir = self.floater.ship.dir + self.floater.dir + self.anglewidth
-				stopdir = self.floater.ship.dir + self.floater.dir - self.anglewidth	
+				startdir = self.floater.ship.direction + self.floater.direction + self.anglewidth
+				stopdir = self.floater.ship.direction + self.floater.direction - self.anglewidth	
 			else:
-				startdir = self.floater.dir + self.anglewidth
-				stopdir = self.floater.dir - self.anglewidth
+				startdir = self.floater.direction + self.anglewidth
+				stopdir = self.floater.direction - self.anglewidth
 			adir = random.uniform(startdir,stopdir)
 
 			delta = -Vec2d(0,0).rotatedd(adir,random.uniform(self.startvelocity,self.stopvelocity))

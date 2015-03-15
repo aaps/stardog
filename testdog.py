@@ -64,7 +64,7 @@ class TestParticles(unittest.TestCase):
         pygame.display.set_mode((400, 400), hardwareFlag | pygame.SRCALPHA)
         pygame.init()
         self.pos = Vec2d(0,0)
-        self.dir = 0
+        self.direction = 0
         self.emitter = Emitter( self, self.condAlways , 180, 10, 20, BLACK, PARTICLE1, 4, 5, 5, 3, 5, True)
 
     def testParticleGeneration(self):

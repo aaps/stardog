@@ -26,12 +26,12 @@ class Floater(Ballistic):
     system."""
     baseImage = None
 
-    def __init__(self, universe, pos, delta, dir=270, radius=10,
+    def __init__(self, universe, pos, delta, direction=270, radius=10,
                  spritename=None):
         Ballistic.__init__(self, pos, delta)
         self.universe = universe
         self.hasimage = True
-        self.dir = dir
+        self.direction = direction
         self.surespawn = False
         self.spawncost = 1
         self.emitters = []
@@ -43,14 +43,9 @@ class Floater(Ballistic):
         self.lastDamageFrom = None
         self.fps = 10
         self.radius = radius
-        self.sprite = self.universe.game.spritesystem.getsprite("res/parts/default.png", (0,0))
+        
+        self.sprite = self.universe.game.spritesystem.getsprite(("res/parts/default.png", (0,0), None,None,None))
         self.image = self.sprite.image
-        # self.multysprite = multysprite("res/ammo/default.png", energyColor((255,0,0)), True)
-        # self.image = self.multysprite.scalecolor
-
-        # if spritename:
-        #     self.multysprite = multysprite(self.spritename, energyColor(damage), True)
-        #     self.image = self.multysprite.scalecolor
         self.rect = self.image.get_rect()
         self.rect = self.image.get_rect()
         self.soundsys = self.universe.game.soundSystem
@@ -84,9 +79,19 @@ class Floater(Ballistic):
     def draw(self, surface, offset=Vec2d(0, 0)):
         """Blits this floater onto the surface. """
         if self.hasimage:
-            poss = (self.pos.x - self.image.get_width() / 2 - offset.x,
-                    self.pos.y - self.image.get_height() / 2 - offset.y)
-            surface.blit(self.image, poss)
+            if self.image:
+                poss = (self.pos.x - self.image.get_width() / 2 - offset.x,
+                        self.pos.y - self.image.get_height() / 2 - offset.y)
+                surface.blit(self.image, poss)
+            elif self.spritename:
+                image = self.universe.game.spritesystem.getsprite(self.spritename).getImage()
+               
+                poss = (self.pos.x - image.get_width() / 2 - offset.x,
+                        self.pos.y - image.get_height() / 2 - offset.y)
+                surface.blit(image, poss)
+
+
+
         for emitter in self.emitters:
             emitter.draw(surface, offset)
 
@@ -121,15 +126,15 @@ class Floater(Ballistic):
 
 class Bullet(Floater):
     def __init__(self, universe, gun, damage, speed, range, image=None):
-        dir = gun.dir + gun.ship.dir
-        pos = (gun.pos + Vec2d(gun.shootPoint).rotated(dir)
+        direction = gun.direction + gun.ship.direction
+        pos = (gun.pos + Vec2d(gun.shootPoint).rotated(direction)
                / universe.game.fps)
         # not needed for the offset, but needed for the dir.
-        dir += gun.shootDir
+        direction += gun.shootDir
         self.speed = speed
-        delta = gun.ship.delta.rotatedd(dir, self.speed)
+        delta = gun.ship.delta.rotatedd(direction, self.speed)
         Floater.__init__(self, universe, pos, delta,
-                         dir=dir, radius=gun.bulletRadius,
+                         direction=direction, radius=gun.bulletRadius,
                          spritename=None)
         self.range = range
         self.hp = damage
@@ -138,8 +143,8 @@ class Bullet(Floater):
         if 'target' in gun.ship.__dict__:
             self.curtarget = gun.ship.curtarget
 
-        self.sprite = self.universe.game.spritesystem.getsprite("res/ammo/shot.png", (0,0), energyColor(damage), dir )
-        self.image = self.sprite.image
+        self.spritename = ("res/ammo/shot.png", (0,0), energyColor(damage),direction, None)
+        self.image = None
 
         # register the bullet sound
         self.soundsys = self.universe.game.soundSystem
@@ -177,6 +182,8 @@ class Missile(Bullet):
     def __init__(self, universe, launcher, damage, speed, acceleration, range,
                  explosionRadius, image=None):
         Bullet.__init__(self, universe, launcher, self.hp, speed, range, image)
+        self.image = None
+        self.spritename = ("res/ammo/missile.png", (0,0), None, self.direction)
         self.damage = damage
         self.turning = launcher.turning
         self.percision = launcher.percision
@@ -197,15 +204,15 @@ class Missile(Bullet):
 
     def update(self):
         self.life += 1. / self.fps
-        self.dir = (self.dir + 180) % 360 - 180
-        self.delta += (Vec2d(0, 0).rotatedd(self.dir, self.acceleration)
+        self.direction = (self.direction + 180) % 360 - 180
+        self.delta += (Vec2d(0, 0).rotatedd(self.direction, self.acceleration)
                        / self.fps)
         if self.life > self.range:
             self.kill()
         Floater.update(self)
 
     def detonate(self):
-        delta = self.delta.rotatedd(self.dir, -(self.acceleration * self.life))
+        delta = self.delta.rotatedd(self.direction, -(self.acceleration * self.life))
         explosion = Explosion(self.universe, self.pos, delta,
                               self.explosionRadius, self.time, self.damage,
                               self.force)
@@ -227,6 +234,8 @@ class Mine(Bullet):
     def __init__(self, universe, launcher, damage, speed, acceleration, range,
                  explosionRadius, image=None):
         Bullet.__init__(self, universe, launcher, self.hp, speed, range, image)
+        self.image = None
+        self.spritename = ("res/ammo/mine.png", (0,0), None, 0)
         self.damage = damage
         self.turning = launcher.turning
         self.percision = launcher.percision
@@ -242,14 +251,14 @@ class Mine(Bullet):
         self.percision = 0
 
     def update(self):
-        self.dir = (self.dir+180) % 360 - 180
+        self.direction = (self.direction+180) % 360 - 180
         self.delta = self.delta / 1.05
         if self.life > self.range:
             self.kill()
         Floater.update(self)
 
     def detonate(self):
-        delta = self.delta.rotatedd(self.dir, -(self.acceleration*self.life))
+        delta = self.delta.rotatedd(self.direction, -(self.acceleration*self.life))
         explosion = Explosion(self.universe, self.pos, delta,
                               self.explosionRadius, self.time, self.damage,
                               self.force)
@@ -357,19 +366,19 @@ class LaserBeam(Floater):
     
 
     def __init__(self, universe, laser, damage, range):
-        dir = laser.dir + laser.ship.dir
+        direction = laser.direction + laser.ship.direction
         self.baseImage = loadImage("res/ammo/laser.png").convert_alpha()
         pos = (laser.pos + Vec2d(laser.shootPoint).rotated(dir) +
                laser.ship.delta / universe.game.fps)
 
         start = pos
-        dir = laser.dir + laser.ship.dir + laser.shootDir
+        direction = laser.direction + laser.ship.direction + laser.shootDir
         length = range
 
-        stop = pos.rotatedd(dir, range)
+        stop = pos.rotatedd(direction, range)
 
         Floater.__init__(self, universe, (start + stop) / 2, laser.ship.delta,
-                         dir, radius=0)
+                         direction, radius=0)
         # seconds
         self.life = .5
         self.hp = 0
@@ -390,7 +399,7 @@ class LaserBeam(Floater):
 
         self.image = colorShift(self.baseImage, (energyColor(self.damage)))
         self.image = pygame.transform.scale(self.image, (int(length), 5))
-        self.image = pygame.transform.rotate(self.image, -dir).convert_alpha()
+        self.image = pygame.transform.rotate(self.image, -direction).convert_alpha()
 
         if 'target' in laser.ship.__dict__:
             self.curtarget = laser.ship.curtarget
@@ -420,10 +429,10 @@ class LaserBeam(Floater):
                         if self.intersect(part, True):
                             colliders.append(part)
             # sort so that the nearest gets hit first:
-            dir = sign(self.stop.y + self.stop.x * self.slope -
+            direction = sign(self.stop.y + self.stop.x * self.slope -
                        self.start.y + self.start.x * self.slope)
             colliders.sort(key=lambda f: (f.pos.y+f.pos.x*self.slope) *
-                           dir-f.radius)
+                           direction-f.radius)
             # hit until damage is used up
             for floater in colliders:
                 tmp = floater.hp
@@ -452,13 +461,13 @@ class LaserBeam(Floater):
 class RadarDisk(Floater):
 
 
-    def __init__(self, universe, pos, delta, dir=0, radius=10, image=None):
+    def __init__(self, universe, pos, delta, direction=0, radius=10, image=None):
         self.baseImage = None
         self.rect = Rect(pos.x,pos.y,radius,radius)
         self.color = (0, 0, 0)
         self.mass = 0
         self.tangible = False
-        self.dir = dir
+        self.direction = direction
         self.pos = pos
         self.delta = delta
         self.radius = radius

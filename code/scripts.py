@@ -111,14 +111,14 @@ class InputScript(Script):
                         
 
         if self.game.mouseControl:
-            dir = angleNorm(atan2(self.game.mouse[0][1] - self.center[1], \
+            direction = angleNorm(atan2(self.game.mouse[0][1] - self.center[1], \
                                   self.game.mouse[0][0] - self.center[0])\
-                                  -ship.dir)
+                                  -ship.direction)
             
-            if dir < 0:
-                ship.turnLeft(dir)
-            elif dir > 0:
-                ship.turnRight(dir)
+            if direction < 0:
+                ship.turnLeft(direction)
+            elif direction > 0:
+                ship.turnRight(direction)
             if self.game.mouse[3]:
                 ship.forward()
             if self.game.mouse[1]:
@@ -172,7 +172,7 @@ class AIScript(Script):
         return curtarget, distance
     
     def turn(self, ship, angle):
-        angle = angleNorm(angle - ship.dir)
+        angle = angleNorm(angle - ship.direction)
         if angle < 0:
             ship.turnLeft()
         elif angle > 0:
@@ -186,9 +186,9 @@ class AIScript(Script):
         returns True if the ship is pointed within self.acceptableError degrees 
         of the target."""
         if isinstance(target, Floater):
-            angleToTarget = atan2(target.pos.y - ship.pos.y, target.pos.x - ship.pos.x) - ship.dir
+            angleToTarget = atan2(target.pos.y - ship.pos.y, target.pos.x - ship.pos.x) - ship.direction
         else:#target is a point
-            angleToTarget = atan2(target[1] - ship.pos.y, target[0] - ship.pos.x) - ship.dir
+            angleToTarget = atan2(target[1] - ship.pos.y, target[0] - ship.pos.x) - ship.direction
             
         angleToTarget = (angleToTarget - angleOffset + 180) % 360 - 180
         if angleToTarget < 0:

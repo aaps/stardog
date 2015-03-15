@@ -124,8 +124,8 @@ class Planet(Floater):
 
         if rand() > .8 and not isinstance(part, Cargo):
 
-            part.dir = 0
-            part.image = colorShift(pygame.transform.rotate(part.baseImage, part.dir), part.color).convert_alpha()
+            part.direction = 0
+            part.image = colorShift(pygame.transform.rotate(part.baseImage, part.direction), part.color).convert_alpha()
         else:
             part = Scrap(self.starSystem.universe)
         self.inventory.append(part)
