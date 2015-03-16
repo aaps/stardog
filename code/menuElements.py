@@ -108,14 +108,13 @@ class Panel(object):
             rect = self.rect
         if self.bgColor:
             pygame.draw.rect(surface, self.bgColor, rect, 0)
-        
         if self.image:
-            surface.blit(self.image, (self.rect.left+self.lineoutspace, self.rect.top), (0, 0, self.rect.width, self.rect.height))
+            surface.blit(self.image, (self.rect.left+self.lineoutspace, self.rect.top), (0, 0, self.rect.width+8, self.rect.height+8))
+
 
         for panel in self.panels:
             panel.draw(surface, rect)
         if self.drawBorder:
-            
             diamondRect(surface, self.color, rect, self.corners)   
 
     def handleEvent(self, keys):

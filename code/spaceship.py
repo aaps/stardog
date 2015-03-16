@@ -152,6 +152,8 @@ def makeInterceptor(game, pos, delta, direction = 270, color = (255, 255, 255),n
             if rand() > .6:
                 addAdjective(part)
         part.color = color
+
+    missile.spritename['color'] = (255,0,0)
     ship.addPart(cockpit)
     cockpit.addPart(missile, 0)
     cockpit.addPart(gun, 2)

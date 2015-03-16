@@ -22,8 +22,6 @@ class Port(object):
 
 class Part(Cargo):
     """A part of a ship."""
-   
-    # height, width = 9, 3
     
     acted = False
 
@@ -41,8 +39,7 @@ class Part(Cargo):
         self.parent = None
         self.offset = Vec2d(0, 0)
         self.shipoffset = Vec2d(0, 0)
-        self.animatedBaseImage = None
-        self.animatedImage = None
+        # self.animatedImage = None
         self.pickuptimeout = 0
         self.number = -1
         self.name = 'part'
@@ -70,12 +67,14 @@ class Part(Cargo):
         
         self.image = colorShift(self.baseImage.copy(), self.color)
         self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
-        self.width = self.image.get_width() - 4
-        self.height = self.image.get_height() - 4
+        self.rect.width = self.image.get_width() - 4
+        self.rect.height = self.image.get_height() - 4
+        # self.width = self.image.get_width() - 4
+        # self.height = self.image.get_height() - 4
         # the length of this list is the number of connections.
         # each element is the part there, (x,y,dir) position of the connection.
         # the example is at the bottom of the part, pointed down.
-        self.ports = [Port(Vec2d(-self.width / 2, 0), 0, self)]
+        self.ports = [Port(Vec2d(-self.rect.width / 2, 0), 0, self)]
         self.emitters.append(Emitter( self, self.condHalfDamage , 180, 10, 20, BLACK, PARTICLE1, 4, 5, 5, 3, 5, True))
         self.emitters.append(Emitter( self, self.condThQuarterDamage , 180, 40, 50, PARTICLE3, RED, 0, 1, 1, 1, 2.5, True))
         
@@ -113,7 +112,7 @@ class Part(Cargo):
         
         part.ship = self.ship
         part.direction = port.direction + self.direction
-        part.offset = self.offset + port.offset.rotated(self.direction) - Vec2d(0,0).rotatedd(part.direction,(part.width - part.part_overlap) / 2)
+        part.offset = self.offset + port.offset.rotated(self.direction) - Vec2d(0,0).rotatedd(part.direction,(part.rect.width - part.part_overlap) / 2)
 
         part.parent = self
 
@@ -139,19 +138,17 @@ class Part(Cargo):
         #calculate offsets:
 
         #rotate takes a ccw angle and color.
-        part.image = colorShift(pygame.transform.rotate(part.baseImage, \
-                    -part.direction), part.color)
-        part.greyimage = colorShift(pygame.transform.rotate(part.baseImage, \
-                    -part.direction), (100,100,100))
-        # part.image.set_colorkey(BLACK)
-        # part.greyimage.set_colorkey(BLACK)
-        if part.animatedBaseImage:
-            part.animatedImage = colorShift(part.animatedBaseImage, part.color)
-            # part.animatedImage.set_colorkey(BLACK)
+        if part.image:
+            part.image = colorShift(pygame.transform.rotate(part.baseImage, \
+                        -part.direction), part.color)
+            part.greyimage = colorShift(pygame.transform.rotate(part.baseImage, \
+                        -part.direction), (100,100,100))
+        elif part.spritename:
+            part.spritename['direction'] = -part.direction
+            part.spritename['color'] = part.color
+        
         #unequip the part if it collides with others, except parent(self).
         
-
-
         #allow the ship to re-adjust:
         self.ship.reset()
 
@@ -269,18 +266,27 @@ class Part(Cargo):
 
     def draw(self, surface, offset = None, redraw = True, grey = False):
         """draws this part onto the surface."""
+        if self.image:
+            image = self.image
+        elif self.spritename:
+            image = self.universe.game.spritesystem.getsprite(self.spritename).getImage()
+
         if not offset:
+            
             offset = Vec2d((surface.get_width() \
-                    - self.image.get_width()) / 2 + self.offset[0], \
+                    - image.get_width()) / 2 + self.offset[0], \
                     (surface.get_height() \
-                    - self.image.get_height()) / 2 + self.offset[1])
+                    - image.get_height()) / 2 + self.offset[1])
         
         if self.ship == None:
             Floater.draw(self, surface, offset)
-        elif not grey:
+        elif self.spritename:
+            image = self.universe.game.spritesystem.getsprite(self.spritename).getImage()
+            surface.blit(image, offset)
+        elif self.image:
             surface.blit(self.image, offset)
-        else:
-        	surface.blit(self.greyimage, offset)
+
+
 
         #draw children:
         for port in self.ports:
@@ -308,13 +314,14 @@ class Part(Cargo):
         """redraw(surface, offset) -> draws 
         animated elements of this part to surface. 
         This should circumvent the ship surface and draw directly onto space."""
+        # pass
 
-        if self.animated and self.animatedImage and self.ship:
-            image = pygame.transform.rotate(self.animatedImage,- self.direction - self.ship.direction).convert_alpha()
-            # image.set_colorkey(BLACK)
-            pos = self.pos.x - image.get_width() / 2 - offset[0], \
-                  self.pos.y - image.get_height() / 2 - offset[1]
-            surface.blit(image, pos)
+        # if self.animated and self.animatedImage and self.ship:
+        #     image = pygame.transform.rotate(self.animatedImage,- self.direction - self.ship.direction).convert_alpha()
+        #     # image.set_colorkey(BLACK)
+        #     pos = self.pos.x - image.get_width() / 2 - offset[0], \
+        #           self.pos.y - image.get_height() / 2 - offset[1]
+        #     surface.blit(image, pos)
         
         for emitter in self.emitters:
             emitter.draw(surface, offset)
@@ -516,19 +523,17 @@ class MineDropper(Gun):
 
 class MissileLauncher(Gun):
     
-    missileImage = None
+    # missileImage = None
     
     
     def __init__(self, universe):
-        if self.missileImage == None:
-            self.missileImage = loadImage("res/ammo/missile.png").copy()
-        # self.baseImage = loadImage("res/parts/misilelauncher.png")
         
-        self.sprite = universe.game.spritesystem.getsprite(("res/parts/misilelauncher.png", (0,0), (255,255,255),None,None) )
-        self.baseImage = self.sprite.image
-
         Gun.__init__(self, universe)
-        
+
+        self.spritename = {'name':"res/parts/misilelauncher.png", 'pos':(0,0), 'color':(255,255,255), 'direction':None,'zoom':None}
+        universe.game.spritesystem.getsprite(self.spritename)
+        # self.baseImage = self.sprite.image
+        self.image=None
         self.damage = 20
         self.speed = 40
         self.reloadTime = 5
@@ -815,7 +820,7 @@ class Engine(Part):
         self.baseImage = loadImage("res/parts/engine.png")
         Part.__init__(self, universe)
         
-        self.width -= 6	#move the engines in 6 pixels.
+        self.rect.width -= 6	#move the engines in 6 pixels.
         self.name = "Engine"
         self.ports = []
         self.functions.append(self.thrust)
@@ -880,9 +885,9 @@ class Gyro(Part):
         self.baseImage = loadImage("res/parts/gyro.png")
         Part.__init__(self, universe)
         
-        self.ports = [Port(Vec2d(0, self.height / 2 ), 270, self), \
-                Port(Vec2d(-self.width / 2 , 0), 0, self), \
-                Port(Vec2d(0, -self.height / 2 ), 90, self)]
+        self.ports = [Port(Vec2d(0, self.rect.height / 2 ), 270, self), \
+                Port(Vec2d(-self.rect.width / 2 , 0), 0, self), \
+                Port(Vec2d(0, -self.rect.height / 2 ), 90, self)]
         self.functions.extend([self.turnLeft,self.turnRight])
         self.functionDescriptions.extend(\
                 [self.turnLeft.__doc__,self.turnRight.__doc__])
@@ -967,9 +972,9 @@ class Interconnect(Part):
         self.baseImage = loadImage("res/parts/interconnect.png")
         Part.__init__(self, universe)
         
-        self.ports = [Port(Vec2d(0, self.height / 2 ), 270, self), \
-                Port(Vec2d(-self.width / 2 , 0), 0, self), \
-                Port(Vec2d(0, -self.height / 2 ), 90, self)]
+        self.ports = [Port(Vec2d(0, self.rect.height / 2 ), 270, self), \
+                Port(Vec2d(-self.rect.width / 2 , 0), 0, self), \
+                Port(Vec2d(0, -self.rect.height / 2 ), 90, self)]
         self.name = "Interconnect"
     def update(self):
         Part.update(self)
@@ -1194,9 +1199,9 @@ class CargoHold(Part):
     def __init__(self, universe):
         self.baseImage = loadImage("res/parts/cargo.png")
         Part.__init__(self, universe)
-        self.ports = [  Port(Vec2d(0, self.height / 2 ), 270, self), \
-                        Port(Vec2d(-self.width / 2 , 0), 0, self), \
-                        Port(Vec2d(0, -self.height / 2 ), 90, self)]
+        self.ports = [  Port(Vec2d(0, self.rect.height / 2 ), 270, self), \
+                        Port(Vec2d(-self.rect.width / 2 , 0), 0, self), \
+                        Port(Vec2d(0, -self.rect.height / 2 ), 90, self)]
         self.name = "CargoHold"
         self.energyCost = 10
         self.mass = 1
@@ -1249,10 +1254,10 @@ class Cockpit(Radar, Battery, Generator, Gyro, CargoHold):
         self.capacity = 5 #battery
         self.rate = .5 #generator
         self.gargocapacity = 6
-        self.ports = [Port(Vec2d(self.width / 2 - 2, 0), 180, self), \
-                    Port(Vec2d(0, self.height / 2 - 2), 270, self), \
-                    Port(Vec2d(-self.width / 2 + 2, 0), 0, self), \
-                    Port(Vec2d(0, -self.height / 2 + 2), 90, self)]
+        self.ports = [Port(Vec2d(self.rect.width / 2 - 2, 0), 180, self), \
+                    Port(Vec2d(0, self.rect.height / 2 - 2), 270, self), \
+                    Port(Vec2d(-self.rect.width / 2 + 2, 0), 0, self), \
+                    Port(Vec2d(0, -self.rect.height / 2 + 2), 90, self)]
         self.name = "Cockpit"
 
     def stats(self):

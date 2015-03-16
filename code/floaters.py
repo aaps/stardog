@@ -44,9 +44,9 @@ class Floater(Ballistic):
         self.fps = 10
         self.radius = radius
         
-        self.sprite = self.universe.game.spritesystem.getsprite(("res/parts/default.png", (0,0), None,None,None))
-        self.image = self.sprite.image
-        self.rect = self.image.get_rect()
+        self.spritename = None
+        # self.universe.game.spritesystem.getsprite(self.spritename).getImage()
+        self.image = self.universe.game.spritesystem.getsprite({'name':"res/parts/default.png", 'pos':(0,0), 'color':None,'direction':None,'zoom':None}).getImage()
         self.rect = self.image.get_rect()
         self.soundsys = self.universe.game.soundSystem
         self.crashSound = 'se_sdest.wav'
@@ -89,8 +89,6 @@ class Floater(Ballistic):
                 poss = (self.pos.x - image.get_width() / 2 - offset.x,
                         self.pos.y - image.get_height() / 2 - offset.y)
                 surface.blit(image, poss)
-
-
 
         for emitter in self.emitters:
             emitter.draw(surface, offset)
@@ -143,7 +141,7 @@ class Bullet(Floater):
         if 'target' in gun.ship.__dict__:
             self.curtarget = gun.ship.curtarget
 
-        self.spritename = ("res/ammo/shot.png", (0,0), energyColor(damage),direction, None)
+        self.spritename = {'name':"res/ammo/shot.png", 'pos':(0,0), 'color':energyColor(damage),'direction':direction, 'zoom':None}
         self.image = None
 
         # register the bullet sound
@@ -183,7 +181,7 @@ class Missile(Bullet):
                  explosionRadius, image=None):
         Bullet.__init__(self, universe, launcher, self.hp, speed, range, image)
         self.image = None
-        self.spritename = ("res/ammo/missile.png", (0,0), None, self.direction)
+        self.spritename = {'name':"res/ammo/missile.png", 'pos':(0,0), 'color':None, 'direction':self.direction, 'zoom':None}
         self.damage = damage
         self.turning = launcher.turning
         self.percision = launcher.percision
@@ -368,7 +366,7 @@ class LaserBeam(Floater):
     def __init__(self, universe, laser, damage, range):
         direction = laser.direction + laser.ship.direction
         self.baseImage = loadImage("res/ammo/laser.png").convert_alpha()
-        pos = (laser.pos + Vec2d(laser.shootPoint).rotated(dir) +
+        pos = (laser.pos + Vec2d(laser.shootPoint).rotated(direction) +
                laser.ship.delta / universe.game.fps)
 
         start = pos
@@ -467,6 +465,7 @@ class RadarDisk(Floater):
         self.color = (0, 0, 0)
         self.mass = 0
         self.tangible = False
+        self.hasimage = False
         self.direction = direction
         self.pos = pos
         self.delta = delta

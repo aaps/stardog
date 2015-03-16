@@ -485,10 +485,10 @@ class ShipPanel(Selecter):
                     sint = sin(part.direction)
                     dummy.offset = (part.offset[0] + port.offset[0] * cost 
                         - port.offset[1] * sint 
-                        - cos(dummy.direction) * (dummy.width - dummy.part_overlap) / 2, 
+                        - cos(dummy.direction) * (dummy.rect.width - dummy.part_overlap) / 2, 
                         part.offset[1] + port.offset[0] * sint 
                         + port.offset[1] * cost 
-                        - sin(dummy.direction) * (dummy.width - dummy.part_overlap) / 2)
+                        - sin(dummy.direction) * (dummy.rect.width - dummy.part_overlap) / 2)
                     #rotate takes a ccw angle.
                     dummy.image = colorShift(pygame.transform.rotate(
                             dummy.baseImage, -dummy.direction), dummy.color).convert_alpha()
@@ -575,8 +575,9 @@ class ShipPartPanel(DragableSelectable):
     part = None
     
     def __init__(self, part, parent):
-        width = part.image.get_width() * 2
-        height = part.image.get_height() * 2
+
+        width = part.rect.width * 2
+        height = part.rect.height * 2
         rect = Rect(
             part.offset[0] * 2 + parent.rect.width / 2 - width / 2, 
             part.offset[1] * 2 + parent.rect.height / 2 - height / 2, 
@@ -590,8 +591,14 @@ class ShipPartPanel(DragableSelectable):
             for port in part.parent.ports:
                 if port.part == part:
                     self.port = port
-        self.image = pygame.transform.scale2x(part.image).convert_alpha()
-        self.image.set_colorkey(BLACK) 
+        
+        if part.image:
+            self.image = pygame.transform.scale2x(part.image).convert_alpha()
+        if part.spritename:
+            spritename = part.spritename
+            spritename['zoom'] = 2
+
+            self.image = part.universe.game.spritesystem.getsprite(spritename).getImage()
         
     def select(self):
         if self.part:
@@ -607,12 +614,19 @@ class ShipPartPanel(DragableSelectable):
         
     def unselect(self):
         if self.part:
-            self.image = pygame.transform.scale2x(self.part.image).convert_alpha()
-            self.image.set_colorkey(BLACK) 
+            if self.image:
+                # image = self.part.universe.game.spritesystem.getsprite(self.part.spritename).getImage()
+                self.image = pygame.transform.scale2x(self.image).convert_alpha()
+                self.image.set_colorkey(BLACK)
+            elif self.spritename:
+                spritename = part.spritename
+                spritename['zoom'] = 2
+                self.image = part.universe.game.spritesystem.getsprite(spritename).getImage()
+
         else:
             direction = self.port.direction + self.port.parent.direction
             self.image = pygame.transform.scale2x(\
-                        pygame.transform.rotate(loadImage("res/parts/default.png"), -direction)).convert_alpha()
+                    pygame.transform.rotate(loadImage("res/parts/default.png"), -direction)).convert_alpha()
             self.image.set_colorkey(BLACK) 
         
     def dragOver(self, pos, rel):
@@ -692,8 +706,8 @@ class MultyPartTile(DragableSelectable):
     def reset(self):
         bigImage = pygame.transform.scale2x(self.part.image)
         bigImage.set_colorkey(SUPER_WHITE) # idk why this one's white.
-        self.hotSpot = (self.partImageOffset[0] + self.part.width, 
-                        self.partImageOffset[1] + self.part.height)
+        self.hotSpot = (self.partImageOffset[0] + self.part.rect.width, 
+                        self.partImageOffset[1] + self.part.rect.height)
         # self.image.fill((0,0,0,0))
         self.image.blit(bigImage, self.partImageOffset)
         #add text labels:
@@ -748,8 +762,15 @@ class PartTile(DragableSelectable):
 
         self.part = part
         self.drawBorder = False
-        bigImage = pygame.transform.scale2x(self.part.image)
-        bigImage.set_colorkey(SUPER_WHITE) # idk why this one's white.
+        
+        if self.part.spritename:
+            spritename = self.part.spritename
+            spritename['zoom'] = 2
+            bigImage = part.universe.game.spritesystem.getsprite(spritename).getImage()
+        elif self.part.image:
+
+            bigImage = pygame.transform.scale2x(self.part.image)
+            bigImage.set_colorkey(SUPER_WHITE) # idk why this one's white.
         self.hotSpot = (self.partImageOffset[0] + self.part.rect.width, 
                         self.partImageOffset[1] + self.part.rect.height)
         self.image.blit(bigImage, self.partImageOffset)

@@ -18,25 +18,19 @@ class spriteSystem(object):
         
 
     def getsprite(self, spriteid):
-        name = spriteid[0]
-        pos = spriteid[1]
-        color = spriteid[2]
-        direction = spriteid[3]
-        zoom = spriteid[4]
-
-        ahash = zlib.adler32(name + str(pos) +  str(color) + str(direction) + str(zoom))
+        ahash = zlib.adler32(spriteid.get('name') + str(spriteid.get('pos')) +  str(spriteid.get('color')) + str(spriteid.get('direction')) + str(spriteid.get('zoom')))
         result = self.sprites.get(ahash)
         if result:
             return result
         else:
-            spritesheet = self.spritesheets.get(name)
+            spritesheet = self.spritesheets.get(spriteid.get('name'))
             if spritesheet:
                 dimentions = spritesheet.get('dimentions')
-                rect = Rect(pos[0]*dimentions[2], pos[1]*dimentions[3], dimentions[2], dimentions[3] )
+                rect = Rect(spriteid.get('pos')[0]*dimentions[2], spriteid.get('pos')[1]*dimentions[3], dimentions[2], dimentions[3] )
                 surface = spritesheet.get('image').subsurface(rect)
 
 
-                amultysprite = multysprite(name, surface, pos, color, direction, zoom)
+                amultysprite = multysprite(spriteid.get('name'), surface, spriteid.get('pos'), spriteid.get('color'), spriteid.get('direction'), spriteid.get('zoom'))
                 self.sprites.update({ahash:amultysprite}) 
                 return amultysprite
 
