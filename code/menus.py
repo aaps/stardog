@@ -595,7 +595,7 @@ class ShipPartPanel(DragableSelectable):
         if part.image:
             self.image = pygame.transform.scale2x(part.image).convert_alpha()
         if part.spritename:
-            spritename = part.spritename
+            spritename = part.spritename.copy()
             spritename['zoom'] = 2
 
             self.image = part.universe.game.spritesystem.getsprite(spritename).getImage()
@@ -619,7 +619,7 @@ class ShipPartPanel(DragableSelectable):
                 self.image = pygame.transform.scale2x(self.image).convert_alpha()
                 self.image.set_colorkey(BLACK)
             elif self.spritename:
-                spritename = part.spritename
+                spritename = part.spritename.copy()
                 spritename['zoom'] = 2
                 self.image = part.universe.game.spritesystem.getsprite(spritename).getImage()
 
@@ -704,12 +704,15 @@ class MultyPartTile(DragableSelectable):
        
     
     def reset(self):
-        bigImage = pygame.transform.scale2x(self.part.image)
-        bigImage.set_colorkey(SUPER_WHITE) # idk why this one's white.
+        if self.part.image:
+            bigImage = pygame.transform.scale2x(self.part.image)
+            self.image.blit(bigImage, self.partImageOffset)
+
+        # bigImage.set_colorkey(SUPER_WHITE) # idk why this one's white.
         self.hotSpot = (self.partImageOffset[0] + self.part.rect.width, 
                         self.partImageOffset[1] + self.part.rect.height)
         # self.image.fill((0,0,0,0))
-        self.image.blit(bigImage, self.partImageOffset)
+        
         #add text labels:
         
         self.addPanel(Label(self.rect, self.part.name, font = SMALL_FONT))
@@ -764,7 +767,7 @@ class PartTile(DragableSelectable):
         self.drawBorder = False
         
         if self.part.spritename:
-            spritename = self.part.spritename
+            spritename = self.part.spritename.copy()
             spritename['zoom'] = 2
             bigImage = part.universe.game.spritesystem.getsprite(spritename).getImage()
         elif self.part.image:

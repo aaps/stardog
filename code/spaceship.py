@@ -36,7 +36,7 @@ def makeFighter(game, pos, delta, direction = 270, \
     ship.energy = ship.maxEnergy * .8
     return ship
 
-def makeFreighter(game, pos, delta, direction=27, color = SUPER_WHITE, name=("Shippy","mcShipperson"), player=False, partlim=8):
+def makeFreighter(game, pos, delta, direction=270, color = SUPER_WHITE, name=("Shippy","mcShipperson"), player=False, partlim=8):
     if player:
         ship = Player(game, pos, delta, direction=direction, color=color, name=name, partlimit=partlim)
     else:
@@ -153,7 +153,6 @@ def makeInterceptor(game, pos, delta, direction = 270, color = (255, 255, 255),n
                 addAdjective(part)
         part.color = color
 
-    missile.spritename['color'] = (255,0,0)
     ship.addPart(cockpit)
     cockpit.addPart(missile, 0)
     cockpit.addPart(gun, 2)
@@ -345,10 +344,7 @@ class Ship(Floater, Controllable):
         self.partLimit = partlim
         self.knownsystems = dict()
         self.__dict__.update(self.baseBonuses)
-        self.baseImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
-        # self.baseImage.set_colorkey(BLACK)
-        self.greyImage = pygame.Surface((200, 200), hardwareFlag | SRCALPHA).convert_alpha()
-        # self.greyImage.set_colorkey(BLACK)
+
 
         self.functions = [self.forward, self.reverse, self.left, self.right, \
                 self.turnLeft, self.turnRight, self.shoot, self.launchMissiles, self.launchMines, self.toggleGatewayFocus, self.toggleRadar]
@@ -373,8 +369,14 @@ class Ship(Floater, Controllable):
         part.direction = 0
         part.offset = Vec2d(0, 0)
         part.ship = self
-        part.image = colorShift(part.baseImage, self.color)
-        # part.image.set_colorkey(BLACK)
+
+        if part.image:
+            part.image = colorShift(pygame.transform.rotate(part.baseImage, \
+                        0), part.color)
+        elif part.spritename:
+            part.spritename['color'] = part.color
+            part.spritename['direction'] = 0
+
         self.ports[0].part = part
         self.reset()
 
@@ -568,14 +570,12 @@ class Ship(Floater, Controllable):
     def combineLists(self, atype):
         pass
     
-    
     def update(self):
         #check if dead:
         if not self.parts or self.parts[0].hp <= 0:
             self.kill()
         #run script, get choices.
         
-
         resultList = []
         for radar in self.radars:
             resultList= list(set(radar.detected)|set(resultList))
@@ -612,12 +612,9 @@ class Ship(Floater, Controllable):
             posdiff = (self.pos - self.universe.curSystem.star.pos)
             nearest = sorted(posdifflist, key=lambda diff: diff[1].get_distance(posdiff))[-1]
 
-
             if len(posdifflist) == 1 and (nearest[1].normalized()*10 + self.delta.normalized()*10).get_length() > 10:
                 self.direction = -nearest[1].get_angle()-90
                 self.delta = -self.delta.rotated(nearest[1].get_angle()+90)
-
-            
             newpos =  Vec2d(0,0).rotatedd(self.delta.get_angle()+180, nearest[0].edgerad-50)
 
             
@@ -630,11 +627,8 @@ class Ship(Floater, Controllable):
             self.universe.curSystem = nearest[0]
             self.pos = newpos
             for camera in self.universe.cameras:
-
                 camera.setPos(self.pos)
 
-
- 
             self.overedge = False
 
 
@@ -649,10 +643,13 @@ class Ship(Floater, Controllable):
         #note: transform is counter-clockwise, opposite of everything else.
         buffer = pygame.Surface((self.radius * 2, self.radius * 2), \
                 flags = hardwareFlag | SRCALPHA).convert_alpha()
-        # buffer.set_colorkey(BLACK)
+
         self.image = pygame.transform.rotate(self.baseImage, \
                                     -self.direction).convert_alpha()
-        # self.image.set_colorkey(BLACK)
+
+        if self.spritename:
+            self.spritename['direction'] = -self.direction
+
         
         #imageOffset compensates for the extra padding from the rotation.
         imageOffset = [- self.image.get_width() / 2,\
@@ -734,11 +731,9 @@ class Ship(Floater, Controllable):
         if part.pickuptimeout <= 0:
             part.direction = 0
             part.image = colorShift(pygame.transform.rotate(part.baseImage, part.direction), part.color).convert_alpha()
-            # part.image.set_colorkey(BLACK)
             self.inventory.append(part)
             part.kill()
             if self.universe.player == self:
-                #use a state machine ?
                 self.universe.game.menu.parts.inventoryPanel.reset() #TODO: make not suck
 
 

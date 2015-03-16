@@ -4,9 +4,10 @@ from parts import *
 
 class LeftFlakCannon(FlakCannon, FlippablePart): 
     def __init__(self, universe):
-        self.baseImage = loadImage("res/parts/leftflak.png")
         FlakCannon.__init__(self, universe)
         FlippablePart.__init__(self, universe)
+        self.spritename = {'name':"res/parts/leftflak.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.ports = []
         self.shootPoint = 0, - 20;
@@ -15,9 +16,10 @@ class LeftFlakCannon(FlakCannon, FlippablePart):
 
 class MachineGun(Cannon):
     def __init__(self, universe):
-        self.baseImage = loadImage('res/parts/machinegun.png')
         Cannon.__init__(self, universe)
-        
+        self.spritename = {'name':"res/parts/machinegun.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.image=None
+
         self.ports = []
         self.damage = .25
         self.reloadTime = 0.7
@@ -30,9 +32,10 @@ class MachineGun(Cannon):
 
 class RightFlakCannon(FlakCannon, FlippablePart):
     def __init__(self, universe):
-        self.baseImage = loadImage("res/parts/rightflak.png")
         FlakCannon.__init__(self, universe)
         FlippablePart.__init__(self, universe)
+        self.spritename = {'name':"res/parts/rightflak.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.ports = []
         self.shootPoint = 0, 20
@@ -41,9 +44,10 @@ class RightFlakCannon(FlakCannon, FlippablePart):
 
 class LeftLaser(Laser, FlippablePart):
     def __init__(self, universe):
-        self.baseImage = loadImage("res/parts/leftlaser.png")
         Laser.__init__(self, universe)
         FlippablePart.__init__(self, universe)
+        self.spritename = {'name':"res/parts/leftlaser.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.ports = []
         self.shootPoint = 0, - 15
@@ -52,9 +56,10 @@ class LeftLaser(Laser, FlippablePart):
 
 class RightLaser(Laser, FlippablePart):
     def __init__(self, universe):
-        self.baseImage = loadImage("res/parts/rightlaser.png")
         Laser.__init__(self, universe)
         FlippablePart.__init__(self, universe)
+        self.spritename = {'name':"res/parts/rightlaser.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.ports = []
         self.shootPoint = 0, 15
@@ -63,9 +68,10 @@ class RightLaser(Laser, FlippablePart):
 
 class LeftCannon(Cannon, FlippablePart):
     def __init__(self, universe):
-        self.baseImage = loadImage("res/parts/leftgun.png")
         Cannon.__init__(self, universe)
         FlippablePart.__init__(self, universe)
+        self.spritename = {'name':"res/parts/leftgun.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.ports = []
         self.shootPoint = 0, - 30
@@ -74,9 +80,10 @@ class LeftCannon(Cannon, FlippablePart):
 
 class RightCannon(Cannon, FlippablePart):
     def __init__(self, universe):
-        self.baseImage = loadImage("res/parts/rightgun.png")
         Cannon.__init__(self, universe)
         FlippablePart.__init__(self, universe)
+        self.spritename = {'name':"res/parts/rightgun.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.ports = []
         self.shootPoint = 0, 30
@@ -85,8 +92,9 @@ class RightCannon(Cannon, FlippablePart):
 
 class StrafebatCannon(Cannon):
     def __init__(self, universe):
-        self.baseImage = loadImage("res/parts/strafebatgun.png")
         Cannon.__init__(self, universe)
+        self.spritename = {'name':"res/parts/strafebatgun.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.ports = []
         self.shootDir = 180
@@ -97,8 +105,10 @@ class StrafebatCannon(Cannon):
 
 class FighterShield(Shield):
     def __init__(self, universe):
-        self.baseImage =  loadImage("res/parts/fightershield.png")
+        # self.baseImage =  loadImage("res/parts/fightershield.png")
         Shield.__init__(self, universe)
+        self.spritename = {'name':"res/parts/fightershield.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.ports = []
         self.mass = 4
@@ -106,7 +116,3 @@ class FighterShield(Shield):
         self.shieldRegen = .1
         self.energyCost = .5
         self.name = 'Fighter Shield'
-
-# generalSellable = [LeftFlakCannon, MachineGun, LeftLaser, LeftCannon, 
-#     StrafebatCannon, FighterShield, MissileLauncher, Engine, Generator,
-#     Gyro, Battery, BigShield]

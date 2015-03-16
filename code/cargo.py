@@ -13,8 +13,6 @@ class Cargo(Floater):
         self.detach_speed = 100
         self.resources = True
         self.pickuptimeout = 0
-        # self.width = self.image.get_width() - 4
-        # self.height = self.image.get_height() - 4
         self.parent = None
         self.functions = []
         self.adjectives = []
@@ -56,96 +54,76 @@ class Cargo(Floater):
         self.fps = fps
 
 class Scrap(Cargo):
-    
-    image = None
+
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/scrap.png")
-        self.color = None
+
         Cargo.__init__(self, universe)
-        self.color = PART1
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/scrap.png", 'pos':(0,0), 'color':PART1, 'direction':None,'zoom':None}
+        self.image=None
+
         self.name = "Scrap"
         self.damage = 1
 
 
 class Iron(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/iron.png")
-        self.color = None
+
         Cargo.__init__(self, universe)
-        self.color = PART1
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/iron.png", 'pos':(0,0), 'color':PART1, 'direction':None,'zoom':None}
+        self.image=None
+
         self.name = "Iron"
         self.damage = 1
 
 
 class IronOre(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
-        self.color = None
         Cargo.__init__(self, universe)
-        self.color = PART1
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':PART1, 'direction':None,'zoom':None}
+        self.image=None
         self.name = "IronOre"
         self.damage = 1
 
 class TitaniumOre(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
         
         Cargo.__init__(self, universe)
-        self.color = (255,255,255)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(255,255,255), 'direction':None,'zoom':None}
+        self.image=None
+
         self.name = "titaniumOre"
         self.damage = 1
 
 class Titanium(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/iron.png")
         Cargo.__init__(self, universe)
-        self.color = (255,255,255)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
-        
+        self.spritename = {'name':"res/goods/iron.png", 'pos':(0,0), 'color':(255,255,255), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "Titanium"
         self.damage = 1
 
 class AluminiumOre(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
         Cargo.__init__(self, universe)
-        self.color = (255,100,100)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(255,100,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "AluminiumOre"
         self.damage = 1
 
 class Aluminium(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/iron.png")
         
         Cargo.__init__(self, universe)
-        self.color = (200,200,200)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/iron.png", 'pos':(0,0), 'color':(200,200,200), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "Aluminium"
         self.damage = 1
@@ -153,27 +131,21 @@ class Aluminium(Cargo):
 
 class Chemicals(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/chemicals.png")
         
         Cargo.__init__(self, universe)
-        self.color = (100,250,100)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/chemicals.png", 'pos':(0,0), 'color':(100,250,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "Chemicals"
         self.damage = 1
 
 class Food(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/food.png")
         Cargo.__init__(self, universe)
-        self.color = (250,250,100)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/food.png", 'pos':(0,0), 'color':(250,250,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "Food"
         self.damage = 1
@@ -181,14 +153,11 @@ class Food(Cargo):
 
 class Gems(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/gems.png")
         
         Cargo.__init__(self, universe)
-        self.color = (250,50,50)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/gems.png", 'pos':(0,0), 'color':(250,50,50), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "Gems"
         self.damage = 1
@@ -196,12 +165,11 @@ class Gems(Cargo):
 
 class ExMetal(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
         
         Cargo.__init__(self, universe)
-        self.color = (100,100,100)
+        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.image=None
 
         
         self.name = "Ex metal"
@@ -210,14 +178,11 @@ class ExMetal(Cargo):
 
 class SheetMetal(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/sheetmetal.png")
         
         Cargo.__init__(self, universe)
-        self.color = (100,100,100)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/sheetmetal.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "Sheet metal"
         self.damage = 1
@@ -225,57 +190,44 @@ class SheetMetal(Cargo):
 
 class ConstMat(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
         
         Cargo.__init__(self, universe)
-        self.color = (100,100,100)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "ConstMat"
         self.damage = 1
 
 
 class CompComp(Cargo):
-    
-    image = None
+
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/compcomp.png")
         Cargo.__init__(self, universe)
-        
-        self.color = (50,200,50)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/compcomp.png", 'pos':(0,0), 'color':(50,200,50), 'direction':None,'zoom':None}
+        self.image=None        
         self.name = "CompComp"
         self.damage = 1
 
 
 class MachParts(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/machparts.png")
         
         Cargo.__init__(self, universe)
-        self.color = (100,150,100)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/machparts.png", 'pos':(0,0), 'color':(100,150,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "MachParts"
         self.damage = 1
 
 class Plastics(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/plastics.png")
         
         Cargo.__init__(self, universe)
-        self.color = (100,200,200)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/plastics.png", 'pos':(0,0), 'color':(100,200,200), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "Plastics"
         self.damage = 1
@@ -283,27 +235,21 @@ class Plastics(Cargo):
 
 class Explosives(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/explosives.png")
         Cargo.__init__(self, universe)
-        self.color = (100,150,150)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/explosives.png", 'pos':(0,0), 'color':(100,150,150), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "Explosives"
         self.damage = 1
 
 class Minerals(Cargo):
     
-    image = None
     def __init__(self, universe):
         
-        self.baseImage = loadImage("res/goods/minerals.png")
         Cargo.__init__(self, universe)
-        self.color = (50,50,50)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/minerals.png", 'pos':(0,0), 'color':(50,50,50), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "Minerals"
         self.damage = 1
@@ -311,28 +257,22 @@ class Minerals(Cargo):
 
 class AirFilters(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
         
         Cargo.__init__(self, universe)
-        self.color = (50,50,50)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(50,50,50), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "Air filters"
         self.damage = 1
 
 class PleasureCubes(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/pleasurecubes.png")
         
         Cargo.__init__(self, universe)
-        self.color = (200,200,100)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/pleasurecubes.png", 'pos':(0,0), 'color':(200,200,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "Pleasure cubes"
         self.damage = 1
@@ -340,14 +280,11 @@ class PleasureCubes(Cargo):
 
 class Alcohol(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
         
         Cargo.__init__(self, universe)
-        self.color = (150,150,100)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(150,150,100), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "Alcohol"
         self.damage = 1
@@ -355,14 +292,11 @@ class Alcohol(Cargo):
 
 class Textiles(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/textiles.png")
-        
+       
         Cargo.__init__(self, universe)
-        self.color = (200,200,200)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/textiles.png", 'pos':(0,0), 'color':(200,200,200), 'direction':None,'zoom':None}
+        self.image=None
         
         self.name = "Textiles"
         self.damage = 1
@@ -370,10 +304,10 @@ class Textiles(Cargo):
 
 class HuskarCigars(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
         Cargo.__init__(self, universe)
+        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.image=None
 
         
         self.name = "Huskar cigars"
@@ -382,40 +316,37 @@ class HuskarCigars(Cargo):
 
 class ServantDroids(Cargo):
     
-    image = None
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
+
 
         Cargo.__init__(self, universe)
-        self.color = (200,200,200)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(250,200,200), 'direction':None,'zoom':None}
+        self.image=None
+
         
         self.name = "Servant droids"
         self.damage = 1
 
 class CloningDevice(Cargo):
     
-    image = None
+
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/ironore.png")
         Cargo.__init__(self, universe)
-        self.color = (200,200,200)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(200,200,250), 'direction':None,'zoom':None}
+        self.image=None
+
         
         self.name = "Cloning device"
         self.damage = 1
 
 class PureWater(Cargo):
     
-    image = None
+
     def __init__(self, universe):
-        self.baseImage = loadImage("res/goods/water.png")
         Cargo.__init__(self, universe)
-        self.color = (0,100,200)
-        self.image = colorShift(self.baseImage.copy(), self.color)
-        self.greyimage = colorShift(self.baseImage.copy(), (100,100,100))
+        self.spritename = {'name':"res/goods/water.png", 'pos':(0,0), 'color':(0,100,200), 'direction':None,'zoom':None}
+        self.image=None
+
         
         self.name = "Pure water"
         self.damage = 1
