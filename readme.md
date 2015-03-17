@@ -62,6 +62,12 @@ If you are interested in contributing to the code, graphics, art, AI, plot, etc.
 
 This source is given only under the GPL General Public License.  If you are interested in other licensing, please contact me. 
 
+REGENERATE THE DOCS
+===
+epydoc --graph all  code/*.py -o docs
+? no epydoc
+sudo pip install epydoc OR sudo apt-get install python-epydoc
+
 
 CHANGES:
 ===

@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>code.spaceship.Ship</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="code-module.html">Package&nbsp;code</a> ::
+        <a href="code.spaceship-module.html">Module&nbsp;spaceship</a> ::
+        Class&nbsp;Ship
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="code.spaceship.Ship-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Ship</h1><p class="nomargin-top"><span class="codelink"><a href="code.spaceship-pysrc.html#Ship">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_code_spa_2" name="uml_class_diagram_for_code_spa_2">
+<area shape="rect" id="node1" href="code.floaters.Ballistic-class.html" title="an abstraction of a Floater." alt="" coords="103,6,220,50"/>
+<area shape="rect" id="node1179" href="code.floaters.Floater-class.html#baseImage" title="code.floaters.Floater.baseImage" alt="" coords="17,95,308,113"/>
+<area shape="rect" id="node1179" href="code.floaters.Floater-class.html#addEmitter" title="code.floaters.Floater.addEmitter" alt="" coords="17,116,308,135"/>
+<area shape="rect" id="node1179" href="code.floaters.Floater-class.html#condAlways" title="code.floaters.Floater.condAlways" alt="" coords="17,135,308,153"/>
+<area shape="rect" id="node1179" href="code.floaters.Floater-class.html#condHalfDamage" title="code.floaters.Floater.condHalfDamage" alt="" coords="17,153,308,172"/>
+<area shape="rect" id="node1179" href="code.floaters.Floater-class.html#condThQuarterDamage" title="code.floaters.Floater.condThQuarterDamage" alt="" coords="17,172,308,191"/>
+<area shape="rect" id="node1179" href="code.floaters.Floater-class.html#crash" title="code.floaters.Floater.crash" alt="" coords="17,191,308,209"/>
+<area shape="rect" id="node1179" href="code.floaters.Floater-class.html#distanceVolumeAdjust" title="a handling function that determines the distance and returns a scale based &#160;on that." alt="" coords="17,209,308,228"/>
+<area shape="rect" id="node1179" href="code.floaters.Floater-class.html#setFPS" title="code.floaters.Floater.setFPS" alt="" coords="17,228,308,247"/>
+<area shape="rect" id="node5" href="code.floaters.Floater-class.html" title="creates a floater with position (x,y) in pixels, speed (dx, dy) in pixels per second, direction dir where 0 is pointing right and 270 is pointing up, radius radius (for collision testing), and with the image image." alt="" coords="5,70,320,253"/>
+<area shape="rect" id="node1178" href="code.spaceship.Ship-class.html#baseBonuses" title="code.spaceship.Ship.baseBonuses" alt="" coords="52,297,536,316"/>
+<area shape="rect" id="node1178" href="code.spaceship.Ship-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="52,319,536,337"/>
+<area shape="rect" id="node1178" href="code.spaceship.Ship-class.html#addPart" title="Only used for the base part (usually a cockpit), other parts are added to &#160;parts." alt="" coords="52,337,536,356"/>
+<area shape="rect" id="node1178" href="code.spaceship.Ship-class.html#combineLists" title="code.spaceship.Ship.combineLists" alt="" coords="52,356,536,375"/>
+<area shape="rect" id="node1178" href="code.spaceship.Ship-class.html#draw" title="offset is the (x,y) of the topleft of the surface, pos is the position to &#160;draw the ship on the surface, where pos=(0,0) is the center of the surface." alt="" coords="52,375,536,393"/>
+<area shape="rect" id="node1178" href="code.spaceship.Ship-class.html#forward" title="thrust forward using all forward engines" alt="" coords="52,393,536,412"/>
+<area shape="rect" id="node1178" href="code.spaceship.Ship-class.html#freepartCollision" title="code.spaceship.Ship.freepartCollision" alt="" coords="52,412,536,431"/>
+<area shape="rect" id="node1178" href="code.spaceship.Ship-class.html#gatewayCollision" title="code.spaceship.Ship.gatewayCollision" alt="" coords="52,431,536,449"/>
+<area shape="rect" id="node1178" href="code.spaceship.Ship-class.html#insertPart" title="code.spaceship.Ship.insertPart" alt="" coords="52,449,536,468"/>
+<area shape="rect" id="node1178" href="code.spaceship.Ship-class.html#kill" title="play explosion effect than call Floater.kill(self)" alt="" coords="52,468,536,487"/>
+<area shape="rect" id="node1178" href="code.spaceship.Ship-class.html#launchMines" title="code.spaceship.Ship.launchMines" alt="" coords="52,487,536,505"/>
+<area shape="rect" id="node1178" href="code.spaceship.Ship-class.html#launchMissiles" title="code.spaceship.Ship.launchMissiles" alt="" coords="52,505,536,524"/>
+<area shape="rect" id="node1178" href="code.spaceship.Ship-class.html#left" title="strafes left using all left engines" alt="" coords="52,524,536,543"/>
+<area shape="rect" id="node1178" href="code.spaceship.Ship-class.html#partRollCall" title="adds parts to self.parts recursively." alt="" coords="52,543,536,561"/>
+<area shape="rect" id="node1178" href="code.spaceship.Ship-class.html#update" title="updates this floater based on its variables" alt="" coords="52,580,536,599"/>
+<area shape="rect" id="node2" href="code.spaceship.Ship-class.html" title="Ship(x, y, dx = 0, dy = 0, direction = 270, script = None, color = SUPER_WHITE) script should have an update method that returns (moveDir, target, action)." alt="" coords="40,273,547,605"/>
+<area shape="rect" id="node3" href="code.spaceship.Player-class.html" title="code.spaceship.Player" alt="" coords="191,625,263,663"/>
+<area shape="rect" id="node6" href="code.strafebat.Strafebat-class.html" title="code.strafebat.Strafebat" alt="" coords="292,625,436,663"/>
+<area shape="rect" id="node1181" href="code.scripts.Controllable-class.html#addScript" title="code.scripts.Controllable.addScript" alt="" coords="361,137,493,156"/>
+<area shape="rect" id="node1181" href="code.scripts.Controllable-class.html#setActive" title="code.scripts.Controllable.setActive" alt="" coords="361,156,493,175"/>
+<area shape="rect" id="node1181" href="code.scripts.Controllable-class.html#setInactive" title="code.scripts.Controllable.setInactive" alt="" coords="361,175,493,193"/>
+<area shape="rect" id="node1181" href="code.scripts.Controllable-class.html#toggleActive" title="code.scripts.Controllable.toggleActive" alt="" coords="361,193,493,212"/>
+<area shape="rect" id="node4" href="code.scripts.Controllable-class.html" title="code.scripts.Controllable" alt="" coords="349,105,504,218"/>
+</map>
+  <img src="uml_class_diagram_for_code_spa_2.gif" alt='' usemap="#uml_class_diagram_for_code_spa_2" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Ship(x, y, dx = 0, dy = 0, direction = 270, script = None, color = 
+  SUPER_WHITE) script should have an update method that returns (moveDir, 
+  target, action).</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="code.spaceship.Ship-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>,
+        <span class="summary-sig-arg">dx</span>=<span class="summary-sig-default"> 0</span>,
+        <span class="summary-sig-arg">dy</span>=<span class="summary-sig-default"> 0</span>,
+        <span class="summary-sig-arg">direction</span>=<span class="summary-sig-default"> 270</span>,
+        <span class="summary-sig-arg">script</span>=<span class="summary-sig-default"> None</span>,
+        <span class="summary-sig-arg">color</span>=<span class="summary-sig-default"> SUPER_WHITE</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Sets the main part for this ship</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPart"></a><span class="summary-sig-name">addPart</span>(<span class="summary-sig-arg">ship</span>,
+        <span class="summary-sig-arg">part</span>)</span><br />
+      Only used for the base part (usually a cockpit), other parts are 
+      added to parts.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.addPart">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="combineLists"></a><span class="summary-sig-name">combineLists</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">atype</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.combineLists">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Blits this ship onto the surface</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="code.spaceship.Ship-class.html#draw" class="summary-sig-name">draw</a>(<span class="summary-sig-arg">ship</span>,
+        <span class="summary-sig-arg">surface</span>,
+        <span class="summary-sig-arg">offset</span>)</span><br />
+      offset is the (x,y) of the topleft of the surface, pos is the 
+      position to draw the ship on the surface, where pos=(0,0) is the 
+      center of the surface.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.draw">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="forward"></a><span class="summary-sig-name">forward</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      thrust forward using all forward engines</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.forward">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="freepartCollision"></a><span class="summary-sig-name">freepartCollision</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">part</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.freepartCollision">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="gatewayCollision"></a><span class="summary-sig-name">gatewayCollision</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">gateway</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.gatewayCollision">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="insertPart"></a><span class="summary-sig-name">insertPart</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">part</span>,
+        <span class="summary-sig-arg">amount</span>=<span class="summary-sig-default">1</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.insertPart">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="code.spaceship.Ship-class.html#kill" class="summary-sig-name">kill</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      play explosion effect than call Floater.kill(self)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.kill">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="launchMines"></a><span class="summary-sig-name">launchMines</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.launchMines">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="launchMissiles"></a><span class="summary-sig-name">launchMissiles</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.launchMissiles">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="left"></a><span class="summary-sig-name">left</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      strafes left using all left engines</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.left">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="partRollCall"></a><span class="summary-sig-name">partRollCall</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">part</span>)</span><br />
+      adds parts to self.parts recursively.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.partRollCall">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="planetCollision"></a><span class="summary-sig-name">planetCollision</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">planet</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.planetCollision">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="reset"></a><span class="summary-sig-name">reset</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.reset">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="reverse"></a><span class="summary-sig-name">reverse</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      thrust backward using all reverse engines</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.reverse">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="right"></a><span class="summary-sig-name">right</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      strafes right using all right engines</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.right">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="shoot"></a><span class="summary-sig-name">shoot</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      fires all guns.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.shoot">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="code.spaceship.Ship-class.html#takeDamage" class="summary-sig-name">takeDamage</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">damage</span>,
+        <span class="summary-sig-arg">other</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.takeDamage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="targetNextPart"></a><span class="summary-sig-name">targetNextPart</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.targetNextPart">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="targetNextPlanet"></a><span class="summary-sig-name">targetNextPlanet</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.targetNextPlanet">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="targetNextShip"></a><span class="summary-sig-name">targetNextShip</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.targetNextShip">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="targetPrefPart"></a><span class="summary-sig-name">targetPrefPart</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.targetPrefPart">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="targetPrefPlanet"></a><span class="summary-sig-name">targetPrefPlanet</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.targetPrefPlanet">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="targetPrefShip"></a><span class="summary-sig-name">targetPrefShip</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.targetPrefShip">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="toggleGatewayFocus"></a><span class="summary-sig-name">toggleGatewayFocus</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.toggleGatewayFocus">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="toggleRadar"></a><span class="summary-sig-name">toggleRadar</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.toggleRadar">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="turnLeft"></a><span class="summary-sig-name">turnLeft</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">angle</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Turns ccw using all gyros.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.turnLeft">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="turnRight"></a><span class="summary-sig-name">turnRight</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">angle</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Turns cw using all gyros.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.turnRight">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="code.spaceship.Ship-class.html#update" class="summary-sig-name">update</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      updates this floater based on its variables</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.spaceship-pysrc.html#Ship.update">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="code.floaters.Floater-class.html">floaters.Floater</a></code></b>:
+      <code><a href="code.floaters.Floater-class.html#addEmitter">addEmitter</a></code>,
+      <code><a href="code.floaters.Floater-class.html#condAlways">condAlways</a></code>,
+      <code><a href="code.floaters.Floater-class.html#condHalfDamage">condHalfDamage</a></code>,
+      <code><a href="code.floaters.Floater-class.html#condThQuarterDamage">condThQuarterDamage</a></code>,
+      <code><a href="code.floaters.Floater-class.html#crash">crash</a></code>,
+      <code><a href="code.floaters.Floater-class.html#distanceVolumeAdjust">distanceVolumeAdjust</a></code>,
+      <code><a href="code.floaters.Floater-class.html#setFPS">setFPS</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="code.scripts.Controllable-class.html">scripts.Controllable</a></code></b>:
+      <code><a href="code.scripts.Controllable-class.html#addScript">addScript</a></code>,
+      <code><a href="code.scripts.Controllable-class.html#setActive">setActive</a></code>,
+      <code><a href="code.scripts.Controllable-class.html#setInactive">setInactive</a></code>,
+      <code><a href="code.scripts.Controllable-class.html#toggleActive">toggleActive</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="code.spaceship.Ship-class.html#baseBonuses" class="summary-name">baseBonuses</a> = <code title="{'batteryBonus': 1.0,
+ 'cannonBonus': 1.0,
+ 'cannonDefenseBonus': 1.0,
+ 'cannonRangeBonus': 1.0,
+ 'cannonRateBonus': 1.0,
+ 'cannonSpeedBonus': 1.0,
+ 'damageBonus': 1.0,
+ 'energyUseBonus': 1.0,
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">batteryBonus</code><code class="variable-quote">'</code><code class="variable-op">: </code>1.0<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">cannonBonus</code><code class="variable-quote">'</code><code class="variable-op">: </code>1.0<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">canno</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="code.floaters.Floater-class.html">floaters.Floater</a></code></b>:
+      <code><a href="code.floaters.Floater-class.html#baseImage">baseImage</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">x</span>,
+        <span class="sig-arg">y</span>,
+        <span class="sig-arg">dx</span>=<span class="sig-default"> 0</span>,
+        <span class="sig-arg">dy</span>=<span class="sig-default"> 0</span>,
+        <span class="sig-arg">direction</span>=<span class="sig-default"> 270</span>,
+        <span class="sig-arg">script</span>=<span class="sig-default"> None</span>,
+        <span class="sig-arg">color</span>=<span class="sig-default"> SUPER_WHITE</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="code.spaceship-pysrc.html#Ship.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="draw"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">draw</span>(<span class="sig-arg">ship</span>,
+        <span class="sig-arg">surface</span>,
+        <span class="sig-arg">offset</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="code.spaceship-pysrc.html#Ship.draw">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>offset is the (x,y) of the topleft of the surface, pos is the position
+  to draw the ship on the surface, where pos=(0,0) is the center of the 
+  surface. If offset is none, the ship will be drawn down and right from 
+  pos where pos(0,0) is the topleft of the surface.</p>
+  <dl class="fields">
+    <dt>Returns: Blits this ship onto the surface</dt>
+    <dt>Overrides:
+        <a href="code.floaters.Floater-class.html#draw">floaters.Floater.draw</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="kill"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">kill</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="code.spaceship-pysrc.html#Ship.kill">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>play explosion effect than call Floater.kill(self)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="code.floaters.Floater-class.html#kill">floaters.Floater.kill</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="takeDamage"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">takeDamage</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">damage</span>,
+        <span class="sig-arg">other</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="code.spaceship-pysrc.html#Ship.takeDamage">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="code.floaters.Floater-class.html#takeDamage">floaters.Floater.takeDamage</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="update"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">update</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="code.spaceship-pysrc.html#Ship.update">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>updates this floater based on its variables</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="code.scripts.Controllable-class.html#update">scripts.Controllable.update</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="baseBonuses"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">baseBonuses</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">batteryBonus</code><code class="variable-quote">'</code><code class="variable-op">: </code>1.0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">cannonBonus</code><code class="variable-quote">'</code><code class="variable-op">: </code>1.0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">cannonDefenseBonus</code><code class="variable-quote">'</code><code class="variable-op">: </code>1.0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">cannonRangeBonus</code><code class="variable-quote">'</code><code class="variable-op">: </code>1.0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">cannonRateBonus</code><code class="variable-quote">'</code><code class="variable-op">: </code>1.0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">cannonSpeedBonus</code><code class="variable-quote">'</code><code class="variable-op">: </code>1.0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">damageBonus</code><code class="variable-quote">'</code><code class="variable-op">: </code>1.0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">energyUseBonus</code><code class="variable-quote">'</code><code class="variable-op">: </code>1.0<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Mar 17 21:02:18 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

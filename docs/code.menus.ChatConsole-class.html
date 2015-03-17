@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>code.menus.ChatConsole</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="code-module.html">Package&nbsp;code</a> ::
+        <a href="code.menus-module.html">Module&nbsp;menus</a> ::
+        Class&nbsp;ChatConsole
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="code.menus.ChatConsole-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ChatConsole</h1><p class="nomargin-top"><span class="codelink"><a href="code.menus-pysrc.html#ChatConsole">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_code_men_19" name="uml_class_diagram_for_code_men_19">
+<area shape="rect" id="node682" href="code.menuElements.Panel-class.html#image" title="code.menuElements.Panel.image" alt="" coords="17,31,197,49"/>
+<area shape="rect" id="node682" href="code.menuElements.Panel-class.html#addPanel" title="adds a subpanel to this panel." alt="" coords="17,52,197,71"/>
+<area shape="rect" id="node682" href="code.menuElements.Panel-class.html#click" title="called when this panel is clicked on." alt="" coords="17,71,197,89"/>
+<area shape="rect" id="node682" href="code.menuElements.Panel-class.html#drag" title="drag(start): The mouse has started dragging at start." alt="" coords="17,89,197,108"/>
+<area shape="rect" id="node682" href="code.menuElements.Panel-class.html#dragOver" title="called when the mouse moves to or from this panel." alt="" coords="17,108,197,127"/>
+<area shape="rect" id="node682" href="code.menuElements.Panel-class.html#drop" title="drop(pos, dropped): &#160;The dragged object was dropped on this panel at pos." alt="" coords="17,127,197,145"/>
+<area shape="rect" id="node682" href="code.menuElements.Panel-class.html#endDrag" title="called when a drag from here drops with a non&#45;None result." alt="" coords="17,145,197,164"/>
+<area shape="rect" id="node682" href="code.menuElements.Panel-class.html#move" title="called when the mouse moves to or from this panel." alt="" coords="17,164,197,183"/>
+<area shape="rect" id="node682" href="code.menuElements.Panel-class.html#removePanel" title="removes a subpanel from this panel." alt="" coords="17,183,197,201"/>
+<area shape="rect" id="node682" href="code.menuElements.Panel-class.html#reset" title="code.menuElements.Panel.reset" alt="" coords="17,201,197,220"/>
+<area shape="rect" id="node1" href="code.menuElements.Panel-class.html" title="Panel(mouse, rect) &#45;&gt; new Panel." alt="" coords="5,6,208,226"/>
+<area shape="rect" id="node681" href="code.menuElements.TopLevelPanel-class.html#draw" title="surface." alt="" coords="19,307,197,325"/>
+<area shape="rect" id="node2" href="code.menuElements.TopLevelPanel-class.html" title="TopLevelPanel(rect) &#45;&gt; TopLevelPanel." alt="" coords="7,274,209,331"/>
+<area shape="rect" id="node680" href="code.menus.ChatConsole-class.html#activeMenu" title="code.menus.ChatConsole.activeMenu" alt="" coords="136,404,288,423"/>
+<area shape="rect" id="node680" href="code.menus.ChatConsole-class.html#color" title="code.menus.ChatConsole.color" alt="" coords="136,423,288,441"/>
+<area shape="rect" id="node680" href="code.menus.ChatConsole-class.html#game" title="code.menus.ChatConsole.game" alt="" coords="136,441,288,460"/>
+<area shape="rect" id="node680" href="code.menus.ChatConsole-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="136,463,288,481"/>
+<area shape="rect" id="node680" href="code.menus.ChatConsole-class.html#handleEvent" title="Examines the event and passes it down to children as appropriate." alt="" coords="136,481,288,500"/>
+<area shape="rect" id="node680" href="code.menus.ChatConsole-class.html#update" title="updates this panel and its children" alt="" coords="136,500,288,519"/>
+<area shape="rect" id="node3" href="code.menus.ChatConsole-class.html" title="code.menus.ChatConsole" alt="" coords="124,379,300,525"/>
+<area shape="rect" id="node683" href="code.scripts.Controllable-class.html#addScript" title="code.scripts.Controllable.addScript" alt="" coords="251,279,383,297"/>
+<area shape="rect" id="node683" href="code.scripts.Controllable-class.html#setActive" title="code.scripts.Controllable.setActive" alt="" coords="251,297,383,316"/>
+<area shape="rect" id="node683" href="code.scripts.Controllable-class.html#setInactive" title="code.scripts.Controllable.setInactive" alt="" coords="251,316,383,335"/>
+<area shape="rect" id="node683" href="code.scripts.Controllable-class.html#toggleActive" title="code.scripts.Controllable.toggleActive" alt="" coords="251,335,383,353"/>
+<area shape="rect" id="node4" href="code.scripts.Controllable-class.html" title="code.scripts.Controllable" alt="" coords="239,246,393,359"/>
+</map>
+  <img src="uml_class_diagram_for_code_men_19.gif" alt='' usemap="#uml_class_diagram_for_code_men_19" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">TopLevelPanel</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="code.menus.ChatConsole-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">game</span>,
+        <span class="summary-sig-arg">rect</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#ChatConsole.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="code.menus.ChatConsole-class.html#handleEvent" class="summary-sig-name">handleEvent</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span><br />
+      Examines the event and passes it down to children as appropriate.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#ChatConsole.handleEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="code.menus.ChatConsole-class.html#update" class="summary-sig-name">update</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      updates this panel and its children</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#ChatConsole.update">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="code.menuElements.TopLevelPanel-class.html">menuElements.TopLevelPanel</a></code></b>:
+      <code><a href="code.menuElements.TopLevelPanel-class.html#draw">draw</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="code.menuElements.Panel-class.html">menuElements.Panel</a></code></b>:
+      <code><a href="code.menuElements.Panel-class.html#addPanel">addPanel</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#click">click</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#drag">drag</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#dragOver">dragOver</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#drop">drop</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#endDrag">endDrag</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#move">move</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#removePanel">removePanel</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#reset">reset</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="code.scripts.Controllable-class.html">scripts.Controllable</a></code></b>:
+      <code><a href="code.scripts.Controllable-class.html#addScript">addScript</a></code>,
+      <code><a href="code.scripts.Controllable-class.html#setActive">setActive</a></code>,
+      <code><a href="code.scripts.Controllable-class.html#setInactive">setInactive</a></code>,
+      <code><a href="code.scripts.Controllable-class.html#toggleActive">toggleActive</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="activeMenu"></a><span class="summary-name">activeMenu</span> = <code title="None">None</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="color"></a><span class="summary-name">color</span> = <code title="(0, 0, 50, 200)"><code class="variable-group">(</code>0<code class="variable-op">, </code>0<code class="variable-op">, </code>50<code class="variable-op">, </code>200<code class="variable-group">)</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="game"></a><span class="summary-name">game</span> = <code title="None">None</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="code.menuElements.Panel-class.html">menuElements.Panel</a></code></b>:
+      <code><a href="code.menuElements.Panel-class.html#image">image</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">game</span>,
+        <span class="sig-arg">rect</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="code.menus-pysrc.html#ChatConsole.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+  <dl class="fields">
+    <dt>Returns: TopLevelPanel</dt>
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="handleEvent"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">handleEvent</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">event</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="code.menus-pysrc.html#ChatConsole.handleEvent">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Examines the event and passes it down to children as appropriate.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="code.menuElements.Panel-class.html#handleEvent">menuElements.Panel.handleEvent</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="update"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">update</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="code.menus-pysrc.html#ChatConsole.update">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>updates this panel and its children</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="code.scripts.Controllable-class.html#update">scripts.Controllable.update</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Mar 17 21:02:11 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

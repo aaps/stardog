@@ -1,0 +1,1453 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>code.game</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="code-module.html">Package&nbsp;code</a> ::
+        Module&nbsp;game
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="code.game-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="code.game-module.html">Module code.game</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#game.py</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module code.menus=code.menus-module.html"><a title="code.menus" class="py-name" href="#" onclick="return doclink('link-0', 'menus', 'link-0');">menus</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-1" class="py-name" targets="Module code.scripts=code.scripts-module.html"><a title="code.scripts" class="py-name" href="#" onclick="return doclink('link-1', 'scripts', 'link-1');">scripts</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Module code.gui=code.gui-module.html"><a title="code.gui" class="py-name" href="#" onclick="return doclink('link-2', 'gui', 'link-2');">gui</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name" targets="Module code.dialogs=code.dialogs-module.html"><a title="code.dialogs" class="py-name" href="#" onclick="return doclink('link-3', 'dialogs', 'link-3');">dialogs</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name" targets="Module code.camera=code.camera-module.html"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-4', 'camera', 'link-4');">camera</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name" targets="Module code.universe=code.universe-module.html"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-5', 'universe', 'link-5');">universe</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-6" class="py-name" targets="Module code.plot=code.plot-module.html"><a title="code.plot" class="py-name" href="#" onclick="return doclink('link-6', 'plot', 'link-6');">plot</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">datetime</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-7" class="py-name" targets="Module code.utils=code.utils-module.html"><a title="code.utils" class="py-name" href="#" onclick="return doclink('link-7', 'utils', 'link-7');">utils</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-8" class="py-name" targets="Module code.multysprites=code.multysprites-module.html"><a title="code.multysprites" class="py-name" href="#" onclick="return doclink('link-8', 'multysprites', 'link-8');">multysprites</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment"># command parsing (a command line interface for the game)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment"># that supports multiple commands, and functions.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-9" class="py-name" targets="Module code.commandParse=code.commandParse-module.html"><a title="code.commandParse" class="py-name" href="#" onclick="return doclink('link-9', 'commandParse', 'link-9');">commandParse</a></tt> <tt class="py-keyword">import</tt> <tt id="link-10" class="py-name" targets="Class code.commandParse.CommandParse=code.commandParse.CommandParse-class.html"><a title="code.commandParse.CommandParse" class="py-name" href="#" onclick="return doclink('link-10', 'CommandParse', 'link-10');">CommandParse</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment"># import librarie for showing mem usage in caption</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">resource</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">gc</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Variable code.game.FPS=code.game-module.html#FPS"><a title="code.game.FPS" class="py-name" href="#" onclick="return doclink('link-11', 'FPS', 'link-11');">FPS</a></tt> <tt class="py-op">=</tt> <tt class="py-number">3e6</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="Game"></a><div id="Game-def"><a name="L29"></a><tt class="py-lineno"> 29</tt> <a class="py-toggle" href="#" id="Game-toggle" onclick="return toggle('Game');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.game.Game-class.html">Game</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Game-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Game-expanded"><a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-docstring">"""Game(resolution = None, fullscreen = False)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">    -&gt; new game instance. Multiple game instances</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">    are probably a bad idea."""</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt id="link-12" class="py-name" targets="Variable code.game.Game.menu=code.game.Game-class.html#menu"><a title="code.game.Game.menu" class="py-name" href="#" onclick="return doclink('link-12', 'menu', 'link-12');">menu</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="Game.__init__"></a><div id="Game.__init__-def"><a name="L35"></a><tt class="py-lineno"> 35</tt> <a class="py-toggle" href="#" id="Game.__init__-toggle" onclick="return toggle('Game.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.game.Game-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">screen</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Game.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Game.__init__-expanded"><a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">console</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">debug</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">starttime</tt> <tt class="py-op">=</tt> <tt class="py-number">1899463445</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fps</tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name"><a title="code.game.FPS" class="py-name" href="#" onclick="return doclink('link-13', 'FPS', 'link-11');">FPS</a></tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fpscounter</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fpses</tt> <tt class="py-op">=</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">30</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">averagefps</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">screen</tt> <tt class="py-op">=</tt> <tt class="py-name">screen</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">top_left</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Variable code.scripts.InputScript.mouseControl=code.scripts.InputScript-class.html#mouseControl"><a title="code.scripts.InputScript.mouseControl" class="py-name" href="#" onclick="return doclink('link-14', 'mouseControl', 'link-14');">mouseControl</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">timer</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">triggers</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-15', 'universe', 'link-5');">universe</a></tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name" targets="Class code.universe.Universe=code.universe.Universe-class.html"><a title="code.universe.Universe" class="py-name" href="#" onclick="return doclink('link-16', 'Universe', 'link-16');">Universe</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Variable code.menus.MultyPartTile.width=code.menus.MultyPartTile-class.html#width"><a title="code.menus.MultyPartTile.width" class="py-name" href="#" onclick="return doclink('link-17', 'width', 'link-17');">width</a></tt> <tt class="py-op">=</tt> <tt class="py-name">screen</tt><tt class="py-op">.</tt><tt class="py-name">get_width</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Variable code.menus.MultyPartTile.height=code.menus.MultyPartTile-class.html#height"><a title="code.menus.MultyPartTile.height" class="py-name" href="#" onclick="return doclink('link-18', 'height', 'link-18');">height</a></tt> <tt class="py-op">=</tt> <tt class="py-name">screen</tt><tt class="py-op">.</tt><tt class="py-name">get_height</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-comment"># initialize the the music system.</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicSystem</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name" targets="Class code.SoundSystem.MusicSystem=code.SoundSystem.MusicSystem-class.html"><a title="code.SoundSystem.MusicSystem" class="py-name" href="#" onclick="return doclink('link-19', 'MusicSystem', 'link-19');">MusicSystem</a></tt><tt class="py-op">(</tt><tt class="py-string">'res/sound/ambientMusic/'</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicSystem</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method code.SoundSystem.DummyMusicSystem.play()=code.SoundSystem.DummyMusicSystem-class.html#play,Method code.SoundSystem.DummySoundSystem.play()=code.SoundSystem.DummySoundSystem-class.html#play,Method code.SoundSystem.MusicSystem.play()=code.SoundSystem.MusicSystem-class.html#play,Method code.SoundSystem.SoundSystem.play()=code.SoundSystem.SoundSystem-class.html#play"><a title="code.SoundSystem.DummyMusicSystem.play
+code.SoundSystem.DummySoundSystem.play
+code.SoundSystem.MusicSystem.play
+code.SoundSystem.SoundSystem.play" class="py-name" href="#" onclick="return doclink('link-20', 'play', 'link-20');">play</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicSystem</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method code.SoundSystem.DummyMusicSystem.getRandomMusic()=code.SoundSystem.DummyMusicSystem-class.html#getRandomMusic,Method code.SoundSystem.MusicSystem.getRandomMusic()=code.SoundSystem.MusicSystem-class.html#getRandomMusic"><a title="code.SoundSystem.DummyMusicSystem.getRandomMusic
+code.SoundSystem.MusicSystem.getRandomMusic" class="py-name" href="#" onclick="return doclink('link-21', 'getRandomMusic', 'link-21');">getRandomMusic</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-comment"># initialize the sound system.</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">        <tt class="py-comment"># every part has to register with this system.</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">soundSystem</tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name" targets="Module code.SoundSystem=code.SoundSystem-module.html,Class code.SoundSystem.SoundSystem=code.SoundSystem.SoundSystem-class.html"><a title="code.SoundSystem
+code.SoundSystem.SoundSystem" class="py-name" href="#" onclick="return doclink('link-22', 'SoundSystem', 'link-22');">SoundSystem</a></tt><tt class="py-op">(</tt><tt class="py-string">'res/sound/sfxSounds/'</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt> <tt class="py-op">=</tt> <tt id="link-23" class="py-name" targets="Class code.multysprites.spriteSystem=code.multysprites.spriteSystem-class.html"><a title="code.multysprites.spriteSystem" class="py-name" href="#" onclick="return doclink('link-23', 'spriteSystem', 'link-23');">spriteSystem</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method code.multysprites.spriteSystem.addspritesheet()=code.multysprites.spriteSystem-class.html#addspritesheet"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-24', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/default.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-25', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/ammo/shot.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-26', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/misilelauncher.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-27', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/ammo/missile.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-28', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/ammo/mine.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-29', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/radar.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-30', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/engine.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-31', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/gyro.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-32', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/generator.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-33', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/interconnect.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-34', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/quarters.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-35', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/gateway_focus.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-36', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/battery.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-37', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/shield.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-38', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/cargo.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-39', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/minelayer.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-40', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/interceptor.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-41', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/fighter.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-42', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/destroyer.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-43', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/leftflak.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-44', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/machinegun.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-45', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/rightflak.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-46', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/leftlaser.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-47', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/rightlaser.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-48', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/leftgun.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-49', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/rightgun.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-50" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-50', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/strafebatgun.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-51', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/fightershield.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-52" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-52', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/parts/cockpit.png"</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">         </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-53" class="py-name"><a title="code.multysprites.spriteSystem.addspritesheet" class="py-name" href="#" onclick="return doclink('link-53', 'addspritesheet', 'link-24');">addspritesheet</a></tt><tt class="py-op">(</tt><tt class="py-string">"res/goods/goods.png"</tt><tt class="py-op">,</tt> <tt class="py-number">5</tt><tt class="py-op">,</tt><tt class="py-number">5</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">         </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-54" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-54', 'camera', 'link-4');">camera</a></tt> <tt class="py-op">=</tt> <tt id="link-55" class="py-name" targets="Class code.camera.Camera=code.camera.Camera-class.html"><a title="code.camera.Camera" class="py-name" href="#" onclick="return doclink('link-55', 'Camera', 'link-55');">Camera</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-56" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-56', 'universe', 'link-5');">universe</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-57', 'universe', 'link-5');">universe</a></tt><tt class="py-op">.</tt><tt id="link-58" class="py-name" targets="Method code.universe.Universe.addCamera()=code.universe.Universe-class.html#addCamera"><a title="code.universe.Universe.addCamera" class="py-name" href="#" onclick="return doclink('link-58', 'addCamera', 'link-58');">addCamera</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-59', 'camera', 'link-4');">camera</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-comment"># messenger, with controls as first message:</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">messenger</tt> <tt class="py-op">=</tt> <tt id="link-60" class="py-name" targets="Class code.gui.Messenger=code.gui.Messenger-class.html"><a title="code.gui.Messenger" class="py-name" href="#" onclick="return doclink('link-60', 'Messenger', 'link-60');">Messenger</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-61" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-61', 'universe', 'link-5');">universe</a></tt><tt class="py-op">,</tt> <tt id="link-62" class="py-name" targets="Variable code.adjectives.BIG_FONT=code.adjectives-module.html#BIG_FONT,Variable code.cargo.BIG_FONT=code.cargo-module.html#BIG_FONT,Variable code.commandParse.BIG_FONT=code.commandParse-module.html#BIG_FONT,Variable code.floaters.BIG_FONT=code.floaters-module.html#BIG_FONT,Variable code.game.BIG_FONT=code.game-module.html#BIG_FONT,Variable code.gui.BIG_FONT=code.gui-module.html#BIG_FONT,Variable code.menuElements.BIG_FONT=code.menuElements-module.html#BIG_FONT,Variable code.menus.BIG_FONT=code.menus-module.html#BIG_FONT,Variable code.multysprites.BIG_FONT=code.multysprites-module.html#BIG_FONT,Variable code.nameMaker.BIG_FONT=code.nameMaker-module.html#BIG_FONT,Variable code.partCatalog.BIG_FONT=code.partCatalog-module.html#BIG_FONT,Variable code.parts.BIG_FONT=code.parts-module.html#BIG_FONT,Variable code.planet.BIG_FONT=code.planet-module.html#BIG_FONT,Variable code.plot.BIG_FONT=code.plot-module.html#BIG_FONT,Variable code.scripts.BIG_FONT=code.scripts-module.html#BIG_FONT,Variable code.spaceship.BIG_FONT=code.spaceship-module.html#BIG_FONT,Variable code.starSystem.BIG_FONT=code.starSystem-module.html#BIG_FONT,Variable code.strafebat.BIG_FONT=code.strafebat-module.html#BIG_FONT,Variable code.universe.BIG_FONT=code.universe-module.html#BIG_FONT,Variable code.utils.BIG_FONT=code.utils-module.html#BIG_FONT"><a title="code.adjectives.BIG_FONT
+code.cargo.BIG_FONT
+code.commandParse.BIG_FONT
+code.floaters.BIG_FONT
+code.game.BIG_FONT
+code.gui.BIG_FONT
+code.menuElements.BIG_FONT
+code.menus.BIG_FONT
+code.multysprites.BIG_FONT
+code.nameMaker.BIG_FONT
+code.partCatalog.BIG_FONT
+code.parts.BIG_FONT
+code.planet.BIG_FONT
+code.plot.BIG_FONT
+code.scripts.BIG_FONT
+code.spaceship.BIG_FONT
+code.starSystem.BIG_FONT
+code.strafebat.BIG_FONT
+code.universe.BIG_FONT
+code.utils.BIG_FONT" class="py-name" href="#" onclick="return doclink('link-62', 'BIG_FONT', 'link-62');">BIG_FONT</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-name">theone</tt> <tt class="py-op">=</tt> <tt id="link-63" class="py-name" targets="Class code.starSystem.SolarA1=code.starSystem.SolarA1-class.html"><a title="code.starSystem.SolarA1" class="py-name" href="#" onclick="return doclink('link-63', 'SolarA1', 'link-63');">SolarA1</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-64', 'universe', 'link-5');">universe</a></tt><tt class="py-op">,</tt> <tt class="py-string">"theone"</tt><tt class="py-op">,</tt> <tt id="link-65" class="py-name" targets="Class code.vec2d.Vec2d=code.vec2d.Vec2d-class.html"><a title="code.vec2d.Vec2d" class="py-name" href="#" onclick="return doclink('link-65', 'Vec2d', 'link-65');">Vec2d</a></tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">100</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-name">thesecond</tt> <tt class="py-op">=</tt> <tt id="link-66" class="py-name"><a title="code.starSystem.SolarA1" class="py-name" href="#" onclick="return doclink('link-66', 'SolarA1', 'link-63');">SolarA1</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-67" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-67', 'universe', 'link-5');">universe</a></tt><tt class="py-op">,</tt> <tt class="py-string">"thesecond"</tt><tt class="py-op">,</tt> <tt id="link-68" class="py-name"><a title="code.vec2d.Vec2d" class="py-name" href="#" onclick="return doclink('link-68', 'Vec2d', 'link-65');">Vec2d</a></tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">100</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-name">thethird</tt> <tt class="py-op">=</tt> <tt id="link-69" class="py-name"><a title="code.starSystem.SolarA1" class="py-name" href="#" onclick="return doclink('link-69', 'SolarA1', 'link-63');">SolarA1</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-70" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-70', 'universe', 'link-5');">universe</a></tt><tt class="py-op">,</tt> <tt class="py-string">"thethird"</tt><tt class="py-op">,</tt> <tt id="link-71" class="py-name"><a title="code.vec2d.Vec2d" class="py-name" href="#" onclick="return doclink('link-71', 'Vec2d', 'link-65');">Vec2d</a></tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">200</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-name">theone</tt><tt class="py-op">.</tt><tt id="link-72" class="py-name" targets="Method code.starSystem.StarSystem.addNeighbor()=code.starSystem.StarSystem-class.html#addNeighbor"><a title="code.starSystem.StarSystem.addNeighbor" class="py-name" href="#" onclick="return doclink('link-72', 'addNeighbor', 'link-72');">addNeighbor</a></tt><tt class="py-op">(</tt><tt class="py-name">thesecond</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-name">theone</tt><tt class="py-op">.</tt><tt id="link-73" class="py-name"><a title="code.starSystem.StarSystem.addNeighbor" class="py-name" href="#" onclick="return doclink('link-73', 'addNeighbor', 'link-72');">addNeighbor</a></tt><tt class="py-op">(</tt><tt class="py-name">thethird</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-74" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-74', 'universe', 'link-5');">universe</a></tt><tt class="py-op">.</tt><tt id="link-75" class="py-name" targets="Method code.universe.Universe.addStarSystem()=code.universe.Universe-class.html#addStarSystem"><a title="code.universe.Universe.addStarSystem" class="py-name" href="#" onclick="return doclink('link-75', 'addStarSystem', 'link-75');">addStarSystem</a></tt><tt class="py-op">(</tt><tt class="py-name">theone</tt><tt class="py-op">)</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-76" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-76', 'universe', 'link-5');">universe</a></tt><tt class="py-op">.</tt><tt id="link-77" class="py-name"><a title="code.universe.Universe.addStarSystem" class="py-name" href="#" onclick="return doclink('link-77', 'addStarSystem', 'link-75');">addStarSystem</a></tt><tt class="py-op">(</tt><tt class="py-name">thesecond</tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-78" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-78', 'universe', 'link-5');">universe</a></tt><tt class="py-op">.</tt><tt id="link-79" class="py-name"><a title="code.universe.Universe.addStarSystem" class="py-name" href="#" onclick="return doclink('link-79', 'addStarSystem', 'link-75');">addStarSystem</a></tt><tt class="py-op">(</tt><tt class="py-name">thethird</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-80" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-80', 'camera', 'link-4');">camera</a></tt><tt class="py-op">.</tt><tt id="link-81" class="py-name" targets="Method code.camera.Camera.layerAdd()=code.camera.Camera-class.html#layerAdd"><a title="code.camera.Camera.layerAdd" class="py-name" href="#" onclick="return doclink('link-81', 'layerAdd', 'link-81');">layerAdd</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">messenger</tt><tt class="py-op">,</tt> <tt class="py-number">7</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-82" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-82', 'camera', 'link-4');">camera</a></tt><tt class="py-op">.</tt><tt id="link-83" class="py-name"><a title="code.camera.Camera.layerAdd" class="py-name" href="#" onclick="return doclink('link-83', 'layerAdd', 'link-81');">layerAdd</a></tt><tt class="py-op">(</tt><tt id="link-84" class="py-name" targets="Class code.gui.MiniInfo=code.gui.MiniInfo-class.html"><a title="code.gui.MiniInfo" class="py-name" href="#" onclick="return doclink('link-84', 'MiniInfo', 'link-84');">MiniInfo</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-85" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-85', 'universe', 'link-5');">universe</a></tt><tt class="py-op">,</tt> <tt id="link-86" class="py-name" targets="Variable code.adjectives.FONT=code.adjectives-module.html#FONT,Variable code.cargo.FONT=code.cargo-module.html#FONT,Variable code.commandParse.FONT=code.commandParse-module.html#FONT,Variable code.floaters.FONT=code.floaters-module.html#FONT,Variable code.game.FONT=code.game-module.html#FONT,Variable code.gui.FONT=code.gui-module.html#FONT,Variable code.menuElements.FONT=code.menuElements-module.html#FONT,Variable code.menus.FONT=code.menus-module.html#FONT,Variable code.multysprites.FONT=code.multysprites-module.html#FONT,Variable code.nameMaker.FONT=code.nameMaker-module.html#FONT,Variable code.partCatalog.FONT=code.partCatalog-module.html#FONT,Variable code.parts.FONT=code.parts-module.html#FONT,Variable code.planet.FONT=code.planet-module.html#FONT,Variable code.plot.FONT=code.plot-module.html#FONT,Variable code.scripts.FONT=code.scripts-module.html#FONT,Variable code.spaceship.FONT=code.spaceship-module.html#FONT,Variable code.starSystem.FONT=code.starSystem-module.html#FONT,Variable code.strafebat.FONT=code.strafebat-module.html#FONT,Variable code.universe.FONT=code.universe-module.html#FONT,Variable code.utils.FONT=code.utils-module.html#FONT"><a title="code.adjectives.FONT
+code.cargo.FONT
+code.commandParse.FONT
+code.floaters.FONT
+code.game.FONT
+code.gui.FONT
+code.menuElements.FONT
+code.menus.FONT
+code.multysprites.FONT
+code.nameMaker.FONT
+code.partCatalog.FONT
+code.parts.FONT
+code.planet.FONT
+code.plot.FONT
+code.scripts.FONT
+code.spaceship.FONT
+code.starSystem.FONT
+code.strafebat.FONT
+code.universe.FONT
+code.utils.FONT" class="py-name" href="#" onclick="return doclink('link-86', 'FONT', 'link-86');">FONT</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">6</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-comment"># key polling:</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">False</tt><tt class="py-op">]</tt><tt class="py-op">*</tt><tt class="py-number">322</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-comment"># mouse is [pos, button1, button2, button3,..., button6].</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-comment"># new Apple mice think they have 6 buttons.</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">mouse</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt class="py-comment"># pygame setup:</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">clock</tt> <tt class="py-op">=</tt> <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">Clock</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">hud</tt> <tt class="py-op">=</tt> <tt id="link-87" class="py-name" targets="Class code.gui.HUD=code.gui.HUD-class.html"><a title="code.gui.HUD" class="py-name" href="#" onclick="return doclink('link-87', 'HUD', 'link-87');">HUD</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-88" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-88', 'universe', 'link-5');">universe</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tageting</tt> <tt class="py-op">=</tt> <tt id="link-89" class="py-name" targets="Class code.gui.TargetingRect=code.gui.TargetingRect-class.html"><a title="code.gui.TargetingRect" class="py-name" href="#" onclick="return doclink('link-89', 'TargetingRect', 'link-89');">TargetingRect</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-90" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-90', 'universe', 'link-5');">universe</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">radarfield</tt> <tt class="py-op">=</tt> <tt id="link-91" class="py-name" targets="Class code.gui.RadarField=code.gui.RadarField-class.html"><a title="code.gui.RadarField" class="py-name" href="#" onclick="return doclink('link-91', 'RadarField', 'link-91');">RadarField</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-92" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-92', 'universe', 'link-5');">universe</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-93" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-93', 'camera', 'link-4');">camera</a></tt><tt class="py-op">.</tt><tt id="link-94" class="py-name"><a title="code.camera.Camera.layerAdd" class="py-name" href="#" onclick="return doclink('link-94', 'layerAdd', 'link-81');">layerAdd</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">hud</tt><tt class="py-op">,</tt> <tt class="py-number">4</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-95" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-95', 'camera', 'link-4');">camera</a></tt><tt class="py-op">.</tt><tt id="link-96" class="py-name"><a title="code.camera.Camera.layerAdd" class="py-name" href="#" onclick="return doclink('link-96', 'layerAdd', 'link-81');">layerAdd</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">radarfield</tt><tt class="py-op">,</tt> <tt class="py-number">4</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-97" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-97', 'camera', 'link-4');">camera</a></tt><tt class="py-op">.</tt><tt id="link-98" class="py-name"><a title="code.camera.Camera.layerAdd" class="py-name" href="#" onclick="return doclink('link-98', 'layerAdd', 'link-81');">layerAdd</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tageting</tt><tt class="py-op">,</tt> <tt class="py-number">4</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spaceview</tt> <tt class="py-op">=</tt> <tt id="link-99" class="py-name" targets="Class code.camera.SpaceView=code.camera.SpaceView-class.html"><a title="code.camera.SpaceView" class="py-name" href="#" onclick="return doclink('link-99', 'SpaceView', 'link-99');">SpaceView</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-100" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-100', 'camera', 'link-4');">camera</a></tt><tt class="py-op">.</tt><tt id="link-101" class="py-name"><a title="code.camera.Camera.layerAdd" class="py-name" href="#" onclick="return doclink('link-101', 'layerAdd', 'link-81');">layerAdd</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spaceview</tt><tt class="py-op">,</tt> <tt class="py-number">3</tt><tt class="py-op">,</tt> <tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-comment"># create a chatconsole for text input capabilities</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-comment"># self.chatconsole = ChatConsole(self, col12row9(self,1,1,4,8))</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-comment"># does the universe have a player present in it?</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">hasPlayer</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"> </tt>
+<a name="Game.quit"></a><div id="Game.quit-def"><a name="L133"></a><tt class="py-lineno">133</tt> <a class="py-toggle" href="#" id="Game.quit-toggle" onclick="return toggle('Game.quit');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.game.Game-class.html#quit">quit</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Game.quit-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Game.quit-expanded"><a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt id="link-102" class="py-name" targets="Method code.game.Game.quit()=code.game.Game-class.html#quit"><a title="code.game.Game.quit" class="py-name" href="#" onclick="return doclink('link-102', 'quit', 'link-102');">quit</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"> </tt>
+<a name="Game.run"></a><div id="Game.run-def"><a name="L136"></a><tt class="py-lineno">136</tt> <a class="py-toggle" href="#" id="Game.run-toggle" onclick="return toggle('Game.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.game.Game-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Game.run-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Game.run-expanded"><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-docstring">"""Runs the game."""</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">running</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">        <tt class="py-keyword">while</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">running</tt><tt class="py-op">:</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">            <tt class="py-comment"># game setup:</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">            <tt class="py-name">intro</tt> <tt class="py-op">=</tt> <tt id="link-103" class="py-name" targets="Class code.menus.IntroMenu=code.menus.IntroMenu-class.html"><a title="code.menus.IntroMenu" class="py-name" href="#" onclick="return doclink('link-103', 'IntroMenu', 'link-103');">IntroMenu</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">Rect</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-104" class="py-name"><a title="code.menus.MultyPartTile.width" class="py-name" href="#" onclick="return doclink('link-104', 'width', 'link-17');">width</a></tt> <tt class="py-op">-</tt> <tt class="py-number">800</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">                                         <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-105" class="py-name"><a title="code.menus.MultyPartTile.height" class="py-name" href="#" onclick="return doclink('link-105', 'height', 'link-18');">height</a></tt> <tt class="py-op">-</tt> <tt class="py-number">600</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">                                         <tt class="py-number">800</tt><tt class="py-op">,</tt> <tt class="py-number">600</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">messenger</tt><tt class="py-op">.</tt><tt id="link-106" class="py-name" targets="Method code.gui.Messenger.empty()=code.gui.Messenger-class.html#empty,Method code.starSystem.StarSystem.empty()=code.starSystem.StarSystem-class.html#empty"><a title="code.gui.Messenger.empty
+code.starSystem.StarSystem.empty" class="py-name" href="#" onclick="return doclink('link-106', 'empty', 'link-106');">empty</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">            <tt class="py-keyword">while</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">running</tt> <tt class="py-keyword">and</tt> <tt class="py-name">intro</tt><tt class="py-op">.</tt><tt class="py-name">running</tt><tt class="py-op">:</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">                <tt class="py-comment"># event polling:</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">                <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">pump</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">event</tt> <tt class="py-keyword">in</tt> <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">type</tt> <tt class="py-op">==</tt> <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt id="link-107" class="py-name" targets="Variable code.adjectives.QUIT=code.adjectives-module.html#QUIT,Variable code.cargo.QUIT=code.cargo-module.html#QUIT,Variable code.commandParse.QUIT=code.commandParse-module.html#QUIT,Variable code.floaters.QUIT=code.floaters-module.html#QUIT,Variable code.game.QUIT=code.game-module.html#QUIT,Variable code.gui.QUIT=code.gui-module.html#QUIT,Variable code.menuElements.QUIT=code.menuElements-module.html#QUIT,Variable code.menus.QUIT=code.menus-module.html#QUIT,Variable code.multysprites.QUIT=code.multysprites-module.html#QUIT,Variable code.nameMaker.QUIT=code.nameMaker-module.html#QUIT,Variable code.partCatalog.QUIT=code.partCatalog-module.html#QUIT,Variable code.parts.QUIT=code.parts-module.html#QUIT,Variable code.planet.QUIT=code.planet-module.html#QUIT,Variable code.plot.QUIT=code.plot-module.html#QUIT,Variable code.scripts.QUIT=code.scripts-module.html#QUIT,Variable code.spaceship.QUIT=code.spaceship-module.html#QUIT,Variable code.starSystem.QUIT=code.starSystem-module.html#QUIT,Variable code.strafebat.QUIT=code.strafebat-module.html#QUIT,Variable code.universe.QUIT=code.universe-module.html#QUIT,Variable code.utils.QUIT=code.utils-module.html#QUIT"><a title="code.adjectives.QUIT
+code.cargo.QUIT
+code.commandParse.QUIT
+code.floaters.QUIT
+code.game.QUIT
+code.gui.QUIT
+code.menuElements.QUIT
+code.menus.QUIT
+code.multysprites.QUIT
+code.nameMaker.QUIT
+code.partCatalog.QUIT
+code.parts.QUIT
+code.planet.QUIT
+code.plot.QUIT
+code.scripts.QUIT
+code.spaceship.QUIT
+code.starSystem.QUIT
+code.strafebat.QUIT
+code.universe.QUIT
+code.utils.QUIT" class="py-name" href="#" onclick="return doclink('link-107', 'QUIT', 'link-107');">QUIT</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">running</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">                        <tt class="py-keyword">break</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">                    <tt class="py-name">intro</tt><tt class="py-op">.</tt><tt id="link-108" class="py-name" targets="Method code.menuElements.InputField.handleEvent()=code.menuElements.InputField-class.html#handleEvent,Method code.menuElements.Panel.handleEvent()=code.menuElements.Panel-class.html#handleEvent,Method code.menuElements.TopLevelPanel.handleEvent()=code.menuElements.TopLevelPanel-class.html#handleEvent,Method code.menus.ChatConsole.handleEvent()=code.menus.ChatConsole-class.html#handleEvent,Method code.menus.Console.handleEvent()=code.menus.Console-class.html#handleEvent,Method code.menus.IntroMenu.handleEvent()=code.menus.IntroMenu-class.html#handleEvent,Method code.menus.Menu.handleEvent()=code.menus.Menu-class.html#handleEvent"><a title="code.menuElements.InputField.handleEvent
+code.menuElements.Panel.handleEvent
+code.menuElements.TopLevelPanel.handleEvent
+code.menus.ChatConsole.handleEvent
+code.menus.Console.handleEvent
+code.menus.IntroMenu.handleEvent
+code.menus.Menu.handleEvent" class="py-name" href="#" onclick="return doclink('link-108', 'handleEvent', 'link-108');">handleEvent</a></tt><tt class="py-op">(</tt><tt class="py-name">event</tt><tt class="py-op">)</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">                <tt class="py-name">intro</tt><tt class="py-op">.</tt><tt id="link-109" class="py-name" targets="Method code.camera.Camera.update()=code.camera.Camera-class.html#update,Method code.camera.Layer.update()=code.camera.Layer-class.html#update,Method code.camera.SpaceView.update()=code.camera.SpaceView-class.html#update,Method code.cargo.Cargo.update()=code.cargo.Cargo-class.html#update,Method code.commandParse.CommandParse.update()=code.commandParse.CommandParse-class.html#update,Method code.dialogs.Trigger.update()=code.dialogs.Trigger-class.html#update,Method code.facilitys.Company.update()=code.facilitys.Company-class.html#update,Method code.facilitys.Facility.update()=code.facilitys.Facility-class.html#update,Method code.floaters.Bullet.update()=code.floaters.Bullet-class.html#update,Method code.floaters.Explosion.update()=code.floaters.Explosion-class.html#update,Method code.floaters.Floater.update()=code.floaters.Floater-class.html#update,Method code.floaters.Impact.update()=code.floaters.Impact-class.html#update,Method code.floaters.LaserBeam.update()=code.floaters.LaserBeam-class.html#update,Method code.floaters.Mine.update()=code.floaters.Mine-class.html#update,Method code.floaters.Missile.update()=code.floaters.Missile-class.html#update,Method code.floaters.RadarDisk.update()=code.floaters.RadarDisk-class.html#update,Method code.gui.Drawable.update()=code.gui.Drawable-class.html#update,Method code.gui.Messenger.update()=code.gui.Messenger-class.html#update,Method code.gui.MiniInfo.update()=code.gui.MiniInfo-class.html#update,Method code.gui.shipDamage.update()=code.gui.shipDamage-class.html#update,Method code.menuElements.FunctionLabel.update()=code.menuElements.FunctionLabel-class.html#update,Method code.menuElements.InputField.update()=code.menuElements.InputField-class.html#update,Method code.menuElements.Panel.update()=code.menuElements.Panel-class.html#update,Method code.menuElements.ScrollTextBlock.update()=code.menuElements.ScrollTextBlock-class.html#update,Method code.menuElements.TextBlock.update()=code.menuElements.TextBlock-class.html#update,Method code.menus.ChatConsole.update()=code.menus.ChatConsole-class.html#update,Method code.menus.Menu.update()=code.menus.Menu-class.html#update,Method code.menus.NavigationTile.update()=code.menus.NavigationTile-class.html#update,Method code.menus.PartDescriptionPanel.update()=code.menus.PartDescriptionPanel-class.html#update,Method code.menus.PartsPanel.update()=code.menus.PartsPanel-class.html#update,Method code.menus.PlanetButtons.update()=code.menus.PlanetButtons-class.html#update,Method code.menus.TimeTile.update()=code.menus.TimeTile-class.html#update,Method code.multysprites.spriteSystem.update()=code.multysprites.spriteSystem-class.html#update,Method code.particles.CircleEmitter.update()=code.particles.CircleEmitter-class.html#update,Method code.particles.Emitter.update()=code.particles.Emitter-class.html#update,Method code.particles.Particle.update()=code.particles.Particle-class.html#update,Method code.particles.RingCollector.update()=code.particles.RingCollector-class.html#update,Method code.particles.RingEmitter.update()=code.particles.RingEmitter-class.html#update,Method code.parts.CargoHold.update()=code.parts.CargoHold-class.html#update,Method code.parts.Chip.update()=code.parts.Chip-class.html#update,Method code.parts.Cockpit.update()=code.parts.Cockpit-class.html#update,Method code.parts.Dummy.update()=code.parts.Dummy-class.html#update,Method code.parts.Engine.update()=code.parts.Engine-class.html#update,Method code.parts.FlakCannon.update()=code.parts.FlakCannon-class.html#update,Method code.parts.GatewayFocus.update()=code.parts.GatewayFocus-class.html#update,Method code.parts.Generator.update()=code.parts.Generator-class.html#update,Method code.parts.Gun.update()=code.parts.Gun-class.html#update,Method code.parts.Interconnect.update()=code.parts.Interconnect-class.html#update,Method code.parts.Part.update()=code.parts.Part-class.html#update,Method code.parts.Quarters.update()=code.parts.Quarters-class.html#update,Method code.parts.Radar.update()=code.parts.Radar-class.html#update,Method code.parts.Shield.update()=code.parts.Shield-class.html#update,Method code.planet.Gateway.update()=code.planet.Gateway-class.html#update,Method code.planet.Planet.update()=code.planet.Planet-class.html#update,Method code.planet.Star.update()=code.planet.Star-class.html#update,Method code.planet.Structure.update()=code.planet.Structure-class.html#update,Method code.races.Race.update()=code.races.Race-class.html#update,Method code.scripts.AIScript.update()=code.scripts.AIScript-class.html#update,Method code.scripts.Controllable.update()=code.scripts.Controllable-class.html#update,Method code.scripts.InputScript.update()=code.scripts.InputScript-class.html#update,Method code.scripts.Script.update()=code.scripts.Script-class.html#update,Method code.spaceship.Player.update()=code.spaceship.Player-class.html#update,Method code.spaceship.Ship.update()=code.spaceship.Ship-class.html#update,Method code.starSystem.StarSystem.update()=code.starSystem.StarSystem-class.html#update,Method code.strafebat.StrafebatScript.update()=code.strafebat.StrafebatScript-class.html#update,Method code.universe.Universe.update()=code.universe.Universe-class.html#update"><a title="code.camera.Camera.update
+code.camera.Layer.update
+code.camera.SpaceView.update
+code.cargo.Cargo.update
+code.commandParse.CommandParse.update
+code.dialogs.Trigger.update
+code.facilitys.Company.update
+code.facilitys.Facility.update
+code.floaters.Bullet.update
+code.floaters.Explosion.update
+code.floaters.Floater.update
+code.floaters.Impact.update
+code.floaters.LaserBeam.update
+code.floaters.Mine.update
+code.floaters.Missile.update
+code.floaters.RadarDisk.update
+code.gui.Drawable.update
+code.gui.Messenger.update
+code.gui.MiniInfo.update
+code.gui.shipDamage.update
+code.menuElements.FunctionLabel.update
+code.menuElements.InputField.update
+code.menuElements.Panel.update
+code.menuElements.ScrollTextBlock.update
+code.menuElements.TextBlock.update
+code.menus.ChatConsole.update
+code.menus.Menu.update
+code.menus.NavigationTile.update
+code.menus.PartDescriptionPanel.update
+code.menus.PartsPanel.update
+code.menus.PlanetButtons.update
+code.menus.TimeTile.update
+code.multysprites.spriteSystem.update
+code.particles.CircleEmitter.update
+code.particles.Emitter.update
+code.particles.Particle.update
+code.particles.RingCollector.update
+code.particles.RingEmitter.update
+code.parts.CargoHold.update
+code.parts.Chip.update
+code.parts.Cockpit.update
+code.parts.Dummy.update
+code.parts.Engine.update
+code.parts.FlakCannon.update
+code.parts.GatewayFocus.update
+code.parts.Generator.update
+code.parts.Gun.update
+code.parts.Interconnect.update
+code.parts.Part.update
+code.parts.Quarters.update
+code.parts.Radar.update
+code.parts.Shield.update
+code.planet.Gateway.update
+code.planet.Planet.update
+code.planet.Star.update
+code.planet.Structure.update
+code.races.Race.update
+code.scripts.AIScript.update
+code.scripts.Controllable.update
+code.scripts.InputScript.update
+code.scripts.Script.update
+code.spaceship.Player.update
+code.spaceship.Ship.update
+code.starSystem.StarSystem.update
+code.strafebat.StrafebatScript.update
+code.universe.Universe.update" class="py-name" href="#" onclick="return doclink('link-109', 'update', 'link-109');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">screen</tt><tt class="py-op">.</tt><tt class="py-name">fill</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">                <tt class="py-name">intro</tt><tt class="py-op">.</tt><tt id="link-110" class="py-name" targets="Method code.camera.Camera.draw()=code.camera.Camera-class.html#draw,Method code.camera.Layer.draw()=code.camera.Layer-class.html#draw,Method code.camera.SpaceView.draw()=code.camera.SpaceView-class.html#draw,Method code.floaters.Floater.draw()=code.floaters.Floater-class.html#draw,Method code.floaters.RadarDisk.draw()=code.floaters.RadarDisk-class.html#draw,Method code.gui.BGImage.draw()=code.gui.BGImage-class.html#draw,Method code.gui.Drawable.draw()=code.gui.Drawable-class.html#draw,Method code.gui.HUD.draw()=code.gui.HUD-class.html#draw,Method code.gui.LifeBar.draw()=code.gui.LifeBar-class.html#draw,Method code.gui.Messenger.draw()=code.gui.Messenger-class.html#draw,Method code.gui.MiniInfo.draw()=code.gui.MiniInfo-class.html#draw,Method code.gui.RadarField.draw()=code.gui.RadarField-class.html#draw,Method code.gui.StarField.draw()=code.gui.StarField-class.html#draw,Method code.gui.TargetingRect.draw()=code.gui.TargetingRect-class.html#draw,Method code.gui.shipDamage.draw()=code.gui.shipDamage-class.html#draw,Method code.menuElements.ColorPanel.draw()=code.menuElements.ColorPanel-class.html#draw,Method code.menuElements.Panel.draw()=code.menuElements.Panel-class.html#draw,Method code.menuElements.ScrollPanel.draw()=code.menuElements.ScrollPanel-class.html#draw,Method code.menuElements.Selecter.draw()=code.menuElements.Selecter-class.html#draw,Method code.menuElements.ShapeButton.draw()=code.menuElements.ShapeButton-class.html#draw,Method code.menuElements.TopLevelPanel.draw()=code.menuElements.TopLevelPanel-class.html#draw,Method code.menus.ColorButton.draw()=code.menus.ColorButton-class.html#draw,Method code.particles.Emitter.draw()=code.particles.Emitter-class.html#draw,Method code.particles.Particle.draw()=code.particles.Particle-class.html#draw,Method code.parts.Part.draw()=code.parts.Part-class.html#draw,Method code.planet.Gateway.draw()=code.planet.Gateway-class.html#draw,Method code.planet.Planet.draw()=code.planet.Planet-class.html#draw,Method code.planet.Structure.draw()=code.planet.Structure-class.html#draw,Method code.spaceship.Ship.draw()=code.spaceship.Ship-class.html#draw,Method code.universe.Universe.draw()=code.universe.Universe-class.html#draw"><a title="code.camera.Camera.draw
+code.camera.Layer.draw
+code.camera.SpaceView.draw
+code.floaters.Floater.draw
+code.floaters.RadarDisk.draw
+code.gui.BGImage.draw
+code.gui.Drawable.draw
+code.gui.HUD.draw
+code.gui.LifeBar.draw
+code.gui.Messenger.draw
+code.gui.MiniInfo.draw
+code.gui.RadarField.draw
+code.gui.StarField.draw
+code.gui.TargetingRect.draw
+code.gui.shipDamage.draw
+code.menuElements.ColorPanel.draw
+code.menuElements.Panel.draw
+code.menuElements.ScrollPanel.draw
+code.menuElements.Selecter.draw
+code.menuElements.ShapeButton.draw
+code.menuElements.TopLevelPanel.draw
+code.menus.ColorButton.draw
+code.particles.Emitter.draw
+code.particles.Particle.draw
+code.parts.Part.draw
+code.planet.Gateway.draw
+code.planet.Planet.draw
+code.planet.Structure.draw
+code.spaceship.Ship.draw
+code.universe.Universe.draw" class="py-name" href="#" onclick="return doclink('link-110', 'draw', 'link-110');">draw</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">screen</tt><tt class="py-op">)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">                <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">display</tt><tt class="py-op">.</tt><tt id="link-111" class="py-name" targets="Method code.menus.PartsPanel.flip()=code.menus.PartsPanel-class.html#flip,Method code.parts.FlippablePart.flip()=code.parts.FlippablePart-class.html#flip"><a title="code.menus.PartsPanel.flip
+code.parts.FlippablePart.flip" class="py-name" href="#" onclick="return doclink('link-111', 'flip', 'link-111');">flip</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">                <tt class="py-comment"># aim for FPS but adjust vars for self.fps.</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">clock</tt><tt class="py-op">.</tt><tt class="py-name">tick</tt><tt class="py-op">(</tt><tt id="link-112" class="py-name"><a title="code.game.FPS" class="py-name" href="#" onclick="return doclink('link-112', 'FPS', 'link-11');">FPS</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fps</tt> <tt class="py-op">=</tt> <tt class="py-name">max</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">clock</tt><tt class="py-op">.</tt><tt class="py-name">get_fps</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">timer</tt> <tt class="py-op">+=</tt> <tt class="py-number">1.</tt> <tt class="py-op">/</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fps</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">            <tt class="py-comment"># handle if running is false</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">running</tt><tt class="py-op">:</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">                <tt class="py-keyword">break</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">            <tt class="py-comment"># setup initial state:</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">playerScript</tt> <tt class="py-op">=</tt> <tt id="link-113" class="py-name" targets="Class code.scripts.InputScript=code.scripts.InputScript-class.html"><a title="code.scripts.InputScript" class="py-name" href="#" onclick="return doclink('link-113', 'InputScript', 'link-113');">InputScript</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuScript</tt> <tt class="py-op">=</tt> <tt id="link-114" class="py-name" targets="Class code.scripts.Script=code.scripts.Script-class.html"><a title="code.scripts.Script" class="py-name" href="#" onclick="return doclink('link-114', 'Script', 'link-114');">Script</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">consoleScript</tt> <tt class="py-op">=</tt> <tt id="link-115" class="py-name"><a title="code.scripts.Script" class="py-name" href="#" onclick="return doclink('link-115', 'Script', 'link-114');">Script</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt> <tt class="py-op">=</tt> <tt id="link-116" class="py-name" targets="Function code.spaceship.playerShip()=code.spaceship-module.html#playerShip"><a title="code.spaceship.playerShip" class="py-name" href="#" onclick="return doclink('link-116', 'playerShip', 'link-116');">playerShip</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt id="link-117" class="py-name"><a title="code.vec2d.Vec2d" class="py-name" href="#" onclick="return doclink('link-117', 'Vec2d', 'link-65');">Vec2d</a></tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-118" class="py-name"><a title="code.vec2d.Vec2d" class="py-name" href="#" onclick="return doclink('link-118', 'Vec2d', 'link-65');">Vec2d</a></tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">                                     <tt id="link-119" class="py-name" targets="Variable code.gui.MiniInfo.color=code.gui.MiniInfo-class.html#color,Variable code.menus.ChatConsole.color=code.menus.ChatConsole-class.html#color,Variable code.menus.Console.color=code.menus.Console-class.html#color,Variable code.menus.Menu.color=code.menus.Menu-class.html#color"><a title="code.gui.MiniInfo.color
+code.menus.ChatConsole.color
+code.menus.Console.color
+code.menus.Menu.color" class="py-name" href="#" onclick="return doclink('link-119', 'color', 'link-119');">color</a></tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">playerColor</tt><tt class="py-op">,</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">                                     <tt class="py-name">name</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">PlayerName</tt><tt class="py-op">,</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">                                     <tt class="py-name">type</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">playerType</tt><tt class="py-op">)</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">playerid</tt> <tt class="py-op">=</tt> <tt class="py-name">id</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt><tt class="py-op">)</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-120" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-120', 'camera', 'link-4');">camera</a></tt><tt class="py-op">.</tt><tt id="link-121" class="py-name"><a title="code.camera.Camera.layerAdd" class="py-name" href="#" onclick="return doclink('link-121', 'layerAdd', 'link-81');">layerAdd</a></tt><tt class="py-op">(</tt><tt id="link-122" class="py-name" targets="Class code.gui.shipDamage=code.gui.shipDamage-class.html"><a title="code.gui.shipDamage" class="py-name" href="#" onclick="return doclink('link-122', 'shipDamage', 'link-122');">shipDamage</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-123" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-123', 'universe', 'link-5');">universe</a></tt><tt class="py-op">,</tt> <tt id="link-124" class="py-name"><a title="code.adjectives.FONT
+code.cargo.FONT
+code.commandParse.FONT
+code.floaters.FONT
+code.game.FONT
+code.gui.FONT
+code.menuElements.FONT
+code.menus.FONT
+code.multysprites.FONT
+code.nameMaker.FONT
+code.partCatalog.FONT
+code.parts.FONT
+code.planet.FONT
+code.plot.FONT
+code.scripts.FONT
+code.spaceship.FONT
+code.starSystem.FONT
+code.strafebat.FONT
+code.universe.FONT
+code.utils.FONT" class="py-name" href="#" onclick="return doclink('link-124', 'FONT', 'link-86');">FONT</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">5</tt><tt class="py-op">)</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-125" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-125', 'camera', 'link-4');">camera</a></tt><tt class="py-op">.</tt><tt id="link-126" class="py-name"><a title="code.camera.Camera.layerAdd" class="py-name" href="#" onclick="return doclink('link-126', 'layerAdd', 'link-81');">layerAdd</a></tt><tt class="py-op">(</tt><tt id="link-127" class="py-name" targets="Class code.gui.StarField=code.gui.StarField-class.html"><a title="code.gui.StarField" class="py-name" href="#" onclick="return doclink('link-127', 'StarField', 'link-127');">StarField</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-128" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-128', 'universe', 'link-5');">universe</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-129" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-129', 'universe', 'link-5');">universe</a></tt><tt class="py-op">.</tt><tt id="link-130" class="py-name" targets="Method code.universe.Universe.setCurrentStarSystem()=code.universe.Universe-class.html#setCurrentStarSystem"><a title="code.universe.Universe.setCurrentStarSystem" class="py-name" href="#" onclick="return doclink('link-130', 'setCurrentStarSystem', 'link-130');">setCurrentStarSystem</a></tt><tt class="py-op">(</tt><tt class="py-string">"theone"</tt><tt class="py-op">)</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-131" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-131', 'camera', 'link-4');">camera</a></tt><tt class="py-op">.</tt><tt id="link-132" class="py-name"><a title="code.camera.Camera.layerAdd" class="py-name" href="#" onclick="return doclink('link-132', 'layerAdd', 'link-81');">layerAdd</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-133" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-133', 'universe', 'link-5');">universe</a></tt><tt class="py-op">.</tt><tt class="py-name">curSystem</tt><tt class="py-op">.</tt><tt class="py-name">bg</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-134" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-134', 'camera', 'link-4');">camera</a></tt><tt class="py-op">.</tt><tt id="link-135" class="py-name" targets="Method code.camera.Camera.setLayersPlayer()=code.camera.Camera-class.html#setLayersPlayer"><a title="code.camera.Camera.setLayersPlayer" class="py-name" href="#" onclick="return doclink('link-135', 'setLayersPlayer', 'link-135');">setLayersPlayer</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt><tt class="py-op">)</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-136" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-136', 'universe', 'link-5');">universe</a></tt><tt class="py-op">.</tt><tt id="link-137" class="py-name" targets="Method code.gui.Drawable.setPlayer()=code.gui.Drawable-class.html#setPlayer,Method code.universe.Universe.setPlayer()=code.universe.Universe-class.html#setPlayer"><a title="code.gui.Drawable.setPlayer
+code.universe.Universe.setPlayer" class="py-name" href="#" onclick="return doclink('link-137', 'setPlayer', 'link-137');">setPlayer</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt><tt class="py-op">)</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-138" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-138', 'camera', 'link-4');">camera</a></tt><tt class="py-op">.</tt><tt id="link-139" class="py-name" targets="Method code.camera.Camera.setPos()=code.camera.Camera-class.html#setPos"><a title="code.camera.Camera.setPos" class="py-name" href="#" onclick="return doclink('link-139', 'setPos', 'link-139');">setPos</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt><tt class="py-op">)</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">            <tt id="link-140" class="py-name" targets="Function code.scripts.makePlayerBindings()=code.scripts-module.html#makePlayerBindings"><a title="code.scripts.makePlayerBindings" class="py-name" href="#" onclick="return doclink('link-140', 'makePlayerBindings', 'link-140');">makePlayerBindings</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">playerScript</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt><tt class="py-op">)</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-141" class="py-name"><a title="code.game.Game.menu" class="py-name" href="#" onclick="return doclink('link-141', 'menu', 'link-12');">menu</a></tt> <tt class="py-op">=</tt> <tt id="link-142" class="py-name" targets="Class code.menus.Menu=code.menus.Menu-class.html"><a title="code.menus.Menu" class="py-name" href="#" onclick="return doclink('link-142', 'Menu', 'link-142');">Menu</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">Rect</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-143" class="py-name"><a title="code.menus.MultyPartTile.width" class="py-name" href="#" onclick="return doclink('link-143', 'width', 'link-17');">width</a></tt> <tt class="py-op">-</tt> <tt class="py-number">800</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">                             <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-144" class="py-name"><a title="code.menus.MultyPartTile.height" class="py-name" href="#" onclick="return doclink('link-144', 'height', 'link-18');">height</a></tt> <tt class="py-op">-</tt> <tt class="py-number">600</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-number">800</tt><tt class="py-op">,</tt> <tt class="py-number">600</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chatconsole</tt> <tt class="py-op">=</tt> <tt id="link-145" class="py-name" targets="Class code.menus.ChatConsole=code.menus.ChatConsole-class.html"><a title="code.menus.ChatConsole" class="py-name" href="#" onclick="return doclink('link-145', 'ChatConsole', 'link-145');">ChatConsole</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt id="link-146" class="py-name" targets="Function code.utils.col12row9()=code.utils-module.html#col12row9"><a title="code.utils.col12row9" class="py-name" href="#" onclick="return doclink('link-146', 'col12row9', 'link-146');">col12row9</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt><tt class="py-number">2</tt><tt class="py-op">,</tt><tt class="py-number">11</tt><tt class="py-op">,</tt><tt class="py-number">10</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"><tt class="py-op">)</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">            <tt id="link-147" class="py-name" targets="Function code.scripts.makeMenuBindings()=code.scripts-module.html#makeMenuBindings"><a title="code.scripts.makeMenuBindings" class="py-name" href="#" onclick="return doclink('link-147', 'makeMenuBindings', 'link-147');">makeMenuBindings</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuScript</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">            <tt id="link-148" class="py-name" targets="Function code.scripts.makeGameBindings()=code.scripts-module.html#makeGameBindings"><a title="code.scripts.makeGameBindings" class="py-name" href="#" onclick="return doclink('link-148', 'makeGameBindings', 'link-148');">makeGameBindings</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">playerScript</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">            <tt id="link-149" class="py-name" targets="Function code.scripts.makeConsoleBindings()=code.scripts-module.html#makeConsoleBindings"><a title="code.scripts.makeConsoleBindings" class="py-name" href="#" onclick="return doclink('link-149', 'makeConsoleBindings', 'link-149');">makeConsoleBindings</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">consoleScript</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">            <tt class="py-comment"># two rules below should be integrated into their classes</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">            <tt class="py-comment"># self.menu.keys.bindings.bindings = self.playerScript.bindings</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-150" class="py-name"><a title="code.game.Game.menu" class="py-name" href="#" onclick="return doclink('link-150', 'menu', 'link-12');">menu</a></tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">.</tt><tt class="py-name">bindings</tt><tt class="py-op">.</tt><tt id="link-151" class="py-name" targets="Method code.menuElements.Panel.reset()=code.menuElements.Panel-class.html#reset,Method code.menuElements.Selecter.reset()=code.menuElements.Selecter-class.html#reset,Method code.menus.BindingSelecter.reset()=code.menus.BindingSelecter-class.html#reset,Method code.menus.FunctionSelecter.reset()=code.menus.FunctionSelecter-class.html#reset,Method code.menus.InventoryPanel.reset()=code.menus.InventoryPanel-class.html#reset,Method code.menus.MultyPartTile.reset()=code.menus.MultyPartTile-class.html#reset,Method code.menus.PartDescriptionPanel.reset()=code.menus.PartDescriptionPanel-class.html#reset,Method code.menus.PartFunctionsPanel.reset()=code.menus.PartFunctionsPanel-class.html#reset,Method code.menus.PartsPanel.reset()=code.menus.PartsPanel-class.html#reset,Method code.menus.ShipPanel.reset()=code.menus.ShipPanel-class.html#reset,Method code.parts.Part.reset()=code.parts.Part-class.html#reset,Method code.spaceship.Ship.reset()=code.spaceship.Ship-class.html#reset"><a title="code.menuElements.Panel.reset
+code.menuElements.Selecter.reset
+code.menus.BindingSelecter.reset
+code.menus.FunctionSelecter.reset
+code.menus.InventoryPanel.reset
+code.menus.MultyPartTile.reset
+code.menus.PartDescriptionPanel.reset
+code.menus.PartFunctionsPanel.reset
+code.menus.PartsPanel.reset
+code.menus.ShipPanel.reset
+code.parts.Part.reset
+code.spaceship.Ship.reset" class="py-name" href="#" onclick="return doclink('link-151', 'reset', 'link-151');">reset</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-152" class="py-name"><a title="code.game.Game.menu" class="py-name" href="#" onclick="return doclink('link-152', 'menu', 'link-12');">menu</a></tt><tt class="py-op">.</tt><tt id="link-153" class="py-name" targets="Method code.scripts.Controllable.addScript()=code.scripts.Controllable-class.html#addScript"><a title="code.scripts.Controllable.addScript" class="py-name" href="#" onclick="return doclink('link-153', 'addScript', 'link-153');">addScript</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuScript</tt><tt class="py-op">)</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chatconsole</tt><tt class="py-op">.</tt><tt id="link-154" class="py-name"><a title="code.scripts.Controllable.addScript" class="py-name" href="#" onclick="return doclink('link-154', 'addScript', 'link-153');">addScript</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">consoleScript</tt><tt class="py-op">)</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt><tt class="py-op">.</tt><tt id="link-155" class="py-name"><a title="code.scripts.Controllable.addScript" class="py-name" href="#" onclick="return doclink('link-155', 'addScript', 'link-153');">addScript</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">playerScript</tt><tt class="py-op">)</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt id="link-156" class="py-name" targets="Variable code.vec2d.Vec2d.x=code.vec2d.Vec2d-class.html#x"><a title="code.vec2d.Vec2d.x" class="py-name" href="#" onclick="return doclink('link-156', 'x', 'link-156');">x</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-number">10</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">clock</tt><tt class="py-op">.</tt><tt class="py-name">tick</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">triggers</tt> <tt class="py-op">=</tt> <tt id="link-157" class="py-name" targets="Class code.plot.Triggers=code.plot.Triggers-class.html"><a title="code.plot.Triggers" class="py-name" href="#" onclick="return doclink('link-157', 'Triggers', 'link-157');">Triggers</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">storytriggers</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">triggers</tt><tt class="py-op">.</tt><tt id="link-158" class="py-name" targets="Method code.plot.Triggers.StoryTriggers()=code.plot.Triggers-class.html#StoryTriggers"><a title="code.plot.Triggers.StoryTriggers" class="py-name" href="#" onclick="return doclink('link-158', 'StoryTriggers', 'link-158');">StoryTriggers</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-159" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-159', 'universe', 'link-5');">universe</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">            <tt class="py-comment"># create a parser that parses chatconsole input</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">            <tt class="py-comment"># for command and such.</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-160" class="py-name"><a title="code.commandParse" class="py-name" href="#" onclick="return doclink('link-160', 'commandParse', 'link-9');">commandParse</a></tt> <tt class="py-op">=</tt> <tt id="link-161" class="py-name"><a title="code.commandParse.CommandParse" class="py-name" href="#" onclick="return doclink('link-161', 'CommandParse', 'link-10');">CommandParse</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chatconsole</tt><tt class="py-op">,</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">                                             <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">messenger</tt><tt class="py-op">)</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">            <tt class="py-comment"># check once wether the universe still has a player.</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">hasPlayer</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-162" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-162', 'universe', 'link-5');">universe</a></tt><tt class="py-op">.</tt><tt class="py-name">curSystem</tt><tt class="py-op">.</tt><tt id="link-163" class="py-name" targets="Module code.floaters=code.floaters-module.html"><a title="code.floaters" class="py-name" href="#" onclick="return doclink('link-163', 'floaters', 'link-163');">floaters</a></tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">            <tt class="py-comment"># The in-round loop (while player is alive):</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">            <tt class="py-comment"># print self.hasPlayer, self.running</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line"> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">            <tt class="py-keyword">while</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">running</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">hasPlayer</tt><tt class="py-op">:</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">                <tt class="py-comment"># check wether the universe still has a player.</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">hasPlayer</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-164" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-164', 'universe', 'link-5');">universe</a></tt><tt class="py-op">.</tt><tt class="py-name">curSystem</tt><tt class="py-op">.</tt><tt id="link-165" class="py-name"><a title="code.floaters" class="py-name" href="#" onclick="return doclink('link-165', 'floaters', 'link-163');">floaters</a></tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">                <tt class="py-comment"># event polling:</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">                <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">pump</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">event</tt> <tt class="py-keyword">in</tt> <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">type</tt> <tt class="py-op">==</tt> <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt id="link-166" class="py-name"><a title="code.adjectives.QUIT
+code.cargo.QUIT
+code.commandParse.QUIT
+code.floaters.QUIT
+code.game.QUIT
+code.gui.QUIT
+code.menuElements.QUIT
+code.menus.QUIT
+code.multysprites.QUIT
+code.nameMaker.QUIT
+code.partCatalog.QUIT
+code.parts.QUIT
+code.planet.QUIT
+code.plot.QUIT
+code.scripts.QUIT
+code.spaceship.QUIT
+code.starSystem.QUIT
+code.strafebat.QUIT
+code.universe.QUIT
+code.utils.QUIT" class="py-name" href="#" onclick="return doclink('link-166', 'QUIT', 'link-107');">QUIT</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">running</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">                    <tt class="py-comment"># if not self.pause and not self.console:</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">type</tt> <tt class="py-op">==</tt> <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt id="link-167" class="py-name" targets="Variable code.adjectives.MOUSEBUTTONDOWN=code.adjectives-module.html#MOUSEBUTTONDOWN,Variable code.cargo.MOUSEBUTTONDOWN=code.cargo-module.html#MOUSEBUTTONDOWN,Variable code.commandParse.MOUSEBUTTONDOWN=code.commandParse-module.html#MOUSEBUTTONDOWN,Variable code.floaters.MOUSEBUTTONDOWN=code.floaters-module.html#MOUSEBUTTONDOWN,Variable code.game.MOUSEBUTTONDOWN=code.game-module.html#MOUSEBUTTONDOWN,Variable code.gui.MOUSEBUTTONDOWN=code.gui-module.html#MOUSEBUTTONDOWN,Variable code.menuElements.MOUSEBUTTONDOWN=code.menuElements-module.html#MOUSEBUTTONDOWN,Variable code.menus.MOUSEBUTTONDOWN=code.menus-module.html#MOUSEBUTTONDOWN,Variable code.multysprites.MOUSEBUTTONDOWN=code.multysprites-module.html#MOUSEBUTTONDOWN,Variable code.nameMaker.MOUSEBUTTONDOWN=code.nameMaker-module.html#MOUSEBUTTONDOWN,Variable code.partCatalog.MOUSEBUTTONDOWN=code.partCatalog-module.html#MOUSEBUTTONDOWN,Variable code.parts.MOUSEBUTTONDOWN=code.parts-module.html#MOUSEBUTTONDOWN,Variable code.planet.MOUSEBUTTONDOWN=code.planet-module.html#MOUSEBUTTONDOWN,Variable code.plot.MOUSEBUTTONDOWN=code.plot-module.html#MOUSEBUTTONDOWN,Variable code.scripts.MOUSEBUTTONDOWN=code.scripts-module.html#MOUSEBUTTONDOWN,Variable code.spaceship.MOUSEBUTTONDOWN=code.spaceship-module.html#MOUSEBUTTONDOWN,Variable code.starSystem.MOUSEBUTTONDOWN=code.starSystem-module.html#MOUSEBUTTONDOWN,Variable code.strafebat.MOUSEBUTTONDOWN=code.strafebat-module.html#MOUSEBUTTONDOWN,Variable code.universe.MOUSEBUTTONDOWN=code.universe-module.html#MOUSEBUTTONDOWN,Variable code.utils.MOUSEBUTTONDOWN=code.utils-module.html#MOUSEBUTTONDOWN"><a title="code.adjectives.MOUSEBUTTONDOWN
+code.cargo.MOUSEBUTTONDOWN
+code.commandParse.MOUSEBUTTONDOWN
+code.floaters.MOUSEBUTTONDOWN
+code.game.MOUSEBUTTONDOWN
+code.gui.MOUSEBUTTONDOWN
+code.menuElements.MOUSEBUTTONDOWN
+code.menus.MOUSEBUTTONDOWN
+code.multysprites.MOUSEBUTTONDOWN
+code.nameMaker.MOUSEBUTTONDOWN
+code.partCatalog.MOUSEBUTTONDOWN
+code.parts.MOUSEBUTTONDOWN
+code.planet.MOUSEBUTTONDOWN
+code.plot.MOUSEBUTTONDOWN
+code.scripts.MOUSEBUTTONDOWN
+code.spaceship.MOUSEBUTTONDOWN
+code.starSystem.MOUSEBUTTONDOWN
+code.strafebat.MOUSEBUTTONDOWN
+code.universe.MOUSEBUTTONDOWN
+code.utils.MOUSEBUTTONDOWN" class="py-name" href="#" onclick="return doclink('link-167', 'MOUSEBUTTONDOWN', 'link-167');">MOUSEBUTTONDOWN</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">mouse</tt><tt class="py-op">[</tt><tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">button</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">mouse</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">                    <tt class="py-keyword">elif</tt> <tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">type</tt> <tt class="py-op">==</tt> <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt id="link-168" class="py-name" targets="Variable code.adjectives.MOUSEBUTTONUP=code.adjectives-module.html#MOUSEBUTTONUP,Variable code.cargo.MOUSEBUTTONUP=code.cargo-module.html#MOUSEBUTTONUP,Variable code.commandParse.MOUSEBUTTONUP=code.commandParse-module.html#MOUSEBUTTONUP,Variable code.floaters.MOUSEBUTTONUP=code.floaters-module.html#MOUSEBUTTONUP,Variable code.game.MOUSEBUTTONUP=code.game-module.html#MOUSEBUTTONUP,Variable code.gui.MOUSEBUTTONUP=code.gui-module.html#MOUSEBUTTONUP,Variable code.menuElements.MOUSEBUTTONUP=code.menuElements-module.html#MOUSEBUTTONUP,Variable code.menus.MOUSEBUTTONUP=code.menus-module.html#MOUSEBUTTONUP,Variable code.multysprites.MOUSEBUTTONUP=code.multysprites-module.html#MOUSEBUTTONUP,Variable code.nameMaker.MOUSEBUTTONUP=code.nameMaker-module.html#MOUSEBUTTONUP,Variable code.partCatalog.MOUSEBUTTONUP=code.partCatalog-module.html#MOUSEBUTTONUP,Variable code.parts.MOUSEBUTTONUP=code.parts-module.html#MOUSEBUTTONUP,Variable code.planet.MOUSEBUTTONUP=code.planet-module.html#MOUSEBUTTONUP,Variable code.plot.MOUSEBUTTONUP=code.plot-module.html#MOUSEBUTTONUP,Variable code.scripts.MOUSEBUTTONUP=code.scripts-module.html#MOUSEBUTTONUP,Variable code.spaceship.MOUSEBUTTONUP=code.spaceship-module.html#MOUSEBUTTONUP,Variable code.starSystem.MOUSEBUTTONUP=code.starSystem-module.html#MOUSEBUTTONUP,Variable code.strafebat.MOUSEBUTTONUP=code.strafebat-module.html#MOUSEBUTTONUP,Variable code.universe.MOUSEBUTTONUP=code.universe-module.html#MOUSEBUTTONUP,Variable code.utils.MOUSEBUTTONUP=code.utils-module.html#MOUSEBUTTONUP"><a title="code.adjectives.MOUSEBUTTONUP
+code.cargo.MOUSEBUTTONUP
+code.commandParse.MOUSEBUTTONUP
+code.floaters.MOUSEBUTTONUP
+code.game.MOUSEBUTTONUP
+code.gui.MOUSEBUTTONUP
+code.menuElements.MOUSEBUTTONUP
+code.menus.MOUSEBUTTONUP
+code.multysprites.MOUSEBUTTONUP
+code.nameMaker.MOUSEBUTTONUP
+code.partCatalog.MOUSEBUTTONUP
+code.parts.MOUSEBUTTONUP
+code.planet.MOUSEBUTTONUP
+code.plot.MOUSEBUTTONUP
+code.scripts.MOUSEBUTTONUP
+code.spaceship.MOUSEBUTTONUP
+code.starSystem.MOUSEBUTTONUP
+code.strafebat.MOUSEBUTTONUP
+code.universe.MOUSEBUTTONUP
+code.utils.MOUSEBUTTONUP" class="py-name" href="#" onclick="return doclink('link-168', 'MOUSEBUTTONUP', 'link-168');">MOUSEBUTTONUP</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">mouse</tt><tt class="py-op">[</tt><tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">button</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">mouse</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">                    <tt class="py-keyword">elif</tt> <tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">type</tt> <tt class="py-op">==</tt> <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt id="link-169" class="py-name" targets="Variable code.adjectives.MOUSEMOTION=code.adjectives-module.html#MOUSEMOTION,Variable code.cargo.MOUSEMOTION=code.cargo-module.html#MOUSEMOTION,Variable code.commandParse.MOUSEMOTION=code.commandParse-module.html#MOUSEMOTION,Variable code.floaters.MOUSEMOTION=code.floaters-module.html#MOUSEMOTION,Variable code.game.MOUSEMOTION=code.game-module.html#MOUSEMOTION,Variable code.gui.MOUSEMOTION=code.gui-module.html#MOUSEMOTION,Variable code.menuElements.MOUSEMOTION=code.menuElements-module.html#MOUSEMOTION,Variable code.menus.MOUSEMOTION=code.menus-module.html#MOUSEMOTION,Variable code.multysprites.MOUSEMOTION=code.multysprites-module.html#MOUSEMOTION,Variable code.nameMaker.MOUSEMOTION=code.nameMaker-module.html#MOUSEMOTION,Variable code.partCatalog.MOUSEMOTION=code.partCatalog-module.html#MOUSEMOTION,Variable code.parts.MOUSEMOTION=code.parts-module.html#MOUSEMOTION,Variable code.planet.MOUSEMOTION=code.planet-module.html#MOUSEMOTION,Variable code.plot.MOUSEMOTION=code.plot-module.html#MOUSEMOTION,Variable code.scripts.MOUSEMOTION=code.scripts-module.html#MOUSEMOTION,Variable code.spaceship.MOUSEMOTION=code.spaceship-module.html#MOUSEMOTION,Variable code.starSystem.MOUSEMOTION=code.starSystem-module.html#MOUSEMOTION,Variable code.strafebat.MOUSEMOTION=code.strafebat-module.html#MOUSEMOTION,Variable code.universe.MOUSEMOTION=code.universe-module.html#MOUSEMOTION,Variable code.utils.MOUSEMOTION=code.utils-module.html#MOUSEMOTION"><a title="code.adjectives.MOUSEMOTION
+code.cargo.MOUSEMOTION
+code.commandParse.MOUSEMOTION
+code.floaters.MOUSEMOTION
+code.game.MOUSEMOTION
+code.gui.MOUSEMOTION
+code.menuElements.MOUSEMOTION
+code.menus.MOUSEMOTION
+code.multysprites.MOUSEMOTION
+code.nameMaker.MOUSEMOTION
+code.partCatalog.MOUSEMOTION
+code.parts.MOUSEMOTION
+code.planet.MOUSEMOTION
+code.plot.MOUSEMOTION
+code.scripts.MOUSEMOTION
+code.spaceship.MOUSEMOTION
+code.starSystem.MOUSEMOTION
+code.strafebat.MOUSEMOTION
+code.universe.MOUSEMOTION
+code.utils.MOUSEMOTION" class="py-name" href="#" onclick="return doclink('link-169', 'MOUSEMOTION', 'link-169');">MOUSEMOTION</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">mouse</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">                    <tt class="py-keyword">elif</tt> <tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">type</tt> <tt class="py-op">==</tt> <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt id="link-170" class="py-name" targets="Variable code.adjectives.KEYDOWN=code.adjectives-module.html#KEYDOWN,Variable code.cargo.KEYDOWN=code.cargo-module.html#KEYDOWN,Variable code.commandParse.KEYDOWN=code.commandParse-module.html#KEYDOWN,Variable code.floaters.KEYDOWN=code.floaters-module.html#KEYDOWN,Variable code.game.KEYDOWN=code.game-module.html#KEYDOWN,Variable code.gui.KEYDOWN=code.gui-module.html#KEYDOWN,Variable code.menuElements.KEYDOWN=code.menuElements-module.html#KEYDOWN,Variable code.menus.KEYDOWN=code.menus-module.html#KEYDOWN,Variable code.multysprites.KEYDOWN=code.multysprites-module.html#KEYDOWN,Variable code.nameMaker.KEYDOWN=code.nameMaker-module.html#KEYDOWN,Variable code.partCatalog.KEYDOWN=code.partCatalog-module.html#KEYDOWN,Variable code.parts.KEYDOWN=code.parts-module.html#KEYDOWN,Variable code.planet.KEYDOWN=code.planet-module.html#KEYDOWN,Variable code.plot.KEYDOWN=code.plot-module.html#KEYDOWN,Variable code.scripts.KEYDOWN=code.scripts-module.html#KEYDOWN,Variable code.spaceship.KEYDOWN=code.spaceship-module.html#KEYDOWN,Variable code.starSystem.KEYDOWN=code.starSystem-module.html#KEYDOWN,Variable code.strafebat.KEYDOWN=code.strafebat-module.html#KEYDOWN,Variable code.universe.KEYDOWN=code.universe-module.html#KEYDOWN,Variable code.utils.KEYDOWN=code.utils-module.html#KEYDOWN"><a title="code.adjectives.KEYDOWN
+code.cargo.KEYDOWN
+code.commandParse.KEYDOWN
+code.floaters.KEYDOWN
+code.game.KEYDOWN
+code.gui.KEYDOWN
+code.menuElements.KEYDOWN
+code.menus.KEYDOWN
+code.multysprites.KEYDOWN
+code.nameMaker.KEYDOWN
+code.partCatalog.KEYDOWN
+code.parts.KEYDOWN
+code.planet.KEYDOWN
+code.plot.KEYDOWN
+code.scripts.KEYDOWN
+code.spaceship.KEYDOWN
+code.starSystem.KEYDOWN
+code.strafebat.KEYDOWN
+code.universe.KEYDOWN
+code.utils.KEYDOWN" class="py-name" href="#" onclick="return doclink('link-170', 'KEYDOWN', 'link-170');">KEYDOWN</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">[</tt><tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">key</tt> <tt class="py-op">%</tt> <tt class="py-number">322</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line"> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">                    <tt class="py-keyword">elif</tt> <tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">type</tt> <tt class="py-op">==</tt> <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt id="link-171" class="py-name" targets="Variable code.adjectives.KEYUP=code.adjectives-module.html#KEYUP,Variable code.cargo.KEYUP=code.cargo-module.html#KEYUP,Variable code.commandParse.KEYUP=code.commandParse-module.html#KEYUP,Variable code.floaters.KEYUP=code.floaters-module.html#KEYUP,Variable code.game.KEYUP=code.game-module.html#KEYUP,Variable code.gui.KEYUP=code.gui-module.html#KEYUP,Variable code.menuElements.KEYUP=code.menuElements-module.html#KEYUP,Variable code.menus.KEYUP=code.menus-module.html#KEYUP,Variable code.multysprites.KEYUP=code.multysprites-module.html#KEYUP,Variable code.nameMaker.KEYUP=code.nameMaker-module.html#KEYUP,Variable code.partCatalog.KEYUP=code.partCatalog-module.html#KEYUP,Variable code.parts.KEYUP=code.parts-module.html#KEYUP,Variable code.planet.KEYUP=code.planet-module.html#KEYUP,Variable code.plot.KEYUP=code.plot-module.html#KEYUP,Variable code.scripts.KEYUP=code.scripts-module.html#KEYUP,Variable code.spaceship.KEYUP=code.spaceship-module.html#KEYUP,Variable code.starSystem.KEYUP=code.starSystem-module.html#KEYUP,Variable code.strafebat.KEYUP=code.strafebat-module.html#KEYUP,Variable code.universe.KEYUP=code.universe-module.html#KEYUP,Variable code.utils.KEYUP=code.utils-module.html#KEYUP"><a title="code.adjectives.KEYUP
+code.cargo.KEYUP
+code.commandParse.KEYUP
+code.floaters.KEYUP
+code.game.KEYUP
+code.gui.KEYUP
+code.menuElements.KEYUP
+code.menus.KEYUP
+code.multysprites.KEYUP
+code.nameMaker.KEYUP
+code.partCatalog.KEYUP
+code.parts.KEYUP
+code.planet.KEYUP
+code.plot.KEYUP
+code.scripts.KEYUP
+code.spaceship.KEYUP
+code.starSystem.KEYUP
+code.strafebat.KEYUP
+code.universe.KEYUP
+code.utils.KEYUP" class="py-name" href="#" onclick="return doclink('link-171', 'KEYUP', 'link-171');">KEYUP</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">[</tt><tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">key</tt> <tt class="py-op">%</tt> <tt class="py-number">322</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-172" class="py-name"><a title="code.game.Game.menu" class="py-name" href="#" onclick="return doclink('link-172', 'menu', 'link-12');">menu</a></tt><tt class="py-op">.</tt><tt class="py-name">active</tt><tt class="py-op">:</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-173" class="py-name"><a title="code.game.Game.menu" class="py-name" href="#" onclick="return doclink('link-173', 'menu', 'link-12');">menu</a></tt><tt class="py-op">.</tt><tt id="link-174" class="py-name"><a title="code.menuElements.InputField.handleEvent
+code.menuElements.Panel.handleEvent
+code.menuElements.TopLevelPanel.handleEvent
+code.menus.ChatConsole.handleEvent
+code.menus.Console.handleEvent
+code.menus.IntroMenu.handleEvent
+code.menus.Menu.handleEvent" class="py-name" href="#" onclick="return doclink('link-174', 'handleEvent', 'link-108');">handleEvent</a></tt><tt class="py-op">(</tt><tt class="py-name">event</tt><tt class="py-op">)</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chatconsole</tt><tt class="py-op">.</tt><tt class="py-name">active</tt><tt class="py-op">:</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chatconsole</tt><tt class="py-op">.</tt><tt id="link-175" class="py-name"><a title="code.menuElements.InputField.handleEvent
+code.menuElements.Panel.handleEvent
+code.menuElements.TopLevelPanel.handleEvent
+code.menus.ChatConsole.handleEvent
+code.menus.Console.handleEvent
+code.menus.IntroMenu.handleEvent
+code.menus.Menu.handleEvent" class="py-name" href="#" onclick="return doclink('link-175', 'handleEvent', 'link-108');">handleEvent</a></tt><tt class="py-op">(</tt><tt class="py-name">event</tt><tt class="py-op">)</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">                <tt class="py-comment"># game-level key input:</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">                <tt class="py-comment"># somehow delete key will destroy ship and when back out of</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">                <tt class="py-comment"># menu will again destroy ship</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">                <tt class="py-comment"># when this schript part is in scripts thats</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">                <tt class="py-comment"># why it is still here.</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">[</tt><tt id="link-176" class="py-name" targets="Variable code.adjectives.K_DELETE=code.adjectives-module.html#K_DELETE,Variable code.cargo.K_DELETE=code.cargo-module.html#K_DELETE,Variable code.commandParse.K_DELETE=code.commandParse-module.html#K_DELETE,Variable code.floaters.K_DELETE=code.floaters-module.html#K_DELETE,Variable code.game.K_DELETE=code.game-module.html#K_DELETE,Variable code.gui.K_DELETE=code.gui-module.html#K_DELETE,Variable code.menuElements.K_DELETE=code.menuElements-module.html#K_DELETE,Variable code.menus.K_DELETE=code.menus-module.html#K_DELETE,Variable code.multysprites.K_DELETE=code.multysprites-module.html#K_DELETE,Variable code.nameMaker.K_DELETE=code.nameMaker-module.html#K_DELETE,Variable code.partCatalog.K_DELETE=code.partCatalog-module.html#K_DELETE,Variable code.parts.K_DELETE=code.parts-module.html#K_DELETE,Variable code.planet.K_DELETE=code.planet-module.html#K_DELETE,Variable code.plot.K_DELETE=code.plot-module.html#K_DELETE,Variable code.scripts.K_DELETE=code.scripts-module.html#K_DELETE,Variable code.spaceship.K_DELETE=code.spaceship-module.html#K_DELETE,Variable code.starSystem.K_DELETE=code.starSystem-module.html#K_DELETE,Variable code.strafebat.K_DELETE=code.strafebat-module.html#K_DELETE,Variable code.universe.K_DELETE=code.universe-module.html#K_DELETE,Variable code.utils.K_DELETE=code.utils-module.html#K_DELETE"><a title="code.adjectives.K_DELETE
+code.cargo.K_DELETE
+code.commandParse.K_DELETE
+code.floaters.K_DELETE
+code.game.K_DELETE
+code.gui.K_DELETE
+code.menuElements.K_DELETE
+code.menus.K_DELETE
+code.multysprites.K_DELETE
+code.nameMaker.K_DELETE
+code.partCatalog.K_DELETE
+code.parts.K_DELETE
+code.planet.K_DELETE
+code.plot.K_DELETE
+code.scripts.K_DELETE
+code.spaceship.K_DELETE
+code.starSystem.K_DELETE
+code.strafebat.K_DELETE
+code.universe.K_DELETE
+code.utils.K_DELETE" class="py-name" href="#" onclick="return doclink('link-176', 'K_DELETE', 'link-176');">K_DELETE</a></tt> <tt class="py-op">%</tt> <tt class="py-number">322</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">[</tt><tt id="link-177" class="py-name"><a title="code.adjectives.K_DELETE
+code.cargo.K_DELETE
+code.commandParse.K_DELETE
+code.floaters.K_DELETE
+code.game.K_DELETE
+code.gui.K_DELETE
+code.menuElements.K_DELETE
+code.menus.K_DELETE
+code.multysprites.K_DELETE
+code.nameMaker.K_DELETE
+code.partCatalog.K_DELETE
+code.parts.K_DELETE
+code.planet.K_DELETE
+code.plot.K_DELETE
+code.scripts.K_DELETE
+code.spaceship.K_DELETE
+code.starSystem.K_DELETE
+code.strafebat.K_DELETE
+code.universe.K_DELETE
+code.utils.K_DELETE" class="py-name" href="#" onclick="return doclink('link-177', 'K_DELETE', 'link-176');">K_DELETE</a></tt> <tt class="py-op">%</tt> <tt class="py-number">322</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">                    <tt class="py-comment"># suicide</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt><tt class="py-op">.</tt><tt id="link-178" class="py-name" targets="Method code.floaters.Bullet.kill()=code.floaters.Bullet-class.html#kill,Method code.floaters.Explosion.kill()=code.floaters.Explosion-class.html#kill,Method code.floaters.Floater.kill()=code.floaters.Floater-class.html#kill,Method code.floaters.Mine.kill()=code.floaters.Mine-class.html#kill,Method code.floaters.Missile.kill()=code.floaters.Missile-class.html#kill,Method code.spaceship.Player.kill()=code.spaceship.Player-class.html#kill,Method code.spaceship.Ship.kill()=code.spaceship.Ship-class.html#kill"><a title="code.floaters.Bullet.kill
+code.floaters.Explosion.kill
+code.floaters.Floater.kill
+code.floaters.Mine.kill
+code.floaters.Missile.kill
+code.spaceship.Player.kill
+code.spaceship.Ship.kill" class="py-name" href="#" onclick="return doclink('link-178', 'kill', 'link-178');">kill</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line"> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">[</tt><tt id="link-179" class="py-name" targets="Variable code.adjectives.K_BACKSLASH=code.adjectives-module.html#K_BACKSLASH,Variable code.cargo.K_BACKSLASH=code.cargo-module.html#K_BACKSLASH,Variable code.commandParse.K_BACKSLASH=code.commandParse-module.html#K_BACKSLASH,Variable code.floaters.K_BACKSLASH=code.floaters-module.html#K_BACKSLASH,Variable code.game.K_BACKSLASH=code.game-module.html#K_BACKSLASH,Variable code.gui.K_BACKSLASH=code.gui-module.html#K_BACKSLASH,Variable code.menuElements.K_BACKSLASH=code.menuElements-module.html#K_BACKSLASH,Variable code.menus.K_BACKSLASH=code.menus-module.html#K_BACKSLASH,Variable code.multysprites.K_BACKSLASH=code.multysprites-module.html#K_BACKSLASH,Variable code.nameMaker.K_BACKSLASH=code.nameMaker-module.html#K_BACKSLASH,Variable code.partCatalog.K_BACKSLASH=code.partCatalog-module.html#K_BACKSLASH,Variable code.parts.K_BACKSLASH=code.parts-module.html#K_BACKSLASH,Variable code.planet.K_BACKSLASH=code.planet-module.html#K_BACKSLASH,Variable code.plot.K_BACKSLASH=code.plot-module.html#K_BACKSLASH,Variable code.scripts.K_BACKSLASH=code.scripts-module.html#K_BACKSLASH,Variable code.spaceship.K_BACKSLASH=code.spaceship-module.html#K_BACKSLASH,Variable code.starSystem.K_BACKSLASH=code.starSystem-module.html#K_BACKSLASH,Variable code.strafebat.K_BACKSLASH=code.strafebat-module.html#K_BACKSLASH,Variable code.universe.K_BACKSLASH=code.universe-module.html#K_BACKSLASH,Variable code.utils.K_BACKSLASH=code.utils-module.html#K_BACKSLASH"><a title="code.adjectives.K_BACKSLASH
+code.cargo.K_BACKSLASH
+code.commandParse.K_BACKSLASH
+code.floaters.K_BACKSLASH
+code.game.K_BACKSLASH
+code.gui.K_BACKSLASH
+code.menuElements.K_BACKSLASH
+code.menus.K_BACKSLASH
+code.multysprites.K_BACKSLASH
+code.nameMaker.K_BACKSLASH
+code.partCatalog.K_BACKSLASH
+code.parts.K_BACKSLASH
+code.planet.K_BACKSLASH
+code.plot.K_BACKSLASH
+code.scripts.K_BACKSLASH
+code.spaceship.K_BACKSLASH
+code.starSystem.K_BACKSLASH
+code.strafebat.K_BACKSLASH
+code.universe.K_BACKSLASH
+code.utils.K_BACKSLASH" class="py-name" href="#" onclick="return doclink('link-179', 'K_BACKSLASH', 'link-179');">K_BACKSLASH</a></tt> <tt class="py-op">%</tt> <tt class="py-number">322</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">                    <tt id="link-180" class="py-name" targets="Function code.utils.saveScreenShot()=code.utils-module.html#saveScreenShot"><a title="code.utils.saveScreenShot" class="py-name" href="#" onclick="return doclink('link-180', 'saveScreenShot', 'link-180');">saveScreenShot</a></tt><tt class="py-op">(</tt><tt class="py-string">"Screen-shots"</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">screen</tt><tt class="py-op">)</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line"> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">debug</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">                <tt class="py-name">L_ALT_F4</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">[</tt><tt id="link-181" class="py-name" targets="Variable code.adjectives.K_LALT=code.adjectives-module.html#K_LALT,Variable code.cargo.K_LALT=code.cargo-module.html#K_LALT,Variable code.commandParse.K_LALT=code.commandParse-module.html#K_LALT,Variable code.floaters.K_LALT=code.floaters-module.html#K_LALT,Variable code.game.K_LALT=code.game-module.html#K_LALT,Variable code.gui.K_LALT=code.gui-module.html#K_LALT,Variable code.menuElements.K_LALT=code.menuElements-module.html#K_LALT,Variable code.menus.K_LALT=code.menus-module.html#K_LALT,Variable code.multysprites.K_LALT=code.multysprites-module.html#K_LALT,Variable code.nameMaker.K_LALT=code.nameMaker-module.html#K_LALT,Variable code.partCatalog.K_LALT=code.partCatalog-module.html#K_LALT,Variable code.parts.K_LALT=code.parts-module.html#K_LALT,Variable code.planet.K_LALT=code.planet-module.html#K_LALT,Variable code.plot.K_LALT=code.plot-module.html#K_LALT,Variable code.scripts.K_LALT=code.scripts-module.html#K_LALT,Variable code.spaceship.K_LALT=code.spaceship-module.html#K_LALT,Variable code.starSystem.K_LALT=code.starSystem-module.html#K_LALT,Variable code.strafebat.K_LALT=code.strafebat-module.html#K_LALT,Variable code.universe.K_LALT=code.universe-module.html#K_LALT,Variable code.utils.K_LALT=code.utils-module.html#K_LALT"><a title="code.adjectives.K_LALT
+code.cargo.K_LALT
+code.commandParse.K_LALT
+code.floaters.K_LALT
+code.game.K_LALT
+code.gui.K_LALT
+code.menuElements.K_LALT
+code.menus.K_LALT
+code.multysprites.K_LALT
+code.nameMaker.K_LALT
+code.partCatalog.K_LALT
+code.parts.K_LALT
+code.planet.K_LALT
+code.plot.K_LALT
+code.scripts.K_LALT
+code.spaceship.K_LALT
+code.starSystem.K_LALT
+code.strafebat.K_LALT
+code.universe.K_LALT
+code.utils.K_LALT" class="py-name" href="#" onclick="return doclink('link-181', 'K_LALT', 'link-181');">K_LALT</a></tt> <tt class="py-op">%</tt> <tt class="py-number">322</tt><tt class="py-op">]</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">[</tt><tt id="link-182" class="py-name" targets="Variable code.adjectives.K_F4=code.adjectives-module.html#K_F4,Variable code.cargo.K_F4=code.cargo-module.html#K_F4,Variable code.commandParse.K_F4=code.commandParse-module.html#K_F4,Variable code.floaters.K_F4=code.floaters-module.html#K_F4,Variable code.game.K_F4=code.game-module.html#K_F4,Variable code.gui.K_F4=code.gui-module.html#K_F4,Variable code.menuElements.K_F4=code.menuElements-module.html#K_F4,Variable code.menus.K_F4=code.menus-module.html#K_F4,Variable code.multysprites.K_F4=code.multysprites-module.html#K_F4,Variable code.nameMaker.K_F4=code.nameMaker-module.html#K_F4,Variable code.partCatalog.K_F4=code.partCatalog-module.html#K_F4,Variable code.parts.K_F4=code.parts-module.html#K_F4,Variable code.planet.K_F4=code.planet-module.html#K_F4,Variable code.plot.K_F4=code.plot-module.html#K_F4,Variable code.scripts.K_F4=code.scripts-module.html#K_F4,Variable code.spaceship.K_F4=code.spaceship-module.html#K_F4,Variable code.starSystem.K_F4=code.starSystem-module.html#K_F4,Variable code.strafebat.K_F4=code.strafebat-module.html#K_F4,Variable code.universe.K_F4=code.universe-module.html#K_F4,Variable code.utils.K_F4=code.utils-module.html#K_F4"><a title="code.adjectives.K_F4
+code.cargo.K_F4
+code.commandParse.K_F4
+code.floaters.K_F4
+code.game.K_F4
+code.gui.K_F4
+code.menuElements.K_F4
+code.menus.K_F4
+code.multysprites.K_F4
+code.nameMaker.K_F4
+code.partCatalog.K_F4
+code.parts.K_F4
+code.planet.K_F4
+code.plot.K_F4
+code.scripts.K_F4
+code.spaceship.K_F4
+code.starSystem.K_F4
+code.strafebat.K_F4
+code.universe.K_F4
+code.utils.K_F4" class="py-name" href="#" onclick="return doclink('link-182', 'K_F4', 'link-182');">K_F4</a></tt> <tt class="py-op">%</tt> <tt class="py-number">322</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line">                <tt class="py-name">R_ALT_F4</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">[</tt><tt id="link-183" class="py-name" targets="Variable code.adjectives.K_RALT=code.adjectives-module.html#K_RALT,Variable code.cargo.K_RALT=code.cargo-module.html#K_RALT,Variable code.commandParse.K_RALT=code.commandParse-module.html#K_RALT,Variable code.floaters.K_RALT=code.floaters-module.html#K_RALT,Variable code.game.K_RALT=code.game-module.html#K_RALT,Variable code.gui.K_RALT=code.gui-module.html#K_RALT,Variable code.menuElements.K_RALT=code.menuElements-module.html#K_RALT,Variable code.menus.K_RALT=code.menus-module.html#K_RALT,Variable code.multysprites.K_RALT=code.multysprites-module.html#K_RALT,Variable code.nameMaker.K_RALT=code.nameMaker-module.html#K_RALT,Variable code.partCatalog.K_RALT=code.partCatalog-module.html#K_RALT,Variable code.parts.K_RALT=code.parts-module.html#K_RALT,Variable code.planet.K_RALT=code.planet-module.html#K_RALT,Variable code.plot.K_RALT=code.plot-module.html#K_RALT,Variable code.scripts.K_RALT=code.scripts-module.html#K_RALT,Variable code.spaceship.K_RALT=code.spaceship-module.html#K_RALT,Variable code.starSystem.K_RALT=code.starSystem-module.html#K_RALT,Variable code.strafebat.K_RALT=code.strafebat-module.html#K_RALT,Variable code.universe.K_RALT=code.universe-module.html#K_RALT,Variable code.utils.K_RALT=code.utils-module.html#K_RALT"><a title="code.adjectives.K_RALT
+code.cargo.K_RALT
+code.commandParse.K_RALT
+code.floaters.K_RALT
+code.game.K_RALT
+code.gui.K_RALT
+code.menuElements.K_RALT
+code.menus.K_RALT
+code.multysprites.K_RALT
+code.nameMaker.K_RALT
+code.partCatalog.K_RALT
+code.parts.K_RALT
+code.planet.K_RALT
+code.plot.K_RALT
+code.scripts.K_RALT
+code.spaceship.K_RALT
+code.starSystem.K_RALT
+code.strafebat.K_RALT
+code.universe.K_RALT
+code.utils.K_RALT" class="py-name" href="#" onclick="return doclink('link-183', 'K_RALT', 'link-183');">K_RALT</a></tt> <tt class="py-op">%</tt> <tt class="py-number">322</tt><tt class="py-op">]</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">[</tt><tt id="link-184" class="py-name"><a title="code.adjectives.K_F4
+code.cargo.K_F4
+code.commandParse.K_F4
+code.floaters.K_F4
+code.game.K_F4
+code.gui.K_F4
+code.menuElements.K_F4
+code.menus.K_F4
+code.multysprites.K_F4
+code.nameMaker.K_F4
+code.partCatalog.K_F4
+code.parts.K_F4
+code.planet.K_F4
+code.plot.K_F4
+code.scripts.K_F4
+code.spaceship.K_F4
+code.starSystem.K_F4
+code.strafebat.K_F4
+code.universe.K_F4
+code.utils.K_F4" class="py-name" href="#" onclick="return doclink('link-184', 'K_F4', 'link-182');">K_F4</a></tt> <tt class="py-op">%</tt> <tt class="py-number">322</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">                <tt class="py-name">L_CTRL_Q</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">[</tt><tt id="link-185" class="py-name" targets="Variable code.adjectives.K_LCTRL=code.adjectives-module.html#K_LCTRL,Variable code.cargo.K_LCTRL=code.cargo-module.html#K_LCTRL,Variable code.commandParse.K_LCTRL=code.commandParse-module.html#K_LCTRL,Variable code.floaters.K_LCTRL=code.floaters-module.html#K_LCTRL,Variable code.game.K_LCTRL=code.game-module.html#K_LCTRL,Variable code.gui.K_LCTRL=code.gui-module.html#K_LCTRL,Variable code.menuElements.K_LCTRL=code.menuElements-module.html#K_LCTRL,Variable code.menus.K_LCTRL=code.menus-module.html#K_LCTRL,Variable code.multysprites.K_LCTRL=code.multysprites-module.html#K_LCTRL,Variable code.nameMaker.K_LCTRL=code.nameMaker-module.html#K_LCTRL,Variable code.partCatalog.K_LCTRL=code.partCatalog-module.html#K_LCTRL,Variable code.parts.K_LCTRL=code.parts-module.html#K_LCTRL,Variable code.planet.K_LCTRL=code.planet-module.html#K_LCTRL,Variable code.plot.K_LCTRL=code.plot-module.html#K_LCTRL,Variable code.scripts.K_LCTRL=code.scripts-module.html#K_LCTRL,Variable code.spaceship.K_LCTRL=code.spaceship-module.html#K_LCTRL,Variable code.starSystem.K_LCTRL=code.starSystem-module.html#K_LCTRL,Variable code.strafebat.K_LCTRL=code.strafebat-module.html#K_LCTRL,Variable code.universe.K_LCTRL=code.universe-module.html#K_LCTRL,Variable code.utils.K_LCTRL=code.utils-module.html#K_LCTRL"><a title="code.adjectives.K_LCTRL
+code.cargo.K_LCTRL
+code.commandParse.K_LCTRL
+code.floaters.K_LCTRL
+code.game.K_LCTRL
+code.gui.K_LCTRL
+code.menuElements.K_LCTRL
+code.menus.K_LCTRL
+code.multysprites.K_LCTRL
+code.nameMaker.K_LCTRL
+code.partCatalog.K_LCTRL
+code.parts.K_LCTRL
+code.planet.K_LCTRL
+code.plot.K_LCTRL
+code.scripts.K_LCTRL
+code.spaceship.K_LCTRL
+code.starSystem.K_LCTRL
+code.strafebat.K_LCTRL
+code.universe.K_LCTRL
+code.utils.K_LCTRL" class="py-name" href="#" onclick="return doclink('link-185', 'K_LCTRL', 'link-185');">K_LCTRL</a></tt> <tt class="py-op">%</tt> <tt class="py-number">322</tt><tt class="py-op">]</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">[</tt><tt id="link-186" class="py-name" targets="Variable code.adjectives.K_q=code.adjectives-module.html#K_q,Variable code.cargo.K_q=code.cargo-module.html#K_q,Variable code.commandParse.K_q=code.commandParse-module.html#K_q,Variable code.floaters.K_q=code.floaters-module.html#K_q,Variable code.game.K_q=code.game-module.html#K_q,Variable code.gui.K_q=code.gui-module.html#K_q,Variable code.menuElements.K_q=code.menuElements-module.html#K_q,Variable code.menus.K_q=code.menus-module.html#K_q,Variable code.multysprites.K_q=code.multysprites-module.html#K_q,Variable code.nameMaker.K_q=code.nameMaker-module.html#K_q,Variable code.partCatalog.K_q=code.partCatalog-module.html#K_q,Variable code.parts.K_q=code.parts-module.html#K_q,Variable code.planet.K_q=code.planet-module.html#K_q,Variable code.plot.K_q=code.plot-module.html#K_q,Variable code.scripts.K_q=code.scripts-module.html#K_q,Variable code.spaceship.K_q=code.spaceship-module.html#K_q,Variable code.starSystem.K_q=code.starSystem-module.html#K_q,Variable code.strafebat.K_q=code.strafebat-module.html#K_q,Variable code.universe.K_q=code.universe-module.html#K_q,Variable code.utils.K_q=code.utils-module.html#K_q"><a title="code.adjectives.K_q
+code.cargo.K_q
+code.commandParse.K_q
+code.floaters.K_q
+code.game.K_q
+code.gui.K_q
+code.menuElements.K_q
+code.menus.K_q
+code.multysprites.K_q
+code.nameMaker.K_q
+code.partCatalog.K_q
+code.parts.K_q
+code.planet.K_q
+code.plot.K_q
+code.scripts.K_q
+code.spaceship.K_q
+code.starSystem.K_q
+code.strafebat.K_q
+code.universe.K_q
+code.utils.K_q" class="py-name" href="#" onclick="return doclink('link-186', 'K_q', 'link-186');">K_q</a></tt> <tt class="py-op">%</tt> <tt class="py-number">322</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line">                <tt class="py-name">R_CTRL_Q</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">[</tt><tt id="link-187" class="py-name" targets="Variable code.adjectives.K_RCTRL=code.adjectives-module.html#K_RCTRL,Variable code.cargo.K_RCTRL=code.cargo-module.html#K_RCTRL,Variable code.commandParse.K_RCTRL=code.commandParse-module.html#K_RCTRL,Variable code.floaters.K_RCTRL=code.floaters-module.html#K_RCTRL,Variable code.game.K_RCTRL=code.game-module.html#K_RCTRL,Variable code.gui.K_RCTRL=code.gui-module.html#K_RCTRL,Variable code.menuElements.K_RCTRL=code.menuElements-module.html#K_RCTRL,Variable code.menus.K_RCTRL=code.menus-module.html#K_RCTRL,Variable code.multysprites.K_RCTRL=code.multysprites-module.html#K_RCTRL,Variable code.nameMaker.K_RCTRL=code.nameMaker-module.html#K_RCTRL,Variable code.partCatalog.K_RCTRL=code.partCatalog-module.html#K_RCTRL,Variable code.parts.K_RCTRL=code.parts-module.html#K_RCTRL,Variable code.planet.K_RCTRL=code.planet-module.html#K_RCTRL,Variable code.plot.K_RCTRL=code.plot-module.html#K_RCTRL,Variable code.scripts.K_RCTRL=code.scripts-module.html#K_RCTRL,Variable code.spaceship.K_RCTRL=code.spaceship-module.html#K_RCTRL,Variable code.starSystem.K_RCTRL=code.starSystem-module.html#K_RCTRL,Variable code.strafebat.K_RCTRL=code.strafebat-module.html#K_RCTRL,Variable code.universe.K_RCTRL=code.universe-module.html#K_RCTRL,Variable code.utils.K_RCTRL=code.utils-module.html#K_RCTRL"><a title="code.adjectives.K_RCTRL
+code.cargo.K_RCTRL
+code.commandParse.K_RCTRL
+code.floaters.K_RCTRL
+code.game.K_RCTRL
+code.gui.K_RCTRL
+code.menuElements.K_RCTRL
+code.menus.K_RCTRL
+code.multysprites.K_RCTRL
+code.nameMaker.K_RCTRL
+code.partCatalog.K_RCTRL
+code.parts.K_RCTRL
+code.planet.K_RCTRL
+code.plot.K_RCTRL
+code.scripts.K_RCTRL
+code.spaceship.K_RCTRL
+code.starSystem.K_RCTRL
+code.strafebat.K_RCTRL
+code.universe.K_RCTRL
+code.utils.K_RCTRL" class="py-name" href="#" onclick="return doclink('link-187', 'K_RCTRL', 'link-187');">K_RCTRL</a></tt> <tt class="py-op">%</tt> <tt class="py-number">322</tt><tt class="py-op">]</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">[</tt><tt id="link-188" class="py-name"><a title="code.adjectives.K_q
+code.cargo.K_q
+code.commandParse.K_q
+code.floaters.K_q
+code.game.K_q
+code.gui.K_q
+code.menuElements.K_q
+code.menus.K_q
+code.multysprites.K_q
+code.nameMaker.K_q
+code.partCatalog.K_q
+code.parts.K_q
+code.planet.K_q
+code.plot.K_q
+code.scripts.K_q
+code.spaceship.K_q
+code.starSystem.K_q
+code.strafebat.K_q
+code.universe.K_q
+code.utils.K_q" class="py-name" href="#" onclick="return doclink('link-188', 'K_q', 'link-186');">K_q</a></tt> <tt class="py-op">%</tt> <tt class="py-number">322</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">L_ALT_F4</tt> <tt class="py-keyword">or</tt> <tt class="py-name">R_ALT_F4</tt> <tt class="py-keyword">or</tt> <tt class="py-name">L_CTRL_Q</tt> <tt class="py-keyword">or</tt> <tt class="py-name">R_CTRL_Q</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">running</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line"> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line"> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">strigger</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">storytriggers</tt><tt class="py-op">:</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line">                    <tt class="py-name">strigger</tt><tt class="py-op">.</tt><tt id="link-189" class="py-name"><a title="code.camera.Camera.update
+code.camera.Layer.update
+code.camera.SpaceView.update
+code.cargo.Cargo.update
+code.commandParse.CommandParse.update
+code.dialogs.Trigger.update
+code.facilitys.Company.update
+code.facilitys.Facility.update
+code.floaters.Bullet.update
+code.floaters.Explosion.update
+code.floaters.Floater.update
+code.floaters.Impact.update
+code.floaters.LaserBeam.update
+code.floaters.Mine.update
+code.floaters.Missile.update
+code.floaters.RadarDisk.update
+code.gui.Drawable.update
+code.gui.Messenger.update
+code.gui.MiniInfo.update
+code.gui.shipDamage.update
+code.menuElements.FunctionLabel.update
+code.menuElements.InputField.update
+code.menuElements.Panel.update
+code.menuElements.ScrollTextBlock.update
+code.menuElements.TextBlock.update
+code.menus.ChatConsole.update
+code.menus.Menu.update
+code.menus.NavigationTile.update
+code.menus.PartDescriptionPanel.update
+code.menus.PartsPanel.update
+code.menus.PlanetButtons.update
+code.menus.TimeTile.update
+code.multysprites.spriteSystem.update
+code.particles.CircleEmitter.update
+code.particles.Emitter.update
+code.particles.Particle.update
+code.particles.RingCollector.update
+code.particles.RingEmitter.update
+code.parts.CargoHold.update
+code.parts.Chip.update
+code.parts.Cockpit.update
+code.parts.Dummy.update
+code.parts.Engine.update
+code.parts.FlakCannon.update
+code.parts.GatewayFocus.update
+code.parts.Generator.update
+code.parts.Gun.update
+code.parts.Interconnect.update
+code.parts.Part.update
+code.parts.Quarters.update
+code.parts.Radar.update
+code.parts.Shield.update
+code.planet.Gateway.update
+code.planet.Planet.update
+code.planet.Star.update
+code.planet.Structure.update
+code.races.Race.update
+code.scripts.AIScript.update
+code.scripts.Controllable.update
+code.scripts.InputScript.update
+code.scripts.Script.update
+code.spaceship.Player.update
+code.spaceship.Ship.update
+code.starSystem.StarSystem.update
+code.strafebat.StrafebatScript.update
+code.universe.Universe.update" class="py-name" href="#" onclick="return doclink('link-189', 'update', 'link-109');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line"> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-190" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-190', 'universe', 'link-5');">universe</a></tt><tt class="py-op">.</tt><tt id="link-191" class="py-name"><a title="code.camera.Camera.update
+code.camera.Layer.update
+code.camera.SpaceView.update
+code.cargo.Cargo.update
+code.commandParse.CommandParse.update
+code.dialogs.Trigger.update
+code.facilitys.Company.update
+code.facilitys.Facility.update
+code.floaters.Bullet.update
+code.floaters.Explosion.update
+code.floaters.Floater.update
+code.floaters.Impact.update
+code.floaters.LaserBeam.update
+code.floaters.Mine.update
+code.floaters.Missile.update
+code.floaters.RadarDisk.update
+code.gui.Drawable.update
+code.gui.Messenger.update
+code.gui.MiniInfo.update
+code.gui.shipDamage.update
+code.menuElements.FunctionLabel.update
+code.menuElements.InputField.update
+code.menuElements.Panel.update
+code.menuElements.ScrollTextBlock.update
+code.menuElements.TextBlock.update
+code.menus.ChatConsole.update
+code.menus.Menu.update
+code.menus.NavigationTile.update
+code.menus.PartDescriptionPanel.update
+code.menus.PartsPanel.update
+code.menus.PlanetButtons.update
+code.menus.TimeTile.update
+code.multysprites.spriteSystem.update
+code.particles.CircleEmitter.update
+code.particles.Emitter.update
+code.particles.Particle.update
+code.particles.RingCollector.update
+code.particles.RingEmitter.update
+code.parts.CargoHold.update
+code.parts.Chip.update
+code.parts.Cockpit.update
+code.parts.Dummy.update
+code.parts.Engine.update
+code.parts.FlakCannon.update
+code.parts.GatewayFocus.update
+code.parts.Generator.update
+code.parts.Gun.update
+code.parts.Interconnect.update
+code.parts.Part.update
+code.parts.Quarters.update
+code.parts.Radar.update
+code.parts.Shield.update
+code.planet.Gateway.update
+code.planet.Planet.update
+code.planet.Star.update
+code.planet.Structure.update
+code.races.Race.update
+code.scripts.AIScript.update
+code.scripts.Controllable.update
+code.scripts.InputScript.update
+code.scripts.Script.update
+code.spaceship.Player.update
+code.spaceship.Ship.update
+code.starSystem.StarSystem.update
+code.strafebat.StrafebatScript.update
+code.universe.Universe.update" class="py-name" href="#" onclick="return doclink('link-191', 'update', 'link-109');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-192" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-192', 'universe', 'link-5');">universe</a></tt><tt class="py-op">.</tt><tt id="link-193" class="py-name"><a title="code.camera.Camera.draw
+code.camera.Layer.draw
+code.camera.SpaceView.draw
+code.floaters.Floater.draw
+code.floaters.RadarDisk.draw
+code.gui.BGImage.draw
+code.gui.Drawable.draw
+code.gui.HUD.draw
+code.gui.LifeBar.draw
+code.gui.Messenger.draw
+code.gui.MiniInfo.draw
+code.gui.RadarField.draw
+code.gui.StarField.draw
+code.gui.TargetingRect.draw
+code.gui.shipDamage.draw
+code.menuElements.ColorPanel.draw
+code.menuElements.Panel.draw
+code.menuElements.ScrollPanel.draw
+code.menuElements.Selecter.draw
+code.menuElements.ShapeButton.draw
+code.menuElements.TopLevelPanel.draw
+code.menus.ColorButton.draw
+code.particles.Emitter.draw
+code.particles.Particle.draw
+code.parts.Part.draw
+code.planet.Gateway.draw
+code.planet.Planet.draw
+code.planet.Structure.draw
+code.spaceship.Ship.draw
+code.universe.Universe.draw" class="py-name" href="#" onclick="return doclink('link-193', 'draw', 'link-110');">draw</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">screen</tt><tt class="py-op">)</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line"> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line">                <tt class="py-comment"># paused:</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line"> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-194" class="py-name"><a title="code.game.Game.menu" class="py-name" href="#" onclick="return doclink('link-194', 'menu', 'link-12');">menu</a></tt><tt class="py-op">.</tt><tt class="py-name">active</tt><tt class="py-op">:</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-195" class="py-name"><a title="code.game.Game.menu" class="py-name" href="#" onclick="return doclink('link-195', 'menu', 'link-12');">menu</a></tt><tt class="py-op">.</tt><tt id="link-196" class="py-name"><a title="code.camera.Camera.update
+code.camera.Layer.update
+code.camera.SpaceView.update
+code.cargo.Cargo.update
+code.commandParse.CommandParse.update
+code.dialogs.Trigger.update
+code.facilitys.Company.update
+code.facilitys.Facility.update
+code.floaters.Bullet.update
+code.floaters.Explosion.update
+code.floaters.Floater.update
+code.floaters.Impact.update
+code.floaters.LaserBeam.update
+code.floaters.Mine.update
+code.floaters.Missile.update
+code.floaters.RadarDisk.update
+code.gui.Drawable.update
+code.gui.Messenger.update
+code.gui.MiniInfo.update
+code.gui.shipDamage.update
+code.menuElements.FunctionLabel.update
+code.menuElements.InputField.update
+code.menuElements.Panel.update
+code.menuElements.ScrollTextBlock.update
+code.menuElements.TextBlock.update
+code.menus.ChatConsole.update
+code.menus.Menu.update
+code.menus.NavigationTile.update
+code.menus.PartDescriptionPanel.update
+code.menus.PartsPanel.update
+code.menus.PlanetButtons.update
+code.menus.TimeTile.update
+code.multysprites.spriteSystem.update
+code.particles.CircleEmitter.update
+code.particles.Emitter.update
+code.particles.Particle.update
+code.particles.RingCollector.update
+code.particles.RingEmitter.update
+code.parts.CargoHold.update
+code.parts.Chip.update
+code.parts.Cockpit.update
+code.parts.Dummy.update
+code.parts.Engine.update
+code.parts.FlakCannon.update
+code.parts.GatewayFocus.update
+code.parts.Generator.update
+code.parts.Gun.update
+code.parts.Interconnect.update
+code.parts.Part.update
+code.parts.Quarters.update
+code.parts.Radar.update
+code.parts.Shield.update
+code.planet.Gateway.update
+code.planet.Planet.update
+code.planet.Star.update
+code.planet.Structure.update
+code.races.Race.update
+code.scripts.AIScript.update
+code.scripts.Controllable.update
+code.scripts.InputScript.update
+code.scripts.Script.update
+code.spaceship.Player.update
+code.spaceship.Ship.update
+code.starSystem.StarSystem.update
+code.strafebat.StrafebatScript.update
+code.universe.Universe.update" class="py-name" href="#" onclick="return doclink('link-196', 'update', 'link-109');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-197" class="py-name"><a title="code.game.Game.menu" class="py-name" href="#" onclick="return doclink('link-197', 'menu', 'link-12');">menu</a></tt><tt class="py-op">.</tt><tt id="link-198" class="py-name"><a title="code.camera.Camera.draw
+code.camera.Layer.draw
+code.camera.SpaceView.draw
+code.floaters.Floater.draw
+code.floaters.RadarDisk.draw
+code.gui.BGImage.draw
+code.gui.Drawable.draw
+code.gui.HUD.draw
+code.gui.LifeBar.draw
+code.gui.Messenger.draw
+code.gui.MiniInfo.draw
+code.gui.RadarField.draw
+code.gui.StarField.draw
+code.gui.TargetingRect.draw
+code.gui.shipDamage.draw
+code.menuElements.ColorPanel.draw
+code.menuElements.Panel.draw
+code.menuElements.ScrollPanel.draw
+code.menuElements.Selecter.draw
+code.menuElements.ShapeButton.draw
+code.menuElements.TopLevelPanel.draw
+code.menus.ColorButton.draw
+code.particles.Emitter.draw
+code.particles.Particle.draw
+code.parts.Part.draw
+code.planet.Gateway.draw
+code.planet.Planet.draw
+code.planet.Structure.draw
+code.spaceship.Ship.draw
+code.universe.Universe.draw" class="py-name" href="#" onclick="return doclink('link-198', 'draw', 'link-110');">draw</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">screen</tt><tt class="py-op">)</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line"> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chatconsole</tt><tt class="py-op">.</tt><tt class="py-name">active</tt><tt class="py-op">:</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chatconsole</tt><tt class="py-op">.</tt><tt id="link-199" class="py-name"><a title="code.camera.Camera.update
+code.camera.Layer.update
+code.camera.SpaceView.update
+code.cargo.Cargo.update
+code.commandParse.CommandParse.update
+code.dialogs.Trigger.update
+code.facilitys.Company.update
+code.facilitys.Facility.update
+code.floaters.Bullet.update
+code.floaters.Explosion.update
+code.floaters.Floater.update
+code.floaters.Impact.update
+code.floaters.LaserBeam.update
+code.floaters.Mine.update
+code.floaters.Missile.update
+code.floaters.RadarDisk.update
+code.gui.Drawable.update
+code.gui.Messenger.update
+code.gui.MiniInfo.update
+code.gui.shipDamage.update
+code.menuElements.FunctionLabel.update
+code.menuElements.InputField.update
+code.menuElements.Panel.update
+code.menuElements.ScrollTextBlock.update
+code.menuElements.TextBlock.update
+code.menus.ChatConsole.update
+code.menus.Menu.update
+code.menus.NavigationTile.update
+code.menus.PartDescriptionPanel.update
+code.menus.PartsPanel.update
+code.menus.PlanetButtons.update
+code.menus.TimeTile.update
+code.multysprites.spriteSystem.update
+code.particles.CircleEmitter.update
+code.particles.Emitter.update
+code.particles.Particle.update
+code.particles.RingCollector.update
+code.particles.RingEmitter.update
+code.parts.CargoHold.update
+code.parts.Chip.update
+code.parts.Cockpit.update
+code.parts.Dummy.update
+code.parts.Engine.update
+code.parts.FlakCannon.update
+code.parts.GatewayFocus.update
+code.parts.Generator.update
+code.parts.Gun.update
+code.parts.Interconnect.update
+code.parts.Part.update
+code.parts.Quarters.update
+code.parts.Radar.update
+code.parts.Shield.update
+code.planet.Gateway.update
+code.planet.Planet.update
+code.planet.Star.update
+code.planet.Structure.update
+code.races.Race.update
+code.scripts.AIScript.update
+code.scripts.Controllable.update
+code.scripts.InputScript.update
+code.scripts.Script.update
+code.spaceship.Player.update
+code.spaceship.Ship.update
+code.starSystem.StarSystem.update
+code.strafebat.StrafebatScript.update
+code.universe.Universe.update" class="py-name" href="#" onclick="return doclink('link-199', 'update', 'link-109');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chatconsole</tt><tt class="py-op">.</tt><tt id="link-200" class="py-name"><a title="code.camera.Camera.draw
+code.camera.Layer.draw
+code.camera.SpaceView.draw
+code.floaters.Floater.draw
+code.floaters.RadarDisk.draw
+code.gui.BGImage.draw
+code.gui.Drawable.draw
+code.gui.HUD.draw
+code.gui.LifeBar.draw
+code.gui.Messenger.draw
+code.gui.MiniInfo.draw
+code.gui.RadarField.draw
+code.gui.StarField.draw
+code.gui.TargetingRect.draw
+code.gui.shipDamage.draw
+code.menuElements.ColorPanel.draw
+code.menuElements.Panel.draw
+code.menuElements.ScrollPanel.draw
+code.menuElements.Selecter.draw
+code.menuElements.ShapeButton.draw
+code.menuElements.TopLevelPanel.draw
+code.menus.ColorButton.draw
+code.particles.Emitter.draw
+code.particles.Particle.draw
+code.parts.Part.draw
+code.planet.Gateway.draw
+code.planet.Planet.draw
+code.planet.Structure.draw
+code.spaceship.Ship.draw
+code.universe.Universe.draw" class="py-name" href="#" onclick="return doclink('link-200', 'draw', 'link-110');">draw</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">screen</tt><tt class="py-op">)</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line"> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">                <tt class="py-comment"># update actually parses input.</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line">                <tt class="py-comment"># and does actions based upon that.</tt> </tt>
+<a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-201" class="py-name"><a title="code.commandParse" class="py-name" href="#" onclick="return doclink('link-201', 'commandParse', 'link-9');">commandParse</a></tt><tt class="py-op">.</tt><tt id="link-202" class="py-name"><a title="code.camera.Camera.update
+code.camera.Layer.update
+code.camera.SpaceView.update
+code.cargo.Cargo.update
+code.commandParse.CommandParse.update
+code.dialogs.Trigger.update
+code.facilitys.Company.update
+code.facilitys.Facility.update
+code.floaters.Bullet.update
+code.floaters.Explosion.update
+code.floaters.Floater.update
+code.floaters.Impact.update
+code.floaters.LaserBeam.update
+code.floaters.Mine.update
+code.floaters.Missile.update
+code.floaters.RadarDisk.update
+code.gui.Drawable.update
+code.gui.Messenger.update
+code.gui.MiniInfo.update
+code.gui.shipDamage.update
+code.menuElements.FunctionLabel.update
+code.menuElements.InputField.update
+code.menuElements.Panel.update
+code.menuElements.ScrollTextBlock.update
+code.menuElements.TextBlock.update
+code.menus.ChatConsole.update
+code.menus.Menu.update
+code.menus.NavigationTile.update
+code.menus.PartDescriptionPanel.update
+code.menus.PartsPanel.update
+code.menus.PlanetButtons.update
+code.menus.TimeTile.update
+code.multysprites.spriteSystem.update
+code.particles.CircleEmitter.update
+code.particles.Emitter.update
+code.particles.Particle.update
+code.particles.RingCollector.update
+code.particles.RingEmitter.update
+code.parts.CargoHold.update
+code.parts.Chip.update
+code.parts.Cockpit.update
+code.parts.Dummy.update
+code.parts.Engine.update
+code.parts.FlakCannon.update
+code.parts.GatewayFocus.update
+code.parts.Generator.update
+code.parts.Gun.update
+code.parts.Interconnect.update
+code.parts.Part.update
+code.parts.Quarters.update
+code.parts.Radar.update
+code.parts.Shield.update
+code.planet.Gateway.update
+code.planet.Planet.update
+code.planet.Star.update
+code.planet.Structure.update
+code.races.Race.update
+code.scripts.AIScript.update
+code.scripts.Controllable.update
+code.scripts.InputScript.update
+code.scripts.Script.update
+code.spaceship.Player.update
+code.spaceship.Ship.update
+code.starSystem.StarSystem.update
+code.strafebat.StrafebatScript.update
+code.universe.Universe.update" class="py-name" href="#" onclick="return doclink('link-202', 'update', 'link-109');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line">                <tt class="py-comment"># reloading logic, couldn't make it work</tt> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line">                <tt class="py-comment"># from inside the commandParse class</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line">                <tt class="py-comment"># reloads the module so it imports new code.</tt> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-203" class="py-name"><a title="code.commandParse" class="py-name" href="#" onclick="return doclink('link-203', 'commandParse', 'link-9');">commandParse</a></tt><tt class="py-op">.</tt><tt class="py-name">reload</tt><tt class="py-op">:</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-204" class="py-name"><a title="code.commandParse" class="py-name" href="#" onclick="return doclink('link-204', 'commandParse', 'link-9');">commandParse</a></tt><tt class="py-op">.</tt><tt class="py-name">reload</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line">                    <tt class="py-name">reload</tt><tt class="py-op">(</tt><tt id="link-205" class="py-name"><a title="code.commandParse" class="py-name" href="#" onclick="return doclink('link-205', 'commandParse', 'link-9');">commandParse</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-206" class="py-name"><a title="code.commandParse" class="py-name" href="#" onclick="return doclink('link-206', 'commandParse', 'link-9');">commandParse</a></tt> <tt class="py-op">=</tt> <tt id="link-207" class="py-name"><a title="code.commandParse.CommandParse" class="py-name" href="#" onclick="return doclink('link-207', 'CommandParse', 'link-10');">CommandParse</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">chatconsole</tt><tt class="py-op">,</tt> </tt>
+<a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line">                                                     <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">messenger</tt><tt class="py-op">)</tt> </tt>
+<a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line"> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line">                <tt class="py-comment"># frame maintainance:</tt> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line">                <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">display</tt><tt class="py-op">.</tt><tt id="link-208" class="py-name"><a title="code.menus.PartsPanel.flip
+code.parts.FlippablePart.flip" class="py-name" href="#" onclick="return doclink('link-208', 'flip', 'link-111');">flip</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fpscounter</tt> <tt class="py-op">&gt;=</tt> <tt class="py-number">30</tt><tt class="py-op">:</tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fpscounter</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fpses</tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fpscounter</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fps</tt> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fpscounter</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">averagefps</tt> <tt class="py-op">=</tt> <tt class="py-name">reduce</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt id="link-209" class="py-name"><a title="code.vec2d.Vec2d.x" class="py-name" href="#" onclick="return doclink('link-209', 'x', 'link-156');">x</a></tt><tt class="py-op">,</tt> <tt id="link-210" class="py-name" targets="Variable code.vec2d.Vec2d.y=code.vec2d.Vec2d-class.html#y"><a title="code.vec2d.Vec2d.y" class="py-name" href="#" onclick="return doclink('link-210', 'y', 'link-210');">y</a></tt><tt class="py-op">:</tt> <tt id="link-211" class="py-name"><a title="code.vec2d.Vec2d.x" class="py-name" href="#" onclick="return doclink('link-211', 'x', 'link-156');">x</a></tt><tt class="py-op">+</tt><tt id="link-212" class="py-name"><a title="code.vec2d.Vec2d.y" class="py-name" href="#" onclick="return doclink('link-212', 'y', 'link-210');">y</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fpses</tt><tt class="py-op">)</tt><tt class="py-op">/</tt><tt class="py-number">30</tt> </tt>
+<a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line"> </tt>
+<a name="L298"></a><tt class="py-lineno">298</tt>  <tt class="py-line">                <tt class="py-comment"># aim for FPS but adjust vars for self.fps.</tt> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">clock</tt><tt class="py-op">.</tt><tt class="py-name">tick</tt><tt class="py-op">(</tt><tt id="link-213" class="py-name"><a title="code.game.FPS" class="py-name" href="#" onclick="return doclink('link-213', 'FPS', 'link-11');">FPS</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fps</tt> <tt class="py-op">=</tt> <tt class="py-name">max</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">clock</tt><tt class="py-op">.</tt><tt class="py-name">get_fps</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">timer</tt> <tt class="py-op">+=</tt> <tt class="py-number">1.</tt> <tt class="py-op">/</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fps</tt> </tt>
+<a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line"> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-214" class="py-name" targets="Method code.cargo.Cargo.setFPS()=code.cargo.Cargo-class.html#setFPS,Method code.floaters.Floater.setFPS()=code.floaters.Floater-class.html#setFPS,Method code.multysprites.spriteSystem.setFPS()=code.multysprites.spriteSystem-class.html#setFPS,Method code.particles.Emitter.setFPS()=code.particles.Emitter-class.html#setFPS,Method code.parts.Part.setFPS()=code.parts.Part-class.html#setFPS,Method code.planet.Planet.setFPS()=code.planet.Planet-class.html#setFPS"><a title="code.cargo.Cargo.setFPS
+code.floaters.Floater.setFPS
+code.multysprites.spriteSystem.setFPS
+code.particles.Emitter.setFPS
+code.parts.Part.setFPS
+code.planet.Planet.setFPS" class="py-name" href="#" onclick="return doclink('link-214', 'setFPS', 'link-214');">setFPS</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fps</tt><tt class="py-op">)</tt> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-215" class="py-name"><a title="code.camera.Camera.update
+code.camera.Layer.update
+code.camera.SpaceView.update
+code.cargo.Cargo.update
+code.commandParse.CommandParse.update
+code.dialogs.Trigger.update
+code.facilitys.Company.update
+code.facilitys.Facility.update
+code.floaters.Bullet.update
+code.floaters.Explosion.update
+code.floaters.Floater.update
+code.floaters.Impact.update
+code.floaters.LaserBeam.update
+code.floaters.Mine.update
+code.floaters.Missile.update
+code.floaters.RadarDisk.update
+code.gui.Drawable.update
+code.gui.Messenger.update
+code.gui.MiniInfo.update
+code.gui.shipDamage.update
+code.menuElements.FunctionLabel.update
+code.menuElements.InputField.update
+code.menuElements.Panel.update
+code.menuElements.ScrollTextBlock.update
+code.menuElements.TextBlock.update
+code.menus.ChatConsole.update
+code.menus.Menu.update
+code.menus.NavigationTile.update
+code.menus.PartDescriptionPanel.update
+code.menus.PartsPanel.update
+code.menus.PlanetButtons.update
+code.menus.TimeTile.update
+code.multysprites.spriteSystem.update
+code.particles.CircleEmitter.update
+code.particles.Emitter.update
+code.particles.Particle.update
+code.particles.RingCollector.update
+code.particles.RingEmitter.update
+code.parts.CargoHold.update
+code.parts.Chip.update
+code.parts.Cockpit.update
+code.parts.Dummy.update
+code.parts.Engine.update
+code.parts.FlakCannon.update
+code.parts.GatewayFocus.update
+code.parts.Generator.update
+code.parts.Gun.update
+code.parts.Interconnect.update
+code.parts.Part.update
+code.parts.Quarters.update
+code.parts.Radar.update
+code.parts.Shield.update
+code.planet.Gateway.update
+code.planet.Planet.update
+code.planet.Star.update
+code.planet.Structure.update
+code.races.Race.update
+code.scripts.AIScript.update
+code.scripts.Controllable.update
+code.scripts.InputScript.update
+code.scripts.Script.update
+code.spaceship.Player.update
+code.spaceship.Ship.update
+code.starSystem.StarSystem.update
+code.strafebat.StrafebatScript.update
+code.universe.Universe.update" class="py-name" href="#" onclick="return doclink('link-215', 'update', 'link-109');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line"> </tt>
+<a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line">                <tt class="py-comment"># try and print debuging caption</tt> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line">                <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line">                    <tt class="py-name">disp_str</tt> <tt class="py-op">=</tt> <tt class="py-string">'Memory usage: %d(KB) %d(MB) %d(GB) FPS: %d'</tt> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line">                    <tt class="py-name">memUse</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">resource</tt><tt class="py-op">.</tt><tt class="py-name">getrusage</tt><tt class="py-op">(</tt> </tt>
+<a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line">                                 <tt class="py-name">resource</tt><tt class="py-op">.</tt><tt class="py-name">RUSAGE_SELF</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">ru_maxrss</tt><tt class="py-op">)</tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line">                    <tt class="py-name">memUseMB</tt> <tt class="py-op">=</tt> <tt class="py-name">memUse</tt><tt class="py-op">/</tt><tt class="py-number">1024</tt> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line">                    <tt class="py-name">memUseGB</tt> <tt class="py-op">=</tt> <tt class="py-name">memUseMB</tt><tt class="py-op">/</tt><tt class="py-number">1024</tt> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line">                    <tt class="py-name">fps</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">averagefps</tt> </tt>
+<a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line">                    <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">display</tt><tt class="py-op">.</tt><tt class="py-name">set_caption</tt><tt class="py-op">(</tt><tt class="py-name">disp_str</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">memUse</tt><tt class="py-op">,</tt> <tt class="py-name">memUseMB</tt><tt class="py-op">,</tt> </tt>
+<a name="L315"></a><tt class="py-lineno">315</tt>  <tt class="py-line">                                               <tt class="py-name">memUseGB</tt><tt class="py-op">,</tt> <tt class="py-name">fps</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line">                <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line">                    <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">display</tt><tt class="py-op">.</tt><tt class="py-name">set_caption</tt><tt class="py-op">(</tt><tt class="py-string">'FPS: %d'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">averagefps</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line">            <tt class="py-comment"># end round loop (until gameover)</tt> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line">        <tt class="py-comment"># end game loop</tt> </tt>
+<a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line">        <tt class="py-comment"># self.__init__(self.screen)</tt> </tt>
+<a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Mar 17 21:02:22 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

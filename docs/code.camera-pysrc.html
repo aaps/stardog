@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>code.camera</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="code-module.html">Package&nbsp;code</a> ::
+        Module&nbsp;camera
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="code.camera-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="code.camera-module.html">Module code.camera</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># camera.py</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module code.vec2d=code.vec2d-module.html"><a title="code.vec2d" class="py-name" href="#" onclick="return doclink('link-0', 'vec2d', 'link-0');">vec2d</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class code.vec2d.Vec2d=code.vec2d.Vec2d-class.html"><a title="code.vec2d.Vec2d" class="py-name" href="#" onclick="return doclink('link-1', 'Vec2d', 'link-1');">Vec2d</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Module code.planet=code.planet-module.html,Variable code.strafebat.Strafebat.planet=code.strafebat.Strafebat-class.html#planet"><a title="code.planet
+code.strafebat.Strafebat.planet" class="py-name" href="#" onclick="return doclink('link-2', 'planet', 'link-2');">planet</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name" targets="Module code.multysprites=code.multysprites-module.html"><a title="code.multysprites" class="py-name" href="#" onclick="return doclink('link-3', 'multysprites', 'link-3');">multysprites</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="Camera"></a><div id="Camera-def"><a name="L8"></a><tt class="py-lineno">  8</tt> <a class="py-toggle" href="#" id="Camera-toggle" onclick="return toggle('Camera');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.camera.Camera-class.html">Camera</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Camera-expanded"><a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line">    <tt class="py-docstring">"""A camera class that can keep screen dimentions, and has a location, not much more for now, used to view the game"""</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="Camera.__init__"></a><div id="Camera.__init__-def"><a name="L11"></a><tt class="py-lineno"> 11</tt> <a class="py-toggle" href="#" id="Camera.__init__-toggle" onclick="return toggle('Camera.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">universe</tt><tt class="py-op">,</tt> <tt class="py-param">spritesystem</tt><tt class="py-op">,</tt> <tt class="py-param">pos</tt><tt class="py-op">=</tt><tt id="link-4" class="py-name"><a title="code.vec2d.Vec2d" class="py-name" href="#" onclick="return doclink('link-4', 'Vec2d', 'link-1');">Vec2d</a></tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.__init__-expanded"><a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Module code.universe=code.universe-module.html"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-5', 'universe', 'link-5');">universe</a></tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-6', 'universe', 'link-5');">universe</a></tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt> <tt class="py-op">=</tt> <tt class="py-name">spritesystem</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Module code.camera=code.camera-module.html"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-7', 'camera', 'link-7');">camera</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt> <tt class="py-op">=</tt> <tt class="py-name">pos</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Variable code.menus.MultyPartTile.width=code.menus.MultyPartTile-class.html#width"><a title="code.menus.MultyPartTile.width" class="py-name" href="#" onclick="return doclink('link-8', 'width', 'link-8');">width</a></tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-9', 'universe', 'link-5');">universe</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Module code.game=code.game-module.html,Variable code.menus.ChatConsole.game=code.menus.ChatConsole-class.html#game,Variable code.menus.Menu.game=code.menus.Menu-class.html#game"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-10', 'game', 'link-10');">game</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="code.menus.MultyPartTile.width" class="py-name" href="#" onclick="return doclink('link-11', 'width', 'link-8');">width</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Variable code.menus.MultyPartTile.height=code.menus.MultyPartTile-class.html#height"><a title="code.menus.MultyPartTile.height" class="py-name" href="#" onclick="return doclink('link-12', 'height', 'link-12');">height</a></tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-13', 'universe', 'link-5');">universe</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-14', 'game', 'link-10');">game</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="code.menus.MultyPartTile.height" class="py-name" href="#" onclick="return doclink('link-15', 'height', 'link-12');">height</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">transcurve</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">transitioning</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">transtime</tt> <tt class="py-op">=</tt> <tt class="py-number">10</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layers</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">target</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method code.multysprites.spriteSystem.zoom()=code.multysprites.spriteSystem-class.html#zoom"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-16', 'zoom', 'link-16');">zoom</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="Camera.zoomOut"></a><div id="Camera.zoomOut-def"><a name="L25"></a><tt class="py-lineno"> 25</tt> <a class="py-toggle" href="#" id="Camera.zoomOut-toggle" onclick="return toggle('Camera.zoomOut');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#zoomOut">zoomOut</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.zoomOut-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.zoomOut-expanded"><a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-17', 'zoom', 'link-16');">zoom</a></tt> <tt class="py-op">&gt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-18', 'zoom', 'link-16');">zoom</a></tt> <tt class="py-op">-=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-19', 'zoom', 'link-16');">zoom</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-20', 'zoom', 'link-16');">zoom</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layers</tt><tt class="py-op">:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">            <tt class="py-name">layer</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method code.camera.Layer.zoomTo()=code.camera.Layer-class.html#zoomTo"><a title="code.camera.Layer.zoomTo" class="py-name" href="#" onclick="return doclink('link-21', 'zoomTo', 'link-21');">zoomTo</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-22', 'zoom', 'link-16');">zoom</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<a name="Camera.zoomIn"></a><div id="Camera.zoomIn-def"><a name="L33"></a><tt class="py-lineno"> 33</tt> <a class="py-toggle" href="#" id="Camera.zoomIn-toggle" onclick="return toggle('Camera.zoomIn');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#zoomIn">zoomIn</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.zoomIn-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.zoomIn-expanded"><a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-23', 'zoom', 'link-16');">zoom</a></tt> <tt class="py-op">&lt;</tt> <tt class="py-number">6</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-24', 'zoom', 'link-16');">zoom</a></tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">spritesystem</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-25', 'zoom', 'link-16');">zoom</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-26', 'zoom', 'link-16');">zoom</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layers</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">            <tt class="py-name">layer</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="code.camera.Layer.zoomTo" class="py-name" href="#" onclick="return doclink('link-27', 'zoomTo', 'link-21');">zoomTo</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-28', 'zoom', 'link-16');">zoom</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"> </tt>
+<a name="Camera.update"></a><div id="Camera.update-def"><a name="L40"></a><tt class="py-lineno"> 40</tt> <a class="py-toggle" href="#" id="Camera.update-toggle" onclick="return toggle('Camera.update');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#update">update</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.update-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.update-expanded"><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-docstring">"""Update all the layers in this camera"""</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layers</tt><tt class="py-op">:</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">layer</tt><tt class="py-op">.</tt><tt class="py-name">enabled</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">                <tt class="py-name">layer</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Method code.camera.Camera.update()=code.camera.Camera-class.html#update,Method code.camera.Layer.update()=code.camera.Layer-class.html#update,Method code.camera.SpaceView.update()=code.camera.SpaceView-class.html#update,Method code.cargo.Cargo.update()=code.cargo.Cargo-class.html#update,Method code.commandParse.CommandParse.update()=code.commandParse.CommandParse-class.html#update,Method code.dialogs.Trigger.update()=code.dialogs.Trigger-class.html#update,Method code.facilitys.Company.update()=code.facilitys.Company-class.html#update,Method code.facilitys.Facility.update()=code.facilitys.Facility-class.html#update,Method code.floaters.Bullet.update()=code.floaters.Bullet-class.html#update,Method code.floaters.Explosion.update()=code.floaters.Explosion-class.html#update,Method code.floaters.Floater.update()=code.floaters.Floater-class.html#update,Method code.floaters.Impact.update()=code.floaters.Impact-class.html#update,Method code.floaters.LaserBeam.update()=code.floaters.LaserBeam-class.html#update,Method code.floaters.Mine.update()=code.floaters.Mine-class.html#update,Method code.floaters.Missile.update()=code.floaters.Missile-class.html#update,Method code.floaters.RadarDisk.update()=code.floaters.RadarDisk-class.html#update,Method code.gui.Drawable.update()=code.gui.Drawable-class.html#update,Method code.gui.Messenger.update()=code.gui.Messenger-class.html#update,Method code.gui.MiniInfo.update()=code.gui.MiniInfo-class.html#update,Method code.gui.shipDamage.update()=code.gui.shipDamage-class.html#update,Method code.menuElements.FunctionLabel.update()=code.menuElements.FunctionLabel-class.html#update,Method code.menuElements.InputField.update()=code.menuElements.InputField-class.html#update,Method code.menuElements.Panel.update()=code.menuElements.Panel-class.html#update,Method code.menuElements.ScrollTextBlock.update()=code.menuElements.ScrollTextBlock-class.html#update,Method code.menuElements.TextBlock.update()=code.menuElements.TextBlock-class.html#update,Method code.menus.ChatConsole.update()=code.menus.ChatConsole-class.html#update,Method code.menus.Menu.update()=code.menus.Menu-class.html#update,Method code.menus.NavigationTile.update()=code.menus.NavigationTile-class.html#update,Method code.menus.PartDescriptionPanel.update()=code.menus.PartDescriptionPanel-class.html#update,Method code.menus.PartsPanel.update()=code.menus.PartsPanel-class.html#update,Method code.menus.PlanetButtons.update()=code.menus.PlanetButtons-class.html#update,Method code.menus.TimeTile.update()=code.menus.TimeTile-class.html#update,Method code.multysprites.spriteSystem.update()=code.multysprites.spriteSystem-class.html#update,Method code.particles.CircleEmitter.update()=code.particles.CircleEmitter-class.html#update,Method code.particles.Emitter.update()=code.particles.Emitter-class.html#update,Method code.particles.Particle.update()=code.particles.Particle-class.html#update,Method code.particles.RingCollector.update()=code.particles.RingCollector-class.html#update,Method code.particles.RingEmitter.update()=code.particles.RingEmitter-class.html#update,Method code.parts.CargoHold.update()=code.parts.CargoHold-class.html#update,Method code.parts.Chip.update()=code.parts.Chip-class.html#update,Method code.parts.Cockpit.update()=code.parts.Cockpit-class.html#update,Method code.parts.Dummy.update()=code.parts.Dummy-class.html#update,Method code.parts.Engine.update()=code.parts.Engine-class.html#update,Method code.parts.FlakCannon.update()=code.parts.FlakCannon-class.html#update,Method code.parts.GatewayFocus.update()=code.parts.GatewayFocus-class.html#update,Method code.parts.Generator.update()=code.parts.Generator-class.html#update,Method code.parts.Gun.update()=code.parts.Gun-class.html#update,Method code.parts.Interconnect.update()=code.parts.Interconnect-class.html#update,Method code.parts.Part.update()=code.parts.Part-class.html#update,Method code.parts.Quarters.update()=code.parts.Quarters-class.html#update,Method code.parts.Radar.update()=code.parts.Radar-class.html#update,Method code.parts.Shield.update()=code.parts.Shield-class.html#update,Method code.planet.Gateway.update()=code.planet.Gateway-class.html#update,Method code.planet.Planet.update()=code.planet.Planet-class.html#update,Method code.planet.Star.update()=code.planet.Star-class.html#update,Method code.planet.Structure.update()=code.planet.Structure-class.html#update,Method code.races.Race.update()=code.races.Race-class.html#update,Method code.scripts.AIScript.update()=code.scripts.AIScript-class.html#update,Method code.scripts.Controllable.update()=code.scripts.Controllable-class.html#update,Method code.scripts.InputScript.update()=code.scripts.InputScript-class.html#update,Method code.scripts.Script.update()=code.scripts.Script-class.html#update,Method code.spaceship.Player.update()=code.spaceship.Player-class.html#update,Method code.spaceship.Ship.update()=code.spaceship.Ship-class.html#update,Method code.starSystem.StarSystem.update()=code.starSystem.StarSystem-class.html#update,Method code.strafebat.StrafebatScript.update()=code.strafebat.StrafebatScript-class.html#update,Method code.universe.Universe.update()=code.universe.Universe-class.html#update"><a title="code.camera.Camera.update
+code.camera.Layer.update
+code.camera.SpaceView.update
+code.cargo.Cargo.update
+code.commandParse.CommandParse.update
+code.dialogs.Trigger.update
+code.facilitys.Company.update
+code.facilitys.Facility.update
+code.floaters.Bullet.update
+code.floaters.Explosion.update
+code.floaters.Floater.update
+code.floaters.Impact.update
+code.floaters.LaserBeam.update
+code.floaters.Mine.update
+code.floaters.Missile.update
+code.floaters.RadarDisk.update
+code.gui.Drawable.update
+code.gui.Messenger.update
+code.gui.MiniInfo.update
+code.gui.shipDamage.update
+code.menuElements.FunctionLabel.update
+code.menuElements.InputField.update
+code.menuElements.Panel.update
+code.menuElements.ScrollTextBlock.update
+code.menuElements.TextBlock.update
+code.menus.ChatConsole.update
+code.menus.Menu.update
+code.menus.NavigationTile.update
+code.menus.PartDescriptionPanel.update
+code.menus.PartsPanel.update
+code.menus.PlanetButtons.update
+code.menus.TimeTile.update
+code.multysprites.spriteSystem.update
+code.particles.CircleEmitter.update
+code.particles.Emitter.update
+code.particles.Particle.update
+code.particles.RingCollector.update
+code.particles.RingEmitter.update
+code.parts.CargoHold.update
+code.parts.Chip.update
+code.parts.Cockpit.update
+code.parts.Dummy.update
+code.parts.Engine.update
+code.parts.FlakCannon.update
+code.parts.GatewayFocus.update
+code.parts.Generator.update
+code.parts.Gun.update
+code.parts.Interconnect.update
+code.parts.Part.update
+code.parts.Quarters.update
+code.parts.Radar.update
+code.parts.Shield.update
+code.planet.Gateway.update
+code.planet.Planet.update
+code.planet.Star.update
+code.planet.Structure.update
+code.races.Race.update
+code.scripts.AIScript.update
+code.scripts.Controllable.update
+code.scripts.InputScript.update
+code.scripts.Script.update
+code.spaceship.Player.update
+code.spaceship.Ship.update
+code.starSystem.StarSystem.update
+code.strafebat.StrafebatScript.update
+code.universe.Universe.update" class="py-name" href="#" onclick="return doclink('link-29', 'update', 'link-29');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="Camera.draw"></a><div id="Camera.draw-def"><a name="L46"></a><tt class="py-lineno"> 46</tt> <a class="py-toggle" href="#" id="Camera.draw-toggle" onclick="return toggle('Camera.draw');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#draw">draw</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">surface</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.draw-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.draw-expanded"><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-docstring">"""draw all the layers in this camera"""</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layers</tt><tt class="py-op">:</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">layer</tt><tt class="py-op">.</tt><tt class="py-name">enabled</tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">                <tt class="py-name">layer</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Method code.camera.Camera.draw()=code.camera.Camera-class.html#draw,Method code.camera.Layer.draw()=code.camera.Layer-class.html#draw,Method code.camera.SpaceView.draw()=code.camera.SpaceView-class.html#draw,Method code.floaters.Floater.draw()=code.floaters.Floater-class.html#draw,Method code.floaters.RadarDisk.draw()=code.floaters.RadarDisk-class.html#draw,Method code.gui.BGImage.draw()=code.gui.BGImage-class.html#draw,Method code.gui.Drawable.draw()=code.gui.Drawable-class.html#draw,Method code.gui.HUD.draw()=code.gui.HUD-class.html#draw,Method code.gui.LifeBar.draw()=code.gui.LifeBar-class.html#draw,Method code.gui.Messenger.draw()=code.gui.Messenger-class.html#draw,Method code.gui.MiniInfo.draw()=code.gui.MiniInfo-class.html#draw,Method code.gui.RadarField.draw()=code.gui.RadarField-class.html#draw,Method code.gui.StarField.draw()=code.gui.StarField-class.html#draw,Method code.gui.TargetingRect.draw()=code.gui.TargetingRect-class.html#draw,Method code.gui.shipDamage.draw()=code.gui.shipDamage-class.html#draw,Method code.menuElements.ColorPanel.draw()=code.menuElements.ColorPanel-class.html#draw,Method code.menuElements.Panel.draw()=code.menuElements.Panel-class.html#draw,Method code.menuElements.ScrollPanel.draw()=code.menuElements.ScrollPanel-class.html#draw,Method code.menuElements.Selecter.draw()=code.menuElements.Selecter-class.html#draw,Method code.menuElements.ShapeButton.draw()=code.menuElements.ShapeButton-class.html#draw,Method code.menuElements.TopLevelPanel.draw()=code.menuElements.TopLevelPanel-class.html#draw,Method code.menus.ColorButton.draw()=code.menus.ColorButton-class.html#draw,Method code.particles.Emitter.draw()=code.particles.Emitter-class.html#draw,Method code.particles.Particle.draw()=code.particles.Particle-class.html#draw,Method code.parts.Part.draw()=code.parts.Part-class.html#draw,Method code.planet.Gateway.draw()=code.planet.Gateway-class.html#draw,Method code.planet.Planet.draw()=code.planet.Planet-class.html#draw,Method code.planet.Structure.draw()=code.planet.Structure-class.html#draw,Method code.spaceship.Ship.draw()=code.spaceship.Ship-class.html#draw,Method code.universe.Universe.draw()=code.universe.Universe-class.html#draw"><a title="code.camera.Camera.draw
+code.camera.Layer.draw
+code.camera.SpaceView.draw
+code.floaters.Floater.draw
+code.floaters.RadarDisk.draw
+code.gui.BGImage.draw
+code.gui.Drawable.draw
+code.gui.HUD.draw
+code.gui.LifeBar.draw
+code.gui.Messenger.draw
+code.gui.MiniInfo.draw
+code.gui.RadarField.draw
+code.gui.StarField.draw
+code.gui.TargetingRect.draw
+code.gui.shipDamage.draw
+code.menuElements.ColorPanel.draw
+code.menuElements.Panel.draw
+code.menuElements.ScrollPanel.draw
+code.menuElements.Selecter.draw
+code.menuElements.ShapeButton.draw
+code.menuElements.TopLevelPanel.draw
+code.menus.ColorButton.draw
+code.particles.Emitter.draw
+code.particles.Particle.draw
+code.parts.Part.draw
+code.planet.Gateway.draw
+code.planet.Planet.draw
+code.planet.Structure.draw
+code.spaceship.Ship.draw
+code.universe.Universe.draw" class="py-name" href="#" onclick="return doclink('link-30', 'draw', 'link-30');">draw</a></tt><tt class="py-op">(</tt><tt class="py-name">surface</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="Camera.easeOutQuart"></a><div id="Camera.easeOutQuart-def"><a name="L52"></a><tt class="py-lineno"> 52</tt> <a class="py-toggle" href="#" id="Camera.easeOutQuart-toggle" onclick="return toggle('Camera.easeOutQuart');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#easeOutQuart">easeOutQuart</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">t</tt><tt class="py-op">,</tt> <tt class="py-param">b</tt><tt class="py-op">,</tt> <tt class="py-param">c</tt><tt class="py-op">,</tt> <tt class="py-param">d</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.easeOutQuart-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.easeOutQuart-expanded"><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-name">t</tt> <tt class="py-op">/=</tt> <tt class="py-name">d</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-name">t</tt> <tt class="py-op">-=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">-</tt><tt class="py-name">c</tt> <tt class="py-op">*</tt> <tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">*</tt><tt class="py-name">t</tt><tt class="py-op">*</tt><tt class="py-name">t</tt><tt class="py-op">*</tt><tt class="py-name">t</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">b</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="Camera.linear"></a><div id="Camera.linear-def"><a name="L57"></a><tt class="py-lineno"> 57</tt> <a class="py-toggle" href="#" id="Camera.linear-toggle" onclick="return toggle('Camera.linear');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#linear">linear</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">t</tt><tt class="py-op">,</tt> <tt class="py-param">b</tt><tt class="py-op">,</tt> <tt class="py-param">c</tt><tt class="py-op">,</tt> <tt class="py-param">d</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.linear-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.linear-expanded"><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">c</tt><tt class="py-op">*</tt><tt class="py-name">t</tt><tt class="py-op">/</tt><tt class="py-name">d</tt> <tt class="py-op">+</tt> <tt class="py-name">b</tt> </tt>
+</div><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="Camera.setPos"></a><div id="Camera.setPos-def"><a name="L60"></a><tt class="py-lineno"> 60</tt> <a class="py-toggle" href="#" id="Camera.setPos-toggle" onclick="return toggle('Camera.setPos');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#setPos">setPos</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">pos</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.setPos-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.setPos-expanded"><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt> <tt class="py-op">=</tt> <tt class="py-name">pos</tt> </tt>
+</div><a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="Camera.setTransTime"></a><div id="Camera.setTransTime-def"><a name="L63"></a><tt class="py-lineno"> 63</tt> <a class="py-toggle" href="#" id="Camera.setTransTime-toggle" onclick="return toggle('Camera.setTransTime');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#setTransTime">setTransTime</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">time</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.setTransTime-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.setTransTime-expanded"><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">transtime</tt> <tt class="py-op">=</tt> <tt class="py-name">time</tt> </tt>
+</div><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"> </tt>
+<a name="Camera.setTarget"></a><div id="Camera.setTarget-def"><a name="L66"></a><tt class="py-lineno"> 66</tt> <a class="py-toggle" href="#" id="Camera.setTarget-toggle" onclick="return toggle('Camera.setTarget');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#setTarget">setTarget</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">target</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.setTarget-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.setTarget-expanded"><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">target</tt> <tt class="py-op">=</tt> <tt class="py-name">target</tt> </tt>
+</div><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="Camera.gotoTarget"></a><div id="Camera.gotoTarget-def"><a name="L69"></a><tt class="py-lineno"> 69</tt> <a class="py-toggle" href="#" id="Camera.gotoTarget-toggle" onclick="return toggle('Camera.gotoTarget');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#gotoTarget">gotoTarget</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.gotoTarget-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.gotoTarget-expanded"><a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">transitioning</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"> </tt>
+<a name="Camera.layerAdd"></a><div id="Camera.layerAdd-def"><a name="L72"></a><tt class="py-lineno"> 72</tt> <a class="py-toggle" href="#" id="Camera.layerAdd-toggle" onclick="return toggle('Camera.layerAdd');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#layerAdd">layerAdd</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">drawable</tt><tt class="py-op">,</tt> <tt class="py-param">zindex</tt><tt class="py-op">,</tt> <tt class="py-param">zoomable</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.layerAdd-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.layerAdd-expanded"><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">layer</tt> <tt class="py-op">=</tt> <tt id="link-31" class="py-name" targets="Class code.camera.Layer=code.camera.Layer-class.html"><a title="code.camera.Layer" class="py-name" href="#" onclick="return doclink('link-31', 'Layer', 'link-31');">Layer</a></tt><tt class="py-op">(</tt><tt class="py-name">drawable</tt><tt class="py-op">,</tt> <tt class="py-name">zindex</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">zoomable</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layers</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">layer</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layers</tt> <tt class="py-op">=</tt> <tt class="py-name">sorted</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layers</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">=</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">layy</tt><tt class="py-op">:</tt> <tt class="py-name">layy</tt><tt class="py-op">.</tt><tt class="py-name">zindex</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="Camera.setLayersPlayer"></a><div id="Camera.setLayersPlayer-def"><a name="L77"></a><tt class="py-lineno"> 77</tt> <a class="py-toggle" href="#" id="Camera.setLayersPlayer-toggle" onclick="return toggle('Camera.setLayersPlayer');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#setLayersPlayer">setLayersPlayer</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">player</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.setLayersPlayer-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.setLayersPlayer-expanded"><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layers</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">layer</tt><tt class="py-op">.</tt><tt class="py-name">drawable</tt><tt class="py-op">,</tt> <tt id="link-32" class="py-name" targets="Class code.camera.SpaceView=code.camera.SpaceView-class.html"><a title="code.camera.SpaceView" class="py-name" href="#" onclick="return doclink('link-32', 'SpaceView', 'link-32');">SpaceView</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                <tt class="py-name">layer</tt><tt class="py-op">.</tt><tt class="py-name">drawable</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Method code.gui.Drawable.setPlayer()=code.gui.Drawable-class.html#setPlayer,Method code.universe.Universe.setPlayer()=code.universe.Universe-class.html#setPlayer"><a title="code.gui.Drawable.setPlayer
+code.universe.Universe.setPlayer" class="py-name" href="#" onclick="return doclink('link-33', 'setPlayer', 'link-33');">setPlayer</a></tt><tt class="py-op">(</tt><tt class="py-name">player</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="Camera.getLayer"></a><div id="Camera.getLayer-def"><a name="L82"></a><tt class="py-lineno"> 82</tt> <a class="py-toggle" href="#" id="Camera.getLayer-toggle" onclick="return toggle('Camera.getLayer');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#getLayer">getLayer</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">zindex</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.getLayer-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.getLayer-expanded"><a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layers</tt><tt class="py-op">:</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">layer</tt><tt class="py-op">.</tt><tt class="py-name">zindex</tt> <tt class="py-op">==</tt> <tt class="py-name">zindex</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">layer</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"> </tt>
+<a name="Camera.layerRemove"></a><div id="Camera.layerRemove-def"><a name="L88"></a><tt class="py-lineno"> 88</tt> <a class="py-toggle" href="#" id="Camera.layerRemove-toggle" onclick="return toggle('Camera.layerRemove');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#layerRemove">layerRemove</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">zindex</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.layerRemove-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.layerRemove-expanded"><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layers</tt><tt class="py-op">[</tt><tt class="py-name">zindex</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layers</tt> <tt class="py-op">=</tt> <tt class="py-name">sorted</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layers</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">=</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">layer</tt><tt class="py-op">:</tt> <tt class="py-name">layer</tt><tt class="py-op">.</tt><tt class="py-name">zindex</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"> </tt>
+<a name="Camera.layerReplace"></a><div id="Camera.layerReplace-def"><a name="L92"></a><tt class="py-lineno"> 92</tt> <a class="py-toggle" href="#" id="Camera.layerReplace-toggle" onclick="return toggle('Camera.layerReplace');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Camera-class.html#layerReplace">layerReplace</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">layer</tt><tt class="py-op">,</tt> <tt class="py-param">zindex</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Camera.layerReplace-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Camera.layerReplace-expanded"><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layers</tt><tt class="py-op">[</tt><tt class="py-name">zindex</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">layer</tt> </tt>
+</div></div><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-comment"># this could be somewhat overkill, and refactored in an other structures,</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-comment"># i just dont want drawabled be dependant on</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-comment"># drawing height and other stuff that dont concerns these things</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="Layer"></a><div id="Layer-def"><a name="L101"></a><tt class="py-lineno">101</tt> <a class="py-toggle" href="#" id="Layer-toggle" onclick="return toggle('Layer');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.camera.Layer-class.html">Layer</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Layer-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Layer-expanded"><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="Layer.__init__"></a><div id="Layer.__init__-def"><a name="L103"></a><tt class="py-lineno">103</tt> <a class="py-toggle" href="#" id="Layer.__init__-toggle" onclick="return toggle('Layer.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Layer-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">drawable</tt><tt class="py-op">,</tt> <tt class="py-param">zindex</tt><tt class="py-op">,</tt> <tt class="py-param">camera</tt><tt class="py-op">,</tt> <tt class="py-param">zoomable</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Layer.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Layer.__init__-expanded"><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">zoomable</tt><tt class="py-op">=</tt><tt class="py-name">zoomable</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">zindex</tt> <tt class="py-op">=</tt> <tt class="py-name">zindex</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">drawable</tt> <tt class="py-op">=</tt> <tt class="py-name">drawable</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-34', 'camera', 'link-7');">camera</a></tt> <tt class="py-op">=</tt> <tt id="link-35" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-35', 'camera', 'link-7');">camera</a></tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">enabled</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-36', 'zoom', 'link-16');">zoom</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">zoomable</tt><tt class="py-op">:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-37', 'zoom', 'link-16');">zoom</a></tt> <tt class="py-op">=</tt> <tt class="py-number">3</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">drawable</tt><tt class="py-op">,</tt> <tt id="link-38" class="py-name"><a title="code.camera.SpaceView" class="py-name" href="#" onclick="return doclink('link-38', 'SpaceView', 'link-32');">SpaceView</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">drawable</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-39', 'camera', 'link-7');">camera</a></tt> <tt class="py-op">=</tt> <tt id="link-40" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-40', 'camera', 'link-7');">camera</a></tt> </tt>
+</div><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"> </tt>
+<a name="Layer.zoomTo"></a><div id="Layer.zoomTo-def"><a name="L115"></a><tt class="py-lineno">115</tt> <a class="py-toggle" href="#" id="Layer.zoomTo-toggle" onclick="return toggle('Layer.zoomTo');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Layer-class.html#zoomTo">zoomTo</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">zoom</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Layer.zoomTo-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Layer.zoomTo-expanded"><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">zoomable</tt><tt class="py-op">:</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-41', 'zoom', 'link-16');">zoom</a></tt> <tt class="py-op">=</tt> <tt id="link-42" class="py-name"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-42', 'zoom', 'link-16');">zoom</a></tt> </tt>
+</div><a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"> </tt>
+<a name="Layer.setEnabled"></a><div id="Layer.setEnabled-def"><a name="L120"></a><tt class="py-lineno">120</tt> <a class="py-toggle" href="#" id="Layer.setEnabled-toggle" onclick="return toggle('Layer.setEnabled');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Layer-class.html#setEnabled">setEnabled</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">enabled</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Layer.setEnabled-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Layer.setEnabled-expanded"><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">enabled</tt> <tt class="py-op">=</tt> <tt class="py-name">enabled</tt> </tt>
+</div><a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"> </tt>
+<a name="Layer.setZindex"></a><div id="Layer.setZindex-def"><a name="L123"></a><tt class="py-lineno">123</tt> <a class="py-toggle" href="#" id="Layer.setZindex-toggle" onclick="return toggle('Layer.setZindex');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Layer-class.html#setZindex">setZindex</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">index</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Layer.setZindex-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Layer.setZindex-expanded"><a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">zindex</tt> <tt class="py-op">=</tt> <tt class="py-name">index</tt> </tt>
+</div><a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<a name="Layer.setZoomable"></a><div id="Layer.setZoomable-def"><a name="L126"></a><tt class="py-lineno">126</tt> <a class="py-toggle" href="#" id="Layer.setZoomable-toggle" onclick="return toggle('Layer.setZoomable');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Layer-class.html#setZoomable">setZoomable</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">zoom</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Layer.setZoomable-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Layer.setZoomable-expanded"><a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">zoomable</tt> <tt class="py-op">=</tt> <tt id="link-43" class="py-name"><a title="code.multysprites.spriteSystem.zoom" class="py-name" href="#" onclick="return doclink('link-43', 'zoom', 'link-16');">zoom</a></tt> </tt>
+</div><a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
+<a name="Layer.setDrawable"></a><div id="Layer.setDrawable-def"><a name="L129"></a><tt class="py-lineno">129</tt> <a class="py-toggle" href="#" id="Layer.setDrawable-toggle" onclick="return toggle('Layer.setDrawable');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Layer-class.html#setDrawable">setDrawable</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">drawable</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Layer.setDrawable-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Layer.setDrawable-expanded"><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">drawable</tt> <tt class="py-op">=</tt> <tt class="py-name">drawable</tt> </tt>
+</div><a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"> </tt>
+<a name="Layer.update"></a><div id="Layer.update-def"><a name="L132"></a><tt class="py-lineno">132</tt> <a class="py-toggle" href="#" id="Layer.update-toggle" onclick="return toggle('Layer.update');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Layer-class.html#update">update</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Layer.update-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Layer.update-expanded"><a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">enabled</tt><tt class="py-op">:</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">drawable</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="code.camera.Camera.update
+code.camera.Layer.update
+code.camera.SpaceView.update
+code.cargo.Cargo.update
+code.commandParse.CommandParse.update
+code.dialogs.Trigger.update
+code.facilitys.Company.update
+code.facilitys.Facility.update
+code.floaters.Bullet.update
+code.floaters.Explosion.update
+code.floaters.Floater.update
+code.floaters.Impact.update
+code.floaters.LaserBeam.update
+code.floaters.Mine.update
+code.floaters.Missile.update
+code.floaters.RadarDisk.update
+code.gui.Drawable.update
+code.gui.Messenger.update
+code.gui.MiniInfo.update
+code.gui.shipDamage.update
+code.menuElements.FunctionLabel.update
+code.menuElements.InputField.update
+code.menuElements.Panel.update
+code.menuElements.ScrollTextBlock.update
+code.menuElements.TextBlock.update
+code.menus.ChatConsole.update
+code.menus.Menu.update
+code.menus.NavigationTile.update
+code.menus.PartDescriptionPanel.update
+code.menus.PartsPanel.update
+code.menus.PlanetButtons.update
+code.menus.TimeTile.update
+code.multysprites.spriteSystem.update
+code.particles.CircleEmitter.update
+code.particles.Emitter.update
+code.particles.Particle.update
+code.particles.RingCollector.update
+code.particles.RingEmitter.update
+code.parts.CargoHold.update
+code.parts.Chip.update
+code.parts.Cockpit.update
+code.parts.Dummy.update
+code.parts.Engine.update
+code.parts.FlakCannon.update
+code.parts.GatewayFocus.update
+code.parts.Generator.update
+code.parts.Gun.update
+code.parts.Interconnect.update
+code.parts.Part.update
+code.parts.Quarters.update
+code.parts.Radar.update
+code.parts.Shield.update
+code.planet.Gateway.update
+code.planet.Planet.update
+code.planet.Star.update
+code.planet.Structure.update
+code.races.Race.update
+code.scripts.AIScript.update
+code.scripts.Controllable.update
+code.scripts.InputScript.update
+code.scripts.Script.update
+code.spaceship.Player.update
+code.spaceship.Ship.update
+code.starSystem.StarSystem.update
+code.strafebat.StrafebatScript.update
+code.universe.Universe.update" class="py-name" href="#" onclick="return doclink('link-44', 'update', 'link-29');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"> </tt>
+<a name="Layer.draw"></a><div id="Layer.draw-def"><a name="L136"></a><tt class="py-lineno">136</tt> <a class="py-toggle" href="#" id="Layer.draw-toggle" onclick="return toggle('Layer.draw');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.Layer-class.html#draw">draw</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">surface</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Layer.draw-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Layer.draw-expanded"><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">enabled</tt><tt class="py-op">:</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">drawable</tt><tt class="py-op">,</tt> <tt id="link-45" class="py-name"><a title="code.camera.SpaceView" class="py-name" href="#" onclick="return doclink('link-45', 'SpaceView', 'link-32');">SpaceView</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">drawable</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="code.camera.Camera.draw
+code.camera.Layer.draw
+code.camera.SpaceView.draw
+code.floaters.Floater.draw
+code.floaters.RadarDisk.draw
+code.gui.BGImage.draw
+code.gui.Drawable.draw
+code.gui.HUD.draw
+code.gui.LifeBar.draw
+code.gui.Messenger.draw
+code.gui.MiniInfo.draw
+code.gui.RadarField.draw
+code.gui.StarField.draw
+code.gui.TargetingRect.draw
+code.gui.shipDamage.draw
+code.menuElements.ColorPanel.draw
+code.menuElements.Panel.draw
+code.menuElements.ScrollPanel.draw
+code.menuElements.Selecter.draw
+code.menuElements.ShapeButton.draw
+code.menuElements.TopLevelPanel.draw
+code.menus.ColorButton.draw
+code.particles.Emitter.draw
+code.particles.Particle.draw
+code.parts.Part.draw
+code.planet.Gateway.draw
+code.planet.Planet.draw
+code.planet.Structure.draw
+code.spaceship.Ship.draw
+code.universe.Universe.draw" class="py-name" href="#" onclick="return doclink('link-46', 'draw', 'link-30');">draw</a></tt><tt class="py-op">(</tt><tt class="py-name">surface</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-47', 'camera', 'link-7');">camera</a></tt><tt class="py-op">.</tt><tt class="py-name">pos</tt><tt class="py-op">)</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">drawable</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name"><a title="code.camera.Camera.draw
+code.camera.Layer.draw
+code.camera.SpaceView.draw
+code.floaters.Floater.draw
+code.floaters.RadarDisk.draw
+code.gui.BGImage.draw
+code.gui.Drawable.draw
+code.gui.HUD.draw
+code.gui.LifeBar.draw
+code.gui.Messenger.draw
+code.gui.MiniInfo.draw
+code.gui.RadarField.draw
+code.gui.StarField.draw
+code.gui.TargetingRect.draw
+code.gui.shipDamage.draw
+code.menuElements.ColorPanel.draw
+code.menuElements.Panel.draw
+code.menuElements.ScrollPanel.draw
+code.menuElements.Selecter.draw
+code.menuElements.ShapeButton.draw
+code.menuElements.TopLevelPanel.draw
+code.menus.ColorButton.draw
+code.particles.Emitter.draw
+code.particles.Particle.draw
+code.parts.Part.draw
+code.planet.Gateway.draw
+code.planet.Planet.draw
+code.planet.Structure.draw
+code.spaceship.Ship.draw
+code.universe.Universe.draw" class="py-name" href="#" onclick="return doclink('link-48', 'draw', 'link-30');">draw</a></tt><tt class="py-op">(</tt><tt class="py-name">surface</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"> </tt>
+<a name="SpaceView"></a><div id="SpaceView-def"><a name="L146"></a><tt class="py-lineno">146</tt> <a class="py-toggle" href="#" id="SpaceView-toggle" onclick="return toggle('SpaceView');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.camera.SpaceView-class.html">SpaceView</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SpaceView-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SpaceView-expanded"><a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">     </tt>
+<a name="SpaceView.__init__"></a><div id="SpaceView.__init__-def"><a name="L149"></a><tt class="py-lineno">149</tt> <a class="py-toggle" href="#" id="SpaceView.__init__-toggle" onclick="return toggle('SpaceView.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.SpaceView-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">game</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SpaceView.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SpaceView.__init__-expanded"><a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-49', 'game', 'link-10');">game</a></tt> <tt class="py-op">=</tt> <tt id="link-50" class="py-name"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-50', 'game', 'link-10');">game</a></tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">onScreen</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-51', 'camera', 'link-7');">camera</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">offset</tt> <tt class="py-op">=</tt> <tt id="link-52" class="py-name"><a title="code.vec2d.Vec2d" class="py-name" href="#" onclick="return doclink('link-52', 'Vec2d', 'link-1');">Vec2d</a></tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"> </tt>
+<a name="SpaceView.update"></a><div id="SpaceView.update-def"><a name="L156"></a><tt class="py-lineno">156</tt> <a class="py-toggle" href="#" id="SpaceView.update-toggle" onclick="return toggle('SpaceView.update');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.SpaceView-class.html#update">update</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SpaceView.update-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SpaceView.update-expanded"><a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-53" class="py-name"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-53', 'game', 'link-10');">game</a></tt><tt class="py-op">.</tt><tt id="link-54" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-54', 'universe', 'link-5');">universe</a></tt><tt class="py-op">.</tt><tt class="py-name">curSystem</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="code.camera.Camera.update
+code.camera.Layer.update
+code.camera.SpaceView.update
+code.cargo.Cargo.update
+code.commandParse.CommandParse.update
+code.dialogs.Trigger.update
+code.facilitys.Company.update
+code.facilitys.Facility.update
+code.floaters.Bullet.update
+code.floaters.Explosion.update
+code.floaters.Floater.update
+code.floaters.Impact.update
+code.floaters.LaserBeam.update
+code.floaters.Mine.update
+code.floaters.Missile.update
+code.floaters.RadarDisk.update
+code.gui.Drawable.update
+code.gui.Messenger.update
+code.gui.MiniInfo.update
+code.gui.shipDamage.update
+code.menuElements.FunctionLabel.update
+code.menuElements.InputField.update
+code.menuElements.Panel.update
+code.menuElements.ScrollTextBlock.update
+code.menuElements.TextBlock.update
+code.menus.ChatConsole.update
+code.menus.Menu.update
+code.menus.NavigationTile.update
+code.menus.PartDescriptionPanel.update
+code.menus.PartsPanel.update
+code.menus.PlanetButtons.update
+code.menus.TimeTile.update
+code.multysprites.spriteSystem.update
+code.particles.CircleEmitter.update
+code.particles.Emitter.update
+code.particles.Particle.update
+code.particles.RingCollector.update
+code.particles.RingEmitter.update
+code.parts.CargoHold.update
+code.parts.Chip.update
+code.parts.Cockpit.update
+code.parts.Dummy.update
+code.parts.Engine.update
+code.parts.FlakCannon.update
+code.parts.GatewayFocus.update
+code.parts.Generator.update
+code.parts.Gun.update
+code.parts.Interconnect.update
+code.parts.Part.update
+code.parts.Quarters.update
+code.parts.Radar.update
+code.parts.Shield.update
+code.planet.Gateway.update
+code.planet.Planet.update
+code.planet.Star.update
+code.planet.Structure.update
+code.races.Race.update
+code.scripts.AIScript.update
+code.scripts.Controllable.update
+code.scripts.InputScript.update
+code.scripts.Script.update
+code.spaceship.Player.update
+code.spaceship.Ship.update
+code.starSystem.StarSystem.update
+code.strafebat.StrafebatScript.update
+code.universe.Universe.update" class="py-name" href="#" onclick="return doclink('link-55', 'update', 'link-29');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">onScreen</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">offset</tt> <tt class="py-op">=</tt> <tt id="link-56" class="py-name"><a title="code.vec2d.Vec2d" class="py-name" href="#" onclick="return doclink('link-56', 'Vec2d', 'link-1');">Vec2d</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-57', 'camera', 'link-7');">camera</a></tt><tt class="py-op">.</tt><tt class="py-name">pos</tt><tt class="py-op">.</tt><tt id="link-58" class="py-name" targets="Variable code.vec2d.Vec2d.x=code.vec2d.Vec2d-class.html#x"><a title="code.vec2d.Vec2d.x" class="py-name" href="#" onclick="return doclink('link-58', 'x', 'link-58');">x</a></tt> <tt class="py-op">-</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-59', 'camera', 'link-7');">camera</a></tt><tt class="py-op">.</tt><tt id="link-60" class="py-name"><a title="code.menus.MultyPartTile.width" class="py-name" href="#" onclick="return doclink('link-60', 'width', 'link-8');">width</a></tt> <tt class="py-op">/</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">                            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-61" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-61', 'camera', 'link-7');">camera</a></tt><tt class="py-op">.</tt><tt class="py-name">pos</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name" targets="Variable code.vec2d.Vec2d.y=code.vec2d.Vec2d-class.html#y"><a title="code.vec2d.Vec2d.y" class="py-name" href="#" onclick="return doclink('link-62', 'y', 'link-62');">y</a></tt> <tt class="py-op">-</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-63" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-63', 'camera', 'link-7');">camera</a></tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="code.menus.MultyPartTile.height" class="py-name" href="#" onclick="return doclink('link-64', 'height', 'link-12');">height</a></tt> <tt class="py-op">/</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">floater</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-65" class="py-name"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-65', 'game', 'link-10');">game</a></tt><tt class="py-op">.</tt><tt id="link-66" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-66', 'universe', 'link-5');">universe</a></tt><tt class="py-op">.</tt><tt class="py-name">curSystem</tt><tt class="py-op">.</tt><tt id="link-67" class="py-name" targets="Module code.floaters=code.floaters-module.html"><a title="code.floaters" class="py-name" href="#" onclick="return doclink('link-67', 'floaters', 'link-67');">floaters</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">            <tt id="link-68" class="py-name" targets="Variable code.adjectives.r=code.adjectives-module.html#r,Variable code.cargo.r=code.cargo-module.html#r,Variable code.commandParse.r=code.commandParse-module.html#r,Variable code.floaters.r=code.floaters-module.html#r,Variable code.game.r=code.game-module.html#r,Variable code.gui.r=code.gui-module.html#r,Variable code.menuElements.r=code.menuElements-module.html#r,Variable code.menus.r=code.menus-module.html#r,Variable code.multysprites.r=code.multysprites-module.html#r,Variable code.nameMaker.r=code.nameMaker-module.html#r,Variable code.partCatalog.r=code.partCatalog-module.html#r,Variable code.parts.r=code.parts-module.html#r,Variable code.planet.r=code.planet-module.html#r,Variable code.plot.r=code.plot-module.html#r,Variable code.scripts.r=code.scripts-module.html#r,Variable code.spaceship.r=code.spaceship-module.html#r,Variable code.starSystem.r=code.starSystem-module.html#r,Variable code.strafebat.r=code.strafebat-module.html#r,Variable code.universe.r=code.universe-module.html#r,Variable code.utils.r=code.utils-module.html#r"><a title="code.adjectives.r
+code.cargo.r
+code.commandParse.r
+code.floaters.r
+code.game.r
+code.gui.r
+code.menuElements.r
+code.menus.r
+code.multysprites.r
+code.nameMaker.r
+code.partCatalog.r
+code.parts.r
+code.planet.r
+code.plot.r
+code.scripts.r
+code.spaceship.r
+code.starSystem.r
+code.strafebat.r
+code.universe.r
+code.utils.r" class="py-name" href="#" onclick="return doclink('link-68', 'r', 'link-68');">r</a></tt> <tt class="py-op">=</tt> <tt class="py-name">floater</tt><tt class="py-op">.</tt><tt class="py-name">radius</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">            <tt class="py-name">leftRight</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt id="link-69" class="py-name"><a title="code.adjectives.r
+code.cargo.r
+code.commandParse.r
+code.floaters.r
+code.game.r
+code.gui.r
+code.menuElements.r
+code.menus.r
+code.multysprites.r
+code.nameMaker.r
+code.partCatalog.r
+code.parts.r
+code.planet.r
+code.plot.r
+code.scripts.r
+code.spaceship.r
+code.starSystem.r
+code.strafebat.r
+code.universe.r
+code.utils.r" class="py-name" href="#" onclick="return doclink('link-69', 'r', 'link-68');">r</a></tt> <tt class="py-op">+</tt> <tt class="py-name">floater</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt><tt class="py-op">.</tt><tt id="link-70" class="py-name"><a title="code.vec2d.Vec2d.x" class="py-name" href="#" onclick="return doclink('link-70', 'x', 'link-58');">x</a></tt> <tt class="py-op">&gt;</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">offset</tt><tt class="py-op">.</tt><tt id="link-71" class="py-name"><a title="code.vec2d.Vec2d.x" class="py-name" href="#" onclick="return doclink('link-71', 'x', 'link-58');">x</a></tt> <tt class="py-keyword">and</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">                         <tt class="py-name">floater</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt><tt class="py-op">.</tt><tt id="link-72" class="py-name"><a title="code.vec2d.Vec2d.x" class="py-name" href="#" onclick="return doclink('link-72', 'x', 'link-58');">x</a></tt><tt class="py-op">-</tt><tt id="link-73" class="py-name"><a title="code.adjectives.r
+code.cargo.r
+code.commandParse.r
+code.floaters.r
+code.game.r
+code.gui.r
+code.menuElements.r
+code.menus.r
+code.multysprites.r
+code.nameMaker.r
+code.partCatalog.r
+code.parts.r
+code.planet.r
+code.plot.r
+code.scripts.r
+code.spaceship.r
+code.starSystem.r
+code.strafebat.r
+code.universe.r
+code.utils.r" class="py-name" href="#" onclick="return doclink('link-73', 'r', 'link-68');">r</a></tt> <tt class="py-op">&lt;</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">offset</tt><tt class="py-op">.</tt><tt id="link-74" class="py-name"><a title="code.vec2d.Vec2d.x" class="py-name" href="#" onclick="return doclink('link-74', 'x', 'link-58');">x</a></tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-75" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-75', 'camera', 'link-7');">camera</a></tt><tt class="py-op">.</tt><tt id="link-76" class="py-name"><a title="code.menus.MultyPartTile.width" class="py-name" href="#" onclick="return doclink('link-76', 'width', 'link-8');">width</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">            <tt class="py-name">upDown</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt id="link-77" class="py-name"><a title="code.adjectives.r
+code.cargo.r
+code.commandParse.r
+code.floaters.r
+code.game.r
+code.gui.r
+code.menuElements.r
+code.menus.r
+code.multysprites.r
+code.nameMaker.r
+code.partCatalog.r
+code.parts.r
+code.planet.r
+code.plot.r
+code.scripts.r
+code.spaceship.r
+code.starSystem.r
+code.strafebat.r
+code.universe.r
+code.utils.r" class="py-name" href="#" onclick="return doclink('link-77', 'r', 'link-68');">r</a></tt> <tt class="py-op">+</tt> <tt class="py-name">floater</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt><tt class="py-op">.</tt><tt id="link-78" class="py-name"><a title="code.vec2d.Vec2d.y" class="py-name" href="#" onclick="return doclink('link-78', 'y', 'link-62');">y</a></tt> <tt class="py-op">&gt;</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">offset</tt><tt class="py-op">.</tt><tt id="link-79" class="py-name"><a title="code.vec2d.Vec2d.y" class="py-name" href="#" onclick="return doclink('link-79', 'y', 'link-62');">y</a></tt> <tt class="py-keyword">and</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">                      <tt class="py-name">floater</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt><tt class="py-op">.</tt><tt id="link-80" class="py-name"><a title="code.vec2d.Vec2d.y" class="py-name" href="#" onclick="return doclink('link-80', 'y', 'link-62');">y</a></tt><tt class="py-op">-</tt><tt id="link-81" class="py-name"><a title="code.adjectives.r
+code.cargo.r
+code.commandParse.r
+code.floaters.r
+code.game.r
+code.gui.r
+code.menuElements.r
+code.menus.r
+code.multysprites.r
+code.nameMaker.r
+code.partCatalog.r
+code.parts.r
+code.planet.r
+code.plot.r
+code.scripts.r
+code.spaceship.r
+code.starSystem.r
+code.strafebat.r
+code.universe.r
+code.utils.r" class="py-name" href="#" onclick="return doclink('link-81', 'r', 'link-68');">r</a></tt> <tt class="py-op">&lt;</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">offset</tt><tt class="py-op">.</tt><tt id="link-82" class="py-name"><a title="code.vec2d.Vec2d.y" class="py-name" href="#" onclick="return doclink('link-82', 'y', 'link-62');">y</a></tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-83" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-83', 'camera', 'link-7');">camera</a></tt><tt class="py-op">.</tt><tt id="link-84" class="py-name"><a title="code.menus.MultyPartTile.height" class="py-name" href="#" onclick="return doclink('link-84', 'height', 'link-12');">height</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">leftRight</tt> <tt class="py-keyword">and</tt> <tt class="py-name">upDown</tt><tt class="py-op">:</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">onScreen</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">floater</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"> </tt>
+<a name="SpaceView.sortFloaterHeight"></a><div id="SpaceView.sortFloaterHeight-def"><a name="L171"></a><tt class="py-lineno">171</tt> <a class="py-toggle" href="#" id="SpaceView.sortFloaterHeight-toggle" onclick="return toggle('SpaceView.sortFloaterHeight');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.SpaceView-class.html#sortFloaterHeight">sortFloaterHeight</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">onscreen</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SpaceView.sortFloaterHeight-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SpaceView.sortFloaterHeight-expanded"><a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">onscreen</tt><tt class="py-op">,</tt> <tt id="link-85" class="py-name" targets="Class code.planet.Planet=code.planet.Planet-class.html"><a title="code.planet.Planet" class="py-name" href="#" onclick="return doclink('link-85', 'Planet', 'link-85');">Planet</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-number">4</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">onscreen</tt><tt class="py-op">,</tt> <tt id="link-86" class="py-name" targets="Class code.floaters.Impact=code.floaters.Impact-class.html"><a title="code.floaters.Impact" class="py-name" href="#" onclick="return doclink('link-86', 'Impact', 'link-86');">Impact</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-number">5</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">onscreen</tt><tt class="py-op">,</tt> <tt id="link-87" class="py-name" targets="Class code.floaters.Explosion=code.floaters.Explosion-class.html"><a title="code.floaters.Explosion" class="py-name" href="#" onclick="return doclink('link-87', 'Explosion', 'link-87');">Explosion</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-number">3</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-number">1</tt> </tt>
+</div><a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"> </tt>
+<a name="SpaceView.draw"></a><div id="SpaceView.draw-def"><a name="L181"></a><tt class="py-lineno">181</tt> <a class="py-toggle" href="#" id="SpaceView.draw-toggle" onclick="return toggle('SpaceView.draw');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.camera.SpaceView-class.html#draw">draw</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">surface</tt><tt class="py-op">,</tt> <tt class="py-param">pos</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SpaceView.draw-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SpaceView.draw-expanded"><a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">onScreen</tt> <tt class="py-op">=</tt> <tt class="py-name">sorted</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">onScreen</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">=</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">onscreen</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-88" class="py-name" targets="Method code.camera.SpaceView.sortFloaterHeight()=code.camera.SpaceView-class.html#sortFloaterHeight"><a title="code.camera.SpaceView.sortFloaterHeight" class="py-name" href="#" onclick="return doclink('link-88', 'sortFloaterHeight', 'link-88');">sortFloaterHeight</a></tt><tt class="py-op">(</tt><tt class="py-name">onscreen</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">floater</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">onScreen</tt><tt class="py-op">:</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">            <tt class="py-name">floater</tt><tt class="py-op">.</tt><tt id="link-89" class="py-name"><a title="code.camera.Camera.draw
+code.camera.Layer.draw
+code.camera.SpaceView.draw
+code.floaters.Floater.draw
+code.floaters.RadarDisk.draw
+code.gui.BGImage.draw
+code.gui.Drawable.draw
+code.gui.HUD.draw
+code.gui.LifeBar.draw
+code.gui.Messenger.draw
+code.gui.MiniInfo.draw
+code.gui.RadarField.draw
+code.gui.StarField.draw
+code.gui.TargetingRect.draw
+code.gui.shipDamage.draw
+code.menuElements.ColorPanel.draw
+code.menuElements.Panel.draw
+code.menuElements.ScrollPanel.draw
+code.menuElements.Selecter.draw
+code.menuElements.ShapeButton.draw
+code.menuElements.TopLevelPanel.draw
+code.menus.ColorButton.draw
+code.particles.Emitter.draw
+code.particles.Particle.draw
+code.parts.Part.draw
+code.planet.Gateway.draw
+code.planet.Planet.draw
+code.planet.Structure.draw
+code.spaceship.Ship.draw
+code.universe.Universe.draw" class="py-name" href="#" onclick="return doclink('link-89', 'draw', 'link-30');">draw</a></tt><tt class="py-op">(</tt><tt class="py-name">surface</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">offset</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Mar 17 21:02:22 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>code.universe</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="code-module.html">Package&nbsp;code</a> ::
+        Module&nbsp;universe
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="code.universe-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="code.universe-module.html">Module code.universe</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># universe.py</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># </tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module code.starSystem=code.starSystem-module.html"><a title="code.starSystem" class="py-name" href="#" onclick="return doclink('link-0', 'starSystem', 'link-0');">starSystem</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="Universe"></a><div id="Universe-def"><a name="L5"></a><tt class="py-lineno"> 5</tt> <a class="py-toggle" href="#" id="Universe-toggle" onclick="return toggle('Universe');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.universe.Universe-class.html">Universe</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Universe-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Universe-expanded"><a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line">     </tt>
+<a name="Universe.__init__"></a><div id="Universe.__init__-def"><a name="L7"></a><tt class="py-lineno"> 7</tt> <a class="py-toggle" href="#" id="Universe.__init__-toggle" onclick="return toggle('Universe.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.universe.Universe-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">game</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Universe.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Universe.__init__-expanded"><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">starSystems</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">curSystem</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module code.game=code.game-module.html,Variable code.menus.ChatConsole.game=code.menus.ChatConsole-class.html#game,Variable code.menus.Menu.game=code.menus.Menu-class.html#game"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-1', 'game', 'link-1');">game</a></tt> <tt class="py-op">=</tt> <tt id="link-2" class="py-name"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-2', 'game', 'link-1');">game</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-3" class="py-name"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-3', 'game', 'link-1');">game</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-4', 'game', 'link-1');">game</a></tt><tt class="py-op">.</tt><tt class="py-name">player</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cameras</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
+<a name="Universe.setPlayer"></a><div id="Universe.setPlayer-def"><a name="L17"></a><tt class="py-lineno">17</tt> <a class="py-toggle" href="#" id="Universe.setPlayer-toggle" onclick="return toggle('Universe.setPlayer');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.universe.Universe-class.html#setPlayer">setPlayer</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">player</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Universe.setPlayer-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Universe.setPlayer-expanded"><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt> <tt class="py-op">=</tt> <tt class="py-name">player</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">curSystem</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method code.starSystem.StarSystem.add()=code.starSystem.StarSystem-class.html#add"><a title="code.starSystem.StarSystem.add" class="py-name" href="#" onclick="return doclink('link-5', 'add', 'link-5');">add</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">player</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="Universe.getSystemByName"></a><div id="Universe.getSystemByName-def"><a name="L21"></a><tt class="py-lineno">21</tt> <a class="py-toggle" href="#" id="Universe.getSystemByName-toggle" onclick="return toggle('Universe.getSystemByName');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.universe.Universe-class.html#getSystemByName">getSystemByName</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Universe.getSystemByName-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Universe.getSystemByName-expanded"><a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">system</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">starSystems</tt><tt class="py-op">:</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">system</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-op">==</tt> <tt class="py-name">name</tt><tt class="py-op">:</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">system</tt> </tt>
+</div><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt>
+<a name="Universe.addStarSystem"></a><div id="Universe.addStarSystem-def"><a name="L26"></a><tt class="py-lineno">26</tt> <a class="py-toggle" href="#" id="Universe.addStarSystem-toggle" onclick="return toggle('Universe.addStarSystem');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.universe.Universe-class.html#addStarSystem">addStarSystem</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">system</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Universe.addStarSystem-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Universe.addStarSystem-expanded"><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">starSystems</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">system</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
+<a name="Universe.addCamera"></a><div id="Universe.addCamera-def"><a name="L29"></a><tt class="py-lineno">29</tt> <a class="py-toggle" href="#" id="Universe.addCamera-toggle" onclick="return toggle('Universe.addCamera');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.universe.Universe-class.html#addCamera">addCamera</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">camera</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Universe.addCamera-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Universe.addCamera-expanded"><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cameras</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-6" class="py-name" targets="Module code.camera=code.camera-module.html"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-6', 'camera', 'link-6');">camera</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="Universe.update"></a><div id="Universe.update-def"><a name="L32"></a><tt class="py-lineno">32</tt> <a class="py-toggle" href="#" id="Universe.update-toggle" onclick="return toggle('Universe.update');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.universe.Universe-class.html#update">update</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Universe.update-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Universe.update-expanded"><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-7" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-7', 'camera', 'link-6');">camera</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cameras</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">            <tt id="link-8" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-8', 'camera', 'link-6');">camera</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method code.camera.Camera.update()=code.camera.Camera-class.html#update,Method code.camera.Layer.update()=code.camera.Layer-class.html#update,Method code.camera.SpaceView.update()=code.camera.SpaceView-class.html#update,Method code.cargo.Cargo.update()=code.cargo.Cargo-class.html#update,Method code.commandParse.CommandParse.update()=code.commandParse.CommandParse-class.html#update,Method code.dialogs.Trigger.update()=code.dialogs.Trigger-class.html#update,Method code.facilitys.Company.update()=code.facilitys.Company-class.html#update,Method code.facilitys.Facility.update()=code.facilitys.Facility-class.html#update,Method code.floaters.Bullet.update()=code.floaters.Bullet-class.html#update,Method code.floaters.Explosion.update()=code.floaters.Explosion-class.html#update,Method code.floaters.Floater.update()=code.floaters.Floater-class.html#update,Method code.floaters.Impact.update()=code.floaters.Impact-class.html#update,Method code.floaters.LaserBeam.update()=code.floaters.LaserBeam-class.html#update,Method code.floaters.Mine.update()=code.floaters.Mine-class.html#update,Method code.floaters.Missile.update()=code.floaters.Missile-class.html#update,Method code.floaters.RadarDisk.update()=code.floaters.RadarDisk-class.html#update,Method code.gui.Drawable.update()=code.gui.Drawable-class.html#update,Method code.gui.Messenger.update()=code.gui.Messenger-class.html#update,Method code.gui.MiniInfo.update()=code.gui.MiniInfo-class.html#update,Method code.gui.shipDamage.update()=code.gui.shipDamage-class.html#update,Method code.menuElements.FunctionLabel.update()=code.menuElements.FunctionLabel-class.html#update,Method code.menuElements.InputField.update()=code.menuElements.InputField-class.html#update,Method code.menuElements.Panel.update()=code.menuElements.Panel-class.html#update,Method code.menuElements.ScrollTextBlock.update()=code.menuElements.ScrollTextBlock-class.html#update,Method code.menuElements.TextBlock.update()=code.menuElements.TextBlock-class.html#update,Method code.menus.ChatConsole.update()=code.menus.ChatConsole-class.html#update,Method code.menus.Menu.update()=code.menus.Menu-class.html#update,Method code.menus.NavigationTile.update()=code.menus.NavigationTile-class.html#update,Method code.menus.PartDescriptionPanel.update()=code.menus.PartDescriptionPanel-class.html#update,Method code.menus.PartsPanel.update()=code.menus.PartsPanel-class.html#update,Method code.menus.PlanetButtons.update()=code.menus.PlanetButtons-class.html#update,Method code.menus.TimeTile.update()=code.menus.TimeTile-class.html#update,Method code.multysprites.spriteSystem.update()=code.multysprites.spriteSystem-class.html#update,Method code.particles.CircleEmitter.update()=code.particles.CircleEmitter-class.html#update,Method code.particles.Emitter.update()=code.particles.Emitter-class.html#update,Method code.particles.Particle.update()=code.particles.Particle-class.html#update,Method code.particles.RingCollector.update()=code.particles.RingCollector-class.html#update,Method code.particles.RingEmitter.update()=code.particles.RingEmitter-class.html#update,Method code.parts.CargoHold.update()=code.parts.CargoHold-class.html#update,Method code.parts.Chip.update()=code.parts.Chip-class.html#update,Method code.parts.Cockpit.update()=code.parts.Cockpit-class.html#update,Method code.parts.Dummy.update()=code.parts.Dummy-class.html#update,Method code.parts.Engine.update()=code.parts.Engine-class.html#update,Method code.parts.FlakCannon.update()=code.parts.FlakCannon-class.html#update,Method code.parts.GatewayFocus.update()=code.parts.GatewayFocus-class.html#update,Method code.parts.Generator.update()=code.parts.Generator-class.html#update,Method code.parts.Gun.update()=code.parts.Gun-class.html#update,Method code.parts.Interconnect.update()=code.parts.Interconnect-class.html#update,Method code.parts.Part.update()=code.parts.Part-class.html#update,Method code.parts.Quarters.update()=code.parts.Quarters-class.html#update,Method code.parts.Radar.update()=code.parts.Radar-class.html#update,Method code.parts.Shield.update()=code.parts.Shield-class.html#update,Method code.planet.Gateway.update()=code.planet.Gateway-class.html#update,Method code.planet.Planet.update()=code.planet.Planet-class.html#update,Method code.planet.Star.update()=code.planet.Star-class.html#update,Method code.planet.Structure.update()=code.planet.Structure-class.html#update,Method code.races.Race.update()=code.races.Race-class.html#update,Method code.scripts.AIScript.update()=code.scripts.AIScript-class.html#update,Method code.scripts.Controllable.update()=code.scripts.Controllable-class.html#update,Method code.scripts.InputScript.update()=code.scripts.InputScript-class.html#update,Method code.scripts.Script.update()=code.scripts.Script-class.html#update,Method code.spaceship.Player.update()=code.spaceship.Player-class.html#update,Method code.spaceship.Ship.update()=code.spaceship.Ship-class.html#update,Method code.starSystem.StarSystem.update()=code.starSystem.StarSystem-class.html#update,Method code.strafebat.StrafebatScript.update()=code.strafebat.StrafebatScript-class.html#update,Method code.universe.Universe.update()=code.universe.Universe-class.html#update"><a title="code.camera.Camera.update
+code.camera.Layer.update
+code.camera.SpaceView.update
+code.cargo.Cargo.update
+code.commandParse.CommandParse.update
+code.dialogs.Trigger.update
+code.facilitys.Company.update
+code.facilitys.Facility.update
+code.floaters.Bullet.update
+code.floaters.Explosion.update
+code.floaters.Floater.update
+code.floaters.Impact.update
+code.floaters.LaserBeam.update
+code.floaters.Mine.update
+code.floaters.Missile.update
+code.floaters.RadarDisk.update
+code.gui.Drawable.update
+code.gui.Messenger.update
+code.gui.MiniInfo.update
+code.gui.shipDamage.update
+code.menuElements.FunctionLabel.update
+code.menuElements.InputField.update
+code.menuElements.Panel.update
+code.menuElements.ScrollTextBlock.update
+code.menuElements.TextBlock.update
+code.menus.ChatConsole.update
+code.menus.Menu.update
+code.menus.NavigationTile.update
+code.menus.PartDescriptionPanel.update
+code.menus.PartsPanel.update
+code.menus.PlanetButtons.update
+code.menus.TimeTile.update
+code.multysprites.spriteSystem.update
+code.particles.CircleEmitter.update
+code.particles.Emitter.update
+code.particles.Particle.update
+code.particles.RingCollector.update
+code.particles.RingEmitter.update
+code.parts.CargoHold.update
+code.parts.Chip.update
+code.parts.Cockpit.update
+code.parts.Dummy.update
+code.parts.Engine.update
+code.parts.FlakCannon.update
+code.parts.GatewayFocus.update
+code.parts.Generator.update
+code.parts.Gun.update
+code.parts.Interconnect.update
+code.parts.Part.update
+code.parts.Quarters.update
+code.parts.Radar.update
+code.parts.Shield.update
+code.planet.Gateway.update
+code.planet.Planet.update
+code.planet.Star.update
+code.planet.Structure.update
+code.races.Race.update
+code.scripts.AIScript.update
+code.scripts.Controllable.update
+code.scripts.InputScript.update
+code.scripts.Script.update
+code.spaceship.Player.update
+code.spaceship.Ship.update
+code.starSystem.StarSystem.update
+code.strafebat.StrafebatScript.update
+code.universe.Universe.update" class="py-name" href="#" onclick="return doclink('link-9', 'update', 'link-9');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="Universe.draw"></a><div id="Universe.draw-def"><a name="L36"></a><tt class="py-lineno">36</tt> <a class="py-toggle" href="#" id="Universe.draw-toggle" onclick="return toggle('Universe.draw');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.universe.Universe-class.html#draw">draw</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">surface</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Universe.draw-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Universe.draw-expanded"><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-10" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-10', 'camera', 'link-6');">camera</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cameras</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">            <tt id="link-11" class="py-name"><a title="code.camera" class="py-name" href="#" onclick="return doclink('link-11', 'camera', 'link-6');">camera</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method code.camera.Camera.draw()=code.camera.Camera-class.html#draw,Method code.camera.Layer.draw()=code.camera.Layer-class.html#draw,Method code.camera.SpaceView.draw()=code.camera.SpaceView-class.html#draw,Method code.floaters.Floater.draw()=code.floaters.Floater-class.html#draw,Method code.floaters.RadarDisk.draw()=code.floaters.RadarDisk-class.html#draw,Method code.gui.BGImage.draw()=code.gui.BGImage-class.html#draw,Method code.gui.Drawable.draw()=code.gui.Drawable-class.html#draw,Method code.gui.HUD.draw()=code.gui.HUD-class.html#draw,Method code.gui.LifeBar.draw()=code.gui.LifeBar-class.html#draw,Method code.gui.Messenger.draw()=code.gui.Messenger-class.html#draw,Method code.gui.MiniInfo.draw()=code.gui.MiniInfo-class.html#draw,Method code.gui.RadarField.draw()=code.gui.RadarField-class.html#draw,Method code.gui.StarField.draw()=code.gui.StarField-class.html#draw,Method code.gui.TargetingRect.draw()=code.gui.TargetingRect-class.html#draw,Method code.gui.shipDamage.draw()=code.gui.shipDamage-class.html#draw,Method code.menuElements.ColorPanel.draw()=code.menuElements.ColorPanel-class.html#draw,Method code.menuElements.Panel.draw()=code.menuElements.Panel-class.html#draw,Method code.menuElements.ScrollPanel.draw()=code.menuElements.ScrollPanel-class.html#draw,Method code.menuElements.Selecter.draw()=code.menuElements.Selecter-class.html#draw,Method code.menuElements.ShapeButton.draw()=code.menuElements.ShapeButton-class.html#draw,Method code.menuElements.TopLevelPanel.draw()=code.menuElements.TopLevelPanel-class.html#draw,Method code.menus.ColorButton.draw()=code.menus.ColorButton-class.html#draw,Method code.particles.Emitter.draw()=code.particles.Emitter-class.html#draw,Method code.particles.Particle.draw()=code.particles.Particle-class.html#draw,Method code.parts.Part.draw()=code.parts.Part-class.html#draw,Method code.planet.Gateway.draw()=code.planet.Gateway-class.html#draw,Method code.planet.Planet.draw()=code.planet.Planet-class.html#draw,Method code.planet.Structure.draw()=code.planet.Structure-class.html#draw,Method code.spaceship.Ship.draw()=code.spaceship.Ship-class.html#draw,Method code.universe.Universe.draw()=code.universe.Universe-class.html#draw"><a title="code.camera.Camera.draw
+code.camera.Layer.draw
+code.camera.SpaceView.draw
+code.floaters.Floater.draw
+code.floaters.RadarDisk.draw
+code.gui.BGImage.draw
+code.gui.Drawable.draw
+code.gui.HUD.draw
+code.gui.LifeBar.draw
+code.gui.Messenger.draw
+code.gui.MiniInfo.draw
+code.gui.RadarField.draw
+code.gui.StarField.draw
+code.gui.TargetingRect.draw
+code.gui.shipDamage.draw
+code.menuElements.ColorPanel.draw
+code.menuElements.Panel.draw
+code.menuElements.ScrollPanel.draw
+code.menuElements.Selecter.draw
+code.menuElements.ShapeButton.draw
+code.menuElements.TopLevelPanel.draw
+code.menus.ColorButton.draw
+code.particles.Emitter.draw
+code.particles.Particle.draw
+code.parts.Part.draw
+code.planet.Gateway.draw
+code.planet.Planet.draw
+code.planet.Structure.draw
+code.spaceship.Ship.draw
+code.universe.Universe.draw" class="py-name" href="#" onclick="return doclink('link-12', 'draw', 'link-12');">draw</a></tt><tt class="py-op">(</tt><tt class="py-name">surface</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">    <tt class="py-comment"># def getAllNeighbors(self, name):</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">    <tt class="py-comment">#   portals = []</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">    <tt class="py-comment">#   systems = []</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">    <tt class="py-comment">#   for system in self.starSystems:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">    <tt class="py-comment">#       if system.name == name:</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">    <tt class="py-comment">#           portals = system.getAllPortals()</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">    <tt class="py-comment">#   if portals:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">    <tt class="py-comment">#       for portal in portals:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">    <tt class="py-comment">#           systems.append(portal.getSister())</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">    <tt class="py-comment">#   return systems</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"> </tt>
+<a name="Universe.neighborsTo"></a><div id="Universe.neighborsTo-def"><a name="L51"></a><tt class="py-lineno">51</tt> <a class="py-toggle" href="#" id="Universe.neighborsTo-toggle" onclick="return toggle('Universe.neighborsTo');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.universe.Universe-class.html#neighborsTo">neighborsTo</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">starsystem</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Universe.neighborsTo-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Universe.neighborsTo-expanded"><a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"> </tt>
+<a name="Universe.removeStarSystem"></a><div id="Universe.removeStarSystem-def"><a name="L54"></a><tt class="py-lineno">54</tt> <a class="py-toggle" href="#" id="Universe.removeStarSystem-toggle" onclick="return toggle('Universe.removeStarSystem');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.universe.Universe-class.html#removeStarSystem">removeStarSystem</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Universe.removeStarSystem-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Universe.removeStarSystem-expanded"><a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">system</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">starSystems</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">system</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-op">==</tt> <tt class="py-name">name</tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">                <tt class="py-keyword">del</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">starSystems</tt><tt class="py-op">[</tt><tt class="py-name">system</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">                <tt class="py-comment"># self.starSystems[system] = None</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"> </tt>
+<a name="Universe.setCurrentStarSystem"></a><div id="Universe.setCurrentStarSystem-def"><a name="L60"></a><tt class="py-lineno">60</tt> <a class="py-toggle" href="#" id="Universe.setCurrentStarSystem-toggle" onclick="return toggle('Universe.setCurrentStarSystem');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.universe.Universe-class.html#setCurrentStarSystem">setCurrentStarSystem</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Universe.setCurrentStarSystem-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Universe.setCurrentStarSystem-expanded"><a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">curSystem</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method code.universe.Universe.getSystemByName()=code.universe.Universe-class.html#getSystemByName"><a title="code.universe.Universe.getSystemByName" class="py-name" href="#" onclick="return doclink('link-13', 'getSystemByName', 'link-13');">getSystemByName</a></tt><tt class="py-op">(</tt><tt class="py-name">name</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"> </tt>
+<a name="Universe.getCurrentStarSystem"></a><div id="Universe.getCurrentStarSystem-def"><a name="L63"></a><tt class="py-lineno">63</tt> <a class="py-toggle" href="#" id="Universe.getCurrentStarSystem-toggle" onclick="return toggle('Universe.getCurrentStarSystem');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.universe.Universe-class.html#getCurrentStarSystem">getCurrentStarSystem</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Universe.getCurrentStarSystem-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Universe.getCurrentStarSystem-expanded"><a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">curSystem</tt> </tt>
+</div></div><a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Mar 17 21:02:20 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>code.SoundSystem</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="code-module.html">Package&nbsp;code</a> ::
+        Module&nbsp;SoundSystem
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="code.SoundSystem-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="code.SoundSystem-module.html">Module code.SoundSystem</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># SoundSystem.py</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">pygame</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">random</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable code.SoundSystem.MISSILE_RADIUS=code.SoundSystem-module.html#MISSILE_RADIUS,Variable code.adjectives.MISSILE_RADIUS=code.adjectives-module.html#MISSILE_RADIUS,Variable code.cargo.MISSILE_RADIUS=code.cargo-module.html#MISSILE_RADIUS,Variable code.commandParse.MISSILE_RADIUS=code.commandParse-module.html#MISSILE_RADIUS,Variable code.floaters.MISSILE_RADIUS=code.floaters-module.html#MISSILE_RADIUS,Variable code.game.MISSILE_RADIUS=code.game-module.html#MISSILE_RADIUS,Variable code.gui.MISSILE_RADIUS=code.gui-module.html#MISSILE_RADIUS,Variable code.menus.MISSILE_RADIUS=code.menus-module.html#MISSILE_RADIUS,Variable code.nameMaker.MISSILE_RADIUS=code.nameMaker-module.html#MISSILE_RADIUS,Variable code.partCatalog.MISSILE_RADIUS=code.partCatalog-module.html#MISSILE_RADIUS,Variable code.parts.MISSILE_RADIUS=code.parts-module.html#MISSILE_RADIUS,Variable code.planet.MISSILE_RADIUS=code.planet-module.html#MISSILE_RADIUS,Variable code.plot.MISSILE_RADIUS=code.plot-module.html#MISSILE_RADIUS,Variable code.scripts.MISSILE_RADIUS=code.scripts-module.html#MISSILE_RADIUS,Variable code.spaceship.MISSILE_RADIUS=code.spaceship-module.html#MISSILE_RADIUS,Variable code.starSystem.MISSILE_RADIUS=code.starSystem-module.html#MISSILE_RADIUS,Variable code.strafebat.MISSILE_RADIUS=code.strafebat-module.html#MISSILE_RADIUS,Variable code.universe.MISSILE_RADIUS=code.universe-module.html#MISSILE_RADIUS"><a title="code.SoundSystem.MISSILE_RADIUS
+code.adjectives.MISSILE_RADIUS
+code.cargo.MISSILE_RADIUS
+code.commandParse.MISSILE_RADIUS
+code.floaters.MISSILE_RADIUS
+code.game.MISSILE_RADIUS
+code.gui.MISSILE_RADIUS
+code.menus.MISSILE_RADIUS
+code.nameMaker.MISSILE_RADIUS
+code.partCatalog.MISSILE_RADIUS
+code.parts.MISSILE_RADIUS
+code.planet.MISSILE_RADIUS
+code.plot.MISSILE_RADIUS
+code.scripts.MISSILE_RADIUS
+code.spaceship.MISSILE_RADIUS
+code.starSystem.MISSILE_RADIUS
+code.strafebat.MISSILE_RADIUS
+code.universe.MISSILE_RADIUS" class="py-name" href="#" onclick="return doclink('link-0', 'MISSILE_RADIUS', 'link-0');">MISSILE_RADIUS</a></tt> <tt class="py-op">=</tt> <tt class="py-number">50</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable code.SoundSystem.SOUND_RADIUS=code.SoundSystem-module.html#SOUND_RADIUS,Variable code.adjectives.SOUND_RADIUS=code.adjectives-module.html#SOUND_RADIUS,Variable code.cargo.SOUND_RADIUS=code.cargo-module.html#SOUND_RADIUS,Variable code.commandParse.SOUND_RADIUS=code.commandParse-module.html#SOUND_RADIUS,Variable code.floaters.SOUND_RADIUS=code.floaters-module.html#SOUND_RADIUS,Variable code.game.SOUND_RADIUS=code.game-module.html#SOUND_RADIUS,Variable code.gui.SOUND_RADIUS=code.gui-module.html#SOUND_RADIUS,Variable code.menus.SOUND_RADIUS=code.menus-module.html#SOUND_RADIUS,Variable code.nameMaker.SOUND_RADIUS=code.nameMaker-module.html#SOUND_RADIUS,Variable code.partCatalog.SOUND_RADIUS=code.partCatalog-module.html#SOUND_RADIUS,Variable code.parts.SOUND_RADIUS=code.parts-module.html#SOUND_RADIUS,Variable code.planet.SOUND_RADIUS=code.planet-module.html#SOUND_RADIUS,Variable code.plot.SOUND_RADIUS=code.plot-module.html#SOUND_RADIUS,Variable code.scripts.SOUND_RADIUS=code.scripts-module.html#SOUND_RADIUS,Variable code.spaceship.SOUND_RADIUS=code.spaceship-module.html#SOUND_RADIUS,Variable code.starSystem.SOUND_RADIUS=code.starSystem-module.html#SOUND_RADIUS,Variable code.strafebat.SOUND_RADIUS=code.strafebat-module.html#SOUND_RADIUS,Variable code.universe.SOUND_RADIUS=code.universe-module.html#SOUND_RADIUS"><a title="code.SoundSystem.SOUND_RADIUS
+code.adjectives.SOUND_RADIUS
+code.cargo.SOUND_RADIUS
+code.commandParse.SOUND_RADIUS
+code.floaters.SOUND_RADIUS
+code.game.SOUND_RADIUS
+code.gui.SOUND_RADIUS
+code.menus.SOUND_RADIUS
+code.nameMaker.SOUND_RADIUS
+code.partCatalog.SOUND_RADIUS
+code.parts.SOUND_RADIUS
+code.planet.SOUND_RADIUS
+code.plot.SOUND_RADIUS
+code.scripts.SOUND_RADIUS
+code.spaceship.SOUND_RADIUS
+code.starSystem.SOUND_RADIUS
+code.strafebat.SOUND_RADIUS
+code.universe.SOUND_RADIUS" class="py-name" href="#" onclick="return doclink('link-1', 'SOUND_RADIUS', 'link-1');">SOUND_RADIUS</a></tt> <tt class="py-op">=</tt> <tt class="py-number">3000</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"># def setVolume(channel, floater1, floater2):</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment">#     from spaceship import Player</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment">#     """sets volume for a channel based on the distance between</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment">#      the player and floater."""</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment">#     distance = floater2.pos.get_distance(floater1.pos)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment">#     if channel and floater1 and floater2:</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment">#         volume = 0.0</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment">#         if distance &lt; SOUND_RADIUS and (isinstance(floater1, Player) or</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment">#            isinstance(floater2, Player)):</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment">#             volume = math.sqrt(((SOUND_RADIUS - distance)**1.8 /</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment">#                                (SOUND_RADIUS + .001)**1.8))*SFX_VOLUME</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-comment">#         channel.set_volume(volume)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="DummyMusicSystem"></a><div id="DummyMusicSystem-def"><a name="L23"></a><tt class="py-lineno"> 23</tt> <a class="py-toggle" href="#" id="DummyMusicSystem-toggle" onclick="return toggle('DummyMusicSystem');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.SoundSystem.DummyMusicSystem-class.html">DummyMusicSystem</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DummyMusicSystem-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="DummyMusicSystem-expanded"><a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">    a dummy class that has all the functions the Music Class uses.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">    for example to disable the Music system on a server or such.</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="DummyMusicSystem.__init__"></a><div id="DummyMusicSystem.__init__-def"><a name="L28"></a><tt class="py-lineno"> 28</tt> <a class="py-toggle" href="#" id="DummyMusicSystem.__init__-toggle" onclick="return toggle('DummyMusicSystem.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.DummyMusicSystem-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">universe</tt><tt class="py-op">,</tt> <tt class="py-param">musicdir</tt><tt class="py-op">,</tt> <tt class="py-param">quality</tt><tt class="py-op">=</tt><tt class="py-number">44100</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DummyMusicSystem.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DummyMusicSystem.__init__-expanded"><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="DummyMusicSystem.getMusicFiles"></a><div id="DummyMusicSystem.getMusicFiles-def"><a name="L31"></a><tt class="py-lineno"> 31</tt> <a class="py-toggle" href="#" id="DummyMusicSystem.getMusicFiles-toggle" onclick="return toggle('DummyMusicSystem.getMusicFiles');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.DummyMusicSystem-class.html#getMusicFiles">getMusicFiles</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DummyMusicSystem.getMusicFiles-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DummyMusicSystem.getMusicFiles-expanded"><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">'Dummy.ogg'</tt><tt class="py-op">,</tt> <tt class="py-string">'Dummy2.ogg'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="DummyMusicSystem.play"></a><div id="DummyMusicSystem.play-def"><a name="L34"></a><tt class="py-lineno"> 34</tt> <a class="py-toggle" href="#" id="DummyMusicSystem.play-toggle" onclick="return toggle('DummyMusicSystem.play');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.DummyMusicSystem-class.html#play">play</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">music</tt><tt class="py-op">,</tt> <tt class="py-param">amount</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DummyMusicSystem.play-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DummyMusicSystem.play-expanded"><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"> </tt>
+<a name="DummyMusicSystem.setVolume"></a><div id="DummyMusicSystem.setVolume-def"><a name="L37"></a><tt class="py-lineno"> 37</tt> <a class="py-toggle" href="#" id="DummyMusicSystem.setVolume-toggle" onclick="return toggle('DummyMusicSystem.setVolume');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.DummyMusicSystem-class.html#setVolume">setVolume</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">volume</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DummyMusicSystem.setVolume-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DummyMusicSystem.setVolume-expanded"><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"> </tt>
+<a name="DummyMusicSystem.getVolume"></a><div id="DummyMusicSystem.getVolume-def"><a name="L40"></a><tt class="py-lineno"> 40</tt> <a class="py-toggle" href="#" id="DummyMusicSystem.getVolume-toggle" onclick="return toggle('DummyMusicSystem.getVolume');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.DummyMusicSystem-class.html#getVolume">getVolume</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">volume</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DummyMusicSystem.getVolume-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DummyMusicSystem.getVolume-expanded"><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt><tt class="py-op">(</tt><tt class="py-number">1.0</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"> </tt>
+<a name="DummyMusicSystem.getRandomMusic"></a><div id="DummyMusicSystem.getRandomMusic-def"><a name="L43"></a><tt class="py-lineno"> 43</tt> <a class="py-toggle" href="#" id="DummyMusicSystem.getRandomMusic-toggle" onclick="return toggle('DummyMusicSystem.getRandomMusic');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.DummyMusicSystem-class.html#getRandomMusic">getRandomMusic</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DummyMusicSystem.getRandomMusic-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DummyMusicSystem.getRandomMusic-expanded"><a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt><tt class="py-op">(</tt><tt class="py-string">'Dummy.ogg'</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
+<a name="DummySoundSystem"></a><div id="DummySoundSystem-def"><a name="L47"></a><tt class="py-lineno"> 47</tt> <a class="py-toggle" href="#" id="DummySoundSystem-toggle" onclick="return toggle('DummySoundSystem');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.SoundSystem.DummySoundSystem-class.html">DummySoundSystem</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DummySoundSystem-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="DummySoundSystem-expanded"><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">    a dummy class that has all the fucntions the Sound Class uses.</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">    for example to disable the Sound system on a server or such.</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="DummySoundSystem.__init__"></a><div id="DummySoundSystem.__init__-def"><a name="L52"></a><tt class="py-lineno"> 52</tt> <a class="py-toggle" href="#" id="DummySoundSystem.__init__-toggle" onclick="return toggle('DummySoundSystem.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.DummySoundSystem-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">sounddir</tt><tt class="py-op">,</tt> <tt class="py-param">quality</tt><tt class="py-op">=</tt><tt class="py-number">44100</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DummySoundSystem.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DummySoundSystem.__init__-expanded"><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"> </tt>
+<a name="DummySoundSystem.register"></a><div id="DummySoundSystem.register-def"><a name="L55"></a><tt class="py-lineno"> 55</tt> <a class="py-toggle" href="#" id="DummySoundSystem.register-toggle" onclick="return toggle('DummySoundSystem.register');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.DummySoundSystem-class.html#register">register</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">sound</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DummySoundSystem.register-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DummySoundSystem.register-expanded"><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"> </tt>
+<a name="DummySoundSystem.getSound"></a><div id="DummySoundSystem.getSound-def"><a name="L58"></a><tt class="py-lineno"> 58</tt> <a class="py-toggle" href="#" id="DummySoundSystem.getSound-toggle" onclick="return toggle('DummySoundSystem.getSound');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.DummySoundSystem-class.html#getSound">getSound</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DummySoundSystem.getSound-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DummySoundSystem.getSound-expanded"><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt><tt class="py-op">(</tt><tt class="py-string">'Dummy.ogg'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"> </tt>
+<a name="DummySoundSystem.setVolume"></a><div id="DummySoundSystem.setVolume-def"><a name="L61"></a><tt class="py-lineno"> 61</tt> <a class="py-toggle" href="#" id="DummySoundSystem.setVolume-toggle" onclick="return toggle('DummySoundSystem.setVolume');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.DummySoundSystem-class.html#setVolume">setVolume</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">volume</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DummySoundSystem.setVolume-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DummySoundSystem.setVolume-expanded"><a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="DummySoundSystem.getVolume"></a><div id="DummySoundSystem.getVolume-def"><a name="L64"></a><tt class="py-lineno"> 64</tt> <a class="py-toggle" href="#" id="DummySoundSystem.getVolume-toggle" onclick="return toggle('DummySoundSystem.getVolume');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.DummySoundSystem-class.html#getVolume">getVolume</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DummySoundSystem.getVolume-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DummySoundSystem.getVolume-expanded"><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt><tt class="py-op">(</tt><tt class="py-number">1.0</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="DummySoundSystem.play"></a><div id="DummySoundSystem.play-def"><a name="L67"></a><tt class="py-lineno"> 67</tt> <a class="py-toggle" href="#" id="DummySoundSystem.play-toggle" onclick="return toggle('DummySoundSystem.play');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.DummySoundSystem-class.html#play">play</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">sound</tt><tt class="py-op">,</tt> <tt class="py-param">scale_f</tt><tt class="py-op">,</tt> <tt class="py-param">loops</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DummySoundSystem.play-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DummySoundSystem.play-expanded"><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div></div><a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="MusicSystem"></a><div id="MusicSystem-def"><a name="L71"></a><tt class="py-lineno"> 71</tt> <a class="py-toggle" href="#" id="MusicSystem-toggle" onclick="return toggle('MusicSystem');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.SoundSystem.MusicSystem-class.html">MusicSystem</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MusicSystem-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="MusicSystem-expanded"><a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">    the MusicSystem class.</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">    that wraps pygame functions for running music.</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">    &lt;musicdir&gt;(str) that is the location of the music files.</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">    &lt;quality&gt;(int) that is the quality the pygame system will be</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">    initialized to.</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="MusicSystem.__init__"></a><div id="MusicSystem.__init__-def"><a name="L79"></a><tt class="py-lineno"> 79</tt> <a class="py-toggle" href="#" id="MusicSystem.__init__-toggle" onclick="return toggle('MusicSystem.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.MusicSystem-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">musicdir</tt><tt class="py-op">,</tt> <tt class="py-param">quality</tt><tt class="py-op">=</tt><tt class="py-number">44100</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MusicSystem.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MusicSystem.__init__-expanded"><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">            <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">mixer</tt><tt class="py-op">.</tt><tt class="py-name">init</tt><tt class="py-op">(</tt><tt class="py-name">quality</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">            <tt class="py-comment"># 20% volume default</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicvolume</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-number">20.</tt><tt class="py-op">/</tt><tt class="py-number">100</tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">            <tt class="py-comment"># get the music files in musicdir</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicdir</tt> <tt class="py-op">=</tt> <tt class="py-name">musicdir</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicfiles</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">listdir</tt><tt class="py-op">(</tt><tt class="py-name">musicdir</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">            <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">mixer</tt><tt class="py-op">.</tt><tt class="py-name">music</tt><tt class="py-op">.</tt><tt class="py-name">set_volume</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicvolume</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-string">""" returns a list of music files."""</tt> </tt>
+<a name="MusicSystem.getMusicFiles"></a><div id="MusicSystem.getMusicFiles-def"><a name="L92"></a><tt class="py-lineno"> 92</tt> <a class="py-toggle" href="#" id="MusicSystem.getMusicFiles-toggle" onclick="return toggle('MusicSystem.getMusicFiles');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.MusicSystem-class.html#getMusicFiles">getMusicFiles</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MusicSystem.getMusicFiles-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MusicSystem.getMusicFiles-expanded"><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicfiles</tt> </tt>
+</div><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-string">"""</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-string">        play function that plays &lt;music&gt;(str),</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-string">        and the number of loops &lt;loops&gt;(int)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-string">        default unlimited loops (-1)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-string">    """</tt> </tt>
+<a name="MusicSystem.play"></a><div id="MusicSystem.play-def"><a name="L99"></a><tt class="py-lineno"> 99</tt> <a class="py-toggle" href="#" id="MusicSystem.play-toggle" onclick="return toggle('MusicSystem.play');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.MusicSystem-class.html#play">play</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">music</tt><tt class="py-op">,</tt> <tt class="py-param">loops</tt><tt class="py-op">=</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MusicSystem.play-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MusicSystem.play-expanded"><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-name">index</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicfiles</tt><tt class="py-op">.</tt><tt class="py-name">index</tt><tt class="py-op">(</tt><tt class="py-name">music</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-name">filelocation</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicdir</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicfiles</tt><tt class="py-op">[</tt><tt class="py-name">index</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">mixer</tt><tt class="py-op">.</tt><tt class="py-name">music</tt><tt class="py-op">.</tt><tt class="py-name">load</tt><tt class="py-op">(</tt><tt class="py-name">filelocation</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">mixer</tt><tt class="py-op">.</tt><tt class="py-name">music</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Method code.SoundSystem.DummyMusicSystem.play()=code.SoundSystem.DummyMusicSystem-class.html#play,Method code.SoundSystem.DummySoundSystem.play()=code.SoundSystem.DummySoundSystem-class.html#play,Method code.SoundSystem.MusicSystem.play()=code.SoundSystem.MusicSystem-class.html#play,Method code.SoundSystem.SoundSystem.play()=code.SoundSystem.SoundSystem-class.html#play"><a title="code.SoundSystem.DummyMusicSystem.play
+code.SoundSystem.DummySoundSystem.play
+code.SoundSystem.MusicSystem.play
+code.SoundSystem.SoundSystem.play" class="py-name" href="#" onclick="return doclink('link-2', 'play', 'link-2');">play</a></tt><tt class="py-op">(</tt><tt class="py-name">loops</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">mixer</tt><tt class="py-op">.</tt><tt class="py-name">music</tt><tt class="py-op">.</tt><tt class="py-name">set_volume</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicvolume</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-string">""" function to set the music volume. """</tt> </tt>
+<a name="MusicSystem.setVolume"></a><div id="MusicSystem.setVolume-def"><a name="L106"></a><tt class="py-lineno">106</tt> <a class="py-toggle" href="#" id="MusicSystem.setVolume-toggle" onclick="return toggle('MusicSystem.setVolume');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.MusicSystem-class.html#setVolume">setVolume</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">volume</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MusicSystem.setVolume-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MusicSystem.setVolume-expanded"><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicvolume</tt> <tt class="py-op">=</tt> <tt class="py-name">volume</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">mixer</tt><tt class="py-op">.</tt><tt class="py-name">music</tt><tt class="py-op">.</tt><tt class="py-name">set_volume</tt><tt class="py-op">(</tt><tt class="py-name">volume</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-string">""" function to get the current music volume """</tt> </tt>
+<a name="MusicSystem.getVolume"></a><div id="MusicSystem.getVolume-def"><a name="L110"></a><tt class="py-lineno">110</tt> <a class="py-toggle" href="#" id="MusicSystem.getVolume-toggle" onclick="return toggle('MusicSystem.getVolume');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.MusicSystem-class.html#getVolume">getVolume</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MusicSystem.getVolume-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MusicSystem.getVolume-expanded"><a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicvolume</tt> </tt>
+</div><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-string">""" returns a random music file. """</tt> </tt>
+<a name="MusicSystem.getRandomMusic"></a><div id="MusicSystem.getRandomMusic-def"><a name="L113"></a><tt class="py-lineno">113</tt> <a class="py-toggle" href="#" id="MusicSystem.getRandomMusic-toggle" onclick="return toggle('MusicSystem.getRandomMusic');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.MusicSystem-class.html#getRandomMusic">getRandomMusic</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MusicSystem.getRandomMusic-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MusicSystem.getRandomMusic-expanded"><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicfiles</tt><tt class="py-op">[</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">randint</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">musicfiles</tt><tt class="py-op">)</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"> </tt>
+<a name="SoundSystem"></a><div id="SoundSystem-def"><a name="L117"></a><tt class="py-lineno">117</tt> <a class="py-toggle" href="#" id="SoundSystem-toggle" onclick="return toggle('SoundSystem');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.SoundSystem.SoundSystem-class.html">SoundSystem</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundSystem-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SoundSystem-expanded"><a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">    the SoundSystem class.</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring">    a wrapper around the pygame sound system.</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">    &lt;soundDir&gt;(str) is the location of the sound files.</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring">    &lt;quality&gt;(int) is the quality the pygame system,</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">    is initialized to.</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="SoundSystem.__init__"></a><div id="SoundSystem.__init__-def"><a name="L125"></a><tt class="py-lineno">125</tt> <a class="py-toggle" href="#" id="SoundSystem.__init__-toggle" onclick="return toggle('SoundSystem.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.SoundSystem-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">soundDir</tt><tt class="py-op">,</tt> <tt class="py-param">quality</tt><tt class="py-op">=</tt><tt class="py-number">44100</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundSystem.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SoundSystem.__init__-expanded"><a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">            <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">mixer</tt><tt class="py-op">.</tt><tt class="py-name">init</tt><tt class="py-op">(</tt><tt class="py-name">quality</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-comment"># 5% volume default</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sfxvolume</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-number">5.</tt><tt class="py-op">/</tt><tt class="py-number">100</tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">soundDir</tt> <tt class="py-op">=</tt> <tt class="py-name">soundDir</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">soundFiles</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">listdir</tt><tt class="py-op">(</tt><tt class="py-name">soundDir</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sounds</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+</div><a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">    <tt class="py-string">""" function to register a &lt;sound&gt;(str) to the soundsystem """</tt> </tt>
+<a name="SoundSystem.register"></a><div id="SoundSystem.register-def"><a name="L136"></a><tt class="py-lineno">136</tt> <a class="py-toggle" href="#" id="SoundSystem.register-toggle" onclick="return toggle('SoundSystem.register');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.SoundSystem-class.html#register">register</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">sound</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundSystem.register-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SoundSystem.register-expanded"><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-name">location</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">soundDir</tt><tt class="py-op">)</tt><tt class="py-op">+</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">sound</tt><tt class="py-op">)</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sounds</tt><tt class="py-op">[</tt><tt class="py-name">sound</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">pygame</tt><tt class="py-op">.</tt><tt class="py-name">mixer</tt><tt class="py-op">.</tt><tt class="py-name">Sound</tt><tt class="py-op">(</tt><tt class="py-name">location</tt><tt class="py-op">)</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">sound</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sounds</tt><tt class="py-op">:</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sounds</tt><tt class="py-op">[</tt><tt class="py-name">sound</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">set_volume</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sfxvolume</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">    <tt class="py-string">""" returns the &lt;soundFiles&gt;(list) found at &lt;soundDir&gt; """</tt> </tt>
+<a name="SoundSystem.getSounds"></a><div id="SoundSystem.getSounds-def"><a name="L142"></a><tt class="py-lineno">142</tt> <a class="py-toggle" href="#" id="SoundSystem.getSounds-toggle" onclick="return toggle('SoundSystem.getSounds');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.SoundSystem-class.html#getSounds">getSounds</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundSystem.getSounds-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SoundSystem.getSounds-expanded"><a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">soundFiles</tt> </tt>
+</div><a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">    <tt class="py-string">""" sets the &lt;volume&gt;(float) for playing sounds """</tt> </tt>
+<a name="SoundSystem.setVolume"></a><div id="SoundSystem.setVolume-def"><a name="L145"></a><tt class="py-lineno">145</tt> <a class="py-toggle" href="#" id="SoundSystem.setVolume-toggle" onclick="return toggle('SoundSystem.setVolume');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.SoundSystem-class.html#setVolume">setVolume</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">volume</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundSystem.setVolume-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SoundSystem.setVolume-expanded"><a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sfxvolume</tt> <tt class="py-op">=</tt> <tt class="py-name">volume</tt> </tt>
+</div><a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">    <tt class="py-string">""" returns the current value for &lt;volume&gt;(float) """</tt> </tt>
+<a name="SoundSystem.getVolume"></a><div id="SoundSystem.getVolume-def"><a name="L148"></a><tt class="py-lineno">148</tt> <a class="py-toggle" href="#" id="SoundSystem.getVolume-toggle" onclick="return toggle('SoundSystem.getVolume');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.SoundSystem-class.html#getVolume">getVolume</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundSystem.getVolume-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SoundSystem.getVolume-expanded"><a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sfxvolume</tt> </tt>
+</div><a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">    <tt class="py-string">""" function that plays a &lt;sound&gt;(str)</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-string">        with scaled volume returned by &lt;scale_f&gt;(&lt;func&gt;(float))</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-string">        default no scaling</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-string">        and loop for number of &lt;loops&gt;(int)</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-string">        default 0 loops. (played once.)</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-string">    """</tt> </tt>
+<a name="SoundSystem.play"></a><div id="SoundSystem.play-def"><a name="L156"></a><tt class="py-lineno">156</tt> <a class="py-toggle" href="#" id="SoundSystem.play-toggle" onclick="return toggle('SoundSystem.play');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.SoundSystem.SoundSystem-class.html#play">play</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">sound</tt><tt class="py-op">,</tt> <tt class="py-param">scale_f</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">loops</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundSystem.play-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SoundSystem.play-expanded"><a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sounds</tt><tt class="py-op">[</tt><tt class="py-name">sound</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name"><a title="code.SoundSystem.DummyMusicSystem.play
+code.SoundSystem.DummySoundSystem.play
+code.SoundSystem.MusicSystem.play
+code.SoundSystem.SoundSystem.play" class="py-name" href="#" onclick="return doclink('link-3', 'play', 'link-2');">play</a></tt><tt class="py-op">(</tt><tt class="py-name">loops</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Mar 17 21:02:22 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

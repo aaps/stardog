@@ -1,0 +1,1286 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>code.adjectives</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="code-module.html">Package&nbsp;code</a> ::
+        Module&nbsp;adjectives
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="code.adjectives-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="code.adjectives-module.html">Module code.adjectives</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># adjectives.py</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module code.parts=code.parts-module.html,Variable code.races.Race.parts=code.races.Race-class.html#parts"><a title="code.parts
+code.races.Race.parts" class="py-name" href="#" onclick="return doclink('link-0', 'parts', 'link-0');">parts</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-1" class="py-name" targets="Module code.cargo=code.cargo-module.html"><a title="code.cargo" class="py-name" href="#" onclick="return doclink('link-1', 'cargo', 'link-1');">cargo</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Module code.Resources=code.Resources-module.html"><a title="code.Resources" class="py-name" href="#" onclick="return doclink('link-2', 'Resources', 'link-2');">Resources</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name" targets="Module code.partCatalog=code.partCatalog-module.html"><a title="code.partCatalog" class="py-name" href="#" onclick="return doclink('link-3', 'partCatalog', 'link-3');">partCatalog</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable code.adjectives.CARGO=code.adjectives-module.html#CARGO,Variable code.game.CARGO=code.game-module.html#CARGO,Variable code.nameMaker.CARGO=code.nameMaker-module.html#CARGO,Variable code.planet.CARGO=code.planet-module.html#CARGO,Variable code.plot.CARGO=code.plot-module.html#CARGO,Variable code.starSystem.CARGO=code.starSystem-module.html#CARGO,Variable code.strafebat.CARGO=code.strafebat-module.html#CARGO,Variable code.universe.CARGO=code.universe-module.html#CARGO"><a title="code.adjectives.CARGO
+code.game.CARGO
+code.nameMaker.CARGO
+code.planet.CARGO
+code.plot.CARGO
+code.starSystem.CARGO
+code.strafebat.CARGO
+code.universe.CARGO" class="py-name" href="#" onclick="return doclink('link-4', 'CARGO', 'link-4');">CARGO</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-5" class="py-name" targets="Class code.cargo.Scrap=code.cargo.Scrap-class.html"><a title="code.cargo.Scrap" class="py-name" href="#" onclick="return doclink('link-5', 'Scrap', 'link-5');">Scrap</a></tt><tt class="py-op">,</tt> <tt id="link-6" class="py-name" targets="Class code.cargo.Iron=code.cargo.Iron-class.html"><a title="code.cargo.Iron" class="py-name" href="#" onclick="return doclink('link-6', 'Iron', 'link-6');">Iron</a></tt><tt class="py-op">,</tt> <tt id="link-7" class="py-name" targets="Class code.cargo.IronOre=code.cargo.IronOre-class.html"><a title="code.cargo.IronOre" class="py-name" href="#" onclick="return doclink('link-7', 'IronOre', 'link-7');">IronOre</a></tt><tt class="py-op">,</tt> <tt id="link-8" class="py-name" targets="Class code.cargo.Chemicals=code.cargo.Chemicals-class.html"><a title="code.cargo.Chemicals" class="py-name" href="#" onclick="return doclink('link-8', 'Chemicals', 'link-8');">Chemicals</a></tt><tt class="py-op">,</tt> <tt id="link-9" class="py-name" targets="Class code.cargo.Food=code.cargo.Food-class.html"><a title="code.cargo.Food" class="py-name" href="#" onclick="return doclink('link-9', 'Food', 'link-9');">Food</a></tt><tt class="py-op">,</tt> <tt id="link-10" class="py-name" targets="Class code.cargo.Gems=code.cargo.Gems-class.html"><a title="code.cargo.Gems" class="py-name" href="#" onclick="return doclink('link-10', 'Gems', 'link-10');">Gems</a></tt><tt class="py-op">,</tt> <tt id="link-11" class="py-name" targets="Class code.cargo.ExMetal=code.cargo.ExMetal-class.html"><a title="code.cargo.ExMetal" class="py-name" href="#" onclick="return doclink('link-11', 'ExMetal', 'link-11');">ExMetal</a></tt><tt class="py-op">,</tt> <tt id="link-12" class="py-name" targets="Class code.cargo.SheetMetal=code.cargo.SheetMetal-class.html"><a title="code.cargo.SheetMetal" class="py-name" href="#" onclick="return doclink('link-12', 'SheetMetal', 'link-12');">SheetMetal</a></tt><tt class="py-op">,</tt>  </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line">        <tt id="link-13" class="py-name" targets="Class code.cargo.ConstMat=code.cargo.ConstMat-class.html"><a title="code.cargo.ConstMat" class="py-name" href="#" onclick="return doclink('link-13', 'ConstMat', 'link-13');">ConstMat</a></tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name" targets="Class code.cargo.CompComp=code.cargo.CompComp-class.html"><a title="code.cargo.CompComp" class="py-name" href="#" onclick="return doclink('link-14', 'CompComp', 'link-14');">CompComp</a></tt><tt class="py-op">,</tt> <tt id="link-15" class="py-name" targets="Class code.cargo.MachParts=code.cargo.MachParts-class.html"><a title="code.cargo.MachParts" class="py-name" href="#" onclick="return doclink('link-15', 'MachParts', 'link-15');">MachParts</a></tt><tt class="py-op">,</tt> <tt id="link-16" class="py-name" targets="Class code.cargo.Plastics=code.cargo.Plastics-class.html"><a title="code.cargo.Plastics" class="py-name" href="#" onclick="return doclink('link-16', 'Plastics', 'link-16');">Plastics</a></tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name" targets="Class code.cargo.Explosives=code.cargo.Explosives-class.html"><a title="code.cargo.Explosives" class="py-name" href="#" onclick="return doclink('link-17', 'Explosives', 'link-17');">Explosives</a></tt><tt class="py-op">,</tt> <tt id="link-18" class="py-name" targets="Class code.cargo.Minerals=code.cargo.Minerals-class.html"><a title="code.cargo.Minerals" class="py-name" href="#" onclick="return doclink('link-18', 'Minerals', 'link-18');">Minerals</a></tt><tt class="py-op">,</tt> <tt id="link-19" class="py-name" targets="Class code.cargo.AirFilters=code.cargo.AirFilters-class.html"><a title="code.cargo.AirFilters" class="py-name" href="#" onclick="return doclink('link-19', 'AirFilters', 'link-19');">AirFilters</a></tt><tt class="py-op">,</tt>  </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line">        <tt id="link-20" class="py-name" targets="Class code.cargo.PleasureCubes=code.cargo.PleasureCubes-class.html"><a title="code.cargo.PleasureCubes" class="py-name" href="#" onclick="return doclink('link-20', 'PleasureCubes', 'link-20');">PleasureCubes</a></tt><tt class="py-op">,</tt> <tt id="link-21" class="py-name" targets="Class code.cargo.Alcohol=code.cargo.Alcohol-class.html"><a title="code.cargo.Alcohol" class="py-name" href="#" onclick="return doclink('link-21', 'Alcohol', 'link-21');">Alcohol</a></tt><tt class="py-op">,</tt> <tt id="link-22" class="py-name" targets="Class code.cargo.Textiles=code.cargo.Textiles-class.html"><a title="code.cargo.Textiles" class="py-name" href="#" onclick="return doclink('link-22', 'Textiles', 'link-22');">Textiles</a></tt><tt class="py-op">,</tt> <tt id="link-23" class="py-name"><a title="code.cargo.Alcohol" class="py-name" href="#" onclick="return doclink('link-23', 'Alcohol', 'link-21');">Alcohol</a></tt><tt class="py-op">,</tt> <tt id="link-24" class="py-name" targets="Class code.cargo.HuskarCigars=code.cargo.HuskarCigars-class.html"><a title="code.cargo.HuskarCigars" class="py-name" href="#" onclick="return doclink('link-24', 'HuskarCigars', 'link-24');">HuskarCigars</a></tt><tt class="py-op">,</tt> <tt id="link-25" class="py-name"><a title="code.cargo.Alcohol" class="py-name" href="#" onclick="return doclink('link-25', 'Alcohol', 'link-21');">Alcohol</a></tt><tt class="py-op">,</tt> <tt id="link-26" class="py-name" targets="Class code.cargo.ServantDroids=code.cargo.ServantDroids-class.html"><a title="code.cargo.ServantDroids" class="py-name" href="#" onclick="return doclink('link-26', 'ServantDroids', 'link-26');">ServantDroids</a></tt><tt class="py-op">,</tt>  </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line">        <tt id="link-27" class="py-name" targets="Class code.cargo.CloningDevice=code.cargo.CloningDevice-class.html"><a title="code.cargo.CloningDevice" class="py-name" href="#" onclick="return doclink('link-27', 'CloningDevice', 'link-27');">CloningDevice</a></tt><tt class="py-op">,</tt> <tt id="link-28" class="py-name" targets="Class code.cargo.PureWater=code.cargo.PureWater-class.html"><a title="code.cargo.PureWater" class="py-name" href="#" onclick="return doclink('link-28', 'PureWater', 'link-28');">PureWater</a></tt><tt class="py-op">,</tt> <tt id="link-29" class="py-name" targets="Class code.cargo.Aluminium=code.cargo.Aluminium-class.html"><a title="code.cargo.Aluminium" class="py-name" href="#" onclick="return doclink('link-29', 'Aluminium', 'link-29');">Aluminium</a></tt><tt class="py-op">,</tt> <tt id="link-30" class="py-name" targets="Class code.cargo.AluminiumOre=code.cargo.AluminiumOre-class.html"><a title="code.cargo.AluminiumOre" class="py-name" href="#" onclick="return doclink('link-30', 'AluminiumOre', 'link-30');">AluminiumOre</a></tt><tt class="py-op">,</tt> <tt id="link-31" class="py-name" targets="Class code.adjectives.Titanium=code.adjectives.Titanium-class.html,Class code.cargo.Titanium=code.cargo.Titanium-class.html"><a title="code.adjectives.Titanium
+code.cargo.Titanium" class="py-name" href="#" onclick="return doclink('link-31', 'Titanium', 'link-31');">Titanium</a></tt><tt class="py-op">,</tt> <tt id="link-32" class="py-name" targets="Class code.cargo.TitaniumOre=code.cargo.TitaniumOre-class.html"><a title="code.cargo.TitaniumOre" class="py-name" href="#" onclick="return doclink('link-32', 'TitaniumOre', 'link-32');">TitaniumOre</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt id="link-33" class="py-name" targets="Variable code.adjectives.PARTS=code.adjectives-module.html#PARTS,Variable code.game.PARTS=code.game-module.html#PARTS,Variable code.nameMaker.PARTS=code.nameMaker-module.html#PARTS,Variable code.planet.PARTS=code.planet-module.html#PARTS,Variable code.plot.PARTS=code.plot-module.html#PARTS,Variable code.starSystem.PARTS=code.starSystem-module.html#PARTS,Variable code.strafebat.PARTS=code.strafebat-module.html#PARTS,Variable code.universe.PARTS=code.universe-module.html#PARTS"><a title="code.adjectives.PARTS
+code.game.PARTS
+code.nameMaker.PARTS
+code.planet.PARTS
+code.plot.PARTS
+code.starSystem.PARTS
+code.strafebat.PARTS
+code.universe.PARTS" class="py-name" href="#" onclick="return doclink('link-33', 'PARTS', 'link-33');">PARTS</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-34" class="py-name" targets="Class code.partCatalog.LeftCannon=code.partCatalog.LeftCannon-class.html"><a title="code.partCatalog.LeftCannon" class="py-name" href="#" onclick="return doclink('link-34', 'LeftCannon', 'link-34');">LeftCannon</a></tt><tt class="py-op">,</tt> <tt id="link-35" class="py-name" targets="Class code.partCatalog.RightCannon=code.partCatalog.RightCannon-class.html"><a title="code.partCatalog.RightCannon" class="py-name" href="#" onclick="return doclink('link-35', 'RightCannon', 'link-35');">RightCannon</a></tt><tt class="py-op">,</tt> <tt id="link-36" class="py-name" targets="Class code.parts.Engine=code.parts.Engine-class.html"><a title="code.parts.Engine" class="py-name" href="#" onclick="return doclink('link-36', 'Engine', 'link-36');">Engine</a></tt><tt class="py-op">,</tt> <tt id="link-37" class="py-name" targets="Class code.parts.Gyro=code.parts.Gyro-class.html"><a title="code.parts.Gyro" class="py-name" href="#" onclick="return doclink('link-37', 'Gyro', 'link-37');">Gyro</a></tt><tt class="py-op">,</tt> <tt id="link-38" class="py-name" targets="Class code.parts.Generator=code.parts.Generator-class.html"><a title="code.parts.Generator" class="py-name" href="#" onclick="return doclink('link-38', 'Generator', 'link-38');">Generator</a></tt><tt class="py-op">,</tt> <tt id="link-39" class="py-name" targets="Class code.parts.Battery=code.parts.Battery-class.html"><a title="code.parts.Battery" class="py-name" href="#" onclick="return doclink('link-39', 'Battery', 'link-39');">Battery</a></tt><tt class="py-op">,</tt> <tt id="link-40" class="py-name" targets="Class code.parts.BigShield=code.parts.BigShield-class.html"><a title="code.parts.BigShield" class="py-name" href="#" onclick="return doclink('link-40', 'BigShield', 'link-40');">BigShield</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">         <tt id="link-41" class="py-name" targets="Class code.partCatalog.LeftLaser=code.partCatalog.LeftLaser-class.html"><a title="code.partCatalog.LeftLaser" class="py-name" href="#" onclick="return doclink('link-41', 'LeftLaser', 'link-41');">LeftLaser</a></tt><tt class="py-op">,</tt> <tt id="link-42" class="py-name" targets="Class code.partCatalog.RightLaser=code.partCatalog.RightLaser-class.html"><a title="code.partCatalog.RightLaser" class="py-name" href="#" onclick="return doclink('link-42', 'RightLaser', 'link-42');">RightLaser</a></tt><tt class="py-op">,</tt> <tt id="link-43" class="py-name" targets="Class code.parts.MissileLauncher=code.parts.MissileLauncher-class.html"><a title="code.parts.MissileLauncher" class="py-name" href="#" onclick="return doclink('link-43', 'MissileLauncher', 'link-43');">MissileLauncher</a></tt><tt class="py-op">,</tt> <tt id="link-44" class="py-name" targets="Class code.partCatalog.MachineGun=code.partCatalog.MachineGun-class.html"><a title="code.partCatalog.MachineGun" class="py-name" href="#" onclick="return doclink('link-44', 'MachineGun', 'link-44');">MachineGun</a></tt><tt class="py-op">,</tt> <tt id="link-45" class="py-name" targets="Class code.partCatalog.FighterShield=code.partCatalog.FighterShield-class.html"><a title="code.partCatalog.FighterShield" class="py-name" href="#" onclick="return doclink('link-45', 'FighterShield', 'link-45');">FighterShield</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">         <tt id="link-46" class="py-name" targets="Class code.partCatalog.LeftFlakCannon=code.partCatalog.LeftFlakCannon-class.html"><a title="code.partCatalog.LeftFlakCannon" class="py-name" href="#" onclick="return doclink('link-46', 'LeftFlakCannon', 'link-46');">LeftFlakCannon</a></tt><tt class="py-op">,</tt> <tt id="link-47" class="py-name" targets="Class code.partCatalog.RightFlakCannon=code.partCatalog.RightFlakCannon-class.html"><a title="code.partCatalog.RightFlakCannon" class="py-name" href="#" onclick="return doclink('link-47', 'RightFlakCannon', 'link-47');">RightFlakCannon</a></tt><tt class="py-op">,</tt> <tt id="link-48" class="py-name" targets="Class code.parts.Interconnect=code.parts.Interconnect-class.html"><a title="code.parts.Interconnect" class="py-name" href="#" onclick="return doclink('link-48', 'Interconnect', 'link-48');">Interconnect</a></tt><tt class="py-op">,</tt> <tt id="link-49" class="py-name" targets="Class code.parts.Quarters=code.parts.Quarters-class.html"><a title="code.parts.Quarters" class="py-name" href="#" onclick="return doclink('link-49', 'Quarters', 'link-49');">Quarters</a></tt><tt class="py-op">,</tt> <tt id="link-50" class="py-name" targets="Class code.parts.GatewayFocus=code.parts.GatewayFocus-class.html"><a title="code.parts.GatewayFocus" class="py-name" href="#" onclick="return doclink('link-50', 'GatewayFocus', 'link-50');">GatewayFocus</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">         <tt id="link-51" class="py-name" targets="Class code.parts.MineDropper=code.parts.MineDropper-class.html"><a title="code.parts.MineDropper" class="py-name" href="#" onclick="return doclink('link-51', 'MineDropper', 'link-51');">MineDropper</a></tt><tt class="py-op">,</tt> <tt id="link-52" class="py-name" targets="Class code.parts.Radar=code.parts.Radar-class.html"><a title="code.parts.Radar" class="py-name" href="#" onclick="return doclink('link-52', 'Radar', 'link-52');">Radar</a></tt><tt class="py-op">,</tt> <tt id="link-53" class="py-name" targets="Class code.parts.CargoHold=code.parts.CargoHold-class.html"><a title="code.parts.CargoHold" class="py-name" href="#" onclick="return doclink('link-53', 'CargoHold', 'link-53');">CargoHold</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt id="link-54" class="py-name" targets="Variable code.adjectives.ENERGY_USING=code.adjectives-module.html#ENERGY_USING,Variable code.game.ENERGY_USING=code.game-module.html#ENERGY_USING,Variable code.starSystem.ENERGY_USING=code.starSystem-module.html#ENERGY_USING,Variable code.strafebat.ENERGY_USING=code.strafebat-module.html#ENERGY_USING,Variable code.universe.ENERGY_USING=code.universe-module.html#ENERGY_USING"><a title="code.adjectives.ENERGY_USING
+code.game.ENERGY_USING
+code.starSystem.ENERGY_USING
+code.strafebat.ENERGY_USING
+code.universe.ENERGY_USING" class="py-name" href="#" onclick="return doclink('link-54', 'ENERGY_USING', 'link-54');">ENERGY_USING</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-55" class="py-name" targets="Class code.parts.Gun=code.parts.Gun-class.html"><a title="code.parts.Gun" class="py-name" href="#" onclick="return doclink('link-55', 'Gun', 'link-55');">Gun</a></tt><tt class="py-op">,</tt> <tt id="link-56" class="py-name"><a title="code.parts.Engine" class="py-name" href="#" onclick="return doclink('link-56', 'Engine', 'link-36');">Engine</a></tt><tt class="py-op">,</tt> <tt id="link-57" class="py-name"><a title="code.parts.Gyro" class="py-name" href="#" onclick="return doclink('link-57', 'Gyro', 'link-37');">Gyro</a></tt><tt class="py-op">,</tt> <tt id="link-58" class="py-name" targets="Class code.parts.Shield=code.parts.Shield-class.html"><a title="code.parts.Shield" class="py-name" href="#" onclick="return doclink('link-58', 'Shield', 'link-58');">Shield</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"> </tt>
+<a name="randCargo"></a><div id="randCargo-def"><a name="L20"></a><tt class="py-lineno"> 20</tt> <a class="py-toggle" href="#" id="randCargo-toggle" onclick="return toggle('randCargo');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives-module.html#randCargo">randCargo</a><tt class="py-op">(</tt><tt class="py-param">universe</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="randCargo-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="randCargo-expanded"><a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt class="py-name">roll</tt> <tt class="py-op">=</tt> <tt class="py-name">randint</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-59" class="py-name"><a title="code.adjectives.CARGO
+code.game.CARGO
+code.nameMaker.CARGO
+code.planet.CARGO
+code.plot.CARGO
+code.starSystem.CARGO
+code.strafebat.CARGO
+code.universe.CARGO" class="py-name" href="#" onclick="return doclink('link-59', 'CARGO', 'link-4');">CARGO</a></tt><tt class="py-op">)</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-60" class="py-name"><a title="code.adjectives.CARGO
+code.game.CARGO
+code.nameMaker.CARGO
+code.planet.CARGO
+code.plot.CARGO
+code.starSystem.CARGO
+code.strafebat.CARGO
+code.universe.CARGO" class="py-name" href="#" onclick="return doclink('link-60', 'CARGO', 'link-4');">CARGO</a></tt><tt class="py-op">[</tt><tt class="py-name">roll</tt><tt class="py-op">]</tt><tt class="py-op">(</tt><tt id="link-61" class="py-name" targets="Module code.universe=code.universe-module.html"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-61', 'universe', 'link-61');">universe</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="randItem"></a><div id="randItem-def"><a name="L25"></a><tt class="py-lineno"> 25</tt> <a class="py-toggle" href="#" id="randItem-toggle" onclick="return toggle('randItem');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives-module.html#randItem">randItem</a><tt class="py-op">(</tt><tt class="py-param">universe</tt><tt class="py-op">,</tt> <tt class="py-param">level</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="randItem-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="randItem-expanded"><a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-name">roll</tt> <tt class="py-op">=</tt> <tt class="py-name">randint</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-62" class="py-name"><a title="code.adjectives.PARTS
+code.game.PARTS
+code.nameMaker.PARTS
+code.planet.PARTS
+code.plot.PARTS
+code.starSystem.PARTS
+code.strafebat.PARTS
+code.universe.PARTS" class="py-name" href="#" onclick="return doclink('link-62', 'PARTS', 'link-33');">PARTS</a></tt><tt class="py-op">)</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">roll</tt> <tt class="py-op">==</tt> <tt id="link-63" class="py-name" targets="Function code.utils.rand()=code.utils-module.html#rand"><a title="code.utils.rand" class="py-name" href="#" onclick="return doclink('link-63', 'rand', 'link-63');">rand</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt id="link-64" class="py-name" targets="Variable code.adjectives.Adjective.level=code.adjectives.Adjective-class.html#level,Variable code.adjectives.Damaged.level=code.adjectives.Damaged-class.html#level,Variable code.adjectives.Fragile.level=code.adjectives.Fragile-class.html#level,Variable code.adjectives.Heavy.level=code.adjectives.Heavy-class.html#level,Variable code.adjectives.Inefficient.level=code.adjectives.Inefficient-class.html#level,Variable code.adjectives.Leaky.level=code.adjectives.Leaky-class.html#level,Variable code.adjectives.Obsolete.level=code.adjectives.Obsolete-class.html#level,Variable code.strafebat.Strafebat.level=code.strafebat.Strafebat-class.html#level"><a title="code.adjectives.Adjective.level
+code.adjectives.Damaged.level
+code.adjectives.Fragile.level
+code.adjectives.Heavy.level
+code.adjectives.Inefficient.level
+code.adjectives.Leaky.level
+code.adjectives.Obsolete.level
+code.strafebat.Strafebat.level" class="py-name" href="#" onclick="return doclink('link-64', 'level', 'link-64');">level</a></tt> <tt class="py-op">/</tt> <tt class="py-number">2</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">.8</tt><tt class="py-op">:</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt id="link-65" class="py-name" targets="Variable code.menus.ShipPartPanel.part=code.menus.ShipPartPanel-class.html#part"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-65', 'part', 'link-65');">part</a></tt> <tt class="py-op">=</tt> <tt id="link-66" class="py-name"><a title="code.adjectives.PARTS
+code.game.PARTS
+code.nameMaker.PARTS
+code.planet.PARTS
+code.plot.PARTS
+code.starSystem.PARTS
+code.strafebat.PARTS
+code.universe.PARTS" class="py-name" href="#" onclick="return doclink('link-66', 'PARTS', 'link-33');">PARTS</a></tt><tt class="py-op">[</tt><tt class="py-name">roll</tt><tt class="py-op">]</tt><tt class="py-op">(</tt><tt id="link-67" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-67', 'universe', 'link-61');">universe</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-68" class="py-name" targets="Function code.adjectives.addAdjective()=code.adjectives-module.html#addAdjective"><a title="code.adjectives.addAdjective" class="py-name" href="#" onclick="return doclink('link-68', 'addAdjective', 'link-68');">addAdjective</a></tt><tt class="py-op">(</tt><tt id="link-69" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-69', 'part', 'link-65');">part</a></tt><tt class="py-op">,</tt> <tt id="link-70" class="py-name"><a title="code.adjectives.Adjective.level
+code.adjectives.Damaged.level
+code.adjectives.Fragile.level
+code.adjectives.Heavy.level
+code.adjectives.Inefficient.level
+code.adjectives.Leaky.level
+code.adjectives.Obsolete.level
+code.strafebat.Strafebat.level" class="py-name" href="#" onclick="return doclink('link-70', 'level', 'link-64');">level</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<a name="addAdjective"></a><div id="addAdjective-def"><a name="L33"></a><tt class="py-lineno"> 33</tt> <a class="py-toggle" href="#" id="addAdjective-toggle" onclick="return toggle('addAdjective');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives-module.html#addAdjective">addAdjective</a><tt class="py-op">(</tt><tt class="py-param">part</tt><tt class="py-op">,</tt> <tt class="py-param">level</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="addAdjective-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="addAdjective-expanded"><a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-name">choice</tt> <tt class="py-op">=</tt> <tt id="link-71" class="py-name" targets="Module code.adjectives=code.adjectives-module.html,Variable code.adjectives.adjectives=code.adjectives-module.html#adjectives,Variable code.game.adjectives=code.game-module.html#adjectives,Variable code.races.Race.adjectives=code.races.Race-class.html#adjectives,Variable code.starSystem.adjectives=code.starSystem-module.html#adjectives,Variable code.strafebat.adjectives=code.strafebat-module.html#adjectives,Variable code.universe.adjectives=code.universe-module.html#adjectives"><a title="code.adjectives
+code.adjectives.adjectives
+code.game.adjectives
+code.races.Race.adjectives
+code.starSystem.adjectives
+code.strafebat.adjectives
+code.universe.adjectives" class="py-name" href="#" onclick="return doclink('link-71', 'adjectives', 'link-71');">adjectives</a></tt><tt class="py-op">[</tt><tt class="py-name">randint</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-72" class="py-name"><a title="code.adjectives
+code.adjectives.adjectives
+code.game.adjectives
+code.races.Race.adjectives
+code.starSystem.adjectives
+code.strafebat.adjectives
+code.universe.adjectives" class="py-name" href="#" onclick="return doclink('link-72', 'adjectives', 'link-71');">adjectives</a></tt><tt class="py-op">)</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">choice</tt><tt class="py-op">.</tt><tt id="link-73" class="py-name"><a title="code.adjectives.Adjective.level
+code.adjectives.Damaged.level
+code.adjectives.Fragile.level
+code.adjectives.Heavy.level
+code.adjectives.Inefficient.level
+code.adjectives.Leaky.level
+code.adjectives.Obsolete.level
+code.strafebat.Strafebat.level" class="py-name" href="#" onclick="return doclink('link-73', 'level', 'link-64');">level</a></tt> <tt class="py-op">&lt;=</tt> <tt id="link-74" class="py-name"><a title="code.adjectives.Adjective.level
+code.adjectives.Damaged.level
+code.adjectives.Fragile.level
+code.adjectives.Heavy.level
+code.adjectives.Inefficient.level
+code.adjectives.Leaky.level
+code.adjectives.Obsolete.level
+code.strafebat.Strafebat.level" class="py-name" href="#" onclick="return doclink('link-74', 'level', 'link-64');">level</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">type</tt> <tt class="py-keyword">in</tt> <tt class="py-name">choice</tt><tt class="py-op">.</tt><tt id="link-75" class="py-name" targets="Variable code.adjectives.Adjective.types=code.adjectives.Adjective-class.html#types,Variable code.adjectives.Advanced_Chemical.types=code.adjectives.Advanced_Chemical-class.html#types,Variable code.adjectives.Alpha_Decay.types=code.adjectives.Alpha_Decay-class.html#types,Variable code.adjectives.Antimatter.types=code.adjectives.Antimatter-class.html#types,Variable code.adjectives.Delicate.types=code.adjectives.Delicate-class.html#types,Variable code.adjectives.Dilithium.types=code.adjectives.Dilithium-class.html#types,Variable code.adjectives.Efficient.types=code.adjectives.Efficient-class.html#types,Variable code.adjectives.Heavy.types=code.adjectives.Heavy-class.html#types,Variable code.adjectives.Helium_Cooled.types=code.adjectives.Helium_Cooled-class.html#types,Variable code.adjectives.Hydrogen_Fusion.types=code.adjectives.Hydrogen_Fusion-class.html#types,Variable code.adjectives.Inefficient.types=code.adjectives.Inefficient-class.html#types,Variable code.adjectives.Kinetic.types=code.adjectives.Kinetic-class.html#types,Variable code.adjectives.Leaky.types=code.adjectives.Leaky-class.html#types,Variable code.adjectives.Magnetic.types=code.adjectives.Magnetic-class.html#types,Variable code.adjectives.Miserly.types=code.adjectives.Miserly-class.html#types,Variable code.adjectives.Nitrogen_Cooled.types=code.adjectives.Nitrogen_Cooled-class.html#types,Variable code.adjectives.Nuclear.types=code.adjectives.Nuclear-class.html#types,Variable code.adjectives.Obsolete.types=code.adjectives.Obsolete-class.html#types,Variable code.adjectives.Quantum_Accelerated.types=code.adjectives.Quantum_Accelerated-class.html#types,Variable code.adjectives.Stored_Antimatter.types=code.adjectives.Stored_Antimatter-class.html#types,Variable code.adjectives._200_Megawatt.types=code.adjectives._200_Megawatt-class.html#types,Variable code.adjectives._300_Megawatt.types=code.adjectives._300_Megawatt-class.html#types,Variable code.adjectives._400_Megawatt.types=code.adjectives._400_Megawatt-class.html#types,Variable code.adjectives._50_Megawatt.types=code.adjectives._50_Megawatt-class.html#types"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-75', 'types', 'link-75');">types</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt id="link-76" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-76', 'part', 'link-65');">part</a></tt><tt class="py-op">,</tt> <tt class="py-name">type</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">                <tt class="py-name">adj</tt> <tt class="py-op">=</tt> <tt class="py-name">choice</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">                <tt class="py-name">adj</tt><tt class="py-op">.</tt><tt id="link-77" class="py-name" targets="Method code.adjectives.Adjective.effect()=code.adjectives.Adjective-class.html#effect,Method code.adjectives.Advanced_Chemical.effect()=code.adjectives.Advanced_Chemical-class.html#effect,Method code.adjectives.Alpha_Decay.effect()=code.adjectives.Alpha_Decay-class.html#effect,Method code.adjectives.Antimatter.effect()=code.adjectives.Antimatter-class.html#effect,Method code.adjectives.Armored.effect()=code.adjectives.Armored-class.html#effect,Method code.adjectives.Carbonfiber.effect()=code.adjectives.Carbonfiber-class.html#effect,Method code.adjectives.Damaged.effect()=code.adjectives.Damaged-class.html#effect,Method code.adjectives.Delicate.effect()=code.adjectives.Delicate-class.html#effect,Method code.adjectives.Dilithium.effect()=code.adjectives.Dilithium-class.html#effect,Method code.adjectives.Doublesilk.effect()=code.adjectives.Doublesilk-class.html#effect,Method code.adjectives.Durable.effect()=code.adjectives.Durable-class.html#effect,Method code.adjectives.Efficient.effect()=code.adjectives.Efficient-class.html#effect,Method code.adjectives.Fragile.effect()=code.adjectives.Fragile-class.html#effect,Method code.adjectives.Heavy.effect()=code.adjectives.Heavy-class.html#effect,Method code.adjectives.Helium_Cooled.effect()=code.adjectives.Helium_Cooled-class.html#effect,Method code.adjectives.Hydrogen_Fusion.effect()=code.adjectives.Hydrogen_Fusion-class.html#effect,Method code.adjectives.Inefficient.effect()=code.adjectives.Inefficient-class.html#effect,Method code.adjectives.Kinetic.effect()=code.adjectives.Kinetic-class.html#effect,Method code.adjectives.Leaky.effect()=code.adjectives.Leaky-class.html#effect,Method code.adjectives.Magnetic.effect()=code.adjectives.Magnetic-class.html#effect,Method code.adjectives.Miserly.effect()=code.adjectives.Miserly-class.html#effect,Method code.adjectives.Nanosilk.effect()=code.adjectives.Nanosilk-class.html#effect,Method code.adjectives.Nanosteel.effect()=code.adjectives.Nanosteel-class.html#effect,Method code.adjectives.Nitrogen_Cooled.effect()=code.adjectives.Nitrogen_Cooled-class.html#effect,Method code.adjectives.Nuclear.effect()=code.adjectives.Nuclear-class.html#effect,Method code.adjectives.Obsolete.effect()=code.adjectives.Obsolete-class.html#effect,Method code.adjectives.Plated.effect()=code.adjectives.Plated-class.html#effect,Method code.adjectives.Quantum_Accelerated.effect()=code.adjectives.Quantum_Accelerated-class.html#effect,Method code.adjectives.Reinforced.effect()=code.adjectives.Reinforced-class.html#effect,Method code.adjectives.Solid.effect()=code.adjectives.Solid-class.html#effect,Method code.adjectives.Stored_Antimatter.effect()=code.adjectives.Stored_Antimatter-class.html#effect,Method code.adjectives.Sturdy.effect()=code.adjectives.Sturdy-class.html#effect,Method code.adjectives.Titanium.effect()=code.adjectives.Titanium-class.html#effect,Method code.adjectives._200_Megawatt.effect()=code.adjectives._200_Megawatt-class.html#effect,Method code.adjectives._300_Megawatt.effect()=code.adjectives._300_Megawatt-class.html#effect,Method code.adjectives._400_Megawatt.effect()=code.adjectives._400_Megawatt-class.html#effect,Method code.adjectives._50_Megawatt.effect()=code.adjectives._50_Megawatt-class.html#effect"><a title="code.adjectives.Adjective.effect
+code.adjectives.Advanced_Chemical.effect
+code.adjectives.Alpha_Decay.effect
+code.adjectives.Antimatter.effect
+code.adjectives.Armored.effect
+code.adjectives.Carbonfiber.effect
+code.adjectives.Damaged.effect
+code.adjectives.Delicate.effect
+code.adjectives.Dilithium.effect
+code.adjectives.Doublesilk.effect
+code.adjectives.Durable.effect
+code.adjectives.Efficient.effect
+code.adjectives.Fragile.effect
+code.adjectives.Heavy.effect
+code.adjectives.Helium_Cooled.effect
+code.adjectives.Hydrogen_Fusion.effect
+code.adjectives.Inefficient.effect
+code.adjectives.Kinetic.effect
+code.adjectives.Leaky.effect
+code.adjectives.Magnetic.effect
+code.adjectives.Miserly.effect
+code.adjectives.Nanosilk.effect
+code.adjectives.Nanosteel.effect
+code.adjectives.Nitrogen_Cooled.effect
+code.adjectives.Nuclear.effect
+code.adjectives.Obsolete.effect
+code.adjectives.Plated.effect
+code.adjectives.Quantum_Accelerated.effect
+code.adjectives.Reinforced.effect
+code.adjectives.Solid.effect
+code.adjectives.Stored_Antimatter.effect
+code.adjectives.Sturdy.effect
+code.adjectives.Titanium.effect
+code.adjectives._200_Megawatt.effect
+code.adjectives._300_Megawatt.effect
+code.adjectives._400_Megawatt.effect
+code.adjectives._50_Megawatt.effect" class="py-name" href="#" onclick="return doclink('link-77', 'effect', 'link-77');">effect</a></tt><tt class="py-op">(</tt><tt id="link-78" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-78', 'part', 'link-65');">part</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">                <tt class="py-comment"># part.name = choice.__name__ + ' ' + part.name</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">                <tt id="link-79" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-79', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt id="link-80" class="py-name"><a title="code.adjectives
+code.adjectives.adjectives
+code.game.adjectives
+code.races.Race.adjectives
+code.starSystem.adjectives
+code.strafebat.adjectives
+code.universe.adjectives" class="py-name" href="#" onclick="return doclink('link-80', 'adjectives', 'link-71');">adjectives</a></tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">adj</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt id="link-81" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-81', 'part', 'link-65');">part</a></tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-comment"># TODO: make a better data structure for these.</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt class="py-comment"># for now, if this adjective doesn't fit, pick another at random.</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-82" class="py-name"><a title="code.adjectives.addAdjective" class="py-name" href="#" onclick="return doclink('link-82', 'addAdjective', 'link-68');">addAdjective</a></tt><tt class="py-op">(</tt><tt id="link-83" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-83', 'part', 'link-65');">part</a></tt><tt class="py-op">,</tt> <tt id="link-84" class="py-name"><a title="code.adjectives.Adjective.level
+code.adjectives.Damaged.level
+code.adjectives.Fragile.level
+code.adjectives.Heavy.level
+code.adjectives.Inefficient.level
+code.adjectives.Leaky.level
+code.adjectives.Obsolete.level
+code.strafebat.Strafebat.level" class="py-name" href="#" onclick="return doclink('link-84', 'level', 'link-64');">level</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<a name="Adjective"></a><div id="Adjective-def"><a name="L48"></a><tt class="py-lineno"> 48</tt> <a class="py-toggle" href="#" id="Adjective-toggle" onclick="return toggle('Adjective');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Adjective-class.html">Adjective</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Adjective-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Adjective-expanded"><a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt id="link-85" class="py-name"><a title="code.adjectives.Adjective.level
+code.adjectives.Damaged.level
+code.adjectives.Fragile.level
+code.adjectives.Heavy.level
+code.adjectives.Inefficient.level
+code.adjectives.Leaky.level
+code.adjectives.Obsolete.level
+code.strafebat.Strafebat.level" class="py-name" href="#" onclick="return doclink('link-85', 'level', 'link-64');">level</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt id="link-86" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-86', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-87" class="py-name"><a title="code.parts.Gun" class="py-name" href="#" onclick="return doclink('link-87', 'Gun', 'link-55');">Gun</a></tt><tt class="py-op">,</tt> <tt id="link-88" class="py-name"><a title="code.parts.Engine" class="py-name" href="#" onclick="return doclink('link-88', 'Engine', 'link-36');">Engine</a></tt><tt class="py-op">,</tt> <tt id="link-89" class="py-name"><a title="code.parts.Gyro" class="py-name" href="#" onclick="return doclink('link-89', 'Gyro', 'link-37');">Gyro</a></tt><tt class="py-op">,</tt> <tt id="link-90" class="py-name"><a title="code.parts.Battery" class="py-name" href="#" onclick="return doclink('link-90', 'Battery', 'link-39');">Battery</a></tt><tt class="py-op">,</tt> <tt id="link-91" class="py-name"><a title="code.parts.Generator" class="py-name" href="#" onclick="return doclink('link-91', 'Generator', 'link-38');">Generator</a></tt><tt class="py-op">,</tt> <tt id="link-92" class="py-name" targets="Class code.parts.Cockpit=code.parts.Cockpit-class.html"><a title="code.parts.Cockpit" class="py-name" href="#" onclick="return doclink('link-92', 'Cockpit', 'link-92');">Cockpit</a></tt><tt class="py-op">,</tt> <tt id="link-93" class="py-name"><a title="code.parts.BigShield" class="py-name" href="#" onclick="return doclink('link-93', 'BigShield', 'link-40');">BigShield</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">             <tt id="link-94" class="py-name"><a title="code.parts.Interconnect" class="py-name" href="#" onclick="return doclink('link-94', 'Interconnect', 'link-48');">Interconnect</a></tt><tt class="py-op">,</tt> <tt id="link-95" class="py-name"><a title="code.parts.Quarters" class="py-name" href="#" onclick="return doclink('link-95', 'Quarters', 'link-49');">Quarters</a></tt><tt class="py-op">,</tt> <tt id="link-96" class="py-name"><a title="code.parts.GatewayFocus" class="py-name" href="#" onclick="return doclink('link-96', 'GatewayFocus', 'link-50');">GatewayFocus</a></tt><tt class="py-op">,</tt> <tt id="link-97" class="py-name"><a title="code.parts.MineDropper" class="py-name" href="#" onclick="return doclink('link-97', 'MineDropper', 'link-51');">MineDropper</a></tt><tt class="py-op">,</tt> <tt id="link-98" class="py-name"><a title="code.parts.Radar" class="py-name" href="#" onclick="return doclink('link-98', 'Radar', 'link-52');">Radar</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">             <tt id="link-99" class="py-name"><a title="code.parts.CargoHold" class="py-name" href="#" onclick="return doclink('link-99', 'CargoHold', 'link-53');">CargoHold</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="Adjective.effect"></a><div id="Adjective.effect-def"><a name="L54"></a><tt class="py-lineno"> 54</tt> <a class="py-toggle" href="#" id="Adjective.effect-toggle" onclick="return toggle('Adjective.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Adjective-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Adjective.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Adjective.effect-expanded"><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div></div><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"> </tt>
+<a name="Sturdy"></a><div id="Sturdy-def"><a name="L58"></a><tt class="py-lineno"> 58</tt> <a class="py-toggle" href="#" id="Sturdy-toggle" onclick="return toggle('Sturdy');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Sturdy-class.html">Sturdy</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Sturdy-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Sturdy-expanded"><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt class="py-docstring">"""HP * 1.6"""</tt> </tt>
+<a name="Sturdy.effect"></a><div id="Sturdy.effect-def"><a name="L60"></a><tt class="py-lineno"> 60</tt> <a class="py-toggle" href="#" id="Sturdy.effect-toggle" onclick="return toggle('Sturdy.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Sturdy-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Sturdy.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Sturdy.effect-expanded"><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt id="link-100" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-100', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">maxhp</tt> <tt class="py-op">*=</tt> <tt class="py-number">1.6</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt id="link-101" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-101', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt id="link-102" class="py-name" targets="Variable code.floaters.Mine.hp=code.floaters.Mine-class.html#hp,Variable code.floaters.Missile.hp=code.floaters.Missile-class.html#hp"><a title="code.floaters.Mine.hp
+code.floaters.Missile.hp" class="py-name" href="#" onclick="return doclink('link-102', 'hp', 'link-102');">hp</a></tt> <tt class="py-op">*=</tt> <tt class="py-number">1.6</tt> </tt>
+</div></div><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="Durable"></a><div id="Durable-def"><a name="L65"></a><tt class="py-lineno"> 65</tt> <a class="py-toggle" href="#" id="Durable-toggle" onclick="return toggle('Durable');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Durable-class.html">Durable</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Durable-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Durable-expanded"><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt class="py-docstring">"""HP * 1.2"""</tt> </tt>
+<a name="Durable.effect"></a><div id="Durable.effect-def"><a name="L67"></a><tt class="py-lineno"> 67</tt> <a class="py-toggle" href="#" id="Durable.effect-toggle" onclick="return toggle('Durable.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Durable-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Durable.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Durable.effect-expanded"><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt id="link-103" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-103', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">maxhp</tt> <tt class="py-op">*=</tt> <tt class="py-number">1.2</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt id="link-104" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-104', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt id="link-105" class="py-name"><a title="code.floaters.Mine.hp
+code.floaters.Missile.hp" class="py-name" href="#" onclick="return doclink('link-105', 'hp', 'link-102');">hp</a></tt> <tt class="py-op">*=</tt> <tt class="py-number">1.2</tt> </tt>
+</div></div><a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"> </tt>
+<a name="Solid"></a><div id="Solid-def"><a name="L72"></a><tt class="py-lineno"> 72</tt> <a class="py-toggle" href="#" id="Solid-toggle" onclick="return toggle('Solid');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Solid-class.html">Solid</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Solid-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Solid-expanded"><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-docstring">"""HP * 2"""</tt> </tt>
+<a name="Solid.effect"></a><div id="Solid.effect-def"><a name="L74"></a><tt class="py-lineno"> 74</tt> <a class="py-toggle" href="#" id="Solid.effect-toggle" onclick="return toggle('Solid.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Solid-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Solid.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Solid.effect-expanded"><a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt id="link-106" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-106', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">maxhp</tt> <tt class="py-op">*=</tt> <tt class="py-number">2</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt id="link-107" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-107', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt id="link-108" class="py-name"><a title="code.floaters.Mine.hp
+code.floaters.Missile.hp" class="py-name" href="#" onclick="return doclink('link-108', 'hp', 'link-102');">hp</a></tt> <tt class="py-op">*=</tt> <tt class="py-number">2</tt> </tt>
+</div></div><a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="Fragile"></a><div id="Fragile-def"><a name="L79"></a><tt class="py-lineno"> 79</tt> <a class="py-toggle" href="#" id="Fragile-toggle" onclick="return toggle('Fragile');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Fragile-class.html">Fragile</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Fragile-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Fragile-expanded"><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-docstring">"""HP * .4"""</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt id="link-109" class="py-name"><a title="code.adjectives.Adjective.level
+code.adjectives.Damaged.level
+code.adjectives.Fragile.level
+code.adjectives.Heavy.level
+code.adjectives.Inefficient.level
+code.adjectives.Leaky.level
+code.adjectives.Obsolete.level
+code.strafebat.Strafebat.level" class="py-name" href="#" onclick="return doclink('link-109', 'level', 'link-64');">level</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="Fragile.effect"></a><div id="Fragile.effect-def"><a name="L83"></a><tt class="py-lineno"> 83</tt> <a class="py-toggle" href="#" id="Fragile.effect-toggle" onclick="return toggle('Fragile.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Fragile-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Fragile.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Fragile.effect-expanded"><a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt id="link-110" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-110', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">maxhp</tt> <tt class="py-op">*=</tt> <tt class="py-number">.4</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt id="link-111" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-111', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt id="link-112" class="py-name"><a title="code.floaters.Mine.hp
+code.floaters.Missile.hp" class="py-name" href="#" onclick="return doclink('link-112', 'hp', 'link-102');">hp</a></tt> <tt class="py-op">*=</tt> <tt class="py-number">.4</tt> </tt>
+</div></div><a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"> </tt>
+<a name="Titanium"></a><div id="Titanium-def"><a name="L88"></a><tt class="py-lineno"> 88</tt> <a class="py-toggle" href="#" id="Titanium-toggle" onclick="return toggle('Titanium');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Titanium-class.html">Titanium</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Titanium-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Titanium-expanded"><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-docstring">"""HP * 1.5, mass * 1.2"""</tt> </tt>
+<a name="Titanium.effect"></a><div id="Titanium.effect-def"><a name="L90"></a><tt class="py-lineno"> 90</tt> <a class="py-toggle" href="#" id="Titanium.effect-toggle" onclick="return toggle('Titanium.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Titanium-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Titanium.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Titanium.effect-expanded"><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt id="link-113" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-113', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">maxhp</tt> <tt class="py-op">*=</tt> <tt class="py-number">1.5</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt id="link-114" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-114', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt id="link-115" class="py-name"><a title="code.floaters.Mine.hp
+code.floaters.Missile.hp" class="py-name" href="#" onclick="return doclink('link-115', 'hp', 'link-102');">hp</a></tt> <tt class="py-op">*=</tt> <tt class="py-number">1.5</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt id="link-116" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-116', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">mass</tt> <tt class="py-op">*=</tt> <tt class="py-number">1.2</tt> </tt>
+</div></div><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"> </tt>
+<a name="Carbonfiber"></a><div id="Carbonfiber-def"><a name="L96"></a><tt class="py-lineno"> 96</tt> <a class="py-toggle" href="#" id="Carbonfiber-toggle" onclick="return toggle('Carbonfiber');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Carbonfiber-class.html">Carbonfiber</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Carbonfiber-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Carbonfiber-expanded"><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-docstring">"""HP * .4, mass * .4"""</tt> </tt>
+<a name="Carbonfiber.effect"></a><div id="Carbonfiber.effect-def"><a name="L98"></a><tt class="py-lineno"> 98</tt> <a class="py-toggle" href="#" id="Carbonfiber.effect-toggle" onclick="return toggle('Carbonfiber.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Carbonfiber-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Carbonfiber.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Carbonfiber.effect-expanded"><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt id="link-117" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-117', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">maxhp</tt> <tt class="py-op">*=</tt> <tt class="py-number">.4</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt id="link-118" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-118', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt id="link-119" class="py-name"><a title="code.floaters.Mine.hp
+code.floaters.Missile.hp" class="py-name" href="#" onclick="return doclink('link-119', 'hp', 'link-102');">hp</a></tt> <tt class="py-op">*=</tt> <tt class="py-number">.4</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt id="link-120" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-120', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">mass</tt> <tt class="py-op">*=</tt> <tt class="py-number">.4</tt> </tt>
+</div></div><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"> </tt>
+<a name="Nanosteel"></a><div id="Nanosteel-def"><a name="L104"></a><tt class="py-lineno">104</tt> <a class="py-toggle" href="#" id="Nanosteel-toggle" onclick="return toggle('Nanosteel');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Nanosteel-class.html">Nanosteel</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Nanosteel-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Nanosteel-expanded"><a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-docstring">"""HP * .8, mass * .6"""</tt> </tt>
+<a name="Nanosteel.effect"></a><div id="Nanosteel.effect-def"><a name="L106"></a><tt class="py-lineno">106</tt> <a class="py-toggle" href="#" id="Nanosteel.effect-toggle" onclick="return toggle('Nanosteel.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Nanosteel-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Nanosteel.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Nanosteel.effect-expanded"><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt id="link-121" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-121', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">maxhp</tt> <tt class="py-op">*=</tt> <tt class="py-number">.8</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt id="link-122" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-122', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt id="link-123" class="py-name"><a title="code.floaters.Mine.hp
+code.floaters.Missile.hp" class="py-name" href="#" onclick="return doclink('link-123', 'hp', 'link-102');">hp</a></tt> <tt class="py-op">*=</tt> <tt class="py-number">.8</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt id="link-124" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-124', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">mass</tt> <tt class="py-op">*=</tt> <tt class="py-number">.6</tt> </tt>
+</div></div><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt>
+<a name="Nanosilk"></a><div id="Nanosilk-def"><a name="L112"></a><tt class="py-lineno">112</tt> <a class="py-toggle" href="#" id="Nanosilk-toggle" onclick="return toggle('Nanosilk');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Nanosilk-class.html">Nanosilk</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Nanosilk-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Nanosilk-expanded"><a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">    <tt class="py-docstring">"""mass * .5"""</tt> </tt>
+<a name="Nanosilk.effect"></a><div id="Nanosilk.effect-def"><a name="L114"></a><tt class="py-lineno">114</tt> <a class="py-toggle" href="#" id="Nanosilk.effect-toggle" onclick="return toggle('Nanosilk.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Nanosilk-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Nanosilk.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Nanosilk.effect-expanded"><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt id="link-125" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-125', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">mass</tt> <tt class="py-op">*=</tt> <tt class="py-number">.5</tt> </tt>
+</div></div><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"> </tt>
+<a name="Doublesilk"></a><div id="Doublesilk-def"><a name="L118"></a><tt class="py-lineno">118</tt> <a class="py-toggle" href="#" id="Doublesilk-toggle" onclick="return toggle('Doublesilk');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Doublesilk-class.html">Doublesilk</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Doublesilk-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Doublesilk-expanded"><a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-docstring">"""HP * 2"""</tt> </tt>
+<a name="Doublesilk.effect"></a><div id="Doublesilk.effect-def"><a name="L120"></a><tt class="py-lineno">120</tt> <a class="py-toggle" href="#" id="Doublesilk.effect-toggle" onclick="return toggle('Doublesilk.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Doublesilk-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Doublesilk.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Doublesilk.effect-expanded"><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt id="link-126" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-126', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">maxhp</tt> <tt class="py-op">*=</tt> <tt class="py-number">2</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">        <tt id="link-127" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-127', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt id="link-128" class="py-name"><a title="code.floaters.Mine.hp
+code.floaters.Missile.hp" class="py-name" href="#" onclick="return doclink('link-128', 'hp', 'link-102');">hp</a></tt> <tt class="py-op">*=</tt> <tt class="py-number">2</tt> </tt>
+</div></div><a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"> </tt>
+<a name="Plated"></a><div id="Plated-def"><a name="L125"></a><tt class="py-lineno">125</tt> <a class="py-toggle" href="#" id="Plated-toggle" onclick="return toggle('Plated');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Plated-class.html">Plated</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Plated-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Plated-expanded"><a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">    <tt class="py-docstring">"""HP + 10, Mass + 6"""</tt> </tt>
+<a name="Plated.effect"></a><div id="Plated.effect-def"><a name="L127"></a><tt class="py-lineno">127</tt> <a class="py-toggle" href="#" id="Plated.effect-toggle" onclick="return toggle('Plated.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Plated-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Plated.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Plated.effect-expanded"><a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt id="link-129" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-129', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">maxhp</tt> <tt class="py-op">+=</tt> <tt class="py-number">10</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt id="link-130" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-130', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt id="link-131" class="py-name"><a title="code.floaters.Mine.hp
+code.floaters.Missile.hp" class="py-name" href="#" onclick="return doclink('link-131', 'hp', 'link-102');">hp</a></tt> <tt class="py-op">+=</tt> <tt class="py-number">10</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt id="link-132" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-132', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">mass</tt> <tt class="py-op">+=</tt> <tt class="py-number">6</tt> </tt>
+</div></div><a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"> </tt>
+<a name="Reinforced"></a><div id="Reinforced-def"><a name="L133"></a><tt class="py-lineno">133</tt> <a class="py-toggle" href="#" id="Reinforced-toggle" onclick="return toggle('Reinforced');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Reinforced-class.html">Reinforced</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Reinforced-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Reinforced-expanded"><a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">    <tt class="py-docstring">"""HP + 15, Mass + 9"""</tt> </tt>
+<a name="Reinforced.effect"></a><div id="Reinforced.effect-def"><a name="L135"></a><tt class="py-lineno">135</tt> <a class="py-toggle" href="#" id="Reinforced.effect-toggle" onclick="return toggle('Reinforced.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Reinforced-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Reinforced.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Reinforced.effect-expanded"><a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">        <tt id="link-133" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-133', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">maxhp</tt> <tt class="py-op">+=</tt> <tt class="py-number">15</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt id="link-134" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-134', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt id="link-135" class="py-name"><a title="code.floaters.Mine.hp
+code.floaters.Missile.hp" class="py-name" href="#" onclick="return doclink('link-135', 'hp', 'link-102');">hp</a></tt> <tt class="py-op">+=</tt> <tt class="py-number">15</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt id="link-136" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-136', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">mass</tt> <tt class="py-op">+=</tt> <tt class="py-number">9</tt> </tt>
+</div></div><a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"> </tt>
+<a name="Armored"></a><div id="Armored-def"><a name="L141"></a><tt class="py-lineno">141</tt> <a class="py-toggle" href="#" id="Armored-toggle" onclick="return toggle('Armored');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Armored-class.html">Armored</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Armored-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Armored-expanded"><a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">    <tt class="py-docstring">"""HP + 20, Mass + 12"""</tt> </tt>
+<a name="Armored.effect"></a><div id="Armored.effect-def"><a name="L143"></a><tt class="py-lineno">143</tt> <a class="py-toggle" href="#" id="Armored.effect-toggle" onclick="return toggle('Armored.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Armored-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Armored.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Armored.effect-expanded"><a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt id="link-137" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-137', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">maxhp</tt> <tt class="py-op">+=</tt> <tt class="py-number">20</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">        <tt id="link-138" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-138', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt id="link-139" class="py-name"><a title="code.floaters.Mine.hp
+code.floaters.Missile.hp" class="py-name" href="#" onclick="return doclink('link-139', 'hp', 'link-102');">hp</a></tt> <tt class="py-op">+=</tt> <tt class="py-number">20</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt id="link-140" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-140', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">mass</tt> <tt class="py-op">+=</tt> <tt class="py-number">12</tt> </tt>
+</div></div><a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"> </tt>
+<a name="_50_Megawatt"></a><div id="_50_Megawatt-def"><a name="L149"></a><tt class="py-lineno">149</tt> <a class="py-toggle" href="#" id="_50_Megawatt-toggle" onclick="return toggle('_50_Megawatt');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives._50_Megawatt-class.html">_50_Megawatt</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_50_Megawatt-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_50_Megawatt-expanded"><a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">    <tt class="py-docstring">"""Damage * .5, Cost * .5"""</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">    <tt id="link-141" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-141', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-142" class="py-name" targets="Class code.parts.Cannon=code.parts.Cannon-class.html"><a title="code.parts.Cannon" class="py-name" href="#" onclick="return doclink('link-142', 'Cannon', 'link-142');">Cannon</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"> </tt>
+<a name="_50_Megawatt.effect"></a><div id="_50_Megawatt.effect-def"><a name="L153"></a><tt class="py-lineno">153</tt> <a class="py-toggle" href="#" id="_50_Megawatt.effect-toggle" onclick="return toggle('_50_Megawatt.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives._50_Megawatt-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_50_Megawatt.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_50_Megawatt.effect-expanded"><a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">        <tt id="link-143" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-143', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">damage</tt> <tt class="py-op">*=</tt> <tt class="py-number">.5</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">        <tt id="link-144" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-144', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">energyCost</tt> <tt class="py-op">*=</tt> <tt class="py-number">.5</tt> </tt>
+</div></div><a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"> </tt>
+<a name="_200_Megawatt"></a><div id="_200_Megawatt-def"><a name="L158"></a><tt class="py-lineno">158</tt> <a class="py-toggle" href="#" id="_200_Megawatt-toggle" onclick="return toggle('_200_Megawatt');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives._200_Megawatt-class.html">_200_Megawatt</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_200_Megawatt-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_200_Megawatt-expanded"><a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">    <tt class="py-docstring">"""Damage * 2, Cost * 2"""</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt id="link-145" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-145', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-146" class="py-name"><a title="code.parts.Cannon" class="py-name" href="#" onclick="return doclink('link-146', 'Cannon', 'link-142');">Cannon</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"> </tt>
+<a name="_200_Megawatt.effect"></a><div id="_200_Megawatt.effect-def"><a name="L162"></a><tt class="py-lineno">162</tt> <a class="py-toggle" href="#" id="_200_Megawatt.effect-toggle" onclick="return toggle('_200_Megawatt.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives._200_Megawatt-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_200_Megawatt.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_200_Megawatt.effect-expanded"><a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">        <tt id="link-147" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-147', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">damage</tt> <tt class="py-op">*=</tt> <tt class="py-number">2</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">        <tt id="link-148" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-148', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">energyCost</tt> <tt class="py-op">*=</tt> <tt class="py-number">2</tt> </tt>
+</div></div><a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"> </tt>
+<a name="_300_Megawatt"></a><div id="_300_Megawatt-def"><a name="L167"></a><tt class="py-lineno">167</tt> <a class="py-toggle" href="#" id="_300_Megawatt-toggle" onclick="return toggle('_300_Megawatt');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives._300_Megawatt-class.html">_300_Megawatt</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_300_Megawatt-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_300_Megawatt-expanded"><a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">    <tt class="py-docstring">"""Damage * 3, Cost * 3"""</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">    <tt id="link-149" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-149', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-150" class="py-name"><a title="code.parts.Cannon" class="py-name" href="#" onclick="return doclink('link-150', 'Cannon', 'link-142');">Cannon</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"> </tt>
+<a name="_300_Megawatt.effect"></a><div id="_300_Megawatt.effect-def"><a name="L171"></a><tt class="py-lineno">171</tt> <a class="py-toggle" href="#" id="_300_Megawatt.effect-toggle" onclick="return toggle('_300_Megawatt.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives._300_Megawatt-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_300_Megawatt.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_300_Megawatt.effect-expanded"><a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">        <tt id="link-151" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-151', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">damage</tt> <tt class="py-op">*=</tt> <tt class="py-number">3</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">        <tt id="link-152" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-152', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">energyCost</tt> <tt class="py-op">*=</tt> <tt class="py-number">3</tt> </tt>
+</div></div><a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"> </tt>
+<a name="_400_Megawatt"></a><div id="_400_Megawatt-def"><a name="L176"></a><tt class="py-lineno">176</tt> <a class="py-toggle" href="#" id="_400_Megawatt-toggle" onclick="return toggle('_400_Megawatt');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives._400_Megawatt-class.html">_400_Megawatt</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_400_Megawatt-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_400_Megawatt-expanded"><a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">    <tt class="py-docstring">"""Damage * 4, Cost * 4"""</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">    <tt id="link-153" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-153', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-154" class="py-name"><a title="code.parts.Cannon" class="py-name" href="#" onclick="return doclink('link-154', 'Cannon', 'link-142');">Cannon</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"> </tt>
+<a name="_400_Megawatt.effect"></a><div id="_400_Megawatt.effect-def"><a name="L180"></a><tt class="py-lineno">180</tt> <a class="py-toggle" href="#" id="_400_Megawatt.effect-toggle" onclick="return toggle('_400_Megawatt.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives._400_Megawatt-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_400_Megawatt.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_400_Megawatt.effect-expanded"><a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">        <tt id="link-155" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-155', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">damage</tt> <tt class="py-op">*=</tt> <tt class="py-number">4</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">        <tt id="link-156" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-156', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">energyCost</tt> <tt class="py-op">*=</tt> <tt class="py-number">4</tt> </tt>
+</div></div><a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"> </tt>
+<a name="Nitrogen_Cooled"></a><div id="Nitrogen_Cooled-def"><a name="L185"></a><tt class="py-lineno">185</tt> <a class="py-toggle" href="#" id="Nitrogen_Cooled-toggle" onclick="return toggle('Nitrogen_Cooled');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Nitrogen_Cooled-class.html">Nitrogen_Cooled</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Nitrogen_Cooled-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Nitrogen_Cooled-expanded"><a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">    <tt class="py-docstring">"""Rate * 1.3, Cost + 3"""</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">    <tt id="link-157" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-157', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-158" class="py-name"><a title="code.parts.Cannon" class="py-name" href="#" onclick="return doclink('link-158', 'Cannon', 'link-142');">Cannon</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"> </tt>
+<a name="Nitrogen_Cooled.effect"></a><div id="Nitrogen_Cooled.effect-def"><a name="L189"></a><tt class="py-lineno">189</tt> <a class="py-toggle" href="#" id="Nitrogen_Cooled.effect-toggle" onclick="return toggle('Nitrogen_Cooled.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Nitrogen_Cooled-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Nitrogen_Cooled.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Nitrogen_Cooled.effect-expanded"><a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">        <tt id="link-159" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-159', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">reloadTime</tt> <tt class="py-op">/=</tt> <tt class="py-number">1.3</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">        <tt id="link-160" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-160', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">energyCost</tt> <tt class="py-op">+=</tt> <tt class="py-number">3</tt> </tt>
+</div></div><a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"> </tt>
+<a name="Helium_Cooled"></a><div id="Helium_Cooled-def"><a name="L194"></a><tt class="py-lineno">194</tt> <a class="py-toggle" href="#" id="Helium_Cooled-toggle" onclick="return toggle('Helium_Cooled');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Helium_Cooled-class.html">Helium_Cooled</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Helium_Cooled-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Helium_Cooled-expanded"><a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">    <tt class="py-docstring">"""Rate * 1.5, Cost + 5"""</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">    <tt id="link-161" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-161', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-162" class="py-name"><a title="code.parts.Cannon" class="py-name" href="#" onclick="return doclink('link-162', 'Cannon', 'link-142');">Cannon</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"> </tt>
+<a name="Helium_Cooled.effect"></a><div id="Helium_Cooled.effect-def"><a name="L198"></a><tt class="py-lineno">198</tt> <a class="py-toggle" href="#" id="Helium_Cooled.effect-toggle" onclick="return toggle('Helium_Cooled.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Helium_Cooled-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Helium_Cooled.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Helium_Cooled.effect-expanded"><a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">        <tt id="link-163" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-163', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">reloadTime</tt> <tt class="py-op">/=</tt> <tt class="py-number">1.5</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">        <tt id="link-164" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-164', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">energyCost</tt> <tt class="py-op">+=</tt> <tt class="py-number">5</tt> </tt>
+</div></div><a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"> </tt>
+<a name="Quantum_Accelerated"></a><div id="Quantum_Accelerated-def"><a name="L203"></a><tt class="py-lineno">203</tt> <a class="py-toggle" href="#" id="Quantum_Accelerated-toggle" onclick="return toggle('Quantum_Accelerated');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Quantum_Accelerated-class.html">Quantum_Accelerated</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Quantum_Accelerated-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Quantum_Accelerated-expanded"><a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">    <tt class="py-docstring">"""Rate * 2., Cost + 9"""</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">    <tt id="link-165" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-165', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-166" class="py-name"><a title="code.parts.Cannon" class="py-name" href="#" onclick="return doclink('link-166', 'Cannon', 'link-142');">Cannon</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"> </tt>
+<a name="Quantum_Accelerated.effect"></a><div id="Quantum_Accelerated.effect-def"><a name="L207"></a><tt class="py-lineno">207</tt> <a class="py-toggle" href="#" id="Quantum_Accelerated.effect-toggle" onclick="return toggle('Quantum_Accelerated.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Quantum_Accelerated-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Quantum_Accelerated.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Quantum_Accelerated.effect-expanded"><a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">        <tt id="link-167" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-167', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">reloadTime</tt> <tt class="py-op">/=</tt> <tt class="py-number">2</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">        <tt id="link-168" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-168', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">energyCost</tt> <tt class="py-op">+=</tt> <tt class="py-number">9</tt> </tt>
+</div></div><a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line"> </tt>
+<a name="Hydrogen_Fusion"></a><div id="Hydrogen_Fusion-def"><a name="L212"></a><tt class="py-lineno">212</tt> <a class="py-toggle" href="#" id="Hydrogen_Fusion-toggle" onclick="return toggle('Hydrogen_Fusion');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Hydrogen_Fusion-class.html">Hydrogen_Fusion</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Hydrogen_Fusion-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Hydrogen_Fusion-expanded"><a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">    <tt class="py-docstring">"""Rate * 1.5"""</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">    <tt id="link-169" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-169', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-170" class="py-name"><a title="code.parts.Generator" class="py-name" href="#" onclick="return doclink('link-170', 'Generator', 'link-38');">Generator</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line"> </tt>
+<a name="Hydrogen_Fusion.effect"></a><div id="Hydrogen_Fusion.effect-def"><a name="L216"></a><tt class="py-lineno">216</tt> <a class="py-toggle" href="#" id="Hydrogen_Fusion.effect-toggle" onclick="return toggle('Hydrogen_Fusion.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Hydrogen_Fusion-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Hydrogen_Fusion.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Hydrogen_Fusion.effect-expanded"><a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">        <tt id="link-171" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-171', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">rate</tt> <tt class="py-op">*=</tt> <tt class="py-number">1.5</tt> </tt>
+</div></div><a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line"> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line"> </tt>
+<a name="Dilithium"></a><div id="Dilithium-def"><a name="L220"></a><tt class="py-lineno">220</tt> <a class="py-toggle" href="#" id="Dilithium-toggle" onclick="return toggle('Dilithium');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Dilithium-class.html">Dilithium</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Dilithium-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Dilithium-expanded"><a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">    <tt class="py-docstring">"""Rate * 2"""</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">    <tt id="link-172" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-172', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-173" class="py-name"><a title="code.parts.Generator" class="py-name" href="#" onclick="return doclink('link-173', 'Generator', 'link-38');">Generator</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line"> </tt>
+<a name="Dilithium.effect"></a><div id="Dilithium.effect-def"><a name="L224"></a><tt class="py-lineno">224</tt> <a class="py-toggle" href="#" id="Dilithium.effect-toggle" onclick="return toggle('Dilithium.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Dilithium-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Dilithium.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Dilithium.effect-expanded"><a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">        <tt id="link-174" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-174', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">rate</tt> <tt class="py-op">*=</tt> <tt class="py-number">2</tt> </tt>
+</div></div><a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line"> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line"> </tt>
+<a name="Antimatter"></a><div id="Antimatter-def"><a name="L228"></a><tt class="py-lineno">228</tt> <a class="py-toggle" href="#" id="Antimatter-toggle" onclick="return toggle('Antimatter');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Antimatter-class.html">Antimatter</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Antimatter-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Antimatter-expanded"><a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">    <tt class="py-docstring">"""Rate * 4"""</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">    <tt id="link-175" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-175', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-176" class="py-name"><a title="code.parts.Generator" class="py-name" href="#" onclick="return doclink('link-176', 'Generator', 'link-38');">Generator</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line"> </tt>
+<a name="Antimatter.effect"></a><div id="Antimatter.effect-def"><a name="L232"></a><tt class="py-lineno">232</tt> <a class="py-toggle" href="#" id="Antimatter.effect-toggle" onclick="return toggle('Antimatter.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Antimatter-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Antimatter.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Antimatter.effect-expanded"><a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">        <tt id="link-177" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-177', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">rate</tt> <tt class="py-op">*=</tt> <tt class="py-number">4</tt> </tt>
+</div></div><a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line"> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line"> </tt>
+<a name="Advanced_Chemical"></a><div id="Advanced_Chemical-def"><a name="L236"></a><tt class="py-lineno">236</tt> <a class="py-toggle" href="#" id="Advanced_Chemical-toggle" onclick="return toggle('Advanced_Chemical');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Advanced_Chemical-class.html">Advanced_Chemical</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Advanced_Chemical-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Advanced_Chemical-expanded"><a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">    <tt class="py-docstring">"""Capacity * 1.2"""</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">    <tt id="link-178" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-178', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-179" class="py-name"><a title="code.parts.Battery" class="py-name" href="#" onclick="return doclink('link-179', 'Battery', 'link-39');">Battery</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line"> </tt>
+<a name="Advanced_Chemical.effect"></a><div id="Advanced_Chemical.effect-def"><a name="L240"></a><tt class="py-lineno">240</tt> <a class="py-toggle" href="#" id="Advanced_Chemical.effect-toggle" onclick="return toggle('Advanced_Chemical.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Advanced_Chemical-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Advanced_Chemical.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Advanced_Chemical.effect-expanded"><a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">        <tt id="link-180" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-180', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">capacity</tt> <tt class="py-op">*=</tt> <tt class="py-number">1.2</tt> </tt>
+</div></div><a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line"> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line"> </tt>
+<a name="Magnetic"></a><div id="Magnetic-def"><a name="L244"></a><tt class="py-lineno">244</tt> <a class="py-toggle" href="#" id="Magnetic-toggle" onclick="return toggle('Magnetic');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Magnetic-class.html">Magnetic</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Magnetic-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Magnetic-expanded"><a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">    <tt class="py-docstring">"""Capacity * 1.6"""</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">    <tt id="link-181" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-181', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-182" class="py-name"><a title="code.parts.Battery" class="py-name" href="#" onclick="return doclink('link-182', 'Battery', 'link-39');">Battery</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line"> </tt>
+<a name="Magnetic.effect"></a><div id="Magnetic.effect-def"><a name="L248"></a><tt class="py-lineno">248</tt> <a class="py-toggle" href="#" id="Magnetic.effect-toggle" onclick="return toggle('Magnetic.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Magnetic-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Magnetic.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Magnetic.effect-expanded"><a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line">        <tt id="link-183" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-183', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">capacity</tt> <tt class="py-op">*=</tt> <tt class="py-number">1.6</tt> </tt>
+</div></div><a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line"> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line"> </tt>
+<a name="Kinetic"></a><div id="Kinetic-def"><a name="L252"></a><tt class="py-lineno">252</tt> <a class="py-toggle" href="#" id="Kinetic-toggle" onclick="return toggle('Kinetic');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Kinetic-class.html">Kinetic</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Kinetic-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Kinetic-expanded"><a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line">    <tt class="py-docstring">"""Capacity * 2"""</tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">    <tt id="link-184" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-184', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-185" class="py-name"><a title="code.parts.Battery" class="py-name" href="#" onclick="return doclink('link-185', 'Battery', 'link-39');">Battery</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line"> </tt>
+<a name="Kinetic.effect"></a><div id="Kinetic.effect-def"><a name="L256"></a><tt class="py-lineno">256</tt> <a class="py-toggle" href="#" id="Kinetic.effect-toggle" onclick="return toggle('Kinetic.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Kinetic-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Kinetic.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Kinetic.effect-expanded"><a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line">        <tt id="link-186" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-186', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">capacity</tt> <tt class="py-op">*=</tt> <tt class="py-number">2</tt> </tt>
+</div></div><a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line"> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line"> </tt>
+<a name="Alpha_Decay"></a><div id="Alpha_Decay-def"><a name="L260"></a><tt class="py-lineno">260</tt> <a class="py-toggle" href="#" id="Alpha_Decay-toggle" onclick="return toggle('Alpha_Decay');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Alpha_Decay-class.html">Alpha_Decay</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Alpha_Decay-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Alpha_Decay-expanded"><a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">    <tt class="py-docstring">"""Capacity * 2.5"""</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line">    <tt id="link-187" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-187', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-188" class="py-name"><a title="code.parts.Battery" class="py-name" href="#" onclick="return doclink('link-188', 'Battery', 'link-39');">Battery</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line"> </tt>
+<a name="Alpha_Decay.effect"></a><div id="Alpha_Decay.effect-def"><a name="L264"></a><tt class="py-lineno">264</tt> <a class="py-toggle" href="#" id="Alpha_Decay.effect-toggle" onclick="return toggle('Alpha_Decay.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Alpha_Decay-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Alpha_Decay.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Alpha_Decay.effect-expanded"><a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line">        <tt id="link-189" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-189', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">capacity</tt> <tt class="py-op">*=</tt> <tt class="py-number">2.5</tt> </tt>
+</div></div><a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line"> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line"> </tt>
+<a name="Nuclear"></a><div id="Nuclear-def"><a name="L268"></a><tt class="py-lineno">268</tt> <a class="py-toggle" href="#" id="Nuclear-toggle" onclick="return toggle('Nuclear');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Nuclear-class.html">Nuclear</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Nuclear-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Nuclear-expanded"><a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">    <tt class="py-docstring">"""Capacity * 3"""</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">    <tt id="link-190" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-190', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-191" class="py-name"><a title="code.parts.Battery" class="py-name" href="#" onclick="return doclink('link-191', 'Battery', 'link-39');">Battery</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line"> </tt>
+<a name="Nuclear.effect"></a><div id="Nuclear.effect-def"><a name="L272"></a><tt class="py-lineno">272</tt> <a class="py-toggle" href="#" id="Nuclear.effect-toggle" onclick="return toggle('Nuclear.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Nuclear-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Nuclear.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Nuclear.effect-expanded"><a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line">        <tt id="link-192" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-192', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">capacity</tt> <tt class="py-op">*=</tt> <tt class="py-number">3</tt> </tt>
+</div></div><a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line"> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line"> </tt>
+<a name="Stored_Antimatter"></a><div id="Stored_Antimatter-def"><a name="L276"></a><tt class="py-lineno">276</tt> <a class="py-toggle" href="#" id="Stored_Antimatter-toggle" onclick="return toggle('Stored_Antimatter');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Stored_Antimatter-class.html">Stored_Antimatter</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Stored_Antimatter-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Stored_Antimatter-expanded"><a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line">    <tt class="py-docstring">"""Capacity * 4"""</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">    <tt id="link-193" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-193', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-194" class="py-name"><a title="code.parts.Battery" class="py-name" href="#" onclick="return doclink('link-194', 'Battery', 'link-39');">Battery</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line"> </tt>
+<a name="Stored_Antimatter.effect"></a><div id="Stored_Antimatter.effect-def"><a name="L280"></a><tt class="py-lineno">280</tt> <a class="py-toggle" href="#" id="Stored_Antimatter.effect-toggle" onclick="return toggle('Stored_Antimatter.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Stored_Antimatter-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Stored_Antimatter.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Stored_Antimatter.effect-expanded"><a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line">        <tt id="link-195" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-195', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">capacity</tt> <tt class="py-op">*=</tt> <tt class="py-number">4</tt> </tt>
+</div></div><a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line"> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line"> </tt>
+<a name="Delicate"></a><div id="Delicate-def"><a name="L284"></a><tt class="py-lineno">284</tt> <a class="py-toggle" href="#" id="Delicate-toggle" onclick="return toggle('Delicate');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Delicate-class.html">Delicate</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Delicate-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Delicate-expanded"><a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line">    <tt class="py-docstring">"""Cost * .8, HP * .6"""</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line">    <tt id="link-196" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-196', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt id="link-197" class="py-name"><a title="code.adjectives.ENERGY_USING
+code.game.ENERGY_USING
+code.starSystem.ENERGY_USING
+code.strafebat.ENERGY_USING
+code.universe.ENERGY_USING" class="py-name" href="#" onclick="return doclink('link-197', 'ENERGY_USING', 'link-54');">ENERGY_USING</a></tt> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line"> </tt>
+<a name="Delicate.effect"></a><div id="Delicate.effect-def"><a name="L288"></a><tt class="py-lineno">288</tt> <a class="py-toggle" href="#" id="Delicate.effect-toggle" onclick="return toggle('Delicate.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Delicate-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Delicate.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Delicate.effect-expanded"><a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line">        <tt id="link-198" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-198', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">energyCost</tt> <tt class="py-op">*=</tt> <tt class="py-number">.8</tt> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line">        <tt id="link-199" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-199', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">maxhp</tt> <tt class="py-op">*=</tt> <tt class="py-number">.6</tt> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line">        <tt id="link-200" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-200', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt id="link-201" class="py-name"><a title="code.floaters.Mine.hp
+code.floaters.Missile.hp" class="py-name" href="#" onclick="return doclink('link-201', 'hp', 'link-102');">hp</a></tt> <tt class="py-op">*=</tt> <tt class="py-number">.6</tt> </tt>
+</div></div><a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line"> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line"> </tt>
+<a name="Efficient"></a><div id="Efficient-def"><a name="L294"></a><tt class="py-lineno">294</tt> <a class="py-toggle" href="#" id="Efficient-toggle" onclick="return toggle('Efficient');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Efficient-class.html">Efficient</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Efficient-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Efficient-expanded"><a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line">    <tt class="py-docstring">"""Cost *= .6"""</tt> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line">    <tt id="link-202" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-202', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt id="link-203" class="py-name"><a title="code.adjectives.ENERGY_USING
+code.game.ENERGY_USING
+code.starSystem.ENERGY_USING
+code.strafebat.ENERGY_USING
+code.universe.ENERGY_USING" class="py-name" href="#" onclick="return doclink('link-203', 'ENERGY_USING', 'link-54');">ENERGY_USING</a></tt> </tt>
+<a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line"> </tt>
+<a name="Efficient.effect"></a><div id="Efficient.effect-def"><a name="L298"></a><tt class="py-lineno">298</tt> <a class="py-toggle" href="#" id="Efficient.effect-toggle" onclick="return toggle('Efficient.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Efficient-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Efficient.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Efficient.effect-expanded"><a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line">        <tt id="link-204" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-204', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">energyCost</tt> <tt class="py-op">*=</tt> <tt class="py-number">.6</tt> </tt>
+</div></div><a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line"> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line"> </tt>
+<a name="Miserly"></a><div id="Miserly-def"><a name="L302"></a><tt class="py-lineno">302</tt> <a class="py-toggle" href="#" id="Miserly-toggle" onclick="return toggle('Miserly');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Miserly-class.html">Miserly</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Miserly-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Miserly-expanded"><a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line">    <tt class="py-docstring">"""Cost *= .4"""</tt> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line">    <tt id="link-205" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-205', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt id="link-206" class="py-name"><a title="code.adjectives.ENERGY_USING
+code.game.ENERGY_USING
+code.starSystem.ENERGY_USING
+code.strafebat.ENERGY_USING
+code.universe.ENERGY_USING" class="py-name" href="#" onclick="return doclink('link-206', 'ENERGY_USING', 'link-54');">ENERGY_USING</a></tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line"> </tt>
+<a name="Miserly.effect"></a><div id="Miserly.effect-def"><a name="L306"></a><tt class="py-lineno">306</tt> <a class="py-toggle" href="#" id="Miserly.effect-toggle" onclick="return toggle('Miserly.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Miserly-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Miserly.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Miserly.effect-expanded"><a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line">        <tt id="link-207" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-207', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">energyCost</tt> <tt class="py-op">*=</tt> <tt class="py-number">.4</tt> </tt>
+</div></div><a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line"> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line"> </tt>
+<a name="Leaky"></a><div id="Leaky-def"><a name="L310"></a><tt class="py-lineno">310</tt> <a class="py-toggle" href="#" id="Leaky-toggle" onclick="return toggle('Leaky');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Leaky-class.html">Leaky</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Leaky-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Leaky-expanded"><a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line">    <tt class="py-docstring">"""-.5 energy per second"""</tt> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line">    <tt id="link-208" class="py-name"><a title="code.adjectives.Adjective.level
+code.adjectives.Damaged.level
+code.adjectives.Fragile.level
+code.adjectives.Heavy.level
+code.adjectives.Inefficient.level
+code.adjectives.Leaky.level
+code.adjectives.Obsolete.level
+code.strafebat.Strafebat.level" class="py-name" href="#" onclick="return doclink('link-208', 'level', 'link-64');">level</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line">    <tt id="link-209" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-209', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt id="link-210" class="py-name"><a title="code.adjectives.ENERGY_USING
+code.game.ENERGY_USING
+code.starSystem.ENERGY_USING
+code.strafebat.ENERGY_USING
+code.universe.ENERGY_USING" class="py-name" href="#" onclick="return doclink('link-210', 'ENERGY_USING', 'link-54');">ENERGY_USING</a></tt> </tt>
+<a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line"> </tt>
+<a name="Leaky.effect"></a><div id="Leaky.effect-def"><a name="L315"></a><tt class="py-lineno">315</tt> <a class="py-toggle" href="#" id="Leaky.effect-toggle" onclick="return toggle('Leaky.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Leaky-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Leaky.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Leaky.effect-expanded"><a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line">        <tt class="py-keyword">from</tt> <tt id="link-211" class="py-name" targets="Module code.effects=code.effects-module.html"><a title="code.effects" class="py-name" href="#" onclick="return doclink('link-211', 'effects', 'link-211');">effects</a></tt> <tt class="py-keyword">import</tt> <tt id="link-212" class="py-name" targets="Function code.effects.leak()=code.effects-module.html#leak"><a title="code.effects.leak" class="py-name" href="#" onclick="return doclink('link-212', 'leak', 'link-212');">leak</a></tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line">        <tt id="link-213" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-213', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">shipEffects</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-214" class="py-name"><a title="code.effects.leak" class="py-name" href="#" onclick="return doclink('link-214', 'leak', 'link-212');">leak</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line"> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line"> </tt>
+<a name="Inefficient"></a><div id="Inefficient-def"><a name="L320"></a><tt class="py-lineno">320</tt> <a class="py-toggle" href="#" id="Inefficient-toggle" onclick="return toggle('Inefficient');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Inefficient-class.html">Inefficient</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Inefficient-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Inefficient-expanded"><a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line">    <tt class="py-docstring">"""Cost *= 2.5"""</tt> </tt>
+<a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line">    <tt id="link-215" class="py-name"><a title="code.adjectives.Adjective.level
+code.adjectives.Damaged.level
+code.adjectives.Fragile.level
+code.adjectives.Heavy.level
+code.adjectives.Inefficient.level
+code.adjectives.Leaky.level
+code.adjectives.Obsolete.level
+code.strafebat.Strafebat.level" class="py-name" href="#" onclick="return doclink('link-215', 'level', 'link-64');">level</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L323"></a><tt class="py-lineno">323</tt>  <tt class="py-line">    <tt id="link-216" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-216', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt id="link-217" class="py-name"><a title="code.adjectives.ENERGY_USING
+code.game.ENERGY_USING
+code.starSystem.ENERGY_USING
+code.strafebat.ENERGY_USING
+code.universe.ENERGY_USING" class="py-name" href="#" onclick="return doclink('link-217', 'ENERGY_USING', 'link-54');">ENERGY_USING</a></tt> </tt>
+<a name="L324"></a><tt class="py-lineno">324</tt>  <tt class="py-line"> </tt>
+<a name="Inefficient.effect"></a><div id="Inefficient.effect-def"><a name="L325"></a><tt class="py-lineno">325</tt> <a class="py-toggle" href="#" id="Inefficient.effect-toggle" onclick="return toggle('Inefficient.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Inefficient-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Inefficient.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Inefficient.effect-expanded"><a name="L326"></a><tt class="py-lineno">326</tt>  <tt class="py-line">        <tt id="link-218" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-218', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">energyCost</tt> <tt class="py-op">*=</tt> <tt class="py-number">2.5</tt> </tt>
+</div></div><a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line"> </tt>
+<a name="L328"></a><tt class="py-lineno">328</tt>  <tt class="py-line"> </tt>
+<a name="Obsolete"></a><div id="Obsolete-def"><a name="L329"></a><tt class="py-lineno">329</tt> <a class="py-toggle" href="#" id="Obsolete-toggle" onclick="return toggle('Obsolete');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Obsolete-class.html">Obsolete</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Obsolete-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Obsolete-expanded"><a name="L330"></a><tt class="py-lineno">330</tt>  <tt class="py-line">    <tt class="py-docstring">"""Cost *= 2, Mass *= 2"""</tt> </tt>
+<a name="L331"></a><tt class="py-lineno">331</tt>  <tt class="py-line">    <tt id="link-219" class="py-name"><a title="code.adjectives.Adjective.level
+code.adjectives.Damaged.level
+code.adjectives.Fragile.level
+code.adjectives.Heavy.level
+code.adjectives.Inefficient.level
+code.adjectives.Leaky.level
+code.adjectives.Obsolete.level
+code.strafebat.Strafebat.level" class="py-name" href="#" onclick="return doclink('link-219', 'level', 'link-64');">level</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line">    <tt id="link-220" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-220', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt id="link-221" class="py-name"><a title="code.adjectives.ENERGY_USING
+code.game.ENERGY_USING
+code.starSystem.ENERGY_USING
+code.strafebat.ENERGY_USING
+code.universe.ENERGY_USING" class="py-name" href="#" onclick="return doclink('link-221', 'ENERGY_USING', 'link-54');">ENERGY_USING</a></tt> </tt>
+<a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line"> </tt>
+<a name="Obsolete.effect"></a><div id="Obsolete.effect-def"><a name="L334"></a><tt class="py-lineno">334</tt> <a class="py-toggle" href="#" id="Obsolete.effect-toggle" onclick="return toggle('Obsolete.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Obsolete-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Obsolete.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Obsolete.effect-expanded"><a name="L335"></a><tt class="py-lineno">335</tt>  <tt class="py-line">        <tt id="link-222" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-222', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">energyCost</tt> <tt class="py-op">*=</tt> <tt class="py-number">2</tt> </tt>
+<a name="L336"></a><tt class="py-lineno">336</tt>  <tt class="py-line">        <tt id="link-223" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-223', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">mass</tt> <tt class="py-op">*=</tt> <tt class="py-number">2</tt> </tt>
+</div></div><a name="L337"></a><tt class="py-lineno">337</tt>  <tt class="py-line"> </tt>
+<a name="L338"></a><tt class="py-lineno">338</tt>  <tt class="py-line"> </tt>
+<a name="Heavy"></a><div id="Heavy-def"><a name="L339"></a><tt class="py-lineno">339</tt> <a class="py-toggle" href="#" id="Heavy-toggle" onclick="return toggle('Heavy');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Heavy-class.html">Heavy</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Heavy-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Heavy-expanded"><a name="L340"></a><tt class="py-lineno">340</tt>  <tt class="py-line">    <tt class="py-docstring">"""Mass *= 2.5"""</tt> </tt>
+<a name="L341"></a><tt class="py-lineno">341</tt>  <tt class="py-line">    <tt id="link-224" class="py-name"><a title="code.adjectives.Adjective.level
+code.adjectives.Damaged.level
+code.adjectives.Fragile.level
+code.adjectives.Heavy.level
+code.adjectives.Inefficient.level
+code.adjectives.Leaky.level
+code.adjectives.Obsolete.level
+code.strafebat.Strafebat.level" class="py-name" href="#" onclick="return doclink('link-224', 'level', 'link-64');">level</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L342"></a><tt class="py-lineno">342</tt>  <tt class="py-line">    <tt id="link-225" class="py-name"><a title="code.adjectives.Adjective.types
+code.adjectives.Advanced_Chemical.types
+code.adjectives.Alpha_Decay.types
+code.adjectives.Antimatter.types
+code.adjectives.Delicate.types
+code.adjectives.Dilithium.types
+code.adjectives.Efficient.types
+code.adjectives.Heavy.types
+code.adjectives.Helium_Cooled.types
+code.adjectives.Hydrogen_Fusion.types
+code.adjectives.Inefficient.types
+code.adjectives.Kinetic.types
+code.adjectives.Leaky.types
+code.adjectives.Magnetic.types
+code.adjectives.Miserly.types
+code.adjectives.Nitrogen_Cooled.types
+code.adjectives.Nuclear.types
+code.adjectives.Obsolete.types
+code.adjectives.Quantum_Accelerated.types
+code.adjectives.Stored_Antimatter.types
+code.adjectives._200_Megawatt.types
+code.adjectives._300_Megawatt.types
+code.adjectives._400_Megawatt.types
+code.adjectives._50_Megawatt.types" class="py-name" href="#" onclick="return doclink('link-225', 'types', 'link-75');">types</a></tt> <tt class="py-op">=</tt> <tt id="link-226" class="py-name"><a title="code.adjectives.ENERGY_USING
+code.game.ENERGY_USING
+code.starSystem.ENERGY_USING
+code.strafebat.ENERGY_USING
+code.universe.ENERGY_USING" class="py-name" href="#" onclick="return doclink('link-226', 'ENERGY_USING', 'link-54');">ENERGY_USING</a></tt> </tt>
+<a name="L343"></a><tt class="py-lineno">343</tt>  <tt class="py-line"> </tt>
+<a name="Heavy.effect"></a><div id="Heavy.effect-def"><a name="L344"></a><tt class="py-lineno">344</tt> <a class="py-toggle" href="#" id="Heavy.effect-toggle" onclick="return toggle('Heavy.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Heavy-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Heavy.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Heavy.effect-expanded"><a name="L345"></a><tt class="py-lineno">345</tt>  <tt class="py-line">        <tt id="link-227" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-227', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt class="py-name">mass</tt> <tt class="py-op">*=</tt> <tt class="py-number">2.5</tt> </tt>
+</div></div><a name="L346"></a><tt class="py-lineno">346</tt>  <tt class="py-line"> </tt>
+<a name="L347"></a><tt class="py-lineno">347</tt>  <tt class="py-line"> </tt>
+<a name="Damaged"></a><div id="Damaged-def"><a name="L348"></a><tt class="py-lineno">348</tt> <a class="py-toggle" href="#" id="Damaged-toggle" onclick="return toggle('Damaged');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.adjectives.Damaged-class.html">Damaged</a><tt class="py-op">(</tt><tt class="py-base-class">Adjective</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Damaged-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Damaged-expanded"><a name="L349"></a><tt class="py-lineno">349</tt>  <tt class="py-line">    <tt class="py-docstring">"""Starting HP / 2"""</tt> </tt>
+<a name="L350"></a><tt class="py-lineno">350</tt>  <tt class="py-line">    <tt id="link-228" class="py-name"><a title="code.adjectives.Adjective.level
+code.adjectives.Damaged.level
+code.adjectives.Fragile.level
+code.adjectives.Heavy.level
+code.adjectives.Inefficient.level
+code.adjectives.Leaky.level
+code.adjectives.Obsolete.level
+code.strafebat.Strafebat.level" class="py-name" href="#" onclick="return doclink('link-228', 'level', 'link-64');">level</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L351"></a><tt class="py-lineno">351</tt>  <tt class="py-line"> </tt>
+<a name="Damaged.effect"></a><div id="Damaged.effect-def"><a name="L352"></a><tt class="py-lineno">352</tt> <a class="py-toggle" href="#" id="Damaged.effect-toggle" onclick="return toggle('Damaged.effect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.adjectives.Damaged-class.html#effect">effect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">part</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Damaged.effect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Damaged.effect-expanded"><a name="L353"></a><tt class="py-lineno">353</tt>  <tt class="py-line">        <tt id="link-229" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-229', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt id="link-230" class="py-name"><a title="code.floaters.Mine.hp
+code.floaters.Missile.hp" class="py-name" href="#" onclick="return doclink('link-230', 'hp', 'link-102');">hp</a></tt> <tt class="py-op">=</tt> <tt id="link-231" class="py-name"><a title="code.menus.ShipPartPanel.part" class="py-name" href="#" onclick="return doclink('link-231', 'part', 'link-65');">part</a></tt><tt class="py-op">.</tt><tt id="link-232" class="py-name"><a title="code.floaters.Mine.hp
+code.floaters.Missile.hp" class="py-name" href="#" onclick="return doclink('link-232', 'hp', 'link-102');">hp</a></tt> <tt class="py-op">/</tt> <tt class="py-number">2</tt> </tt>
+</div></div><a name="L354"></a><tt class="py-lineno">354</tt>  <tt class="py-line"> </tt>
+<a name="L355"></a><tt class="py-lineno">355</tt>  <tt class="py-line"> </tt>
+<a name="L356"></a><tt class="py-lineno">356</tt>  <tt class="py-line"><tt id="link-233" class="py-name"><a title="code.adjectives
+code.adjectives.adjectives
+code.game.adjectives
+code.races.Race.adjectives
+code.starSystem.adjectives
+code.strafebat.adjectives
+code.universe.adjectives" class="py-name" href="#" onclick="return doclink('link-233', 'adjectives', 'link-71');">adjectives</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt id="link-234" class="py-name" targets="Class code.adjectives.Sturdy=code.adjectives.Sturdy-class.html"><a title="code.adjectives.Sturdy" class="py-name" href="#" onclick="return doclink('link-234', 'Sturdy', 'link-234');">Sturdy</a></tt><tt class="py-op">,</tt> <tt id="link-235" class="py-name" targets="Class code.adjectives.Durable=code.adjectives.Durable-class.html"><a title="code.adjectives.Durable" class="py-name" href="#" onclick="return doclink('link-235', 'Durable', 'link-235');">Durable</a></tt><tt class="py-op">,</tt> <tt id="link-236" class="py-name" targets="Class code.adjectives.Solid=code.adjectives.Solid-class.html"><a title="code.adjectives.Solid" class="py-name" href="#" onclick="return doclink('link-236', 'Solid', 'link-236');">Solid</a></tt><tt class="py-op">,</tt> <tt id="link-237" class="py-name" targets="Class code.adjectives.Fragile=code.adjectives.Fragile-class.html"><a title="code.adjectives.Fragile" class="py-name" href="#" onclick="return doclink('link-237', 'Fragile', 'link-237');">Fragile</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L357"></a><tt class="py-lineno">357</tt>  <tt class="py-line">              <tt id="link-238" class="py-name"><a title="code.adjectives.Titanium
+code.cargo.Titanium" class="py-name" href="#" onclick="return doclink('link-238', 'Titanium', 'link-31');">Titanium</a></tt><tt class="py-op">,</tt> <tt id="link-239" class="py-name" targets="Class code.adjectives.Carbonfiber=code.adjectives.Carbonfiber-class.html"><a title="code.adjectives.Carbonfiber" class="py-name" href="#" onclick="return doclink('link-239', 'Carbonfiber', 'link-239');">Carbonfiber</a></tt><tt class="py-op">,</tt> <tt id="link-240" class="py-name" targets="Class code.adjectives.Nanosteel=code.adjectives.Nanosteel-class.html"><a title="code.adjectives.Nanosteel" class="py-name" href="#" onclick="return doclink('link-240', 'Nanosteel', 'link-240');">Nanosteel</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L358"></a><tt class="py-lineno">358</tt>  <tt class="py-line">              <tt id="link-241" class="py-name" targets="Class code.adjectives.Nanosilk=code.adjectives.Nanosilk-class.html"><a title="code.adjectives.Nanosilk" class="py-name" href="#" onclick="return doclink('link-241', 'Nanosilk', 'link-241');">Nanosilk</a></tt><tt class="py-op">,</tt> <tt id="link-242" class="py-name" targets="Class code.adjectives.Doublesilk=code.adjectives.Doublesilk-class.html"><a title="code.adjectives.Doublesilk" class="py-name" href="#" onclick="return doclink('link-242', 'Doublesilk', 'link-242');">Doublesilk</a></tt><tt class="py-op">,</tt> <tt id="link-243" class="py-name" targets="Class code.adjectives.Plated=code.adjectives.Plated-class.html"><a title="code.adjectives.Plated" class="py-name" href="#" onclick="return doclink('link-243', 'Plated', 'link-243');">Plated</a></tt><tt class="py-op">,</tt> <tt id="link-244" class="py-name" targets="Class code.adjectives.Reinforced=code.adjectives.Reinforced-class.html"><a title="code.adjectives.Reinforced" class="py-name" href="#" onclick="return doclink('link-244', 'Reinforced', 'link-244');">Reinforced</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L359"></a><tt class="py-lineno">359</tt>  <tt class="py-line">              <tt id="link-245" class="py-name" targets="Class code.adjectives.Armored=code.adjectives.Armored-class.html"><a title="code.adjectives.Armored" class="py-name" href="#" onclick="return doclink('link-245', 'Armored', 'link-245');">Armored</a></tt><tt class="py-op">,</tt> <tt id="link-246" class="py-name" targets="Class code.adjectives._50_Megawatt=code.adjectives._50_Megawatt-class.html"><a title="code.adjectives._50_Megawatt" class="py-name" href="#" onclick="return doclink('link-246', '_50_Megawatt', 'link-246');">_50_Megawatt</a></tt><tt class="py-op">,</tt> <tt id="link-247" class="py-name" targets="Class code.adjectives._200_Megawatt=code.adjectives._200_Megawatt-class.html"><a title="code.adjectives._200_Megawatt" class="py-name" href="#" onclick="return doclink('link-247', '_200_Megawatt', 'link-247');">_200_Megawatt</a></tt><tt class="py-op">,</tt> <tt id="link-248" class="py-name" targets="Class code.adjectives._300_Megawatt=code.adjectives._300_Megawatt-class.html"><a title="code.adjectives._300_Megawatt" class="py-name" href="#" onclick="return doclink('link-248', '_300_Megawatt', 'link-248');">_300_Megawatt</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L360"></a><tt class="py-lineno">360</tt>  <tt class="py-line">              <tt id="link-249" class="py-name" targets="Class code.adjectives._400_Megawatt=code.adjectives._400_Megawatt-class.html"><a title="code.adjectives._400_Megawatt" class="py-name" href="#" onclick="return doclink('link-249', '_400_Megawatt', 'link-249');">_400_Megawatt</a></tt><tt class="py-op">,</tt> <tt id="link-250" class="py-name" targets="Class code.adjectives.Nitrogen_Cooled=code.adjectives.Nitrogen_Cooled-class.html"><a title="code.adjectives.Nitrogen_Cooled" class="py-name" href="#" onclick="return doclink('link-250', 'Nitrogen_Cooled', 'link-250');">Nitrogen_Cooled</a></tt><tt class="py-op">,</tt> <tt id="link-251" class="py-name" targets="Class code.adjectives.Helium_Cooled=code.adjectives.Helium_Cooled-class.html"><a title="code.adjectives.Helium_Cooled" class="py-name" href="#" onclick="return doclink('link-251', 'Helium_Cooled', 'link-251');">Helium_Cooled</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L361"></a><tt class="py-lineno">361</tt>  <tt class="py-line">              <tt id="link-252" class="py-name" targets="Class code.adjectives.Quantum_Accelerated=code.adjectives.Quantum_Accelerated-class.html"><a title="code.adjectives.Quantum_Accelerated" class="py-name" href="#" onclick="return doclink('link-252', 'Quantum_Accelerated', 'link-252');">Quantum_Accelerated</a></tt><tt class="py-op">,</tt> <tt id="link-253" class="py-name" targets="Class code.adjectives.Hydrogen_Fusion=code.adjectives.Hydrogen_Fusion-class.html"><a title="code.adjectives.Hydrogen_Fusion" class="py-name" href="#" onclick="return doclink('link-253', 'Hydrogen_Fusion', 'link-253');">Hydrogen_Fusion</a></tt><tt class="py-op">,</tt> <tt id="link-254" class="py-name" targets="Class code.adjectives.Dilithium=code.adjectives.Dilithium-class.html"><a title="code.adjectives.Dilithium" class="py-name" href="#" onclick="return doclink('link-254', 'Dilithium', 'link-254');">Dilithium</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L362"></a><tt class="py-lineno">362</tt>  <tt class="py-line">              <tt id="link-255" class="py-name" targets="Class code.adjectives.Antimatter=code.adjectives.Antimatter-class.html"><a title="code.adjectives.Antimatter" class="py-name" href="#" onclick="return doclink('link-255', 'Antimatter', 'link-255');">Antimatter</a></tt><tt class="py-op">,</tt> <tt id="link-256" class="py-name" targets="Class code.adjectives.Advanced_Chemical=code.adjectives.Advanced_Chemical-class.html"><a title="code.adjectives.Advanced_Chemical" class="py-name" href="#" onclick="return doclink('link-256', 'Advanced_Chemical', 'link-256');">Advanced_Chemical</a></tt><tt class="py-op">,</tt> <tt id="link-257" class="py-name" targets="Class code.adjectives.Magnetic=code.adjectives.Magnetic-class.html"><a title="code.adjectives.Magnetic" class="py-name" href="#" onclick="return doclink('link-257', 'Magnetic', 'link-257');">Magnetic</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L363"></a><tt class="py-lineno">363</tt>  <tt class="py-line">              <tt id="link-258" class="py-name" targets="Class code.adjectives.Kinetic=code.adjectives.Kinetic-class.html"><a title="code.adjectives.Kinetic" class="py-name" href="#" onclick="return doclink('link-258', 'Kinetic', 'link-258');">Kinetic</a></tt><tt class="py-op">,</tt> <tt id="link-259" class="py-name" targets="Class code.adjectives.Alpha_Decay=code.adjectives.Alpha_Decay-class.html"><a title="code.adjectives.Alpha_Decay" class="py-name" href="#" onclick="return doclink('link-259', 'Alpha_Decay', 'link-259');">Alpha_Decay</a></tt><tt class="py-op">,</tt> <tt id="link-260" class="py-name" targets="Class code.adjectives.Nuclear=code.adjectives.Nuclear-class.html"><a title="code.adjectives.Nuclear" class="py-name" href="#" onclick="return doclink('link-260', 'Nuclear', 'link-260');">Nuclear</a></tt><tt class="py-op">,</tt> <tt id="link-261" class="py-name" targets="Class code.adjectives.Stored_Antimatter=code.adjectives.Stored_Antimatter-class.html"><a title="code.adjectives.Stored_Antimatter" class="py-name" href="#" onclick="return doclink('link-261', 'Stored_Antimatter', 'link-261');">Stored_Antimatter</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L364"></a><tt class="py-lineno">364</tt>  <tt class="py-line">              <tt id="link-262" class="py-name" targets="Class code.adjectives.Delicate=code.adjectives.Delicate-class.html"><a title="code.adjectives.Delicate" class="py-name" href="#" onclick="return doclink('link-262', 'Delicate', 'link-262');">Delicate</a></tt><tt class="py-op">,</tt> <tt id="link-263" class="py-name" targets="Class code.adjectives.Efficient=code.adjectives.Efficient-class.html"><a title="code.adjectives.Efficient" class="py-name" href="#" onclick="return doclink('link-263', 'Efficient', 'link-263');">Efficient</a></tt><tt class="py-op">,</tt> <tt id="link-264" class="py-name" targets="Class code.adjectives.Miserly=code.adjectives.Miserly-class.html"><a title="code.adjectives.Miserly" class="py-name" href="#" onclick="return doclink('link-264', 'Miserly', 'link-264');">Miserly</a></tt><tt class="py-op">,</tt> <tt id="link-265" class="py-name" targets="Class code.adjectives.Leaky=code.adjectives.Leaky-class.html"><a title="code.adjectives.Leaky" class="py-name" href="#" onclick="return doclink('link-265', 'Leaky', 'link-265');">Leaky</a></tt><tt class="py-op">,</tt> <tt id="link-266" class="py-name" targets="Class code.adjectives.Inefficient=code.adjectives.Inefficient-class.html"><a title="code.adjectives.Inefficient" class="py-name" href="#" onclick="return doclink('link-266', 'Inefficient', 'link-266');">Inefficient</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L365"></a><tt class="py-lineno">365</tt>  <tt class="py-line">              <tt id="link-267" class="py-name" targets="Class code.adjectives.Obsolete=code.adjectives.Obsolete-class.html"><a title="code.adjectives.Obsolete" class="py-name" href="#" onclick="return doclink('link-267', 'Obsolete', 'link-267');">Obsolete</a></tt><tt class="py-op">,</tt> <tt id="link-268" class="py-name" targets="Class code.adjectives.Damaged=code.adjectives.Damaged-class.html"><a title="code.adjectives.Damaged" class="py-name" href="#" onclick="return doclink('link-268', 'Damaged', 'link-268');">Damaged</a></tt><tt class="py-op">,</tt> <tt id="link-269" class="py-name" targets="Class code.adjectives.Heavy=code.adjectives.Heavy-class.html"><a title="code.adjectives.Heavy" class="py-name" href="#" onclick="return doclink('link-269', 'Heavy', 'link-269');">Heavy</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L366"></a><tt class="py-lineno">366</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Mar 17 21:02:22 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

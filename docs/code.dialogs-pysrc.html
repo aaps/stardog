@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>code.dialogs</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="code-module.html">Package&nbsp;code</a> ::
+        Module&nbsp;dialogs
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="code.dialogs-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="code.dialogs-module.html">Module code.dialogs</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># dialogs.py</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module code.utils=code.utils-module.html"><a title="code.utils" class="py-name" href="#" onclick="return doclink('link-0', 'utils', 'link-0');">utils</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-1" class="py-name" targets="Module code.menuElements=code.menuElements-module.html"><a title="code.menuElements" class="py-name" href="#" onclick="return doclink('link-1', 'menuElements', 'link-1');">menuElements</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Module code.spaceship=code.spaceship-module.html"><a title="code.spaceship" class="py-name" href="#" onclick="return doclink('link-2', 'spaceship', 'link-2');">spaceship</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class code.spaceship.Ship=code.spaceship.Ship-class.html"><a title="code.spaceship.Ship" class="py-name" href="#" onclick="return doclink('link-3', 'Ship', 'link-3');">Ship</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name" targets="Module code.planet=code.planet-module.html,Variable code.strafebat.Strafebat.planet=code.strafebat.Strafebat-class.html#planet"><a title="code.planet
+code.strafebat.Strafebat.planet" class="py-name" href="#" onclick="return doclink('link-4', 'planet', 'link-4');">planet</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name" targets="Module code.gui=code.gui-module.html"><a title="code.gui" class="py-name" href="#" onclick="return doclink('link-5', 'gui', 'link-5');">gui</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="Trigger"></a><div id="Trigger-def"><a name="L9"></a><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="Trigger-toggle" onclick="return toggle('Trigger');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.dialogs.Trigger-class.html">Trigger</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Trigger-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Trigger-expanded"><a name="Trigger.__init__"></a><div id="Trigger.__init__-def"><a name="L10"></a><tt class="py-lineno">10</tt> <a class="py-toggle" href="#" id="Trigger.__init__-toggle" onclick="return toggle('Trigger.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.dialogs.Trigger-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">universe</tt><tt class="py-op">,</tt> <tt class="py-param">conditions</tt><tt class="py-op">,</tt> <tt class="py-param">actions</tt><tt class="py-op">,</tt> <tt class="py-param">repeat</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Trigger.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Trigger.__init__-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">repeat</tt> <tt class="py-op">=</tt> <tt class="py-name">repeat</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">conditions</tt><tt class="py-op">,</tt> <tt class="py-name">list</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">            <tt class="py-name">conditions</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">conditions</tt><tt class="py-op">]</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conditions</tt> <tt class="py-op">=</tt> <tt class="py-name">conditions</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">actions</tt><tt class="py-op">,</tt> <tt class="py-name">list</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">            <tt class="py-name">actions</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">actions</tt><tt class="py-op">]</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">actions</tt> <tt class="py-op">=</tt> <tt class="py-name">actions</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module code.game=code.game-module.html,Variable code.menus.ChatConsole.game=code.menus.ChatConsole-class.html#game,Variable code.menus.Menu.game=code.menus.Menu-class.html#game"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-6', 'game', 'link-6');">game</a></tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name" targets="Module code.universe=code.universe-module.html"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-7', 'universe', 'link-7');">universe</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-8', 'game', 'link-6');">game</a></tt> </tt>
+</div><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="Trigger.update"></a><div id="Trigger.update-def"><a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="Trigger.update-toggle" onclick="return toggle('Trigger.update');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.dialogs.Trigger-class.html#update">update</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Trigger.update-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Trigger.update-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">condition</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conditions</tt><tt class="py-op">:</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">condition</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">action</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">actions</tt><tt class="py-op">:</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">            <tt class="py-name">action</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">repeat</tt><tt class="py-op">:</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-9', 'game', 'link-6');">game</a></tt><tt class="py-op">.</tt><tt class="py-name">storytriggers</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method code.menus.PartsPanel.remove()=code.menus.PartsPanel-class.html#remove"><a title="code.menus.PartsPanel.remove" class="py-name" href="#" onclick="return doclink('link-10', 'remove', 'link-10');">remove</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
+<a name="Conditions"></a><div id="Conditions-def"><a name="L29"></a><tt class="py-lineno">29</tt> <a class="py-toggle" href="#" id="Conditions-toggle" onclick="return toggle('Conditions');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.dialogs.Conditions-class.html">Conditions</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Conditions-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Conditions-expanded"><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="Conditions.timerCondition"></a><div id="Conditions.timerCondition-def"><a name="L32"></a><tt class="py-lineno">32</tt> <a class="py-toggle" href="#" id="Conditions.timerCondition-toggle" onclick="return toggle('Conditions.timerCondition');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.dialogs.Conditions-class.html#timerCondition">timerCondition</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">universe</tt><tt class="py-op">,</tt> <tt class="py-param">time</tt><tt class="py-op">,</tt> <tt class="py-param">relative</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Conditions.timerCondition-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Conditions.timerCondition-expanded"><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">relative</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">            <tt class="py-name">time</tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-11', 'universe', 'link-7');">universe</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-12', 'game', 'link-6');">game</a></tt><tt class="py-op">.</tt><tt class="py-name">timer</tt> <tt class="py-op">+</tt> <tt class="py-name">time</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-keyword">lambda</tt><tt class="py-op">:</tt> <tt id="link-13" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-13', 'universe', 'link-7');">universe</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-14', 'game', 'link-6');">game</a></tt><tt class="py-op">.</tt><tt class="py-name">timer</tt> <tt class="py-op">&gt;=</tt> <tt class="py-name">time</tt> </tt>
+</div><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="Conditions.levelCondition"></a><div id="Conditions.levelCondition-def"><a name="L38"></a><tt class="py-lineno">38</tt> <a class="py-toggle" href="#" id="Conditions.levelCondition-toggle" onclick="return toggle('Conditions.levelCondition');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.dialogs.Conditions-class.html#levelCondition">levelCondition</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">universe</tt><tt class="py-op">,</tt> <tt class="py-param">level</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Conditions.levelCondition-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Conditions.levelCondition-expanded"><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-keyword">lambda</tt><tt class="py-op">:</tt> <tt id="link-15" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-15', 'universe', 'link-7');">universe</a></tt><tt class="py-op">.</tt><tt class="py-name">curSystem</tt><tt class="py-op">.</tt><tt class="py-name">player</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Variable code.adjectives.Adjective.level=code.adjectives.Adjective-class.html#level,Variable code.adjectives.Damaged.level=code.adjectives.Damaged-class.html#level,Variable code.adjectives.Fragile.level=code.adjectives.Fragile-class.html#level,Variable code.adjectives.Heavy.level=code.adjectives.Heavy-class.html#level,Variable code.adjectives.Inefficient.level=code.adjectives.Inefficient-class.html#level,Variable code.adjectives.Leaky.level=code.adjectives.Leaky-class.html#level,Variable code.adjectives.Obsolete.level=code.adjectives.Obsolete-class.html#level,Variable code.strafebat.Strafebat.level=code.strafebat.Strafebat-class.html#level"><a title="code.adjectives.Adjective.level
+code.adjectives.Damaged.level
+code.adjectives.Fragile.level
+code.adjectives.Heavy.level
+code.adjectives.Inefficient.level
+code.adjectives.Leaky.level
+code.adjectives.Obsolete.level
+code.strafebat.Strafebat.level" class="py-name" href="#" onclick="return doclink('link-16', 'level', 'link-16');">level</a></tt> <tt class="py-op">&gt;=</tt> <tt id="link-17" class="py-name"><a title="code.adjectives.Adjective.level
+code.adjectives.Damaged.level
+code.adjectives.Fragile.level
+code.adjectives.Heavy.level
+code.adjectives.Inefficient.level
+code.adjectives.Leaky.level
+code.adjectives.Obsolete.level
+code.strafebat.Strafebat.level" class="py-name" href="#" onclick="return doclink('link-17', 'level', 'link-16');">level</a></tt> </tt>
+</div><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="Conditions.planetCondition"></a><div id="Conditions.planetCondition-def"><a name="L42"></a><tt class="py-lineno">42</tt> <a class="py-toggle" href="#" id="Conditions.planetCondition-toggle" onclick="return toggle('Conditions.planetCondition');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.dialogs.Conditions-class.html#planetCondition">planetCondition</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">universe</tt><tt class="py-op">,</tt> <tt class="py-param">planet</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Conditions.planetCondition-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Conditions.planetCondition-expanded"><a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-keyword">lambda</tt><tt class="py-op">:</tt> <tt id="link-18" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-18', 'universe', 'link-7');">universe</a></tt><tt class="py-op">.</tt><tt class="py-name">curSystem</tt><tt class="py-op">.</tt><tt class="py-name">player</tt><tt class="py-op">.</tt><tt class="py-name">landed</tt> <tt class="py-op">==</tt> <tt id="link-19" class="py-name"><a title="code.planet
+code.strafebat.Strafebat.planet" class="py-name" href="#" onclick="return doclink('link-19', 'planet', 'link-4');">planet</a></tt> </tt>
+</div><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"> </tt>
+<a name="Conditions.solarSystemCondition"></a><div id="Conditions.solarSystemCondition-def"><a name="L46"></a><tt class="py-lineno">46</tt> <a class="py-toggle" href="#" id="Conditions.solarSystemCondition-toggle" onclick="return toggle('Conditions.solarSystemCondition');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.dialogs.Conditions-class.html#solarSystemCondition">solarSystemCondition</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">universe</tt><tt class="py-op">,</tt> <tt class="py-param">solarSystem</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Conditions.solarSystemCondition-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Conditions.solarSystemCondition-expanded"><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-keyword">lambda</tt><tt class="py-op">:</tt> <tt id="link-20" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-20', 'universe', 'link-7');">universe</a></tt><tt class="py-op">.</tt><tt class="py-name">curSystem</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-op">==</tt> <tt class="py-name">solarSystem</tt> </tt>
+</div><a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"> </tt>
+<a name="Conditions.seePlanetCondition"></a><div id="Conditions.seePlanetCondition-def"><a name="L50"></a><tt class="py-lineno">50</tt> <a class="py-toggle" href="#" id="Conditions.seePlanetCondition-toggle" onclick="return toggle('Conditions.seePlanetCondition');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.dialogs.Conditions-class.html#seePlanetCondition">seePlanetCondition</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">universe</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Conditions.seePlanetCondition-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Conditions.seePlanetCondition-expanded"><a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">see</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">radar</tt> <tt class="py-keyword">in</tt> <tt id="link-21" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-21', 'universe', 'link-7');">universe</a></tt><tt class="py-op">.</tt><tt class="py-name">player</tt><tt class="py-op">.</tt><tt class="py-name">radars</tt><tt class="py-op">:</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">floater</tt> <tt class="py-keyword">in</tt> <tt class="py-name">radar</tt><tt class="py-op">.</tt><tt class="py-name">detected</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">floater</tt><tt class="py-op">,</tt> <tt id="link-22" class="py-name" targets="Class code.planet.Planet=code.planet.Planet-class.html"><a title="code.planet.Planet" class="py-name" href="#" onclick="return doclink('link-22', 'Planet', 'link-22');">Planet</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">floater</tt><tt class="py-op">,</tt> <tt id="link-23" class="py-name" targets="Class code.planet.Star=code.planet.Star-class.html"><a title="code.planet.Star" class="py-name" href="#" onclick="return doclink('link-23', 'Star', 'link-23');">Star</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">see</tt> </tt>
+</div><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"> </tt>
+<a name="Conditions.seeShipCondition"></a><div id="Conditions.seeShipCondition-def"><a name="L60"></a><tt class="py-lineno">60</tt> <a class="py-toggle" href="#" id="Conditions.seeShipCondition-toggle" onclick="return toggle('Conditions.seeShipCondition');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.dialogs.Conditions-class.html#seeShipCondition">seeShipCondition</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">universe</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Conditions.seeShipCondition-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Conditions.seeShipCondition-expanded"><a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">see</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">radar</tt> <tt class="py-keyword">in</tt> <tt id="link-24" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-24', 'universe', 'link-7');">universe</a></tt><tt class="py-op">.</tt><tt class="py-name">player</tt><tt class="py-op">.</tt><tt class="py-name">radars</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">floater</tt> <tt class="py-keyword">in</tt> <tt class="py-name">radar</tt><tt class="py-op">.</tt><tt class="py-name">detected</tt><tt class="py-op">:</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">floater</tt><tt class="py-op">,</tt> <tt id="link-25" class="py-name"><a title="code.spaceship.Ship" class="py-name" href="#" onclick="return doclink('link-25', 'Ship', 'link-3');">Ship</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">see</tt> </tt>
+</div><a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line"> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"> </tt>
+<a name="Conditions.farAwayCondition"></a><div id="Conditions.farAwayCondition-def"><a name="L71"></a><tt class="py-lineno">71</tt> <a class="py-toggle" href="#" id="Conditions.farAwayCondition-toggle" onclick="return toggle('Conditions.farAwayCondition');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.dialogs.Conditions-class.html#farAwayCondition">farAwayCondition</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">universe</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Conditions.farAwayCondition-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Conditions.farAwayCondition-expanded"><a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-keyword">lambda</tt><tt class="py-op">:</tt> <tt id="link-26" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-26', 'universe', 'link-7');">universe</a></tt><tt class="py-op">.</tt><tt class="py-name">curSystem</tt><tt class="py-op">.</tt><tt class="py-name">player</tt><tt class="py-op">.</tt><tt class="py-name">overedge</tt> </tt>
+</div></div><a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line"> </tt>
+<a name="Actions"></a><div id="Actions-def"><a name="L74"></a><tt class="py-lineno">74</tt> <a class="py-toggle" href="#" id="Actions-toggle" onclick="return toggle('Actions');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="code.dialogs.Actions-class.html">Actions</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Actions-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Actions-expanded"><a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line"> </tt>
+<a name="Actions.messageAction"></a><div id="Actions.messageAction-def"><a name="L76"></a><tt class="py-lineno">76</tt> <a class="py-toggle" href="#" id="Actions.messageAction-toggle" onclick="return toggle('Actions.messageAction');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="code.dialogs.Actions-class.html#messageAction">messageAction</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">universe</tt><tt class="py-op">,</tt> <tt class="py-param">text</tt><tt class="py-op">,</tt> <tt class="py-param">color</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-number">200</tt><tt class="py-op">,</tt> <tt class="py-number">200</tt><tt class="py-op">,</tt> <tt class="py-number">100</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Actions.messageAction-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Actions.messageAction-expanded"><a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-keyword">lambda</tt><tt class="py-op">:</tt> <tt id="link-27" class="py-name"><a title="code.universe" class="py-name" href="#" onclick="return doclink('link-27', 'universe', 'link-7');">universe</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="code.game
+code.menus.ChatConsole.game
+code.menus.Menu.game" class="py-name" href="#" onclick="return doclink('link-28', 'game', 'link-6');">game</a></tt><tt class="py-op">.</tt><tt class="py-name">messenger</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Method code.gui.Messenger.message()=code.gui.Messenger-class.html#message"><a title="code.gui.Messenger.message" class="py-name" href="#" onclick="return doclink('link-29', 'message', 'link-29');">message</a></tt><tt class="py-op">(</tt><tt class="py-name">text</tt><tt class="py-op">,</tt> <tt id="link-30" class="py-name" targets="Variable code.gui.MiniInfo.color=code.gui.MiniInfo-class.html#color,Variable code.menus.ChatConsole.color=code.menus.ChatConsole-class.html#color,Variable code.menus.Console.color=code.menus.Console-class.html#color,Variable code.menus.Menu.color=code.menus.Menu-class.html#color"><a title="code.gui.MiniInfo.color
+code.menus.ChatConsole.color
+code.menus.Console.color
+code.menus.Menu.color" class="py-name" href="#" onclick="return doclink('link-30', 'color', 'link-30');">color</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Mar 17 21:02:22 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

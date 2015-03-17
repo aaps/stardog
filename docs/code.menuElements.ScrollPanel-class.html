@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>code.menuElements.ScrollPanel</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="code-module.html">Package&nbsp;code</a> ::
+        <a href="code.menuElements-module.html">Module&nbsp;menuElements</a> ::
+        Class&nbsp;ScrollPanel
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="code.menuElements.ScrollPanel-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ScrollPanel</h1><p class="nomargin-top"><span class="codelink"><a href="code.menuElements-pysrc.html#ScrollPanel">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_code_men_9" name="uml_class_diagram_for_code_men_9">
+<area shape="rect" id="node1" href="code.menus.ShipPanel-class.html" title="code.menus.ShipPanel" alt="" coords="32,470,171,509"/>
+<area shape="rect" id="node2" href="code.menus.PartFunctionsPanel-class.html" title="code.menus.PartFunctionsPanel" alt="" coords="5,529,197,567"/>
+<area shape="rect" id="node3" href="code.menus.FunctionSelecter-class.html" title="code.menus.FunctionSelecter" alt="" coords="200,470,376,509"/>
+<area shape="rect" id="node4" href="code.menus.InventoryPanel-class.html" title="code.menus.InventoryPanel" alt="" coords="405,470,571,509"/>
+<area shape="rect" id="node5" href="code.menus.SkillTreeSelector-class.html" title="code.menus.SkillTreeSelector" alt="" coords="600,470,779,509"/>
+<area shape="rect" id="node633" href="code.menuElements.Panel-class.html#image" title="code.menuElements.Panel.image" alt="" coords="397,31,577,49"/>
+<area shape="rect" id="node633" href="code.menuElements.Panel-class.html#addPanel" title="adds a subpanel to this panel." alt="" coords="397,52,577,71"/>
+<area shape="rect" id="node633" href="code.menuElements.Panel-class.html#drag" title="drag(start): The mouse has started dragging at start." alt="" coords="397,71,577,89"/>
+<area shape="rect" id="node633" href="code.menuElements.Panel-class.html#drop" title="drop(pos, dropped): &#160;The dragged object was dropped on this panel at pos." alt="" coords="397,89,577,108"/>
+<area shape="rect" id="node633" href="code.menuElements.Panel-class.html#endDrag" title="called when a drag from here drops with a non&#45;None result." alt="" coords="397,108,577,127"/>
+<area shape="rect" id="node633" href="code.menuElements.Panel-class.html#handleEvent" title="code.menuElements.Panel.handleEvent" alt="" coords="397,127,577,145"/>
+<area shape="rect" id="node633" href="code.menuElements.Panel-class.html#removePanel" title="removes a subpanel from this panel." alt="" coords="397,145,577,164"/>
+<area shape="rect" id="node633" href="code.menuElements.Panel-class.html#reset" title="code.menuElements.Panel.reset" alt="" coords="397,164,577,183"/>
+<area shape="rect" id="node633" href="code.menuElements.Panel-class.html#update" title="updates this panel and its children" alt="" coords="397,183,577,201"/>
+<area shape="rect" id="node6" href="code.menuElements.Panel-class.html" title="Panel(mouse, rect) &#45;&gt; new Panel." alt="" coords="385,6,588,207"/>
+<area shape="rect" id="node632" href="code.menuElements.ScrollPanel-class.html#scrollRate" title="code.menuElements.ScrollPanel.scrollRate" alt="" coords="361,252,613,271"/>
+<area shape="rect" id="node632" href="code.menuElements.ScrollPanel-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="361,273,613,292"/>
+<area shape="rect" id="node632" href="code.menuElements.ScrollPanel-class.html#scroll" title="scroll this panel by x,y." alt="" coords="361,292,613,311"/>
+<area shape="rect" id="node632" href="code.menuElements.ScrollPanel-class.html#draw" title="draws this panel on the surface." alt="" coords="361,311,613,329"/>
+<area shape="rect" id="node632" href="code.menuElements.ScrollPanel-class.html#click" title="called when this panel is clicked on." alt="" coords="361,329,613,348"/>
+<area shape="rect" id="node632" href="code.menuElements.ScrollPanel-class.html#move" title="called when the mouse moves to or from this panel." alt="" coords="361,348,613,367"/>
+<area shape="rect" id="node632" href="code.menuElements.ScrollPanel-class.html#dragOver" title="called when the mouse moves to or from this panel." alt="" coords="361,367,613,385"/>
+<area shape="rect" id="node9" href="code.menuElements.ScrollPanel-class.html" title="A panel with a scrollbar." alt="" coords="349,227,624,391"/>
+<area shape="rect" id="node7" href="code.menuElements.Selecter-class.html" title="code.menuElements.Selecter" alt="" coords="445,411,531,450"/>
+<area shape="rect" id="node8" href="code.menus.BindingSelecter-class.html" title="code.menus.BindingSelecter" alt="" coords="808,470,979,509"/>
+</map>
+  <img src="uml_class_diagram_for_code_men_9.gif" alt='' usemap="#uml_class_diagram_for_code_men_9" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>A panel with a scrollbar.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">new Panel</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="code.menuElements.ScrollPanel-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">displayRect</span>,
+        <span class="summary-sig-arg">fullDimensions</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menuElements-pysrc.html#ScrollPanel.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="scroll"></a><span class="summary-sig-name">scroll</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>)</span><br />
+      scroll this panel by x,y.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menuElements-pysrc.html#ScrollPanel.scroll">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="code.menuElements.ScrollPanel-class.html#draw" class="summary-sig-name">draw</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">surface</span>,
+        <span class="summary-sig-arg">rect</span>)</span><br />
+      draws this panel on the surface.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menuElements-pysrc.html#ScrollPanel.draw">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="code.menuElements.ScrollPanel-class.html#click" class="summary-sig-name">click</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">button</span>,
+        <span class="summary-sig-arg">pos</span>)</span><br />
+      called when this panel is clicked on.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menuElements-pysrc.html#ScrollPanel.click">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="code.menuElements.ScrollPanel-class.html#move" class="summary-sig-name">move</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">pos</span>,
+        <span class="summary-sig-arg">rel</span>)</span><br />
+      called when the mouse moves to or from this panel.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menuElements-pysrc.html#ScrollPanel.move">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="code.menuElements.ScrollPanel-class.html#dragOver" class="summary-sig-name">dragOver</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">pos</span>,
+        <span class="summary-sig-arg">rel</span>)</span><br />
+      called when the mouse moves to or from this panel.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menuElements-pysrc.html#ScrollPanel.dragOver">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="code.menuElements.Panel-class.html">Panel</a></code></b>:
+      <code><a href="code.menuElements.Panel-class.html#addPanel">addPanel</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#drag">drag</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#drop">drop</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#endDrag">endDrag</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#handleEvent">handleEvent</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#removePanel">removePanel</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#reset">reset</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#update">update</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="scrollRate"></a><span class="summary-name">scrollRate</span> = <code title="48">48</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="code.menuElements.Panel-class.html">Panel</a></code></b>:
+      <code><a href="code.menuElements.Panel-class.html#image">image</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">displayRect</span>,
+        <span class="sig-arg">fullDimensions</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="code.menuElements-pysrc.html#ScrollPanel.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+  <dl class="fields">
+    <dt>Returns: new Panel</dt>
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="draw"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">draw</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">surface</span>,
+        <span class="sig-arg">rect</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="code.menuElements-pysrc.html#ScrollPanel.draw">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>draws this panel on the surface.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="code.menuElements.Panel-class.html#draw">Panel.draw</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="click"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">click</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">button</span>,
+        <span class="sig-arg">pos</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="code.menuElements-pysrc.html#ScrollPanel.click">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>called when this panel is clicked on.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="code.menuElements.Panel-class.html#click">Panel.click</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="move"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">move</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">pos</span>,
+        <span class="sig-arg">rel</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="code.menuElements-pysrc.html#ScrollPanel.move">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>called when the mouse moves to or from this panel.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="code.menuElements.Panel-class.html#move">Panel.move</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="dragOver"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">dragOver</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">pos</span>,
+        <span class="sig-arg">rel</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="code.menuElements-pysrc.html#ScrollPanel.dragOver">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>called when the mouse moves to or from this panel.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="code.menuElements.Panel-class.html#dragOver">Panel.dragOver</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Mar 17 21:02:10 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>code.menus.IntroMenu</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="code-module.html">Package&nbsp;code</a> ::
+        <a href="code.menus-module.html">Module&nbsp;menus</a> ::
+        Class&nbsp;IntroMenu
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="code.menus.IntroMenu-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class IntroMenu</h1><p class="nomargin-top"><span class="codelink"><a href="code.menus-pysrc.html#IntroMenu">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_code_men_25" name="uml_class_diagram_for_code_men_25">
+<area shape="rect" id="node700" href="code.menuElements.Panel-class.html#image" title="code.menuElements.Panel.image" alt="" coords="69,31,249,49"/>
+<area shape="rect" id="node700" href="code.menuElements.Panel-class.html#addPanel" title="adds a subpanel to this panel." alt="" coords="69,52,249,71"/>
+<area shape="rect" id="node700" href="code.menuElements.Panel-class.html#click" title="called when this panel is clicked on." alt="" coords="69,71,249,89"/>
+<area shape="rect" id="node700" href="code.menuElements.Panel-class.html#drag" title="drag(start): The mouse has started dragging at start." alt="" coords="69,89,249,108"/>
+<area shape="rect" id="node700" href="code.menuElements.Panel-class.html#dragOver" title="called when the mouse moves to or from this panel." alt="" coords="69,108,249,127"/>
+<area shape="rect" id="node700" href="code.menuElements.Panel-class.html#drop" title="drop(pos, dropped): &#160;The dragged object was dropped on this panel at pos." alt="" coords="69,127,249,145"/>
+<area shape="rect" id="node700" href="code.menuElements.Panel-class.html#endDrag" title="called when a drag from here drops with a non&#45;None result." alt="" coords="69,145,249,164"/>
+<area shape="rect" id="node700" href="code.menuElements.Panel-class.html#move" title="called when the mouse moves to or from this panel." alt="" coords="69,164,249,183"/>
+<area shape="rect" id="node700" href="code.menuElements.Panel-class.html#removePanel" title="removes a subpanel from this panel." alt="" coords="69,183,249,201"/>
+<area shape="rect" id="node700" href="code.menuElements.Panel-class.html#reset" title="code.menuElements.Panel.reset" alt="" coords="69,201,249,220"/>
+<area shape="rect" id="node700" href="code.menuElements.Panel-class.html#update" title="updates this panel and its children" alt="" coords="69,220,249,239"/>
+<area shape="rect" id="node1" href="code.menuElements.Panel-class.html" title="Panel(mouse, rect) &#45;&gt; new Panel." alt="" coords="57,6,260,245"/>
+<area shape="rect" id="node699" href="code.menuElements.TopLevelPanel-class.html#draw" title="surface." alt="" coords="71,297,249,316"/>
+<area shape="rect" id="node2" href="code.menuElements.TopLevelPanel-class.html" title="TopLevelPanel(rect) &#45;&gt; TopLevelPanel." alt="" coords="59,265,261,322"/>
+<area shape="rect" id="node698" href="code.menus.IntroMenu-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="17,375,301,393"/>
+<area shape="rect" id="node698" href="code.menus.IntroMenu-class.html#rootChoose" title="code.menus.IntroMenu.rootChoose" alt="" coords="17,393,301,412"/>
+<area shape="rect" id="node698" href="code.menus.IntroMenu-class.html#volumeChoose" title="code.menus.IntroMenu.volumeChoose" alt="" coords="17,412,301,431"/>
+<area shape="rect" id="node698" href="code.menus.IntroMenu-class.html#versionChoose" title="code.menus.IntroMenu.versionChoose" alt="" coords="17,431,301,449"/>
+<area shape="rect" id="node698" href="code.menus.IntroMenu-class.html#versionMessage" title="code.menus.IntroMenu.versionMessage" alt="" coords="17,449,301,468"/>
+<area shape="rect" id="node698" href="code.menus.IntroMenu-class.html#getGameVersion" title="code.menus.IntroMenu.getGameVersion" alt="" coords="17,468,301,487"/>
+<area shape="rect" id="node698" href="code.menus.IntroMenu-class.html#getRemoteVersion" title="code.menus.IntroMenu.getRemoteVersion" alt="" coords="17,487,301,505"/>
+<area shape="rect" id="node698" href="code.menus.IntroMenu-class.html#checkRemoveVersion" title="code.menus.IntroMenu.checkRemoveVersion" alt="" coords="17,505,301,524"/>
+<area shape="rect" id="node698" href="code.menus.IntroMenu-class.html#serverChoose" title="code.menus.IntroMenu.serverChoose" alt="" coords="17,524,301,543"/>
+<area shape="rect" id="node698" href="code.menus.IntroMenu-class.html#colorChoose" title="code.menus.IntroMenu.colorChoose" alt="" coords="17,543,301,561"/>
+<area shape="rect" id="node698" href="code.menus.IntroMenu-class.html#creditsChoose" title="code.menus.IntroMenu.creditsChoose" alt="" coords="17,561,301,580"/>
+<area shape="rect" id="node698" href="code.menus.IntroMenu-class.html#getCredits" title="code.menus.IntroMenu.getCredits" alt="" coords="17,580,301,599"/>
+<area shape="rect" id="node698" href="code.menus.IntroMenu-class.html#quitChoose" title="code.menus.IntroMenu.quitChoose" alt="" coords="17,599,301,617"/>
+<area shape="rect" id="node698" href="code.menus.IntroMenu-class.html#chooseServer" title="code.menus.IntroMenu.chooseServer" alt="" coords="17,636,301,655"/>
+<area shape="rect" id="node3" href="code.menus.IntroMenu-class.html" title="code.menus.IntroMenu" alt="" coords="5,342,312,661"/>
+</map>
+  <img src="uml_class_diagram_for_code_men_25.gif" alt='' usemap="#uml_class_diagram_for_code_men_25" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">TopLevelPanel</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="code.menus.IntroMenu-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">game</span>,
+        <span class="summary-sig-arg">rect</span>,
+        <span class="summary-sig-arg">corners</span>=<span class="summary-sig-default"><code class="variable-group">[</code>10<code class="variable-op">, </code>0<code class="variable-op">, </code>10<code class="variable-op">, </code>0<code class="variable-group">]</code></span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="rootChoose"></a><span class="summary-sig-name">rootChoose</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.rootChoose">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="volumeChoose"></a><span class="summary-sig-name">volumeChoose</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.volumeChoose">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="versionChoose"></a><span class="summary-sig-name">versionChoose</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.versionChoose">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="versionMessage"></a><span class="summary-sig-name">versionMessage</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.versionMessage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getGameVersion"></a><span class="summary-sig-name">getGameVersion</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.getGameVersion">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getRemoteVersion"></a><span class="summary-sig-name">getRemoteVersion</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.getRemoteVersion">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="checkRemoveVersion"></a><span class="summary-sig-name">checkRemoveVersion</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.checkRemoveVersion">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="serverChoose"></a><span class="summary-sig-name">serverChoose</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.serverChoose">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="colorChoose"></a><span class="summary-sig-name">colorChoose</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.colorChoose">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="creditsChoose"></a><span class="summary-sig-name">creditsChoose</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.creditsChoose">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCredits"></a><span class="summary-sig-name">getCredits</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.getCredits">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="quitChoose"></a><span class="summary-sig-name">quitChoose</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.quitChoose">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="nameChoose"></a><span class="summary-sig-name">nameChoose</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.nameChoose">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="code.menus.IntroMenu-class.html#handleEvent" class="summary-sig-name">handleEvent</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span><br />
+      Examines the event and passes it down to children as appropriate.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.handleEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="typeChoose"></a><span class="summary-sig-name">typeChoose</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.typeChoose">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="setMusicVolume"></a><span class="summary-sig-name">setMusicVolume</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.setMusicVolume">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="setSfxVolume"></a><span class="summary-sig-name">setSfxVolume</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.setSfxVolume">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="cooseVolume"></a><span class="summary-sig-name">cooseVolume</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.cooseVolume">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="chooseColor"></a><span class="summary-sig-name">chooseColor</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.chooseColor">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="chooseRed"></a><span class="summary-sig-name">chooseRed</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">red</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.chooseRed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="chooseGreen"></a><span class="summary-sig-name">chooseGreen</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">green</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.chooseGreen">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="chooseBlue"></a><span class="summary-sig-name">chooseBlue</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">blue</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.chooseBlue">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="chooseName"></a><span class="summary-sig-name">chooseName</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.chooseName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="chooseType"></a><span class="summary-sig-name">chooseType</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">type</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.chooseType">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="chooseServer"></a><span class="summary-sig-name">chooseServer</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">server</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.chooseServer">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="code.menuElements.TopLevelPanel-class.html">menuElements.TopLevelPanel</a></code></b>:
+      <code><a href="code.menuElements.TopLevelPanel-class.html#draw">draw</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="code.menuElements.Panel-class.html">menuElements.Panel</a></code></b>:
+      <code><a href="code.menuElements.Panel-class.html#addPanel">addPanel</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#click">click</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#drag">drag</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#dragOver">dragOver</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#drop">drop</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#endDrag">endDrag</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#move">move</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#removePanel">removePanel</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#reset">reset</a></code>,
+      <code><a href="code.menuElements.Panel-class.html#update">update</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="code.menuElements.Panel-class.html">menuElements.Panel</a></code></b>:
+      <code><a href="code.menuElements.Panel-class.html#image">image</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">game</span>,
+        <span class="sig-arg">rect</span>,
+        <span class="sig-arg">corners</span>=<span class="sig-default"><code class="variable-group">[</code>10<code class="variable-op">, </code>0<code class="variable-op">, </code>10<code class="variable-op">, </code>0<code class="variable-group">]</code></span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+  <dl class="fields">
+    <dt>Returns: TopLevelPanel</dt>
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="handleEvent"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">handleEvent</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">event</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="code.menus-pysrc.html#IntroMenu.handleEvent">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Examines the event and passes it down to children as appropriate.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="code.menuElements.Panel-class.html#handleEvent">menuElements.Panel.handleEvent</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="code-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Mar 17 21:02:11 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

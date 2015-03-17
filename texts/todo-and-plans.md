@@ -36,6 +36,7 @@ better graphics, more graphics, for cargo parts, different planets, structure mo
 promoting the game, on twitter github and other places ?
 keep the readme.md up to date
 play the game find bugs.
+a config file for epydoc: http://epydoc.sourceforge.net/using.html#cli
 
 
 
