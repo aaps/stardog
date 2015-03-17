@@ -406,11 +406,19 @@ class Ship(Floater, Controllable):
         #TODO: ? make the center of the ship the center of mass instead of the 
         #center of the radii. 
         for part in self.parts:
+            offset = part.offset
+            part.reset()
+            for port in part.parent.ports:
+                if port.part == self:
+                    offset = port.offset * self.spritename['zoom']
+
+            # print part
+            offset = part.offset #* Vec2d(part.sprite.get_height() / 2, part.sprite.get_width() / 2)
             if isinstance(part, Dummy): continue
-            minX = min(part.offset[0] - part.radius, minX)
-            minY = min(part.offset[1] - part.radius, minY)
-            maxX = max(part.offset[0] + part.radius, maxX)
-            maxY = max(part.offset[1] + part.radius, maxY)
+            minX = min(offset[0] - part.radius, minX)
+            minY = min(offset[1] - part.radius, minY)
+            maxX = max(offset[0] + part.radius, maxX)
+            maxY = max(offset[1] + part.radius, maxY)
             self.detectionscore += part.hp
         self.radius = max(maxX - minX, maxY - minY) / 2
         self.rect = Rect(0,0,self.radius*2,self.radius*2)
@@ -438,10 +446,7 @@ class Ship(Floater, Controllable):
         self.hp = min(self.hp, self.maxhp)
         for skill in self.skills:
             skill.shipReset()
-        #redraw base image:
-        #if self.game.pause:
-        #    size = int(self.radius * 2 + 60)
-        #else: 
+
         size = int(self.radius * 2)
         self.baseImage = pygame.Surface((size, size), \
                     hardwareFlag | SRCALPHA).convert_alpha()

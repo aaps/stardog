@@ -269,7 +269,7 @@ class Part(Cargo):
         if self.image:
             image = self.image
         elif self.spritename:
-            image = self.universe.game.spritesystem.getsprite(self.spritename).getImage()
+            image = self.universe.game.spritesystem.getsprite(self, self.spritename).getImage()
 
         if not offset:
             
@@ -281,7 +281,8 @@ class Part(Cargo):
         if self.ship == None:
             Floater.draw(self, surface, offset)
         elif self.spritename:
-            image = self.universe.game.spritesystem.getsprite(self.spritename).getImage()
+            
+            image = self.universe.game.spritesystem.getsprite(self, self.spritename).getImage()
             surface.blit(image, offset)
         elif self.image:
             surface.blit(self.image, offset)
@@ -361,6 +362,13 @@ class Part(Cargo):
             self.universe.curSystem.add(Explosion(self.universe, self.pos, \
                         self.delta, radius = self.radius * 4,\
                         time = self.maxhp / 5))
+
+    def reset(self,):
+
+                    
+            sprite = self.universe.game.spritesystem.getsprite(self, self.spritename).getImage()
+            self.radius = max(sprite.get_height() / 2, sprite.get_width() / 2)
+
 
 class Dummy(Part):
     """A dummy part used by the parts menu."""

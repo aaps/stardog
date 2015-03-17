@@ -21,6 +21,7 @@ class IntroMenu(TopLevelPanel):
         self.musicSys = game.musicSystem
         self.soundSys = game.soundSystem
         self.running = True
+        
         self.game.playerColor = [255, 255, 255]
         self.gameversion = self.game.GLV("./installer_log.txt")
         self.remoteversion = ""
@@ -575,7 +576,7 @@ class ShipPartPanel(DragableSelectable):
     part = None
     
     def __init__(self, part, parent):
-
+        self.spritename = None
         width = part.rect.width * 2
         height = part.rect.height * 2
         rect = Rect(
@@ -598,7 +599,7 @@ class ShipPartPanel(DragableSelectable):
             spritename = part.spritename.copy()
             spritename['zoom'] = 2
 
-            self.image = part.universe.game.spritesystem.getsprite(spritename).getImage()
+            self.image = part.universe.game.spritesystem.getsprite(self, spritename).getImage()
         
     def select(self):
         if self.part:
@@ -615,13 +616,12 @@ class ShipPartPanel(DragableSelectable):
     def unselect(self):
         if self.part:
             if self.image:
-                # image = self.part.universe.game.spritesystem.getsprite(self.part.spritename).getImage()
                 self.image = pygame.transform.scale2x(self.image).convert_alpha()
                 self.image.set_colorkey(BLACK)
             elif self.spritename:
                 spritename = part.spritename.copy()
                 spritename['zoom'] = 2
-                self.image = part.universe.game.spritesystem.getsprite(spritename).getImage()
+                self.image = part.universe.game.spritesystem.getsprite(self, spritename).getImage()
 
         else:
             direction = self.port.direction + self.port.parent.direction
@@ -748,14 +748,12 @@ class MultyPartTile(DragableSelectable):
 
 
 class PartTile(DragableSelectable):
-    # drawBorder = False
-
     
     def __init__(self, part, rect, parent):
         """PartTile(part, rect) -> new PartTile.
         The menu interface for a part. Display it like a button!"""
         DragableSelectable.__init__(self, rect, parent)
-
+        self.spritename = None
         self.partImageOffset = 0,12
         self.drawBorderDragging = False
         self.selectedColor = SELECTED_COLOR
@@ -769,7 +767,7 @@ class PartTile(DragableSelectable):
         if self.part.spritename:
             spritename = self.part.spritename.copy()
             spritename['zoom'] = 2
-            bigImage = part.universe.game.spritesystem.getsprite(spritename).getImage()
+            bigImage = part.universe.game.spritesystem.getsprite(self, spritename).getImage()
         elif self.part.image:
 
             bigImage = pygame.transform.scale2x(self.part.image)

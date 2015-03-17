@@ -58,7 +58,7 @@ class Scrap(Cargo):
     def __init__(self, universe):
 
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/scrap.png", 'pos':(0,0), 'color':PART1, 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(2,0), 'color':PART1, 'direction':None,'zoom':None}
         self.image=None
 
         self.name = "Scrap"
@@ -70,7 +70,7 @@ class Iron(Cargo):
     def __init__(self, universe):
 
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/iron.png", 'pos':(0,0), 'color':PART1, 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(1,0), 'color':PART1, 'direction':None,'zoom':None}
         self.image=None
 
         self.name = "Iron"
@@ -81,7 +81,7 @@ class IronOre(Cargo):
     
     def __init__(self, universe):
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':PART1, 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(0,1), 'color':PART1, 'direction':None,'zoom':None}
         self.image=None
         self.name = "IronOre"
         self.damage = 1
@@ -91,7 +91,7 @@ class TitaniumOre(Cargo):
     def __init__(self, universe):
         
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(255,255,255), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(0,1), 'color':(255,255,255), 'direction':None,'zoom':None}
         self.image=None
 
         self.name = "titaniumOre"
@@ -101,7 +101,7 @@ class Titanium(Cargo):
     
     def __init__(self, universe):
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/iron.png", 'pos':(0,0), 'color':(255,255,255), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(1,0), 'color':(255,255,255), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "Titanium"
@@ -111,7 +111,7 @@ class AluminiumOre(Cargo):
     
     def __init__(self, universe):
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(255,100,100), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(0,1), 'color':(255,100,100), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "AluminiumOre"
@@ -122,7 +122,7 @@ class Aluminium(Cargo):
     def __init__(self, universe):
         
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/iron.png", 'pos':(0,0), 'color':(200,200,200), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(1,0), 'color':(200,200,200), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "Aluminium"
@@ -134,7 +134,7 @@ class Chemicals(Cargo):
     def __init__(self, universe):
         
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/chemicals.png", 'pos':(0,0), 'color':(100,250,100), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(4,0), 'color':(100,250,100), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "Chemicals"
@@ -144,7 +144,7 @@ class Food(Cargo):
     
     def __init__(self, universe):
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/food.png", 'pos':(0,0), 'color':(250,250,100), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(3,2), 'color':(250,250,100), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "Food"
@@ -156,7 +156,7 @@ class Gems(Cargo):
     def __init__(self, universe):
         
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/gems.png", 'pos':(0,0), 'color':(250,50,50), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(2,1), 'color':(250,50,50), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "Gems"
@@ -168,7 +168,7 @@ class ExMetal(Cargo):
     def __init__(self, universe):
         
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
         self.image=None
 
         
@@ -181,7 +181,7 @@ class SheetMetal(Cargo):
     def __init__(self, universe):
         
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/sheetmetal.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "Sheet metal"
@@ -193,7 +193,7 @@ class ConstMat(Cargo):
     def __init__(self, universe):
         
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(4,2), 'color':(100,100,100), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "ConstMat"
@@ -204,7 +204,7 @@ class CompComp(Cargo):
 
     def __init__(self, universe):
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/compcomp.png", 'pos':(0,0), 'color':(50,200,50), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(0,2), 'color':(50,200,50), 'direction':None,'zoom':None}
         self.image=None        
         self.name = "CompComp"
         self.damage = 1
@@ -215,7 +215,7 @@ class MachParts(Cargo):
     def __init__(self, universe):
         
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/machparts.png", 'pos':(0,0), 'color':(100,150,100), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(1,2), 'color':(100,150,100), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "MachParts"
@@ -226,7 +226,7 @@ class Plastics(Cargo):
     def __init__(self, universe):
         
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/plastics.png", 'pos':(0,0), 'color':(100,200,200), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(4,1), 'color':(100,200,200), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "Plastics"
@@ -237,7 +237,7 @@ class Explosives(Cargo):
     
     def __init__(self, universe):
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/explosives.png", 'pos':(0,0), 'color':(100,150,150), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(3,1), 'color':(100,150,150), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "Explosives"
@@ -248,7 +248,7 @@ class Minerals(Cargo):
     def __init__(self, universe):
         
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/minerals.png", 'pos':(0,0), 'color':(50,50,50), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(1,1), 'color':(50,50,50), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "Minerals"
@@ -260,7 +260,7 @@ class AirFilters(Cargo):
     def __init__(self, universe):
         
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(50,50,50), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(4,2), 'color':(50,50,50), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "Air filters"
@@ -271,7 +271,7 @@ class PleasureCubes(Cargo):
     def __init__(self, universe):
         
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/pleasurecubes.png", 'pos':(0,0), 'color':(200,200,100), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(0,3), 'color':(200,200,100), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "Pleasure cubes"
@@ -283,7 +283,7 @@ class Alcohol(Cargo):
     def __init__(self, universe):
         
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(150,150,100), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(4,2), 'color':(150,150,100), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "Alcohol"
@@ -295,7 +295,7 @@ class Textiles(Cargo):
     def __init__(self, universe):
        
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/textiles.png", 'pos':(0,0), 'color':(200,200,200), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(2,2), 'color':(200,200,200), 'direction':None,'zoom':None}
         self.image=None
         
         self.name = "Textiles"
@@ -306,7 +306,7 @@ class HuskarCigars(Cargo):
     
     def __init__(self, universe):
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(100,100,100), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(4,2), 'color':(100,100,100), 'direction':None,'zoom':None}
         self.image=None
 
         
@@ -320,7 +320,7 @@ class ServantDroids(Cargo):
 
 
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(250,200,200), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(0,0), 'color':(250,200,200), 'direction':None,'zoom':None}
         self.image=None
 
         
@@ -332,7 +332,7 @@ class CloningDevice(Cargo):
 
     def __init__(self, universe):
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/ironore.png", 'pos':(0,0), 'color':(200,200,250), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(0,0), 'color':(200,200,250), 'direction':None,'zoom':None}
         self.image=None
 
         
@@ -344,7 +344,7 @@ class PureWater(Cargo):
 
     def __init__(self, universe):
         Cargo.__init__(self, universe)
-        self.spritename = {'name':"res/goods/water.png", 'pos':(0,0), 'color':(0,100,200), 'direction':None,'zoom':None}
+        self.spritename = {'name':"res/goods/goods.png", 'pos':(0,3), 'color':(0,100,200), 'direction':None,'zoom':None}
         self.image=None
 
         

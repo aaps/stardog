@@ -17,7 +17,9 @@ class spriteSystem(object):
         self.spritesheets.update({str(filename):{'image':image,'dimentions':dims}})
         
 
-    def getsprite(self, spriteid):
+    def getsprite(self, sprited, spriteid):
+        if not spriteid['zoom']:
+             spriteid['zoom'] =  self.camera.zoom
         ahash = zlib.adler32(spriteid.get('name') + str(spriteid.get('pos')) +  str(spriteid.get('color')) + str(spriteid.get('direction')) + str(spriteid.get('zoom')))
         result = self.sprites.get(ahash)
         if result:
@@ -30,17 +32,17 @@ class spriteSystem(object):
                 surface = spritesheet.get('image').subsurface(rect)
 
 
-                amultysprite = multysprite(spriteid.get('name'), surface, spriteid.get('pos'), spriteid.get('color'), spriteid.get('direction'), spriteid.get('zoom'))
+                amultysprite = multysprite( spriteid.get('name'), surface, sprited, spriteid.get('pos'), spriteid.get('color'), spriteid.get('direction'), spriteid.get('zoom'))
                 self.sprites.update({ahash:amultysprite}) 
                 return amultysprite
 
-            return multysprite(self.defname,self.default,(0,0))
+            return multysprite(self.defname,self.default,sprited,(0,0))
 
 
     def zoom(self, zoom):
         for sprite in self.sprites:
-            if sprite.zoomable:
-                sprite.zoom(zoom)
+            if self.sprites[sprite].sprited and self.sprites[sprite].sprited.spritename:
+                self.sprites[sprite].sprited.spritename['zoom'] = zoom
 
     def setFPS(self, fps):
         self.fps = fps
@@ -59,9 +61,10 @@ class spriteSystem(object):
                 
 class multysprite(object):
 
-    def __init__(self, filename, surface, pos=(1,1), color=(255,255,255), direction = 0, zoom = 1):
+    def __init__(self, filename, surface, sprited=None, pos=(1,1), color=(255,255,255), direction = 0, zoom = 1):
         
         self.image = surface
+        self.sprited = sprited
         self.notused = 0
         if color:
             self.image = colorShift(self.image, color)

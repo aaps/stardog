@@ -87,21 +87,9 @@ class Game(object):
         self.spritesystem.addspritesheet("res/parts/strafebatgun.png", 1,1)
         self.spritesystem.addspritesheet("res/parts/fightershield.png", 1,1)
         self.spritesystem.addspritesheet("res/parts/cockpit.png", 1,1)
-        self.spritesystem.addspritesheet("res/goods/scrap.png", 1,1)
-        self.spritesystem.addspritesheet("res/goods/iron.png", 1,1)
-        self.spritesystem.addspritesheet("res/goods/ironore.png", 1,1)
-        self.spritesystem.addspritesheet("res/goods/chemicals.png", 1,1)
-        self.spritesystem.addspritesheet("res/goods/food.png", 1,1)
-        self.spritesystem.addspritesheet("res/goods/gems.png", 1,1)
-        self.spritesystem.addspritesheet("res/goods/sheetmetal.png", 1,1)
-        self.spritesystem.addspritesheet("res/goods/compcomp.png", 1,1)
-        self.spritesystem.addspritesheet("res/goods/machparts.png", 1,1)
-        self.spritesystem.addspritesheet("res/goods/plastics.png", 1,1)
-        self.spritesystem.addspritesheet("res/goods/explosives.png", 1,1)
-        self.spritesystem.addspritesheet("res/goods/minerals.png", 1,1)
-        self.spritesystem.addspritesheet("res/goods/pleasurecubes.png", 1,1)
-        self.spritesystem.addspritesheet("res/goods/textiles.png", 1,1)
-        self.spritesystem.addspritesheet("res/goods/water.png", 1,1)
+        
+        self.spritesystem.addspritesheet("res/goods/goods.png", 5,5)
+
 
         
         self.camera = Camera(self.universe, self.spritesystem)

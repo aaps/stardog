@@ -11,7 +11,7 @@
 [![Chat](https://img.shields.io/badge/chat-gitter-blue.svg?style=flat
 )](https://gitter.im/aaps/stardog)
 <img align="right" height="100" src="https://raw.githubusercontent.com/aaps/stardog/master/res/stardog-logo.gif">
-
+<br /><br /><br /><br /><br /><br /><br />
 
 Credits
 ===
@@ -29,7 +29,7 @@ Programmers
 
 Music
 ===
-* . . . Soon
+* Corné Matton 
 
 Running:
 ===

@@ -45,8 +45,7 @@ class Floater(Ballistic):
         self.radius = radius
         
         self.spritename = None
-        # self.universe.game.spritesystem.getsprite(self.spritename).getImage()
-        self.image = self.universe.game.spritesystem.getsprite({'name':"res/parts/default.png", 'pos':(0,0), 'color':None,'direction':None,'zoom':None}).getImage()
+        self.image = self.universe.game.spritesystem.getsprite(self, {'name':"res/parts/default.png", 'pos':(0,0), 'color':None,'direction':None,'zoom':None}).getImage()
         self.rect = self.image.get_rect()
         self.soundsys = self.universe.game.soundSystem
         self.crashSound = 'se_sdest.wav'
@@ -84,8 +83,7 @@ class Floater(Ballistic):
                         self.pos.y - self.image.get_height() / 2 - offset.y)
                 surface.blit(self.image, poss)
             elif self.spritename:
-                image = self.universe.game.spritesystem.getsprite(self.spritename).getImage()
-               
+                image = self.universe.game.spritesystem.getsprite(self, self.spritename).getImage()
                 poss = (self.pos.x - image.get_width() / 2 - offset.x,
                         self.pos.y - image.get_height() / 2 - offset.y)
                 surface.blit(image, poss)
@@ -367,7 +365,7 @@ class LaserBeam(Floater):
         direction = laser.direction + laser.ship.direction
         self.baseImage = loadImage("res/ammo/laser.png").convert_alpha()
         pos = (laser.pos + Vec2d(laser.shootPoint).rotated(direction) +
-               laser.ship.delta / universe.game.fps)
+               50 / universe.game.fps)
 
         start = pos
         direction = laser.direction + laser.ship.direction + laser.shootDir

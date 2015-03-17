@@ -11,6 +11,7 @@ class Camera(object):
     def __init__(self, universe, spritesystem, pos=Vec2d(0, 0)):
         self.universe = universe
         self.spritesystem = spritesystem
+        self.spritesystem.camera = self
         self.pos = pos
         self.width = universe.game.width
         self.height = universe.game.height
@@ -19,7 +20,7 @@ class Camera(object):
         self.transtime = 10
         self.layers = []
         self.target = None
-        self.zoom = 3
+        self.zoom = 1
 
     def zoomOut(self):
         if self.zoom > 1:

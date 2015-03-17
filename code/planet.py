@@ -17,7 +17,6 @@ class Planet(Floater):
     
     def __init__(self, starsystem, pos, delta = Vec2d(0,0), grav=5000, radius = 100, mass = 10000, \
                     color = (100,200,50), image = None, race = None):
-        # print starsystem
         Floater.__init__(self, starsystem.universe, pos, delta, radius = radius, spritename = None)
         self.maxRadius = 1000000 # no gravity felt past this (approximation).
         self.planet_damage = .0004
