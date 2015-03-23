@@ -1,10 +1,10 @@
 # universe.py
-# 
 from starSystem import *
 
+
 class Universe(object):
-    
-    def __init__(self, game = None):
+
+    def __init__(self, game=None):
         self.starSystems = []
         self.curSystem = None
         self.player = None

@@ -1,20 +1,17 @@
 from pygame import Rect
- 
+
+
 class QuadTree(object):
-    """An implementation of a quad-tree.
- 
+    """An implementation of a quad-tree. 
     This QuadTree started life as a version of [1] but found a life of its own
     when I realised it wasn't doing what I needed. It is intended for static
     geometry, ie, items such as the landscape that don't move.
- 
     This implementation inserts items at the current level if they overlap all
     4 sub-quadrants, otherwise it inserts them recursively into the one or two
     sub-quadrants that they overlap.
- 
     Items being stored in the tree must be a pygame.Rect or have have a
     .rect (pygame.Rect) attribute that is a pygame.Rect
-        ...and they must be hashable.
-    
+    ...and they must be hashable.
     Acknowledgements:
     [1] http://mu.arete.cc/pcr/syntax/quadtree/1/quadtree.py
     """

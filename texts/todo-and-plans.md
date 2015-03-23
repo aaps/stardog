@@ -80,15 +80,15 @@ This for kickasery also you can see problems with parts without starting up the 
 main dish
 ==========
 
-are we gonna use: http://pymunk.org/ lets try some examples first.
 
-(warning this file could describe things in faul language, cursing and poor grammar !)
+* (warning this file could describe things in faul language, cursing and poor grammar !)
+
+* perhaps a plugin system, so that game functionality can be more modular and more tempting to build ?
+* are we gonna use: http://pymunk.org/ lets try some examples first.
 
 * quad trees (partly done, still have to do more collition refactoring)
 
 * wormholes/star gates to other systems. (medium mode ?, after Gravless class) [can travel to other star systems via direct travel now, star gates next] [done]
-
-
 
 * make everything looser coupled, vec2d, particles and some others are quite loosly coupled.
 Find one class to make even looser.

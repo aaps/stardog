@@ -57,41 +57,37 @@ class Game(object):
         # every part has to register with this system.
         self.soundSystem = SoundSystem('res/sound/sfxSounds/')
         self.spritesystem = spriteSystem()
-        self.spritesystem.addspritesheet("res/parts/default.png", 1,1)
+        self.spritesystem.addspritesheet("res/parts/default.png", 1, 1)
         self.spritesystem.addspritesheet("res/ammo/shot.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/misilelauncher.png", 1,1)
-        self.spritesystem.addspritesheet("res/ammo/missile.png", 1,1)
-        self.spritesystem.addspritesheet("res/ammo/mine.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/radar.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/engine.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/gyro.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/generator.png", 1,1)
+        self.spritesystem.addspritesheet("res/parts/misilelauncher.png", 1, 1)
+        self.spritesystem.addspritesheet("res/ammo/missile.png", 1, 1)
+        self.spritesystem.addspritesheet("res/ammo/mine.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/radar.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/engine.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/gyro.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/generator.png", 1, 1)
 
-        self.spritesystem.addspritesheet("res/parts/interconnect.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/quarters.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/gateway_focus.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/battery.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/shield.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/cargo.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/minelayer.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/interceptor.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/fighter.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/destroyer.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/leftflak.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/machinegun.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/rightflak.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/leftlaser.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/rightlaser.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/leftgun.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/rightgun.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/strafebatgun.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/fightershield.png", 1,1)
-        self.spritesystem.addspritesheet("res/parts/cockpit.png", 1,1)
-        
-        self.spritesystem.addspritesheet("res/goods/goods.png", 5,5)
-
-
-        
+        self.spritesystem.addspritesheet("res/parts/interconnect.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/quarters.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/gateway_focus.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/battery.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/shield.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/cargo.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/minelayer.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/interceptor.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/fighter.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/destroyer.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/leftflak.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/machinegun.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/rightflak.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/leftlaser.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/rightlaser.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/leftgun.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/rightgun.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/strafebatgun.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/fightershield.png", 1, 1)
+        self.spritesystem.addspritesheet("res/parts/cockpit.png", 1,1 )
+        self.spritesystem.addspritesheet("res/goods/goods.png", 5, 5)
         self.camera = Camera(self.universe, self.spritesystem)
         self.universe.addCamera(self.camera)
 
@@ -257,8 +253,7 @@ class Game(object):
                 R_CTRL_Q = (self.keys[K_RCTRL % 322] and self.keys[K_q % 322])
                 if (L_ALT_F4 or R_ALT_F4 or L_CTRL_Q or R_CTRL_Q):
                     self.running = False
-
-
+                    
                 for strigger in self.storytriggers:
                     strigger.update()
 

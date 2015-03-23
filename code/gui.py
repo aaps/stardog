@@ -35,14 +35,13 @@ class Drawable(object):
     def draw(self):
         pass
 
+
 class Messenger(Drawable):
-    # not capitalized in stand lib
-    
-    # font = FONT
+
 
     def __init__(self, universe, font, direction=1):
         Drawable.__init__(self, universe)
-        queue = deque()
+        # queue = deque()
         # -1 means the messages stack upward.
         self.font = FONT
         self.direction = direction
@@ -107,7 +106,6 @@ class HUD(Drawable):
         Drawable.__init__(self, universe)
         self.player = universe.game.player
         self.arect = col12row9(universe.game, 10, 8, 2, 3)
-
 
         self.image = pygame.Surface((self.arect.width, self.arect.height), flags=(SRCALPHA))
         
@@ -216,9 +214,8 @@ class RadarField(Drawable):
                                              (dotPos[0]-1, dotPos[1]-1, 2, 2))
                         elif isinstance(floater, Cargo):
                             pygame.draw.rect(self.image, (200, 200, 0),
-                                             (dotPos[0]-1, dotPos[1]-1, 2, 2))
+                                                         (dotPos[0]-1, dotPos[1]-1, 2, 2))
                 
-
                 elif not isinstance(floater, Planet):
                     color = (255, 0, 0)
                     modi = 7
@@ -239,10 +236,10 @@ class RadarField(Drawable):
                          Vec2d(center).rotatedd(angle, 97), 1)
 
             pygame.draw.line(self.image, SUPER_WHITE, (0, self.radarRadius),
-                             (self.radarRadius*2, self.radarRadius), 1)
+                            (self.radarRadius*2, self.radarRadius), 1)
 
             pygame.draw.line(self.image, SUPER_WHITE, (self.radarRadius, 0),
-                             (self.radarRadius, self.radarRadius*2), 1)
+                            (self.radarRadius, self.radarRadius*2), 1)
 
             self.image.blit(self.maskimage, (0, 0))
 
@@ -250,7 +247,7 @@ class RadarField(Drawable):
                                self.center, self.radarRadius, 1)
 
             surface.blit(self.image,
-                         (self.rect.x, self.rect.y))
+                        (self.rect.x, self.rect.y))
 
     def zoomInRadar(self):
         if self.zoomModifier <= 2.4:
@@ -333,21 +330,18 @@ class LifeBar(object):
         ratio = (value / (maxi-mini))
         if self.hori and value < self.rect.width and value > 0:
             self.dynamicrect.width = (ratio * self.rect.width)
-            self.dynamicrect.x = self.rect.width - (ratio * self.rect.width) 
+            self.dynamicrect.x = self.rect.width - (ratio * self.rect.width)
 
         if not self.hori and value < self.rect.height and value > 0:
             self.dynamicrect.height = (ratio * self.rect.height)
-            self.dynamicrect.y = self.rect.height - (ratio * self.rect.height) 
+            self.dynamicrect.y = self.rect.height - (ratio * self.rect.height)
 
 
     def draw(self, surface, offset):
         if self.game.player:
             pygame.draw.rect(self.image, (0,0,0), self.rect)
-            
             pygame.draw.rect(self.image, HUD2, self.rect, 1)
-            
-            pygame.draw.rect(self.image, self.color, self.dynamicrect) 
-            
+            pygame.draw.rect(self.image, self.color, self.dynamicrect)
             surface.blit(self.image, offset)
 
 
@@ -441,17 +435,14 @@ class shipDamage(Drawable):
 
     def __init__(self, universe, font):
         Drawable.__init__(self, universe)
-        # self.game = game
         self.player = self.universe.game.player
         self.totalhealth = 0
         self.font = font
         self.shownparts = []
-        self.rect = col12row9(self.universe.game,9,4,3,3)
-        # self.width = int(self.universe.game.width / 5)
-        # self.height = int(self.universe.game.height/ 4 )
-        self.image = pygame.Surface((self.rect.width,self.rect.height))
+        self.rect = col12row9(self.universe.game, 9, 4, 3, 3)
+        self.image = pygame.Surface((self.rect.width, self.rect.height))
         self.image.set_alpha(200)
-    
+
     def update(self):
         totalhealth = sum(c.hp for c in self.player.parts)
         if totalhealth != self.totalhealth:
@@ -463,14 +454,13 @@ class shipDamage(Drawable):
             self.active = False
 
 
-    def draw(self,surface):
+    def draw(self, surface):
         
         if self.active:
             self.startrect = Rect(10, 0, 150, 5)
             self.image.fill(SHIPDAMAGE)
             for part in self.shownparts:
-                partfactor = part.hp / part.maxhp 
-                
+                partfactor = part.hp / part.maxhp
                 if partfactor >= 0 and partfactor <= 1:
                     self.startrect[2] = partfactor * 150
                     self.startrect[1] += 30
@@ -479,9 +469,5 @@ class shipDamage(Drawable):
                     pygame.draw.rect(self.image, color, self.startrect)
                     text = self.font.render(part.name + " " + str(round(part.hp,1)) + "/" + str(part.maxhp), False, HUD3)
                     self.image.blit(text, (10, self.startrect[1]-15))
-            
-            
 
         surface.blit(self.image, (self.rect.x, self.rect.y))
-                
-

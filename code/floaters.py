@@ -43,9 +43,8 @@ class Floater(Ballistic):
         self.lastDamageFrom = None
         self.fps = 10
         self.radius = radius
-        
         self.spritename = None
-        self.image = self.universe.game.spritesystem.getsprite(self, {'name':"res/parts/default.png", 'pos':(0,0), 'color':None,'direction':None,'zoom':None}).getImage()
+        self.image = self.universe.game.spritesystem.getsprite(self, {'name': "res/parts/default.png", 'pos': (0, 0), 'color': None, 'direction': None, 'zoom': None}).getImage()
         self.rect = self.image.get_rect()
         self.soundsys = self.universe.game.soundSystem
         self.crashSound = 'se_sdest.wav'
@@ -146,8 +145,6 @@ class Bullet(Floater):
         self.soundsys = self.universe.game.soundSystem
         self.bulletSound = 'se_explode02.wav'
         self.soundsys.register(self.bulletSound)
-
-
 
     def update(self):
         self.life += 1. / self.fps
@@ -359,7 +356,6 @@ class LaserBeam(Floater):
     collision mechanism: they use line/circle collision, and it is checked
     during initialization."""
 
-    
 
     def __init__(self, universe, laser, damage, range):
         direction = laser.direction + laser.ship.direction
@@ -474,4 +470,3 @@ class RadarDisk(Floater):
 
     def update(self):
         pass
-

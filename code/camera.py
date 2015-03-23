@@ -101,7 +101,7 @@ class Camera(object):
 class Layer(object):
 
     def __init__(self, drawable, zindex, camera, zoomable=False):
-        self.zoomable=zoomable
+        self.zoomable = zoomable
         self.zindex = zindex
         self.drawable = drawable
         self.camera = camera
@@ -115,7 +115,6 @@ class Layer(object):
     def zoomTo(self, zoom):
         if self.zoomable:
             self.zoom = zoom
-
 
     def setEnabled(self, enabled):
         self.enabled = enabled
@@ -141,11 +140,8 @@ class Layer(object):
                 self.drawable.draw(surface)
 
 
-
-
 class SpaceView(object):
 
-    
     def __init__(self, game):
         self.game = game
 

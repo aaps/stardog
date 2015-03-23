@@ -10,41 +10,41 @@ from os.path import isfile, join
 import os
 import re
 
-BLACK = (0,0,0)
-MIN_BLACK = (10,10,10)
-SHIPDAMAGE = (0,0,50,200)
-SHIPDAMAGE2 = (0,0,70,200)
-HUD3 = (0,150,50)
-HUD2 = (0,50,250)
-HUD1 = (0,0,150)
-RED = (250,0,0)
-GREEN = (0,250,0)
-BLUE = (0,0,250)
-SHIP_PANEL_BLUE = (100,200,0)
-CONSOLE_BLUE = (100,100,250,250)
-BGSELECTED = (100,50,100)
-DRAGGABLE = (50,150,50)
-BGACTIVE = (110,100,50)
-DS_SELECTED = (250,50,50)
-SELECTED_COLOR = (250,200,200)
-ST = (200,200,250)
-BUTTON_ACTIVE = (200,250,200)
-SBUTTON_ACTIVE = (250,150,0)
-BS1 = (100,200,100)
-BS3 = (200,100,100)
-SBUTTON_INACTIVE = (200,100,0)
-FLOATER = (200,200,0)
-HUD6 = (200,0,250)
-MINI2 = (0,250,250)
-PART1 =  (150,150,150)
-PARTICLE1 = (150,150,150,50)
-WHITE = (250,250,250)
-PARTICLE3 = (250,250,0,250)
-PARTICLE5 = (75,100,250,250)
-PARTICLE6 = (250,100,100,0)
-SUPER_WHITE = (255,255,255)
+BLACK = (0, 0, 0)
+MIN_BLACK = (10, 10, 10)
+SHIPDAMAGE = (0, 0, 50, 200)
+SHIPDAMAGE2 = (0, 0, 70, 200)
+HUD3 = (0, 150, 50)
+HUD2 = (0, 50, 250)
+HUD1 = (0, 0, 150)
+RED = (250, 0, 0)
+GREEN = (0, 250, 0)
+BLUE = (0, 0, 250)
+SHIP_PANEL_BLUE = (100, 200, 0)
+CONSOLE_BLUE = (100, 100, 250, 250)
+BGSELECTED = (100, 50, 100)
+DRAGGABLE = (50, 150, 50)
+BGACTIVE = (110, 100, 50)
+DS_SELECTED = (250, 50, 50)
+SELECTED_COLOR = (250, 200, 200)
+ST = (200, 200, 250)
+BUTTON_ACTIVE = (200, 250, 200)
+SBUTTON_ACTIVE = (250, 150, 0)
+BS1 = (100, 200, 100)
+BS3 = (200, 100, 100)
+SBUTTON_INACTIVE = (200, 100, 0)
+FLOATER = (200, 200, 0)
+HUD6 = (200, 0, 250)
+MINI2 = (0, 250, 250)
+PART1 =  (150, 150, 150)
+PARTICLE1 = (150, 150, 150, 50)
+WHITE = (250, 250, 250)
+PARTICLE3 = (250, 250, 0, 250)
+PARTICLE5 = (75, 100, 250, 250)
+PARTICLE6 = (250, 100, 100, 0)
+SUPER_WHITE = (255, 255, 255)
 
-def col12row9(game, xcol,yrow, withcol, heightrow):
+def col12row9(game, xcol, yrow, withcol, heightrow):
     rows = 12
     cols = 12
     x = int(game.width / cols) * xcol
@@ -52,7 +52,7 @@ def col12row9(game, xcol,yrow, withcol, heightrow):
     width = int(game.width / cols) * withcol
     height = int(game.width / rows) * heightrow
 
-    return Rect(x,y,width,height)
+    return Rect(x, y, width, height)
 
 hardwareFlag = pygame.HWSURFACE
 
@@ -87,51 +87,64 @@ randint = r.randint
 randnorm = r.normalvariate
 
 
-#TODO: write fast sloppy trig functions. 
+#TODO: write fast sloppy trig functions.
 def sin(theta):
     return math.sin(math.radians(theta))
 
+
 def cos(theta):
     return math.cos(math.radians(theta))
-    
+
+
 def atan2(rise, run):
     return math.degrees(math.atan2(rise, run))
+
 
 def angleNorm(angle):
     """returns an equivilant angle between -180 and 180."""
     return (angle + 180) % 360 - 180
 
+
 def angleNormPlus(angle):
     """returns an equivilant angle between -180 and 180."""
     return ((angle + 180) % 360 - 180) + 180
 
+
 def rotate(x, y, angle):
     """rotation transformation for a point."""
-    cost = cos(angle) #cost is short for cos(theta)
+     #cost is short for cos(theta)
+    cost = cos(angle)
     sint = sin(angle)
-    newx = x  * cost - y * sint
-    newy = x  * sint + y * cost
+    newx = x * cost - y * sint
+    newy = x * sint + y * cost
     return (newx, newy)
-    
+
+
 def dist(x1, y1, x2, y2):
-    return math.sqrt( (x1 - x2) ** 2 + (y1 - y2) ** 2)
+    return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+
 
 def dist2(floater1, floater2):
     """returns the squared distance between two floaters (center to center)."""
-    return  floater1.pos.get_dist_sqrd(floater2.pos)
+    return floater1.pos.get_dist_sqrd(floater2.pos)
+
 
 def sign(num):
     """returns the sign of the number, -1, 0, or 1."""
-    if num < 0 : return -1
-    if num > 0 : return 1
+    if num < 0: return -1
+    if num > 0: return 1
     return 0
-    
+
+
 def limit(min, num, max):
-    """Returns num if min < num <max.  
+    """Returns num if min < num <max.
     Returns min if num < min or max if num > max."""
-    if num > max: return max
-    if num < min: return min
+    if num > max: 
+        return max
+    if num < min: 
+        return min
     return num
+
 
 def not0(num):
     """if num is 0, returns .001.  To prevent div by 0 errors."""
@@ -140,12 +153,9 @@ def not0(num):
     return .000001
 
 
-
-
 def randColor(min, max):
     return (randint(min[0], max[0]), randint(min[1], max[1]),
             randint(min[2], max[2]))
-
 
 
 def randImageInDir(directory):
@@ -163,31 +173,32 @@ def loadImage(filename):
         image = pygame.image.load(filename).convert_alpha()
     except pygame.error:
         image = pygame.image.load("res/parts/default.png").convert_alpha()
-
     return image
-    
-def colorShift(surface, color, first = 0, second = 2):
-    """Converts every pixel with equal red and blue values to a shade of 
-    color.  Attempts to maintain value and saturation of surface. 
+
+
+def colorShift(surface, color, first=0, second=2):
+    """Converts every pixel with equal red and blue values to a shade of
+    color.  Attempts to maintain value and saturation of surface.
     Returns a new Surface."""
 
     s = pygame.Surface(surface.get_size(), pygame.SRCALPHA, 32).convert_alpha()
-    s.blit(surface, (0,0))
+    s.blit(surface, (0, 0))
     pa = pygame.PixelArray(s)
     for i in range(len(pa)):
         for j in range(len(pa[i])):
             newColor = oldColor = s.get_at((i, j))
-            if oldColor[first] == oldColor[second]: #a shade of magic pink
+            if oldColor[first] == oldColor[second]:
                 newColor = [0, 0, 0, 0]
-                for k in [0,1,2]:
+                for k in [0, 1, 2]:
                     newColor[k] = int(oldColor[0] * color[k] / 255 + oldColor[1] * (255 - color[k]) / 255)
             newColor[3] = oldColor[3]
-            s.set_at((i, j),newColor)
+            s.set_at((i, j), newColor)
     del pa
     del surface
     del oldColor
     del newColor
     return s
+
 
 def totalColorVal(surface):
     pa = pygame.PixelArray(surface)
@@ -198,12 +209,13 @@ def totalColorVal(surface):
             colscore += col[0] + col[1] + col[2]
     return colscore
 
+
 def collisionTest(a, b):
     """test spatial collision of Floaters a and b"""
     return a != b and a.pos.get_distance(b.pos) < (a.radius + b.radius)
 
 
-def linePointDist(linePoint1, linePoint2, point, infinite = False):
+def linePointDist(linePoint1, linePoint2, point, infinite=False):
     line = linePoint2[0] - linePoint1[0], linePoint2[1] - linePoint1[1]
     lineDist = sqrt(line[0] ** 2 + line[1] ** 2)
     toPoint = point[0] - linePoint1[0], point[1] - linePoint1[1]
@@ -212,13 +224,11 @@ def linePointDist(linePoint1, linePoint2, point, infinite = False):
         closest = linePoint1
     elif projectionDist > lineDist and not infinite:
         closest = linePoint2
-    else: 
+    else:
         ratio = projectionDist / lineDist
-        closest = (line[0] * ratio + linePoint1[0],
-                      line[1] * ratio + linePoint1[1])
-        
+        closest = (line[0] * ratio + linePoint1[0], line[1] * ratio + linePoin
     return dist(closest[0], closest[1], point[0], point[1])
-    
+
 
 def energyColor(damage):
     """generates a color based on how much energy it needs to express"""
@@ -256,7 +266,7 @@ def diamondRect(surface, color, rect, corners=[]):
         for idx, corner in enumerate(corners):
             if corner > 0:
                 if idx == 0:
-                    points = [(relrect[0],relrect[1]),(relrect[0]+corner,relrect[1]),(relrect[0],relrect[1]+corner)]
+                    points = [(relrect[0],relrect[1]),(relrect[0]+corner, relrect[1]),(relrect[0],relrect[1]+corner)]
                     pygame.draw.polygon(image, BLACK, points)
                     pygame.draw.lines(image, color, False, points[1:]) 
                 elif idx == 1:
@@ -277,7 +287,7 @@ def diamondRect(surface, color, rect, corners=[]):
 
 def makeKMdistance(floaterx, floatery):
     """Convert game pix distance edge to edge into KM's, ships several KM's big, meh"""
-    return str(max(round((floaterx.pos.get_distance(floatery.pos)-floaterx.radius-floatery.radius)/10,1),0))
+    return str(max(round((floaterx.pos.get_distance(floatery.pos)-floaterx.radius-floatery.radius)/10, 1), 0))
 
 
 def makeKMs(floater):

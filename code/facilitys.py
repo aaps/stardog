@@ -1,6 +1,7 @@
 # facillitys.py
 
-from adjectives import PARTS, CARGO
+from adjectives import PARTS
+
 
 class Company(object):
     def __init__(self,planet):
@@ -8,7 +9,6 @@ class Company(object):
         self.facilitys = []
         self.name = "dummy Company"
         self.cash = 1000
-        # self.prices = {PARTS[0]:1, PARTS[1]:2}.items() + {CARGO[0]:3}.items()
 
     def addFacility(self, facility):
         facility.company = self
@@ -19,14 +19,12 @@ class Company(object):
             facility.update()
 
 
-
 class Facility(object):
     def __init__(self):
         self.name = "dummy Facility"
         self.suply = []
         self.needs = {}
         self.company = None
-        
 
     def update(self):
         pass
@@ -35,19 +33,6 @@ class Facility(object):
 class Shop(Facility):
     def __init__(self,):
         Facility.__init__(self)
-    # getClosesedsystem(Facility)
-    # getClosesedUniverse(Facility)
-    # getaveragesystem(item)
-    # getmaxsystem(item)
-    # getminsystem(item)
-    # getaverageuniverse(item)
-    # getmaxuniverse(item)
-    # getminuniverse(item)
-    # getaveragerepairsystem
-    # getmaxrepairsystem
-    # getminrepairsystem
-    # getclosessystem(item)
-    # getclosesuniverse(item)
 
 
 class Fitter(Facility):

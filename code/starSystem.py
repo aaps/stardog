@@ -11,16 +11,15 @@ from vec2d import Vec2d
 from nameMaker import *
 from Quadtree import *
 
-class StarSystem(object):
 
+class StarSystem(object):
     """A StarSystem holds ships and other floaters."""
-    
-    def __init__(self, universe, position=Vec2d(0,0), boundrad = 30000, edgerad = 60000):
+
+    def __init__(self, universe, position=Vec2d(0, 0), boundrad=30000, edgerad=60000):
         self.boundrad = boundrad
         self.position = position
         self.edgerad = edgerad
         self.neighbors = []
-
         self.universe = universe
         self.floaters = []
         self.spawnScore = 0
@@ -36,7 +35,6 @@ class StarSystem(object):
         self.planets = []
         self.name = ""
 
-    
     def addNeighbor(self, starsystem):
         self.neighbors.append(starsystem)
         starsystem.neighbors.append(self)
@@ -50,10 +48,9 @@ class StarSystem(object):
             posdiff = -(starsystem.position - self.position)
             posdiffs.append((starsystem,posdiff))
         return posdiffs
-        
+
     def update(self):
         """Runs the game."""
-
 
         if self.spawnScore > 0:
             self.spawnScore -= 1
@@ -62,16 +59,12 @@ class StarSystem(object):
             floater.setFPS(self.universe.game.fps)
             floater.update()
 
-        # for floater in self.floaters:
-        #     for hitter in self.floaters:
-        #         self.collide(hitter, floater)
-
         quad = QuadTree(self.floaters, 3, Rect(-self.edgerad, -self.edgerad,self.edgerad,self.edgerad))
 
         for floater in self.floaters:
-            for hitter in  quad.hit(floater.rect):
+            for hitter in quad.hit(floater.rect):
                 self.collide(hitter, floater)
-             
+
         for floater in self.floaters:
             if floater.pos.get_distance(Vec2d(0,0)) > self.boundrad:
                 if isinstance(floater, Ship):
@@ -80,10 +73,8 @@ class StarSystem(object):
                     try:
                         floater.kill()
                     except TypeError:
-                        print floater, "exception error"
+                        print(floater, "exception error")
 
-        
-                    
         #do any special actions that don't fit elsewhere:
         #(currently just laser collisions)
         for function in self.specialOperations:
@@ -91,9 +82,9 @@ class StarSystem(object):
         self.specialOperations = []
 
         for planet in self.planets:
-            
+
             if not planet.ships and not isinstance(planet, Star) and self.spawnScore < self.spawnMax:
-                if planet.respawn > 0:#countdown the timer
+                if planet.respawn > 0:
                     planet.respawn -= 1. / self.universe.game.fps
                     continue
                 else:
@@ -101,18 +92,16 @@ class StarSystem(object):
                     planet.respawn = self.respawnTime #reset respawn timer
                     planet.numShips += 1
                     for i in range(planet.numShips):
-                    
                         angle = randint(0, 360)
                         pos = planet.pos.rotatedd(angle, planet.radius + 300)
                         name = nameMaker().getUniqePilotName(self.ships)
-                        
                         ship = Strafebat(self.universe, pos,  planet.color, name)
                         
                         planet.ships.append(ship)
                         self.add(ship)
                         ship.planet = planet
-        
-        
+
+
     def add(self, floater):
         if (self.spawnScore + floater.spawncost) < self.spawnMax or floater.surespawn:
             if isinstance(floater, Player):
@@ -125,14 +114,13 @@ class StarSystem(object):
             self.spawnScore += floater.spawncost
             floater.starSystem = self
             self.floaters.append(floater)
-        
+
     def empty(self):
         self.ships[:] = []
         self.floaters[:] = []
 
-
 # refactor this and put all functionality in corresponding classes, be carefull can quickly spinn into mess.
-# piecetime refactor 
+# piecetime refactor
 # perhaps this method can be brokenup in a collision method for planet, ship and part
     def collide(self, a, b):
         """test and act on spatial collision of Floaters a and b"""
@@ -147,17 +135,13 @@ class StarSystem(object):
             if isinstance(a, Planet):
                 return a.collision(b)
 
-                    
             if isinstance(b, Explosion): a,b = b,a
             if isinstance(a, Explosion):
                 self.explosion_push(a,b)
-                #but don't return!
-            #shield ship/?
 
             if isinstance(b, Ship) : a,b = b,a
             if isinstance(a, Ship):
-                
-                if isinstance(b, Part) and b.parent == None:
+                if isinstance(b, Part) and not b.parent:
                     a.freepartCollision(b)
                     return True
 
@@ -167,7 +151,6 @@ class StarSystem(object):
 
                 hit = False
                 if a.hp > 0:
-                    
                     if b.hp >= 0 and (sign(b.pos.x - a.pos.x) == - sign(b.delta.x - a.delta.x) \
                                     or sign(b.pos.y - a.pos.y) == - sign(b.delta.y - a.delta.y)):
                         # moving into ship, not out of it.
@@ -186,18 +169,17 @@ class StarSystem(object):
                                 return True
                     return hit
                 else:
-
                     #recurse to ship parts
                     for part in a.parts:
-                        if self.collide(b, part):#works for ship/ship, too.
+                        if self.collide(b, part):
+                            #works for ship/ship, too.
                             #if that returned true, everything
                             #should be done already.
                             hit = True
                     return hit
-                
+
             #free part/free part
-            if (isinstance(b, Part) or isinstance(b, Cargo) )  and b.parent == None \
-            and (isinstance(a, Part) or isinstance(a, Cargo)) and a.parent == None:
+            if (isinstance(b, Part) or isinstance(b, Cargo) )  and b.parent == None and (isinstance(a, Part) or isinstance(a, Cargo)) and a.parent == None:
                 return False #pass through each other, no crash.
 
             #floater/floater (no ship, planet)
@@ -206,13 +188,10 @@ class StarSystem(object):
                 return True
         return False
 
-
-        
     def explosion_push(self, explosion, floater):
         """The push of an explosion.  The rest of the effect is handled by the
         collision branching, which continues."""
-        force = (explosion.force / 
-                not0(dist2(explosion, floater)) * explosion.radius ** 2)
+        force = (explosion.force / not0(dist2(explosion, floater)) * explosion.radius ** 2)
         direction = floater.pos.get_angle_between(explosion.pos)
         accel = force / not0(floater.mass)
         floater.delta += Vec2d(0,0).rotatedd(direction, accel) / explosion.fps
@@ -248,7 +227,6 @@ class SolarA1(StarSystem):
         self.star.numShips = 0
         self.add(self.star)
         self.name = name
-        
         #add planets:
 
         for i in range(numPlanets):
@@ -295,18 +273,8 @@ class SolarA1(StarSystem):
         self.add(gateway1)
         self.add(gateway2)
 
-                
         for planet in self.planets:
             planet.numShips = 0
 
             planet.respawn = 30
             self.add(planet)
-
-
-        
-
-
-        
-    
-
-    
