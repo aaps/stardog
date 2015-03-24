@@ -226,7 +226,7 @@ def linePointDist(linePoint1, linePoint2, point, infinite=False):
         closest = linePoint2
     else:
         ratio = projectionDist / lineDist
-        closest = (line[0] * ratio + linePoint1[0], line[1] * ratio + linePoin
+        closest = line[0] * ratio + linePoint1[0], line[1] * ratio + linePoin
     return dist(closest[0], closest[1], point[0], point[1])
 
 
