@@ -61,7 +61,8 @@ class Floater(object):
 
     def update(self):
         """updates this floater based on its variables"""
-        self.pos += self.delta / self.fps
+        #new position must be depend on direction
+        self.pos += (self.delta * math.cos(self.direction) / self.fps, self.delta * math.sin(self.direction) / self.fps)
         self.rect.x = self.pos.x
         self.rect.y = self.pos.y
 
