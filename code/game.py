@@ -32,12 +32,12 @@ class Game(object):
     are probably a bad idea."""
     menu = None
 
-    def __init__(self, screen, fps=120):
+    def __init__(self, screen):
         self.console = False
         self.debug = False
         self.player = None
         self.starttime = 1899463445
-        self.fps = fps
+        self.fps = FPS
         self.fpscounter = 0
         self.fpses = range(0, 30)
         self.averagefps = 0
@@ -151,7 +151,7 @@ class Game(object):
                 intro.draw(self.screen)
                 pygame.display.flip()
                 # aim for FPS but adjust vars for self.fps.
-                self.clock.tick(self.fps)
+                self.clock.tick(FPS)
                 self.fps = max(1, int(self.clock.get_fps()))
                 self.timer += 1. / self.fps
             # handle if running is false
