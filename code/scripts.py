@@ -214,7 +214,7 @@ class AIScript(Script):
         pos = self.predictBallistic(dummy, time)
         angle = atan2(pos[1] - ship.pos.y, pos[0] - ship.pos.x)
         if self.turn(ship, angle):
-            if not relativeSpeedLimit
+            if not relativeSpeedLimit \
             or self.relativeSpeed(ship, target) > - relativeSpeedLimit:
                 ship.forward()
 
@@ -278,7 +278,7 @@ class AIScript(Script):
         angle = atan2(dummy.pos.y - ship.pos.y, dummy.pos.x - ship.pos.x)
         distance = dist(dummy.pos.x, dummy.pos.y, ship.pos.x, ship.pos.y)
         relativeSpeed = self.relativeSpeed(ship, dummy)
-        if - relativeSpeed / not0(accel)
+        if - relativeSpeed / not0(accel) \
         + turnTime > distance / abs(not0(relativeSpeed)):
             #slow down
             if self.turn(ship, angle + 180):

@@ -7,6 +7,8 @@ import json
 import os
 from time import localtime
 import fnmatch
+import os.path
+
 
 logfile = "installer_log.txt"
 
@@ -59,15 +61,18 @@ def getLogVersion(logfile="installer_log.txt"):
     reported in the log file.
     """
     lines = []
-    with open(logfile, 'r') as log:
-        lines = log.readlines()
-    # get the last element
-    version = lines[-1]
-    # get version
-    version = version.split(' ')[-1]
-    # remove newline
-    version = version[0:-1]
-    return version
+    if not os.path.isfile(logfile):
+        return lines
+    else:
+        with open(logfile, 'r') as log:
+            lines = log.readlines()
+        # get the last element
+        version = lines[-1]
+        # get version
+        version = version.split(' ')[-1]
+        # remove newline
+        version = version[0:-1]
+        return version
 
 
 def checkVersion():

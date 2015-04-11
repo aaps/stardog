@@ -32,12 +32,12 @@ class Game(object):
     are probably a bad idea."""
     menu = None
 
-    def __init__(self, screen):
+    def __init__(self, screen,fps=120):
         self.console = False
         self.debug = False
         self.player = None
         self.starttime = 1899463445
-        self.fps = FPS
+        self.fps = fps
         self.fpscounter = 0
         self.fpses = range(0, 30)
         self.averagefps = 0
