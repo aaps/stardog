@@ -34,7 +34,6 @@ class StarSystem(object):
         self.soundsys.register(self.hitsound)
         self.planets = []
         self.name = ""
-        self.starpos=self.position-Vec2d(randint(-1100,1100),randint(-1100,1100))#star position
 
     def addNeighbor(self, starsystem):
         self.neighbors.append(starsystem)
@@ -108,10 +107,10 @@ class StarSystem(object):
             if isinstance(floater, Player):
                 angle = randint(0,360)
                 distanceFromStar = randint(8000, 18000)
-                floater.pos = self.starpos.rotatedd(angle, distanceFromStar)
+                floater.pos = self.star.pos.rotatedd(angle, distanceFromStar)
 
                 self.player = floater
-            floater.pos=self.position+floater.pos #apsolute coordinates (coordinates system plus relative coordinates floater in system)
+
             self.spawnScore += floater.spawncost
             floater.starSystem = self
             self.floaters.append(floater)

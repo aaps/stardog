@@ -9,10 +9,14 @@ from SoundSystem import *
 from multysprites import *
 
 
+class Ballistic(object):
+    """an abstraction of a Floater.  Just has a Vec2d,Vec2d."""
+    def __init__(self, pos, delta):
+        self.pos = pos
+        self.delta = delta
 
 
-
-class Floater(object):
+class Floater(Ballistic):
     """creates a floater with position (x,y) in pixels, speed (dx, dy)
     in pixels per second, direction dir
     where 0 is pointing right and 270 is pointing up, radius radius
@@ -22,8 +26,9 @@ class Floater(object):
     system."""
     baseImage = None
 
-    def __init__(self, universe, pos, delta, direction=270, radius=10,spritename=None):
-        
+    def __init__(self, universe, pos, delta, direction=270, radius=10,
+                 spritename=None):
+        Ballistic.__init__(self, pos, delta)
         self.universe = universe
         self.hasimage = True
         self.direction = direction
@@ -44,20 +49,13 @@ class Floater(object):
         self.soundsys = self.universe.game.soundSystem
         self.crashSound = 'se_sdest.wav'
         self.soundsys.register(self.crashSound)
-        self.pos=pos
-        self.delta=delta
-    @staticmethod
-    def distanceVolumeAdjust(floater1, floater2):
+
+    def distanceVolumeAdjust(floater1, floater2, system):
         """
         a handling function that determines the distance and returns
-        a scale based on that Distance from two floaters which are not that object
-        No dependent on actual instance, its reason used staticmethod
+        a scale based on that.
         """
-        return floater1.get_distance(floater2)
-
-    def selfDistance(self, floater):
-        'Distance from that object and other floater'
-        return self.pos.get_distance(floater)
+        return(1.0)
 
     def update(self):
         """updates this floater based on its variables"""
